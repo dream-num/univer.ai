@@ -1,0 +1,36 @@
+---
+interface Props {
+  type: 'text' | 'textarea'
+  size?: 'large' | 'medium'
+  placeholder?: string
+  rows?: number
+}
+
+const { type, placeholder, size, rows } = Astro.props
+
+const Element = type === 'textarea' ? 'textarea' : 'input'
+---
+
+<Element
+  class:list={[
+    'rounded-lg',
+    'u-text-content',
+    'u-bg-auxiliary',
+    'text-0.8125rem md:text-2xl',
+    'u-text-title',
+    'w-full',
+    [
+      { 'h-8 md:h-15': size !== 'large' && type !== 'textarea' },
+      { 'h-9 md:h-17': size === 'large' },
+      { 'h-full': type === 'textarea' }
+    ],
+    { 'resize-none': type === 'textarea' },
+    [
+      { 'px-2 md:px-4 py-2': size !== 'large' },
+      { 'px-2 md:px-8 py-3': size === 'large' || type === 'textarea' }
+    ],
+    'focus:outline-none'
+  ]}
+  placeholder={placeholder}
+  rows={rows}
+/>

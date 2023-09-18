@@ -1,0 +1,20 @@
+---
+interface Props {
+  align?: 'center' | 'left'
+}
+
+const { align = 'left' } = Astro.props
+---
+
+<h2
+  class:list={[
+    'text-xl',
+    'md:text-3.625rem',
+    'md:leading-18',
+    'font-700',
+    'u-text-title',
+    { 'text-center w-80% md:w-full m-auto': align === 'center' }
+  ]}
+>
+  <slot />
+</h2>

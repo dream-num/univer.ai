@@ -1,0 +1,32 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Title from '@/components/Title/index.astro'
+import Paragraph from '@/components/Paragraph/index.astro'
+
+const solutions = [{
+  title: '以简洁明了的方式填写数据，提高效率和准确性',
+  desc: '实现类似于 Excel 的数据录入和展示功能，提供了内置的 API，包括在线填报、打印报送、实时预览和数据校验功能。此外，还可以通过自定义开发来满足业务需求，如批量导入导出 Excel、填报暂存、多个 sheet 填报和多级上报等功能。',
+  preview: '/images/pages/solutions/01.png'
+}, {
+  title: '提供 Excel 式报表设计，高效便捷满足数据分析和展示需求',
+  desc: '将 Univer 嵌入企业报表 CRM 平台，实现高度类似 Excel 的使用体验，兼容 Excel 数据格式，从而降低本地到线上的数据迁移工作量，并可复用业务系统原始 Excel 报表模板，提高工作效率。',
+  preview: '/images/pages/solutions/02.png'
+}, {
+  title: '实现表格文档协同编辑，提升团队协作效率',
+  desc: '可构建具备多人实时协同编辑功能的在线文档平台，支持单元格级别的操作精度，满足团队协作、协同编辑、数据同步、版本管理、历史查询等在线文档开发需求，提升团队协作效率。',
+  preview: '/images/pages/solutions/03.png'
+}]
+---
+
+<Layout title="Univer">
+  <section class="grid gap-8 md:gap-30">
+    {solutions.map(item => (
+      <section class="grid gap-8">
+        <Title align="center">{item.title}</Title>
+        <Paragraph align="center">{item.desc}</Paragraph>
+
+        <img src={item.preview} alt={item.title} class="w-full" />
+      </section>
+    ))}
+  </section>
+</Layout>

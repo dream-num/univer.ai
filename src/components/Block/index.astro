@@ -1,0 +1,37 @@
+---
+import Title from '@/components/Title/index.astro'
+import Paragraph from '@/components/Paragraph/index.astro'
+
+interface Props {
+  title: string
+  desc: string
+  align: 'left' | 'right'
+  imgUrl: string
+}
+
+const { title, desc, align, imgUrl } = Astro.props
+---
+<section class="grid md:grid-cols-2 gap-47 items-center">
+  {align === 'left' && (
+    <img class="hidden md:inline-block" src={imgUrl} />
+  )}
+
+  <div class="flex flex-col gap-8 md:gap-10">
+    <Title>
+      <span class="block text-center md:inline">{title}</span>
+    </Title>
+
+    <img class="md:hidden" src={imgUrl} />
+  
+    {desc && (
+      <>
+        <Paragraph>{desc}</Paragraph>
+        <slot />
+      </>
+    )}
+  </div>
+
+  {align === 'right' && (
+    <img class="hidden md:inline-block" src={imgUrl} />
+  )}
+</section>

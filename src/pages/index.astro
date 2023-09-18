@@ -1,0 +1,152 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Button from '@/components/Button/index.astro'
+import Title from '@/components/Title/index.astro'
+import Paragraph from '@/components/Paragraph/index.astro'
+import Block from '@/components/Block/index.astro'
+
+const integrations = [{
+  title: 'Excel',
+  desc: '直观强大流行的电子表格',
+  icon: '/images/pages/index/excel.png'
+}, {
+  title: 'Word',
+  desc: '信息记录明确的电子文档',
+  icon: '/images/pages/index/word.png'
+}, {
+  title: 'Xmind',
+  desc: '分支结构强大的思维导图',
+  icon: '/images/pages/index/xmind.png'
+}, {
+  title: 'PowerPoint',
+  desc: '多样自由的文稿演示工具',
+  icon: '/images/pages/index/slide.png'
+}]
+
+const features = [{
+  title: '甘特图',
+  desc: '通过表格功能，将各种项目计划进度等以可视化的方式展示'
+}, {
+  title: 'API 接口服务',
+  desc: '实现应用程序之间数据交换和功能调用，提高系统灵活性和操作性'
+}, {
+  title: '简化浏览器 Excel 开发',
+  desc: '纯前端表格组件，高性能、跨平台与 Excel 兼容，支持主流前端框架'
+}, {
+  title: '学习使用 Univer',
+  desc: '熟练掌握 Univer 的使用技巧，充分发挥产品的应用潜力'
+}]
+
+const companies = [{
+  logo: '/images/pages/index/logos/01.png'
+}, {
+  logo: '/images/pages/index/logos/02.png'
+}, {
+  logo: '/images/pages/index/logos/03.png'
+}, {
+  logo: '/images/pages/index/logos/04.png'
+}, {
+  logo: '/images/pages/index/logos/05.png'
+}, {
+  logo: '/images/pages/index/logos/06.png'
+}, {
+  logo: '/images/pages/index/logos/07.png'
+}, {
+  logo: '/images/pages/index/logos/08.png'
+}, {
+  logo: '/images/pages/index/logos/09.png'
+}, {
+  logo: '/images/pages/index/logos/10.png'
+}, {
+  logo: '/images/pages/index/logos/11.png'
+}, {
+  logo: '/images/pages/index/logos/12.png'
+}]
+---
+
+<Layout title="Univer">
+  <section class="grid gap-8 md:gap-30">
+    <Block
+      title="串联你的工作流增加你的效率"
+      desc="连接业务数据并以AI来加速团队工作流，兼容 Office 等主流格式"
+      align="right"
+      imgUrl="/images/pages/index/01.png"
+    >
+      <div class="hidden md:flex gap-7">
+        <Button type="ghost" size="medium">立即购买</Button>
+        <Button type="primary" size="medium">马上试用</Button>
+      </div>
+    </Block>
+
+    <section class="grid md:grid-cols-4 gap-9.5">
+      {features.map(item => (
+        <div class="shadow-lg px-4 py-6 rounded-lg">
+          <label class="u-text-primary text-2xl mb-4 block">{item.title}</label>
+          <p class="u-text-title">
+            {item.desc}
+          </p>
+        </div>
+      ))}
+    </section>
+
+    <Block
+      title="超越僵化的工具，并利用人工智能重新构想工作流程"
+      desc="Univer 优化现有流程，摒弃传统的低代码模式，而不是创造和增加流程，真正为企业赋能。"
+      align="left"
+      imgUrl="/images/pages/index/02.png"
+    />
+
+    <Block
+      title="可嵌入您团队的程序把您的工作串联起来"
+      desc="让最接近您业务实际细节的人员能够自定义应用程序，以加快工作完成速度。"
+      align="right"
+      imgUrl="/images/pages/index/03.png"
+    />
+
+    <section class="flex flex-col-reverse md:flex-row gap-4 md:gap-47 items-center">
+      <div class="grid grid-cols-2 grid-rows-2 gap-6 md:gap-10 flex-1">
+        {integrations.map(item => (
+          <div
+            class="shadow flex flex-col items-center md:flex-row rounded-lg gap-2 md:gap-7 px-4 py-6"
+          >
+            <img class="w-14 h-14 shrink-none" src={item.icon} />
+            <div class="flex flex-col items-center md:items-start justify-between">
+              <span class="text-0.9375rem md:text-2xl">{item.title}</span>
+              <p class="u-text-tip text-0.8125rem/1.21875rem md:text-base text-center md:text-left">
+                {item.desc}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <section class="grid gap-10 flex-1">
+        <Title>集成关键办公程序</Title>
+        <Paragraph>Univer包含当前市面上关键的办公程序，无需安装办公软件，只需在浏览器中打开，即包含所有程序。</Paragraph>
+      </section>
+    </section>
+
+    <section class="flex flex-col gap-8 md:gap-10 mt-0 md:mt-8.75rem">
+      <Title align="center">已有 5000+ 团队在使用Univer</Title>
+
+      <div class="grid grid-cols-2 md:grid-cols-6 gap-10">
+        {companies.map((item, index) => (
+          <div
+            class:list={[
+              'shadow',
+              'h-30',
+              'items-center',
+              'justify-center',
+              [
+                { 'flex': index < 6 },
+                { 'hidden md:flex': index >= 6 }
+              ]
+            ]}
+          >
+            <img class="max-w-80% max-h-50%" src={item.logo} />
+          </div>
+        ))}
+      </div>
+    </section>
+  </section>
+</Layout>

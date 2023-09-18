@@ -1,0 +1,36 @@
+---
+interface Props {
+  size: 'small' | 'medium' | 'large' | 'full'
+  type: 'primary' | 'secondary' | 'ghost' | 'submit'
+}
+
+const { size, type } = Astro.props
+---
+
+<button
+  class:list={[
+    'rounded-lg',
+    [
+      'h-9 md:h-12.5',
+      { 'h-17': size === 'full' || type === 'submit' }
+    ],
+    { 'w-full': size === 'full' },
+    [
+      { 'text-xl': size !== 'full' && size !== 'large' },
+      { 'text-0.9375rem md:text-2xl': size === 'full' || size === 'large' }
+    ],
+    [
+      { 'px-10': size === 'small' },
+      { 'px-9': size === 'medium' },
+      { 'px-9 md:px-19.5': size === 'large' }
+    ],
+    { 'u-border-primary': type === 'ghost', 'border-2': type === 'ghost' },
+    [
+      { 'u-bg-primary': type === 'primary', 'text-white': type === 'primary' },
+      { 'u-bg-default': type === 'secondary', 'u-text-title': type === 'secondary' },
+      { 'bg-transparent': type === 'ghost', 'u-text-primary': type === 'ghost' },
+    ]
+  ]}
+>
+  <slot />
+</button>

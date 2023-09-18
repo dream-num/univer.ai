@@ -1,0 +1,42 @@
+---
+interface Props {
+  placeholder?: string
+}
+
+const { placeholder } = Astro.props
+---
+
+<search class="grid gap-10">
+  <div class="relative w-full">
+    <div class="relative max-w-225 block m-auto">
+      <img
+        class="absolute top-50% -translate-y-50% left-4 w-4 md:w-6"
+        src="/images/search/search.svg"
+      />
+      <input
+        class="w-full h-9 md:h-18 pl-10 md:pl-14 u-bg-auxiliary u-text-title rounded-lg text-sm md:text-2xl focus:outline-none"
+        placeholder={placeholder}
+      />
+    </div>
+  </div>
+
+  <div class="hidden md:flex gap-10 m-auto">
+    <strong class="u-text-title">热门搜索：</strong>
+
+    <label class="u-text-tip">
+      如何快速入手Univer
+    </label>
+    <label class="u-text-tip">
+      应用之间应如何快速嵌套
+    </label>
+    <label class="u-text-tip">
+      表格
+    </label>
+    <label class="u-text-tip">
+      新手引导
+    </label>
+    <label class="u-text-tip">
+      数据绑定
+    </label>
+  </div>
+</search>

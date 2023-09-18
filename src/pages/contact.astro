@@ -1,0 +1,105 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Title from '@/components/Title/index.astro'
+import Input from '@/components/Input/index.astro'
+import Button from '@/components/Button/index.astro'
+---
+
+<Layout title="Univer">
+  <section class="grid gap-8 md:gap-30 md:grid-cols-2 md:grid-rows-2 md:grid-flow-col">
+    <section class="grid gap-4 md:gap-10">
+      <Title>与我们的销售团队详细交谈</Title>
+      <ul class="grid gap-4 md:gap-12">
+        <li class="u-text-title text-base md:text-2xl flex items-start gap-6">
+          <img class="relative top-1" src="/images/pages/contact/mark.svg" />
+          了解您的团队如何通过更好的协作来提高生产力。
+        </li>
+        <li class="u-text-title text-base md:text-2xl flex items-start gap-6">
+          <img class="relative top-1" src="/images/pages/contact/mark.svg" />
+          通过为您的业务定制的您自己的现场演示来观看 Univer 的实际操作。
+        </li>
+        <li class="u-text-title text-base md:text-2xl flex items-start gap-6">
+          <img class="relative top-1" src="/images/pages/contact/mark.svg" />
+          了解当您使用 Univer 来满足您的具体需求时，扩展到您的系统里会是什么样子。
+        </li>
+      </ul>
+    </section>
+
+    <section class="grid gap-10 hidden md:block">
+      <Title>Univer 受多数优秀团队信赖</Title>
+      <div class="grid grid-cols-2 gap-12">
+        <div class="shadow h-30 rounded-lg flex items-center justify-center">
+          <img class="max-w-80% max-h-50%" src="/images/pages/contact/logos/01.png" />
+        </div>
+        <div class="shadow h-30 rounded-lg flex items-center justify-center">
+          <img class="max-w-80% max-h-50%" src="/images/pages/contact/logos/02.png" />
+        </div>
+        <div class="shadow h-30 rounded-lg flex items-center justify-center">
+          <img class="max-w-80% max-h-50%" src="/images/pages/contact/logos/03.png" />
+        </div>
+        <div class="shadow h-30 rounded-lg flex items-center justify-center">
+          <img class="max-w-80% max-h-50%" src="/images/pages/contact/logos/04.png" />
+        </div>
+      </div>
+    </section>
+
+    <section class="row-span-2">
+      <form class="shadow-lg rounded-lg px-4 py-8 md:px-21 md:py-15 grid gap-4 md:gap-6">
+        <h2 class="text-[#3d3d3d] text-center text-xl md:text-2rem/2.8rem mb-4">
+          填写此表格，我们会尽快回复您
+        </h2>
+
+        <div class="grid gap-3 md:gap-4 u-text-title text-0.8125rem md:text-1.375rem">
+          <label>名字</label>
+          <Input type="text" />
+        </div>
+
+        <div class="grid gap-3 md:gap-4 u-text-title text-0.8125rem md:text-1.375rem">
+          <label>电子邮箱</label>
+          <Input type="text" />
+        </div>
+
+        <div class="grid gap-3 md:gap-4 u-text-title text-0.8125rem md:text-1.375rem">
+          <label>电话号码</label>
+          <Input type="text" />
+        </div>
+
+        <div class="grid gap-3 md:gap-4 u-text-title text-0.8125rem md:text-1.375rem">
+          <label>职位</label>
+          <Input type="text" />
+        </div>
+
+        <div class="grid gap-3 md:gap-4 u-text-title text-0.8125rem md:text-1.375rem">
+          <label>预计团队成员人数</label>
+          <Input type="text" />
+        </div>
+
+        <div class="grid gap-3 md:gap-4 u-text-title text-0.8125rem md:text-1.375rem">
+          <label>比较关心的功能</label>
+          <Input type="text" />
+        </div>
+
+        <div class="grid gap-3 md:gap-4 u-text-title text-0.8125rem md:text-1.375rem">
+          <label>您详细的需求</label>
+          <Input
+            type="textarea"
+            placeholder="可将您的详细需求写在这里，如您使用 Univer 的用途，从事的行业等。"
+            rows={4}
+          />
+        </div>
+
+        <div class="text-center">
+          <Button type="primary" size="large">
+            联系销售人员
+          </Button>
+        </div>
+
+        <footer class="text-0.8125rem md:text-base">
+          点击“联系销售人员”即表示您同意我们的
+          <a class="u-text-primary underline underline-offset-2">服务条款</a>、
+          <a class="u-text-primary underline underline-offset-2">隐私政策</a>。
+        </footer>
+      </form>
+    </section>
+  </section>
+</Layout>
