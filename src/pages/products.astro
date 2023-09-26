@@ -1,43 +1,76 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import Block from '@/components/Block/index.astro'
+import Hero from '@/components/Hero/index.astro'
+import ResponsiveContainer from '@/components/ResponsiveContainer'
+import VerticalContent from '@/components/VerticalContent/index.astro'
+import HorizontalContent from '@/components/HorizontalContent/index.astro'
+import { SheetIcon, DocIcon, XmindIcon, SlideIcon } from '@/components/Icons'
 ---
 
-<Layout title="Univer">
-  <section class="grid gap-8 md:gap-30">
-    <Block
-      title="无需跨平台在 Univer 就是这么简单"
-      desc="Univer 可自由嵌套 Word、Excel、PowerPoint、思维导图等多类主流办公软件，无需跨越多个平台，直接在 Univer 即可解决你的工作需求。"
-      align="left"
-      imgUrl="/images/pages/products/01.png"
-    />
+<Layout title="了解 Univer / Univer">
+  <Hero
+    title={['Univer 是什么']}
+    desc="Univer 包罗万象，抽象出了效率工具的本质为表格、文档、画布，能够衍生出各种各样的效率工具产品,涵盖大型编辑器项目架构设计、高性能排版渲染引擎、高性能公式计算引擎、实时协同编辑、AIGC等技术主题。体现到具体形态上有sheet、doc、slide、PDF等，最大特点插件化，让大家业务线上化，数据产业化成为立即实现的途径"
+  />
 
-    <Block
-      title="纯前端组件跨平台应用嵌入"
-      desc="Univer 支持跨平台开发，使用其功能无需预装任何插件或第三方组件，支持以原生的方式嵌入各类应用，与各类后端技术框架相结合。"
-      align="right"
-      imgUrl="/images/pages/products/02.png"
-    />
+  <ResponsiveContainer>
+    <main class="py-28 grid gap-28">
+      <VerticalContent
+        title="Univer 可以做什么"
+        desc="Univer 是一款串联企业工作流的效率组件库，它与企业系统融合，能够串联公司业务流程能连接业务数据并以AI来加速企业工作流，兼容 Sheet、Doc、Xmind、PDF、Power Point 等主流办公软件"
+      />
 
-    <Block
-      title="在线导入、导出 Excel"
-      desc="Univer 无需借助后台代码和第三方组件，可直接在浏览器中完成 Excel、CSV、JSON 等文件的导入导出、PDF 导出、打印及预览操作。"
-      align="left"
-      imgUrl="/images/pages/products/03.png"
-    />
+      <HorizontalContent
+        position="left"
+        cover="/images/products/01.png"
+        prefix={SheetIcon}
+        title="Sheet"
+        desc={[
+          '无缺失数据的顺畅导入和导出，无乱码格式保持一致，与 Excel 完美兼容',
+          '全面函数覆盖，400+ 公式，满足 90% 办公函数需求',
+          '灵活权限控制，单元格锁定，个性化协作，保护数据安全',
+          '独立视图，个性化查阅，无干扰，高效协作',
+          '多人在线协作编辑，提高工作效率，完美适应工作习惯'
+        ]}
+      />
 
-    <Block
-      title="业界领先的 Excel 兼容度"
-      desc="Univer 内置 18 种条件格式、32 种图表、53 项单元格格式和 182 种形状，完全支持 Excel 数据格式，可向 Web 系统中轻松嵌入 Excel 功能。"
-      align="right"
-      imgUrl="/images/pages/products/04.png"
-    />
+      <HorizontalContent
+        position="right"
+        cover="/images/products/02.png"
+        prefix={DocIcon}
+        title="Doc"
+        desc={[
+          '摒弃繁琐的文件传输过程，通过一键同步，简化沟通流程，提高编辑效率',
+          '实时多人协作，跨平台同步，让您无论何时何地都能轻松开展工作，满足各种办公场景的需求',
+          '功能丰富，支持附件插入、预览，全面整合项目资料，方便管理和回溯'
+        ]}
+      />
 
-    <Block
-      title="强大的公式计算引擎"
-      desc="Univer 兼容 450 多种 Excel 计算公式，可满足用户自定义、跨表格引用、异步调用等多场景计算需求，实现数据聚合，让有效数据不断完善。"
-      align="left"
-      imgUrl="/images/pages/products/05.png"
-    />
-  </section>
+      <HorizontalContent
+        position="left"
+        cover="/images/products/03.png"
+        prefix={XmindIcon}
+        title="Xmind"
+        desc={[
+          '专业强大的脑图工具，适用于学习、工作',
+          '提供了丰富的功能和工具，满足你的不同需求',
+          '内置了大量的思维导图模板，涵盖了各种场景和主题',
+          '独立视图，个性化查阅，无干扰，高效协作',
+          '支持多种导图类型，包括经典的中心主题导图、鱼骨图、树状图、逻辑图等'
+        ]}
+      />
+
+      <HorizontalContent
+        position="right"
+        cover="/images/products/02.png"
+        prefix={SlideIcon}
+        title="Slide"
+        desc={[
+          '无障碍处理 pptx 格式文件，高度兼容 PowerPoint，拥有各式主题模板、动画效果和形状样式供您选择',
+          '支持多人跨设备实时协作编辑，允许在任意位置添加注释，能自动保存历史版本并支持版本回溯',
+          '支持自由切换演示模式和视图模式，使用激光笔和计时器进行辅助，增加你演讲吸引力和影响力'
+        ]}
+      />
+    </main>
+  </ResponsiveContainer>
 </Layout>

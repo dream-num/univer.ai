@@ -1,74 +1,53 @@
 ---
-import Input from '@/components/Input/index.astro'
-import Button from '@/components/Button/index.astro'
-
-const links = [{
-  icon: '/images/footer/github.svg',
-  title: 'Github',
-  link: 'https://github.com/dream-num/univer'
-}, {
-  icon: '/images/footer/discord.svg',
-  title: 'Discord',
-  link: 'https://discord.gg/g8hkjex3'
-}, {
-  icon: '/images/footer/wechat.svg',
-  title: 'Wechat',
-  link: 'javascript:void(0)'
-}]
+import { LogoIcon, GithubIcon, DiscordIcon, WechatIcon } from '@/components/Icons'
+import ResponsiveContainer from '@/components/ResponsiveContainer'
 ---
 
-<footer class="px-5 md:px-23 2xl:px-0">
-  <section
-    class="h-full max-w-screen-2xl m-auto text-xl"
-  >
-    <div class="mb-7">
-      <div class="w-42 h-13 u-bg-primary" />
-    </div>
-
-    <div class="flex-col md:flex-row flex u-text-content text-base md:text-xl gap-2 md:gap-10 mb-7">
-      <span class="u-text-title md:u-text-content text-xl mb-2 md:mb-0">上海梦数科技有限公司</span>
-      <span>地址：</span>
-      <span>邮箱：developer@univer.ai</span>
-      <span>电话：00000000000</span>
-    </div>
-
-    <div class="flex u-text-title gap-10 mb-4 md:mb-20">
-      {links.map(item => (
-        <a class="w-8" href={item.link} target="_blank">
-          <img src={item.icon} alt={item.title} />
-        </a>
-      ))}
-    </div>
-
-    <form class="mb-8 md:mb-30">
-      <section class="grid md:grid-flow-col md:grid-rows-3 md:grid-cols-2 gap-3 md:gap-x-30 md:gap-y-7 mb-3 md:mb-7">
-        <div>
-          <Input type="text" size="large" placeholder="姓名" />
-        </div>
-        <div>
-          <Input type="text" size="large" placeholder="邮箱" />
-        </div>
-        <div>
-          <Input type="text" size="large" placeholder="电话" />
-        </div>
-        <div>
-          <Input type="text" size="large" placeholder="职位" />
-        </div>
-        <div class="row-span-2">
-          <Input type="textarea" placeholder="您的需求和意见" />
-        </div>
-      </section>
-
-      <div class="col-span-2">
-        <Button type="primary" size="full" >
-          提交
-        </Button>
+<footer>
+  <section class="flex items-center h-110 md:h-96 text-white bg-#606060">
+    <ResponsiveContainer class="grid grid-cols-12 grid-rows-3 md:grid-cols-4 md:grid-rows-2">
+      <div class="col-span-8 row-span-1 md:col-span-3 md:row-span-1 grid gap-2">
+        <LogoIcon fill="#ffffff" />
+        <p class="text-xl font-700 md:tracking-0.25em">串联工作流让业务更高效</p>
       </div>
-    </form>
 
-    <p class="text-center u-text-tip mb-8 md:mb-30 text-base md:text-xl">
-      Copyright © 2021-2023 Mengshu. All Rights Reserved. 上海梦数科技 版权所有
-      服务协议 | 隐私政策
+      <div class="col-span-4 row-span-3 self-end justify-self-end md:col-span-1 md:row-span-2">
+        <img class="w-full md:h-64" src="/images/qrcode.png" alt="qrcode" />
+      </div>
+
+      <div class="col-span-8 row-span-2 md:col-span-3 md:row-span-1 grid md:grid-cols-3 gap-2 md:gap-28">
+        <div class="flex flex-col justify-end gap-6">
+          <span>上海梦数科技有限公司</span>
+          <span>地址：上海市浦东新区上海证券大厦</span>
+        </div>
+
+        <div class="flex flex-col justify-end gap-6">
+          <span>商务合作：sales@univer.ai</span>
+          <span>技术支持：developer@univer.ai</span>
+        </div>
+
+        <div class="flex items-end gap-6">
+          <a href="https://github.com/dream-num/univer">
+            <GithubIcon />
+          </a>
+          <a href="https://discord.gg/z3NKNT6D2f">
+            <DiscordIcon />
+          </a>
+          <a>
+            <WechatIcon />
+          </a>
+        </div>
+      </div>
+    </ResponsiveContainer>
+  </section>
+
+  <section class="h-70 flex justify-center items-center">
+    <p class="text-#999999 flex md:block flex-col gap-4 items-center">
+      <span class="md:mr-2">Copyright &copy; 2021-2023 Mengshu. All Rights Reserved.</span>
+      <span class="md:mr-8">上海梦数科技 版权所有</span>
+      <span>
+        <a>服务协议</a> | <a>隐私政策</a>
+      </span>
     </p>
   </section>
 </footer>
