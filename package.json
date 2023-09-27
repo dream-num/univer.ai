@@ -7,7 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist -t true"
   },
   "dependencies": {
     "@astrojs/solid-js": "^3.0.1",
@@ -16,9 +16,9 @@
     "solid-js": "^1.7.12"
   },
   "devDependencies": {
-    "@unocss/reset": "^0.56.2",
+    "@unocss/reset": "^0.56.4",
     "gh-pages": "^6.0.0",
     "less": "^4.2.0",
-    "unocss": "^0.56.2"
+    "unocss": "^0.56.4"
   }
 }

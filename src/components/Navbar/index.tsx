@@ -111,7 +111,7 @@ export default (props: IProps) => {
                 应用场景
               </a>
 
-              <a href="faq">
+              <a href="/faq">
                 帮助中心
               </a>
             </div>
