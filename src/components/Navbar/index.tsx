@@ -79,6 +79,10 @@ export default (props: IProps) => {
             <a href="/faq">
               帮助中心
             </a>
+
+            {/* <a href="/talent">
+              加入我们
+            </a> */}
           </section>
         </section>
 
@@ -114,6 +118,10 @@ export default (props: IProps) => {
               <a href="/faq">
                 帮助中心
               </a>
+
+              {/* <a href="/talent">
+                加入我们
+              </a> */}
             </div>
           </section>
         </section>

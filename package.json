@@ -10,15 +10,15 @@
     "deploy": "npm run build && gh-pages -d dist -t true"
   },
   "dependencies": {
-    "@astrojs/solid-js": "^3.0.1",
-    "astro": "^3.1.4",
+    "@astrojs/solid-js": "^3.0.2",
+    "astro": "^3.2.3",
     "clsx": "^2.0.0",
     "solid-js": "^1.7.12"
   },
   "devDependencies": {
-    "@unocss/reset": "^0.56.4",
+    "@unocss/reset": "^0.56.5",
     "gh-pages": "^6.0.0",
     "less": "^4.2.0",
-    "unocss": "^0.56.4"
+    "unocss": "^0.56.5"
   }
 }
