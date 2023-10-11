@@ -4,7 +4,7 @@ import Hero from '@/components/Hero/index.astro'
 import ResponsiveContainer from '@/components/ResponsiveContainer'
 import VerticalContent from '@/components/VerticalContent/index.astro'
 import HorizontalContent from '@/components/HorizontalContent/index.astro'
-import { SheetIcon, DocIcon, MindmapIcon, SlideIcon } from '@/components/Icons'
+import { SheetIcon, DocIcon, MindmapIcon, SlideIcon, PDFIcon } from '@/components/Icons'
 ---
 
 <Layout title="了解 Univer / Univer">
@@ -17,7 +17,7 @@ import { SheetIcon, DocIcon, MindmapIcon, SlideIcon } from '@/components/Icons'
     <main class="py-28 grid gap-28">
       <VerticalContent
         title="Univer 可以做什么"
-        desc="Univer 是一款串联企业工作流的效率组件库，它与企业系统融合，能够串联公司业务流程能连接业务数据并以AI来加速企业工作流，兼容 Sheet、Doc、Xmind、PDF、Power Point 等主流办公软件"
+        desc="Univer 是一款串联企业工作流的效率组件库，兼容 Sheet、Doc、Slide、PDF 等主流办公软件，它与企业系统融合，串联公司业务流程，连接业务数据，加速企业工作流"
       />
 
       <HorizontalContent
@@ -26,11 +26,10 @@ import { SheetIcon, DocIcon, MindmapIcon, SlideIcon } from '@/components/Icons'
         prefix={SheetIcon}
         title="Sheet"
         desc={[
-          '无缺失数据的顺畅导入和导出，无乱码格式保持一致，与 Excel 完美兼容',
+          '兼容 Excel 数据格式，高度类似 Excel 的使用体验',
           '全面函数覆盖，400+ 公式，满足 90% 办公函数需求',
           '灵活权限控制，单元格锁定，个性化协作，保护数据安全',
-          '独立视图，个性化查阅，无干扰，高效协作',
-          '多人在线协作编辑，提高工作效率，完美适应工作习惯'
+          '多人在线协作编辑，提高工作效率，完美适应工作习惯',
         ]}
       />
 
@@ -40,8 +39,8 @@ import { SheetIcon, DocIcon, MindmapIcon, SlideIcon } from '@/components/Icons'
         prefix={DocIcon}
         title="Doc"
         desc={[
-          '摒弃繁琐的文件传输过程，通过一键同步，简化沟通流程，提高编辑效率',
-          '实时多人协作，跨平台同步，让您无论何时何地都能轻松开展工作，满足各种办公场景的需求',
+          '摒弃繁琐的文件传输过程，一键共享，简化沟通流程，提高编辑效率',
+          '打破系统壁垒，实现跨场景多人协作，让您无论何时何地都能轻松开展工作，满足各种办公场景的需求',
           '功能丰富，支持附件插入、预览，全面整合项目资料，方便管理和回溯'
         ]}
       />
@@ -49,26 +48,27 @@ import { SheetIcon, DocIcon, MindmapIcon, SlideIcon } from '@/components/Icons'
       <HorizontalContent
         position="left"
         cover="/images/products/03.png"
-        prefix={MindmapIcon}
-        title="Mindmap"
+        prefix={PDFIcon}
+        title="PDF"
         desc={[
-          '专业强大的脑图工具，适用于学习、工作',
-          '提供了丰富的功能和工具，满足你的不同需求',
-          '内置了大量的思维导图模板，涵盖了各种场景和主题',
-          '独立视图，个性化查阅，无干扰，高效协作',
-          '支持多种导图类型，包括经典的中心主题导图、鱼骨图、树状图、逻辑图等'
+          '界面简洁，完美兼容 PDF 格式',
+          '丰富的批注功能，及多样化批注展示模式',
+          '自动翻页，更好阅读体验',
+          '让 PDF 像 Word 一样自由编辑，快速修改文档内容',
+          '丰富的图片、表格编辑功能，让修改更简单',
+          '提供 AI 识别，全文翻译等增强功能',
         ]}
       />
 
       <HorizontalContent
         position="right"
-        cover="/images/products/02.png"
+        cover="/images/products/04.png"
         prefix={SlideIcon}
         title="Slide"
         desc={[
-          '无障碍处理 pptx 格式文件，高度兼容 PowerPoint，拥有各式主题模板、动画效果和形状样式供您选择',
+          '兼容 ppt 数据格式，拥有各式主题模板、动画效果和形状样式供您选择',
           '支持多人跨设备实时协作编辑，允许在任意位置添加注释，能自动保存历史版本并支持版本回溯',
-          '支持自由切换演示模式和视图模式，使用激光笔和计时器进行辅助，增加你演讲吸引力和影响力'
+          '演示模式和视图模式随心切换，满足你不同场景下的需求'
         ]}
       />
     </main>
