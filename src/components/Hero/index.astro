@@ -4,14 +4,16 @@ import Navbar from '@/components/Navbar'
 interface Props {
   title: string[]
   desc: string
+  hideButton?: boolean
+  showDesc?: boolean
 }
 
-const { title, desc } = Astro.props
+const { title, desc, hideButton = false, showDesc = false } = Astro.props
 ---
 
 <Navbar client:load transitionWithParent />
 
-<header id="univer-hero" class="relative bg-[url(/images/hero.jpg)] bg-cover bg-center h-80 md:h-160 2xl:h-200">
+<header id="univer-hero" class="relative bg-[url(/images/hero.jpg)] bg-cover bg-center md:h-160 2xl:h-200" class:list={[showDesc ? "h-140" : "h-80"]}>
   <div class="absolute w-full h-full bg-black opacity-40" />
 
   <section class="absolute left-10% w-80% h-full flex flex-col justify-center items-center gap-8">
@@ -25,9 +27,9 @@ const { title, desc } = Astro.props
       ))}
     </h1>
 
-    <p class="hidden md:block text-white text-5/8 text-center">{desc}</p>
+    <p class="md:block text-white text-5/8 text-center" class:list={[showDesc ? "" : "hidden"]}>{desc}</p>
 
-    <div class="flex gap-8">
+    <div class="flex gap-8" style={{display: hideButton ? 'none': 'flex'}}>
       <button
         id="contact-us"
         class="px-8 py-2 bg-white md:bg-transparent text-#35322b md:text-white rounded border-white border-2"

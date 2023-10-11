@@ -1,0 +1,153 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Hero from '@/components/Hero/index.astro'
+import ResponsiveContainer from '@/components/ResponsiveContainer'
+import HorizontalContent from '@/components/HorizontalContent/index.astro'
+import { SheetIcon, DocIcon, MindmapIcon, SlideIcon } from '@/components/Icons'
+import Tabs from '@/components/Tabs'
+import { type ITab } from '@/components/PCTabs'
+import CompanyLogo from '@/components/CompanyLogo'
+
+const advantages = [{
+  img: '/images/talent/01.png',
+  desc: '具有竞争力的薪资和福利待遇'
+}, {
+  img: '/images/talent/02.png',
+  desc: '提供顶级硬件设备，让你全心投入创新，技术氛围浓厚'
+}, {
+  img: '/images/talent/03.png',
+  desc: '期权激励计划，和公司一起成长'
+}, {
+  img: '/images/talent/04.png',
+  desc: '弹性工作时间和远程工作的机会'
+}]
+const company = [{
+  img: '/images/talent/dingtalk-logo.png',
+}, {
+  img: '/images/talent/feishu-logo.png',
+}, {
+  img: '/images/talent/tencent-logo.png',
+}, {
+  img: '/images/talent/shimo-logo.png',
+},{
+  img: '/images/talent/wps-logo.png',
+},
+]
+
+export const tabs: ITab[] = [
+    { label: '前端工程师',name:'frontend',location:'上海', content:["参与 Univer 架构设计，负责核心模块的设计和研发，攻克技术难关；","实现 Univer 核心功能，提供优秀的产品使用体验；","以开源的方式构建产品，和开发者社区互动，倾听用户呼声，不断提升 Univer 的功能和二次开发体验。"],requirements:["本科及以上学历，扎实的前端开发经验，熟练掌握前端常用语言和库，包括但不限于TypeScript / React / webpack / Vite 等；","具备团队合作精神和良好的沟通能力，能够和其他团队成员保持紧密的合作；具备较好的逻辑性、自驱力和责任心，能够独立负责研发任务。"],addition:["有编辑器项目的开发经验，在协同编辑、排版、图形渲染、公式引擎等任一领域有深入的探索；","熟悉 Node.js 等后端开发环境；","热爱开源，参与过开源项目的研发，是社区的活跃成员。"],coverImage:'/images/talent/talent-frontend.png'
+    },
+    { label: '后端工程师',name:'backend', location:'深圳',content: ["负责Univer后端系统架构设计、优化和演进；","负责高质量的设计和编码，提供稳定的系统服务；","承担重点、难点的技术攻坚，包括协同、SSC、AIGC；","主要语言为Golang/Python/Java"],requirements:["本科及以上学历，熟练掌握 Go 或 Java 编程语言，具有扎实的计算机基础知识；","熟悉微服务架构，具备实际项目开发和维护经验；","对分布式系统、高并发、高可用等技术有深入理解；","具备团队合作精神和良好的沟通能力，较好的逻辑性、自驱力和责任心。"],addition:["有协同算法的开发经验；","参与过开源项目的研发，是技术社区的活跃成员；","有互联网大厂工作经历。"],coverImage:'/images/talent/talent-backend.png' },
+    { label: '市场经理',name:'market', location:'上海',content: ["拜访已有客户，倾听客户诉求，将用户的需求转化成产品路线；","以开源的方式构建产品，和开发者社区互动，倾听用户呼声，不断提升产品的用户体验；","discord 等国外社区维护。"],requirements:["本科及以上学历，擅长B端互联网产品设计；","能完成中型 Feature 的需求分析、设计、落地、复盘和迭代；","至少有一个领域完整的用户模型，对用户、对需求有较为成熟的认知；","有深度思考和复盘的习惯，具备较好的自驱力和责任心、优秀的项目推进和落地的执行力。"],addition:["有工具类或 2B 类产品管理经验；","可以使用英文作为工作语言；","有互联网大厂工作经验。"],coverImage:'/images/talent/talent-market.png' },
+    { label: '市场营销',name:'sale' ,location:'上海', content:['负责公司品牌定位、推广及策略制定，维护企业品牌形象。','结合公司发展战略，制定并实施长期市场营销策略，提升品牌知名度。','管理公司自媒体（如官网、微博、微信等）及开源社区，负责其创意、更新、运营及推广。','利用各类媒体资源，建立长效沟通机制，并负责媒体联络及公司宣传报道。','分析客户需求，制定精准推广策略；根据业务需求，规划推广活动并确保其顺利开展。','监测市场营销策略的执行效果，总结经验，提供优化建议。'],requirements:["本科及以上学历，新闻、传媒、广告等相关专业。","掌握广告、公关、企业形象策划、品牌视觉传达策划等，熟悉商业品牌建设；5年以上相关工作经验。","有强文案策划及撰写能力，精通office使用。","具有丰富的公关传播及媒体维护经验，能独立完成工作并建立合作关系。","在软件行业（尤其是 SaaS）或大型 ToB 业务为主导的企业有5年以上市场工作经验","具有分析、沟通协调、谈判以及执行力。","性格开朗，具有强烈的责任感和团队管理能力。"]
+,addition:["互联网大厂或大型软件企业（微软、用友、泛微、葡萄城、致远、wps、帆软）工作经验","可以使用英文作为工作语言，有海外市场经验","有相关渠道及行业资源"],coverImage:'/images/talent/talent-sale.png' },
+  ];
+
+const bottom = {
+  title:'Univer 团队',
+  desc: 'Univer 团队成员来自字节、阿里、腾讯等互联网企业，在编辑器和 web 开发领域有丰富的经验'
+}
+---
+
+<Layout title="加入我们 / Univer">
+  <Hero
+    title={['我们在做什么']}
+    desc="Univer 是目前的主力产品，基于 web 技术栈的 online office，可以植入到企业系统中，涵盖大型编辑器项目架构设计、高性能排版渲染引擎、高性能公式计算引擎、实时协同编辑、AIGC等技术主题，Univer 的工作充满挑战，我们期待优秀的人才加入我们，共同实现技术梦想和产品梦想，前端项目开源地址 https://github.com/dream-num/univer 。"
+    hideButton={true}
+    showDesc={true}
+  />
+
+  <ResponsiveContainer>
+    <main class="py-28 grid gap-28">
+
+      <section class="grid gap-8 text-center">
+        <h2 class="text-center text-zinc-800 text-[32px] font-bold font-['Source Han Sans CN'] leading-[54px] tracking-widest">福利待遇</h2>
+        <div class="grid grid-flow-col md:grid-flow-row grid-cols-2 grid-rows-2 md:grid-cols-4 md:grid-rows-1 justify-between gap-4 md:gap-10">
+          {advantages.map(item => (
+            <div class="text-center flex flex-col gap-4">
+              <img class="block w-30 h-30 md:w-40 md:h-40 mx-auto" src={item.img} />
+              <p class="text-center text-zinc-800 text-xl font-normal font-['Source Han Sans CN'] leading-7">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="grid gap-8 text-center">
+
+        <h2 class="text-center text-zinc-800 text-[32px] font-bold font-['Source Han Sans CN'] leading-[54px] tracking-widest">热招岗位</h2>
+
+        <!-- PC tabs -->
+        <Tabs client:load tabs={tabs}/>
+
+        <!-- Mobile Tabs, use js to change -->
+        <div class="mobile-tabs-container" style={{display: 'none'}}>
+          {
+            tabs.map((tab)=>{
+              return (<div class="tab-container grid gap-x-4 mt-4" data-name={tab.name}>
+                <div class="mobile-tab-cover">
+                  <img src={tab.coverImage} alt={tab.label} />
+                  </div>
+
+                  <div class="mobile-tab-desc">
+                    <h3 class="text-amber-400 text-left text-lg font-normal font-['Source Han Sans CN'] leading-tight mt-4 mb-4">{tab.label}</h3>
+                  
+                    <div class="text-neutral-400 font-normal font-['Source Han Sans CN'] leading-6 line-clamp-4">{tab.content}</div>
+                  </div>
+                  </div>)
+                
+            })
+          }
+        </div>
+
+      </section>
+
+      <section class="grid gap-8 text-center">
+
+        <h2 class="text-center text-zinc-800 text-[32px] font-bold leading-[54px] tracking-widest">{bottom.title}</h2>
+        <p class="text-center text-neutral-400 text-lg md:text-2xl font-normal leading-9">{bottom.desc}</p>
+        <CompanyLogo client:load company={company}/>
+      </section>
+    </main>
+  </ResponsiveContainer>
+</Layout>
+
+<script>
+
+  let container: HTMLElement | null = document.querySelector('.tabs-container');
+  let mobileContainer: HTMLElement | null = document.querySelector('.mobile-tabs-container');
+  if(document.body.clientWidth < 768){
+    if (container && mobileContainer) {
+
+      // 隐藏PC tabs，展示Mobile tabs
+      container.style.display = 'none';
+      mobileContainer.style.display = 'block';
+
+      // 绑定点击事件
+      const tabContainers = document.querySelectorAll('.tab-container');
+      tabContainers.forEach((tabContainer: Element) => {
+        tabContainer.addEventListener('click', () => {
+          const name = (tabContainer as HTMLElement).dataset.name;
+          console.info('name:',name)
+          // 跳转到对应的tab
+          window.location.href = `/talents/${name}`;
+        })
+      })
+
+    }
+  }
+</script>
+
+<style lang="less">
+  .tab-container {
+    grid-template-areas:"cover desc";
+    grid-template-columns: 2fr 3fr;
+    .mobile-tab-cover {
+      grid-area: cover;
+    }
+  
+    .mobile-tab-desc {
+      grid-area: desc;
+    }
+  }
+  </style>
+  

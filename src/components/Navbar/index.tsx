@@ -80,9 +80,9 @@ export default (props: IProps) => {
               帮助中心
             </a>
 
-            {/* <a href="/talent">
+            <a href="/talent">
               加入我们
-            </a> */}
+            </a>
           </section>
         </section>
 
@@ -119,9 +119,9 @@ export default (props: IProps) => {
                 帮助中心
               </a>
 
-              {/* <a href="/talent">
+              <a href="/talent">
                 加入我们
-              </a> */}
+              </a>
             </div>
           </section>
         </section>
