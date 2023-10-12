@@ -13,5 +13,8 @@ export default defineConfig({
       injectReset: true
     }),
     solidJs()
-  ]
+  ],
+  build: {
+    assetsPrefix: 'https://gcore.jsdelivr.net/gh/dream-num/official-website@gh-pages'
+  }
 })

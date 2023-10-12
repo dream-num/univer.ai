@@ -127,13 +127,13 @@ export default (props: ITabsProps) => {
           class="px-4 py-4 bg-gray-200 text-gray-600 hover:bg-stone-300"
           onClick={handlePrevTab}
         >
-          <img src="/images/talent/prev.png" alt="" />
+          <img src="https://gcore.jsdelivr.net/gh/dream-num/official-website@gh-pages/images/talent/prev.png" alt="" />
         </button>
         <button
           class="px-4 py-4 bg-gray-200 text-gray-600 hover:bg-stone-300"
           onClick={handleNextTab}
         >
-          <img src="/images/talent/next.png" alt="" />
+          <img src="https://gcore.jsdelivr.net/gh/dream-num/official-website@gh-pages/images/talent/next.png" alt="" />
         </button>
 
       </div> */}
