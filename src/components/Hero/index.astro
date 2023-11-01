@@ -32,25 +32,18 @@ const { title, desc, hideButton = false, showDesc = false } = Astro.props
     <div class="flex gap-8" style={{display: hideButton ? 'none': 'flex'}}>
       <button
         id="contact-us"
-        class="px-8 py-2 bg-white md:bg-transparent text-#35322b md:text-white rounded border-white border-2"
+        class="px-8 py-2 bg-white md:bg-transparent text-#35322b md:text-white rounded border-white border-2 hover:bg-white hover:text-#35322b transition-all"
+        onclick="window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })"
       >
         联系我们
       </button>
 
       <button
-        class="hidden md:inline-block px-8 py-2 text-#35322b bg-white rounded border-white border-2"
+        class="hidden md:inline-block px-8 py-2 text-#35322b bg-white rounded border-white border-2 hover:bg-#FFBD37 hover:text-white hover:border-#FFBD37 transition-all"
+        onclick="window.open('https://dream-num.github.io/LuckysheetDemo/')"
       >
         我要试用
       </button>
     </div>
   </section>
 </header>
-
-<script>
-document.getElementById('contact-us')?.addEventListener('click', () => {
-  window.scrollTo({
-    top: document.body.scrollHeight,
-    behavior: 'smooth'
-  })
-})  
-</script>

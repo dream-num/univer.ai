@@ -68,19 +68,19 @@ export default (props: IProps) => {
           </a>
 
           <section class="hidden md:flex items-center gap-16">
-            <a href="/products">
+            <a href="/products" class="hover:text-#FFBD37">
               了解 Univer
             </a>
 
-            <a href="/solutions">
+            <a href="/solutions" class="hover:text-#FFBD37">
               应用场景
             </a>
 
-            <a href="/faq">
+            <a href="/faq" class="hover:text-#FFBD37">
               帮助中心
             </a>
 
-            <a href="/talent">
+            <a href="/talent" class="hover:text-#FFBD37">
               加入我们
             </a>
           </section>
