@@ -21,7 +21,7 @@ const packages =  [
   // 'slides',
   // 'slides-ui',
   'ui',
-  'uniscript',
+  'uniscript'
 ]
 
 
@@ -36,7 +36,7 @@ const typeDocSdierbarGroups = await Promise.all(packages.map(async (pkg) => {
       excludePrivate: true,
       excludeProtected: true,
       excludeReferences: true,
-      disableSources: true,
+      disableSources: true
     },
     output: `./api/${pkg}`
   })
@@ -54,18 +54,22 @@ export default {
   title: 'Univer Docs',
   logo: {
     light: './src/assets/logo-dark.svg',
-    dark: './src/assets/logo-light.svg',
+    dark: './src/assets/logo-light.svg'
   },
   social: {
     github: 'https://github.com/dream-num/univer',
-    discord: 'https://discord.gg/z3NKNT6D2f',
+    discord: 'https://discord.gg/z3NKNT6D2f'
   },
   customCss: ['./src/styles/starlight.css'],
   sidebar: [
+    {
+      label: 'Guides',
+      link: '/guides/introduction'
+    },
     {
       label: 'API reference',
       collapsed: true,
       items: typeDocSdierbarGroups
     }
-  ],
+  ]
 }

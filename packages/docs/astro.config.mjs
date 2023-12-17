@@ -1,5 +1,5 @@
-import { defineConfig } from 'astro/config';
-import starlight from '@astrojs/starlight';
+import { defineConfig } from 'astro/config'
+import starlight from '@astrojs/starlight'
 import UnoCSS from 'unocss/astro'
 
 // https://astro.build/config
@@ -9,23 +9,23 @@ export default defineConfig({
       title: 'Univer Docs',
       logo: {
         light: './src/assets/logo-dark.svg',
-        dark: './src/assets/logo-light.svg',
+        dark: './src/assets/logo-light.svg'
       },
       social: {
         github: 'https://github.com/dream-num/univer',
-        discord: 'https://discord.gg/z3NKNT6D2f',
+        discord: 'https://discord.gg/z3NKNT6D2f'
       },
       customCss: ['./src/styles/starlight.css'],
       defaultLocale: 'root',
       locales: {
         root: {
           label: '简体中文',
-          lang: 'zh-CN',
+          lang: 'zh-CN'
         },
         'en-us': {
           label: 'English',
-          lang: 'en-US',
-        },
+          lang: 'en-US'
+        }
       },
       sidebar: [
         {
@@ -67,17 +67,17 @@ export default defineConfig({
             {
               label: '贡献指南',
               link: 'guides/contributing'
-            },
+            }
           ]
         },
         {
           label: 'API reference',
           link: '../docs/api/core'
         }
-      ],
+      ]
     }),
     UnoCSS({
       injectReset: true
     })
-  ],
-});
+  ]
+})

@@ -18,7 +18,7 @@ importers:
         specifier: ^0.15.0
         version: 0.15.0(astro@4.0.6)
       astro:
-        specifier: ^4.0.5
+        specifier: ^4.0.6
         version: 4.0.6(typescript@5.3.3)
       typedoc:
         specifier: ^0.25.4
