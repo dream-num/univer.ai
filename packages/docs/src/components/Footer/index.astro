@@ -1,8 +1,12 @@
+---
+const present = new Date().getFullYear()
+---
+
 <footer class="footer">
   <section class="banner">
     <div class="wrapper">
       <p>开发成本高？快来试试 Univer！</p>
-      <a>
+      <a href="https://github.com/dream-num/univer">
         立即体验
       </a>
     </div>
@@ -11,31 +15,30 @@
   <nav class="nav">
     <div class="column">
       <label>公司</label>
-      <a>团队介绍</a>
-      <a>加入我们</a>
-      <a>联系我们</a>
+      <!-- <a>团队介绍</a>
+      <a>加入我们</a> -->
+      <a href="/guides/introduction#商业授权">联系我们</a>
     </div>
     <div class="column">
       <label>相关资源</label>
-      <a>资源 1</a>
-      <a>资源 2</a>
-      <a>资源 3</a>
+      <a href="/guides/introduction">文档</a>
+      <a href="/api/core">API</a>
     </div>
     <div class="column">
       <label>社区</label>
-      <a>Discord</a>
-      <a>知乎专栏</a>
+      <a href="https://discord.gg/z3NKNT6D2f">Discord</a>
+      <a href="https://www.zhihu.com/org/meng-shu-ke-ji">知乎专栏</a>
     </div>
     <div class="column">
       <label>帮助</label>
-      <a>Github discussion</a>
-      <a>常见问题</a>
-      <a>报告 Bug</a>
+      <a href="https://github.com/dream-num/univer/discussions">Github discussion</a>
+      <a href="/guides/faq">常见问题</a>
+      <a href="https://github.com/dream-num/univer/issues">报告 Bug</a>
     </div>
   </nav>
 
   <p class="copyright">
-    Copyright © 2021-2023 Mengshu. All Rights Reserved. 上海梦数科技 版权所有
+    Copyright © 2021-{present} Mengshu. All Rights Reserved. 上海梦数科技 版权所有
     服务协议 | 隐私政策
   </p>
 </footer>
@@ -75,6 +78,7 @@
         color: #fff;
         line-height: 2.6rem;
         font-weight: 500;
+        text-decoration: none;
         background: #274FEE;
         border-radius: 8px;
         box-shadow: 0px 4px 12px 0px rgba(11, 0, 208, 0.25);
@@ -102,6 +106,11 @@
       a {
         color: #999;
         font-size: 0.9rem;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }

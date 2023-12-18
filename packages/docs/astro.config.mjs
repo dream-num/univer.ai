@@ -1,7 +1,7 @@
-import { defineConfig } from 'astro/config';
-import starlight from '@astrojs/starlight';
+import { defineConfig } from 'astro/config'
+import starlight from '@astrojs/starlight'
 
-import react from "@astrojs/react";
+import react from "@astrojs/react"
 
 // https://astro.build/config
 export default defineConfig({
@@ -70,6 +70,11 @@ export default defineConfig({
       }, {
         label: 'API reference',
         link: '../docs/api/core'
+      }, {
+        label: 'Playground',
+        autogenerate: {
+          directory: 'playground'
+        }
       }]
     }),
     react()

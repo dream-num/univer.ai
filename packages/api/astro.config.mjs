@@ -4,6 +4,9 @@ import starlightRc from './starlight.config.mjs'
 
 // https://astro.build/config
 export default defineConfig({
+  server: {
+    port: 3210
+  },
   integrations: [
     starlight(starlightRc)
   ]
