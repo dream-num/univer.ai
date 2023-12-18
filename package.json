@@ -6,7 +6,8 @@
     "dev:docs": "turbo dev --filter=./packages/docs",
     "dev:api": "turbo dev --filter=./packages/api",
     "build:docs": "turbo build --filter=./packages/docs",
-    "build:api": "turbo build --filter=./packages/api"
+    "build:api": "turbo build --filter=./packages/api",
+    "build": "turbo build --filter=./packages/docs --filter=./packages/api && mkdir dist && mv packages/docs/dist dist && mv packages/api/dist dist"
   },
   "dependencies": {
     "turbo": "^1.11.2"
