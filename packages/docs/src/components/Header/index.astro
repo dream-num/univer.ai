@@ -1,0 +1,100 @@
+---
+import { Github } from './Github/index'
+---
+
+<header class="header">
+  <div class="wrapper">
+    <section class="left">
+      <h1 class="title">
+        <img src="/logo.svg" alt="logo" />
+        <span class="hidden"></span>
+      </h1>
+
+      <nav class="nav">
+        <a>加入我们</a>
+        <a>加入我们</a>
+        <a>加入我们</a>
+        <a>加入我们</a>
+      </nav>
+    </section>
+
+    <section class="right">
+      <a class="github">
+        <Github client:load />
+      </a>
+      <a class="playground">在线演示</a>
+    </section>
+  </div>
+</header>
+
+<style lang="less" scoped>
+.header {
+  .wrapper {
+    margin: auto;
+    height: 5.8rem;
+    max-width: 1200px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+
+      .title {
+        position: relative;
+        margin: 0;
+  
+        > img {
+          height: 2rem;
+        }
+  
+        .hidden {
+          position: absolute;
+          height: 1px;
+          width: 1px;
+          padding: 0;
+          border: 0;
+          clip: rect(1px, 1px, 1px, 1px);
+          clip-path: inset(0 0 99.9% 99.9%);
+          overflow: hidden;
+        }
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+
+        a {
+          color: #1F2327;
+          font-size: 0.8rem;
+        }
+      }
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+
+      .github {
+
+      }
+
+      .playground {
+        height: 2.6rem;
+        line-height: 2.6rem;
+        padding: 0 2rem;
+        color: #fff;
+        font-weight: 500;
+        background: #274FEE;
+        border-radius: 8px;
+        box-shadow: 0px 4px 12px 0px #0B00D040;
+      }
+    }
+  }
+}
+</style>

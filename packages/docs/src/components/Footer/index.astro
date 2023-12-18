@@ -1,0 +1,115 @@
+<footer class="footer">
+  <section class="banner">
+    <div class="wrapper">
+      <p>开发成本高？快来试试 Univer！</p>
+      <a>
+        立即体验
+      </a>
+    </div>
+  </section>
+
+  <nav class="nav">
+    <div class="column">
+      <label>公司</label>
+      <a>团队介绍</a>
+      <a>加入我们</a>
+      <a>联系我们</a>
+    </div>
+    <div class="column">
+      <label>相关资源</label>
+      <a>资源 1</a>
+      <a>资源 2</a>
+      <a>资源 3</a>
+    </div>
+    <div class="column">
+      <label>社区</label>
+      <a>Discord</a>
+      <a>知乎专栏</a>
+    </div>
+    <div class="column">
+      <label>帮助</label>
+      <a>Github discussion</a>
+      <a>常见问题</a>
+      <a>报告 Bug</a>
+    </div>
+  </nav>
+
+  <p class="copyright">
+    Copyright © 2021-2023 Mengshu. All Rights Reserved. 上海梦数科技 版权所有
+    服务协议 | 隐私政策
+  </p>
+</footer>
+
+<style lang="less" scoped>
+.footer {
+  margin-top: 3rem;
+  padding-bottom: 2rem;
+  background: rgba(228, 244, 254, 0.55);
+
+  .banner {
+    transform: translateY(-50%);
+
+    .wrapper {
+      height: 6rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px 40px 20px 7rem;
+      background: url("/images/footer-banner.png") #fff no-repeat 0 100%;
+      background-size: contain;
+      border-radius: 12px;
+      box-shadow: 0px 0px 24px 0px rgba(31, 35, 39, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      > p {
+        margin: 0;
+        color: #1F2327;
+        font-size: 2rem;
+        font-weight: 600;
+      }
+
+      >a {
+        height: 2.6rem;
+        padding: 0 2rem;
+        color: #fff;
+        line-height: 2.6rem;
+        font-weight: 500;
+        background: #274FEE;
+        border-radius: 8px;
+        box-shadow: 0px 4px 12px 0px rgba(11, 0, 208, 0.25);
+      }
+    }
+  }
+
+  .nav {
+    margin-bottom: 2.1rem;
+    display: flex;
+    justify-content: center;
+    gap: 4.7rem;
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      label {
+        color: #1F2327;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      a {
+        color: #999;
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  .copyright {
+    color: #999;
+    text-align: center;
+    font-size: 0.7rem;
+  }
+}
+</style>

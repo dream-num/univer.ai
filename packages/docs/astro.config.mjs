@@ -1,6 +1,7 @@
-import { defineConfig } from 'astro/config'
-import starlight from '@astrojs/starlight'
-import UnoCSS from 'unocss/astro'
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
@@ -27,57 +28,50 @@ export default defineConfig({
           lang: 'en-US'
         }
       },
-      sidebar: [
-        {
-          label: '指南',
-          autogenerate: { directory: 'guides/*.md' },
-          items: [
-            {
-              label: 'Univer 介绍',
-              link: 'guides/introduction'
-            },
-            {
-              label: '快速上手',
-              link: 'guides/quick-start'
-            },
-            {
-              label: '功能一览',
-              link: 'guides/features'
-            },
-            {
-              label: '路线图',
-              link: 'guides/roadmap'
-            },
-            {
-              label: '架构',
-              autogenerate: { directory: 'guides/architecture' }
-            },
-            {
-              label: '插件',
-              autogenerate: { directory: 'guides/plugins' }
-            },
-            {
-              label: '扩展',
-              autogenerate: { directory: 'guides/extend' }
-            },
-            {
-              label: 'FAQ',
-              link: 'guides/faq'
-            },
-            {
-              label: '贡献指南',
-              link: 'guides/contributing'
-            }
-          ]
+      sidebar: [{
+        label: '指南',
+        autogenerate: {
+          directory: 'guides/*.md'
         },
-        {
-          label: 'API reference',
-          link: '../docs/api/core'
-        }
-      ]
+        items: [{
+          label: 'Univer 介绍',
+          link: 'guides/introduction'
+        }, {
+          label: '快速上手',
+          link: 'guides/quick-start'
+        }, {
+          label: '功能一览',
+          link: 'guides/features'
+        }, {
+          label: '路线图',
+          link: 'guides/roadmap'
+        }, {
+          label: '架构',
+          autogenerate: {
+            directory: 'guides/architecture'
+          }
+        }, {
+          label: '插件',
+          autogenerate: {
+            directory: 'guides/plugins'
+          }
+        }, {
+          label: '扩展',
+          autogenerate: {
+            directory: 'guides/extend'
+          }
+        }, {
+          label: 'FAQ',
+          link: 'guides/faq'
+        }, {
+          label: '贡献指南',
+          link: 'guides/contributing'
+        }]
+      }, {
+        label: 'API reference',
+        link: '../docs/api/core'
+      }]
     }),
-    UnoCSS({
-      injectReset: true
-    })
+    react()
   ]
 })

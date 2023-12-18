@@ -1,11 +1,691 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import 'modern-normalize'
+
+const features = [{
+  label: '数据连接器，集成业务数据',
+  desc: ['编写和保存脚本语言，实现自动化操作；', ' 未来可实现AI生成脚本，让工作更智能。']
+}, {
+  label: '脚本编辑器，记录操作指令',
+  desc: ['编写和保存脚本语言，实现自动化操作；', ' 未来可实现AI生成脚本，让工作更智能。']
+}, {
+  label: '高扩展性，适配个性化需求',
+  desc: ['编写和保存脚本语言，实现自动化操作；', ' 未来可实现AI生成脚本，让工作更智能。']
+}, {
+  label: '无界模式，跨形态打破边界',
+  desc: ['编写和保存脚本语言，实现自动化操作；', ' 未来可实现AI生成脚本，让工作更智能。']
+}, {
+  label: '协同办公，团队作战更默契',
+  desc: ['编写和保存脚本语言，实现自动化操作；', ' 未来可实现AI生成脚本，让工作更智能。']
+}]
+
+const tech = [{
+  icon: '/images/tech-1.svg',
+  color: 'rgba(45, 174, 255, 0.5)',
+  title: '基于依赖注入的插件化架构',
+  desc: 'Univer 功能被划分到多个插件当中，开发者可根据自己的需要组合插件，也可以自己开发插件满足个性化需要；'
+}, {
+  icon: '/images/tech-2.svg',
+  color: 'rgba(255, 140, 81, 0.5)',
+  title: '统一渲染引擎',
+  desc: '自研基于 canvas 的高性能图形渲染引擎，支持排版、富文本、表格和图形，带来无缝的使用体验； 支持图文混排、单元格内富文本等高级渲染能力。'
+}, {
+  icon: '/images/tech-3.svg',
+  color: 'rgba(254, 75, 75, 0.5)',
+  title: '高度可扩展的命令系统',
+  desc: '用户在 Univer 上的操作都通过命令系统执行；基于命令系统可实现协同编辑、协同光标、live share、脚本生成等高级功能'
+}, {
+  icon: '/images/tech-4.svg',
+  color: 'rgba(39, 79, 238, 0.5)',
+  title: '自研高性能公式引擎',
+  desc: '支持倒排索引、lambda 表达式等高级特性； 基于 RPC 机制实现 web worker 计算，提升性能表现，未来可支持服务端计算。'
+}]
 ---
 
 <Layout title="Univer">
   <main>
-    univer home page
+    <section class="hero">
+      <h2 class="title">新一代开源办公套件</h2>
+      <p class="desc">嵌入企业系统 · 高效流转数据 · 打破应用孤岛</p>
+      <a class="btn">立即体验</a>
+
+      <section class="materials">
+        <div class="center">
+          <img class="material shadow-left-top" src="/materials/shadow-left-top.svg" />
+          <img class="material shadow-left-bottom" src="/materials/shadow-left-bottom.svg" />
+          <img class="material shadow-right-top" src="/materials/shadow-right-top.svg" />
+          <img class="material shadow-right-bottom" src="/materials/shadow-right-bottom.svg" />
+
+          <img class="material polygon-left" src="/materials/polygon-left.svg" />
+          <img class="material polygon-right" src="/materials/polygon-right.svg" />
+
+          <div class="material dot dot-1" />
+          <div class="material dot dot-2" />
+          <div class="material dot dot-3" />
+          <div class="material dot dot-4" />
+          <div class="material dot dot-5" />
+          <div class="material dot dot-6" />
+          <div class="material dot dot-7" />
+          <div class="material dot dot-8" />
+          <div class="material dot dot-9" />
+
+          <img class="sheets" src="/images/sheets-01.png" alt="univer sheets" />
+        </div>
+      </section>
+    </section>
+
+    <section class="features">
+      <section class="preview">
+        <img class="frame" src="/images/frame.png" alt="frame">
+        <img class="sheet" src="/images/sheets-02.png" alt="univer sheets" />
+      </section>
+
+      <section class="block">
+        <section class="wrapper">
+          <div class="list">
+            <h2 class="title">功能抢先看</h2>
+
+            <ul>
+              {features.map(feature => (
+                <li data-univer-feature>
+                  <a>
+                    <label>{feature.label}</label>
+                    <p>
+                      {feature.desc?.map(text => (
+                        <span>{text}</span>
+                      ))}
+                    </p>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      </section>
+    </section>
+
+    <section class="tech">
+      <h2 class="title">背后技术解密</h2>
+
+      <section class="list">
+        {tech.map(item => (
+          <div class="block" style={{ '--tech-icon-color': item.color }}>
+            <img src={item.icon} alt={item.title} />
+            <h3>{item.title}</h3>
+            <p>{item.desc}</p>
+          </div>
+        ))}
+      </section>
+    </section>
+
+    <section class="users">
+      <h2 class="title">5,000+企业所信任的协同办公解决方案</h2>
+
+      <section class="materials">
+        <div class="dot dot-1" />
+        <div class="dot dot-2" />
+        <div class="dot dot-3" />
+        <div class="dot dot-4" />
+        <div class="dot dot-5" />
+        <div class="dot dot-6" />
+        <div class="dot dot-7" />
+        <div class="dot dot-8" />
+      </section>
+
+      <section class="wall">
+        <div class="line">
+          <img src="/images/logo-1.png" />
+          <img src="/images/logo-1.png" />
+          <img src="/images/logo-1.png" />
+          <img src="/images/logo-1.png" />
+          <img src="/images/logo-1.png" />
+          <img src="/images/logo-1.png" />
+        </div>
+        <div class="line">
+          <img src="/images/logo-1.png" />
+          <img src="/images/logo-1.png" />
+          <img src="/images/logo-1.png" />
+          <img src="/images/logo-1.png" />
+          <img src="/images/logo-1.png" />
+          <img src="/images/logo-1.png" />
+        </div>
+        <div class="line">
+          <img src="/images/logo-1.png" />
+          <img src="/images/logo-1.png" />
+          <img src="/images/logo-1.png" />
+          <img src="/images/logo-1.png" />
+          <img src="/images/logo-1.png" />
+          <img src="/images/logo-1.png" />
+        </div>
+      </section>
+    </section>
   </main>
 </Layout>
 
-<style></style>
+<script>
+const $features = document.querySelectorAll('[data-univer-feature]')
+
+$features.forEach(($feature, index: number) => {
+  $feature.addEventListener('click', () => {
+    focusFeature(index)
+  })
+})
+
+function focusFeature (index: number) {
+  for (let i = 0; i < $features.length; i++) {
+    const $feature = $features[i]
+
+    if (i === index) {
+      $feature.classList.add('feature-active')
+    } else {
+      $feature.classList.remove('feature-active')
+    }
+  }
+}
+
+focusFeature(0)
+</script>
+
+<style lang="less" is:global>
+.feature-active {
+  color: #1F2327 !important;
+
+  p {
+    padding-top: 0.6rem;
+    height: auto !important;
+  }
+}
+</style>
+
+<style lang="less" scoped>
+.hero {
+  margin-top: 1.9rem;
+  padding-bottom: 14.15rem;
+  overflow-x: hidden;
+
+  .title {
+    margin: 0 0 1.2rem;
+    font-size: 3.3rem;
+    font-weight: 600;
+    text-align: center;
+    background: linear-gradient(121deg, #0048FF 18.89%, #0C81ED 39.58%, #029DCE 59.87%, #00BBB0 74.37%, #00C5A8 79.64%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .desc {
+    margin: 0 0 1.6rem;
+    color: #999;
+    text-align: center;
+    font-size: 1.1rem;
+  }
+
+  .btn {
+    width: 12rem;
+    height: 3.3rem;
+    margin: 0 auto 2.8rem auto;
+    color: #fff;
+    text-align: center;
+    line-height: 3.3rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    background: #274FEE;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px 0px rgba(11, 0, 208, 0.25);
+    display: block;
+  }
+
+  .materials {
+    position: relative;
+
+    .center {
+      position: relative;
+      width: 46.6rem;
+      height: 24.1rem;
+      margin: 0 auto;
+    }
+
+    .sheets {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 0;
+    }
+
+    .material {
+      position: absolute;
+
+      &.shadow {
+        &-left {
+          &-top {
+            top: -5.65rem;
+            left: 2rem;
+            width: 5.8rem;
+            height: 20.1rem;
+            transform: rotate(-93deg);
+            background: rgba(39, 79, 238, 0.50);
+            border-radius: 20.1rem;
+            filter: blur(100px);
+          }
+
+          &-bottom {
+            top: 16.65rem;
+            left: 1.3rem;
+            width: 3.25rem;
+            height: 13rem;
+            transform: rotate(-58deg);
+            background: rgba(16, 232, 199, 0.50);
+            border-radius: 13rem;
+            filter: blur(100px);
+          }
+        }
+
+        &-right {
+          &-top {
+            top: 1rem;
+            left: 43.1rem;
+            width: 7.65rem;
+            height: 7.1rem;
+            background: rgba(11, 158, 251, 0.50);
+            filter: blur(100px);
+            transform: rotate(-5deg);
+          }
+
+          &-bottom {
+            top: 18.95rem;
+            left: 42.4rem;
+            width: 7.65rem;
+            height: 7.1rem;
+            transform: rotate(-5deg);
+            background: rgba(254, 75, 75, 0.50);
+            filter: blur(100px);
+          }
+        }
+      }
+
+      &.polygon {
+        &-left {
+          top: -3rem;
+          left: -4rem;
+          width: 10.55rem;
+        }
+
+        &-right {
+          right: -4rem;
+          bottom: -3rem;
+          width: 18.05rem;
+        }
+      }
+
+
+      &.dot {
+        border-radius: 50%;
+
+        &-1 {
+          left: -23.6rem;
+          top: 4rem;
+          width: 2rem;
+          height: 2rem;
+          background: #ffbd37;
+        }
+
+        &-2 {
+          left: -7.5rem;
+          top: -7.4rem;
+          width: 1rem;
+          height: 1rem;
+          background: #2DAEFF;
+        }
+
+        &-3 {
+          left: -4.3rem;
+          top: 16.95rem;
+          width: 0.8rem;
+          height: 0.8rem;
+          background: #FE4B4B;
+        }
+
+        &-4 {
+          left: -9.85rem;
+          top: 30.75rem;
+          width: 2.2rem;
+          height: 2.2rem;
+          background: #274FEE;
+        }
+
+        &-5 {
+          left: 15.65rem;
+          top: 24rem;
+          width: 1rem;
+          height: 1rem;
+          background: #FF8C51;
+        }
+
+        &-6 {
+          left: 46.6rem;
+          top: 10rem;
+          width: 1rem;
+          height: 1rem;
+          background: #274FEE;
+        }
+
+        &-7 {
+          left: 48.3rem;
+          top: 28.4rem;
+          width: 1.3rem;
+          height: 1.3rem;
+          background: #2DAEFF;
+        }
+
+        &-8 {
+          left: 58rem;
+          top: -11.5rem;
+          width: 1.4rem;
+          height: 1.4rem;
+          background: #D0EDFF;
+        }
+
+        &-9 {
+          left: 65.6rem;
+          top: 2.2rem;
+          width: 0.6rem;
+          height: 0.6rem;
+          background: #FE4B4B;
+        }
+      }
+    }
+  }
+}
+
+.features {
+  position: relative;
+  height: 36.4rem;
+  margin-bottom: 8.5rem;
+  display: flex;
+  align-items: center;
+
+  .preview {
+    position: absolute;
+    left: 60%;
+    top: 0;
+    height: 38.4rem;
+    width: 80.6rem;
+    transform: translateX(-100%);
+    z-index: 1;
+
+    .frame {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+    }
+
+    .sheet {
+      position: absolute;
+      top: 3rem;
+      right: 8.2rem;
+      width: 63.8rem;
+      height: 32.9rem;
+    }
+  }
+
+  .block {
+    position: relative;
+    width: 100%;
+    height: 28rem;
+    background: rgba(228, 244, 254, 0.55);
+    display: flex;
+    justify-content: flex-end;
+
+    .wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      flex: 1;
+
+      .list {
+        position: absolute;
+        left: 50%;
+        height: 100%;
+        padding-left: 10%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        .title {
+          margin: 0 0 1.4rem;
+          font-size: 2.4rem;
+          background-image: linear-gradient(121deg, #0048FF 18.89%, #0C81ED 39.58%, #029DCE 59.87%, #00BBB0 74.37%, #00C5A8 79.64%);
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        ul {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          display: grid;
+          gap: 1.2rem;
+
+          li {
+            color: #BCBCBC;
+            font-size: 1rem;
+            transition: color .15s;
+
+            &:hover {
+              color: #1F2327;
+            }
+
+            &::before {
+              content: "";
+              width: 8px;
+              height: 8px;
+              margin-right: 0.6rem;
+              background: currentColor;
+              border-radius: 50%;
+              display: inline-block;
+            }
+
+            label {
+              font-weight: 500;
+              cursor: pointer;
+            }
+
+            p {
+              margin: 0;
+              height: 0;
+              padding-left: 1.4rem;
+              color: #999;
+              font-size: 0.8rem;
+              line-height: 1.8;
+              overflow: hidden;
+              transition: all 0.15s;
+
+              span {
+                display: block;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.tech {
+  .title {
+    margin-bottom: 3rem;
+    text-align: center;
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 600;
+    background: linear-gradient(121deg, #0048FF 18.89%, #0C81ED 39.58%, #029DCE 59.87%, #00BBB0 74.37%, #00C5A8 79.64%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .list {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+
+    .block {
+      width: 16rem;
+      height: 16.1rem;
+      padding: 1.6rem 1.8rem;
+      border-radius: 20px;
+      background: rgba(228, 244, 254, 0.55);
+      box-shadow: 0px 2px 6px 0px rgba(111, 195, 255, 0.20) inset;
+      transition: all 0.15s;
+      &:hover {
+        background: #fff;
+        box-shadow: 0px 24px 48px 0px rgba(31, 35, 39, 0.06);
+
+        img {
+          filter: drop-shadow(0px 4px 12px var(--tech-icon-color));
+        }
+      }
+
+      img {
+        width: 3.6rem;
+        height: 3.6rem;
+        margin-bottom: 1.6rem;
+        display: block;
+        transition: all 0.15s;
+      }
+
+      h3 {
+        margin: 0 0 0.9rem;
+        color: #1F2327;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      p {
+        margin: 0;
+        color: #999;
+        line-height: 1.4rem;
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+
+.users {
+  position: relative;
+  padding-top: 9.5rem;
+  padding-bottom: 10rem;
+  overflow-x: hidden;
+
+  .title {
+    margin-bottom: 3rem;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  .materials {
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto;
+
+    .dot {
+      position: absolute;
+      border-radius: 50%;
+
+      &-1 {
+        top: 3rem;
+        left: -5rem;
+        width: 1.6rem;
+        height: 1.6rem;
+        background: #FFBD37;
+      }
+
+      &-2 {
+        top: 13.5rem;
+        left: -1.4rem;
+        width: 1.4rem;
+        height: 1.4rem;
+        background: #274FEE;
+      }
+
+      &-3 {
+        top: -8.75rem;
+        width: 0.8rem;
+        height: 0.8rem;
+        background: #2DAEFF;
+      }
+
+      &-4 {
+        top: 8rem;
+        left: 3rem;
+        width: 1rem;
+        height: 1rem;
+        background: #FE4B4B;
+      }
+
+      &-5 {
+        top: 0rem;
+        right: 3.75rem;
+        width: 0.6rem;
+        height: 0.6rem;
+        background: #2DAEFF;
+      }
+
+      &-6 {
+        top: 11rem;
+        right: 1rem;
+        width: 0.8rem;
+        height: 0.8rem;
+        background: #FE4B4B;
+      }
+
+      &-7 {
+        top: -7.75rem;
+        right: -2.75rem;
+        width: 1.4rem;
+        height: 1.4rem;
+        background: #FFBD37;
+      }
+
+      &-8 {
+        top: 5.5rem;
+        right: -7rem;
+        width: 2.2rem;
+        height: 2.2rem;
+        background: #274FEE;
+      }
+    }
+  }
+
+  .wall {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    gap: 2.2rem;
+
+    .line {
+      display: flex;
+      justify-content: center;
+      gap: 2.4rem;
+      &:nth-child(1) {
+        padding-left: 4rem;
+      }
+      &:nth-child(2) {
+        padding-left: 8rem;
+      }
+
+      img {
+        height: 1.6rem;
+        &:first-child,
+        &:last-child {
+          filter: blur(2px);
+        }
+      }
+    }
+  }
+}
+</style>
