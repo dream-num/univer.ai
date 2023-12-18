@@ -45,7 +45,9 @@ const tech = [{
 <Layout title="Univer">
   <main>
     <section class="hero">
-      <h2 class="title">新一代开源办公套件</h2>
+      <h2 class="title">
+        <span>新一代开源办公套件</span>
+      </h2>
       <p class="desc">嵌入企业系统 · 高效流转数据 · 打破应用孤岛</p>
       <a class="btn">立即体验</a>
 
@@ -83,7 +85,9 @@ const tech = [{
       <section class="block">
         <section class="wrapper">
           <div class="list">
-            <h2 class="title">功能抢先看</h2>
+            <h2 class="title">
+              <span>功能抢先看</span>
+            </h2>
 
             <ul>
               {features.map(feature => (
@@ -105,7 +109,9 @@ const tech = [{
     </section>
 
     <section class="tech">
-      <h2 class="title">背后技术解密</h2>
+      <h2 class="title">
+        <span>背后技术解密</span>
+      </h2>
 
       <section class="list">
         {tech.map(item => (
@@ -205,13 +211,18 @@ focusFeature(0)
 
   .title {
     margin: 0 0 1.2rem;
-    font-size: 3.3rem;
-    font-weight: 600;
-    text-align: center;
-    background: linear-gradient(121deg, #0048FF 18.89%, #0C81ED 39.58%, #029DCE 59.87%, #00BBB0 74.37%, #00C5A8 79.64%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    display: flex;
+    justify-content: center;
+
+    span {
+      font-size: 3.3rem;
+      font-weight: 600;
+      background: linear-gradient(121deg, #0048FF 18.89%, #0C81ED 39.58%, #029DCE 59.87%, #00BBB0 74.37%, #00C5A8 79.64%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+    }
   }
 
   .desc {
@@ -455,11 +466,14 @@ focusFeature(0)
 
         .title {
           margin: 0 0 1.4rem;
-          font-size: 2.4rem;
-          background-image: linear-gradient(121deg, #0048FF 18.89%, #0C81ED 39.58%, #029DCE 59.87%, #00BBB0 74.37%, #00C5A8 79.64%);
-          background-clip: text;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+
+          span {
+            font-size: 2.4rem;
+            background-image: linear-gradient(121deg, #0048FF 18.89%, #0C81ED 39.58%, #029DCE 59.87%, #00BBB0 74.37%, #00C5A8 79.64%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
         }
 
         ul {
@@ -518,13 +532,16 @@ focusFeature(0)
   .title {
     margin-bottom: 3rem;
     text-align: center;
-    text-align: center;
-    font-size: 2.4rem;
-    font-weight: 600;
-    background: linear-gradient(121deg, #0048FF 18.89%, #0C81ED 39.58%, #029DCE 59.87%, #00BBB0 74.37%, #00C5A8 79.64%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+
+    span {
+      text-align: center;
+      font-size: 2.4rem;
+      font-weight: 600;
+      background: linear-gradient(121deg, #0048FF 18.89%, #0C81ED 39.58%, #029DCE 59.87%, #00BBB0 74.37%, #00C5A8 79.64%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
   }
 
   .list {
