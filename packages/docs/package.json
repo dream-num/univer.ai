@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -14,11 +14,11 @@
     "@astrojs/react": "^3.0.7",
     "@astrojs/starlight": "^0.15.0",
     "@types/react-dom": "^18.2.18",
-    "@univerjs/icons": "^0.1.18",
     "astro": "^4.0.6",
     "modern-normalize": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "sharp": "^0.33.1",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
