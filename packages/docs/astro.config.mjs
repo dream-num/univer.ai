@@ -69,7 +69,7 @@ export default defineConfig({
         }]
       }, {
         label: 'API reference',
-        link: '../docs/api/core'
+        link: '../api/core'
       }, {
         label: 'Playground',
         autogenerate: {
