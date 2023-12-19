@@ -1,6 +1,13 @@
 {
   "name": "docs",
   "type": "module",
+  "licenses": [{
+    "type": "CC-BY-NC-SA-4.0",
+    "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en"
+  }, {
+    "type": "Apache-2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  }],
   "version": "0.1.0",
   "scripts": {
     "dev:docs": "turbo dev --filter=./packages/docs",
@@ -8,7 +15,7 @@
     "dev": "turbo dev --filter=./packages/docs --filter=./packages/api",
     "build:docs": "turbo build --filter=./packages/docs",
     "build:api": "turbo build --filter=./packages/api",
-    "build": "turbo build --filter=./packages/docs --filter=./packages/api && mkdir dist && cp -r packages/docs/dist/* dist && cp -r packages/api/dist/* dist"
+    "build": "turbo build --filter=./packages/docs --filter=./packages/api"
   },
   "dependencies": {
     "turbo": "^1.11.2"

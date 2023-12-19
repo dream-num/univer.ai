@@ -1,0 +1,205 @@
+---
+const features = [{
+  label: '数据连接器，集成业务数据',
+  desc: ['编写和保存脚本语言，实现自动化操作；', ' 未来可实现AI生成脚本，让工作更智能。']
+}, {
+  label: '脚本编辑器，记录操作指令',
+  desc: ['编写和保存脚本语言，实现自动化操作；', ' 未来可实现AI生成脚本，让工作更智能。']
+}, {
+  label: '高扩展性，适配个性化需求',
+  desc: ['编写和保存脚本语言，实现自动化操作；', ' 未来可实现AI生成脚本，让工作更智能。']
+}, {
+  label: '无界模式，跨形态打破边界',
+  desc: ['编写和保存脚本语言，实现自动化操作；', ' 未来可实现AI生成脚本，让工作更智能。']
+}, {
+  label: '协同办公，团队作战更默契',
+  desc: ['编写和保存脚本语言，实现自动化操作；', ' 未来可实现AI生成脚本，让工作更智能。']
+}]
+---
+
+<section class="features">
+  <section class="preview">
+    <img class="frame" src="/images/frame.png" alt="frame" draggable={false}>
+    <img class="sheet" src="/images/sheets-02.png" alt="univer sheets" draggable={false} />
+  </section>
+
+  <section class="block">
+    <section class="wrapper">
+      <div class="list">
+        <h2 class="title">
+          <span>功能抢先看</span>
+        </h2>
+
+        <ul>
+          {features.map(feature => (
+            <li data-univer-feature>
+              <a>
+                <label>{feature.label}</label>
+                <p>
+                  {feature.desc?.map(text => (
+                    <span>{text}</span>
+                  ))}
+                </p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </section>
+</section>
+
+<script>
+const $features = document.querySelectorAll('[data-univer-feature]')
+
+$features.forEach(($feature, index: number) => {
+  $feature.addEventListener('click', () => {
+    focusFeature(index)
+  })
+})
+
+function focusFeature (index: number) {
+  for (let i = 0; i < $features.length; i++) {
+    const $feature = $features[i]
+
+    if (i === index) {
+      $feature.classList.add('feature-active')
+    } else {
+      $feature.classList.remove('feature-active')
+    }
+  }
+}
+
+focusFeature(0)
+</script>
+
+<style lang="less" is:global>
+.feature-active {
+  color: #1F2327 !important;
+
+  p {
+    padding-top: 0.6rem;
+    height: auto !important;
+  }
+}
+</style>
+
+<style lang="less" scoped>
+.features {
+  position: relative;
+  height: 36.4rem;
+  margin-bottom: 8.5rem;
+  display: flex;
+  align-items: center;
+
+  .preview {
+    position: absolute;
+    left: 60%;
+    top: 0;
+    height: 38.4rem;
+    width: 80.6rem;
+    transform: translateX(-100%);
+    z-index: 1;
+
+    .frame {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+    }
+
+    .sheet {
+      position: absolute;
+      top: 3rem;
+      right: 8.2rem;
+      width: 63.8rem;
+      height: 32.9rem;
+    }
+  }
+
+  .block {
+    position: relative;
+    width: 100%;
+    height: 28rem;
+    background: rgba(228, 244, 254, 0.55);
+    display: flex;
+    justify-content: flex-end;
+
+    .wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      flex: 1;
+
+      .list {
+        position: absolute;
+        left: 50%;
+        height: 100%;
+        padding-left: 10%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        .title {
+          margin: 0 0 1.4rem;
+
+          span {
+            font-size: 2.4rem;
+            background-image: linear-gradient(121deg, #0048FF 18.89%, #0C81ED 39.58%, #029DCE 59.87%, #00BBB0 74.37%, #00C5A8 79.64%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+        }
+
+        ul {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          display: grid;
+          gap: 1.2rem;
+
+          li {
+            color: #BCBCBC;
+            font-size: 1rem;
+            transition: color .15s;
+
+            &:hover {
+              color: #1F2327;
+            }
+
+            &::before {
+              content: "";
+              width: 8px;
+              height: 8px;
+              margin-right: 0.6rem;
+              background: currentColor;
+              border-radius: 50%;
+              display: inline-block;
+            }
+
+            label {
+              font-weight: 500;
+              cursor: pointer;
+            }
+
+            p {
+              margin: 0;
+              height: 0;
+              padding-left: 1.4rem;
+              color: #999;
+              font-size: 0.8rem;
+              line-height: 1.8;
+              overflow: hidden;
+              transition: all 0.15s;
+
+              span {
+                display: block;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</style>

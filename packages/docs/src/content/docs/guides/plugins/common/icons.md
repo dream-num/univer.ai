@@ -6,4 +6,4 @@ title: "@univerjs/icons"
 
 ![](/img/icons-preview.png)
 
-出于和 [@univerjs/design](/docs/guides/plugins/common/design) 相似的目的，我们也提供了一些基础图标。你可以访问[图标库网站](https://univer-icons.vercel.app/)了解更多信息。
+出于和 [@univerjs/design](/guides/plugins/common/design) 相似的目的，我们也提供了一些基础图标。你可以访问[图标库网站](https://univer-icons.vercel.app/)了解更多信息。

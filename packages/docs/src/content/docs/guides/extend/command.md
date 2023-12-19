@@ -3,7 +3,7 @@ title: 扩展命令
 ---
 
 :::info
-建议在阅读本小节内容之前先[了解 Univer 的命令系统](/docs/guides/architecture/#命令系统)。
+建议在阅读本小节内容之前先[了解 Univer 的命令系统](/guides/architecture/architecture/#命令系统)。
 :::
 
 ## 创建新命令
@@ -50,7 +50,7 @@ export class YourController extends Disposable {
 }
 ```
 
-之后就可以通过 `ICommandService` 来执行命令了。实践中常用的方式是通过 UI 触发，请参考[拓展 UI](/docs/guides/extend/ui)。
+之后就可以通过 `ICommandService` 来执行命令了。实践中常用的方式是通过 UI 触发，请参考[拓展 UI](/guides/extend/ui)。
 
 ### Undo / Redo
 

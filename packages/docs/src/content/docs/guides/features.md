@@ -4,7 +4,7 @@ title: 功能一览
 
 Univer 致力于为用户实现完整的办公文档解决方案，以下是我们目前已经实现的产品和特性。
 
-想要了解后续的开发计划，请参考[路线图](/docs/guides/roadmap)。你也可以通过 Feature Request 的方式提交你的需求，请参考[贡献指南](/docs/guides/contributing)，我们会结合社区的反馈调整开发计划。
+想要了解后续的开发计划，请参考[路线图](/guides/roadmap)。你也可以通过 Feature Request 的方式提交你的需求，请参考[贡献指南](/guides/contributing)，我们会结合社区的反馈调整开发计划。
 
 ## 通用能力
 

@@ -1,0 +1,158 @@
+<section class="companies">
+  <h2 class="title">5,000+企业所信任的协同办公解决方案</h2>
+
+  <section class="materials">
+    <div class="dot dot-1" />
+    <div class="dot dot-2" />
+    <div class="dot dot-3" />
+    <div class="dot dot-4" />
+    <div class="dot dot-5" />
+    <div class="dot dot-6" />
+    <div class="dot dot-7" />
+    <div class="dot dot-8" />
+  </section>
+
+  <section class="wall">
+    <div class="line">
+      <img src="/images/logo-1.png" draggable={false} />
+      <img src="/images/logo-1.png" draggable={false} />
+      <img src="/images/logo-1.png" draggable={false} />
+      <img src="/images/logo-1.png" draggable={false} />
+      <img src="/images/logo-1.png" draggable={false} />
+      <img src="/images/logo-1.png" draggable={false} />
+    </div>
+    <div class="line">
+      <img src="/images/logo-1.png" draggable={false} />
+      <img src="/images/logo-1.png" draggable={false} />
+      <img src="/images/logo-1.png" draggable={false} />
+      <img src="/images/logo-1.png" draggable={false} />
+      <img src="/images/logo-1.png" draggable={false} />
+      <img src="/images/logo-1.png" draggable={false} />
+    </div>
+    <div class="line">
+      <img src="/images/logo-1.png" draggable={false} />
+      <img src="/images/logo-1.png" draggable={false} />
+      <img src="/images/logo-1.png" draggable={false} />
+      <img src="/images/logo-1.png" draggable={false} />
+      <img src="/images/logo-1.png" draggable={false} />
+      <img src="/images/logo-1.png" draggable={false} />
+    </div>
+  </section>
+</section>
+
+<style lang="less" scoped>
+.companies {
+  position: relative;
+  padding-top: 9.5rem;
+  padding-bottom: 10rem;
+  overflow-x: hidden;
+
+  .title {
+    margin-bottom: 3rem;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  .materials {
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto;
+
+    .dot {
+      position: absolute;
+      border-radius: 50%;
+
+      &-1 {
+        top: 3rem;
+        left: -5rem;
+        width: 1.6rem;
+        height: 1.6rem;
+        background: #FFBD37;
+      }
+
+      &-2 {
+        top: 13.5rem;
+        left: -1.4rem;
+        width: 1.4rem;
+        height: 1.4rem;
+        background: #274FEE;
+      }
+
+      &-3 {
+        top: -8.75rem;
+        width: 0.8rem;
+        height: 0.8rem;
+        background: #2DAEFF;
+      }
+
+      &-4 {
+        top: 8rem;
+        left: 3rem;
+        width: 1rem;
+        height: 1rem;
+        background: #FE4B4B;
+      }
+
+      &-5 {
+        top: 0rem;
+        right: 3.75rem;
+        width: 0.6rem;
+        height: 0.6rem;
+        background: #2DAEFF;
+      }
+
+      &-6 {
+        top: 11rem;
+        right: 1rem;
+        width: 0.8rem;
+        height: 0.8rem;
+        background: #FE4B4B;
+      }
+
+      &-7 {
+        top: -7.75rem;
+        right: -2.75rem;
+        width: 1.4rem;
+        height: 1.4rem;
+        background: #FFBD37;
+      }
+
+      &-8 {
+        top: 5.5rem;
+        right: -7rem;
+        width: 2.2rem;
+        height: 2.2rem;
+        background: #274FEE;
+      }
+    }
+  }
+
+  .wall {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    gap: 2.2rem;
+
+    .line {
+      display: flex;
+      justify-content: center;
+      gap: 2.4rem;
+      &:nth-child(1) {
+        padding-left: 4rem;
+      }
+      &:nth-child(2) {
+        padding-left: 8rem;
+      }
+
+      img {
+        height: 1.6rem;
+        &:first-child,
+        &:last-child {
+          filter: blur(2px);
+        }
+      }
+    }
+  }
+}
+</style>

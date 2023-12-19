@@ -1,0 +1,251 @@
+<section class="hero">
+  <h2 class="title">
+    <span>新一代开源办公套件</span>
+  </h2>
+  <p class="desc">嵌入企业系统 · 高效流转数据 · 打破应用孤岛</p>
+  <a class="btn" href="https://github.com/dream-num/univer">立即体验</a>
+
+  <section class="materials">
+    <div class="center">
+      <img class="material shadow-left-top" src="/materials/shadow-left-top.svg" draggable={false} />
+      <img class="material shadow-left-bottom" src="/materials/shadow-left-bottom.svg" draggable={false} />
+      <img class="material shadow-right-top" src="/materials/shadow-right-top.svg" draggable={false} />
+      <img class="material shadow-right-bottom" src="/materials/shadow-right-bottom.svg" draggable={false} />
+
+      <img class="material polygon-left" src="/materials/polygon-left.svg" draggable={false} />
+      <img class="material polygon-right" src="/materials/polygon-right.svg" draggable={false} />
+
+      <div class="material dot dot-1" />
+      <div class="material dot dot-2" />
+      <div class="material dot dot-3" />
+      <div class="material dot dot-4" />
+      <div class="material dot dot-5" />
+      <div class="material dot dot-6" />
+      <div class="material dot dot-7" />
+      <div class="material dot dot-8" />
+      <div class="material dot dot-9" />
+
+      <img class="sheets" src="/images/sheets-01.png" alt="univer sheets" draggable={false} />
+    </div>
+  </section>
+</section>
+
+<style lang="less" is:global>
+.feature-active {
+  color: #1F2327 !important;
+
+  p {
+    padding-top: 0.6rem;
+    height: auto !important;
+  }
+}
+</style>
+
+<style lang="less" scoped>
+.hero {
+  margin-top: 1.9rem;
+  padding-bottom: 14.15rem;
+  overflow-x: hidden;
+
+  .title {
+    margin: 0 0 1.2rem;
+    display: flex;
+    justify-content: center;
+
+    span {
+      font-size: 3.3rem;
+      font-weight: 600;
+      background: linear-gradient(121deg, #0048FF 18.89%, #0C81ED 39.58%, #029DCE 59.87%, #00BBB0 74.37%, #00C5A8 79.64%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+    }
+  }
+
+  .desc {
+    margin: 0 0 1.6rem;
+    color: #999;
+    text-align: center;
+    font-size: 1.1rem;
+  }
+
+  .btn {
+    width: 12rem;
+    height: 3.3rem;
+    margin: 0 auto 2.8rem auto;
+    color: #fff;
+    text-align: center;
+    line-height: 3.3rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-decoration: none;
+    background: #274FEE;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px 0px rgba(11, 0, 208, 0.25);
+    display: block;
+  }
+
+  .materials {
+    position: relative;
+
+    .center {
+      position: relative;
+      width: 46.6rem;
+      height: 24.1rem;
+      margin: 0 auto;
+    }
+
+    .sheets {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 0;
+    }
+
+    .material {
+      position: absolute;
+
+      &.shadow {
+        &-left {
+          &-top {
+            top: -5.65rem;
+            left: 2rem;
+            width: 5.8rem;
+            height: 20.1rem;
+            transform: rotate(-93deg);
+            background: rgba(39, 79, 238, 0.50);
+            border-radius: 20.1rem;
+            filter: blur(100px);
+          }
+
+          &-bottom {
+            top: 16.65rem;
+            left: 1.3rem;
+            width: 3.25rem;
+            height: 13rem;
+            transform: rotate(-58deg);
+            background: rgba(16, 232, 199, 0.50);
+            border-radius: 13rem;
+            filter: blur(100px);
+          }
+        }
+
+        &-right {
+          &-top {
+            top: 1rem;
+            left: 43.1rem;
+            width: 7.65rem;
+            height: 7.1rem;
+            background: rgba(11, 158, 251, 0.50);
+            filter: blur(100px);
+            transform: rotate(-5deg);
+          }
+
+          &-bottom {
+            top: 18.95rem;
+            left: 42.4rem;
+            width: 7.65rem;
+            height: 7.1rem;
+            transform: rotate(-5deg);
+            background: rgba(254, 75, 75, 0.50);
+            filter: blur(100px);
+          }
+        }
+      }
+
+      &.polygon {
+        &-left {
+          top: -3rem;
+          left: -4rem;
+          width: 10.55rem;
+        }
+
+        &-right {
+          right: -4rem;
+          bottom: -3rem;
+          width: 18.05rem;
+        }
+      }
+
+
+      &.dot {
+        border-radius: 50%;
+
+        &-1 {
+          left: -23.6rem;
+          top: 4rem;
+          width: 2rem;
+          height: 2rem;
+          background: #ffbd37;
+        }
+
+        &-2 {
+          left: -7.5rem;
+          top: -7.4rem;
+          width: 1rem;
+          height: 1rem;
+          background: #2DAEFF;
+        }
+
+        &-3 {
+          left: -4.3rem;
+          top: 16.95rem;
+          width: 0.8rem;
+          height: 0.8rem;
+          background: #FE4B4B;
+        }
+
+        &-4 {
+          left: -9.85rem;
+          top: 30.75rem;
+          width: 2.2rem;
+          height: 2.2rem;
+          background: #274FEE;
+        }
+
+        &-5 {
+          left: 15.65rem;
+          top: 24rem;
+          width: 1rem;
+          height: 1rem;
+          background: #FF8C51;
+        }
+
+        &-6 {
+          left: 46.6rem;
+          top: 10rem;
+          width: 1rem;
+          height: 1rem;
+          background: #274FEE;
+        }
+
+        &-7 {
+          left: 48.3rem;
+          top: 28.4rem;
+          width: 1.3rem;
+          height: 1.3rem;
+          background: #2DAEFF;
+        }
+
+        &-8 {
+          left: 58rem;
+          top: -11.5rem;
+          width: 1.4rem;
+          height: 1.4rem;
+          background: #D0EDFF;
+        }
+
+        &-9 {
+          left: 65.6rem;
+          top: 2.2rem;
+          width: 0.6rem;
+          height: 0.6rem;
+          background: #FE4B4B;
+        }
+      }
+    }
+  }
+}
+</style>
