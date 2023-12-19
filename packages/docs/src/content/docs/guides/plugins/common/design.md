@@ -6,7 +6,7 @@ title: "@univerjs/design"
 
 为了让 Univer 的插件 UI 能够有更好的一致性，也为了降低用户自定义开发时的工作量，我们提供了一些基础的设计规范和组件。
 
-组件基于 React 和 less 开发，可以访问[组件库网站](https://univer-design.vercel.app/?path=/docs/design-design-token-default--docs)了解更多信息。
+组件基于 React 和 less 开发，可以访问[组件库网站](https://univer-design.vercel.app)了解更多信息。
 
 ![](/img/design.jpeg)
 

@@ -43,8 +43,17 @@ export default defineConfig({
           label: '功能一览',
           link: 'guides/features'
         }, {
+          label: '国际化',
+          link: 'guides/i18n'
+        }, {
+          label: 'FAQ',
+          link: 'guides/faq'
+        }, {
           label: '路线图',
           link: 'guides/roadmap'
+        }, {
+          label: '贡献指南',
+          link: 'guides/contributing'
         }, {
           label: '架构',
           autogenerate: {
@@ -60,12 +69,6 @@ export default defineConfig({
           autogenerate: {
             directory: 'guides/extend'
           }
-        }, {
-          label: 'FAQ',
-          link: 'guides/faq'
-        }, {
-          label: '贡献指南',
-          link: 'guides/contributing'
         }]
       }, {
         label: 'API reference',
