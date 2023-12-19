@@ -5,7 +5,7 @@ import Footer from '@/components/Footer/index.astro'
 import 'modern-normalize'
 
 interface Props {
-	title: string
+  title: string
 }
 
 const { title } = Astro.props
@@ -13,30 +13,29 @@ const { title } = Astro.props
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<Header />
-		<slot />
-		<Footer />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="新一代开源办公套件,univer,sheet,doc,slide" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <Header />
+    <slot />
+    <Footer />
+  </body>
 </html>
 
 <style is:global>
 :root {
-	font-family: Inter, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "noto sans", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 16px;
-	-webkit-font-smoothing: antialiased;
-	background: #E4F4FE33;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "noto sans", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  background: #E4F4FE33;
 }
 
 img {
-	user-select: none;
+  user-select: none;
 }
 </style>
