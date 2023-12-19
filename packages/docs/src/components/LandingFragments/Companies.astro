@@ -1,5 +1,5 @@
 <section class="companies">
-  <h2 class="title">5,000+企业所信任的协同办公解决方案</h2>
+  <h2 class="title">5,000+ 企业所信任的协同办公解决方案</h2>
 
   <section class="materials">
     <div class="dot dot-1" />
@@ -13,32 +13,27 @@
   </section>
 
   <section class="wall">
-    <div class="line">
-      <img src="/images/logo-1.png" draggable={false} />
-      <img src="/images/logo-1.png" draggable={false} />
-      <img src="/images/logo-1.png" draggable={false} />
-      <img src="/images/logo-1.png" draggable={false} />
-      <img src="/images/logo-1.png" draggable={false} />
-      <img src="/images/logo-1.png" draggable={false} />
-    </div>
-    <div class="line">
-      <img src="/images/logo-1.png" draggable={false} />
-      <img src="/images/logo-1.png" draggable={false} />
-      <img src="/images/logo-1.png" draggable={false} />
-      <img src="/images/logo-1.png" draggable={false} />
-      <img src="/images/logo-1.png" draggable={false} />
-      <img src="/images/logo-1.png" draggable={false} />
-    </div>
-    <div class="line">
-      <img src="/images/logo-1.png" draggable={false} />
-      <img src="/images/logo-1.png" draggable={false} />
-      <img src="/images/logo-1.png" draggable={false} />
-      <img src="/images/logo-1.png" draggable={false} />
-      <img src="/images/logo-1.png" draggable={false} />
-      <img src="/images/logo-1.png" draggable={false} />
-    </div>
+    {[0, 1, 2].map(i => (
+      <div class="line">
+        {[1].map(() => (
+          <>
+            <img src={`/images/logos/${i * 10 + 1}.png`} draggable={false} />
+            <img src={`/images/logos/${i * 10 + 2}.png`} draggable={false} />
+            <img src={`/images/logos/${i * 10 + 3}.png`} draggable={false} />
+            <img src={`/images/logos/${i * 10 + 4}.png`} draggable={false} />
+            <img src={`/images/logos/${i * 10 + 5}.png`} draggable={false} />
+            <img src={`/images/logos/${i * 10 + 6}.png`} draggable={false} />
+            <img src={`/images/logos/${i * 10 + 7}.png`} draggable={false} />
+            <img src={`/images/logos/${i * 10 + 8}.png`} draggable={false} />
+            <img src={`/images/logos/${i * 10 + 9}.png`} draggable={false} />
+            <img src={`/images/logos/${i * 10 + 10}.png`} draggable={false} />
+          </>
+        ))}
+      </div>
+    ))}
   </section>
 </section>
+
 
 <style lang="less" scoped>
 .companies {
@@ -65,7 +60,7 @@
 
       &-1 {
         top: 3rem;
-        left: -5rem;
+        left: -7.8rem;
         width: 1.6rem;
         height: 1.6rem;
         background: #FFBD37;
@@ -73,7 +68,7 @@
 
       &-2 {
         top: 13.5rem;
-        left: -1.4rem;
+        left: -3.4rem;
         width: 1.4rem;
         height: 1.4rem;
         background: #274FEE;
@@ -87,15 +82,15 @@
       }
 
       &-4 {
-        top: 8rem;
-        left: 3rem;
+        top: 8.8rem;
+        left: -5.2rem;
         width: 1rem;
         height: 1rem;
         background: #FE4B4B;
       }
 
       &-5 {
-        top: 0rem;
+        top: -2rem;
         right: 3.75rem;
         width: 0.6rem;
         height: 0.6rem;
@@ -129,30 +124,52 @@
   }
 
   .wall {
-    max-width: 1280px;
+    position: relative;
+    max-width: 1200px;
     margin: 0 auto;
     display: grid;
+    justify-content: center;
     gap: 2.2rem;
+    // overflow-x: hidden;
 
     .line {
       display: flex;
       justify-content: center;
       gap: 2.4rem;
+
       &:nth-child(1) {
-        padding-left: 4rem;
+        // animation: line-1 40s linear infinite;
       }
       &:nth-child(2) {
-        padding-left: 8rem;
+        // justify-self: flex-end;
+        // animation: line-2 40s linear infinite;
+      }
+      &:nth-child(3) {
+        // animation: line-3 40s linear infinite;
       }
 
       img {
         height: 1.6rem;
+
         &:first-child,
         &:last-child {
-          filter: blur(2px);
+          // filter: blur(2px);
         }
       }
     }
+  }
+
+  @keyframes line-1 {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-1290px); }
+  }
+  @keyframes line-2 {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(1380px); }
+  }
+  @keyframes line-3 {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-1396px); }
   }
 }
 </style>
