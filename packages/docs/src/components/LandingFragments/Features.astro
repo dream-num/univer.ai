@@ -78,7 +78,7 @@ focusFeature(0)
   color: #1F2327 !important;
 
   p {
-    padding-top: 0.6rem;
+    padding-top: 0.8rem;
     height: auto !important;
   }
 }
@@ -134,9 +134,9 @@ focusFeature(0)
         position: absolute;
         left: 50%;
         height: 100%;
-        padding-left: 10%;
+        padding-top: 3rem;
+        padding-left: 8%;
         display: flex;
-        justify-content: center;
         flex-direction: column;
 
         .title {
@@ -178,8 +178,11 @@ focusFeature(0)
             }
 
             label {
+              position: relative;
               font-weight: 500;
               cursor: pointer;
+              display: inline-block;
+              z-index: 1;
             }
 
             p {
@@ -187,7 +190,7 @@ focusFeature(0)
               height: 0;
               padding-left: 1.4rem;
               color: #999;
-              font-size: 0.8rem;
+              font-size: 0.9rem;
               line-height: 1.8;
               overflow: hidden;
               transition: all 0.15s;
