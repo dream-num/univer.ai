@@ -1,3 +1,25 @@
+:root {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "noto sans", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+  --sl-color-accent: #274FEE !important;
+}
+
 .site-title {
   --sl-nav-gap: 0.5rem;
+}
+
+.pagination-links a {
+  --sl-shadow-md: 0px 0px 24px 0px rgba(31,35,39,0.04);
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  border: none;
+  transition: all 0.15s;
+}
+.pagination-links a:hover {
+  background: #F5F5F5;
+}
+
+.link-title {
+  --sl-text-2xl: 1rem;
 }

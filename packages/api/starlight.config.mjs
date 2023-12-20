@@ -63,11 +63,11 @@ export default {
   customCss: ['./src/styles/starlight.css'],
   sidebar: [
     {
-      label: 'Guides',
+      label: '🔰 Guides',
       link: '/guides/introduction'
     },
     {
-      label: 'API reference',
+      label: '🔌 API reference',
       collapsed: true,
       items: typeDocSdierbarGroups
     }

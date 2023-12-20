@@ -29,7 +29,7 @@ export default defineConfig({
         }
       },
       sidebar: [{
-        label: '指南',
+        label: '🔰 指南',
         autogenerate: {
           directory: 'guides/*.md'
         },
@@ -71,15 +71,15 @@ export default defineConfig({
           }
         }]
       }, {
-        label: '企业服务',
+        label: '💼 企业服务',
         autogenerate: {
           directory: 'enterprises'
         }
       }, {
-        label: 'API reference',
+        label: '🔌 API reference',
         link: '/api/core'
       }, {
-        label: 'Playground',
+        label: '🧩 Playground',
         autogenerate: {
           directory: 'playground'
         }

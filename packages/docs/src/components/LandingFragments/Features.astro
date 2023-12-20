@@ -1,17 +1,18 @@
 ---
 const features = [{
+  preview: '/images/features-1.png',
   label: '数据连接器，集成业务数据',
   desc: ['调用数据连接器，跨平台导入外部数据；', '设置周期性任务，自动同步和更新数据。']
 }, {
+  preview: '/images/features-2.png',
   label: '脚本编辑器，记录操作指令',
   desc: ['编写和保存脚本语言，实现自动化操作；', '未来可实现AI生成脚本，让工作更智能。']
 }, {
-  label: '高扩展性，适配个性化需求',
-  desc: ['提供丰富的功能插件，调用所需组件一键下载；', '也能自定义开发功能，根据业务需求丰富扩展。']
-}, {
+  preview: '/images/features-3.png',
   label: '无界模式，跨形态打破边界',
   desc: ['单元格内嵌有序列表，写内容也能结构清晰；', '幻灯片亦能写入公式 ，跨应用调取表格数据。']
 }, {
+  preview: '/images/features-4.png',
   label: '协同办公，团队作战更默契',
   desc: ['允许多人同时编辑，群策群力头脑风暴；', '插入评论即时沟通，随时沉淀关键结论。']
 }]
@@ -20,7 +21,9 @@ const features = [{
 <section class="features">
   <section class="preview">
     <img class="frame" src="/images/frame.png" alt="frame" draggable={false}>
-    <img class="sheet" src="/images/sheets-02.png" alt="univer sheets" draggable={false} />
+    {features.map(feature => (
+      <img data-univer-preview class="sheet" src={feature.preview} alt="univer sheets" draggable={false} />
+    ))}
   </section>
 
   <section class="block">
@@ -51,6 +54,7 @@ const features = [{
 
 <script>
 const $features = document.querySelectorAll('[data-univer-feature]')
+const $previews = document.querySelectorAll('[data-univer-preview]')
 
 $features.forEach(($feature, index: number) => {
   $feature.addEventListener('click', () => {
@@ -64,8 +68,10 @@ function focusFeature (index: number) {
 
     if (i === index) {
       $feature.classList.add('feature-active')
+      $previews[i].classList.add('preview-active')
     } else {
       $feature.classList.remove('feature-active')
+      $previews[i].classList.remove('preview-active')
     }
   }
 }
@@ -81,6 +87,10 @@ focusFeature(0)
     padding-top: 0.8rem;
     height: auto !important;
   }
+}
+
+.preview-active {
+  opacity: 1 !important;
 }
 </style>
 
@@ -109,10 +119,12 @@ focusFeature(0)
 
     .sheet {
       position: absolute;
-      top: 3rem;
-      right: 8.2rem;
-      width: 63.8rem;
-      height: 32.9rem;
+      top: 3.3rem;
+      right: 8.9rem;
+      height: 31.2rem;
+      border-radius: 6px;
+      opacity: 0;
+      transition: all 0.5s;
     }
   }
 
@@ -134,10 +146,10 @@ focusFeature(0)
         position: absolute;
         left: 50%;
         height: 100%;
-        padding-top: 3rem;
         padding-left: 8%;
         display: flex;
         flex-direction: column;
+        justify-content: center;
 
         .title {
           margin: 0 0 1.4rem;
