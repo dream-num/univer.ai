@@ -8,7 +8,7 @@ sidebar:
 
 [![npm version](https://img.shields.io/npm/v/@univerjs/uniscript)](https://npmjs.org/package/@univerjs/uniscript)
 
-@univerjs/uniscript 提供了以个基于 TypeScript 的 DSL，可以用来操作 Univer 的数据结构和业务逻辑。
+@univerjs/uniscript 提供了一个基于 TypeScript 的 DSL，可以用来操作 Univer 的数据结构和业务逻辑。
 
 ![](/img/uniscript.jpeg)
 
