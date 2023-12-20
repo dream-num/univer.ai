@@ -71,8 +71,13 @@ export default defineConfig({
           }
         }]
       }, {
+        label: '企业服务',
+        autogenerate: {
+          directory: 'enterprises'
+        }
+      }, {
         label: 'API reference',
-        link: '../api/core'
+        link: '/api/core'
       }, {
         label: 'Playground',
         autogenerate: {
