@@ -80,9 +80,7 @@ export default defineConfig({
         link: '/api/core'
       }, {
         label: '🧩 Playground',
-        autogenerate: {
-          directory: 'playground'
-        }
+        link: '/playground'
       }]
     }),
     react()

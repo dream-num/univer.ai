@@ -1,5 +1,6 @@
 {
   "name": "docs",
+  "version": "0.1.0",
   "type": "module",
   "licenses": [{
     "type": "CC-BY-NC-SA-4.0",
@@ -8,7 +9,6 @@
     "type": "Apache-2.0",
     "url": "https://www.apache.org/licenses/LICENSE-2.0"
   }],
-  "version": "0.1.0",
   "scripts": {
     "dev:docs": "turbo dev --filter=./packages/docs",
     "dev:api": "turbo dev --filter=./packages/api",

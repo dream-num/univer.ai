@@ -1,6 +1,4 @@
 ---
-import Header from '@/components/Header/index.astro'
-import Footer from '@/components/Footer/index.astro'
 import Wrapper from '@/components/Wrapper/index.astro'
 
 interface Props {
@@ -11,7 +9,5 @@ const { title } = Astro.props
 ---
 
 <Wrapper title={title}>
-  <Header />
   <slot />
-  <Footer />
 </Wrapper>

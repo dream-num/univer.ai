@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.3.3",
-    "@astrojs/react": "^3.0.7",
-    "@astrojs/starlight": "^0.15.0",
+    "@astrojs/react": "^3.0.8",
+    "@astrojs/starlight": "^0.15.1",
     "@types/react-dom": "^18.2.18",
-    "astro": "^4.0.6",
+    "astro": "^4.0.7",
     "modern-normalize": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

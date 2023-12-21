@@ -13,4 +13,3 @@ title: FAQ
 我们提供了一个基于 webpack 4 的在线 demo，希望可以帮助你解决这个问题
 
 [![Edit Univer Sheets 🩷 Webpack 4](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/univer-sheets-webpack-4-6lmwhv?file=%2F.codesandbox%2Ftasks.json&embed=1)
-
