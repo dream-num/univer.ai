@@ -26,6 +26,10 @@ export default defineConfig({
         'en-us': {
           label: 'English',
           lang: 'en-US'
+        },
+        'ja-jp': {
+          label: '日本語',
+          lang: 'ja-JP'
         }
       },
       sidebar: [{
