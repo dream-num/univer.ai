@@ -50,6 +50,9 @@ export default defineConfig({
           label: '国际化',
           link: 'guides/i18n'
         }, {
+          label: '其他发行版',
+          link: 'guides/release'
+        }, {
           label: 'FAQ',
           link: 'guides/faq'
         }, {
