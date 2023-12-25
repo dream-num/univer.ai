@@ -22,6 +22,7 @@
     "typescript": "^5.3.3"
   },
   "devDependencies": {
-    "@types/react": "^18.2.45"
+    "@types/react": "^18.2.45",
+    "less": "^4.2.0"
   }
 }
