@@ -46,6 +46,9 @@
   margin-top: 1.9rem;
   padding-bottom: 14.15rem;
   overflow-x: hidden;
+  @media (max-width: 1024px) {
+    padding-bottom: 11.0625rem;
+  }
 
   .title {
     margin: 0 0 1.2rem;
@@ -61,6 +64,9 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: block;
+      @media (max-width: 1024px) {
+        font-size: 2rem;
+      }
     }
   }
 
@@ -69,6 +75,9 @@
     color: #999;
     text-align: center;
     font-size: 1.1rem;
+    @media (max-width: 1024px) {
+      font-size: 0.875rem;
+    }
   }
 
   .btn {
@@ -86,6 +95,12 @@
     box-shadow: 0px 4px 12px 0px rgba(11, 0, 208, 0.25);
     display: block;
     transition: all .15s;
+    @media (max-width: 1024px) {
+      width: 6rem;
+      height: 2.25rem;
+      line-height: 2.25rem;
+      font-size: 0.875rem;
+    }
     &:hover {
       background: #3A60F7;
     }
@@ -97,14 +112,15 @@
     .center {
       position: relative;
       width: 46.6rem;
-      height: 24.1rem;
       margin: 0 auto;
+      @media (max-width: 1024px) {
+        width: calc(100% - 4.75rem);
+      }
     }
 
     .sheets {
-      position: absolute;
+      position: relative;
       width: 100%;
-      height: 100%;
       display: block;
       border-radius: 6px;
       box-shadow: 0px 8px 24px 0px rgba(31, 35, 39, 0.12);
@@ -125,6 +141,13 @@
             background: rgba(39, 79, 238, 0.50);
             border-radius: 20.1rem;
             filter: blur(100px);
+            @media (max-width: 1024px) {
+              top: -1.3rem;
+              left: 1.5rem;
+              width: 1.75rem;
+              height: 6.125rem;
+              filter: blur(25px);
+            }
           }
 
           &-bottom {
@@ -136,28 +159,50 @@
             background: rgba(16, 232, 199, 0.50);
             border-radius: 13rem;
             filter: blur(100px);
+            @media (max-width: 1024px) {
+              top: unset;
+              bottom: -1rem;
+              left: 0.5rem;
+              width: 1rem;
+              height: 3.9375rem;
+              filter: blur(25px);
+            }
           }
         }
 
         &-right {
           &-top {
-            top: 1rem;
-            left: 43.1rem;
+            top: 3rem;
+            right: -1rem;
             width: 7.65rem;
             height: 7.1rem;
             background: rgba(11, 158, 251, 0.50);
             filter: blur(100px);
             transform: rotate(-5deg);
+            @media (max-width: 1024px) {
+              top: 0.5rem;
+              left: 12.5rem;
+              width: 2.3125rem;
+              height: 2.1875rem;
+              filter: blur(25px);
+            }
           }
 
           &-bottom {
-            top: 18.95rem;
-            left: 42.4rem;
+            bottom: 0.5rem;
+            right: 2rem;
             width: 7.65rem;
             height: 7.1rem;
             transform: rotate(-5deg);
             background: rgba(254, 75, 75, 0.50);
             filter: blur(100px);
+            @media (max-width: 1024px) {
+              right: -0.5rem;
+              bottom: -1rem;
+              width: 2.3125rem;
+              height: 2.125rem;
+              filter: blur(25px);
+            }
           }
         }
       }
@@ -167,12 +212,22 @@
           top: -3rem;
           left: -4rem;
           width: 10.55rem;
+          @media (max-width: 1024px) {
+            top: -1rem;
+            left: -1rem;
+            width: 2.125rem;
+          }
         }
 
         &-right {
           right: -4rem;
           bottom: -3rem;
           width: 18.05rem;
+          @media (max-width: 1024px) {
+            right: -1.3rem;
+            bottom: -1rem;
+            width: 3.8125rem;
+          }
         }
       }
 
@@ -181,35 +236,59 @@
         border-radius: 50%;
 
         &-1 {
-          left: -23.6rem;
           top: 4rem;
+          left: -23.6rem;
           width: 2rem;
           height: 2rem;
           background: #ffbd37;
+          @media (max-width: 1024px) {
+            top: 36%;
+            left: -8%;
+            width: 0.5rem;
+            height: 0.5rem;
+          }
         }
 
         &-2 {
-          left: -7.5rem;
           top: -7.4rem;
+          left: -7.5rem;
           width: 1rem;
           height: 1rem;
           background: #2DAEFF;
+          @media (max-width: 1024px) {
+            top: 24%;
+            left: -3%;
+            width: 0.3rem;
+            height: 0.3rem;
+          }
         }
 
         &-3 {
+          bottom: 6rem;
           left: -4.3rem;
-          top: 16.95rem;
           width: 0.8rem;
           height: 0.8rem;
           background: #FE4B4B;
+          @media (max-width: 1024px) {
+            bottom: 28%;
+            left: -2%;
+            width: 0.2rem;
+            height: 0.2rem;
+          }
         }
 
         &-4 {
+          bottom: -9rem;
           left: -9.85rem;
-          top: 30.75rem;
           width: 2.2rem;
           height: 2.2rem;
           background: #274FEE;
+          @media (max-width: 1024px) {
+            bottom: -10%;
+            left: 4%;
+            width: 0.5rem;
+            height: 0.5rem;
+          }
         }
 
         &-5 {
@@ -218,38 +297,68 @@
           width: 1rem;
           height: 1rem;
           background: #FF8C51;
+          @media (max-width: 1024px) {
+            left: 42%;
+            top: 102%;
+            width: 0.5rem;
+            height: 0.5rem;
+          }
         }
 
         &-6 {
-          left: 46.6rem;
-          top: 10rem;
+          right: -2rem;
+          bottom: 13rem;
           width: 1rem;
           height: 1rem;
           background: #274FEE;
+          @media (max-width: 1024px) {
+            right: -0.75rem;
+            bottom: 12%;
+            width: 0.25rem;
+            height: 0.25rem;
+          }
         }
 
         &-7 {
-          left: 48.3rem;
-          top: 28.4rem;
+          right: -3rem;
+          bottom: -6rem;
           width: 1.3rem;
           height: 1.3rem;
           background: #2DAEFF;
+          @media (max-width: 1024px) {
+            right: 2%;
+            bottom: -1.75rem;
+            width: 0.3125rem;
+            height: 0.3125rem;
+          }
         }
 
         &-8 {
-          left: 58rem;
           top: -11.5rem;
+          right: -13rem;
           width: 1.4rem;
           height: 1.4rem;
           background: #D0EDFF;
+          @media (max-width: 1024px) {
+            top: 0;
+            right: -1rem;
+            width: 0.3125rem;
+            height: 0.3125rem;
+          }
         }
 
         &-9 {
-          left: 65.6rem;
           top: 2.2rem;
+          right: -20rem;
           width: 0.6rem;
           height: 0.6rem;
           background: #FE4B4B;
+          @media (max-width: 1024px) {
+            top: 40%;
+            right: -2rem;
+            width: 0.2rem;
+            height: 0.2rem;
+          }
         }
       }
     }

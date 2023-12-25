@@ -1,26 +1,25 @@
 ---
 const features = [{
-  preview: '/images/features-1.png',
+  preview: '/images/feature-1.png',
   label: '数据连接器，集成业务数据',
   desc: ['调用数据连接器，跨平台导入外部数据；', '设置周期性任务，自动同步和更新数据。']
 }, {
-  preview: '/images/features-2.png',
+  preview: '/images/feature-2.png',
   label: '脚本编辑器，记录操作指令',
   desc: ['编写和保存脚本语言，实现自动化操作；', '未来可实现AI生成脚本，让工作更智能。']
 }, {
-  preview: '/images/features-3.png',
+  preview: '/images/feature-3.png',
   label: '无界模式，跨形态打破边界',
   desc: ['单元格内嵌有序列表，写内容也能结构清晰；', '幻灯片亦能写入公式 ，跨应用调取表格数据。']
 }, {
-  preview: '/images/features-4.png',
+  preview: '/images/feature-4.png',
   label: '协同办公，团队作战更默契',
   desc: ['允许多人同时编辑，群策群力头脑风暴；', '插入评论即时沟通，随时沉淀关键结论。']
 }]
 ---
 
 <section class="features">
-  <section class="preview">
-    <img class="frame" src="/images/frame.png" alt="frame" draggable={false}>
+  <section data-univer-feature-preview class="preview">
     {features.map(feature => (
       <img data-univer-preview class="sheet" src={feature.preview} alt="univer sheets" draggable={false} />
     ))}
@@ -53,6 +52,7 @@ const features = [{
 </section>
 
 <script>
+const $preview = document.querySelector('[data-univer-feature-preview]')
 const $features = document.querySelectorAll('[data-univer-feature]')
 const $previews = document.querySelectorAll('[data-univer-preview]')
 
@@ -60,6 +60,13 @@ $features.forEach(($feature, index: number) => {
   $feature.addEventListener('click', () => {
     focusFeature(index)
   })
+})
+
+$preview?.addEventListener('scroll', () => {
+  const { scrollLeft } = $preview
+  const index = Math.round(scrollLeft / document.body.clientWidth)
+
+  focusFeature(index)
 })
 
 function focusFeature (index: number) {
@@ -82,6 +89,9 @@ focusFeature(0)
 <style lang="less" is:global>
 .feature-active {
   color: #1F2327 !important;
+  @media (max-width: 1024px) {
+    display: initial !important;
+  }
 
   p {
     padding-top: 0.8rem;
@@ -101,6 +111,21 @@ focusFeature(0)
   margin-bottom: 8.5rem;
   display: flex;
   align-items: center;
+  @media (max-width: 1024px) {
+    height: auto;
+    margin-bottom: 2.5rem;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 8%;
+      left: 0;
+      width: 100%;
+      height: 68%;
+      background: rgba(228, 244, 254, 0.55);
+      z-index: 0;
+    }
+  }
 
   .preview {
     position: absolute;
@@ -110,23 +135,42 @@ focusFeature(0)
     width: 80.6rem;
     transform: translateX(-100%);
     z-index: 1;
-
-    .frame {
-      position: absolute;
-      height: 100%;
-      width: 100%;
+    @media (max-width: 1024px) {
+      position: relative;
+      left: 0;
+      width: 100vw;
+      height: 0;
+      padding-bottom: 50%;
+      transform: translateX(0%);
+      display: grid;
+      grid-template-columns: repeat(4, 100vw);
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x proximity;
+      // hide scrollbar
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
 
     .sheet {
       position: absolute;
-      top: 3.3rem;
-      right: 9.7rem;
-      height: 31.2rem;
-      border: 1px solid #ECECEC;
-      border-radius: 6px;
-      box-shadow: 0px 8px 24px 0px rgba(31, 35, 39, 0.04);
+      top: 0;
+      right: 0;
+      height: 42rem;
       opacity: 0;
       transition: all 0.5s;
+      @media (max-width: 1024px) {
+        position: relative;
+        width: 100%;
+        height: auto;
+        z-index: 1;
+        opacity: 1;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+      }
     }
   }
 
@@ -137,12 +181,19 @@ focusFeature(0)
     background: rgba(228, 244, 254, 0.55);
     display: flex;
     justify-content: flex-end;
+    @media (max-width: 1024px) {
+      position: absolute;
+      top: -5rem;
+      background: none;
+    }
 
     .wrapper {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
       flex: 1;
+      @media (max-width: 1024px) {
+      }
 
       .list {
         position: absolute;
@@ -152,6 +203,14 @@ focusFeature(0)
         display: flex;
         flex-direction: column;
         justify-content: center;
+        @media (max-width: 1024px) {
+          top: 0rem;
+          left: 0;
+          width: 100%;
+          padding: 0;
+          align-items: center;
+          justify-content: flex-start;
+        }
 
         .title {
           margin: 0 0 1.4rem;
@@ -162,6 +221,9 @@ focusFeature(0)
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            @media (max-width: 1024px) {
+              font-size: 1.75rem;
+            }
           }
         }
 
@@ -176,6 +238,9 @@ focusFeature(0)
             color: #BCBCBC;
             font-size: 1rem;
             transition: color .15s;
+            @media (max-width: 1024px) {
+              display: none;
+            }
 
             &:hover {
               color: #1F2327;
@@ -189,6 +254,9 @@ focusFeature(0)
               background: currentColor;
               border-radius: 50%;
               display: inline-block;
+              @media (max-width: 1024px) {
+                display: none;
+              }
             }
 
             label {
@@ -208,6 +276,9 @@ focusFeature(0)
               line-height: 1.8;
               overflow: hidden;
               transition: all 0.15s;
+              @media (max-width: 1024px) {
+                display: none; 
+              }
 
               span {
                 display: block;

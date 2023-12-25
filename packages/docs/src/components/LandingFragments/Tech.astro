@@ -52,6 +52,9 @@ const tech = [{
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      @media (max-width: 1024px) {
+        font-size: 1.75rem;
+      }
     }
   }
 
@@ -59,6 +62,17 @@ const tech = [{
     display: flex;
     justify-content: center;
     gap: 2rem;
+    @media (max-width: 1024px) {
+      padding: 0 1rem;
+      overflow-x: auto;
+      justify-content: flex-start;
+      // hide scrollbar
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
 
     .block {
       width: 16rem;
@@ -67,6 +81,7 @@ const tech = [{
       border-radius: 20px;
       background: rgba(228, 244, 254, 0.55);
       box-shadow: 0px 2px 6px 0px rgba(111, 195, 255, 0.20) inset;
+      flex-shrink: 0;
       transition: all 0.15s;
       &:hover {
         background: #fff;

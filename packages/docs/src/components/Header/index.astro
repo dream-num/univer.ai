@@ -36,6 +36,9 @@ import { Github } from './Github/index'
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @media (max-width: 1024px) {
+      max-width: 100%;
+    }
 
     .left {
       display: flex;
@@ -66,6 +69,9 @@ import { Github } from './Github/index'
         display: flex;
         align-items: center;
         gap: 3rem;
+        @media (max-width: 1024px) {
+          display: none;
+        }
 
         a {
           color: #1F2327;
@@ -98,6 +104,9 @@ import { Github } from './Github/index'
         border-radius: 8px;
         box-shadow: 0px 4px 12px 0px #0B00D040;
         transition: all .15s;
+        @media (max-width: 1024px) {
+          display: none;
+        }
         &:hover {
           background: #3A60F7;
         }
