@@ -101,7 +101,7 @@ title: "@univerjs/sheets-formula"
 
 5. 单元测试
 
-    位置在 [packages/engine-formula/src/functions/math/sumif/__tests__/index.spec.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-formula/src/functions/math/sumif/__tests__/index.spec.ts)
+    位置在 [packages/engine-formula/src/functions/math/sumif/\_\_tests\_\_/index.spec.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-formula/src/functions/math/sumif/__tests__/index.spec.ts)
 
     注意：
 
