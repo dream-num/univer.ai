@@ -2,12 +2,13 @@
 import Wrapper from '@/components/Wrapper/index.astro'
 
 interface Props {
+  lang: string
   title: string
 }
 
-const { title } = Astro.props
+const { lang, title } = Astro.props
 ---
 
-<Wrapper title={title}>
+<Wrapper lang={lang} title={title}>
   <slot />
 </Wrapper>

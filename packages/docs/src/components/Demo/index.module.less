@@ -1,0 +1,86 @@
+.container {
+  height: 100vh;
+  display: flex;
+  background-color: #fff;
+  overflow: hidden;
+
+  .menu {
+    width: 248px;
+    padding: 20px;
+    color: #1E222B;
+
+    .title {
+      margin: 0 0 20px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .search {
+      width: 100%;
+      height: 32px;
+      margin-bottom: 16px;
+      padding: 0 12px;
+      color: #1E222B;
+      font-size: 13px;
+      border: 1px solid #ececec;
+      border-radius: 4px;
+      &::placeholder {
+        color: #999;
+      }
+
+      &:focus {
+        outline: none;
+        border-color: #274FEE;
+      }
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+
+      label {
+        margin-bottom: 8px;
+        color: #1E222B;
+        font-size: 14px;
+        font-weight: 500;
+        display: block;
+      }
+
+      a {
+        height: 28px;
+        padding: 0 12px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.15s;
+        &:hover {
+          color: #274FEE;
+        }
+        &.active {
+          color: #274FEE;
+          background: rgba(39, 79, 238, 0.10);
+        }
+      }
+
+      li {
+        color: #999;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .main {
+    flex: 1;
+    flex-shrink: 0;
+
+    .iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  }
+}

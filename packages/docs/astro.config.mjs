@@ -83,10 +83,10 @@ export default defineConfig({
         }
       }, {
         label: '🔌 API reference',
-        link: '/api/core'
+        link: '../api/core'
       }, {
         label: '🧩 Playground',
-        link: '/playground'
+        link: '../playground'
       }]
     }),
     react()

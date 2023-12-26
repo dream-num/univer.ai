@@ -1,10 +1,28 @@
 ---
 import PlaygroundLayout from '@/layouts/PlaygroundLayout.astro'
-import Embed from '@/components/Embed/index.astro'
+import { Demo } from '@/components/Demo'
+
+const demo = [
+  {
+    title: 'Sheets',
+    children: [
+      {
+        title: 'Vite',
+        src: 'https://codesandbox.io/p/devbox/univer-sheets-vite-n4v3qk?embed=1&file=%2Fsrc%2Fmain.ts'
+      },
+      {
+        title: 'Multi-instance',
+        src: 'https://codesandbox.io/p/devbox/univer-sheets-vite-multi-instance-4gqd6g?embed=1&file=%2Fsrc%2Fmain.tsx'
+      },
+      {
+        title: 'Webpack 4',
+        src: 'https://codesandbox.io/p/devbox/univer-sheets-webpack-4-6lmwhv?embed=1&file=%2Fsrc%2Fmain.js'
+      }
+    ]
+  }
+]
 ---
 
-<PlaygroundLayout title="Playground | Univer">
-  <Embed src="https://codesandbox.io/p/devbox/univer-sheets-vite-n4v3qk" />
-
-  <Embed src="https://codesandbox.io/p/devbox/univer-sheets-webpack-4-6lmwhv" />
+<PlaygroundLayout lang="en-us" title="Playground | Univer">
+  <Demo demo={demo} client:load />
 </PlaygroundLayout>
