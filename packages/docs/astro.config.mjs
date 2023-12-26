@@ -42,13 +42,12 @@ export default defineConfig({
           link: 'guides/introduction'
         }, {
           label: '快速上手',
-          link: 'guides/quick-start'
+          autogenerate: {
+            directory: 'guides/quick-start'
+          }
         }, {
           label: '功能一览',
           link: 'guides/features'
-        }, {
-          label: '国际化',
-          link: 'guides/i18n'
         }, {
           label: '其他发行版',
           link: 'guides/release'
