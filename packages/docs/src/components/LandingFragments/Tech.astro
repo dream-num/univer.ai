@@ -1,30 +1,35 @@
 ---
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const tech = [{
   icon: '/images/tech-1.svg',
   color: 'rgba(45, 174, 255, 0.4)',
-  title: '基于依赖注入的插件化架构',
-  desc: 'Univer 功能被划分到多个插件当中，开发者可根据自己的需要组合插件，也可以自己开发插件满足个性化需要。'
+  title: t('tech.t1.title'),
+  desc: t('tech.t1.desc')
 }, {
   icon: '/images/tech-2.svg',
   color: 'rgba(255, 140, 81, 0.5)',
-  title: '统一渲染引擎',
-  desc: '自研基于 canvas 的高性能图形渲染引擎，支持排版、富文本、表格和图形，带来无缝的使用体验； 支持图文混排、单元格内富文本等高级渲染能力。'
+  title: t('tech.t2.title'),
+  desc: t('tech.t2.desc')
 }, {
   icon: '/images/tech-3.svg',
   color: 'rgba(254, 75, 75, 0.4)',
-  title: '高度可扩展的命令系统',
-  desc: '用户在 Univer 上的操作都通过命令系统执行；基于命令系统可实现协同编辑、协同光标、live share、脚本生成等高级功能。'
+  title: t('tech.t3.title'),
+  desc: t('tech.t3.desc')
 }, {
   icon: '/images/tech-4.svg',
   color: 'rgba(39, 79, 238, 0.3)',
-  title: '自研高性能公式引擎',
-  desc: '支持倒排索引、lambda 表达式等高级特性； 基于 RPC 机制实现 web worker 计算，提升性能表现，未来可支持服务端计算。'
+  title: t('tech.t4.title'),
+  desc: t('tech.t4.desc')
 }]
 ---
 
 <section class="tech">
   <h2 class="title">
-    <span>背后技术解密</span>
+    <span>{t('tech.title')}</span>
   </h2>
 
   <section class="list">

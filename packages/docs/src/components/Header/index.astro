@@ -1,5 +1,10 @@
 ---
 import { Github } from './Github/index'
+import { getLangFromUrl, useTranslations, useI18nUrl } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const l = useI18nUrl(lang);
 ---
 
 <header class="header">
@@ -11,9 +16,9 @@ import { Github } from './Github/index'
       </h1>
 
       <nav class="nav">
-        <a href="/guides/introduction">文档</a>
-        <a href="/api/core">API</a>
-        <a href="/guides/introduction/#商业授权">联系我们</a>
+        <a href={l('/guides/introduction')}>{t('header.nav')}</a>
+        <a href={l('/api/core')}>{t('header.api')}</a>
+        <a href={l('/guides/introduction/#商业授权')}>{t('header.concat')}</a>
       </nav>
     </section>
 
@@ -21,7 +26,7 @@ import { Github } from './Github/index'
       <a class="github" href="https://github.com/dream-num/univer">
         <Github client:load />
       </a>
-      <a class="playground" href="/playground">在线演示</a>
+      <a class="playground" href="/playground">{t('header.playground')}</a>
     </section>
   </div>
 </header>

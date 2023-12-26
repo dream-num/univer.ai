@@ -1,5 +1,12 @@
+---
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
 <section class="companies">
-  <h2 class="title">5,000+ 企业所信任的协同办公解决方案</h2>
+  <h2 class="title">{t('companies.title')}</h2>
 
   <section class="materials">
     <div class="dot dot-1" />

@@ -1,9 +1,16 @@
+---
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
 <section class="hero">
   <h2 class="title">
-    <span>新一代开源办公套件</span>
+    <span>{t('hero.title')}</span>
   </h2>
-  <p class="desc">嵌入企业系统 · 高效流转数据 · 打破应用孤岛</p>
-  <a class="btn" href="https://github.com/dream-num/univer">立即体验</a>
+  <p class="desc">{t('hero.description')}</p>
+  <a class="btn" href="https://github.com/dream-num/univer">{t('hero.button')}</a>
 
   <section class="materials">
     <div class="center">

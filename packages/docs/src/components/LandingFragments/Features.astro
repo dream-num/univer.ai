@@ -1,20 +1,25 @@
 ---
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const features = [{
   preview: '/images/feature-1.png',
-  label: '数据连接器，集成业务数据',
-  desc: ['调用数据连接器，跨平台导入外部数据；', '设置周期性任务，自动同步和更新数据。']
+  label: t('features.f1.title'),
+  desc: t('features.f1.desc'),
 }, {
   preview: '/images/feature-2.png',
-  label: '脚本编辑器，记录操作指令',
-  desc: ['编写和保存脚本语言，实现自动化操作；', '未来可实现AI生成脚本，让工作更智能。']
+  label: t('features.f2.title'),
+  desc: t('features.f2.desc'),
 }, {
   preview: '/images/feature-3.png',
-  label: '无界模式，跨形态打破边界',
-  desc: ['单元格内嵌有序列表，写内容也能结构清晰；', '幻灯片亦能写入公式 ，跨应用调取表格数据。']
+  label: t('features.f3.title'),
+  desc: t('features.f3.desc'),
 }, {
   preview: '/images/feature-4.png',
-  label: '协同办公，团队作战更默契',
-  desc: ['允许多人同时编辑，群策群力头脑风暴；', '插入评论即时沟通，随时沉淀关键结论。']
+  label: t('features.f4.title'),
+  desc: t('features.f4.desc'),
 }]
 ---
 
@@ -29,7 +34,7 @@ const features = [{
     <section class="wrapper">
       <div class="list">
         <h2 class="title">
-          <span>功能抢先看</span>
+          <span>{t('features.title')}</span>
         </h2>
 
         <ul>
@@ -38,7 +43,7 @@ const features = [{
               <a>
                 <label>{feature.label}</label>
                 <p>
-                  {feature.desc?.map(text => (
+                  {feature.desc?.map((text: string) => (
                     <span>{text}</span>
                   ))}
                 </p>

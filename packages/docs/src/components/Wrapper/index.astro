@@ -2,14 +2,15 @@
 import 'modern-normalize'
 
 interface Props {
+  lang: string
   title: string
 }
 
-const { title } = Astro.props
+const { lang, title } = Astro.props
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="新一代开源办公套件,univer,sheet,doc,slide" />

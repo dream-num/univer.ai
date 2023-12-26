@@ -1,4 +1,9 @@
 ---
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const present = new Date().getFullYear()
 ---
 
@@ -6,44 +11,42 @@ const present = new Date().getFullYear()
   <section class="banner">
     <div class="wrapper">
       <p>
-        <span>开发成本高？</span>
-        <span>快来试试 Univer！</span>
+        <span>{t('footer.tagline.t1')}</span>
+        <span>{t('footer.tagline.t2')}</span>
       </p>
       <a href="https://github.com/dream-num/univer">
-        立即体验
+        {t('footer.button')}
       </a>
     </div>
   </section>
 
   <nav class="nav">
     <div class="column">
-      <label>公司</label>
-      <!-- <a>团队介绍</a>
-      <a>加入我们</a> -->
-      <a href="/guides/introduction#商业授权">联系我们</a>
+      <label>{t('footer.nav.company.title')}</label>
+      <a href="/guides/introduction#商业授权">{t('footer.nav.company.concat')}</a>
     </div>
     <div class="column">
-      <label>相关资源</label>
-      <a href="/guides/introduction">文档</a>
-      <a href="/api/core">API</a>
+      <label>{t('footer.nav.resource.title')}</label>
+      <a href="/guides/introduction">{t('footer.nav.resource.docs')}</a>
+      <a href="/api/core">{t('footer.nav.resource.api')}</a>
     </div>
     <div class="column">
-      <label>社区</label>
-      <a href="https://discord.gg/z3NKNT6D2f">Discord</a>
-      <a href="https://www.zhihu.com/org/meng-shu-ke-ji">知乎专栏</a>
+      <label>{t('footer.nav.community.title')}</label>
+      <a href="https://discord.gg/z3NKNT6D2f">{t('footer.nav.community.discord')}</a>
+      <a href="https://www.zhihu.com/org/meng-shu-ke-ji">{t('footer.nav.community.zhihu')}</a>
     </div>
     <div class="column">
-      <label>帮助</label>
-      <a href="https://github.com/dream-num/univer/discussions">Github discussion</a>
-      <a href="/guides/faq">常见问题</a>
-      <a href="https://github.com/dream-num/univer/issues">报告 Bug</a>
+      <label>{t('footer.nav.help.title')}</label>
+      <a href="https://github.com/dream-num/univer/discussions">{t('footer.nav.help.github')}</a>
+      <a href="/guides/faq">{t('footer.nav.help.faq')}</a>
+      <a href="https://github.com/dream-num/univer/issues">{t('footer.nav.help.bug')}</a>
     </div>
   </nav>
 
   <p class="copyright">
     <span>Copyright © 2021-{present} Mengshu. All Rights Reserved.</span>
-    <span>上海梦数科技 版权所有</span>
-    <span>服务协议 | 隐私政策</span>
+    <span>{t('footer.copyright')}</span>
+    <!-- <span>服务协议 | 隐私政策</span> -->
   </p>
 </footer>
 
@@ -98,6 +101,7 @@ const present = new Date().getFullYear()
         background: #274FEE;
         border-radius: 8px;
         box-shadow: 0px 4px 12px 0px rgba(11, 0, 208, 0.25);
+        flex-shrink: 0;
         transition: all .15s;
         @media (max-width: 1024px) {
           height: 2.25rem;
