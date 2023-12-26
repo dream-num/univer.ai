@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import styles from './index.module.less'
 
 interface IEmbedProps {
@@ -18,38 +18,64 @@ interface IProps {
 export function Demo(props: IProps) {
   const { demo } = props
 
+  const [keyword, setKeyword] = useState('')
   const [activeDemo, setActiveDemo] = useState<IEmbedProps>()
 
   useEffect(() => {
-    setActiveDemo(demo[0].children[0])
-  }, [demo])
+    const query = new URLSearchParams(window.location.search).get('title')
 
-  function handleSelectDemo (item: IEmbedProps) {
-    setActiveDemo(item)
+    if (query) {
+      const item = demo.find(group => group.children.some(item => item.title === query))
+      if (item) {
+        setActiveDemo(item.children.find(item => item.title === query))
+      }
+    } else {
+      setActiveDemo(demo[0].children[0])
+    }
+  }, [])
+
+  function handleSearch (e: React.ChangeEvent<HTMLInputElement>) {
+    const value = (e.target as HTMLInputElement).value
+    setKeyword(value)
   }
+
+  const filteredDemo = useMemo(() => {
+    if (!keyword) return demo
+
+    return demo.map(group => ({
+      ...group,
+      children: group.children.filter(item => item.title.toLocaleLowerCase().includes(keyword.toLocaleLowerCase()))
+    })).filter(group => group.children.length)
+  }, [keyword])
 
   return (
     <section className={styles.container}>
     <aside className={styles.menu}>
       <h2 className={styles.title}>Menu</h2>
 
-      <input className={styles.search} placeholder="Search" />
+      <input
+        className={styles.search}
+        placeholder="Search"
+        value={keyword}
+        onInput={handleSearch}
+      />
 
-      <ul data-demo={JSON.stringify(demo)}>
-        {demo.map(group => (
-          <li>
+      <ul>
+        {filteredDemo.map(group => (
+          <li key={group.title}>
             <label>{group.title}</label>
 
             <ul>
-              {group.children.map(item => {
-                return (
-                  <li>
-                    <a className={item.src === activeDemo?.src ? styles.active : ''} onClick={() => handleSelectDemo(item)}>
-                      {item.title}
-                    </a>
-                  </li>
-                )
-              })}
+              {group.children.map(item => (
+                <li key={item.title}>
+                  <a
+                    className={item.src === activeDemo?.src ? styles.active : ''}
+                    href={`?title=${item.title}`}
+                  >
+                    {item.title}
+                  </a>
+                </li>
+              ))}
             </ul>
           </li>
         ))}
