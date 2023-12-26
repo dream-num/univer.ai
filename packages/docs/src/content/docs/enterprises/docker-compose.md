@@ -1,12 +1,16 @@
 ---
-title: 试用版部署
+title: 试用商业版
 ---
 
-> 请使用Docker Compose 运行 Univer 服务端, 此方法不适用于生产环境。
+:::note
+在部署试用版本之前，请先[联系我们](/enterprises/#获取商业版)获取部署镜像。
+:::
+
+> 请使用 Docker Compose 运行 Univer 服务端, 此方法不适用于生产环境。
 
 ## 环境要求
 
-1. CPU: 1核
+1. CPU: 1 核
 2. 内存: 2G
 3. 磁盘：10G
 4. 系统: Linux, Mac
@@ -29,7 +33,7 @@ cd helm-charts/docker-compose
 
 4. 发送邮件到 `developer@univer.ai` 或联系官方微信申请试用资格,获取`LICENSE` 和 `public_key.crt` 文件.
 
-5. 将 `LICENSE` 和 `public_key.crt` 文件放到./configs目录下.
+5. 将 `LICENSE` 和 `public_key.crt` 文件放到./configs 目录下.
 
 6. 启动服务.
 
@@ -54,11 +58,11 @@ curl -i -X 'POST' \
     }
 }'
 
-# response: 
+# response:
 # {"error":{"code":"OK","message":"success"},"unitID":"1735864608675115008"}
 ```
 
-8. 可以利用我们提供的demo打开对应的表格. 
+8. 可以利用我们提供的 demo 打开对应的表格.
 
 ```bash
 docker pull univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/univer-collaboration-demo:latest
@@ -70,8 +74,8 @@ docker run -it -d \
 # Open URL: http://localhost:3010?unit=${unitID}&type=2
 ```
 
-## Use port
+## 占用端口
 
-| service            | port | description             |
-| ------------------ | ---- | ----------------------- |
-| universer          | 8000 | api http server         |
+| service   | port | description     |
+| --------- | ---- | --------------- |
+| universer | 8000 | api http server |
