@@ -17,31 +17,31 @@ title: 试用商业版
 
 ## 快速上手
 
-1. 安装 [docker >= 23 版本](https://docs.docker.com/engine/install/).
+1. 安装 [docker >= 23 版本](https://docs.docker.com/engine/install/)
 
-2. 克隆本仓库.
+2. 克隆本仓库
 
 ```bash
 git clone https://github.com/dream-num/helm-charts.git
 ```
 
-3. 进入 `docker-compose` 目录.
+3. 进入 `docker-compose` 目录
 
 ```bash
 cd helm-charts/docker-compose
 ```
 
-4. 发送邮件到 `developer@univer.ai` 或联系官方微信申请试用资格,获取`LICENSE` 和 `public_key.crt` 文件.
+4. 发送邮件到 `developer@univer.ai` 或联系官方微信申请试用资格,获取 `LICENSE` 和 `public_key.crt` 文件
 
-5. 将 `LICENSE` 和 `public_key.crt` 文件放到./configs 目录下.
+5. 将 `LICENSE` 和 `public_key.crt` 文件放到 ./configs 目录下
 
-6. 启动服务.
+6. 启动服务
 
 ```bash
 bash run.sh
 ```
 
-7. 创建一个试用表格.
+7. 创建一个试用表格
 
 ```bash
 curl -i -X 'POST' \
@@ -62,7 +62,7 @@ curl -i -X 'POST' \
 # {"error":{"code":"OK","message":"success"},"unitID":"1735864608675115008"}
 ```
 
-8. 可以利用我们提供的 demo 打开对应的表格.
+8. 可以利用我们提供的 demo 打开对应的表格
 
 ```bash
 docker pull univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/univer-collaboration-demo:latest
@@ -71,7 +71,7 @@ docker run -it -d \
   -p 3010:3010 \
   univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/univer-collaboration-demo:latest
 
-# Open URL: http://localhost:3010?unit=${unitID}&type=2
+# open http://localhost:3010?unit=${unitID}&type=2
 ```
 
 ## 占用端口
