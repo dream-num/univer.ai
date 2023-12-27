@@ -48,6 +48,10 @@ title: "@univerjs/sheets-formula"
     位置在 [packages/engine-formula/src/functions/math/function-names.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-formula/src/functions/math/function-names.ts)。
     
     每个分类都有一个文件夹，包含一个 `function-names` 文件用于统一管理这个分类的所有函数名。我们先添加上函数名称，在 `sheets-formula` 插件中会用到。
+    
+    注意，Excel 中一个函数可能属于多个分类，比如 `FLOOR` 在兼容性和数学函数中出现，我们将它归类到数学分类下。其他函数也是这样处理，以确切的分类为依据。
+
+    > 大多数 Excel 函数已经写好了函数名。新的函数可以在末尾添加
 
 2. 国际化文件  
     

@@ -47,6 +47,10 @@ To implement a formula, you need to add formula description, internationalizatio
     Location: [packages/engine-formula/src/functions/math/function-names.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-formula/src/functions/math/function-names.ts).
     
     Each category has a folder containing a `function-names` file to manage all function names in that category. Add the function name, which will be used in the `sheets-formula` plugin.
+
+    Note that a function in Excel may belong to multiple categories. For example, `FLOOR` appears in Compatibility and Math Functions, and we classify it under the Math category. Other functions are treated similarly, based on the exact classification.
+
+    > Most Excel functions have already written function names. New functions can be added at the end
     
 2. Internationalization Files
     
