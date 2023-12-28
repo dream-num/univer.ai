@@ -285,3 +285,100 @@ export interface ISheetClipboardHook {
 
 
 ### 扩展下拉填充
+
+Univer 中的下拉填充也是通过插件化的方式添加的，类似复制粘贴，这意味着你可以通过实现接口`ISheetAutoFillHook`来添加一个 Hook 对象，从而修改和拓展下拉填充的行为。
+
+#### 创建和添加 Hook
+
+```tsx
+import { IAutoFillService, Disposable } from '@univer/core';
+
+export class YourController extends Disposable {
+    constructor(
+        @IAutoFillService private readonly _autoFillService: IAutoFillService,
+    ) {
+        const yourHook: ISheetAutoFillHook = {
+            id: 'your-hook-name',
+            priority: 1,
+            type: AutoFillHookType.Append // This hook will be executed after the default one
+            onBeforeFillData: (location, direction) => {
+                // In this method, you can cache the date in source range in case of refilling
+                console.log(`AutoFill will apply from Range-${location.source} to Range-${location.target}`)
+            },
+            onFillData: (location, direction, applyType) => {
+                console.log(`apply type is ${applyType}`)
+                // In this method, you can provide the mutations in redos which are supposed to be executed.
+                // Undos is also necessary.
+                return {
+                    undos: [],
+                    redos: [],
+                }
+                
+            },
+            onAfterFillData: (location, direction, applyType) => {
+                console.log('AutoFill is completed.')
+            }
+            // all hook methods are optional, you can learn it from interface definition.
+        }
+        // register your hook
+        this.disposeWithMe(this._autoFillService.addHook(yourHook));
+    }
+}
+
+```
+
+#### 修改默认下拉填充
+
+除了选区变更以外，Univer 的默认下拉填充行为都是以 Hook 的形式添加的，在它的 Hook Function 中处理了扩充序列内容、样式等逻辑。
+
+这个 Hook 与其他的 Hook 没什么不同，只是`type: AutoFillHookType.Default`而已，这类 Hook 只会有一个生效，并会第一个执行。因此，你完全可以自己写一个`type: AutoFillHookType.Default`的 Hook，只要它的 Priority 比默认的 0 大就行。
+
+```tsx
+const yourHook: ISheetAutoFillHook = {
+            id: 'your-hook-name',
+            priority: 1,
+            type: AutoFillHookType.Default
+            onBeforeFillData: (location, direction) => {
+                console.log(`AutoFill will apply from Range-${location.source} to Range-${location.target}`)
+            },
+            onFillData: (location, direction, applyType) => {
+                return {
+                    undos: [],
+                    redos: [],
+                }
+            },
+            onAfterFillData: (location, direction, applyType) => {
+                console.log('AutoFill is completed.')
+            }
+        }
+```
+
+
+
+#### 拓展下拉填充
+
+如果在下拉填充时，希望执行一些额外的逻辑，比如让第三方的值也会跟随着下拉一起填充，你可以添加一个`type: AutoFillHookType.Append`的 Hook 对象，并在对应的 Hook Function 处理你的逻辑。这类 Hook 会在 AutoFillHookType.Default 后跟随执行，也可以通过 disable 方法去让它禁用。
+
+```tsx
+const yourHook: ISheetAutoFillHook = {
+            id: 'your-hook-name',
+            priority: 0,
+            type: AutoFillHookType.Append,
+            disable: (location, direction, applyType) => true
+            onBeforeFillData: (location, direction) => {
+                console.log(`AutoFill will apply from Range-${location.source} to Range-${location.target}`)
+            },
+            onFillData: (location, direction, applyType) => {
+                return {
+                    undos: [],
+                    redos: [],
+                }    
+            },
+            onAfterFillData: (location, direction, applyType) => {
+                console.log('AutoFill is completed.')
+            }
+        }
+```
+
+
+
