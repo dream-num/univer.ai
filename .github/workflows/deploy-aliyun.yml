@@ -1,4 +1,5 @@
 name: deploy to aliyun
+
 on:
   push:
     # Sequence of patterns matched against refs/heads
@@ -7,27 +8,31 @@ on:
     # Sequence of patterns matched against refs/tags
     tags:
       - v*
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Install Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18.14.1'
-    - name: Install npm dependencies
-      run: npm install
-    - name: Run build task
-      run: npm run build
-    - name: Deploy to Server
-      uses: easingthemes/ssh-deploy@main
-      with:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: "-rlgoDzvc -i --delete"
-          SOURCE: "dist/"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: "/software/nginx/html/official-website"
+      - uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install npm dependencies
+        run: npm install
+
+      - name: Run build task
+        run: npm run build
+
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@main
+        with:
+            SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+            ARGS: "-rlgoDzvc -i --delete"
+            SOURCE: "dist/"
+            REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+            REMOTE_USER: ${{ secrets.REMOTE_USER }}
+            TARGET: "/software/nginx/html/official-website"

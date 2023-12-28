@@ -1,9 +1,0 @@
-# Univer Docs
-
-[![Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-
-This repository contains the documentation for the Univer project.
-
-- Official website: [https://univer.work](https://univer.work)
-- Official documentation: [https://univer.work/docs](https://univer.work/docs)

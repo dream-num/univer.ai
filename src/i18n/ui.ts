@@ -8,7 +8,7 @@ export const defaultLanguage = 'zh-cn'
 
 export const ui = {
   'zh-cn': {
-    'header.nav': '文档',
+    'header.docs': '文档',
     'header.api': 'API',
     'header.concat': '联系我们',
     'header.playground': '在线演示',
@@ -52,7 +52,7 @@ export const ui = {
     'footer.copyright': '上海梦数科技 版权所有'
   },
   'en-us': {
-    'header.nav': 'Docs',
+    'header.docs': 'Docs',
     'header.api': 'API',
     'header.concat': 'Contact Us',
     'header.playground': 'Playground',
@@ -96,7 +96,7 @@ export const ui = {
     'footer.copyright': '上海梦数科技 版权所有'
   },
   'ja-jp': {
-    'header.nav': 'ドキュメント',
+    'header.docs': 'ドキュメント',
     'header.api': 'API',
     'header.concat': 'お問い合わせ',
     'header.playground': 'オンラインデモ',

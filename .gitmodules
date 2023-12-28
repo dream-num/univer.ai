@@ -1,3 +1,0 @@
-[submodule "packages/api/submodules/univer"]
-	path = packages/api/submodules/univer
-	url = git@github.com:dream-num/univer.git
