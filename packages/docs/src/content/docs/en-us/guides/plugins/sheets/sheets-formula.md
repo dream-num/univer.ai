@@ -79,6 +79,8 @@ To implement a formula, you need to add formula description, internationalizatio
 3. Formula Descriptions
     
     `SUMIF` belongs to the `math` category, and the description is in [packages/sheets-formula/src/services/function-list/math.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-formula/src/services/function-list/math.ts), which manages all functions in the `math` category.
+
+    Most function names already have basic description structure. It is recommended to modify them based on this foundation. If a function is not present, add it to the end.
     
     Requirements:
     

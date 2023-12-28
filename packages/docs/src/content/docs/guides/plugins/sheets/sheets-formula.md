@@ -10,6 +10,21 @@ title: "@univerjs/sheets-formula"
 公式计算是电子表格的核心功能之一，因此公式计算调度是在 `@univerjs/sheets` 中进行的。
 :::
 
+## 如何增加自定义公式
+
+如果官方提供的公式不满足你的需求，可以自己增加自定义公式
+
+1. 定义公式名称
+2. 定义国际化
+3. 注册国际化
+4. 定义描述
+5. 注册描述
+6. 定义公式算法
+7. 注册公式算法
+8. 测试
+
+
+
 ## 如何贡献公式
 
 ### 参考文档
@@ -81,6 +96,8 @@ title: "@univerjs/sheets-formula"
 3. 公式描述
     
     `SUMIF` 属于 `math` 分类，描述信息在 [packages/sheets-formula/src/services/function-list/math.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-formula/src/services/function-list/math.ts)，这个文件负责整个 `math` 分类所有函数。
+
+    大部分的函数名称我们已经写好了基础的描述结构，推荐您在此基础上进行修改，如果没有的函数需要自己加在末尾。
 
     要求：
     - 在 `FUNCTION_LIST_MATH` 数组中增加公式，我们建议保持和国际化文件中的顺序一致，便于管理和查找
