@@ -1,6 +1,7 @@
 {
   "name": "docs",
   "type": "module",
+  "version": "0.1.0-beta.1",
   "licenses": [
     {
       "type": "CC-BY-NC-SA-4.0",
@@ -11,17 +12,30 @@
       "url": "https://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
-  "version": "0.1.0",
   "scripts": {
-    "dev:docs": "turbo dev --filter=./packages/docs",
-    "dev:api": "turbo dev --filter=./packages/api",
-    "dev": "turbo dev --filter=./packages/docs --filter=./packages/api",
-    "build:docs": "turbo build --filter=./packages/docs",
-    "build:api": "turbo build --filter=./packages/api",
-    "build": "turbo build --filter=./packages/docs --filter=./packages/api"
+    "postinstall": "cd ./node_modules/univer && pnpm install --ignore-scripts",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build && node ./generate-api.mjs && cp -r ./api/* ./dist/api",
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/check": "^0.3.4",
+    "@astrojs/react": "^3.0.9",
+    "@astrojs/starlight": "^0.15.1",
+    "@types/react-dom": "^18.2.18",
+    "astro": "^4.0.7",
+    "modern-normalize": "^2.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sharp": "^0.33.1",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.45",
     "less": "^4.2.0",
-    "turbo": "^1.11.2"
+    "typedoc": "^0.25.4",
+    "univer": "github:dream-num/univer"
   }
 }
