@@ -8,7 +8,7 @@ title: 其他发行版
 
 安装 alpha 版本
 
-```
+```shell
 npm install @univerjs/<包名>@alpha
 ```
 

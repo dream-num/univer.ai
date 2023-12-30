@@ -139,7 +139,6 @@ Hook 中暴露如下方法来处理 HTML 的生成过程：
 5. onAfterCopy:
    这个 Hook Function 会在复制后执行。
 
-
 #### 使用 Hook 处理粘贴流程
 
 在 Univer 中，可以通过快捷键和菜单触发粘贴操作。不同于复制，粘贴流程会触发 Mutation 来修改数据，因此关于粘贴的 Hook Function 基本都需要返回 Mutations 数组，需指定 Undo 和 Redo。在 Hook Function 的参数中，可以判断粘贴的来源是复制还是剪切。
@@ -221,14 +220,6 @@ export class NumfmtCopyPasteController extends Disposable {
 }
 ```
 
-
-
-
-
-
-
-
-
 关于`ISheetClipboardHook`接口的详细定义如下
 
 ```ts
@@ -282,7 +273,6 @@ export interface ISheetClipboardHook {
 }
 
 ```
-
 
 ### 扩展下拉填充
 
@@ -353,8 +343,6 @@ const yourHook: ISheetAutoFillHook = {
         }
 ```
 
-
-
 #### 拓展下拉填充
 
 如果在下拉填充时，希望执行一些额外的逻辑，比如让第三方的值也会跟随着下拉一起填充，你可以添加一个`type: AutoFillHookType.Append`的 Hook 对象，并在对应的 Hook Function 处理你的逻辑。这类 Hook 会在 AutoFillHookType.Default 后跟随执行，也可以通过 disable 方法去让它禁用。
@@ -379,6 +367,3 @@ const yourHook: ISheetAutoFillHook = {
             }
         }
 ```
-
-
-

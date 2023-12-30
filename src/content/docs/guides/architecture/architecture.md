@@ -67,7 +67,6 @@ Univer 的插件存在生命周期，通过使用生命周期，Univer 使得插
 
 对应的，Plugin 类型上有四个生命周期勾子，各个 plugin 可以通过覆盖这些方法来在各个声明周期执行相应的逻辑.
 
-
 ```ts
 export abstract class Plugin {
     onStarting(_injector: Injector): void {}

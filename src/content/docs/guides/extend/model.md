@@ -5,6 +5,7 @@ title: 插件自定义模型
 Univer 允许用户自定义插件需要存储在文档快照上的模型。
 ![image](@/assets/img/resource.jpg)
 在 `@univer/core` 中存在一个 `ResourceManagerService` 实例,你可以在自己新建的 plugin 中注册对应的 `hook` ,将数据绑定到 `snapshot` 上.
+
 ```ts
 import {
     IResourceManagerService,
@@ -38,8 +39,11 @@ class CustomerService{
 ```
 
 当你的数据已经接入 `ResourceManagerService` 后,将根据你选择的持久化方式进行落盘处理.这里根据落盘的方式差异有 2 种快照方案.
-##  本地化快照方案.
+
+## 本地化快照方案
+
 在以上注册逻辑生效后,需要执行初始化/落盘两步的操作,可以模拟以下 service 实现.
+
 ```ts
 import type { ISnapshotPersistenceService, Workbook } from '@univerjs/core';
 import { Disposable, IResourceManagerService, IUniverInstanceService } from '@univerjs/core';
@@ -100,14 +104,18 @@ export class LocalSnapshotService extends Disposable implements ISnapshotPersist
 
 ### 1.2 保存快照
 
-通过 DI 拿到 `LocalSnapshotService` 实例后,调用 `LocalSnapshotService.saveWorkbook` 方法，可以获得一个序列化的 json 对象. 
+通过 DI 拿到 `LocalSnapshotService` 实例后,调用 `LocalSnapshotService.saveWorkbook` 方法，可以获得一个序列化的 json 对象.
 
-## 远端快照方案.
+## 远端快照方案
+
    具体文档等协同方案公布后同步。
 
-##  模型引用化
+## 模型引用化
+
 将重复的字符串使用一个短码进行映射，以减少内存/带宽开销.
+
 ### 运行时引用化
+
 运行时引用化，主要是为来缩减运行时的内存开销.
 在 `model` 层,我们会设计一个 `shadowModel`,以及一个 `mappingModel`.
 
@@ -122,4 +130,3 @@ export class LocalSnapshotService extends Disposable implements ISnapshotPersist
 ### 传输时引用化
 
 具体文档等协同方案公布后同步。
-

@@ -18,7 +18,9 @@ class CustomerService{
     }
 }
 ```
+
 其中的 `UniverEditablePermission` 的类型如下
+
 ```ts
 export const UniverEditablePermissionPoint = 'univer.editable';
 export class UniverEditablePermission extends PermissionPoint<boolean> {
@@ -31,7 +33,9 @@ export class UniverEditablePermission extends PermissionPoint<boolean> {
     }
 }
 ```
+
 2. 业务层级,拿 `sheet` 举例, `sheet` 可以针对某个 `worksheet` 进行权限设置.
+
 ```ts
 import { SheetPermissionService } from '@univerjs/sheets';
 
@@ -47,6 +51,7 @@ class CustomerService{
 ```
 
 其中的 `SheetEditablePermission` 的类型如下
+
 ```ts
 const SheetEditablePermissionPoint = 'univer.sheet.editable';
 
@@ -66,6 +71,7 @@ export class SheetEditablePermission extends PermissionPoint<boolean> {
 ```
 
 3. 业务自定义权限
+
 ```ts
 import  { IPermissionService,PermissionPoint } from '@univerjs/core';
 
@@ -100,4 +106,3 @@ class CustomerService{
     }
 }
 ```
-
