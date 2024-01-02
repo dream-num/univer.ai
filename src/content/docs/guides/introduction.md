@@ -15,6 +15,8 @@ Univer 是一套企业文档与数据协同解决方案，包括电子表格、�
   - 🧮 高性能的公式引擎，支持 Web Worker
 - 🌍 国际化支持
 
+点击[这里](/guides/features)以了解 Univer 目前已经推出的功能。
+
 ## 如何使用
 
 如果你不想在本地设置开发环境，我们准备了一个在线 IDE 来帮助你快速体验使用 Univer 开发，点击[这里](/playground/overview)。

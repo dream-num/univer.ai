@@ -1,0 +1,57 @@
+---
+title: 使用 Facade
+sidebar:
+  order: 1
+---
+
+如果你只想使用一个开箱即用的电子表格，不想使用 Univer 的底层 API，或者你更偏向于 Luckysheet 的使用方式，你可以使用 @univerjs/facade 提供的面板（**Facade**） API。实际上，[Uniscript](/guides/plugins/common/uniscript/) 也使用了 @univerjs/facade 提供的这套 API，因此 @univerjs/facade 提供的能力就是 Uniscript 能够提供的能力。
+
+本小节介绍 Facade 的安装和基本使用方法。
+
+:::note[⚗️ 施工中]
+我们仍在扩展 Facade 的能力，部分底层 API 支持的能力可能还没有被 Facade 支持，如果你发现了这样的问题，请向我们[提交 issue](/guides/contributing#github-issues) 或者[提交 Pull Request](http://localhost:4321/guides/contributing#contributing-code)。
+:::
+
+:::note[我应该使用 Facade 还是底层 API？]
+我们建议有下面需求的用户使用 API：
+
+1. 第一次接触 Univer，或者是 Luckysheet 老用户，想尽快上手 Univer
+2. 不太关心 Univer 的插件化能力
+
+建议有如下需求的用户使用底层 API：
+
+1. 已经对 Univer 比较熟悉
+1. 需要根据需求调整安装在 Univer 上的插件
+1. 需要自定义开发插件，调用更多 Univer 核心和其他插件的能力
+1. 追求极致的构建产物体积和性能
+
+注意，Facade 和底层 API 并不是互斥关系，你完全可以同时使用它们。
+:::
+
+## 安装
+
+使用你的 npm 包管理器安装：
+
+```shell
+pnpm install @univerjs/facade
+```
+
+## 使用
+
+@univerjs/facade 提供的 API 是对 `Univer` 实例的封装，因此你需要在创建了 `Univer` 实例之后，再用 `FUniver` 包裹这个实例：
+
+```typescript title="main.ts"
+import { FUniver } from "@univerjs/facade";
+
+const univerAPI = FUniver.newAPI(univer);
+```
+
+然后你就可以通过调用 `univerAPI` 的方法来使用 Univer 了，例如创建一个电子表格：
+
+```typescript title="main.ts"
+univerAPI.createUniverSheet({
+  name: "My Workbook",
+});
+```
+
+你可以查看 [Facade API](/api/facade/) 来进一步了解能用 Facade 做什么。

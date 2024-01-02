@@ -5,9 +5,7 @@ import { dirname, resolve } from 'node:path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
 const __packages = resolve(__dirname, './node_modules/univer/packages');
-
 const __output = resolve(__dirname, './api');
 
 // clean output
@@ -20,7 +18,6 @@ if (fs.existsSync(__output)) {
 const packages = fs.readdirSync(__packages)
   .filter((pkg) => {
     const pkgJson = fs.readFileSync(resolve(__packages, pkg, './package.json'), 'utf8');
-
     const pkgJsonParsed = JSON.parse(pkgJson);
 
     return !pkgJsonParsed.private;
