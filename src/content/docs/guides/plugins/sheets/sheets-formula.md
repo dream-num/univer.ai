@@ -10,6 +10,210 @@ title: "@univerjs/sheets-formula"
 公式计算是电子表格的核心功能之一，因此公式计算调度是在 `@univerjs/sheets` 中进行的。
 :::
 
+## 如何自定义公式
+
+如果官方提供的公式不满足您的需求，可以自己扩展公式。按照以下步骤来实现一个自定义公式 `CUSTOMSUM`。
+
+1. 定义公式名称
+
+   首先为公式起一个名称，我们要求不能同已有公式名称重复，已有公式主要是从 [Office Excel](https://support.microsoft.com/zh-cn/office/excel-%E5%87%BD%E6%95%B0-%E6%8C%89%E7%B1%BB%E5%88%AB%E5%88%97%E5%87%BA-5f91f4e9-7b42-46d2-9bd1-63f26a86c0eb) 参考。
+
+   我们把多个自定义公式搜集在一个枚举中。
+
+   ```ts
+   /**
+    * function name
+    */
+   export enum FUNCTION_NAMES_USER {
+     CUSTOMSUM = "CUSTOMSUM",
+   }
+   ```
+
+2. 定义国际化
+
+   定义你所需要的国际化内容，详细的字段说明请参考[如何贡献公式](./#如何贡献公式)的部分。同样的，多个公式就用公式名称作为 `key` 值区分。
+
+   ```ts
+   /**
+    * i18n
+    */
+   export const functionEnUS = {
+     formula: {
+       functionList: {
+         CUSTOMSUM: {
+           description: `You can add individual values, cell references or ranges or a mix of all three.`,
+           abstract: `Adds its arguments`,
+           links: [
+             {
+               title: "Instruction",
+               url: "https://support.microsoft.com/en-us/office/sum-function-043e1c7d-7726-4e80-8f32-07b23e057f89",
+             },
+           ],
+           functionParameter: {
+             number1: {
+               name: "number1",
+               detail:
+                 "The first number you want to add. The number can be like 4, a cell reference like B6, or a cell range like B2:B8.",
+             },
+             number2: {
+               name: "number2",
+               detail:
+                 "This is the second number you want to add. You can specify up to 255 numbers in this way.",
+             },
+           },
+         },
+       },
+     },
+   };
+
+   export const functionZhCN = {
+     formula: {
+       functionList: {
+         CUSTOMSUM: {
+           description: "将单个值、单元格引用或是区域相加，或者将三者的组合相加。",
+           abstract: "求参数的和",
+           links: [
+             {
+               title: "教学",
+               url: "https://support.microsoft.com/zh-cn/office/sum-%E5%87%BD%E6%95%B0-043e1c7d-7726-4e80-8f32-07b23e057f89",
+             },
+           ],
+           functionParameter: {
+             number1: {
+               name: "数值1",
+               detail:
+                 "要相加的第一个数字。 该数字可以是 4 之类的数字，B6 之类的单元格引用或 B2:B8 之类的单元格范围。",
+             },
+             number2: {
+               name: "数值2",
+               detail:
+                 "这是要相加的第二个数字。 可以按照这种方式最多指定 255 个数字。",
+             },
+           },
+         },
+       },
+     },
+   };
+   ```
+
+3. 注册国际化
+
+    在原有的国际化对象中扩展你定义的国际化内容
+
+    ```ts
+    export const locales = {
+        [LocaleType.EN_US]: {
+            ...UniverSheetsEnUS,
+            ...UniverDocsUIEnUS,
+            ...UniverSheetsUIEnUS,
+            ...UniverUiEnUS,
+            ...UniverDesignEnUS,
+            ...functionEnUS,
+        },
+        [LocaleType.ZH_CN]: {
+            ...functionZhCN,
+        },
+    };
+    ```
+
+4. 定义描述
+
+    公式的描述中主要是配置国际化字段，用于公式搜索提示、详情面板等。
+
+    ```ts
+    /**
+    * description
+    */
+    export const FUNCTION_LIST_USER: IFunctionInfo[] = [
+        {
+        functionName: FUNCTION_NAMES_USER.CUSTOMSUM,
+        aliasFunctionName: "formula.functionList.CUSTOMSUM.aliasFunctionName",
+        functionType: FunctionType.Univer,
+        description: "formula.functionList.CUSTOMSUM.description",
+        abstract: "formula.functionList.CUSTOMSUM.abstract",
+        functionParameter: [
+            {
+            name: "formula.functionList.CUSTOMSUM.functionParameter.number1.name",
+            detail:
+                "formula.functionList.CUSTOMSUM.functionParameter.number1.detail",
+            example: "A1:A20",
+            require: 1,
+            repeat: 0,
+            },
+            {
+            name: "formula.functionList.CUSTOMSUM.functionParameter.number2.name",
+            detail:
+                "formula.functionList.CUSTOMSUM.functionParameter.number2.detail",
+            example: "B2:B10",
+            require: 0,
+            repeat: 1,
+            },
+        ],
+        },
+    ];
+    ```
+
+5. 注册描述
+
+    注册公式插件时传入你定义的描述对象
+
+    ```ts
+    univer.registerPlugin(UniverSheetsFormulaPlugin, {
+        description: FUNCTION_LIST_USER,
+    });
+    ```
+
+6. 定义公式算法
+
+    编写具体的公式计算逻辑，并将算法和公式名称映射起来。
+
+    ```ts
+    /**
+    * Function algorithm
+    */
+    export class Customsum extends BaseFunction {
+        override calculate(...variants: BaseValueObject[]) {
+        let accumulatorAll: BaseValueObject = new NumberValueObject(0);
+        for (let i = 0; i < variants.length; i++) {
+            let variant = variants[i];
+
+            if (variant.isError()) {
+            return variant;
+            }
+
+            if (accumulatorAll.isError()) {
+            return accumulatorAll;
+            }
+
+            if (variant.isArray()) {
+            variant = (variant as ArrayValueObject).sum();
+            }
+
+            accumulatorAll = accumulatorAll.plus(variant as BaseValueObject);
+        }
+
+        return accumulatorAll;
+        }
+    }
+
+    // Mapping of algorithms and names
+    export const functionUser = [[Customsum, FUNCTION_NAMES_USER.CUSTOMSUM]];
+    ```
+
+7. 注册公式算法
+
+    注册公式计算插件时传入你定义的公式算法对象
+
+    ```ts
+    univer.registerPlugin(UniverSheetsFormulaCalculatePlugin, {
+     function: functionUser,
+    });
+    ```
+
+8. 测试
+
+   到这里就完成了自定义公式的开发，现在可以测试一下。任意空白单元格输入 `=CUSTOMSUM` 预期能得到公式提示。这里提供一个[自定义公式 Demo](/playground?title=Custom%20Function)，供参考。
+
 ## 如何贡献公式
 
 ### 参考文档
@@ -48,6 +252,10 @@ title: "@univerjs/sheets-formula"
 
     每个分类都有一个文件夹，包含一个 `function-names` 文件用于统一管理这个分类的所有函数名。我们先添加上函数名称，在 `sheets-formula` 插件中会用到。
 
+    注意，Excel 中一个函数可能属于多个分类，比如 `FLOOR` 在兼容性和数学函数中出现，我们将它归类到数学分类下。其他函数也是这样处理，以确切的分类为依据。
+
+    > 大多数 Excel 函数已经写好了函数名。新的函数可以在末尾添加
+
 2. 国际化文件  
 
     位置在 [packages/sheets-formula/src/locale/function-list/math/en-US.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-formula/src/locale/function-list/math/en-US.ts)。
@@ -76,6 +284,8 @@ title: "@univerjs/sheets-formula"
 3. 公式描述
 
     `SUMIF` 属于 `math` 分类，描述信息在 [packages/sheets-formula/src/services/function-list/math.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-formula/src/services/function-list/math.ts)，这个文件负责整个 `math` 分类所有函数。
+
+    大部分的函数名称我们已经写好了基础的描述结构，推荐您在此基础上进行修改，如果没有的函数需要自己加在末尾。
 
     要求：
     - 在 `FUNCTION_LIST_MATH` 数组中增加公式，我们建议保持和国际化文件中的顺序一致，便于管理和查找
@@ -119,8 +329,8 @@ title: "@univerjs/sheets-formula"
 ### 公式实现注意事项
 
 - 任何公式的入参和出参都可以是 `A1`、`A1:B10`，调研 Excel 的时候需要把所有情况考虑到，比如 `=SIN(A1:B10)`，会展开一个正弦计算后的范围。
- 	- 例如 `XLOOKUP` 函数，要求两个入参的行或列至少又一个大小相等，这样才能进行矩阵计算。
- 	- 例如 `SUMIF` 函数，大家以为是求和，但是它是可以根据第二个参数进行展开的
+  - 例如 `XLOOKUP` 函数，要求两个入参的行或列至少又一个大小相等，这样才能进行矩阵计算。
+  - 例如 `SUMIF` 函数，大家以为是求和，但是它是可以根据第二个参数进行展开的
         ![sumif array](./assets/img/sumif-array.png)
         ![sumif array result](./assets/img/sumif-array-result.png)
   - Excel 的公式计算，越来越像 numpy，比如
