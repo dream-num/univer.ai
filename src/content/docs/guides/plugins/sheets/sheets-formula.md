@@ -10,91 +10,183 @@ title: "@univerjs/sheets-formula"
 公式计算是电子表格的核心功能之一，因此公式计算调度是在 `@univerjs/sheets` 中进行的。
 :::
 
-## 如何自定义公式
+## 添加公式前置条件
 
-如果官方提供的公式不满足您的需求，可以自己扩展公式。按照以下步骤来实现一个自定义公式 `CUSTOMSUM`。
+如果官方提供的公式不满足您的需求，可以自己扩展公式。根据不同的需求，我们提供了多种方式来支持注册一个或多个自定义公式。
+
+您需要先准备好公式提示所需要的国际化文案和算法，然后参考我们的[贡献指南](https://github.com/dream-num/univer/blob/dev/CONTRIBUTING.md)运行 Univer 项目，再开始添加公式。
+
+## 如何使用 Uniscript 添加公式
+
+使用 Uniscript 脚本，可以方便快速的在当前表格中注册自定义公式。
+
+如下案例所示，使用 `registerFunction` 将一个 `CUSTOMSUM` 公式所需要的国际化内容、描述、算法一次性注册到公式插件，执行之后就可以使用公式了。在任何一个单元格输入 `=CUSTOMSUM` 可以看到提示。
+
+```js
+const FUNCTION_NAME = 'CUSTOMSUM'
+Univer.registerFunction({
+    locales:{
+        'zhCN': {
+            formula: {
+                functionList: {
+                    CUSTOMSUM: {
+                        description: '将单个值、单元格引用或是区域相加，或者将三者的组合相加。',
+                        abstract: '求参数的和',
+                        links: [
+                            {
+                                title: '教学',
+                                url: 'https://support.microsoft.com/zh-cn/office/sum-%E5%87%BD%E6%95%B0-043e1c7d-7726-4e80-8f32-07b23e057f89',
+                            },
+                        ],
+                        functionParameter: {
+                            number1: {
+                                name: '数值1',
+                                detail: '要相加的第一个数字。 该数字可以是 4 之类的数字，B6 之类的单元格引用或 B2:B8 之类的单元格范围。',
+                            },
+                            number2: {
+                                name: '数值2',
+                                detail: '这是要相加的第二个数字。 可以按照这种方式最多指定 255 个数字。',
+                            },
+                        },
+                    },
+                    // ... 更多公式
+                },
+            },
+        }
+    },
+    description:[
+         {
+            functionName: FUNCTION_NAME,
+            aliasFunctionName: 'formula.functionList.CUSTOMSUM.aliasFunctionName',
+            functionType: 15,
+            description: 'formula.functionList.CUSTOMSUM.description',
+            abstract: 'formula.functionList.CUSTOMSUM.abstract',
+            functionParameter: [
+                {
+                    name: 'formula.functionList.CUSTOMSUM.functionParameter.number1.name',
+                    detail: 'formula.functionList.CUSTOMSUM.functionParameter.number1.detail',
+                    example: 'A1:A20',
+                    require: 1,
+                    repeat: 0,
+                },
+                {
+                    name: 'formula.functionList.CUSTOMSUM.functionParameter.number2.name',
+                    detail: 'formula.functionList.CUSTOMSUM.functionParameter.number2.detail',
+                    example: 'B2:B10',
+                    require: 0,
+                    repeat: 1,
+                },
+            ],
+        },
+        // ... 更多公式
+    ],
+    calculate: [
+        [function (...variants) {
+            let sum = 0;
+            for(const variant of variants){
+                sum += Number(variant) || 0;
+            }
+            console.info('sum=====',sum)
+            return sum;
+        }, FUNCTION_NAME],
+        // ... 更多公式
+    ]
+})
+```
+
+说明
+
+-   `locales` 下可以设置多种语言，命名规则参考 [LocaleType](https://univer.work/api/core/enums/LocaleType.html)。可以在 `functionList` 下添加多个公式的翻译。详细的字段说明请参考[如何贡献公式](./#如何贡献公式)的部分。
+-   `description` 设置自定义公式的描述。
+-   `calculate` 编写计算公式的具体算法和名称映射。入参为使用公式时用户输入的内容，可能为数字、字符串、布尔值，或者一个范围，也是返回同样的格式。
+
+## 如何初始化时添加公式
+
+按照以下步骤来实现一个自定义公式 `CUSTOMSUM`。
+
+你可以新建一个 `custom-function.ts` 文件来专门放置自定义公式相关模块，或者直接写在 `univer` 初始化之前。
 
 1. 定义公式名称
 
-   首先为公式起一个名称，我们要求不能同已有公式名称重复，已有公式主要是从 [Office Excel](https://support.microsoft.com/zh-cn/office/excel-%E5%87%BD%E6%95%B0-%E6%8C%89%E7%B1%BB%E5%88%AB%E5%88%97%E5%87%BA-5f91f4e9-7b42-46d2-9bd1-63f26a86c0eb) 参考。
+    首先为公式起一个名称，我们要求不能同已有公式名称重复，已有公式主要是从 [Office Excel](https://support.microsoft.com/zh-cn/office/excel-%E5%87%BD%E6%95%B0-%E6%8C%89%E7%B1%BB%E5%88%AB%E5%88%97%E5%87%BA-5f91f4e9-7b42-46d2-9bd1-63f26a86c0eb) 参考。
 
-   我们把多个自定义公式搜集在一个枚举中。
+    我们把多个自定义公式搜集在一个枚举中。
 
-   ```ts
-   /**
-    * function name
-    */
-   export enum FUNCTION_NAMES_USER {
-     CUSTOMSUM = "CUSTOMSUM",
-   }
-   ```
+    ```ts
+    /**
+     * function name
+     */
+    export enum FUNCTION_NAMES_USER {
+      CUSTOMSUM = "CUSTOMSUM",
+    }
+    ```
 
 2. 定义国际化
 
-   定义你所需要的国际化内容，详细的字段说明请参考[如何贡献公式](./#如何贡献公式)的部分。同样的，多个公式就用公式名称作为 `key` 值区分。
+    定义你所需要的国际化内容，详细的字段说明请参考[如何贡献公式](./#如何贡献公式)的部分。同样的，多个公式就用公式名称作为 `key` 值区分。
 
-   ```ts
-   /**
-    * i18n
-    */
-   export const functionEnUS = {
-     formula: {
-       functionList: {
-         CUSTOMSUM: {
-           description: `You can add individual values, cell references or ranges or a mix of all three.`,
-           abstract: `Adds its arguments`,
-           links: [
-             {
-               title: "Instruction",
-               url: "https://support.microsoft.com/en-us/office/sum-function-043e1c7d-7726-4e80-8f32-07b23e057f89",
-             },
-           ],
-           functionParameter: {
-             number1: {
-               name: "number1",
-               detail:
-                 "The first number you want to add. The number can be like 4, a cell reference like B6, or a cell range like B2:B8.",
-             },
-             number2: {
-               name: "number2",
-               detail:
-                 "This is the second number you want to add. You can specify up to 255 numbers in this way.",
-             },
-           },
-         },
-       },
-     },
-   };
+    ```ts
+    /**
+     * i18n
+     */
+    export const functionEnUS = {
+      formula: {
+        functionList: {
+          CUSTOMSUM: {
+            description: `You can add individual values, cell references or ranges or a mix of all three.`,
+            abstract: `Adds its arguments`,
+            links: [
+              {
+                title: "Instruction",
+                url: "https://support.microsoft.com/en-us/office/sum-function-043e1c7d-7726-4e80-8f32-07b23e057f89",
+              },
+            ],
+            functionParameter: {
+              number1: {
+                name: "number1",
+                detail:
+                  "The first number you want to add. The number can be like 4, a cell reference like B6, or a cell range like B2:B8.",
+              },
+              number2: {
+                name: "number2",
+                detail:
+                  "This is the second number you want to add. You can specify up to 255 numbers in this way.",
+              },
+            },
+          },
+        },
+      },
+    };
 
-   export const functionZhCN = {
-     formula: {
-       functionList: {
-         CUSTOMSUM: {
-           description: "将单个值、单元格引用或是区域相加，或者将三者的组合相加。",
-           abstract: "求参数的和",
-           links: [
-             {
-               title: "教学",
-               url: "https://support.microsoft.com/zh-cn/office/sum-%E5%87%BD%E6%95%B0-043e1c7d-7726-4e80-8f32-07b23e057f89",
-             },
-           ],
-           functionParameter: {
-             number1: {
-               name: "数值1",
-               detail:
-                 "要相加的第一个数字。 该数字可以是 4 之类的数字，B6 之类的单元格引用或 B2:B8 之类的单元格范围。",
-             },
-             number2: {
-               name: "数值2",
-               detail:
-                 "这是要相加的第二个数字。 可以按照这种方式最多指定 255 个数字。",
-             },
-           },
-         },
-       },
-     },
-   };
-   ```
+    export const functionZhCN = {
+      formula: {
+        functionList: {
+          CUSTOMSUM: {
+            description: "将单个值、单元格引用或是区域相加，或者将三者的组合相加。",
+            abstract: "求参数的和",
+            links: [
+              {
+                title: "教学",
+                url: "https://support.microsoft.com/zh-cn/office/sum-%E5%87%BD%E6%95%B0-043e1c7d-7726-4e80-8f32-07b23e057f89",
+              },
+            ],
+            functionParameter: {
+              number1: {
+                name: "数值1",
+                detail:
+                  "要相加的第一个数字。 该数字可以是 4 之类的数字，B6 之类的单元格引用或 B2:B8 之类的单元格范围。",
+              },
+              number2: {
+                name: "数值2",
+                detail:
+                  "这是要相加的第二个数字。 可以按照这种方式最多指定 255 个数字。",
+              },
+            },
+          },
+        },
+      },
+    };
+    ```
 
 3. 注册国际化
 
@@ -121,6 +213,9 @@ title: "@univerjs/sheets-formula"
     公式的描述中主要是配置国际化字段，用于公式搜索提示、详情面板等。
 
     ```ts
+    import type { IFunctionInfo } from '@univerjs/engine-formula';
+    import { FunctionType } from '@univerjs/engine-formula';
+
     /**
     * description
     */
@@ -158,6 +253,7 @@ title: "@univerjs/sheets-formula"
     注册公式插件时传入你定义的描述对象
 
     ```ts
+    // univer
     univer.registerPlugin(UniverSheetsFormulaPlugin, {
         description: FUNCTION_LIST_USER,
     });
@@ -168,31 +264,34 @@ title: "@univerjs/sheets-formula"
     编写具体的公式计算逻辑，并将算法和公式名称映射起来。
 
     ```ts
+    import type { ArrayValueObject, BaseValueObject, IFunctionInfo } from '@univerjs/engine-formula';
+    import { BaseFunction, FunctionType, NumberValueObject } from '@univerjs/engine-formula';
+
     /**
     * Function algorithm
     */
     export class Customsum extends BaseFunction {
         override calculate(...variants: BaseValueObject[]) {
-        let accumulatorAll: BaseValueObject = new NumberValueObject(0);
-        for (let i = 0; i < variants.length; i++) {
-            let variant = variants[i];
+            let accumulatorAll: BaseValueObject = new NumberValueObject(0);
+            for (let i = 0; i < variants.length; i++) {
+                let variant = variants[i];
 
-            if (variant.isError()) {
-            return variant;
+                if (variant.isError()) {
+                return variant;
+                }
+
+                if (accumulatorAll.isError()) {
+                return accumulatorAll;
+                }
+
+                if (variant.isArray()) {
+                variant = (variant as ArrayValueObject).sum();
+                }
+
+                accumulatorAll = accumulatorAll.plus(variant as BaseValueObject);
             }
 
-            if (accumulatorAll.isError()) {
             return accumulatorAll;
-            }
-
-            if (variant.isArray()) {
-            variant = (variant as ArrayValueObject).sum();
-            }
-
-            accumulatorAll = accumulatorAll.plus(variant as BaseValueObject);
-        }
-
-        return accumulatorAll;
         }
     }
 
@@ -202,19 +301,23 @@ title: "@univerjs/sheets-formula"
 
 7. 注册公式算法
 
-    注册公式计算插件时传入你定义的公式算法对象
+    在 `UniverFormulaEnginePlugin` 传入你定义的公式算法对象
 
     ```ts
-    univer.registerPlugin(UniverSheetsFormulaCalculatePlugin, {
-     function: functionUser,
+    univer.registerPlugin(UniverFormulaEnginePlugin, {
+        function: functionUser,
     });
     ```
 
+    请注意：如果 `UniverFormulaEnginePlugin` 在 `worker` 中有实例化，则需要在 `worker` 中的 `UniverFormulaEnginePlugin` 注册自定义公式，我们优先将公式算法在 `worker` 中执行。
+
 8. 测试
 
-   到这里就完成了自定义公式的开发，现在可以测试一下。任意空白单元格输入 `=CUSTOMSUM` 预期能得到公式提示。这里提供一个[自定义公式 Demo](/playground?title=Custom%20Function)，供参考。
+    到这里就完成了自定义公式的开发，现在可以测试一下。任意空白单元格输入 `=CUSTOMSUM` 预期能得到公式提示。这里提供一个[自定义公式 Demo](/playground?title=Custom%20Function)，供参考。
 
-## 如何贡献公式
+## 如何在第三方插件中添加公式
+
+## 如何在 `UniverFormulaEnginePlugin` 中添加公式
 
 ### 参考文档
 
@@ -222,31 +325,27 @@ title: "@univerjs/sheets-formula"
 
 ### 类别
 
-- Financial
-- Date
-- Math
-- Statistical
-- Lookup
-- Database
-- Text
-- Logical
-- Information
-- Engineering
-- Cube
-- Compatibility
-- Web
-- Array
-- Univer
-
-### 前置条件
-
-先参考我们的[贡献指南](https://github.com/dream-num/univer/blob/dev/CONTRIBUTING.md)运行 Univer 项目，再开始贡献公式。
+-   Financial
+-   Date
+-   Math
+-   Statistical
+-   Lookup
+-   Database
+-   Text
+-   Logical
+-   Information
+-   Engineering
+-   Cube
+-   Compatibility
+-   Web
+-   Array
+-   Univer
 
 ### 要求
 
 要实现一个公式，需要添加公式描述、国际化和公式算法，以 `SUMIF` 函数的写法为例作为参考
 
-1. 添加函数名称  
+1. 添加函数名称
 
     位置在 [packages/engine-formula/src/functions/math/function-names.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-formula/src/functions/math/function-names.ts)。
 
@@ -256,7 +355,7 @@ title: "@univerjs/sheets-formula"
 
     > 大多数 Excel 函数已经写好了函数名。新的函数可以在末尾添加
 
-2. 国际化文件  
+2. 国际化文件
 
     位置在 [packages/sheets-formula/src/locale/function-list/math/en-US.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-formula/src/locale/function-list/math/en-US.ts)。
 
@@ -269,6 +368,7 @@ title: "@univerjs/sheets-formula"
     大部分的函数名称我们已经写好了基础的描述、简介、链接、参数结构，推荐您在此基础上进行修改，如果没有的函数需要自己加在末尾。
 
     要求：
+
     - 函数翻译的参数 `key` 使用这个函数的每个参数英文名称，比如 `SUMIF`，除非有错误，一般不用改动
     - `description` 参数需要综合下内容进行提取，因为有的 Excel 描述很长，需要简化
     - `abstract` 和 `links` 基本上不需要做改动
@@ -288,6 +388,7 @@ title: "@univerjs/sheets-formula"
     大部分的函数名称我们已经写好了基础的描述结构，推荐您在此基础上进行修改，如果没有的函数需要自己加在末尾。
 
     要求：
+
     - 在 `FUNCTION_LIST_MATH` 数组中增加公式，我们建议保持和国际化文件中的顺序一致，便于管理和查找
     - `functionName` 需要引用之前定义的 `FUNCTION_NAMES_MATH` 枚举
     - `aliasFunctionName` 也是可选的，如果国际化文件中没有别名，这里也不用添加
@@ -322,23 +423,25 @@ title: "@univerjs/sheets-formula"
 6. 功能测试
 
     启动 Univer 开发模式，在界面上测试公式，预先构造好数据，
+
     - 在任一空白单元格输入 `=sumif`，预期会有搜索提示列表弹出
     - 确认选择 `SUMIF` 或者 输入 `=sumif(` 之后，触发公式详细介绍弹窗，仔细检查介绍页内容是否完整
     - 选择数据范围，确认之后触发计算，检查公式计算结果是否正确
 
 ### 公式实现注意事项
 
-- 任何公式的入参和出参都可以是 `A1`、`A1:B10`，调研 Excel 的时候需要把所有情况考虑到，比如 `=SIN(A1:B10)`，会展开一个正弦计算后的范围。
-  - 例如 `XLOOKUP` 函数，要求两个入参的行或列至少又一个大小相等，这样才能进行矩阵计算。
-  - 例如 `SUMIF` 函数，大家以为是求和，但是它是可以根据第二个参数进行展开的
+-   任何公式的入参和出参都可以是 `A1`、`A1:B10`，调研 Excel 的时候需要把所有情况考虑到，比如 `=SIN(A1:B10)`，会展开一个正弦计算后的范围。
+
+    -   例如 `XLOOKUP` 函数，要求两个入参的行或列至少又一个大小相等，这样才能进行矩阵计算。
+    -   例如 `SUMIF` 函数，大家以为是求和，但是它是可以根据第二个参数进行展开的
         ![sumif array](./assets/img/sumif-array.png)
         ![sumif array result](./assets/img/sumif-array-result.png)
-  - Excel 的公式计算，越来越像 numpy，比如
+    -   Excel 的公式计算，越来越像 numpy，比如
         ![numpy](./assets/img/numpy.png)
 
-- 公式的数值计算，需要使用内置的方法，尽量不要获取值自行计算。因为公式的参数可以是值、数组、引用。可以参考已有的 `sum`、`minus` 函数。
-- 精度问题，公式引入了 `big.js`，使用内置方法会调用该库，但是相比原生计算会慢接近100倍，所以像 `sin` 等 `js` 方法，尽量用原生实现。
-- 需要自定义计算，使用 `product` 函数，适合两个入参的计算，调用 `map` 对值自身进行迭代计算，适合对一个入参本身的值进行改变。
+-   公式的数值计算，需要使用内置的方法，尽量不要获取值自行计算。因为公式的参数可以是值、数组、引用。可以参考已有的 `sum`、`minus` 函数。
+-   精度问题，公式引入了 `big.js`，使用内置方法会调用该库，但是相比原生计算会慢接近 100 倍，所以像 `sin` 等 `js` 方法，尽量用原生实现。
+-   需要自定义计算，使用 `product` 函数，适合两个入参的计算，调用 `map` 对值自身进行迭代计算，适合对一个入参本身的值进行改变。
 
 ### 公式基础工具
 
