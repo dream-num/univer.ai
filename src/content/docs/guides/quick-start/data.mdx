@@ -1,5 +1,7 @@
 ---
 title: 创建表格和导出数据
+sidebar:
+  order: 3
 ---
 
 ## 导入数据
@@ -7,11 +9,11 @@ title: 创建表格和导出数据
 通过调用 `Univer` 的 `createUniverSheet` 方法，可以创建一个新的 `Workbook` 实例。方法的第一个参数是一个对象，包含了 `Workbook` 的数据，应该符合 `IWorkbookData` 接口。
 
 ```ts
-import { IWorkbookData } from '@univerjs/core';
+import { IWorkbookData } from "@univerjs/core";
 
 // ... create univer instance and load plugins
 
-const data: IWorkbookData = {}
+const data: IWorkbookData = {};
 const workbook = univer.createUniverSheet(data);
 ```
 

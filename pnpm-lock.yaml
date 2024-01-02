@@ -50,7 +50,7 @@ importers:
         version: 0.25.4(typescript@5.3.3)
       univer:
         specifier: github:dream-num/univer
-        version: git@github.com+dream-num/univer/fe73e3bf79950f12bb00130dcf8fd11711f16cb9
+        version: github.com/dream-num/univer/3012f442cee86d4172ec47c1a22d7147c5d1e4a2
 
   packages/api:
     dependencies:
@@ -16715,8 +16715,8 @@ packages:
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
-  git@github.com+dream-num/univer/fe73e3bf79950f12bb00130dcf8fd11711f16cb9:
-    resolution: {commit: fe73e3bf79950f12bb00130dcf8fd11711f16cb9, repo: git@github.com:dream-num/univer.git, type: git}
+  github.com/dream-num/univer/3012f442cee86d4172ec47c1a22d7147c5d1e4a2:
+    resolution: {tarball: https://codeload.github.com/dream-num/univer/tar.gz/3012f442cee86d4172ec47c1a22d7147c5d1e4a2}
     name: univer
     version: 0.1.0-beta.1
     engines: {node: ^18.17.0, pnpm: ^8.6.2}
