@@ -39,6 +39,14 @@ Univer.registerFunction({
 })
 ```
 
+Use the `unregisterFunction` method to quickly unregister custom formulas
+
+```ts
+Univer.unregisterFunction({
+     functionNames: ['CUSTOMSUM']
+})
+```
+
 If you want to provide more complete international content and description, you can also configure the `locales` and `description` fields. As follows.
 
 ```js
@@ -143,6 +151,20 @@ Note
 -   Multiple languages can be set under `locales`. For naming rules, please refer to [LocaleType](/api/core/enums/LocaleType.html). Translations for multiple formulas can be added under `functionList`. For detailed field descriptions, please refer to the [How to contribute formula](./#how-to-add-formulas-in-univer-formula-engine-plugin) section.
 -   `description` sets the description of the custom formula.
 -   `calculate` writes the specific algorithm and name mapping of the calculation formula. The input parameter is the content entered by the user when using the formula, which may be a number, a string, a Boolean value, or a range, and the same format is returned.
+
+Likewise, if using the `unregisterFunction` method, it is recommended that you remove the internationalization files as well. The example below removes the Chinese and English `formulaCustom` nodes.
+
+```ts
+Univer.unregisterFunction({
+     localeKeys: {
+          'zhCN': ['formulaCustom'],
+          'enUS': ['formulaCustom'],
+         },
+     functionNames: ['CUSTOMSUM']
+})
+```
+
+Uniscript uses `@univerjs/facade` under the hood. You can also use Uniscript-like APIs directly in your project. Please refer to [Register Function](/guides/facade/register-function).
 
 ## How to add formulas when initializing Univer
 
