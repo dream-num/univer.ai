@@ -23,7 +23,7 @@ title: "@univerjs/sheets-formula"
 如下案例所示，使用 `registerFunction` 将一个 `CUSTOMSUM` 公式所需要的算法、名称、描述一次性注册到公式插件，执行之后就可以使用公式了。在任一空白单元格输入 `=CUSTOMSUM` 可以看到提示。
 
 ```js
-Univer.registerFunction({
+univerAPI.registerFunction({
     calculate: [
         [function (...variants) {
             let sum = 0;
@@ -40,8 +40,9 @@ Univer.registerFunction({
 ```
 
 使用 `unregisterFunction` 方法能快速卸载自定义公式
+
 ```ts
-Univer.unregisterFunction({
+univerAPI.unregisterFunction({
     functionNames: ['CUSTOMSUM']
 })
 ```
@@ -52,7 +53,7 @@ Univer.unregisterFunction({
 const FUNCTION_NAMES_USER = {
     CUSTOMSUM: 'CUSTOMSUM'
 }
-Univer.registerFunction({
+univerAPI.registerFunction({
     locales:{
         'zhCN': {
             formulaCustom: {
@@ -152,8 +153,9 @@ Univer.registerFunction({
 -   `calculate` 编写计算公式的具体算法和名称映射。入参为使用公式时用户输入的内容，可能为数字、字符串、布尔值，或者一个范围，也是返回同样的格式。
 
 同样的， 如果使用 `unregisterFunction` 方法，推荐你把国际化文件也移除。下方示例是将中文和英文的 `formulaCustom` 节点移除。
+
 ```ts
-Univer.unregisterFunction({
+univerAPI.unregisterFunction({
     localeKeys: {
          'zhCN': ['formulaCustom'],
          'enUS': ['formulaCustom'],
@@ -163,7 +165,6 @@ Univer.unregisterFunction({
 ```
 
 Uniscript 底层使用了 `@univerjs/facade`，你也可以直接在项目中使用类似 Uniscript 的 API，请参考 [注册公式](/guides/facade/register-function)。
-
 
 ## 如何在初始化 Univer 时添加公式
 

@@ -1,7 +1,7 @@
 ---
 title: 注册公式
 sidebar:
-  order: 2
+  order: 3
 ---
 
 ## 注册公式

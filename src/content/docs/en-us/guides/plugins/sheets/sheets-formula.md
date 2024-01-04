@@ -23,7 +23,7 @@ Using Uniscript scripts, you can quickly and easily register custom formulas in 
 As shown in the following case, use `registerFunction` to register the algorithm, name, and description required by a `CUSTOMSUM` formula into the formula plug-in at one time. After execution, the formula can be used. Enter `=CUSTOMSUM` in any blank cell to see the prompt.
 
 ```js
-Univer.registerFunction({
+univerAPI.registerFunction({
      calculate: [
          [function (...variants) {
              let sum = 0;
@@ -42,7 +42,7 @@ Univer.registerFunction({
 Use the `unregisterFunction` method to quickly unregister custom formulas
 
 ```ts
-Univer.unregisterFunction({
+univerAPI.unregisterFunction({
      functionNames: ['CUSTOMSUM']
 })
 ```
@@ -53,7 +53,7 @@ If you want to provide more complete international content and description, you 
 const FUNCTION_NAMES_USER = {
      CUSTOMSUM: 'CUSTOMSUM'
 }
-Univer.registerFunction({
+univerAPI.registerFunction({
      locales:{
          'zhCN': {
              formulaCustom: {
@@ -155,7 +155,7 @@ Note
 Likewise, if using the `unregisterFunction` method, it is recommended that you remove the internationalization files as well. The example below removes the Chinese and English `formulaCustom` nodes.
 
 ```ts
-Univer.unregisterFunction({
+univerAPI.unregisterFunction({
      localeKeys: {
           'zhCN': ['formulaCustom'],
           'enUS': ['formulaCustom'],
