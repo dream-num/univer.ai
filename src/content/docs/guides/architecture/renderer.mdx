@@ -1,0 +1,246 @@
+---
+title: 渲染引擎架构设计
+---
+
+import SheetEditor from '@/assets/img/SheetEditorRichText.png';
+import rendererArchitecture from '@/assets/img/renderer-architecture.png';
+import rendererViewport from '@/assets/img/renderer-viewport.png';
+import rendererBaseObject from '@/assets/img/renderer-base-object.png';
+import rendererTextureCache from '@/assets/img/renderer-texture-cache.png';
+import rendererComponent from '@/assets/img/renderer-component.png';
+import rendererScene from '@/assets/img/renderer-scene.png';
+import { Image } from 'astro:assets';
+
+## 前言
+
+UniverRendering 参考了 KonvaJs, fabricJs 以及 Babylonjs 的设计。基于 canvas2D 实现，对 CanvasRenderingContext2D 进行 mock，封装了 UniverRenderingContext 类，今后涉及 Slide 动画将会使用 WebGL 或 WebGPU 进行新的渲染实现。
+
+```typescript
+class UniverRenderingContext2D implements CanvasRenderingContext2D {...}
+
+/**
+ * TODO
+ */
+class UniverRenderingContextWebGL {}
+
+/**
+ * TODO
+ */
+class UniverRenderingContextWebGPU {}
+
+
+export class UniverRenderingContext extends UniverRenderingContext2D {}
+
+```
+
+UniverRendering 设计的目的是整合 Sheet, document, slide 功能，让它们的渲染可以相互嵌套和复用，例如在 UniverSheet 中，一个单元格的文本是使用 Document 进行渲染的，未来 Slide 的文本框也会使用 Document 进行渲染，所以 UniverSheet 的单元格支持 Doc 的所有能力，并且在 sheet editor 中编辑时很好的进行了格式还原。
+
+<Image alt='SheetEditorRichText' src={SheetEditor} width="500"/>
+
+## 整体架构
+
+UniverRendering 采取面向对象的思路，把每一个 canvas 中的元素抽象为 Object，并且通过 Group, SceneViewer 实现嵌套结构。整体架构图如下：
+
+<Image alt='rendererArchitecture' src={rendererArchitecture}/>
+
+## Engine
+
+管理 canvas 和 UniverContext 实例，提供 API 给下层修改 canvas 体积、性能监控、驱动 scene 帧，封装事件机制提供给下层使用。
+
+```typescript
+const engine = new Engine();
+
+new Scene(SCENE_NAMESPACE, engine, {width, height});
+
+engine.runRenderLoop(() => {
+    scene.render();
+    this._fps$.next(Math.round(engine.getFps()).toString());
+});
+
+```
+
+## Scene
+
+Scene 相当于所有渲染内容，绘制体积超过当前 Viewport(Engine) 的大小，也是渲染工作的核心部分。
+
+<Image alt='rendererScene' src={rendererScene}/>
+
+Scene 需要添加到 engine 中去，一个 engine 可以有多个 scene，每个 scene 有自己的事件监听，并且所有的渲染对象 Object 都要加入到 scene 才能生效。可以通过 engine.runRenderLoop 切换当前需要渲染的 scene
+
+```typescript
+        const spreadsheet = new Spreadsheet(SHEET_VIEW_KEY.MAIN);
+        const spreadsheetRowHeader = new SpreadsheetRowHeader(SHEET_VIEW_KEY.ROW);
+        const spreadsheetColumnHeader = new SpreadsheetColumnHeader(SHEET_VIEW_KEY.COLUMN);
+        const SpreadsheetLeftTopPlaceholder = new Rect(SHEET_VIEW_KEY.LEFT_TOP, {
+            zIndex: 2,
+            left: -1,
+            top: -1,
+            fill: 'rgb(248, 249, 250)',
+            stroke: 'rgb(217, 217, 217)',
+            strokeWidth: 1,
+        });
+
+        scene.addObjects([spreadsheet, spreadsheetRowHeader, spreadsheetColumnHeader, SpreadsheetLeftTopPlaceholder],
+```
+
+可以对 scene 直接添加事件，就像在 dom 中为 document 添加一个全局事件一样。
+
+```typescript
+// 为 scene 新增一个 MouseMove 事件
+scene.onPointerMoveObserver.add((moveEvt: IPointerEvent | IMouseEvent) => {
+    const { offsetX: moveOffsetX, offsetY: moveOffsetY } = moveEvt;
+    ...
+});
+```
+
+## Viewport
+
+为了支持 Sheet 中冻结的场景，参考了 BabylonJs 的 3D Camera 概念，可以设置宽高来指定渲染 canvas 的哪个部分。如下图所示，sheet 在常规状态下，会有 4 个 viewport，分别对应左上方的全选块，行标题，列标题以及主内容区，只为主内容区添加 scrollBar。在行列冻结的情况下，viewport 会多达 9 个。后续支持行尾冻结，会增加到 12 个。
+
+<Image alt='rendererViewport' src={rendererViewport}/>
+
+添加一个 viewport 的例子如下
+
+```typescript
+// 为 scene 新增一个 Viewport 并且添加一个滚动条
+const viewMain = new Viewport(VIEWPORT_KEY.VIEW_MAIN, scene, {
+    left: rowHeader.width,
+    top: columnHeader.height,
+    bottom: 0,
+    right: 0,
+    isWheelPreventDefaultX: true,
+});
+
+new ScrollBar(viewMain);
+```
+
+Viewport 也会在渲染时会把自己所在的视口信息向需要渲染的 object 传递，可以避免渲染视口之外的 object
+
+## Layer
+
+Layer 参考了 Konva 的设计，但不是显式的新建，会通过 Scene 的方法自动创建 Layer，可以选择是否开启 Layer 层的缓存，在元素比较多的情况下会带来性能提升，但浏览器对 canvas 有总面积的限制，所以 Univer 需要用户指定打开哪些层的缓存。
+
+```typescript
+class Scene {
+    // Scene 在添加 object 的时候会判断是否需要新建 Layer
+    addObject(o: BaseObject, zIndex: number = 1) {
+        this.getLayer(zIndex)?.addObject(o);
+        return this;
+    }
+
+    getLayer(zIndex: number = 1) {
+        for (const layer of this._layers) {
+            if (layer.zIndex === zIndex) {
+                return layer;
+            }
+        }
+        return this._createDefaultLayer(zIndex);
+    }
+
+    // 调用 scene 的方法开启指定 layer 的缓存
+    enableLayerCache(...layerIndexes: number[]) {
+        layerIndexes.forEach((zIndex) => {
+            this.getLayer(zIndex).enableCache();
+        });
+    }
+}
+
+
+// Object 会挂到 layer 上，并且 layer 会有一个离屏 canvas 作为缓存层，_dirty 为 false 的时候直接绘制缓存层 canvas 的内容到主画布
+export class Layer {
+    private _objects: BaseObject[] = [];
+
+    private _cacheCanvas: Nullable<Canvas>;
+
+    protected _dirty: boolean = true;
+}
+```
+
+## Object
+
+Group、SceneViewer 都继承自 Object，在 univer 中它叫 BaseObject 类，所有需要绘制的对象都继承自它。除了之前提到的两个，还有其他对象也继承自 BaseObject，如下图所示：
+
+<Image alt='rendererBaseObject' src={rendererBaseObject}/>
+
+### Shape
+
+Shape 实现基本的形状，比如 Circle , Rect , Path, Polygon，并且画法都用静态函数实现，方便被别的衍生形状调用。一个 Rect 形状的类实现如下：
+
+```typescript
+export class Rect<T extends IRectProps = IRectProps> extends Shape<T> {
+    private _radius: number = 0;
+
+    constructor(key?: string, props?: T) {
+        super(key, props);
+        if (props?.radius) {
+            this._radius = props.radius;
+        }
+    }
+
+    // 采用静态方法，方便其他的形状类复用
+    static override drawWith(ctx: UniverRenderingContext, props: IRectProps | Rect) {
+        let { radius, width, height } = props;
+
+        radius = radius ?? 0;
+        width = width ?? 30;
+        height = height ?? 30;
+
+        ctx.beginPath();
+
+        if (props.strokeDashArray) {
+            ctx.setLineDash(props.strokeDashArray);
+        }
+
+        ctx.rect(0, 0, width, height);
+       
+        ctx.closePath();
+        this._renderPaintInOrder(ctx, props);
+    }
+
+    protected override _draw(ctx: UniverRenderingContext) {
+        Rect.drawWith(ctx, this);
+    }
+}
+```
+
+### Component
+
+实现更加复杂的形状，也就是 Sheet，Document，Slide 类似的大型应用。他们的 viewModel 更加复杂，在 univer 中叫 Skeleton，负责处理计算后的排版数据，提供 canvas 鼠标坐标与 Component 内部坐标的转换，而 extension 会负责具体渲染 Component 的某个部分，可以由用户注入逻辑改变渲染行为，或者自己实现一个 extension，完成数据验证、条件格式、单元格图片等功能，架构如下：
+
+<Image alt='rendererComponent' src={rendererComponent}/>
+
+以 Sheet 为例，要绘制一个电子表格，需要考虑三个部分，背景色、文字、边框线，所以这里有 3 个 extension，他们接受 spreadsheetSkeleton 作为输入，根据其提供的布局信息来按单元格进行绘制。
+
+并且 Component 支持用 canvas 作为缓存，进行贴图缓存绘制。目前在滚动 sheet 的时候，渲染引擎只会绘制增量部分的视图，增加了非常多的性能。
+
+<Image alt='rendererTextureCache' src={rendererTextureCache}/>
+
+贴图使用到了 ctx.globalCompositeOperation = 'copy'，关键代码如下
+
+```typescript
+ctx.save();
+ctx.globalCompositeOperation = 'copy';
+ctx.setTransform(1, 0, 0, 1, 0, 0);
+ctx.drawImage(canvasEle, diffX, diffY);
+ctx.restore();
+
+ctx.setTransform(mainCtx.getTransform());
+for (const diffBound of diffBounds) {
+    ctx.rect(...);
+    ctx.clip();
+    this._draw(...);
+}
+
+```
+
+### Spreadsheet 详细设计
+
+请移步
+
+### Document 详细设计
+
+请移步
+
+### Slide 详细设计
+
+请移步
