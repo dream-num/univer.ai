@@ -66,7 +66,7 @@ export const ui = {
     'features.f2.desc': ['Create scripts for task automation, AI-generated script could be integrated in the future.'],
     'features.f3.title': 'Boundaryless mode, merge Docs, Slides, Sheets in a file',
     'features.f3.desc': ['Use unified functions in any file or forms, embedding formulas and scripts across docs, sheets, and slides.'],
-    'features.f4.title': 'collaboration, make your team work closer ',
+    'features.f4.title': 'Collaboration, make your team work closer ',
     'features.f4.desc': ['Edit simultaneously in your team, and comment on anything you want to discuss.'],
     'tech.title': 'Technology spotlights',
     'tech.t1.title': 'Dependency injection based plugin architecture',
