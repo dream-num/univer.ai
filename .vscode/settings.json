@@ -2,5 +2,11 @@
   "[markdown]": {
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true
-  }  
+  },
+  "cSpell.words": [
+    "astro",
+    "Babylonjs",
+    "Konva",
+    "Univer"
+  ]
 }
