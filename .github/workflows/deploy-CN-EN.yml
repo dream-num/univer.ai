@@ -11,8 +11,8 @@ permissions:
   pull-requests: write
 
 jobs:
-  docker-image-build:
-    name: DockerImageBuild
+  build-docker-image:
+    name: BuildDockerImage
     runs-on: [self-hosted, macOS]
     steps:
       - uses: actions/checkout@v3
