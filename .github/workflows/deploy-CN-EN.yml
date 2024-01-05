@@ -1,0 +1,52 @@
+name: ✈️ Deploy CN & EN
+
+on:
+  # pull_request:
+  #   branches:
+  #     - main
+  workflow_dispatch:
+    
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  docker-image-build:
+    name: DockerImageBuild
+    runs-on: [self-hosted, macOS]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Login to Aliyun Container Registry (ACR)
+        uses: aliyun/acr-login@v1
+        with:
+          login-server: univer-acr-registry.cn-shenzhen.cr.aliyuncs.com
+          region-id: cn-shenzhen
+          username: "${{ secrets.REGISTRY_USERNAME }}"
+          password: "${{ secrets.REGISTRY_PASSWORD }}"
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and Push Docker Image
+        run: |
+          IMAGE_TAG=$(echo "${{ github.sha }}" | cut -c 1-7)
+          make push_image PUSH_TAG=$IMAGE_TAG
+
+  deploy-cn:
+    name: DeployCN
+    runs-on: ubuntu-latest
+    needs: build-docker-image
+    steps:
+      - name: Set IMAGE_TAG environment variable
+        run: echo "IMAGE_TAG=$(echo ${{ github.sha }} | cut -c 1-7)" >> $GITHUB_ENV
+      
+      - uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.GH_ACCESS_TOKEN }}
+          repository: dream-num/helm-charts
+          event-type: dispatch
+          client-payload: '{"service":"docs","tag":"${{ env.IMAGE_TAG }}"}'
