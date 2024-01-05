@@ -6,13 +6,18 @@ import formulaEngineArchitecture from '@/assets/img/formula/formula-engine-archi
 import formulaModelRef from '@/assets/img/formula/formula-model-ref.png';
 import engine from '@/assets/img/formula/engine.png';
 import engineDependency from '@/assets/img/formula/engine-dependency.png';
+import engineLexer from '@/assets/img/formula/engine-lexer.png';
+import engineParser from '@/assets/img/formula/engine-parser.png';
+import arrayObjectCalculate from '@/assets/img/formula/array-object-calculate.png';
+import arrayObjectInvertedIndex from '@/assets/img/formula/array-object-inverted-index.png';
+
 import { Image } from 'astro:assets';
 
 ## 前言
 UniverFromulaEngine 设计的主要目标：
 1. 支持 Univer 所有应用和相关功能可以接入公式
-2. 能力对齐最新的 Office365, 函数可以根据输入，自动展开为数组
-3. 支持 let, lambda 等最新的自定义函数，且 lambda 可以作为参数传给 makeArray, reduce 等最新数组函数
+2. 能力对齐最新的 Office365, 函数可以根据输入，自动展开为动态数组
+3. 支持 let, lambda 等最新的自定义函数，且 lambda 可以作为参数传给 makeArray, reduce 等最新动态数组函数
 4. 提升用户体验，[公式运行在 webwork 中](../web-worker/)，且公式执行状态可感知，支持公式停止执行，循环引用检测及循环引用执行次数设置
 5. 支持超级表、公式和范围命名
 
@@ -25,14 +30,20 @@ UniverFromulaEngine 参考了 Office 设计思想，向 Numpy 的矩阵运算理
 ```typescript
 export class Sum extends BaseFunction {
     override calculate(...variants: BaseValueObject[]) {
+        // 新建一个用于累加的 0 变量
         let accumulatorAll: BaseValueObject = new NumberValueObject(0);
+
+        // Sum 函数的入参数量由用户决定，这里循环获取并计算。
         for (let i = 0; i < variants.length; i++) {
             let variant = variants[i];
 
+            // 如果入参是 A1:B10 的引用范围，上层会把它自动转换为一个 ArrayValueObject，
             if (variant.isArray()) {
+                // 调用 ArrayValueObject 上的 sum 函数，累加所有的 valueObject 值
                 variant = (variant as ArrayValueObject).sum();
             }
 
+            // 调用 ValueObject 上的数值计算函数 Plus 进行累加
             accumulatorAll = accumulatorAll.plus(variant);
         }
 
@@ -58,7 +69,7 @@ export class Sum extends BaseFunction {
 
 <Image alt='formulaModelRef' src={formulaModelRef} width='400'/>
 
-参考 **formula-data.model.ts**，此外还对数组公式、数公式范围的数据进行管理，数组公式是 sheet 内比较重要的概念，近年来 Excel 对数组的支持越来越强，作者有预感，excel 公式未来会越来向 Numpy 矩阵运算看齐，以便于提供强大的数据分析和数据连接能力。
+参考 **formula-data.model.ts**，此外还对数组公式、数公式范围的数据进行管理，数组公式是 sheet 内比较重要的概念，近年来 Excel 对动态数组的支持越来越强，作者有预感 excel 公式未来会越来向 Numpy 矩阵运算看齐，以便于提供强大的数据分析和数据连接能力。
 
 ## Engine
 
@@ -76,9 +87,195 @@ Engine 架构如下图所示：
 
 如上图所示，A1 单元格的内容变更后，会对 A2, A3, A4, A5 单元格的公式进行标脏，标脏后的公式进行依赖关系分析，最终的输出顺序为：A2 -> A3 -> A5 -> A4
 
+如果遇到 [Indirect, Offset](https://support.microsoft.com/en-us/office/indirect-function-474b3a3a-8a26-4f44-b491-92b6306fa261) 等类似的引用函数，则 Dependency 模块会调用 Lexer 和 Parser 执行预计算，提前算出这类函数的引用范围，再以此进行依赖关系的计算。
+
 ### Lexer
+
+负责对公式字符串进行词法分析，匹配引擎定义好的 token，根据规则生成节点，并递归创建树形结构，比如 A1,B10, SUM 等都会成为一个无状态的节点，节点类型的识别将会留在 Parser 环节。
+
+```typescript
+export enum operatorToken {
+    PLUS = '+',
+    MINUS = '-',
+    MULTIPLY = '*',
+    DIVIDED = '/',
+    CONCATENATE = '&',
+    POWER = '^',
+    EQUALS = '=',
+    NOT_EQUAL = '<>',
+    GREATER_THAN = '>',
+    GREATER_THAN_OR_EQUAL = '>=',
+    LESS_THAN = '<',
+    LESS_THAN_OR_EQUAL = '<=',
+}
+
+export enum compareToken {
+    EQUALS = '=',
+    NOT_EQUAL = '<>',
+    GREATER_THAN = '>',
+    GREATER_THAN_OR_EQUAL = '>=',
+    LESS_THAN = '<',
+    LESS_THAN_OR_EQUAL = '<=',
+}
+
+export enum matchToken {
+    OPEN_BRACKET = '(',
+    CLOSE_BRACKET = ')',
+    COMMA = ',',
+    SINGLE_QUOTATION = "'",
+    DOUBLE_QUOTATION = '"',
+    OPEN_BRACES = '{',
+    CLOSE_BRACES = '}',
+    COLON = ':',
+    OPEN_SQUARE_BRACKET = '[',
+    CLOSE_SQUARE_BRACKET = ']',
+}
+
+export enum suffixToken {
+    PERCENTAGE = '%',
+    POUND = '#',
+}
+
+export enum prefixToken {
+    AT = '@',
+    MINUS = '-',
+}
+```
+
+在生成 token 树之后，引擎会调用转换方法，采用[后缀表达式](https://www.geeksforgeeks.org/evaluation-of-postfix-expression/)来替代原有的数值计算顺序，目的是把计算中的括号去掉，
+
+```typescript
+( 3 + 4 ) * 5 - 6 会转换为 3 4 + 5 × 6 - 
+```
+
+例如 ``` =(sum(sum(A1:B10), E10, 100) + 5) * 6 - 1 ``` 转换后的 token 树如下所示：
+
+<Image alt='engineLexer' src={engineLexer} width='600'/>
 
 ### Parser
 
+这个阶段主要是根据 Lexer 生成的 token 树进行以下转换操作：
+
+1. 将节点中的 Sum 转换为 function-node 公式节点，E10 转换为 Reference-node 引用节点，+ 运算符转换为 Operator-node
+2. 类似的 node 还有：
+    1. lambda-node lambda 函数专用，将 lambda 函数进行入参，以及包装为 lambda-value-object
+    2. union-node, 把 A1:B10 合并为 Range-Reference
+    3. prefix-ndoe, 将 - 识别为负数，以及旧版本的兼容@
+    4. suffix-node, 识别%为百分比，#为动态数组公式的范围简写
+    5. value-node, 识别文本，数字，逻辑三个基础类型的值
+3. 将 let 转换为 lambda 执行
+4. 为 lambda 注入参数
+
+转换 token 树为 astTree 后的示意图：
+
+<Image alt='engineParser' src={engineParser} width='600'/>
+
 ### Interpreter
 
+负责执行单个函数的模块，调用 ast-node 的方法递归的得到函数返回值，主要有一下几个执行步骤：
+
+1. 将运算符转换为 meta-function 并执行，其主要针对加减乘除，以及数值比较。
+2. 将字符、数字，布尔值实例化为 value-object，将数组实例化为 array-value-object
+3. 将 Reference 实例化为 reference-object，并调用内部方法转为 array-value-object
+4. 调用具体函数开始执行运算，函数接收的值统一为 base-value-object，返回值为``` reference-object | base-value-object | async-value-object ```
+5. 异步的值会在上层进行 await 得到结果并传递到下层，所以函数内不需要写异步方法，只用把 Promise 作为参数传给 async-value-object 并返回
+6. Indirect 和 offset 等引用函数，返回 reference-object
+7. 函数中不需要关心是返回单个数值还是动态数组，统一由 base-value-object 进行计算。
+
+base-value-object 是公式引擎计算非常重要的部分，由几个对象组成：
+
+#### null-value-object
+代表空值，再与其他类型值进行计算时会被当做 false 或 0，如果无法计算会直接返回 error-value-object
+
+#### error-value-object
+代表错误，类似 Excel 的 #VALUE!, #NAME!, #REF! 等，函数内可以直接返回 error-value-object，代表公式计算错误
+
+#### primitive-value-object
+
+三个基础值对象，```number-value-object, string-value-object, boolean-value-object ```，分别实现了自己的数值计算方法，使用了 [big.js](https://github.com/MikeMcl/big.js) 处理底层计算的精度问题
+
+```typescript
+new NumberValueObject(100).plus(new NumberValueObject(100)); // return NumberValueObject
+
+new StringValueObject(100).concatenateFront(new NumberValueObject(100)); // return StringValueObject
+
+new NumberValueObject(100).isEqual(new NumberValueObject(100)); // return BooleanValueObject
+```
+
+#### lambda-value-object
+
+将 lambda 函数作为值传参给下层函数使用，会应用在 [makearray](https://support.microsoft.com/en-au/office/makearray-function-b80da5ad-b338-4149-a523-5b221da09097), [reduce](https://support.microsoft.com/en-au/office/reduce-function-42e39910-b345-45f3-84b8-0642b568b7cb) 等函数中。
+
+#### array-value-object
+
+是实现矩阵计算的核心，可以与任何 ```primitive-value``` 或 其他```array-value``` 进行计算，计算演示如下图：
+
+ <Image alt='arrayObjectCalculate' src={arrayObjectCalculate}/>
+
+ 其自身也支持如：sum, average, min, max, std, var, power 等计算，并且针对 vlookup, xlookup, match 等函数实现了如 Numpy 的 [slice](https://www.w3schools.com/python/numpy/numpy_array_slicing.asp) 和 [filter](https://www.w3schools.com/python/numpy/numpy_array_filter.asp) 能力，实现一个 vlookup 函数不再需要 for 循环匹配：
+
+```typescript
+
+export class Vlookup extends BaseFunction {
+    override calculate(
+        lookupValue: BaseValueObject,
+        tableArray: BaseValueObject,
+        colIndexNum: BaseValueObject,
+        rangeLookup?: BaseValueObject
+    ) {
+
+        const colIndexNumValue = this.getIndexNumValue(colIndexNum);
+
+        // 对 tableArray 进行切片操作，获取第一列的矩阵
+        const searchArray = (tableArray as ArrayValueObject).slice(, [0, 1]);
+
+        // 对 tableArray 进行切片操作，获取 colIndexNumValue 指定列的矩阵
+        const resultArray = (tableArray as ArrayValueObject).slice(, [colIndexNumValue - 1, colIndexNumValue]);
+
+        // searchArray.isEqual(value) ，得到一个 true or false 的矩阵
+        // resultArray.pick，调用 array 的 pick 方法从 true or false 的矩阵中范围对应索引的结果。相当于 numpy 的 filter
+        // 最后通过 getFirstCell 返回匹配到的第一个结果值
+        return resultArray.pick(searchArray.isEqual(lookupValue) as ArrayValueObject).getFirstCell();
+    }
+}
+```
+
+
+在公式数量较多的情况下，array-value-object 实现了对列的倒排索引缓存（因为在 sheet 中下拉填充是高频操作），以便于提升迭代性能：
+
+ <Image alt='arrayObjectInvertedIndex' src={arrayObjectInvertedIndex} width='500'/>
+
+
+## Service
+
+Service 通过 engine , model 和 function 实现完整的公式计算过程。这里介绍几个重要的 service：
+
+### current-data.service 和 runtime.service
+用于加载 unvier 数据，以及存放公式执行过程中的临时数据，公式执行完毕后 runtime 会返回所有计算结果
+
+### function.service
+用于函数和函数描述的注册，用户也可以通过 uniscript 注册快捷自定义函数，没有 valueObject 能力，但是非常简单快捷。
+
+### feature-calculation-manager.service
+注册数据透视表、条件格式、数据验证等 sheet 领域内的功能函数，举一个透视表的实例：
+1. 数据透视表可以注册一个依赖范围和一个 getDirtyData
+2. 在公式对依赖范围标脏后执行 getDirtyData 方法，实现透视表内的计算逻辑
+3. getDirtyData 方法可返回一个脏区和脏区的临时数据，用于继续计算依赖透视表结果的公式。最后得到正确结果。
+
+### other-formula-manager.service
+注册 doc 和 slide 等非表格领域的公式，这些公式不会被 sheet 内的公式依赖，所以不需要返回脏区和脏区临时数据
+
+### calculate-formula.service
+触发公式计算的核心方法，实现了如下功能：
+1. 公式循环依赖执行
+2. 运行时状态返回，包括执行公式总量，已执行完成数量。
+3. 数组公式返回结果后的二次标脏和执行
+4. 使用 requestImmediateMacroTask 避免了 setTimeout 4ms 限制，实现了公式在宏任务下的运行，支持公式执行终止。
+5. 公式执行时间统计
+
+
+## Function
+
+采取矩阵计算的方式实现函数逻辑，减少了代码量，并且收敛了核心逻辑，让函数实现更加标准，可以保证准确性和质量。
+
+函数还在陆续补充公式中
