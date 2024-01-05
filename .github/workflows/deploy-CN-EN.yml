@@ -36,8 +36,8 @@ jobs:
           IMAGE_TAG=$(echo "${{ github.sha }}" | cut -c 1-7)
           make push_image PUSH_TAG=$IMAGE_TAG
 
-  deploy-cn:
-    name: DeployCN
+  deploy-cn-en:
+    name: DeployCNAndEN
     runs-on: ubuntu-latest
     needs: build-docker-image
     steps:
