@@ -1,4 +1,84 @@
 ---
 title: 公式引擎架构设计
 ---
-## 公式引擎整体架构
+
+import formulaEngineArchitecture from '@/assets/img/formula/formula-engine-architecture.png';
+import formulaModelRef from '@/assets/img/formula/formula-model-ref.png';
+import engine from '@/assets/img/formula/engine.png';
+import engineDependency from '@/assets/img/formula/engine-dependency.png';
+import { Image } from 'astro:assets';
+
+## 前言
+UniverFromulaEngine 设计的主要目标：
+1. 支持 Univer 所有应用和相关功能可以接入公式
+2. 能力对齐最新的 Office365, 函数可以根据输入，自动展开为数组
+3. 支持 let, lambda 等最新的自定义函数，且 lambda 可以作为参数传给 makeArray, reduce 等最新数组函数
+4. 提升用户体验，[公式运行在 webwork 中](../web-worker/)，且公式执行状态可感知，支持公式停止执行，循环引用检测及循环引用执行次数设置
+5. 支持超级表、公式和范围命名
+
+## 整体架构
+
+UniverFromulaEngine 参考了 Office 设计思想，向 Numpy 的矩阵运算理念靠近，减少了实现一个函数的代码量，并收敛了包括数值计算、三角函数计算到 BaseValueObject 中，为函数实现的标准化了做好了铺垫。
+
+实现一个 Sum 公式的代码如下：
+
+```typescript
+export class Sum extends BaseFunction {
+    override calculate(...variants: BaseValueObject[]) {
+        let accumulatorAll: BaseValueObject = new NumberValueObject(0);
+        for (let i = 0; i < variants.length; i++) {
+            let variant = variants[i];
+
+            if (variant.isArray()) {
+                variant = (variant as ArrayValueObject).sum();
+            }
+
+            accumulatorAll = accumulatorAll.plus(variant);
+        }
+
+        return accumulatorAll;
+    }
+}
+```
+
+整体架构图如下：
+
+<Image alt='formulaEngineArchitecture' src={formulaEngineArchitecture} width='600'/>
+
+1. Model, 存储功能中的函数字符串，参考 excel 做了公式引用化，维护数组公式的临时范围和值。
+2. Engine, 公式词法分析，语法分析，构建 astNode，并且把值转换为 ValueObject。公式引擎全部自研。
+3. Service, 提供公式计算环境，函数注册，自定义名称，超级表，公式执行等服务
+4. Command 和 Controller, 负责 web worker 和 服务端 模式下的数据通信，service 的值都通过 mutation 进行更新，Controller 拦截一些事件执行具体的注册或者，这里的架构服从[整体架构](../architecture/)
+5. Function, 所有函数的具体计算实现
+
+
+## Model
+
+主要管理 UniverSheet 的公式字符串，参考 Excel 采取公式引用化存储。
+
+<Image alt='formulaModelRef' src={formulaModelRef} width='400'/>
+
+参考 **formula-data.model.ts**，此外还对数组公式、数公式范围的数据进行管理，数组公式是 sheet 内比较重要的概念，近年来 Excel 对数组的支持越来越强，作者有预感，excel 公式未来会越来向 Numpy 矩阵运算看齐，以便于提供强大的数据分析和数据连接能力。
+
+## Engine
+
+Engine 是公式引擎的核心，提供依赖分析，对一组公式的执行顺序做出判断，还要对每一个公式字符串进行语法分析、词法分析，生成对应的执行语法树，最后通过语法树进行计算，计算过程中会把原始值转换为 ValueObject，会提供函数所需的大部分计算包括加减乘除，字符拼接，三角函数等等。
+
+Engine 架构如下图所示：
+
+<Image alt='engine' src={engine} width='600'/>
+
+### Dependency
+
+负责公式依赖分析，对需要计算的公式进行标脏，最终输出标脏公式的执行队列。
+
+<Image alt='engineDependency' src={engineDependency} width='400'/>
+
+如上图所示，A1 单元格的内容变更后，会对 A2, A3, A4, A5 单元格的公式进行标脏，标脏后的公式进行依赖关系分析，最终的输出顺序为：A2 -> A3 -> A5 -> A4
+
+### Lexer
+
+### Parser
+
+### Interpreter
+
