@@ -1,0 +1,34 @@
+---
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<header class="hero">
+  <h1>{t('blog.title')}</h1>
+  <p>{t('blog.desc')}</p>
+</header>
+
+<style lang="less" scoped>
+.hero {
+  height: 310px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    margin: 0 0 1rem;
+    color: #1e222b;
+    font-size: 2.4rem;
+    font-weight: 706;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1rem;
+    color: #999;
+  }
+}
+</style>

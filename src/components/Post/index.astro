@@ -1,0 +1,98 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import dayjs from 'dayjs'
+
+interface Props {
+  post: CollectionEntry<'blog'>
+}
+
+const { post } = Astro.props
+---
+
+<section class="post">
+  <section class="wrapper">
+    <header class="header">
+      <h1>{post.data.title}</h1>
+
+      <div class="meta">
+        <span>{post.data.author}</span>
+        <time datetime={dayjs(post.data.date)}>
+          {dayjs(post.data.date).format('YYYY-MM-DD')}
+        </time>
+      </div>
+    </header>
+
+    <article class="article">
+      <slot />
+    </article>
+  </section>
+</section>
+
+<style lang="less" scoped>
+.post {
+  margin-bottom: -3rem;
+  padding-top: 3.875rem;
+  padding-bottom: 9rem;
+  background: #fff;
+
+  .wrapper {
+    max-width: 834px;
+    margin: 0 auto;
+    padding: 0 20px;
+
+    .header {
+      display: grid;
+      gap: 2rem;
+
+      h1 {
+        margin: 0;
+        font-size: 3rem;
+      }
+
+      .meta {
+        color: #999;
+        font-size: 0.875rem;
+        display: grid;
+        gap: 0.5rem;
+      }
+    }
+    
+    .article {
+      color: #1E222B;
+      line-height: 2;
+      font-size: 1rem;
+
+      :global(p > code) {
+        padding: 0.25rem 0.5rem;
+        color: #fff;
+        font-size: 0.875rem;
+        background: #1e252f;
+        border-radius: 0.25rem;
+      }
+
+      :global(img) {
+        max-width: 100%;
+
+        display: inline-block;
+      }
+
+      :global(blockquote) {
+        margin: 0;
+        padding: 0 1rem;
+        color: #999;
+        font-style: italic;
+        border-left: 0.25rem solid #1E222B;
+      }
+
+      :global(.expressive-code) {
+        background: #1e252f;
+      }
+
+      :global(a) {
+        color: #274FEE;
+        text-decoration: none;
+      }
+    }
+  }
+}
+</style>

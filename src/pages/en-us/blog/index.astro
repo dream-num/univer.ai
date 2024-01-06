@@ -1,1 +1,17 @@
-<div>111</div>
+---
+import { getCollection } from 'astro:content'
+
+import Layout from '@/layouts/Layout.astro'
+import Hero from '@/components/Hero/index.astro'
+import PostList from '@/components/PostList/index.astro'
+
+const posts = await getCollection('blog', ({ data }) => {
+  return data.lang === 'en-us'
+})
+---
+
+<Layout lang="en-us" title="Blog | Univer">
+  <Hero />
+
+  <PostList posts={posts} />
+</Layout>
