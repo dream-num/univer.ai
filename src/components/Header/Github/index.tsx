@@ -6,7 +6,6 @@ import styles from './index.module.less'
 export const Github = () => {
   const [count, setCount] = useState('　')
 
-
   useEffect(() => {
     fetch('https://api.github.com/repos/dream-num/univer')
       .then(resp => resp.json())

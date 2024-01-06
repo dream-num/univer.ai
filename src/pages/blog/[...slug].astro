@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content'
+
+import Layout from '@/layouts/Layout.astro'
+import Post from '@/components/Post/index.astro'
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog')
+
+  return blogEntries.map(entry => ({
+    params: { slug: entry.slug.replace('blog/', '') },
+    props: { entry }
+  }))
+}
+
+const { entry } = Astro.props
+const { Content } = await entry.render()
+---
+
+<Layout lang="zh-cn" title={`${entry.data.title} | Univer`}>
+  <Post post={entry}>
+    <Content />
+  </Post>
+</Layout>
