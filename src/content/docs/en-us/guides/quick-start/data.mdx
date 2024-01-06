@@ -1,25 +1,25 @@
 ---
-title: 创建表格和导出数据
+title: Create Sheet & Export Data
 sidebar:
   order: 3
 ---
 
-## 导入数据
+## Importing Data
 
-通过调用 `Univer` 的 `createUniverSheet` 方法，可以创建一个新的 `Workbook` 实例。方法的第一个参数是一个对象，包含了 `Workbook` 的数据，应该符合 `IWorkbookData` 接口。
+By calling the `createUniverSheet` method of `Univer`, you can create a new instance of `Workbook`. The method takes an object as its first parameter, which should adhere to the `IWorkbookData` interface.
 
 ```ts
 import { IWorkbookData } from "@univerjs/core";
 
-// ... create univer instance and load plugins
+// ... create the Univer instance and load plugins
 
 const data: IWorkbookData = {};
 const workbook = univer.createUniverSheet(data);
 ```
 
-## 导出数据
+## Exporting Data
 
-通过调用 `Workbook` 的 `save` 方法，可以得到 `IWorkbookData` 对象，包含了表格内部的数据。
+By calling the `save` method of `Workbook`, you can obtain an `IWorkbookData` object containing the data within the spreadsheet.
 
 ```ts
 const savedData = workbook.save();
