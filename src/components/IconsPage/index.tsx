@@ -1,17 +1,16 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import clsx from 'clsx'
+import { ContentSingle20, GithubSingle24, SearchSingle28 } from '@univerjs/icons'
+import pkg from '@univerjs/icons/package.json'
+import * as manifest from '@univerjs/icons/esm/manifest'
+import { Tabs } from '@/components/Tabs'
+import { IconBox } from './IconBox'
 import LogoImg from '@/assets/logo.svg'
 import HeroImg from './hero.png'
-import { SearchSingle28 } from '@univerjs/icons'
-import pkg from '@univerjs/icons/package.json'
-import { Tabs } from '@/components/Tabs'
 
 import styles from './index.module.less'
 
 const tabs = [{
-  label: '全部',
-  value: 'all',
-}, {
   label: '可变单色',
   value: 'single',
 }, {
@@ -22,8 +21,42 @@ const tabs = [{
   value: 'other',
 }]
 
+const excludeList = ['outdate']
+
+export const groups = tabs.map((tab) => ({
+  name: tab.value,
+  items: Object.keys(manifest)
+    .filter((item) => {
+      const itemLowerCase = item.toLowerCase()
+      if (itemLowerCase.search(tab.value) < 0) {
+        return false
+      }
+      const hasExclude = excludeList.some((excludeItem) => {
+        return itemLowerCase.search(excludeItem) >= 0
+      })
+      if (hasExclude) return false
+      return true
+    })
+    .map((item) => ({
+      groupName: item.replace('Manifest', '').replace(tab.value, ''),
+      // @ts-ignore
+      groupItem: manifest[item]
+    }))
+}))
+
 export function IconsPage () {
-  const [category, setCategory] = useState('all')
+  const [category, setCategory] = useState('single')
+  const [keyword, setKeyword] = useState('')
+
+  function handleSearch (e: React.ChangeEvent<HTMLInputElement>) {
+    setKeyword(e.target.value)
+  }
+
+  const activeGroup = useMemo(() => groups.find((group) => group.name === category), [category])!
+
+  // const iconsGroup = useMemo(() => {
+  //   return manifest
+  // }, [keyword])
 
   return (
     <>
@@ -62,7 +95,12 @@ export function IconsPage () {
 
             <footer>
               <a>
-                获取 Figma 文件
+                <ContentSingle20 />
+                API 文档
+              </a>
+              <a href="https://github.com/dream-num/univer-icons">
+                <GithubSingle24 />
+                Github
               </a>
             </footer>
           </section>
@@ -73,10 +111,8 @@ export function IconsPage () {
         <section className={styles.wrapper}>
           <div className={styles.input}>
             <SearchSingle28 className={styles.icon} />
-            <input placeholder="搜索" />
+            <input value={keyword} onChange={handleSearch} placeholder="搜索" />
           </div>
-
-          <div>select</div>
         </section>
       </search>
 
@@ -85,6 +121,20 @@ export function IconsPage () {
             <header>
               <Tabs tabs={tabs} value={category} onChange={setCategory} />
             </header>
+
+            <div>
+              {activeGroup.items.map((item) => (
+                <div key={item.groupName}>
+                  <h4>{item.groupName}</h4>
+
+                  <div className={styles.container}>
+                    {item.groupItem.map((icon: any) => (
+                      <IconBox key={icon.stem} name={icon.icon} iconKey={icon.stem} />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
         </section>
       </main>
     </>
