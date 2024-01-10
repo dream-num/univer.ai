@@ -2,13 +2,12 @@
 title: "@univerjs/uniscript"
 sidebar:
   badge:
-      text: experimental
-      variant: caution
+    text: experimental
+    variant: caution
 ---
 
-import { Image } from 'astro:assets'
-import UniscriptImg from '@/assets/img/uniscript.jpeg'
-
+import { Image } from "astro:assets";
+import UniscriptImg from "@/assets/img/uniscript.jpeg";
 
 [![npm version](https://img.shields.io/npm/v/@univerjs/uniscript)](https://npmjs.org/package/@univerjs/uniscript)
 
@@ -23,7 +22,7 @@ Uniscript 仍在试验阶段，建议不要在生产环境中使用。你可以�
 :::
 
 :::tip
-Uniscript 的 DSL 实际上是一套封装 Univer 内部实现细节的 API，这套 API 定义在[这里](https://github.com/dream-num/univer/blob/dev/packages/uniscript/src/facade/facade.ts)。
+Uniscript 的 DSL 实际上是一套封装 Univer 内部实现细节的 Facade API，这套 API 定义在[这里](/guides/facade)。
 :::
 
 ## 获取编辑器实例
@@ -31,17 +30,22 @@ Uniscript 的 DSL 实际上是一套封装 Univer 内部实现细节的 API，�
 @univerjs/uniscript 内部使用了 [monaco editor](https://microsoft.github.io/monaco-editor/) 作为代码编辑器，你可以通过以下方式获取编辑器实例：
 
 ```ts
-const editor = univer.__getInjector().get(ScriptEditorService).getEditorInstance();
+const editor = univer
+  .__getInjector()
+  .get(ScriptEditorService)
+  .getEditorInstance();
 ```
 
 或者在你的模块中注入 `ScriptEditorService` 以获取编辑器实例。
 
 ```ts
 export class YourModule {
-    constructor(@Inject(ScriptEditorService) private readonly _scriptEditorService) {}
+  constructor(
+    @Inject(ScriptEditorService) private readonly _scriptEditorService
+  ) {}
 
-    private _getEditor() {
-        return this._scriptEditorService.getEditorInstance();
-    }
+  private _getEditor() {
+    return this._scriptEditorService.getEditorInstance();
+  }
 }
 ```

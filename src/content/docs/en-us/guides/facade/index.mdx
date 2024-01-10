@@ -1,0 +1,57 @@
+---
+title: Using Facade
+sidebar:
+  order: 1
+---
+
+If you prefer to use a ready-to-use spreadsheet and don't want to deal with the underlying API of Univer, or if you are more inclined towards the usage style of Luckysheet, you can utilize the Panel API provided by `@univerjs/facade`. In fact, Uniscript also uses the same API provided by `@univerjs/facade`, so the capabilities provided by `@univerjs/facade` align with what Uniscript offers.
+
+In this section, we will introduce the installation and basic usage of Facade.
+
+:::note[⚗️ Under Construction]
+We are still expanding the capabilities of Facade, and some functionalities supported by the underlying API may not be supported by Facade yet. If you encounter any such issues, please submit an issue to us or consider contributing with a pull request.
+:::
+
+:::note[Should I use Facade or the underlying API?]
+We recommend using the API if you fall into one of the following categories:
+
+1. You are new to Univer or are a Luckysheet user who wants to quickly get started with Univer.
+2. You are not very concerned with the plugin capabilities of Univer.
+
+We recommend using the underlying API if you have the following requirements:
+
+1. You are already familiar with Univer.
+2. You need to adjust the installed plugins on Univer according to your requirements.
+3. You need to develop custom plugins and access more of Univer's core and other plugins' capabilities.
+4. You seek optimal build size and performance.
+
+Note that Facade and the underlying API are not mutually exclusive. You can use them simultaneously.
+:::
+
+## Installation
+
+Install via your favorite package manager:
+
+```shell
+pnpm install @univerjs/facade
+```
+
+## Usage
+
+The API provided by `@univerjs/facade` is a wrapper around the `Univer` instance. Therefore, after creating a `Univer` instance, you need to wrap it with `FUniver`:
+
+```typescript title="main.ts"
+import { FUniver } from "@univerjs/facade";
+
+const univerAPI = FUniver.newAPI(univer);
+```
+
+You can then use the Univer functionality by calling methods on the `univerAPI` object. For example, to create a new spreadsheet:
+
+```typescript title="main.ts"
+univerAPI.createUniverSheet({
+  name: "My Workbook",
+});
+```
+
+You can refer to the [Facade API documentation](/api/facade/) for a more detailed description of what you can achieve with Facade.

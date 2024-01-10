@@ -1,0 +1,26 @@
+---
+title: Create Sheet & Export Data
+sidebar:
+  order: 3
+---
+
+## Importing Data
+
+By calling the `createUniverSheet` method of `Univer`, you can create a new instance of `Workbook`. The method takes an object as its first parameter, which should adhere to the `IWorkbookData` interface.
+
+```ts
+import { IWorkbookData } from "@univerjs/core";
+
+// ... create the Univer instance and load plugins
+
+const data: IWorkbookData = {};
+const workbook = univer.createUniverSheet(data);
+```
+
+## Exporting Data
+
+By calling the `save` method of `Workbook`, you can obtain an `IWorkbookData` object containing the data within the spreadsheet.
+
+```ts
+const savedData = workbook.save();
+```
