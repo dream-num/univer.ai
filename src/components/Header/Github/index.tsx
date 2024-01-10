@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import StarIcon from '@/components/Icons/Star'
+import { StarSingle } from '@univerjs/icons'
 
 import styles from './index.module.less'
 
@@ -21,7 +21,7 @@ export const Github = () => {
   return (
     <span className={styles.github}>
       <span className={styles.star}>
-        <StarIcon />
+        <StarSingle />
         Star
       </span>
 

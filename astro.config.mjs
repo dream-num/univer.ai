@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, squooshImageService } from "astro/config";
 import starlight from "@astrojs/starlight";
 
 import react from "@astrojs/react";
@@ -7,6 +7,14 @@ import react from "@astrojs/react";
 export default defineConfig({
   server: {
     host: '0.0.0.0'
+  },
+  vite: {
+    ssr: {
+      noExternal: ["@univerjs/*"],
+    }
+  },
+  image: {
+    service: squooshImageService()
   },
   integrations: [
     starlight({

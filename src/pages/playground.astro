@@ -1,5 +1,5 @@
 ---
-import PlaygroundLayout from '@/layouts/PlaygroundLayout.astro'
+import BlankLayout from '@/layouts/BlankLayout.astro'
 import { Demo } from '@/components/Demo'
 
 const demo = [
@@ -27,6 +27,6 @@ const demo = [
 ]
 ---
 
-<PlaygroundLayout lang="en-us" title="Playground | Univer">
+<BlankLayout lang="en-us" title="Playground | Univer">
   <Demo demo={demo} client:load />
-</PlaygroundLayout>
+</BlankLayout>

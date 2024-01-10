@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import DropdownIcon from '@/components/Icons/Dropdown'
+import { DropdownLightSingle12 } from '@univerjs/icons'
 
 import styles from './index.module.less'
 
@@ -35,7 +35,7 @@ export const Locale = (props: Iprops) => {
     <div className={styles.locale}>
       <a onClick={handleToggleVisible}>
         {lang}
-        <DropdownIcon />
+        <DropdownLightSingle12 />
       </a>
 
       <ul className={visible ? styles.visible : ''}>

@@ -20,22 +20,23 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.3.4",
+    "@astrojs/check": "^0.4.1",
     "@astrojs/react": "^3.0.9",
     "@astrojs/starlight": "^0.15.2",
     "@types/react-dom": "^18.2.18",
+    "@univerjs/icons": "^0.1.24",
     "astro": "^4.1.1",
+    "clsx": "^2.1.0",
     "dayjs": "^1.11.10",
     "modern-normalize": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sharp": "^0.33.1",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
-    "@types/react": "^18.2.46",
+    "@types/react": "^18.2.47",
     "less": "^4.2.0",
-    "typedoc": "^0.25.6",
+    "typedoc": "^0.25.7",
     "univer": "github:dream-num/univer"
   }
 }

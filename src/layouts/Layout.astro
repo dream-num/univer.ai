@@ -12,7 +12,15 @@ const { lang, title } = Astro.props
 ---
 
 <Wrapper lang={lang} title={title}>
-  <Header />
-  <slot />
-  <Footer />
+  <section class="container">
+    <Header />
+    <slot />
+    <Footer />
+  </section>
 </Wrapper>
+
+<style lang="less" scoped>
+.container {
+  background: #E4F4FE33;
+}
+</style>
