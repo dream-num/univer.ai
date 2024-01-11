@@ -11,6 +11,22 @@ This is the repo for [univer.ai](https://univer.ai). This repo contains the sour
 
 Please feel free to contribute to this repo by submitting a pull request. If you have any questions, please contact us at [developer@univer.ai](mailto:developer@univer.ai).
 
+### Contribute PRs by Developing Locally
+
+To begin contributing, fork this repo and clone it to your local machine.
+
+```bash
+# Clone the forked repo
+git clone git@github.com:<YOUR_USERNAME>/<REPO_NAME>.git
+```
+
+Before you begin, please make sure your development environment meets the following requirements:
+
+- node.js >= 18.0.0
+- pnpm >= 8.0.0
+
+After confirming that your development environment meets the above requirements, you can execute the following command to start developing:
+
 ```bash
 # Install dependencies
 pnpm i
@@ -21,3 +37,11 @@ pnpm dev
 # Build the website
 pnpm build
 ```
+
+### Contribute PRs using an online code editor
+
+If you don't want to install the development environment locally, or your local environment doesn't meet the development requirements, you can use an online code editor to develop.
+
+For Example, you can click the following button to open this repo in StackBlitz:
+
+[![Open in StackBlitz](https://img.shields.io/badge/StackBlitz-Open%20in%20StackBlitz-blue?logo=stackblitz)](https://stackblitz.com/github/dream-num/docs)
