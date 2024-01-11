@@ -2,10 +2,13 @@
 title: This is Univer
 desc: 这篇文章旨在帮助新人快速熟悉开源项目 univer 的架构及代码，也是我过去一段时间参与到 univer 开发中的学习和总结，肯定有不够准确或者理解偏差，欢迎大家评论指正
 tags: 
-  - Univer
-cover: ./cover.jpg
+  - Sheet
+  - Architecture
+  - MVC
+  - Good First
+cover: ./cover.png
 date: 2024-01-06
-author: 老罗
+author: Jocs
 lang: en-us
 slug: en-us/blog/this-is-univer
 ---
@@ -28,7 +31,7 @@ slug: en-us/blog/this-is-univer
 
 软件架构的规则其实就是排列组合代码块的规则，软件架构会根据业务域来将组织项目代码，将项目拆分成不同的模块，各个模块做到关注点分离，同时模块之间有明确的依赖关系，并且依赖关系是一个单向无环图，也就是无依赖环原则。正如下面图中所示，系统级、应用级业务逻辑是整个项目最核心的部分，同时也是应用最稳定的部分，应该放在架构的最里层，其他如用户界面、渲染引擎、前端框架、持久化的数据库，这些在架构演进的过程中，可能被替换，所以他们都依赖于最中心的业务实体，置于外层
 
-<img src="https://github.com/Jocs/jocs.github.io/assets/9712830/88f274ed-96e5-4419-ae41-dc6d270b2b3d" width="500" align="middle" >
+<img src="https://github.com/Jocs/jocs.github.io/assets/9712830/88f274ed-96e5-4419-ae41-dc6d270b2b3d" width="400" style="margin: 0 auto; display: block;" >
 
 （图注：core、base-sheet、base-render、base-ui、ui-plugin-sheet 对应仓库中 packages 下不同文件夹）
 
@@ -48,7 +51,7 @@ class SheetPlugin {
 
 在上面代码中，SheetPlugin 类依赖于 CommandService 类，CommandService 类中方法的变更直接会影响到 SheetPlugin，SheetPlugin 可能也需要修改，导致 SheetPlugin 的不稳定
 
-![image](https://github.com/Jocs/jocs.github.io/assets/9712830/39f2bbbd-1bc7-432f-a666-50bb049b9ec5)
+<img src="https://github.com/Jocs/jocs.github.io/assets/9712830/39f2bbbd-1bc7-432f-a666-50bb049b9ec5" width="400" style="margin: 0 auto; display: block;" >
 
 我们通过依赖注入，代码如下：
 
@@ -68,13 +71,13 @@ class SheetPlugin {
 
 在上面的代码中，声明了 _commandService 属性拥有 ICommandService 接口，通过相关的依赖绑定，就可以在 SheetPlugin 的方法中调用 ICommandService 接口所定义的方法了。这样 SheetPlugin 依赖于 ICommandService 接口，同时 CommandService 类实现了这个接口。这样就解耦了 SheetPlugin 和 CommandService 之间的直接依赖关系，图示如下：
 
-![image](https://github.com/Jocs/jocs.github.io/assets/9712830/d5eaaf25-8ad8-423b-8437-fc06551e8a92)
+<img src="https://github.com/Jocs/jocs.github.io/assets/9712830/d5eaaf25-8ad8-423b-8437-fc06551e8a92" width="600" style="margin: 0 auto; display: block;" >
 
 如上图，我们通过 ICommandService 接口实现依赖反转，在没有 ICommandService 接口下，SheetPlugin 直接依赖于 CommandService，导致核心业务逻辑（SheetPlugin）的不稳定。通过引入 ICommandService 接口，及依赖注入，如果将虚线框看成一个整体，CommandService 类指向（实现接口）虚线框，最终实现依赖反转，保证了核心业务逻辑稳定性
 
 ### 浅谈 Univer 中的 MVC 架构模式
 
-![image](https://github.com/Jocs/jocs.github.io/assets/9712830/f4c3a675-c836-48fd-b606-55a44cf318f7)
+<img src="https://github.com/Jocs/jocs.github.io/assets/9712830/f4c3a675-c836-48fd-b606-55a44cf318f7" width="600" style="margin: 0 auto; display: block;" >
 
 MVC 在整个 GUI 编程领域已经有了 50 多年的历史了，但是 MVC 却一直没有一个明确的定义。如上图，就是两种比较典型的 MVC 变种，在 [MVC with ASP.NET](http://asp.net/) 中，控制器负责管理视图和模型，当控制器改变模型层中数据后，通过一些订阅机制，视图层直接读取模型层中数据，更新视图。在 **MVC with Rails** 中，视图层不直接和模型层交互，通过控制器做了一层代理，视图层需要通过控制器从模型层取数据进行渲染。这样有个好处就是视图层和模型层完全的解耦，控制流会更清晰
 
@@ -103,7 +106,7 @@ getRowOrCreate(rowPos: number): IRowData;
 
 #### 控制器（Controller）的职责
 
-![image](https://github.com/Jocs/jocs.github.io/assets/9712830/b8651083-0af7-47dd-874a-5970e02a43de)
+<img src="https://github.com/Jocs/jocs.github.io/assets/9712830/b8651083-0af7-47dd-874a-5970e02a43de" width="400" style="margin: 0 auto; display: block;" >
 
 在传统的MVC架构中，视图和模型层往往职责比较明晰，而控制器承担了主要的业务逻辑，和管理视图层、模型层的任务，往往会比较臃肿，那么 univer 是如何避免控制器臃肿的呢？在 Univer 中，控制器（MVC中的控制器）进一步拆解为 **Controllers**（Univer中狭义的控制器）、**Commands** 和 **Services**。同时在控制器中，几乎包含了 univer 所有的业务逻辑，他们各司其职，保证了 univer 应用的正常运行
 
@@ -155,7 +158,7 @@ Canvas 渲染所需要的组件、服务都在 `base-render` 文件夹中，如 
 
 Sheet 相关的数据类型定义在 [Interfaces](https://github.com/dream-num/univer/tree/dev/packages/core/src/Types/Interfaces) 文件夹中，包含关系如下：
 
-![image](https://github.com/Jocs/jocs.github.io/assets/9712830/51109cec-c76f-46c1-be53-d26add7fbdd6)
+<img src="https://github.com/Jocs/jocs.github.io/assets/9712830/51109cec-c76f-46c1-be53-d26add7fbdd6" width="500" style="margin: 0 auto; display: block;" >
 
 Univer sheet 整体的数据类型定义如上图所示，一个 workbook 包含多个 sheets，sheets 所引用的 styles 字段定义在了顶层 workbook 上，保证了样式的复用，减少内存开销，这也是和 Excel 保持一致。在 IWorksheetConfig 中，定义了 cellData 字段，这是一个二维矩阵，用于持久化单元格信息，也就是 ICellData 中定义的类型信息，**p 是指富文本，接口类型 IDocumentData，也就是一篇 univer doc，这也是 univer 设计的独到之处，univer sheet 的每个单元格都可以转变成一个 univer doc**。s 字段大多是一个字符串 id，指向 IWorkbookConfig 中 styles 字段，从中检索出该单元格的样式信息
 
@@ -214,7 +217,7 @@ export class SheetRenderController extends Disposable {
 
 启动到渲染的整个过程
 
-![image](https://github.com/Jocs/jocs.github.io/assets/9712830/cc814af5-6706-4552-9d03-1657708ef911)
+<img src="https://github.com/Jocs/jocs.github.io/assets/9712830/cc814af5-6706-4552-9d03-1657708ef911" width="600" style="margin: 0 auto; display: block;" >
 
 第一步：创建 Univer 实例、注册 sheet 所需的相关插件和创建 univer sheet 实例
 
@@ -466,7 +469,7 @@ private _initialize() {
 
 下面的时序图描述了当用户点击 text wrap 菜单项，univer 从响应事件到界面渲染的整个过程
 
-![image](https://github.com/Jocs/jocs.github.io/assets/9712830/1132e411-217b-43cd-a157-c3d27c0fa924)
+<img src="https://github.com/Jocs/jocs.github.io/assets/9712830/1132e411-217b-43cd-a157-c3d27c0fa924" width="500" style="margin: 0 auto; display: block;" >
 
 **第一步**：用户点击菜单中 text wrap 菜单项。
 
@@ -590,3 +593,5 @@ private _commandExecutedListener() {
 ## 伍. 更多阅读
 
 如果你想对架构有个整体的了解，推荐阅读[Architecture Notes 架构概要](https://github.com/dream-num/univer/blob/dev/docs/zh/achitecture.md#architecture-notes-%E6%9E%B6%E6%9E%84%E6%A6%82%E8%A6%81)，如果你想了解更多 sheet 的架构和各个模块的设计和职责，推荐阅读[Univer Sheet Architecture - Univer Sheet 架构](https://github.com/dream-num/univer/blob/dev/docs/zh/sheet-architecture.md#univer-sheet-architecture---univer-sheet-%E6%9E%B6%E6%9E%84)。如果你对 DI 系统比较陌生，建议 阅读 Univer 项目中所使用的 DI 框架 [redi](https://redi.wendell.fun/zh-CN/docs/introduction)。项目使用 Rxjs 作为观察者模式，阅读 [Rxjs 相关文档](https://rxjs.tech/guide/overview) 是快速熟悉 Rxjs 的方式
+
+<p style="color: #666; font-size: 14px;">作者：<a href="https://github.com/Jocs">Jocs</a>， <a href="https://github.com/marktext/marktext">MarkText</a> 作者，Univer 核心开发者，负责 Univer Doc 架构及开发</p>
