@@ -1,0 +1,14 @@
+---
+import Wrapper from '@/components/Wrapper/index.astro'
+
+interface Props {
+  lang: string
+  title: string
+}
+
+const { lang, title } = Astro.props
+---
+
+<Wrapper lang={lang} title={title}>
+  <slot />
+</Wrapper>

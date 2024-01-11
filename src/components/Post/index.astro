@@ -16,9 +16,9 @@ const { post } = Astro.props
 
       <div class="meta">
         <span>{post.data.author}</span>
-        <time datetime={dayjs(post.data.date)}>
+        <span>
           {dayjs(post.data.date).format('YYYY-MM-DD')}
-        </time>
+        </span>
       </div>
     </header>
 
@@ -71,6 +71,7 @@ const { post } = Astro.props
       }
 
       :global(img) {
+        height: auto;
         max-width: 100%;
 
         display: inline-block;
