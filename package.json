@@ -16,7 +16,8 @@
   "scripts": {
     "postinstall": "cd ./node_modules/univer && pnpm install --ignore-scripts",
     "dev": "astro dev",
-    "build": "astro build && node ./generate-api.mjs && cp -r ./api/* ./dist/api"
+    "build": "astro build && node ./generate-api.mjs && cp -r ./api/* ./dist/api",
+    "release": "release-it"
   },
   "dependencies": {
     "@astrojs/check": "^0.4.1",
