@@ -1,12 +1,11 @@
 import { useMemo, useState } from 'react'
-import clsx from 'clsx'
-import { ContentSingle20, GithubSingle24, SearchSingle28 } from '@univerjs/icons'
-import pkg from '@univerjs/icons/package.json'
+import { SearchSingle28 } from '@univerjs/icons'
 import * as manifest from '@univerjs/icons/esm/manifest'
 import { Tabs } from '@/components/Tabs'
 import { IconBox } from './IconBox'
-import LogoImg from '@/assets/logo.svg'
-import HeroImg from './hero.png'
+import { Hero } from './Hero'
+import { Slider } from './Slider'
+import { ColorPicker } from './ColorPicker'
 
 import styles from './index.module.less'
 
@@ -47,94 +46,85 @@ export const groups = tabs.map((tab) => ({
 export function IconsPage () {
   const [category, setCategory] = useState('single')
   const [keyword, setKeyword] = useState('')
+  const [fontSize, setFontSize] = useState(24)
+  const [color, setColor] = useState('#1e222b')
+  const [colorChannel1, setColorChannel1] = useState('#274fee')
 
   function handleSearch (e: React.ChangeEvent<HTMLInputElement>) {
     setKeyword(e.target.value)
   }
 
-  const activeGroup = useMemo(() => groups.find((group) => group.name === category), [category])!
+  const activeGroup = useMemo(() => {
+    const result = groups.find((group) => {
+      return group.name === category
+    })!
 
-  // const iconsGroup = useMemo(() => {
-  //   return manifest
-  // }, [keyword])
+    if (!keyword) return result
+
+    return {
+      ...result,
+      items: result.items.map((item) => {
+        return {
+          ...item,
+          groupItem: item.groupItem.filter((icon: any) => {
+            return icon.icon.toLocaleLowerCase().includes(keyword.toLocaleLowerCase())
+          })
+        }
+      })
+    }
+  }, [category, keyword])!
 
   return (
     <>
-      <header className={styles.hero}>
-        <div className={styles.materials}>
-          <div className={clsx(styles.shadow, styles['shadow-1'])} />
-          <div className={clsx(styles.shadow, styles['shadow-2'])} />
-          <div className={clsx(styles.shadow, styles['shadow-3'])} />
-          <img src={HeroImg.src} alt="hero" />
-        </div>
+      <Hero />
 
-        <section className={styles.wrapper}>
-          <nav>
-            <h1>
-              <a href="/">
-                <img src={LogoImg.src} alt="logo" />
-                Univer Icon
-                </a>
-            </h1>
-
-            <label>
-              v{pkg.version}
-            </label>
-          </nav>
-
-          <section className={styles.content}>
-            <label>
-              <span>基于 SVG</span>
-              <span>·</span>
-              <span>组件化</span>
-              <span>·</span>
-              <span>按需使用</span>
-            </label>
-
-            <h2>一款针对办公产品定制的<wbr />图标库</h2>
-
-            <footer>
-              <a>
-                <ContentSingle20 />
-                API 文档
-              </a>
-              <a href="https://github.com/dream-num/univer-icons">
-                <GithubSingle24 />
-                Github
-              </a>
-            </footer>
-          </section>
-        </section>
-      </header>
-
-      <search className={styles.search}> 
+      <search className={styles.search}>
         <section className={styles.wrapper}>
           <div className={styles.input}>
             <SearchSingle28 className={styles.icon} />
             <input value={keyword} onChange={handleSearch} placeholder="搜索" />
           </div>
+
+          <section className={styles.config}>
+            <Slider value={fontSize} onChange={setFontSize} />
+            <span className={styles.picker}>
+              通道 1：
+              <ColorPicker value={color} onChange={setColor} />
+            </span>
+            <span className={styles.picker}>
+              通道 2：
+              <ColorPicker value={colorChannel1} onChange={setColorChannel1} />
+            </span>
+          </section>
         </section>
       </search>
 
       <main className={styles.main}>
         <section className={styles.wrapper}>
-            <header>
-              <Tabs tabs={tabs} value={category} onChange={setCategory} />
-            </header>
+          <header>
+            <Tabs tabs={tabs} value={category} onChange={setCategory} />
+          </header>
 
-            <div>
-              {activeGroup.items.map((item) => (
-                <div key={item.groupName}>
-                  <h4>{item.groupName}</h4>
+          <div>
+            {activeGroup.items.map((item) => (
+              <div key={item.groupName}>
+                <h4>{item.groupName}</h4>
 
-                  <div className={styles.container}>
-                    {item.groupItem.map((icon: any) => (
-                      <IconBox key={icon.stem} name={icon.icon} iconKey={icon.stem} />
-                    ))}
-                  </div>
+                <div className={styles.container}>
+                  {item.groupItem.map((icon: any) => (
+                    <IconBox
+                      key={icon.stem}
+                      name={icon.icon}
+                      iconKey={icon.stem}
+                      fontSize={fontSize}
+                      color={color}
+                      colorChannel1={colorChannel1}
+                    />
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
         </section>
       </main>
     </>

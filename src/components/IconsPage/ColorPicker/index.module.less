@@ -1,0 +1,26 @@
+.picker {
+  position: relative;
+
+  .block {
+    width: 1.4rem;
+    height: 1.4rem;
+    border: 1px solid #ECECEC;
+    border-radius: 4px;
+    display: block;
+    cursor: pointer;
+  }
+  
+  .dropdown {
+    position: absolute;
+    right: 0;
+    width: 0;
+    height: 0;
+    box-shadow: 0px 2px 12px 0px rgba(30, 34, 43, 0.06);
+    overflow: hidden;
+  
+    &.visible {
+      width: auto;
+      height: auto;
+    }
+  }
+}
