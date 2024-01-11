@@ -1,13 +1,8 @@
 name: deploy to aliyun
 
 on:
-  push:
-    # Sequence of patterns matched against refs/heads
-    # branches:    
-    #   - main
-    # Sequence of patterns matched against refs/tags
-    tags:
-      - v*
+  release:
+    types: [released]
 
 jobs:
   build:

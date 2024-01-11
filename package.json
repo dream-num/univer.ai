@@ -41,8 +41,5 @@
     "release-it": "^17.0.1",
     "typedoc": "^0.25.7",
     "univer": "github:dream-num/univer"
-  },
-  "npm": {
-    "publish": false
   }
 }

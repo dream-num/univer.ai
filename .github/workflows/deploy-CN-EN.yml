@@ -1,10 +1,9 @@
 name: ✈️ Deploy CN & EN
 
 on:
-  push:
-    tags:
-      - v*
-    
+  release:
+    types: [released]
+
 permissions:
   contents: write
   pull-requests: write
