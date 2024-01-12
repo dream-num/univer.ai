@@ -1,7 +1,7 @@
 {
   "[markdown]": {
-    "editor.formatOnSave": false,
-    "editor.formatOnPaste": false 
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true 
   },
   "cSpell.words": [
     "astro",

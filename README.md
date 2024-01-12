@@ -36,6 +36,9 @@ pnpm dev
 
 # Build the website
 pnpm build
+
+# If you want to update the api docs, please execute `pnpm up univer` to update the univer version.
+pnpm up
 ```
 
 ### Contribute PRs using an online code editor
