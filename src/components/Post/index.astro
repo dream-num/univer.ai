@@ -86,7 +86,10 @@ const { post } = Astro.props
       }
 
       :global(.expressive-code) {
-        background: #1e252f;
+        background: #fafdff;
+        @media (prefers-color-scheme: dark) {
+          background: #1e252f;
+        }
       }
 
       :global(a) {
