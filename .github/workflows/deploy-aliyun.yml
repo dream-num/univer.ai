@@ -15,12 +15,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: pnpm
 
       - name: Install npm dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Run build task
-        run: npm run build
+        run: pnpm build
 
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@main
