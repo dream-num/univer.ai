@@ -148,7 +148,7 @@ univerAPI.registerFunction({
 
 说明
 
--   `locales` 下可以设置多种语言，命名规则参考 [LocaleType](/api/core/enums/LocaleType.html)。可以在 `functionList` 下添加多个公式的翻译。详细的字段说明请参考[如何贡献公式](./#如何在-univer-formula-engine-plugin-中添加公式)的部分。
+-   `locales` 下可以设置多种语言，命名规则参考 [LocaleType](/api/core/enums/LocaleType.html)。可以在 `functionList` 下添加多个公式的翻译。详细的字段说明请参考[如何在 UniverFormulaEnginePlugin 中添加公式](./#如何在-univerformulaengineplugin-中添加公式)的部分。
 -   `description` 设置自定义公式的描述。
 -   `calculate` 编写计算公式的具体算法和名称映射。入参为使用公式时用户输入的内容，可能为数字、字符串、布尔值，或者一个范围，也是返回同样的格式。
 
@@ -189,7 +189,7 @@ Uniscript 底层使用了 `@univerjs/facade`，你也可以直接在项目中使
 
 2. 定义国际化
 
-    定义你所需要的国际化内容，详细的字段说明请参考[如何贡献公式](./#如何在-univer-formula-engine-plugin-中添加公式)的部分。同样的，多个公式就用公式名称作为 `key` 值区分。
+    定义你所需要的国际化内容，详细的字段说明请参考[如何在 UniverFormulaEnginePlugin 中添加公式](./#如何在-univerformulaengineplugin-中添加公式)的部分。同样的，多个公式就用公式名称作为 `key` 值区分。
 
     ```ts
     /**
@@ -377,7 +377,7 @@ Uniscript 底层使用了 `@univerjs/facade`，你也可以直接在项目中使
 
 我们内部的 `UniverFormulaEnginePlugin` 插件提供了一个 `function.service`，专门用来注册公式的描述和算法。
 
-首先参考 [自定义插件](../../extend/write-a-plugin)，新建一个插件，然后就可以开始添加自定义公式。
+首先参考 [自定义插件](/guides/extend/write-a-plugin/)，新建一个插件，然后就可以开始添加自定义公式。
 
 1. `common` 文件内新建 `custom-function.ts` 文件，将公式所需要的基础模块全部写好。
 

@@ -148,7 +148,7 @@ univerAPI.registerFunction({
 
 Note
 
--   Multiple languages can be set under `locales`. For naming rules, please refer to [LocaleType](/api/core/enums/LocaleType.html). Translations for multiple formulas can be added under `functionList`. For detailed field descriptions, please refer to the [How to contribute formula](./#how-to-add-formulas-in-univer-formula-engine-plugin) section.
+-   Multiple languages can be set under `locales`. For naming rules, please refer to [LocaleType](/api/core/enums/LocaleType.html). Translations for multiple formulas can be added under `functionList`. For detailed field descriptions, please refer to the [How to add formulas in UniverFormulaEnginePlugin](./#how-to-add-formulas-in-univerformulaengineplugin) section.
 -   `description` sets the description of the custom formula.
 -   `calculate` writes the specific algorithm and name mapping of the calculation formula. The input parameter is the content entered by the user when using the formula, which may be a number, a string, a Boolean value, or a range, and the same format is returned.
 
@@ -164,7 +164,7 @@ univerAPI.unregisterFunction({
 })
 ```
 
-Uniscript uses `@univerjs/facade` under the hood. You can also use Uniscript-like APIs directly in your project. Please refer to [Register Function](/guides/facade/register-function).
+Uniscript uses `@univerjs/facade` under the hood. You can also use Uniscript-like APIs directly in your project. Please refer to [Registering Function](/en-us/guides/facade/register-function).
 
 ## How to add formulas when initializing Univer
 
@@ -189,7 +189,7 @@ You can create a new `custom-function.ts` file to specifically place custom form
 
 2. Define internationalization
 
-    Define the international content you need. For detailed field descriptions, please refer to the [How to contribute formula](./#how-to-add-formulas-in-univer-formula-engine-plugin) section. Similarly, multiple formulas are distinguished by using the formula name as the `key` value.
+    Define the international content you need. For detailed field descriptions, please refer to the [How to add formulas in UniverFormulaEnginePlugin](./#how-to-add-formulas-in-univerformulaengineplugin) section. Similarly, multiple formulas are distinguished by using the formula name as the `key` value.
 
     ```ts
     /**
@@ -377,7 +377,7 @@ If you are developing a Univer plug-in, you can add custom formulas directly to 
 
 Our internal `UniverFormulaEnginePlugin` plug-in provides a `function.service` specifically for registering formula descriptions and algorithms.
 
-First refer to [Custom plug-in](../../extend/write-a-plugin) to create a new plug-in, and then you can start adding custom formulas.
+First refer to [Custom Plugin](/en-us/guides/extend/write-a-plugin/) to create a new plug-in, and then you can start adding custom formulas.
 
 1. Create a new `custom-function.ts` file in the `common` file and write all the basic modules required for the formula.
 
