@@ -70,7 +70,7 @@ export function IconsPage () {
             return icon.icon.toLocaleLowerCase().includes(keyword.toLocaleLowerCase())
           })
         }
-      })
+      }).filter((item) => item.groupItem.length > 0)
     }
   }, [category, keyword])!
 
