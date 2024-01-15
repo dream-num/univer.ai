@@ -1,5 +1,5 @@
 ---
-title: Linux
+title: Mac
 ---
 
 ## 快速上手
