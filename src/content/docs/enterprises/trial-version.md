@@ -17,11 +17,11 @@ title: 试用商业版
 
 ## 快速上手
 
-[linux快速上手指南](/enterprises/#Linux)
+[linux快速上手指南](/enterprises/version/linux)
 
-[mac快速上手指南](/enterprises/#Mac)
+[mac快速上手指南](/enterprises/version/mac)
 
-[windows快速上手指南](/enterprises/#Windows)
+[windows快速上手指南](/enterprises/version/win)
 
 ## 占用端口
 

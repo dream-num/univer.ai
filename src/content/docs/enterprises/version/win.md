@@ -1,5 +1,5 @@
 ---
-title: Mac
+title: Windows
 ---
 
 ## 快速上手
@@ -9,24 +9,16 @@ title: Mac
 下载二进制压缩包
 
 ``` url
-https://release-univer.oss-cn-shenzhen.aliyuncs.com/release-demo/darwin.zip
+https://release-univer.oss-cn-shenzhen.aliyuncs.com/release-demo/windows.zip
 ```
 
 创建单独目录并将压缩包所有内容解压到该目录下
 
 ### 2. 启动Univer服务
 
-执行命令
-
 ```bash
-chmod +x ./start_apps.sh
+双击运行start_apps.bat文件
 ```
-
-```bash
-./start_apps.sh
-```
-
-注：mac需要在设置与隐私中允许非 App store 应用运行，[详见](/###如何允许非App store应用访问)
 
 ### 3. 创建文档并访问
 
@@ -36,10 +28,9 @@ chmod +x ./start_apps.sh
 http://localhost:3010/
 ```
 
-![例子](./imgs/img1.png)
-
+![例子](../imgs/img1.png)
 注：本地可打开不同浏览器或使用无痕模式体验协同
-![例子](./imgs/img2.png)
+![例子](../imgs/img2.png)
 
 ### 4. 分享
 
@@ -54,19 +45,19 @@ http://localhost:3010/?unit=17443300120626831361&type=2
 
 ## 备注
 
-### 如何允许非App store应用访问
-
-![允许访问](./imgs/mac1.png)
-
 ### 如何查找本地IP
 
-运行以下命令
+1.按下 Win+R
+
+2.输入 powershell,打开命令提示符
+
+3.复制以下命令并执行
 
 ``` bash
-ifconfig |grep -w  'inet' |grep -v "127.0.0.1" | awk '{print $2}'
+ipconfig | findstr /R /C:"IPv4" | findstr /v "127.0.0.1"
 ```
 
-![mac_ip](./imgs/mac_ip.png)
+![ip](../imgs/win_ip.png)
 
 ### 如何停止服务
 
@@ -76,6 +67,18 @@ chmod +x ./stop_apps.sh
 
 ```bash
 ./stop_apps.sh
+```
+
+### 如何开放防火墙权限
+
+```bash
+netsh advfirewall set allprofiles state off
+```
+
+### 如何恢复防火墙权限
+
+```bash
+netsh advfirewall set allprofiles state on
 ```
 
 ## 占用端口

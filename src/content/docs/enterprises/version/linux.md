@@ -34,9 +34,9 @@ chmod +x ./start_apps.sh
 http://localhost:3010/
 ```
 
-![例子](./imgs/img1.png)
+![例子](../imgs/img1.png)
 注：本地可打开不同浏览器或使用无痕模式体验协同
-![例子](./imgs/img2.png)
+![例子](../imgs/img2.png)
 
 ### 4. 分享
 
@@ -59,7 +59,7 @@ http://localhost:3010/?unit=17443300120626831361&type=2
 ifconfig |grep -w 'inet' |grep -v '127.0.0.1' | awk '{print $2}'
 ```
 
-![ip](./imgs/linux_ip.png)
+![ip](../imgs/linux_ip.png)
 
 ### 如何停止服务
 
