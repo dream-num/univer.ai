@@ -7,25 +7,30 @@ title: Linux
 ### 1. 获取Univer服务
 
 下载二进制压缩包
+
 ``` url
 https://release-univer.oss-cn-shenzhen.aliyuncs.com/release-demo/darwin.zip
 ```
+
 创建单独目录并将压缩包所有内容解压到该目录下
 
 ### 2. 启动Univer服务
 
 执行命令
+
 ```bash
-    chmod +x ./start_apps.sh
+chmod +x ./start_apps.sh
 ```
+
 ```bash
-   ./start_apps.sh
+./start_apps.sh
 ```
-注：mac需要在设置与隐私中允许非 App store应用运行，[详见](/###如何允许非App store应用访问)
+
+注：mac需要在设置与隐私中允许非 App store 应用运行，[详见](/###如何允许非App store应用访问)
 
 ### 3. 创建文档并访问
 
-复制url链接到浏览器，本地体验Univer的乐趣
+复制url链接到浏览器，本地体验 Univer 的乐趣
 
 ```url
 http://localhost:3010/
@@ -38,9 +43,10 @@ http://localhost:3010/
 
 ### 4. 分享
 
-还可以复制浏览器链接，发送给局域网中的朋友一起感受Univer协同的魅力
+还可以复制浏览器链接，发送给局域网中的朋友一起感受 Univer 协同的魅力
 
-需要替换localhost为本地ip
+需要替换 localhost 为本地 ip
+
 ```url
 http://localhost:3010/?unit=17443300120626831361&type=2
 //如 http://192.168.50.172:3010/?unit=17443300120626831361&type=2
@@ -49,20 +55,25 @@ http://localhost:3010/?unit=17443300120626831361&type=2
 ## 备注
 
 ### 如何允许非App store应用访问
+
 ![允许访问](./imgs/mac1.png)
 
 ### 如何查找本地IP
 
 运行以下命令
+
 ``` bash
 ifconfig |grep -w  'inet' |grep -v "127.0.0.1" | awk '{print $2}'
 ```
+
 ![mac_ip](./imgs/mac_ip.png)
 
 ### 如何停止服务
+
 ```bash
 chmod +x ./stop_apps.sh
 ```
+
 ```bash
 ./stop_apps.sh
 ```
