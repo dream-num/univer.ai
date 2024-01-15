@@ -1,4 +1,4 @@
-name: deploy to aliyun
+name: deploy to univer.work
 
 on:
   push:

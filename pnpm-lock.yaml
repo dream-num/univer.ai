@@ -21,8 +21,8 @@ dependencies:
     specifier: ^18.2.18
     version: 18.2.18
   '@univerjs/icons':
-    specifier: ^0.1.25
-    version: 0.1.25(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^0.1.26
+    version: 0.1.26(react-dom@18.2.0)(react@18.2.0)
   astro:
     specifier: ^4.1.2
     version: 4.1.2(less@4.2.0)(typescript@5.3.3)
@@ -1296,8 +1296,8 @@ packages:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: false
 
-  /@univerjs/icons@0.1.25(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-9kJUZFKV2bcc6+SDn/6xJSefZX97EvyE1n9m7WOX2l8qclQE+HNjLt041NnsthTTXh/8JYq6bYQus2jmzJSHyw==}
+  /@univerjs/icons@0.1.26(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-tQZ+t24QsvjeR+8RvSzPzuHMuv+xcwAFW73uQ9mn6NE1QxIyFGMrXQzt8vDxnYbsP2HOIXnkOoCfBEJhfF+YAQ==}
     peerDependencies:
       react: '*'
       react-dom: '*'
