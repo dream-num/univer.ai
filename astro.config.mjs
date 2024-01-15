@@ -108,9 +108,28 @@ export default defineConfig({
         },
         {
           label: "💼 企业服务",
-          autogenerate: {
-            directory: "enterprises",
-          },
+          items: [
+            {
+              label: "商业版介绍",
+              link: "enterprises/",
+            },
+            {
+              label: "试用商业版",
+              link: "enterprises/trial-version",
+            },
+            {
+              label: "mac",
+              link: "enterprises/version/mac"
+            },
+            {
+              label: "windows",
+              link: "enterprises/version/win"
+            },
+            {
+              label: "linux",
+              link: "enterprises/version/linux"
+            },
+          ],
         },
         {
           label: "🔌 API Reference",
