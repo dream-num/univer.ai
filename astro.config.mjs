@@ -1,10 +1,11 @@
 import { defineConfig, squooshImageService } from "astro/config";
 import starlight from "@astrojs/starlight";
-
+import sitemap from '@astrojs/sitemap';
 import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://univer.ai',
   server: {
     host: '0.0.0.0'
   },
@@ -17,6 +18,7 @@ export default defineConfig({
     service: squooshImageService()
   },
   integrations: [
+		sitemap(),
     starlight({
       title: "Univer Docs",
       logo: {

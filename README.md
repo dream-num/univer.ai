@@ -11,6 +11,8 @@ This is the repo for [univer.ai](https://univer.ai). This repo contains the sour
 
 Please feel free to contribute to this repo by submitting a pull request. If you have any questions, please contact us at [developer@univer.ai](mailto:developer@univer.ai).
 
+The documentation is built using [Astro](https://astro.build) and [Typedoc](https://typedoc.org). Before you begin contributing, please make sure you are familiar with the usage of these two tools.
+
 ### Contribute PRs by Developing Locally
 
 To begin contributing, fork this repo and clone it to your local machine.
@@ -45,6 +47,6 @@ pnpm up
 
 If you don't want to install the development environment locally, or your local environment doesn't meet the development requirements, you can use an online code editor to develop.
 
-For Example, you can click the following button to open this repo in StackBlitz:
+You can click the following button to open this repo in StackBlitz:
 
-[![Open in StackBlitz](https://img.shields.io/badge/StackBlitz-Open%20in%20StackBlitz-blue?logo=stackblitz)](https://stackblitz.com/github/dream-num/docs)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/dream-num/docs)
