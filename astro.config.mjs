@@ -119,18 +119,6 @@ export default defineConfig({
               label: "试用商业版",
               link: "enterprises/trial-version",
             },
-            {
-              label: "mac",
-              link: "enterprises/version/mac"
-            },
-            {
-              label: "windows",
-              link: "enterprises/version/win"
-            },
-            {
-              label: "linux",
-              link: "enterprises/version/linux"
-            },
           ],
         },
         {
