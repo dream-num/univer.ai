@@ -9,7 +9,7 @@ sidebar:
 Use `setValue` to set the value of a range. This value can be a number, string, boolean, or standard cell format. If it starts with `=`, it is interpreted as a formula. The value will be tiled across all cells in the range.
 
 ```typescript title="main.ts"
-const activeSheet = univerAPI.getCurrentSheet().getActiveSheet();
+const activeSheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // Set a number in A1
 const range1 = activeSheet.getRange(0, 0, 1, 1);
@@ -34,7 +34,7 @@ range3.setValue({
 Use `setValues` to set different values for each cell in a range. These values can be a two-dimensional array or a standard range matrix (must match the dimensions of this range), composed of numbers, strings, booleans, or standard cell formats. If a value starts with `=`, it will be interpreted as a formula.
 
 ```typescript title="main.ts"
-const activeSheet = univerAPI.getCurrentSheet().getActiveSheet();
+const activeSheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // Set values in B3:C4
 const range1 = activeSheet.getRange(2, 1, 2, 2);

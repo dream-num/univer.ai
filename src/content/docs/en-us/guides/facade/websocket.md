@@ -50,3 +50,5 @@ univerAPI.onCommandExecuted((command, options) => {
   ws.send(commandInfo);
 })
 ```
+
+Note: Make sure there is a unitID when starting Univer. If the unitID is not specified, collaboration will not work.
