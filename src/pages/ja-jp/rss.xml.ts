@@ -3,7 +3,7 @@ import type { APIContext } from 'astro'
 import { getCollection } from 'astro:content'
 
 export async function GET(context: APIContext) {
-  const posts = (await getCollection('blog', entry => entry.data.lang === 'zh-cn'))
+  const posts = (await getCollection('blog', entry => entry.data.lang === 'en-us'))
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 
   return rss({
