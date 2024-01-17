@@ -1,21 +1,31 @@
 ---
-title: 试用商业版
+title: 使用指南
 ---
 
 import {TabItem, Tabs} from "@astrojs/starlight/components";
 
-:::note
-此方法不适用于生产环境。如您有更高级的需求请[联系我们](/enterprises/#获取商业版)。
-:::
 当前部署版本分为lite（社区精简版）和 docker-compose（社区完整版）。
 
 - lite（社区精简版）：只需要执行二进制文件就可完成部署，不需要任何依赖。
 - docker-compose（社区完整版）：需要[docker >= 23 版本](https://docs.docker.com/engine/install/)。
+
+## 技术指标
+| 技术指标    | 描述               |
+|---------|------------------|
+| 协同人数    | 支持多达50人同时协作      |
+| 创建文档数   | 无限制，您可以创建任意数量的文档 |
+| 同时打开文档数 | 最多可以同时打开100个文档   |
+
+我们提供了出色的技术指标，让您和您的团队可以在高效的协作环境中工作。
+
 ## 环境要求
 1. CPU: 1 核
 2. 内存: 2G
 3. 磁盘: 10G
-4. 系统: Linux, Mac, Windows(只支持lite版本部署)
+4. 系统:
+    - Linux Arm64
+    - Mac Apple silicon
+    - Windows Arm64 (仅支持lite版本部署)
 
 ## 部署
 <Tabs>
@@ -91,7 +101,6 @@ import {TabItem, Tabs} from "@astrojs/starlight/components";
 ```
 
 ### 2. mac运行文件失败
-
 打开系统设置设置-隐私与安全-安全性-点击仍然允许
 ![允许访问](./imgs/mac1.png)
 
@@ -121,11 +130,11 @@ univer端口见下表
 ### 5. lite（社区精简版）和docker-compose（社区完整版）有什么分别？
 - 功能性：在功能上保持一致。
 - 支持系统：
-  - lite：支持windows、linux、mac
-  - docker-compose: 支持linux、mac
+- lite：支持windows、linux、mac
+- docker-compose: 支持linux、mac
 - 具体实现：
-  - lite：SQLite + 内存队列
-  - docker-compose: PostgreSQL + RabbitMQ
+- lite：SQLite + 内存队列
+- docker-compose: PostgreSQL + RabbitMQ
 
 ### 6. 针对lite版该如何正确停止服务
 <Tabs>
