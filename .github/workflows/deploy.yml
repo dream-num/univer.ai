@@ -1,4 +1,4 @@
-name: deploy to univer.ai
+name: Deploy
 
 on:
   push:
@@ -24,11 +24,26 @@ jobs:
           node-version: 18
           cache: pnpm
 
-      - name: Install npm dependencies
-        run: pnpm install
+      - name: Build
+        run: |
+          pnpm install
+          pnpm build
 
-      - name: Run build task
-        run: pnpm build
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist/
+
+  deploy-ai:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
 
       - name: Login to Aliyun Container Registry (ACR)
         uses: aliyun/acr-login@v1
@@ -51,10 +66,30 @@ jobs:
 
       - name: Set IMAGE_TAG environment variable
         run: echo "IMAGE_TAG=$(echo ${{ github.sha }} | cut -c 1-7)" >> $GITHUB_ENV
-      
+
       - uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.GH_ACCESS_TOKEN }}
           repository: dream-num/helm-charts
           event-type: dispatch
           client-payload: '{"service":"docs","tag":"${{ env.IMAGE_TAG }}"}'
+
+  deploy-work:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+
+      - name: Deploy to univer.work
+        uses: easingthemes/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: "-rlgoDzvc -i --delete"
+          SOURCE: "dist/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: "/software/nginx/html/official-website"
