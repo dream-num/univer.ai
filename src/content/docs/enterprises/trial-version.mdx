@@ -48,42 +48,34 @@ import {TabItem, Tabs} from "@astrojs/starlight/components";
 
 
     <TabItem label="mac-lite">
-        1. 下载二进制文件
-        ```bash
-        https://release-univer.oss-cn-shenzhen.aliyuncs.com/release-demo/darwin.zip
-        ```
+        1. 点击下载[部署程序](https://release-univer.oss-cn-shenzhen.aliyuncs.com/lite/mac.zip)
+
         2. 进入解压目录下执行命令
         注：mac需要在设置与隐私中允许非 App store 应用运行，[详见FAQ](#faq)
         ```bash
-        chmod +x ./start_apps.sh \
-        ./start_apps.sh
+        chmod +x ./start_apps.sh && ./start_apps.sh
         ```
     </TabItem>
 
     <TabItem label="windows-lite">
-        1. 下载二进制文件
-        ```bash
-        https://release-univer.oss-cn-shenzhen.aliyuncs.com/release-demo/windows.zip
-        ```
+        1. 点击下载[部署程序](https://release-univer.oss-cn-shenzhen.aliyuncs.com/lite/windows.zip)
+
         2. 进入解压目录下运行start_apps.bat文件
     </TabItem>
 
     <TabItem label="linux-lite">
-        1. 下载二进制文件
-        ```bash
-        https://release-univer.oss-cn-shenzhen.aliyuncs.com/release-demo/linux.zip
-        ```
+        1. 点击下载[部署程序](https://release-univer.oss-cn-shenzhen.aliyuncs.com/lite/linux.zip)
+
         2. 进入解压目录下执行命令
         ```bash
-        chmod +x ./start_apps.sh \
-        ./start_apps.sh
+        chmod +x ./start_apps.sh &&./start_apps.sh
         ```
     </TabItem>
 </Tabs>
 
 ## 使用
 
-打开浏览器输入 http://localhost:3010 后会自动创建空白文档并跳转到新文档链接
+打开浏览器输入 http://localhost:3010 后会自动创建空白文档并跳转到新文档链接（不支持IE浏览器）
 
 ![例子](./imgs/img1.png)
 注：本地可打开不同浏览器或使用无痕模式体验univer协同
@@ -92,29 +84,11 @@ import {TabItem, Tabs} from "@astrojs/starlight/components";
 
 ## FAQ
 ### 1. 如何分享到局域网协同
-替换 localhost 为本地ip，并分享当前浏览器链接到局域网
+替换 localhost 为本机ip，并分享给其它内网同事
 ```bash
 # 如 http://localhost:3010/?unit=17443300120626831361&type=2
 # 替换为 http://192.168.50.172:3010/?unit=17443300120626831361&type=2
 ```
-获取本地ip
-<Tabs>
-    <TabItem label="mac">
-        ```bash
-        ifconfig |grep -w 'inet' |grep -v "127.0.0.1" | awk '{print $2}'
-        ```
-    </TabItem>
-    <TabItem label="windows">
-        ```bash
-        ipconfig | findstr /R /C:"IPv4" | findstr /v "127.0.0.1"
-        ```
-    </TabItem>
-    <TabItem label="linux">
-        ```bash
-        ifconfig |grep -w 'inet' |grep -v '127.0.0.1' | awk '{print $2}'
-        ```
-    </TabItem>
-</Tabs>
 
 ### 2. mac运行文件失败
 
@@ -142,7 +116,6 @@ univer端口见下表
         | univer-server | 5001，5002 | collaboration server |
         | univer-client | 3010 | frontend |
     </TabItem>
-
 </Tabs>
 
 ### 5. lite（社区精简版）和docker-compose（社区完整版）有什么分别？
@@ -154,5 +127,25 @@ univer端口见下表
   - lite：SQLite + 内存队列
   - docker-compose: PostgreSQL + RabbitMQ
 
+### 6. 针对lite版该如何正确停止服务
+<Tabs>
+    <TabItem label="mac-lite">
+        进入目录下执行命令
+        ```bash
+        chmod +x ./stop_apps.sh && ./stop_apps.sh
+        ```
+    </TabItem>
 
-若仍然失败请[联系社区](/guides/introduction#社区)
+    <TabItem label="windows-lite">
+        进入目录下运行stop_apps.bat文件
+    </TabItem>
+
+    <TabItem label="linux-lite">
+        进入目录下执行命令
+        ```bash
+        chmod +x ./stop_apps.sh &&./stop_apps.sh
+        ```
+    </TabItem>
+</Tabs>
+
+若仍然不能解决您的问题，请[联系社区](/guides/introduction#社区)获取帮助
