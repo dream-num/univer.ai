@@ -29,6 +29,9 @@ export default defineConfig({
         github: "https://github.com/dream-num/univer",
         discord: "https://discord.gg/z3NKNT6D2f",
       },
+      components: {
+        Sidebar: './src/components/Sidebar/index.astro',
+      },
       customCss: ["./src/styles/starlight.css"],
       defaultLocale: "root",
       locales: {
