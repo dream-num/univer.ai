@@ -51,3 +51,5 @@ univerAPI.onCommandExecuted((command, options) => {
   ws.send(commandInfo);
 })
 ```
+
+注意：启动 Univer 的时候要确保有 unitID，不指定 unitID 的话无法协同。
