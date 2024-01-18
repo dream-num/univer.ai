@@ -109,14 +109,14 @@ export default defineConfig({
           ],
         },
         {
-          label: "🚀 协同引擎",
+          label: "💼 服务端私有部署",
           items: [
             {
               label: "功能介绍",
               link: "enterprises/",
             },
             {
-              label: "使用指南",
+              label: "部署指南",
               link: "enterprises/trial-version",
             },
           ],
