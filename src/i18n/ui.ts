@@ -86,7 +86,7 @@ export const ui = {
     'tech.t4.title': 'Original formula engine',
     'tech.t4.desc': 'Supports inverted indexing, lambda expressions, and more. Web worker compute is done behind RPC requests and allows transition into server side compute in the future.',
     'companies.title': 'Trusted by more than 5,000 companies',
-    'footer.tagline.t1': 'It is worthwhile trying Univer.',
+    'footer.tagline.t1': 'Try Univer.',
     'footer.tagline.t2': 'Break application silos and connect business data to a single platform.',
     'footer.button': 'Get started',
     'footer.nav.company.title': 'Company',
