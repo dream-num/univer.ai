@@ -23,8 +23,14 @@ const { lang, title } = Astro.props
     </script>
 
     <meta charset="UTF-8" />
-    <meta name="description" content="新一代开源办公套件,univer,sheet,doc,slide" />
+    <meta name="description" content="The next-generation open source office suite. Spreedsheets, documents, slides and more." />
     <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#2F80ED" />
+    <!-- og -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content="The next-generation open source office suite. Spreedsheets, documents, slides and more." />
+    <meta property="og:image" content="/og.png" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>
