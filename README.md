@@ -2,6 +2,7 @@
 
 [![CC-BY-NC-SA-4.0](https://img.shields.io/badge/license-CC--BY--NC--SA--4.0-blue)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)
 [![Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue)](https://www.apache.org/licenses/LICENSE-2.0)
+[![Deploy](https://github.com/dream-num/docs/actions/workflows/deploy.yml/badge.svg)](https://github.com/dream-num/docs/actions/workflows/deploy.yml)
 
 This is the repo for [univer.ai](https://univer.ai). This repo contains the source code for the official website, as well as the documentation for the Univer API, blog posts, and other resources.
 
