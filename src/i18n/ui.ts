@@ -60,7 +60,7 @@ export const ui = {
   'en-us': {
     'header.docs': 'Developer Docs',
     'header.api': 'API',
-    'header.concat': 'Contact us',
+    'header.concat': 'Contact Us',
     'header.blog': 'Blog',
     'header.icons': 'Icons',
     'header.playground': 'Playground',
@@ -91,7 +91,7 @@ export const ui = {
     'footer.button': 'Get started',
     'footer.nav.company.title': 'Company',
     'footer.nav.company.blog': 'Blog',
-    'footer.nav.company.concat': 'Contact us',
+    'footer.nav.company.concat': 'Contact Us',
     'footer.nav.resource.title': 'Resources',
     'footer.nav.resource.docs': 'Developer Docs',
     'footer.nav.resource.api': 'API',

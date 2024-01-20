@@ -72,6 +72,11 @@ const {post} = Astro.props
         border-radius: 0.25rem;
       }
 
+      :global(p a[href]) {
+        text-decoration: none;
+        border-bottom: 1px solid currentColor;
+      }
+
       :global(img) {
         height: auto;
         max-width: 100%;
