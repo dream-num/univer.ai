@@ -381,6 +381,20 @@ Additionally, collaborative cursors need to undergo operation transformation. Fo
 
 During the development of the Univer collaborative editing module, we implemented some interesting design choices that we would like to share.
 
+### Architecture
+
+![](./8.png)
+
+Finally, we would like to introduce the architecture of the collaborative editing module in Univer. The client-side architecture diagram is shown above, and it has the following key points:
+
+- We have implemented three plugins: `@univerjs-pro/collaboration`, `@univerjs-pro/collaboration-client`, and `@univerjs-pro/collaboration-server`. These are responsible for shared code between the client and server, as well as the client and server-specific code. They also enable isomorphic behavior, allowing the code to run on both the client and server.
+- For each document's model, there is a corresponding set of `CollaborationEntity` and `CollaborationSession`. The `CollaborationEntity` handles the collaborative scheduling for the document, while the `CollaborationSession` manages the connection with the server. This architecture allows for simultaneous collaboration on multiple documents of the same or different types within a single page.
+- The `CollaborationEntity` listens for edit mutations (operations in Univer terminology) that occur on its associated document and sends these mutations to the server for collaboration. Operations from other clients, synchronized by the server, are transformed into mutations and executed after transformation.
+- The `CollaborationEntity` maintains a state machine that manages the collaborative scheduling on the client-side.
+- We have abstracted a network layer called `NetworkInterface`, which handles the communication and connection establishment between the client and server.
+
+Next, we will provide a detailed explanation of some of these key points.
+
 ### Building Collaborative Editing as a Plugin
 
 In Univer, collaborative editing is not tightly integrated into the core system but rather implemented as a plugin. This design allows us to support multiple collaborative editing algorithms without modifying the Univer core.
@@ -413,7 +427,9 @@ export class CollaborationClientPlugin extends Plugin {
 
 ### Document-Type-Agnostic Collaborative Scheduling Algorithm
 
-The concept of Univer's unbounded documents allows the mixing of multiple document types within the same unbounded space. For example, spreadsheets, documents, and slides can coexist in a single unbounded space. Therefore, the collaborative scheduling algorithm cannot rely on document-type-specific characteristics, such as the row-column structure of spreadsheets. Instead, it needs to be applicable to any document type. To achieve this, we have implemented a document-type-agnostic collaborative scheduling algorithm. This algorithm handles network connectivity, revision history, offline editing, and other related issues. Each document type that integrates with collaborative editing needs to design its own data structure for operations and implement operation transformation algorithms. This significantly reduces the development complexity of collaborative editing for different document types.
+Univer's concept of boundary-less documents requires the ability to mix multiple document types within the same unbounded space. For example, you can have a combination of spreadsheets, documents, and slides within a single unbounded space. This necessitates that the collaborative scheduling algorithm should not rely on the specific characteristics of each document type, such as the row-column structure of a spreadsheet. Instead, it should be able to accommodate any document type.
+
+To address this, we have implemented a document type-agnostic collaborative scheduling algorithm. This algorithm handles various aspects of collaboration, including network connection, version history, and offline editing. In the architecture diagram, you can see a component called `TransformService`. Different document types can leverage the API provided by this service to register their transform methods, enabling seamless integration with collaborative editing. This approach significantly reduces the development complexity associated with enabling collaborative editing for different document types.
 
 ### State Machine-Based Collaborative Scheduling Algorithm
 
