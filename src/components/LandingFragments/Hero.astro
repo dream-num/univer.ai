@@ -1,16 +1,19 @@
 ---
-import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { getLangFromUrl, useI18nUrl, useTranslations } from '@/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const l = useI18nUrl(lang);
 ---
 
 <section class="hero">
   <h2 class="title">
     <span>{t('hero.title')}</span>
   </h2>
+
   <p class="desc">{t('hero.description')}</p>
-  <a class="btn" href="https://github.com/dream-num/univer">{t('hero.button')}</a>
+
+  <a class="btn" href={l('/guides/introduction')}>{t('hero.button')}</a>
 
   <section class="materials">
     <div class="center">
@@ -59,6 +62,7 @@ const t = useTranslations(lang);
 
   .title {
     margin: 0 0 1.2rem;
+    line-height: 1.7;
     display: flex;
     justify-content: center;
     user-select: none;
