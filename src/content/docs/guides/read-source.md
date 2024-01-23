@@ -23,6 +23,11 @@ title: 源码阅读指引
 - 文档示例 [examples/src/docs/main.ts](https://github.com/dream-num/univer/blob/dev/examples/src/docs/main.ts)
 - 表格示例 [examples/src/sheets/main.ts](https://github.com/dream-num/univer/blob/dev/examples/src/sheets/main.ts)
 
+## 框架
+
+- Univer [packages/core/src/basics/univer.ts](https://github.com/dream-num/univer/blob/dev/packages/core/src/basics/univer.ts)
+- 插件基类定义 [packages/core/src/plugin/plugin.ts](https://github.com/dream-num/univer/blob/dev/packages/core/src/plugin/plugin.ts)
+
 ## 文档
   
 - 文字选区管理 [packages/docs/src/services/text-selection-manager](https://github.com/dream-num/univer/blob/dev/packages/docs/src/services/text-selection-manager.service.ts)
