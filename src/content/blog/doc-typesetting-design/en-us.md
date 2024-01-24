@@ -1,7 +1,7 @@
 ---
 title: Univer 文档排版设计初探
 desc: Univer 文档是 Univer 办公套件之一，如果你想了解 Univer 文档架构，建议先阅读《Univer 文档架构及模块设计》，里面有关于 Univer 文档架构的思考和模块划分的设计，本篇文章主要关注文档排版需求及 Univer 文档是如何通过架构设计来服务这些需求的
-tags: 
+tags:
   - Typesetting
   - Architecture
   - Univer Doc

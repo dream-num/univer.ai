@@ -1,8 +1,8 @@
 ---
-import { getLangFromUrl, useI18nUrl, useTranslations } from '@/i18n/utils';
+import { getLangFromUrl, useI18nUrl, useTranslations } from '@/i18n/utils'
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 const l = useI18nUrl(lang);
 ---
 
@@ -241,7 +241,6 @@ const l = useI18nUrl(lang);
           }
         }
       }
-
 
       &.dot {
         border-radius: 50%;

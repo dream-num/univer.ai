@@ -1,29 +1,29 @@
 ---
-import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 
 const tech = [{
   icon: '/images/tech-1.svg',
   color: 'rgba(45, 174, 255, 0.4)',
   title: t('tech.t1.title'),
-  desc: t('tech.t1.desc')
+  desc: t('tech.t1.desc'),
 }, {
   icon: '/images/tech-2.svg',
   color: 'rgba(255, 140, 81, 0.5)',
   title: t('tech.t2.title'),
-  desc: t('tech.t2.desc')
+  desc: t('tech.t2.desc'),
 }, {
   icon: '/images/tech-3.svg',
   color: 'rgba(254, 75, 75, 0.4)',
   title: t('tech.t3.title'),
-  desc: t('tech.t3.desc')
+  desc: t('tech.t3.desc'),
 }, {
   icon: '/images/tech-4.svg',
   color: 'rgba(39, 79, 238, 0.3)',
   title: t('tech.t4.title'),
-  desc: t('tech.t4.desc')
+  desc: t('tech.t4.desc'),
 }]
 ---
 

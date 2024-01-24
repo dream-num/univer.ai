@@ -1,12 +1,12 @@
-import clsx from 'clsx'
 import { GithubSingle24 } from '@univerjs/icons'
 import pkg from '@univerjs/icons/package.json'
-import LogoImg from '@/assets/logo.svg'
+import clsx from 'clsx'
 import HeroImg from './hero.png'
 
 import styles from './index.module.less'
+import LogoImg from '@/assets/logo.svg'
 
-export function Hero () {
+export function Hero() {
   return (
     <header className={styles.hero}>
       <div className={styles.materials}>
@@ -22,11 +22,12 @@ export function Hero () {
             <a href="/">
               <img src={LogoImg.src} alt="logo" />
               Univer Icon
-              </a>
+            </a>
           </h1>
 
           <label>
-            v{pkg.version}
+            v
+            {pkg.version}
           </label>
         </nav>
 
@@ -39,7 +40,11 @@ export function Hero () {
             <span>按需使用</span>
           </label>
 
-          <h2>一款针对办公产品定制的<wbr />图标库</h2>
+          <h2>
+            一款针对办公产品定制的
+            <wbr />
+            图标库
+          </h2>
 
           <footer>
             <a href="https://github.com/dream-num/univer-icons">

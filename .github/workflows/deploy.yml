@@ -19,8 +19,8 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-            version: 8.12.1
-            run_install: false
+          version: 8.12.1
+          run_install: false
 
       - name: Install Node.js
         uses: actions/setup-node@v3
@@ -39,8 +39,8 @@ jobs:
         with:
           login-server: univer-acr-registry.cn-shenzhen.cr.aliyuncs.com
           region-id: cn-shenzhen
-          username: "${{ secrets.REGISTRY_USERNAME }}"
-          password: "${{ secrets.REGISTRY_PASSWORD }}"
+          username: '${{ secrets.REGISTRY_USERNAME }}'
+          password: '${{ secrets.REGISTRY_PASSWORD }}'
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -68,8 +68,8 @@ jobs:
         uses: easingthemes/ssh-deploy@main
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: "-rlgoDzvc -i --delete"
-          SOURCE: "dist/"
+          ARGS: -rlgoDzvc -i --delete
+          SOURCE: dist/
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: "/software/nginx/html/official-website"
+          TARGET: /software/nginx/html/official-website

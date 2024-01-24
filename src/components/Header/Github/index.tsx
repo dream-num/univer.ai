@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react'
 import { StarSingle } from '@univerjs/icons'
+import { useEffect, useState } from 'react'
 
 import styles from './index.module.less'
 
-export const Github = () => {
+export function Github() {
   const [count, setCount] = useState('　')
 
   useEffect(() => {
     fetch('https://api.github.com/repos/dream-num/univer')
       .then(resp => resp.json())
-      .then(data => {
+      .then((data) => {
         const count = data.stargazers_count > 1000
           ? `${(data.stargazers_count / 1000).toFixed(1)}k`
           : data.stargazers_count

@@ -1,22 +1,21 @@
-import { useEffect, useState } from 'react'
-import clsx from 'clsx'
 import RcColorPicker, { type Color } from '@rc-component/color-picker'
-import './rc-color-picker.css'
-
+import clsx from 'clsx'
+import { useEffect, useState } from 'react'
 import styles from './index.module.less'
+import './rc-color-picker.css'
 
 interface IProps {
   value: string
   onChange: (value: string) => void
 }
 
-export function ColorPicker (props: IProps) {
+export function ColorPicker(props: IProps) {
   const { value, onChange } = props
 
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    function handleHide () {
+    function handleHide() {
       setVisible(false)
     }
 
@@ -27,17 +26,17 @@ export function ColorPicker (props: IProps) {
     }
   }, [])
 
-  function handleChangeVisible (e: React.MouseEvent<HTMLAnchorElement>) {
+  function handleChangeVisible(e: React.MouseEvent<HTMLAnchorElement>) {
     e.stopPropagation()
 
-    setVisible((prev) => !prev)
+    setVisible(prev => !prev)
   }
 
-  function handleChange (color: Color) {
+  function handleChange(color: Color) {
     onChange(color.toHexString())
   }
 
-  function stopPropagation (e: React.MouseEvent<HTMLDivElement>) {
+  function stopPropagation(e: React.MouseEvent<HTMLDivElement>) {
     e.stopPropagation()
   }
 
@@ -46,7 +45,7 @@ export function ColorPicker (props: IProps) {
       <a
         className={styles.block}
         style={{
-          backgroundColor: value
+          backgroundColor: value,
         }}
         onClick={handleChangeVisible}
       />

@@ -1,12 +1,11 @@
 ---
-import { getLangFromUrl, useTranslations, useI18nUrl } from '@/i18n/utils';
-
-import { Locale } from './Locale/index'
 import { Github } from './Github/index'
+import { Locale } from './Locale/index'
+import { getLangFromUrl, useI18nUrl, useTranslations } from '@/i18n/utils'
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const l = useI18nUrl(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const l = useI18nUrl(lang)
 
 const currentPath = Astro.url.pathname.replace(`/${lang}`, '')
 
@@ -32,7 +31,7 @@ const langMap: Record<typeof lang, string> = {
         <a href={l('/api')}>{t('header.api')}</a>
         <a href={l('/enterprises#获取商业版')}>{t('header.concat')}</a>
         <a href={l('/blog')}>{t('header.blog')}</a>
-        <a href={'/icons'}>{t('header.icons')}</a>
+        <a href="/icons">{t('header.icons')}</a>
       </nav>
     </section>
 
@@ -69,11 +68,11 @@ const langMap: Record<typeof lang, string> = {
       .title {
         position: relative;
         margin: 0;
-  
+
         > img {
           height: 2rem;
         }
-  
+
         .hidden {
           position: absolute;
           height: 1px;

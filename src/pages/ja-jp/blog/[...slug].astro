@@ -1,15 +1,15 @@
 ---
 import { getCollection } from 'astro:content'
 
-import Layout from '@/layouts/Layout.astro'
 import Post from '@/components/Post/index.astro'
+import Layout from '@/layouts/Layout.astro'
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog')
 
   return blogEntries.map(entry => ({
     params: { slug: entry.slug.replace('en-us/blog/', '') },
-    props: { entry }
+    props: { entry },
   }))
 }
 

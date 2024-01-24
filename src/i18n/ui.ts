@@ -1,7 +1,7 @@
 export const languages = {
   'zh-cn': '简体中文',
   'en-us': 'English',
-  'ja-jp': '日本語'
+  'ja-jp': '日本語',
 }
 
 export const defaultLanguage = 'zh-cn'
@@ -55,7 +55,7 @@ export const ui = {
     'footer.nav.help.bug': '报告 Bug',
     'footer.copyright': '上海梦数科技 版权所有',
     'blog.title': '博客',
-    'blog.desc': 'Univer 最新咨讯、技术分享、视频教学'
+    'blog.desc': 'Univer 最新咨讯、技术分享、视频教学',
   },
   'en-us': {
     'header.docs': 'Developer Docs',
@@ -105,7 +105,7 @@ export const ui = {
     'footer.nav.help.bug': 'Bug report',
     'footer.copyright': 'Copyright © 2021-2024 Dreamnum Co,Ltd.',
     'blog.title': 'Blog',
-    'blog.desc': 'Updates, sharing and tutorials from Univer Team'
+    'blog.desc': 'Updates, sharing and tutorials from Univer Team',
   },
   'ja-jp': {
     'header.docs': 'ドキュメント',
@@ -155,6 +155,6 @@ export const ui = {
     'footer.nav.help.bug': 'バグ報告',
     'footer.copyright': 'Copyright © 2021-2024 Dreamnum Co,Ltd.',
     'blog.title': 'ブログ',
-    'blog.desc': 'Univerの最新情報、技術共有、ビデオチュートリアル'
-  }
+    'blog.desc': 'Univerの最新情報、技術共有、ビデオチュートリアル',
+  },
 } as const

@@ -1,8 +1,8 @@
 ---
-import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 
 const features = [{
   preview: '/images/feature-1.png',
@@ -282,7 +282,7 @@ focusFeature(0)
               overflow: hidden;
               transition: all 0.15s;
               @media (max-width: 1024px) {
-                display: none; 
+                display: none;
               }
 
               span {

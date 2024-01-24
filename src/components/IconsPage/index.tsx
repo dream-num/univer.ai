@@ -1,13 +1,13 @@
-import { useMemo, useState } from 'react'
 import { SearchSingle28 } from '@univerjs/icons'
 import * as manifest from '@univerjs/icons/esm/manifest'
-import { Tabs } from '@/components/Tabs'
-import { IconBox } from './IconBox'
-import { Hero } from './Hero'
-import { Slider } from './Slider'
+import { useMemo, useState } from 'react'
 import { ColorPicker } from './ColorPicker'
+import { Hero } from './Hero'
+import { IconBox } from './IconBox'
 
 import styles from './index.module.less'
+import { Slider } from './Slider'
+import { Tabs } from '@/components/Tabs'
 
 const tabs = [{
   label: '可变单色',
@@ -22,7 +22,7 @@ const tabs = [{
 
 const excludeList = ['outdate']
 
-export const groups = tabs.map((tab) => ({
+export const groups = tabs.map(tab => ({
   name: tab.value,
   items: Object.keys(manifest)
     .filter((item) => {
@@ -30,27 +30,29 @@ export const groups = tabs.map((tab) => ({
       if (itemLowerCase.search(tab.value) < 0) {
         return false
       }
+
       const hasExclude = excludeList.some((excludeItem) => {
         return itemLowerCase.search(excludeItem) >= 0
       })
-      if (hasExclude) return false
+      if (hasExclude) {
+        return false
+      }
       return true
     })
-    .map((item) => ({
+    .map(item => ({
       groupName: item.replace('Manifest', '').replace(tab.value, ''),
-      // @ts-ignore
-      groupItem: manifest[item]
-    }))
+      groupItem: manifest[item as keyof typeof manifest],
+    })),
 }))
 
-export function IconsPage () {
+export function IconsPage() {
   const [category, setCategory] = useState('single')
   const [keyword, setKeyword] = useState('')
   const [fontSize, setFontSize] = useState(24)
   const [color, setColor] = useState('#1e222b')
   const [colorChannel1, setColorChannel1] = useState('#274fee')
 
-  function handleSearch (e: React.ChangeEvent<HTMLInputElement>) {
+  function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     setKeyword(e.target.value)
   }
 
@@ -59,7 +61,9 @@ export function IconsPage () {
       return group.name === category
     })!
 
-    if (!keyword) return result
+    if (!keyword) {
+      return result
+    }
 
     return {
       ...result,
@@ -68,9 +72,9 @@ export function IconsPage () {
           ...item,
           groupItem: item.groupItem.filter((icon: any) => {
             return icon.icon.toLocaleLowerCase().includes(keyword.toLocaleLowerCase())
-          })
+          }),
         }
-      }).filter((item) => item.groupItem.length > 0)
+      }).filter(item => item.groupItem.length > 0),
     }
   }, [category, keyword])!
 
@@ -106,7 +110,7 @@ export function IconsPage () {
           </header>
 
           <div>
-            {activeGroup.items.map((item) => (
+            {activeGroup.items.map(item => (
               <div key={item.groupName}>
                 <h4>{item.groupName}</h4>
 

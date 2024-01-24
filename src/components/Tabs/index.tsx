@@ -12,7 +12,7 @@ interface IProps {
   onChange: (value: string) => void
 }
 
-export function Tabs (props: IProps) {
+export function Tabs(props: IProps) {
   const { value, tabs, onChange } = props
 
   const handleChangeTab = (value: string) => {
@@ -25,7 +25,7 @@ export function Tabs (props: IProps) {
         tabs.map((tab, index) => (
           <a
             key={index}
-            className={clsx(styles.item, {[styles.active]: tab.value === value })}
+            className={clsx(styles.item, { [styles.active]: tab.value === value })}
             onClick={() => handleChangeTab(tab.value)}
           >
             {tab.label}

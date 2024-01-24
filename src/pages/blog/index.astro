@@ -2,9 +2,9 @@
 import { getCollection } from 'astro:content'
 import dayjs from 'dayjs'
 
-import Layout from '@/layouts/Layout.astro'
 import Hero from '@/components/Hero/index.astro'
 import PostList from '@/components/PostList/index.astro'
+import Layout from '@/layouts/Layout.astro'
 
 const posts = await getCollection('blog', ({ data }) => {
   return data.lang === 'zh-cn'

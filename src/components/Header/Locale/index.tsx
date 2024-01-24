@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
 import { DropdownLightSingle12 } from '@univerjs/icons'
+import { useEffect, useState } from 'react'
 
 import styles from './index.module.less'
 
@@ -8,9 +8,9 @@ interface Iprops {
   currentPath: string
 }
 
-export const Locale = (props: Iprops) => {
+export function Locale(props: Iprops) {
   const { lang, currentPath } = props
-  
+
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {

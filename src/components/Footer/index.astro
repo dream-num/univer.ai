@@ -1,9 +1,9 @@
 ---
-import { getLangFromUrl, useTranslations, useI18nUrl } from '@/i18n/utils';
+import { getLangFromUrl, useI18nUrl, useTranslations } from '@/i18n/utils'
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const l = useI18nUrl(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const l = useI18nUrl(lang)
 
 const present = new Date().getFullYear()
 ---

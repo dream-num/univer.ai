@@ -1,5 +1,5 @@
-import { defineCollection, z } from 'astro:content'
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema'
+import { defineCollection, z } from 'astro:content'
 
 const blogCollection = defineCollection({
   type: 'content',
@@ -10,7 +10,7 @@ const blogCollection = defineCollection({
     cover: image(),
     date: z.date(),
     author: z.string().default('Anonymous'),
-    lang: z.enum(['zh-cn', 'en-us', 'ja-jp'])
+    lang: z.enum(['zh-cn', 'en-us', 'ja-jp']),
   }),
 })
 
