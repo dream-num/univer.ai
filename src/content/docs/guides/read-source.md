@@ -70,7 +70,7 @@ title: 源码阅读指引
 ### 核心模块
 
 - 单元格选区管理 [packages/sheets/src/services/selection-manager.service.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets/src/services/selection-manager.service.ts)
-- 改变单元格选区 [packages/sheets/src/commands/commands/set-range-values.command.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets/src/commands/commands/set-range-values.command.ts)
+- 设置单元格值和样式 [packages/sheets/src/commands/commands/set-range-values.command.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets/src/commands/commands/set-range-values.command.ts)
 
 ### 表格 UI 和渲染
 
