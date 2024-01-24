@@ -51,60 +51,108 @@ export default defineConfig({
       sidebar: [
         {
           label: "🔰 指南",
+          translations: {
+            'en-US': 'Guides',
+            'ja-JP': 'ガイド',
+          },
           autogenerate: {
             directory: "guides/*.md",
           },
           items: [
             {
               label: "Univer 介绍",
+              translations: {
+                'en-US': 'Introduction',
+                'ja-JP': 'はじめに',
+              },
               link: "guides/introduction",
             },
             {
               label: "快速上手",
+              translations: {
+                'en-US': 'Quick Start',
+                'ja-JP': 'クイックスタート',
+              },
               autogenerate: {
                 directory: "guides/quick-start",
               },
             },
             {
               label: "简单使用 Univer",
+              translations: {
+                'en-US': 'Getting Started',
+                'ja-JP': 'はじめる',
+              },
               autogenerate: {
                 directory: "guides/facade",
               },
             },
             {
               label: "功能一览",
+              translations: {
+                'en-US': 'Features',
+                'ja-JP': '機能',
+              },
               link: "guides/features",
             },
             {
               label: "其他发行版",
+              translations: {
+                'en-US': 'Releases',
+                'ja-JP': 'リリース',
+              },
               link: "guides/release",
             },
             {
               label: "FAQ",
+              translations: {
+                'en-US': 'FAQ',
+                'ja-JP': 'よくある質問',
+              },
               link: "guides/faq",
             },
             {
               label: "路线图",
+              translations: {
+                'en-US': 'Roadmap',
+                'ja-JP': 'ロードマップ',
+              },
               link: "guides/roadmap",
             },
             {
               label: "贡献指南",
+              translations: {
+                'en-US': 'Contributing',
+                'ja-JP': 'コントリビュート',
+              },
               link: "guides/contributing",
             },
             {
               label: "架构",
+              translations: {
+                'en-US': 'Architecture',
+                'ja-JP': 'アーキテクチャ',
+              },
               autogenerate: {
                 directory: "guides/architecture",
               },
             },
             {
               label: "插件",
+              translations: {
+                'en-US': 'Plugins',
+                'ja-JP': 'プラグイン',
+              },
               autogenerate: {
                 directory: "guides/plugins",
               },
             },
             {
               label: "扩展",
+              translations: {
+                'en-US': 'Extend',
+                'ja-JP': '拡張',
+              },
               autogenerate: {
                 directory: "guides/extend",
               },
@@ -113,13 +161,25 @@ export default defineConfig({
         },
         {
           label: "💼 服务端私有部署",
+          translations: {
+            'en-US': 'Enterprise',
+            'ja-JP': 'エンタープライズ',
+          },
           items: [
             {
               label: "功能介绍",
+              translations: {
+                'en-US': 'Features',
+                'ja-JP': '機能',
+              },
               link: "enterprises/",
             },
             {
               label: "部署指南",
+              translations: {
+                'en-US': 'Deployment',
+                'ja-JP': 'デプロイ',
+              },
               link: "enterprises/trial-version",
             },
           ],
