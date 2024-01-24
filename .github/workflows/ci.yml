@@ -1,0 +1,37 @@
+name: 🧪 CI
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: read
+  issues: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: ./.github/actions/setup-node
+
+      - name: Build
+        run: pnpm bundle
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: ./.github/actions/setup-node
+
+      - name: Lint
+        run: pnpm lint
