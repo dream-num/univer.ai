@@ -21,7 +21,7 @@ jobs:
         uses: ./.github/actions/setup-node
 
       - name: Build
-        run: pnpm bundle
+        run: pnpm build
 
   lint:
     runs-on: ubuntu-latest
