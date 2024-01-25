@@ -1,5 +1,4 @@
 name: 📤 Preview Deploy
-
 on:
   pull_request:
     branches:
