@@ -8,37 +8,37 @@ on:
       - main
 
 permissions:
-    contents: read
-    pull-requests: write
+  contents: read
+  pull-requests: write
 
 jobs:
-    build-demo:
-        runs-on: ubuntu-latest
+  build-demo:
+    runs-on: ubuntu-latest
 
-        outputs:
-            preview-url: ${{ steps.vercel-demo-dev.outputs.preview-url }}
+    outputs:
+      preview-url: ${{ steps.vercel-demo-dev.outputs.preview-url }}
 
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-            - name: Setup Node.js
-              uses: ./.github/actions/setup-node
+      - name: Setup Node.js
+        uses: ./.github/actions/setup-node
 
-            #  ================= Deploy Demo =================
-            - name: 📦 Build demo
-              run: pnpm build
+      #  ================= Deploy Demo =================
+      - name: 📦 Build demo
+        run: pnpm build
 
-            - name: Copy demo to workspace
-              run: |
-                  mkdir .workspace
-                  cp -r ./dist/* .workspace
+      - name: Copy demo to workspace
+        run: |
+          mkdir .workspace
+          cp -r ./dist/* .workspace
 
-            - name: 🚀 Deploy to Vercel (demo)
-              uses: amondnet/vercel-action@v25
-              id: vercel-demo-dev
-              with:
-                  vercel-token: ${{ secrets.VERCEL_TOKEN }}
-                  vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
-                  vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
-                  vercel-args: --prod
+      - name: 🚀 Deploy to Vercel (demo)
+        uses: amondnet/vercel-action@v25
+        id: vercel-demo-dev
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
+          # vercel-args: --prod
