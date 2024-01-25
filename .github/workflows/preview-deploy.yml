@@ -28,7 +28,7 @@ jobs:
 
             #  ================= Deploy Demo =================
             - name: 📦 Build demo
-              run: pnpm run build:demo
+              run: pnpm build
 
             - name: Copy demo to workspace
               run: |
