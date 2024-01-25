@@ -16,12 +16,11 @@ You can submit your requirements through Feature Requests, please refer to the [
 * Sorting
 * Floating Images
 * Comments
-* Formula Editor
 * More Formulas
 
 ## Commercial Version Development Roadmap
 
-We will also synchronize the development roadmap and progress of the commercial licensed version (Enterprise Edition) with the community. If you are interested in the capabilities provided by the commercial license, you can [contact us](/en-us/guides/introduction#commercial-licensing).
+We will also synchronize the development roadmap and progress of the commercial licensed version (Enterprise Edition) with the community. If you are interested in the capabilities provided by the commercial license, you can [contact us](/en-us/guides/introduction/#enterprise-edition).
 
 ### 2024 Q1
 
