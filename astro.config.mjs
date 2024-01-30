@@ -52,8 +52,8 @@ export default defineConfig({
         {
           label: '🔰 指南',
           translations: {
-            'en-US': 'Guides',
-            'ja-JP': 'ガイド',
+            'en-US': '🔰 Guides',
+            'ja-JP': '🔰 ガイド',
           },
           autogenerate: {
             directory: 'guides/*.md',
@@ -107,7 +107,7 @@ export default defineConfig({
               label: '常见问题',
               translations: {
                 'en-US': 'Troubleshooting',
-                'ja-JP': 'トラブルシューティング',
+                'ja-JP': 'よくある質問',
               },
               link: 'guides/troubleshooting',
             },
@@ -162,8 +162,8 @@ export default defineConfig({
         {
           label: '💼 服务端私有部署',
           translations: {
-            'en-US': 'Enterprise',
-            'ja-JP': 'エンタープライズ',
+            'en-US': '💼 Enterprise',
+            'ja-JP': '💼 エンタープライズ',
           },
           items: [
             {
