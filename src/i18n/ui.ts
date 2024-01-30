@@ -151,7 +151,7 @@ export const ui = {
     'footer.nav.community.zhihu': '知乎',
     'footer.nav.help.title': 'ヘルプ',
     'footer.nav.help.github': 'Github Discussions',
-    'footer.nav.help.troubleshooting': 'トラブルシューティング',
+    'footer.nav.help.troubleshooting': 'よくある質問',
     'footer.nav.help.bug': 'バグ報告',
     'footer.copyright': 'Copyright © 2021-2024 Dreamnum Co,Ltd.',
     'blog.title': 'ブログ',
