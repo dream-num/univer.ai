@@ -9,3 +9,15 @@ title: "@univerjs/sheets-numfmt"
 :::note
 数字格式是电子表格的核心功能之一，因此数字格式的解析处理是在 @univerjs/sheets 中进行的。
 :::
+
+## 依赖的插件
+
+本插件运行依赖以下插件：
+
+- @univerjs/core
+- @univerjs/design
+- @univerjs/engine-numfmt
+- @univerjs/engine-render
+- @univerjs/sheets
+- @univerjs/sheets-ui
+- @univerjs/ui

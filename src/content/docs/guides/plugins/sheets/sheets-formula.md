@@ -148,9 +148,9 @@ univerAPI.registerFunction({
 
 说明
 
--   `locales` 下可以设置多种语言，命名规则参考 [LocaleType](/api/core/enums/LocaleType.html)。可以在 `functionList` 下添加多个公式的翻译。详细的字段说明请参考[如何在 UniverFormulaEnginePlugin 中添加公式](./#如何在-univerformulaengineplugin-中添加公式)的部分。
--   `description` 设置自定义公式的描述。
--   `calculate` 编写计算公式的具体算法和名称映射。入参为使用公式时用户输入的内容，可能为数字、字符串、布尔值，或者一个范围，也是返回同样的格式。
+- `locales` 下可以设置多种语言，命名规则参考 [LocaleType](/api/core/enums/LocaleType.html)。可以在 `functionList` 下添加多个公式的翻译。详细的字段说明请参考[如何在 UniverFormulaEnginePlugin 中添加公式](./#如何在-univerformulaengineplugin-中添加公式)的部分。
+- `description` 设置自定义公式的描述。
+- `calculate` 编写计算公式的具体算法和名称映射。入参为使用公式时用户输入的内容，可能为数字、字符串、布尔值，或者一个范围，也是返回同样的格式。
 
 同样的， 如果使用 `unregisterFunction` 方法，推荐你把国际化文件也移除。下方示例是将中文和英文的 `formulaCustom` 节点移除。
 
@@ -655,22 +655,22 @@ univer.registerPlugin(UniverSheetsCustomFunctionPlugin);
 
 详细 API 参考 [FunctionType](/api/engine-formula/enums/FunctionType.html)
 
--   Financial
--   Date
--   Math
--   Statistical
--   Lookup
--   Database
--   Text
--   Logical
--   Information
--   Engineering
--   Cube
--   Compatibility
--   Web
--   Array
--   Univer
--   User
+- Financial
+- Date
+- Math
+- Statistical
+- Lookup
+- Database
+- Text
+- Logical
+- Information
+- Engineering
+- Cube
+- Compatibility
+- Web
+- Array
+- Univer
+- User
 
 ### 要求
 
@@ -761,20 +761,28 @@ univer.registerPlugin(UniverSheetsCustomFunctionPlugin);
 
 ### 公式实现注意事项
 
--   任何公式的入参和出参都可以是 `A1`、`A1:B10`，调研 Excel 的时候需要把所有情况考虑到，比如 `=SIN(A1:B10)`，会展开一个正弦计算后的范围。
+- 任何公式的入参和出参都可以是 `A1`、`A1:B10`，调研 Excel 的时候需要把所有情况考虑到，比如 `=SIN(A1:B10)`，会展开一个正弦计算后的范围。
 
-    -   例如 `XLOOKUP` 函数，要求两个入参的行或列至少又一个大小相等，这样才能进行矩阵计算。
-    -   例如 `SUMIF` 函数，大家以为是求和，但是它是可以根据第二个参数进行展开的
+  - 例如 `XLOOKUP` 函数，要求两个入参的行或列至少又一个大小相等，这样才能进行矩阵计算。
+  - 例如 `SUMIF` 函数，大家以为是求和，但是它是可以根据第二个参数进行展开的
         ![sumif array](./assets/img/sumif-array.png)
         ![sumif array result](./assets/img/sumif-array-result.png)
-    -   Excel 的公式计算，越来越像 numpy，比如
+  - Excel 的公式计算，越来越像 numpy，比如
         ![numpy](./assets/img/numpy.png)
 
--   公式的数值计算，需要使用内置的方法，尽量不要获取值自行计算。因为公式的参数可以是值、数组、引用。可以参考已有的 `sum`、`minus` 函数。
--   精度问题，公式引入了 `big.js`，使用内置方法会调用该库，但是相比原生计算会慢接近 100 倍，所以像 `sin` 等 `js` 方法，尽量用原生实现。
--   需要自定义计算，使用 `product` 函数，适合两个入参的计算，调用 `map` 对值自身进行迭代计算，适合对一个入参本身的值进行改变。
+- 公式的数值计算，需要使用内置的方法，尽量不要获取值自行计算。因为公式的参数可以是值、数组、引用。可以参考已有的 `sum`、`minus` 函数。
+- 精度问题，公式引入了 `big.js`，使用内置方法会调用该库，但是相比原生计算会慢接近 100 倍，所以像 `sin` 等 `js` 方法，尽量用原生实现。
+- 需要自定义计算，使用 `product` 函数，适合两个入参的计算，调用 `map` 对值自身进行迭代计算，适合对一个入参本身的值进行改变。
 
 ### 公式基础工具
 
 1. `ValueObjectFactory` 用来自动识别参数格式创建一个参数实例，范围类型的数据用 `RangeReferenceObject` 来创建参数实例
 2. 数组 `toArrayValueObject` 可以与值直接运算，得到新的数组
+
+## 依赖的插件
+
+本插件运行依赖以下插件：
+
+- @univerjs/core
+- @univerjs/engine-formula
+- @univerjs/engine-render

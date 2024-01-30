@@ -21,3 +21,7 @@ title: "@univerjs/core"
   - 资源管理
 
 @univerjs/core 的 API 请参考 API 文档。
+
+## 依赖的插件
+
+本插件运行不依赖其他插件。
