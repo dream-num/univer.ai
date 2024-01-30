@@ -37,7 +37,7 @@ title: 源码阅读指引
 :::
 
 - 命令管理 [packages/core/src/services/command/command.service.ts](https://github.com/dream-num/univer/blob/dev/packages/core/src/services/command/command.service.ts)
-- 撤销回退 [packages/core/src/services/undoredo/undoredo.service.ts](https://vscode.dev/github/dream-num/univer/blob/dev/packages/core/src/services/undoredo/undoredo.service.ts)
+- 撤销回退 [packages/core/src/services/undoredo/undoredo.service.ts](https://github.com/github/dream-num/univer/blob/dev/packages/core/src/services/undoredo/undoredo.service.ts)
 
 ### 渲染
 
@@ -61,13 +61,13 @@ title: 源码阅读指引
 
 ## 表格
 
-### 基础数据结构
+### 表格基础数据结构
 
 - 数据结构定义 [packages/core/src/types/interfaces](https://github.com/dream-num/univer/blob/dev/packages/core/src/types/interfaces)
   - 单元格数据结构定义 [packages/core/src/types/interfaces/i-cell-data.ts](https://github.com/dream-num/univer/blob/dev/packages/core/src/types/interfaces/i-cell-data.ts)
   - 单元格样式数据结构定义 [packages/core/src/types/interfaces/i-style-data.ts](https://github.com/dream-num/univer/blob/dev/packages/core/src/types/interfaces/i-style-data.ts)
 
-### 核心模块
+### 表格核心模块
 
 - 单元格选区管理 [packages/sheets/src/services/selection-manager.service.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets/src/services/selection-manager.service.ts)
 - 设置单元格值和样式 [packages/sheets/src/commands/commands/set-range-values.command.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets/src/commands/commands/set-range-values.command.ts)
@@ -85,8 +85,18 @@ title: 源码阅读指引
 
 ## 文档
 
+### 文档基础数据结构
+
+- 文档数据结构[packages/core/src/types/interfaces/i-document-data.ts](https://github.com/dream-num/univer/blob/dev/packages/core/src/types/interfaces/i-document-data.ts)
+
+### 文档核心模块
+
 - 文字选区管理 [packages/docs/src/services/text-selection-manager](https://github.com/dream-num/univer/blob/dev/packages/docs/src/services/text-selection-manager.service.ts)
-- 复制粘贴 [packages/docs/src/commands/commands/clipboard.command.ts](https://vscode.dev/github/dream-num/univer/blob/dev/packages/docs/src/commands/commands/clipboard.command.ts)
+- 复制粘贴 [packages/docs/src/commands/commands/clipboard.command.ts](https://github.com/dream-num/univer/blob/dev/packages/docs/src/commands/commands/clipboard.command.ts)
+
+### 文档 UI 和渲染
+
+- 操作栏菜单注册 [packages/docs-ui/src/controllers/doc-ui.controller.ts](https://github.com/dream-num/univer/blob/dev/packages/docs-ui/src/controllers/doc-ui.controller.ts)
 
 ## 扩展插件
 
