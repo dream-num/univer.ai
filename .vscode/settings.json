@@ -38,6 +38,7 @@
     "json",
     "jsonc",
     "yaml",
+    "yml",
     "toml",
     "astro"
   ],
