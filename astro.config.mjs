@@ -104,12 +104,12 @@ export default defineConfig({
               link: 'guides/release',
             },
             {
-              label: 'FAQ',
+              label: '常见问题',
               translations: {
-                'en-US': 'FAQ',
-                'ja-JP': 'よくある質問',
+                'en-US': 'Troubleshooting',
+                'ja-JP': 'トラブルシューティング',
               },
-              link: 'guides/faq',
+              link: 'guides/troubleshooting',
             },
             {
               label: '路线图',
