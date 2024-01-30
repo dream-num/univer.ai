@@ -158,8 +158,8 @@ export default defineConfig({
               },
             },
             {
-              label: "源码阅读指引",
-              link: "guides/read-source",
+              label: '源码阅读指引',
+              link: 'guides/read-source',
             },
           ],
         },
