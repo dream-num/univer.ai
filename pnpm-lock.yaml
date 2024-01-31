@@ -93,7 +93,7 @@ devDependencies:
     version: 0.25.7(typescript@5.3.3)
   univer:
     specifier: github:dream-num/univer
-    version: github.com/dream-num/univer/f7fef1fdb7a0545b51820aeca574e5f8b07c26ea
+    version: github.com/dream-num/univer/eaaf723cdfb756ecf0e2e2eea91b429a6a8afe74
 
 packages:
 
@@ -7533,10 +7533,11 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
 
-  github.com/dream-num/univer/f7fef1fdb7a0545b51820aeca574e5f8b07c26ea:
-    resolution: {tarball: https://codeload.github.com/dream-num/univer/tar.gz/f7fef1fdb7a0545b51820aeca574e5f8b07c26ea}
+  github.com/dream-num/univer/eaaf723cdfb756ecf0e2e2eea91b429a6a8afe74:
+    resolution: {tarball: https://codeload.github.com/dream-num/univer/tar.gz/eaaf723cdfb756ecf0e2e2eea91b429a6a8afe74}
     name: univer
-    version: 0.1.0-beta.2
-    engines: {node: ^18.17.0, pnpm: ^8.6.2}
+    version: 0.1.0-beta.3
+    engines: {node: '>=18.0.0'}
+    prepare: true
     requiresBuild: true
     dev: true
