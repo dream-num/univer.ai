@@ -7,7 +7,7 @@ title: 源码阅读指引
 :::
 
 :::tip
-建议在阅读本小节内容之前先阅读 [Univer 架构](/guides/architecture/architecture/)、[这就是 Univer](http://localhost:4321/blog/this-is-univer) 和 [Univer 文档架构及模块设计](/blog/univer-doc-architecture) 了解 Univer 的整体架构设计。
+建议在阅读本小节内容之前先阅读 [Univer 架构](/guides/architecture/architecture/)、[这就是 Univer](/blog/this-is-univer) 和 [Univer 文档架构及模块设计](/blog/univer-doc-architecture) 了解 Univer 的整体架构设计。
 :::
 
 如果你想进一步了解 Univer 的实现细节，你还可以阅读源码。
