@@ -14,12 +14,12 @@ npm install @univerjs/<包名>@alpha
 
 ## Nightly Release
 
-Univer 每晚都会构建一个版本，用于测试最新功能和修复的 bug。你可以将 npm 源切换至我们私有的 npm 源，来安装这个版本。
+Univer 每晚都会构建一个版本，用于测试最新功能和修复的 bug。
 
-我们推荐的使用方式是，在项目根目录下创建一个 `.npmrc` 文件
+我们推荐在项目根目录下创建一个 `.npmrc` 文件来配置 npm 源，内容如下：
 
 ```Properties title=".npmrc"
-@univerjs:registry=https://univer.work/verdaccio/
+@univerjs:registry=https://verdaccio.univer.work/
 ```
 
 然后安装 nightly 版本
