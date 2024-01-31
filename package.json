@@ -16,7 +16,9 @@
   "scripts": {
     "postinstall": "cd ./node_modules/univer && pnpm install --ignore-scripts",
     "dev": "astro dev",
-    "build": "astro build && node ./generate-api.mjs && cp -r ./api/* ./dist/api",
+    "build": "pnpm run build:site && pnpm run build:api",
+    "build:site": "astro build",
+    "build:api": "node ./generate-api.mjs && cp -r ./api/* ./dist/api",
     "release": "release-it",
     "prepare": "simple-git-hooks",
     "lint": "eslint .",
