@@ -2,6 +2,9 @@
 title: Troubleshooting
 ---
 
+import { Image } from "astro:assets";
+import ClipboardImage from "@/assets/img/clipboard-en.png";
+
 ## Installation Related
 
 ### Why am I getting an error when importing Univer in my webpack 4 project?
@@ -20,3 +23,15 @@ We have provided an [online demo](/playground?title=Webpack%204) based on webpac
 
 - yarn 1 and npm 6 will not automatically install `peerDependencies` from `packages.json`, see [package-json#peerdependencies](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#peerdependencies).
 - It is recommended to upgrade the node version to 16 or above, or upgrade the npm version to 8 or above.
+
+## Usage Related
+
+### Why can't I use the right-click context menu paste in Firefox?
+
+Firefox does not yet support `clipboard.readText()`, as mentioned in the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/readText). In this case, Univer can only retrieve clipboard content from native paste events, which means it can only support paste through keyboard shortcuts.
+
+### Why can't I copy and paste?
+
+In browsers such as Chrome and Safari that support `clipboard.readText()`, Univer will attempt to directly access the clipboard content. Please make sure that the user performing the operation has granted Univer browser clipboard permissions.
+
+<Image src={ClipboardImage} alt="Authorize Clipboard" />

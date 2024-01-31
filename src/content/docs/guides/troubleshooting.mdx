@@ -2,6 +2,9 @@
 title: 常见问题
 ---
 
+import { Image } from "astro:assets";
+import ClipboardImage from "@/assets/img/clipboard.png";
+
 ## 安装相关
 
 ### 为什么我在使用 webpack 4 的项目中导入 Univer 会报错？
@@ -21,3 +24,15 @@ title: 常见问题
 
 - yarn 1 和 npm 6 不会自动安装 `packages.json` 的 `peerDependencies`，详见 [package-json#peerdependencies](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#peerdependencies)。
 - 建议将 node 版本升级到 16 及以上，或者将 npm 版本升级到 8 及以上。
+
+## 使用相关
+
+### 为什么在 Firefox 里无法使用右键中菜单的粘贴？
+
+Firefox 尚不支持 `clipboard.readText()`，详见 [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/readText)，在这种情况下，Univer 只能从原生的粘贴事件中获取剪贴板内容，因此只能支持快捷键粘贴。
+
+### 为什么我无法进行复制粘贴？
+
+在 Chrome 和 Safari 等支持 `clipboard.readText()` 的浏览器中，Univer 会直接尝试获取剪贴板内容，请确保操作的用户授予了 Univer 浏览器的剪贴板权限。
+
+<Image src={ClipboardImage} alt="Authorize Clipboard" />
