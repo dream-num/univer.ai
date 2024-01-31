@@ -14,12 +14,12 @@ npm install @univerjs/<package-name>@alpha
 
 ## Nightly Release
 
-Every night, Univer builds a version that includes the latest features and bug fixes for testing purposes. To install this version, you can switch your npm registry to our private npm registry.
+Every night, Univer builds a version that includes the latest features and bug fixes for testing purposes. To install this version.
 
-We recommend creating a `.npmrc` file in the root directory of your project with the following contents:
+To install the nightly version, we recommend creating a `.npmrc` file in the root directory of your project to configure the npm source, with the following content:
 
 ```Properties title=".npmrc"
-@univerjs:registry=https://univer.work/verdaccio/
+@univerjs:registry=https://verdaccio.univer.work/
 ```
 
 Then, you can install the nightly version using the following command:
