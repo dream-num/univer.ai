@@ -2,7 +2,12 @@ name: 📦 Build
 
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -20,6 +25,9 @@ jobs:
 
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
+
+      - name: 🧪 Lint
+        run: pnpm lint
 
       - name: 📦 Build
         run: pnpm run build
