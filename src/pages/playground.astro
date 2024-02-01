@@ -1,38 +1,63 @@
 ---
+import type { IEmbedProps } from '@/components/Demo'
 import { Demo } from '@/components/Demo'
 import BlankLayout from '@/layouts/BlankLayout.astro'
+
+const children: IEmbedProps[] = [
+  {
+    title: 'Vite',
+    type: 'CodeSandbox',
+    src: 'https://codesandbox.io/p/devbox/univer-sheets-vite-n4v3qk?embed=1',
+  },
+  {
+    title: 'Multi Instance',
+    type: 'CodeSandbox',
+    src: 'https://codesandbox.io/p/devbox/univer-sheets-vite-multi-instance-4gqd6g?embed=1',
+  },
+  {
+    title: 'Uniscript',
+    type: 'CodeSandbox',
+    src: 'https://codesandbox.io/p/devbox/univer-sheets-vite-forked-5ndjz8?embed=1',
+  },
+  {
+    title: 'Webpack 4',
+    type: 'CodeSandbox',
+    src: 'https://codesandbox.io/p/devbox/univer-sheets-webpack-4-6lmwhv?embed=1',
+  },
+  {
+    title: 'UMD',
+    type: 'CodeSandbox',
+    src: 'https://codesandbox.io/p/devbox/univer-sheets-umd-c9r4n5?embed=1',
+  },
+  {
+    title: 'Custom Function',
+    type: 'CodeSandbox',
+    src: 'https://codesandbox.io/p/devbox/univer-custom-function-2c87nz?embed=1',
+  },
+  {
+    title: 'Vue 2',
+    type: 'StackBlitz',
+    repoPath: 'awesome-univer/sheets-vue2-demo',
+    openOptions: {
+      openFile: 'src/App.vue',
+    },
+  },
+  {
+    title: 'Vue 3',
+    type: 'StackBlitz',
+    repoPath: 'awesome-univer/sheets-vue2-demo',
+    openOptions: {
+      openFile: 'src/App.vue',
+    },
+  },
+]
 
 const demo = [
   {
     title: 'Sheets',
-    children: [
-      {
-        title: 'Vite',
-        src: 'https://codesandbox.io/p/devbox/univer-sheets-vite-n4v3qk?embed=1',
-      },
-      {
-        title: 'Multi Instance',
-        src: 'https://codesandbox.io/p/devbox/univer-sheets-vite-multi-instance-4gqd6g?embed=1',
-      },
-      {
-        title: 'Uniscript',
-        src: 'https://codesandbox.io/p/devbox/univer-sheets-vite-forked-5ndjz8?embed=1',
-      },
-      {
-        title: 'Webpack 4',
-        src: 'https://codesandbox.io/p/devbox/univer-sheets-webpack-4-6lmwhv?embed=1',
-      },
-      {
-        title: 'UMD',
-        src: 'https://codesandbox.io/p/devbox/univer-sheets-umd-c9r4n5?embed=1',
-      },
-      {
-        title: 'Custom Function',
-        src: 'https://codesandbox.io/p/devbox/univer-custom-function-2c87nz?embed=1',
-      },
-    ],
+    children,
   },
-]
+];
 ---
 
 <BlankLayout lang="en-us" title="Playground | Univer">
