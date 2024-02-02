@@ -22,8 +22,10 @@ import ClipboardImage from "@/assets/img/clipboard.png";
 
 ### 为什么我使用 npm 或者 yarn 安装，运行时报错找不到依赖？
 
-- yarn 1 和 npm 6 不会自动安装 `packages.json` 的 `peerDependencies`，详见 [package-json#peerdependencies](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#peerdependencies)。
-- 建议将 node 版本升级到 16 及以上，或者将 npm 版本升级到 8 及以上。
+这可能是因为你使用的 node 包管理工具版本较低导致， yarn@1 和 npm@6 不会自动安装 `packages.json` 中的 `peerDependencies`，详见 [package-json#peerdependencies](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#peerdependencies)。
+
+- 你可以自行安装缺失的附属依赖项。
+- 对于 npm 用户，可将 node 版本更新至 16 以上，亦或者将 npm 版本升级至 8 及以上，并留意升级行为可能对您已有项目的影响。
 
 ## 使用相关
 
