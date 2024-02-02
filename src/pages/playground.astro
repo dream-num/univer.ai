@@ -6,33 +6,51 @@ import BlankLayout from '@/layouts/BlankLayout.astro'
 const children: IEmbedProps[] = [
   {
     title: 'Vite',
-    type: 'CodeSandbox',
-    src: 'https://codesandbox.io/p/devbox/univer-sheets-vite-n4v3qk?embed=1',
+    type: 'StackBlitz',
+    repoPath: 'awesome-univer/sheets-vite-demo',
+    openOptions: {
+      openFile: 'src/main.ts',
+    },
   },
   {
     title: 'Multi Instance',
-    type: 'CodeSandbox',
-    src: 'https://codesandbox.io/p/devbox/univer-sheets-vite-multi-instance-4gqd6g?embed=1',
+    type: 'StackBlitz',
+    repoPath: 'awesome-univer/sheets-multi-instance-demo',
+    openOptions: {
+      openFile: 'src/main.tsx',
+    },
   },
   {
     title: 'Uniscript',
-    type: 'CodeSandbox',
-    src: 'https://codesandbox.io/p/devbox/univer-sheets-vite-forked-5ndjz8?embed=1',
+    type: 'StackBlitz',
+    repoPath: 'awesome-univer/sheets-uniscript-demo',
+    openOptions: {
+      openFile: 'src/main.ts',
+    },
   },
   {
     title: 'Webpack 4',
-    type: 'CodeSandbox',
-    src: 'https://codesandbox.io/p/devbox/univer-sheets-webpack-4-6lmwhv?embed=1',
+    type: 'StackBlitz',
+    repoPath: 'awesome-univer/sheets-webpack4-demo',
+    openOptions: {
+      openFile: 'src/App.vue',
+    },
   },
   {
     title: 'UMD',
-    type: 'CodeSandbox',
-    src: 'https://codesandbox.io/p/devbox/univer-sheets-umd-c9r4n5?embed=1',
+    type: 'StackBlitz',
+    repoPath: 'awesome-univer/sheets-umd-demo',
+    openOptions: {
+      openFile: 'main/index.html',
+    },
   },
   {
     title: 'Custom Function',
-    type: 'CodeSandbox',
-    src: 'https://codesandbox.io/p/devbox/univer-custom-function-2c87nz?embed=1',
+    type: 'StackBlitz',
+    repoPath: 'awesome-univer/sheets-custom-function-demo',
+    openOptions: {
+      openFile: 'src/main.ts',
+    },
   },
   {
     title: 'Vue 2',
@@ -48,6 +66,30 @@ const children: IEmbedProps[] = [
     repoPath: 'awesome-univer/sheets-vue2-demo',
     openOptions: {
       openFile: 'src/App.vue',
+    },
+  },
+  {
+    title: 'React',
+    type: 'StackBlitz',
+    repoPath: 'awesome-univer/sheets-react-demo',
+    openOptions: {
+      openFile: 'src/App.jsx',
+    },
+  },
+  {
+    title: 'React and Facade API',
+    type: 'StackBlitz',
+    repoPath: 'awesome-univer/sheets-react-facade-demo',
+    openOptions: {
+      openFile: 'src/App.jsx',
+    },
+  },
+  {
+    title: 'Web Worker',
+    type: 'StackBlitz',
+    repoPath: 'awesome-univer/sheets-web-worker-demo',
+    openOptions: {
+      openFile: 'src/main.ts',
     },
   },
 ]
