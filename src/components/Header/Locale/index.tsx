@@ -1,4 +1,4 @@
-import { DropdownLightSingle12 } from '@univerjs/icons'
+import { MoreDownSingle } from '@univerjs/icons'
 import { useEffect, useState } from 'react'
 
 import styles from './index.module.less'
@@ -35,7 +35,7 @@ export function Locale(props: Iprops) {
     <div className={styles.locale}>
       <a onClick={handleToggleVisible}>
         {lang}
-        <DropdownLightSingle12 />
+        <MoreDownSingle />
       </a>
 
       <ul className={visible ? styles.visible : ''}>

@@ -4,30 +4,32 @@ import astroParser from 'astro-eslint-parser'
 
 import astro from 'eslint-plugin-astro'
 
+const rules = {
+  curly: ['error', 'multi-line'],
+  'style/quote-props': ['error', 'as-needed'],
+  'style/jsx-indent': 'off',
+  'style/jsx-one-expression-per-line': 'off',
+  'style/brace-style': ['warn', '1tbs', { allowSingleLine: true }],
+  'antfu/if-newline': 'off',
+  'import/default': 'off',
+  'import/order': [
+    'error',
+    {
+      warnOnUnassignedImports: true,
+      alphabetize: {
+        order: 'asc',
+        caseInsensitive: true,
+      },
+    },
+  ],
+}
+
 export default antfu({
   react: true,
   yaml: true,
   markdown: false,
 
-  rules: {
-    curly: ['error', 'multi-line'],
-    'style/jsx-indent': 'off',
-    'style/jsx-one-expression-per-line': 'off',
-    'style/quote-props': ['error', 'as-needed'],
-    'style/brace-style': ['warn', '1tbs', { allowSingleLine: true }],
-    'import/default': 'off',
-    'import/order': [
-      'error',
-      {
-        warnOnUnassignedImports: true,
-        alphabetize: {
-          order: 'asc',
-          caseInsensitive: true,
-        },
-      },
-    ],
-  },
-}, {
+  rules,
 }, {
   files: ['**/*.astro'],
   plugins: {
@@ -35,25 +37,7 @@ export default antfu({
   },
   rules: {
     ...astro.configs.recommended.rules,
-
-    curly: ['error', 'multi-line'],
-    'style/quote-props': ['error', 'as-needed'],
-    'style/jsx-indent': 'off',
-    'style/jsx-one-expression-per-line': 'off',
-    'style/brace-style': ['warn', '1tbs', { allowSingleLine: true }],
-    'style/brace-style': ['warn', '1tbs', { allowSingleLine: true }],
-    'antfu/if-newline': 'off',
-    'import/default': 'off',
-    'import/order': [
-      'error',
-      {
-        warnOnUnassignedImports: true,
-        alphabetize: {
-          order: 'asc',
-          caseInsensitive: true,
-        },
-      },
-    ],
+    ...rules,
   },
   languageOptions: {
     parser: astroParser,

@@ -2,6 +2,7 @@
   "name": "@univerjs/docs",
   "type": "module",
   "version": "0.1.0-beta.5",
+  "packageManager": "pnpm@8.7.0",
   "author": "DreamNum Inc. <developer@univer.ai>",
   "licenses": [
     {
@@ -26,15 +27,15 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.4.1",
-    "@astrojs/react": "^3.0.9",
-    "@astrojs/rss": "^4.0.3",
+    "@astrojs/react": "^3.0.10",
+    "@astrojs/rss": "^4.0.5",
     "@astrojs/sitemap": "^3.0.5",
-    "@astrojs/starlight": "^0.16.0",
+    "@astrojs/starlight": "^0.17.3",
     "@rc-component/color-picker": "^1.5.1",
     "@stackblitz/sdk": "^1.9.0",
-    "@types/react-dom": "^18.2.18",
-    "@univerjs/icons": "^0.1.26",
-    "astro": "^4.2.4",
+    "@types/react-dom": "^18.2.19",
+    "@univerjs/icons": "^0.1.28",
+    "astro": "^4.3.5",
     "clsx": "^2.1.0",
     "dayjs": "^1.11.10",
     "modern-normalize": "^2.0.0",
@@ -44,19 +45,19 @@
     "typescript": "^5.3.3"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.6.3",
-    "@types/react": "^18.2.48",
-    "astro-eslint-parser": "^0.16.2",
+    "@antfu/eslint-config": "^2.6.4",
+    "@types/react": "^18.2.55",
+    "astro-eslint-parser": "^0.16.3",
     "eslint": "^8.56.0",
-    "eslint-plugin-astro": "^0.31.3",
+    "eslint-plugin-astro": "^0.31.4",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "less": "^4.2.0",
-    "lint-staged": "^15.2.0",
+    "lint-staged": "^15.2.2",
     "simple-git-hooks": "^2.9.0",
     "typedoc": "^0.25.7",
-    "univer": "github:dream-num/univer"
+    "univer": "github:dream-num/univer#main"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
