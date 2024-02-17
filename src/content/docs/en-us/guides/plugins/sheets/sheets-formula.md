@@ -774,3 +774,9 @@ To implement a formula, you need to add formula description, internationalizatio
 
 1. `ValueObjectFactory` is used to automatically recognize parameter formats and create a parameter instance. Use `RangeReferenceObject` to create parameter instances for range-type data.
 2. The array `toArrayValueObject` can be operated directly with values to get a new array.
+
+<!--package-locales start-->
+<!--package-locales end-->
+
+<!--package-assets start-->
+<!--package-assets end-->

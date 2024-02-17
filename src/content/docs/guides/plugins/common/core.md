@@ -21,3 +21,9 @@ title: "@univerjs/core"
   - 资源管理
 
 @univerjs/core 的 API 请参考 API 文档。
+
+<!--package-locales start-->
+<!--package-locales end-->
+
+<!--package-assets start-->
+<!--package-assets end-->

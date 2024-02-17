@@ -2,6 +2,8 @@ import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import starlight from '@astrojs/starlight'
 import { defineConfig, squooshImageService } from 'astro/config'
+import { packageAssetsPlugin } from './plugins/packageAssetsPlugin.js'
+import { packageLocalesPlugin } from './plugins/packageLocalesPlugin.js'
 
 // https://astro.build/config
 export default defineConfig({
@@ -196,4 +198,10 @@ export default defineConfig({
     }),
     react(),
   ],
+  markdown: {
+    remarkPlugins: [
+      packageAssetsPlugin,
+      packageLocalesPlugin,
+    ],
+  },
 })

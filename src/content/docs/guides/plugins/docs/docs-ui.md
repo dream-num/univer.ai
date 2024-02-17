@@ -13,3 +13,9 @@ sidebar:
 :::info
 @univerjs/docs-ui 仍在试验阶段，建议不要在生产环境中使用。你可以在[路线图](/guides/roadmap)了解迭代计划。
 :::
+
+<!--package-locales start-->
+<!--package-locales end-->
+
+<!--package-assets start-->
+<!--package-assets end-->
