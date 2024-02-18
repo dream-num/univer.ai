@@ -224,7 +224,7 @@ onStarting () {
 `ICommand.handler` 是事件处理函数，当命令被触发时，该函数会被调用。
 
 :::tip
-函数的参数 `accessor` 是 `IAccessor` 对象，通过该对象可以访问 DI 容器中的其他对象，`IAccessor.get` 与 `Inject` 装饰器类似，都是依赖注入系统的一部。
+函数的参数 `accessor` 是 `IAccessor` 对象，通过该对象可以访问 DI 容器中的其他对象，`IAccessor.get` 与 `Inject` 装饰器类似，都是依赖注入系统的一部分。
 
 `IAccessor` 将 `Command` 与 Univer 的其他对象解耦，使组织代码可以更加灵活，提高可维护性。
 :::
