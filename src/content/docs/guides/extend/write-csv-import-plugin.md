@@ -24,7 +24,7 @@ title: 插件案例 - CSV 导入
 
 我们先来体验一下这个插件的效果。
 
-在线体验：[CSV 导入插件](/playground?title=Custom%20Plugin%20\(CSV%20Import\))
+在线体验：[CSV 导入插件](/playground?title=CSV%20Import%20Plugin)
 
 ## 需求拆解
 
@@ -296,7 +296,7 @@ import { SetRangeValuesCommand } from "@univerjs/sheets";
 
 ## 总结
 
-完整代码和演示效果查看 [ImportCSVButton.ts](https://codesandbox.io/p/devbox/univer-sheets-vite-forked-r7jsc6?file=%2Fsrc%2Fplugins%2FImportCSVButton.ts) 。
+插件的完整代码见 [ImportCSVButton.ts](https://github.com/awesome-univer/csv-import-plugin-demo/blob/main/src/plugins/ImportCSVButton.ts) 。
 
 本插件展示了如何通过 Univer 插件系统来扩展 Univer 的 UI 和功能，希望本文可以帮助你快速上手 Univer 插件开发。
 
