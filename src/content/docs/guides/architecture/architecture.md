@@ -176,3 +176,11 @@ export interface ICommandInfo<T extends object = object> {
 ### 抽象依赖
 
 在封装服务时，可以采用抽象依赖的原则，将服务对其他服务的依赖抽象为接口，从而使得服务更加易于测试和维护。
+
+## 了解更多
+
+以上介绍了 Univer 的整体架构。你可以阅读以下章节了解 Univer 子系统的架构设计：
+
+* [公式系统](/guides/architecture/formula)
+* [渲染系统](/guides/architecture/rendering)
+* [Web Worker](/guides/architecture/web-worker)
