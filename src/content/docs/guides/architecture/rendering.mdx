@@ -11,8 +11,6 @@ import rendererComponent from '@/assets/img/renderer-component.png';
 import rendererScene from '@/assets/img/renderer-scene.png';
 import { Image } from 'astro:assets';
 
-## 前言
-
 Univer 的渲染引擎参考了 KonvaJs / FabricJs 以及 BabylonJs，基于 Canvas2D 实现。
 
 渲染引擎设计的目的是整合文档、电子表格和幻灯片的渲染，复用渲染能力并让它们的渲染可以相互嵌套。在电子表格中，单元格内文本的排版和渲染与文档的排版和渲染完全复用，所以单元格支持文档的所有排版能力，并且能够在单元格编辑器中保持完全一致的渲染效果。
@@ -83,7 +81,7 @@ scene.onPointerMoveObserver.add((moveEvt: IPointerEvent | IMouseEvent) => {
 
 <Image alt='rendererViewport' src={rendererViewport}/>
 
-添加一个 Viewport 的例子如下
+添加一个 Viewport 的例子如下：
 
 ```typescript
 // 为 Scene 新增一个 Viewport 并且添加一个滚动条
@@ -130,17 +128,7 @@ class Scene {
 }
 ```
 
- Object 会挂到 Layer 上，并且 Layer 会有一个离屏 canvas 作为缓存，当层非脏时，会直接复制缓存内容到画布上。
-
-```ts
-export class Layer {
-    private _objects: BaseObject[] = [];
-
-    private _cacheCanvas: Nullable<Canvas>;
-
-    protected _dirty: boolean = true;
-}
-```
+Object 会挂到 Layer 上，并且 Layer 会有一个离屏 canvas 作为缓存，当层非脏时，会直接复制缓存内容到画布上。
 
 ## Object
 
@@ -202,20 +190,3 @@ export class Rect<T extends IRectProps = IRectProps> extends Shape<T> {
 Component 支持用 canvas 作为缓存，进行贴图缓存绘制。目前在滚动 sheet 的时候，渲染引擎只会绘制增量部分的视图，极大提升了性能。
 
 <Image alt='rendererTextureCache' src={rendererTextureCache}/>
-
-贴图使用到了 `ctx.globalCompositeOperation = 'copy'`，关键代码如下：
-
-```typescript
-ctx.save();
-ctx.globalCompositeOperation = 'copy';
-ctx.setTransform(1, 0, 0, 1, 0, 0);
-ctx.drawImage(canvasEle, diffX, diffY);
-ctx.restore();
-
-ctx.setTransform(mainCtx.getTransform());
-for (const diffBound of diffBounds) {
-    ctx.rect(...);
-    ctx.clip();
-    this._draw(...);
-}
-```
