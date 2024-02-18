@@ -159,6 +159,10 @@ export default defineConfig({
                 directory: 'guides/extend',
               },
             },
+            {
+              label: '源码阅读指引',
+              link: 'guides/read-source',
+            },
           ],
         },
         {
