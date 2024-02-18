@@ -10,3 +10,9 @@ title: "@univerjs/sheets-ui"
 * 复制粘贴服务，业务可以调用复制粘贴服务提供的方法来自定义某项功能的复制粘贴行为
 * 下拉填充服务，业务可以调用下拉填充服务提供的方法来自定义某项功能的下拉填充行为
 * 单元格编辑器服务
+
+<!--package-locales start-->
+<!--package-locales end-->
+
+<!--package-assets start-->
+<!--package-assets end-->

@@ -9,3 +9,9 @@ title: "@univerjs/sheets-numfmt"
 :::note
 数字格式是电子表格的核心功能之一，因此数字格式的解析处理是在 @univerjs/sheets 中进行的。
 :::
+
+<!--package-locales start-->
+<!--package-locales end-->
+
+<!--package-assets start-->
+<!--package-assets end-->
