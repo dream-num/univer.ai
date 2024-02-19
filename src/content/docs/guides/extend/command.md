@@ -288,7 +288,7 @@ export class YourController extends Disposable {
         @IAutoFillService private readonly _autoFillService: IAutoFillService,
     ) {
         const yourHook: ISheetAutoFillHook = {
-            id: 'your-hook-name',
+            id: 'your-hook-id',
             priority: 1,
             type: AutoFillHookType.Append // This hook will be executed after the default one
             onBeforeFillData: (location, direction) => {
@@ -325,7 +325,7 @@ export class YourController extends Disposable {
 
 ```tsx
 const yourHook: ISheetAutoFillHook = {
-            id: 'your-hook-name',
+            id: 'your-hook-id',
             priority: 1,
             type: AutoFillHookType.Default
             onBeforeFillData: (location, direction) => {
@@ -349,7 +349,7 @@ const yourHook: ISheetAutoFillHook = {
 
 ```tsx
 const yourHook: ISheetAutoFillHook = {
-            id: 'your-hook-name',
+            id: 'your-hook-id',
             priority: 0,
             type: AutoFillHookType.Append,
             disable: (location, direction, applyType) => true

@@ -230,7 +230,7 @@ export class YourController extends Disposable {
         @IAutoFillService private readonly _autoFillService: IAutoFillService,
     ) {
         const yourHook: ISheetAutoFillHook = {
-            id: 'your-hook-name',
+            id: 'your-hook-id',
             priority: 1,
             type: AutoFillHookType.Append // This hook will be executed after the default one
             onBeforeFillData: (location, direction) => {
@@ -265,7 +265,7 @@ This default hook is similar to other hooks, except for its type is `AutoFillHoo
 
 ```tsx
 const yourHook: ISheetAutoFillHook = {
-            id: 'your-hook-name',
+            id: 'your-hook-id',
             priority: 1,
             type: AutoFillHookType.Default
             onBeforeFillData: (location, direction) => {
@@ -289,7 +289,7 @@ If you want to execute some additional mutations during drop-down filling, such 
 
 ```tsx
 const yourHook: ISheetAutoFillHook = {
-            id: 'your-hook-name',
+            id: 'your-hook-id',
             priority: 0,
             type: AutoFillHookType.Append,
             disable: (location, direction, applyType) => true
