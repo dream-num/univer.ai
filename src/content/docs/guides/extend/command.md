@@ -102,7 +102,7 @@ export class YourController extends Disposable {
         @ISheetClipboardService private readonly _sheetClipboardService: ISheetClipboardService
     ) {
         const yourHook: ISheetClipboardHook = {
-            hookName: 'your-hook-name',
+            id: 'your-hook-id',
             onBeforeCopy: () => {
                 alert('Hello!') // In this method, your code will be executed before copying.
             }
