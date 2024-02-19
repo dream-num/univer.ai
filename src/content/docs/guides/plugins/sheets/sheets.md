@@ -33,6 +33,14 @@ title: "@univerjs/sheets"
 
 如果一个功能明确地依赖其他功能，例如公式需要在下拉填充或复制粘贴功能被调用时做一些操作，那么公式模块应该直接依赖下拉填充和复制粘贴模块，而不是通过 `SheetInterceptorService` 来实现。
 
+## 依赖的插件
+
+本插件运行依赖以下插件：
+
+* @univerjs/core
+* @univerjs/engine-formula
+* @univerjs/engine-render
+
 <!--package-locales start-->
 <!--package-locales end-->
 

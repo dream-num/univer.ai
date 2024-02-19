@@ -8,8 +8,16 @@ title: "@univerjs/rpc"
 
 详情请参考 [Web Worker 架构](/guides/architecture/web-worker)。
 
+
+## 依赖的插件
+
+本插件运行依赖以下插件：
+
+- @univerjs/core
+
 <!--package-locales start-->
 <!--package-locales end-->
 
 <!--package-assets start-->
 <!--package-assets end-->
+

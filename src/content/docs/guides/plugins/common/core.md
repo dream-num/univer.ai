@@ -22,6 +22,10 @@ title: "@univerjs/core"
 
 @univerjs/core 的 API 请参考 API 文档。
 
+## 依赖的插件
+
+本插件运行不依赖其他插件。
+
 <!--package-locales start-->
 <!--package-locales end-->
 

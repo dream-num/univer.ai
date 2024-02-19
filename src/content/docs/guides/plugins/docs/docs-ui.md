@@ -14,8 +14,19 @@ sidebar:
 @univerjs/docs-ui 仍在试验阶段，建议不要在生产环境中使用。你可以在[路线图](/guides/roadmap)了解迭代计划。
 :::
 
+## 依赖的插件
+
+本插件运行依赖以下插件：
+
+* @univerjs/core
+* @univerjs/design
+* @univerjs/docs
+* @univerjs/engine-render
+* @univerjs/ui
+
 <!--package-locales start-->
 <!--package-locales end-->
 
 <!--package-assets start-->
 <!--package-assets end-->
+
