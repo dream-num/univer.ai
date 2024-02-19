@@ -50,12 +50,10 @@ import { FUniver } from "@univerjs/facade";
 const univerAPI = FUniver.newAPI(univer);
 ```
 
-然后你就可以通过调用 `univerAPI` 的方法来使用 Univer 了，例如创建一个电子表格：
+然后你就可以通过调用 `univerAPI` 的方法来使用 Univer 了，例如获取当前激活的 Workbook：
 
 ```typescript title="main.ts"
-univerAPI.createUniverSheet({
-  name: "My Workbook",
-});
+univerAPI.getActiveWorkbook();
 ```
 
 你可以查看 [Facade API](/api/facade/) 来查看 Facade 的全部能力。接下来几个小节会演示一些常见的使用场景。

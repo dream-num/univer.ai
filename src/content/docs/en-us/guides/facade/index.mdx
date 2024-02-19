@@ -50,12 +50,10 @@ import { FUniver } from "@univerjs/facade";
 const univerAPI = FUniver.newAPI(univer);
 ```
 
-You can then use the Univer functionality by calling methods on the `univerAPI` object. For example, to create a new spreadsheet:
+You can then use the Univer functionality by calling methods on the `univerAPI` object. For example, get the currently activated Workbook:
 
 ```typescript title="main.ts"
-univerAPI.createUniverSheet({
-  name: "My Workbook",
-});
+univerAPI.getActiveWorkbook();
 ```
 
 You can refer to the [Facade API documentation](/api/facade/) for a more detailed description of what you can achieve with Facade. In the following sections, we will demonstrate some common usage scenarios.

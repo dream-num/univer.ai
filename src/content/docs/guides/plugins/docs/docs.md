@@ -20,3 +20,9 @@ title: "@univerjs/docs"
 * @univerjs/engine-render
 * @univerjs/sheets
 * @univerjs/ui
+
+<!--package-locales start-->
+<!--package-locales end-->
+
+<!--package-assets start-->
+<!--package-assets end-->

@@ -17,3 +17,9 @@ title: "@univerjs/design"
 ## 依赖的插件
 
 本插件运行不依赖其他插件。
+
+<!--package-locales start-->
+<!--package-locales end-->
+
+<!--package-assets start-->
+<!--package-assets end-->

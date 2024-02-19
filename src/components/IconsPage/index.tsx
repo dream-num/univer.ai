@@ -1,4 +1,4 @@
-import { SearchSingle28 } from '@univerjs/icons'
+import { SearchSingle16 } from '@univerjs/icons'
 import * as manifest from '@univerjs/icons/esm/manifest'
 import { useMemo, useState } from 'react'
 import { ColorPicker } from './ColorPicker'
@@ -85,7 +85,7 @@ export function IconsPage() {
       <search className={styles.search}>
         <section className={styles.wrapper}>
           <div className={styles.input}>
-            <SearchSingle28 className={styles.icon} />
+            <SearchSingle16 className={styles.icon} />
             <input value={keyword} onChange={handleSearch} placeholder="搜索" />
           </div>
 

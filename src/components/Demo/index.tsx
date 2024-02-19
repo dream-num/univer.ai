@@ -1,9 +1,14 @@
+import type { OpenOptions } from '@stackblitz/sdk'
+import sdk from '@stackblitz/sdk'
 import { useEffect, useMemo, useState } from 'react'
 import styles from './index.module.less'
 
-interface IEmbedProps {
+export interface IEmbedProps {
   title: string
-  src: string
+  type: 'StackBlitz' | 'CodeSandbox'
+  src?: string
+  repoPath?: string
+  openOptions?: OpenOptions
 }
 
 interface IDemo {
@@ -20,6 +25,7 @@ export function Demo(props: IProps) {
 
   const [keyword, setKeyword] = useState('')
   const [activeDemo, setActiveDemo] = useState<IEmbedProps>()
+  const embedDomId = 'embed-playground'
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search).get('title')
@@ -32,7 +38,16 @@ export function Demo(props: IProps) {
     } else {
       setActiveDemo(demo[0].children[0])
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    if (activeDemo?.type === 'StackBlitz') {
+      sdk.embedGithubProject(embedDomId, activeDemo.repoPath!, {
+        ...activeDemo.openOptions,
+      })
+    }
+  }, [activeDemo])
 
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     const value = (e.target as HTMLInputElement).value
@@ -48,6 +63,7 @@ export function Demo(props: IProps) {
       ...group,
       children: group.children.filter(item => item.title.toLocaleLowerCase().includes(keyword.toLocaleLowerCase())),
     })).filter(group => group.children.length)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyword])
 
   return (
@@ -71,7 +87,7 @@ export function Demo(props: IProps) {
                 {group.children.map(item => (
                   <li key={item.title}>
                     <a
-                      className={item.src === activeDemo?.src ? styles.active : ''}
+                      className={item.title === activeDemo?.title ? styles.active : ''}
                       href={`?title=${item.title}`}
                     >
                       {item.title}
@@ -85,13 +101,21 @@ export function Demo(props: IProps) {
       </aside>
 
       <main className={styles.main}>
-        <iframe
-          className={styles.iframe}
-          allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-          sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-          title={activeDemo?.title}
-          src={activeDemo?.src}
-        />
+        {
+          activeDemo?.type === 'StackBlitz'
+            ? (
+              <iframe id={embedDomId} className={styles.iframe} src="about:blank"></iframe>
+              )
+            : (
+              <iframe
+                className={styles.iframe}
+                allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+                sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+                title={activeDemo?.title}
+                src={activeDemo?.src}
+              />
+              )
+        }
       </main>
     </section>
   )

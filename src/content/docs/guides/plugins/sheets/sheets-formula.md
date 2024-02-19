@@ -779,6 +779,7 @@ univer.registerPlugin(UniverSheetsCustomFunctionPlugin);
 1. `ValueObjectFactory` 用来自动识别参数格式创建一个参数实例，范围类型的数据用 `RangeReferenceObject` 来创建参数实例
 2. 数组 `toArrayValueObject` 可以与值直接运算，得到新的数组
 
+
 ## 依赖的插件
 
 本插件运行依赖以下插件：
@@ -786,3 +787,10 @@ univer.registerPlugin(UniverSheetsCustomFunctionPlugin);
 - @univerjs/core
 - @univerjs/engine-formula
 - @univerjs/engine-render
+
+<!--package-locales start-->
+<!--package-locales end-->
+
+<!--package-assets start-->
+<!--package-assets end-->
+

@@ -11,3 +11,9 @@ title: "@univerjs/engine-render"
 本插件运行依赖以下插件：
 
 - @univerjs/core
+
+<!--package-locales start-->
+<!--package-locales end-->
+
+<!--package-assets start-->
+<!--package-assets end-->

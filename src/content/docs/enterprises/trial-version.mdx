@@ -45,8 +45,8 @@ import {TabItem, Tabs} from "@astrojs/starlight/components";
         ```
         4. 启动前端demo。
         ```bash
-        docker run --net=unvier-prod --rm --name univer-collaboration-demo \
-        -p 3010:3010 univer-collaboration-demo:dev
+       docker run --net=unvier-prod --rm --name univer-collaboration-lite \
+               -p 3010:3010 univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/univer-collaboration-lite:latest
         ```
 
     </TabItem>
@@ -70,7 +70,7 @@ import {TabItem, Tabs} from "@astrojs/starlight/components";
         1. 点击[下载](https://release-univer.oss-cn-shenzhen.aliyuncs.com/lite/mac.zip) Apple silicon版本。
 
         2. 进入解压目录下执行命令。
-        注：mac需要在设置与隐私中允许非 App store 应用运行，[详见FAQ](#faq)。
+        注：mac需要在设置与隐私中允许非 App store 应用运行，[详见常见问题](#常见问题)。
         ```bash
         chmod +x ./start_apps.sh && ./start_apps.sh
         ```
@@ -90,7 +90,7 @@ import {TabItem, Tabs} from "@astrojs/starlight/components";
 ![例子](./imgs/img2.png)
 
 
-## FAQ
+## 常见问题
 ### 1. 如何分享到局域网协同
 替换 localhost 为本机ip，并分享给其它内网同事。
 ```bash

@@ -2,6 +2,8 @@ import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import starlight from '@astrojs/starlight'
 import { defineConfig, squooshImageService } from 'astro/config'
+import { packageAssetsPlugin } from './plugins/packageAssetsPlugin.js'
+import { packageLocalesPlugin } from './plugins/packageLocalesPlugin.js'
 
 // https://astro.build/config
 export default defineConfig({
@@ -52,8 +54,8 @@ export default defineConfig({
         {
           label: '🔰 指南',
           translations: {
-            'en-US': 'Guides',
-            'ja-JP': 'ガイド',
+            'en-US': '🔰 Guides',
+            'ja-JP': '🔰 ガイド',
           },
           autogenerate: {
             directory: 'guides/*.md',
@@ -104,12 +106,12 @@ export default defineConfig({
               link: 'guides/release',
             },
             {
-              label: 'FAQ',
+              label: '常见问题',
               translations: {
-                'en-US': 'FAQ',
+                'en-US': 'Troubleshooting',
                 'ja-JP': 'よくある質問',
               },
-              link: 'guides/faq',
+              link: 'guides/troubleshooting',
             },
             {
               label: '路线图',
@@ -157,13 +159,17 @@ export default defineConfig({
                 directory: 'guides/extend',
               },
             },
+            {
+              label: '源码阅读指引',
+              link: 'guides/read-source',
+            },
           ],
         },
         {
           label: '💼 服务端私有部署',
           translations: {
-            'en-US': 'Enterprise',
-            'ja-JP': 'エンタープライズ',
+            'en-US': '💼 Enterprise',
+            'ja-JP': '💼 エンタープライズ',
           },
           items: [
             {
@@ -196,4 +202,10 @@ export default defineConfig({
     }),
     react(),
   ],
+  markdown: {
+    remarkPlugins: [
+      packageAssetsPlugin,
+      packageLocalesPlugin,
+    ],
+  },
 })

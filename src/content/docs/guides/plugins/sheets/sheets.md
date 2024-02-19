@@ -40,3 +40,9 @@ title: "@univerjs/sheets"
 * @univerjs/core
 * @univerjs/engine-formula
 * @univerjs/engine-render
+
+<!--package-locales start-->
+<!--package-locales end-->
+
+<!--package-assets start-->
+<!--package-assets end-->

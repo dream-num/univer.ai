@@ -23,3 +23,10 @@ sidebar:
 * @univerjs/docs
 * @univerjs/engine-render
 * @univerjs/ui
+
+<!--package-locales start-->
+<!--package-locales end-->
+
+<!--package-assets start-->
+<!--package-assets end-->
+
