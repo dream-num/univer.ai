@@ -52,7 +52,9 @@ slug: blog/write-a-csv-import-plugin
 
 Univer 并不限制你创建插件的方式，为了达到更高的工程化标准，推荐通过[命令行工具创建](/guides/extend/write-a-plugin/#创建项目)。
 
-本文为了演示方便，我们直接通过手动创建的方式创建插件。我们在 `src/plugins` 目录下创建 `ImportCSVButton.ts` 文件，代码如下：
+本文为了演示方便，我们直接手动编写的方式创建插件。你可以跟随本文一起动手实践，我们将基于 [Vite 初始 Demo](https://github.com/awesome-univer/sheets-vite-demo) 源码开发，进入 [Playground](/playground/?title=Vite) 一起开始。
+
+我们在 `src/plugins` 目录下创建 `ImportCSVButton.ts` 文件，代码如下：
 
 ```ts
 import { Plugin, Univer } from "@univerjs/core";
@@ -110,7 +112,7 @@ univer.registerPlugin(csvImportPlugin);
 
 刷新页面，可以看到控制台输出了 `onStarting` 日志，说明插件已经挂载到 Univer 实例中并执行了 `onStarting` 生命周期。
 
-:::tip
+:::note
 插件的挂载顺序取决于插件内部的依赖关系，如果插件 A 依赖插件 B，那么插件 B 必须先于插件 A 挂载到 Univer 实例中。
 :::
 
@@ -139,7 +141,7 @@ const menuItem: IMenuItem = {
 
 然后，我们需要访问到 `IMenuService` 的实例对象，该对象可以通过 `@Inject(注入ID)` 装饰器从 DI 容器中获取。
 
-:::tip
+:::note
 通过注入 ID 我们就可以从 DI 容器中获取到对应的对象实例，注入ID 可以是字符串常量，为了维护方便，常会定义一个变量名来存放注入 ID。
 
 在 Univer 中，注入 ID 通常与接口名称相同，例如 `IMenuService` 接口类型的类实现的实例对象的注入 ID 的变量名也是 `IMenuService` 。
@@ -204,10 +206,9 @@ constructor (
 // ...omit other code
 onStarting () {
   // ...omit other code
-  this.menuService.addMenuItem(menuItem);
 
   const command: ICommand = {
-    id: buttonId,
+    id: "import-csv-button",             // command id, same as menu button id
     type: CommandType.OPERATION,
     handler: (accessor: IAccessor) => {
       console.log('click button');       // todo something
@@ -223,7 +224,7 @@ onStarting () {
 
 `ICommand.handler` 是事件处理函数，当命令被触发时，该函数会被调用。
 
-:::tip
+:::note
 函数的参数 `accessor` 是 `IAccessor` 对象，通过该对象可以访问 DI 容器中的其他对象，`IAccessor.get` 与 `Inject` 装饰器类似，都是依赖注入系统的一部分。
 
 `IAccessor` 将 `Command` 与 Univer 的其他对象解耦，使组织代码可以更加灵活，提高可维护性。
@@ -238,7 +239,7 @@ onStarting () {
 
 ### 3. 转换 CSV 为 ICellData
 
-接下来，我们需要在点击事件中弹出文件选择框，读取用户选择的 CSV 文件，这块代码不涉 Univer，就不在本文赘述了, 可以自行查看 `waitUserSelectCSVFile` 方法的实现。
+接下来，我们需要在点击事件中弹出文件选择框，读取用户选择的 CSV 文件，这块代码不涉 Univer，就不在本文赘述了, 可以自行查看 `waitUserSelectCSVFile` 方法的[实现源码](https://github.com/awesome-univer/csv-import-plugin-demo/blob/main/src/plugins/ImportCSVButton.ts#L21)。
 
 我们讲下如何将 CSV 二层数组转换成 Univer 的数据结构 `ICellData` 。
 
@@ -266,7 +267,7 @@ const parseCSVToUniverData = (csv: string[][]): ICellData[][] => {
 
 将 CSV 数据设置到当前表格中，可以通过 `ICommandService.executeCommand` 方法调用 `SetRangeValuesCommand` 命令来实现。
 
-:::tip
+:::note
 Univer 中绝大多数的操作都注册有命令，为开发者提供统一的使用体验，方便扩展和维护。
 
 另外，我们刚刚定义的菜单按钮点击事件，也可以被其它插件或者用户通过命令触发。
