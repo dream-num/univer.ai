@@ -17,7 +17,7 @@ slug: en-us/blog/this-is-univer
 
 This article aims to help newcomers quickly familiarize themselves with the architecture and code of the open-source project "univer". It reflects my learning and summarization during my involvement in the development of "univer" over the past period. There may be inaccuracies or misunderstandings, so feedback and corrections are welcome.
 
-In Chapter One, I will discuss my understanding of the "univer" architecture, how it modularizes components, and the dependencies between these modules. I will then place "univer" within the MVC architectural pattern and analyze its model layer, view layer, controllers' boundaries, and responsibilities.
+In Chapter One, I will discuss my understanding of the "univer" architecture, how it modularize components, and the dependencies between these modules. I will then place "univer" within the MVC architectural pattern and analyze its model layer, view layer, controllers' boundaries, and responsibilities.
 
 In Chapter Two, we will delve into the data structure design of "univer sheet," distinguishing between workbook, sheet, row, column, style, and understanding their relationships, which will be helpful for a deeper comprehension of the code.
 
