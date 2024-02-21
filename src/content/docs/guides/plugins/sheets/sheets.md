@@ -12,7 +12,6 @@ title: "@univerjs/sheets"
 * 更改电子表格数据的 commands / mutations
 * 公式核心能力
 * 数字格式核心能力
-* 电子表格的 canvas 绘制
 
 ## `SheetInterceptorService`
 

@@ -82,7 +82,7 @@ export default defineConfig({
             {
               label: '简单使用 Univer',
               translations: {
-                'en-US': 'Getting Started',
+                'en-US': 'Use with Ease',
                 'ja-JP': 'はじめる',
               },
               autogenerate: {

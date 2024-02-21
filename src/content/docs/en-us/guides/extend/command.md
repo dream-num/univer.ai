@@ -1,23 +1,84 @@
 ---
-title: Extend Command
+title: Extending Commands
 ---
 
 :::info
-Before reading this section, we suggest that you familiarize yourself with [Univer's command system](/guides/architecture/architecture/#CommandSystem) 
+It is recommended to familiarize oneself with the [Univer command system](/en-us/guides/architecture/architecture/#command-system) before reading this section.
 :::
 
 ## Create a New Command
 
+To create a new command, two steps are required:
+
+First step is to define an object that implements `ICommand` interface:
+
+```ts
+import { ICommand, CommandType } from '@univer/core';
+
+export interface IYourCommandInterface {
+    // Your command's param's interface.
+}
+
+export const YourCommand: ICommand = {
+    name: 'your-command',
+    type: CommandType.COMMAND,
+    handler: async (accessor: IAccessor, params?: IYourCommandInterface) => {
+        // Implement your business logic here.
+    }
+}
+```
+
+Commands require the declaration of the following attributes:
+
+1. `name`: The command's name, which must be unique. It is suggested to name commands in the format of `domain:type:meaning`, such as `sheet.command.copy` and `sheet.command.paste`.
+2. `type`: The command's type.
+3. `handler`: The command's execution logic, which accepts a single `IAccessor` object and the command parameters. The `IAccessor` object allows access to Univer's dependency injection system.
+
+Commands may receive parameters, which must be grouped into an object. The interface of the parameter is determined by your business logic. Of course, a command can also not receive any parameters, in which case the second parameter of handler is undefined.
+
+The second step is to register this command to the `ICommandService`:
+
+```ts
+import { ICommandService, Disposable } from '@univer/core';
+
+export class YourController extends Disposable {
+    constructor(
+        @ICommandService private readonly _commandService: ICommandService
+    ) {
+        this.disposeWithMe(this._commandService.registerCommand(YourCommand));
+    }
+}
+```
+
+After declaring the required attributes, the command can be executed using the `ICommandService`. In real-world scenarios, it's common to trigger commands via the user interface (UI). For more information, please refer to the ["Extend UI"](./ui.md) guide.
 
 ### Undo / Redo
 
+Univer offers undo-redo functionality for commands that require it. To utilize this feature, call the appropriate methods of the `IUndoRedoService` within the `handler` callback function of your command:
+
+```ts
+import { IUndoRedoService } from '@univer/core';
+
+export const YourCommand: ICommand = {
+    name: 'your-command',
+    type: CommandType.COMMAND,
+    handler: async (accessor: IAccessor, params?: IYourCommandInterface) => {
+        const undoRedoService = accessor.get(IUndoRedoService);
+
+        undoRedoService.pushUndoRedo({
+            unitID: 'your-documents-id',
+            undoMutations: [/** mutations for undo */],
+            redoMutations: [/** mutations for do and redo */],
+        });
+    }
+}
+```
 
 ## Extend an Existing Command
 
 Beyond creating new commands, Univer also supports extending existing ones, a feature especially important for expanding Univer's built-in capabilities. Here, three representative scenarios are introduced.
+
 ### Add Mutations at the Specific Command Execution Time
-
-
 
 ### Extend the Copy-paste Functionality
 
@@ -56,6 +117,7 @@ export class YourController extends Disposable {
 ```
 
 #### Handling the Copy Process with Hooks
+
 Copy and paste behaviors are not always consistent, and the source of the copy and the destination of the paste can be both within Univer and external to it. Therefore, in a hook object, copy and paste can be processed independently, and you can choose to implement both or only one of them. In Univer, copy-paste behavior is mainly handled through the clipboard and relies on the `clipboard.write` API.
 
 Copy and cut operations can be triggered in Univer through keyboard shortcuts and menus. Once triggered, Univer will generate HTML and PLAIN text and write them to the clipboard.
@@ -64,20 +126,11 @@ Copy and cut share Hook Functions, which will be distinguished only during paste
 
 The following methods are exposed to implement in hook to handle the HTML generation process:
 
-1. onBeforeCopy:
-This Hook Function will be executed before the copy, and you can do some preliminary work here.
-
-2. onCopyCellContent:
-This Hook Function will handle the content of the copied cell, and it will process the string content of the <td /> inside the <table /> in the generated HTML.
-
-3. onCopyRow:
-This Hook Function will handle the row properties of the copy, and it will process the attributes of the <tr /> inside the <table /> in the generated HTML.
-
-4. onCopyColumn:
-This Hook Function will handle the column properties of the copy, and it will process the string content of the <colgroup /> inside the <table /> in the generated HTML.
-
-5. onAfterCopy:
-This Hook Function will be executed after the copy.
+1. onBeforeCopy: This Hook Function will be executed before the copy, and you can do some preliminary work here.
+2. onCopyCellContent: This Hook Function will handle the content of the copied cell, and it will process the string content of the <td /> inside the <table /> in the generated HTML.
+3. onCopyRow: This Hook Function will handle the row properties of the copy, and it will process the attributes of the <tr /> inside the <table /> in the generated HTML.
+4. onCopyColumn: This Hook Function will handle the column properties of the copy, and it will process the string content of the <colgroup /> inside the <table /> in the generated HTML.
+5. onAfterCopy: This Hook Function will be executed after the copy.
 
 
 #### Handling the Paste Process with Hooks
