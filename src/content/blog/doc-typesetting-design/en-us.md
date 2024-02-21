@@ -216,15 +216,15 @@ The basic steps of the algorithm involve:
 
 1. **Text Analysis**: Initially, the algorithm traverses each character in the text and assigns each character to a Line Break Class based on the Unicode standard.
 2. **Utilizing the Pair Table**: Subsequently, the algorithm examines pairs of adjacent characters' Line Break Classes and utilizes the Pair Table to determine whether a line break is permissible between these two categories.
-
    - The Pair Table is a two-dimensional matrix where rows and columns represent the Line Break Class of preceding and succeeding characters, respectively.
    - Each cell in the table contains a line breaking action (such as "allow line break," "disallow line break," "direct line break," etc.).
-3. **Line Breaking Rules**: The line breaking rules in the Pair Table may also be influenced by other factors, such as:
 
+3. **Line Breaking Rules**: The line breaking rules in the Pair Table may also be influenced by other factors, such as:
    - **Mandatory Break**: Certain characters (e.g., newline characters) necessitate a line break after them.
    - **Direct Break**: Some character pairs can directly allow a line break without further examination.
    - **Indirect Break**: Certain character pairs may permit a line break, but the presence of whitespace characters needs to be checked.
    - **Prohibited Break**: Line breaks are not permitted between certain character pairs.
+
 4. **Determining Line Break Points**: Finally, based on the aforementioned rules, all potential line break points are identified. The text layout system can utilize these break points to determine the actual line break positions within the text.
 
 The above description outlines the implementation process of the Unicode Line Break Algorithm. In our code implementation, we drew inspiration from the _foliojs/linebreak_ implementation and made appropriate enhancements and modifications. Those interested may explore the relevant source code for further insights.
