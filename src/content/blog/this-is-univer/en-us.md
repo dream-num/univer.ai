@@ -19,7 +19,7 @@ This article aims to assist newcomers in swiftly acquainting themselves with the
 
 Chapter One will delve into my comprehension of the architecture of "univer", discussing how "univer" modularizes and establishes dependencies among its modules. Subsequently, we will integrate "univer" into the MVC architectural pattern, dissecting the boundaries and responsibilities of its model layer, view layer, and controllers.
 
-In Chapter Two, we will initially explore the data structure design of the model layer in the "univer sheet," distinguishing between entities such as workbooks, sheets, rows, columns, and styles. Understanding their hierarchical relationships will facilitate a deeper comprehension of the code.
+In Chapter Two, we will initially explore the data structure design of the model layer in the "univer sheet", distinguishing between entities such as workbooks, sheets, rows, columns, and styles. Understanding their hierarchical relationships will facilitate a deeper comprehension of the code.
 
 Chapters Three and Four will analyze the codebase of "univer" through two control chains. One chain entails the process of initializing and rendering "univer," progressing from the model layer to the view layer. The other chain involves "univer" responding to user events, triggering data changes in the model layer, and subsequently re-rendering the page, moving from the view layer to the model layer. These sections will involve extensive source code analysis, focusing on the core logic while excluding edge cases. Additionally, each code block will be prefaced with the corresponding TypeScript file, enhancing the readability of the source code.
 
