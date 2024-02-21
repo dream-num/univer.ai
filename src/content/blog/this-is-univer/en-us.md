@@ -15,35 +15,35 @@ slug: en-us/blog/this-is-univer
 
 ## Chapter Zero: Introduction
 
-This article aims to help newcomers quickly familiarize themselves with the architecture and code of the open-source project "univer". It reflects my learning and summarization during my involvement in the development of "univer" over the past period. There may be inaccuracies or misunderstandings, so feedback and corrections are welcome.
+This article aims to assist newcomers in swiftly acquainting themselves with the architecture and code of the open-source project "univer." It also encapsulates my learning and synthesis from my recent involvement in the development of "univer." There may be instances of inaccuracy or misconceptions, and I welcome comments and corrections from the community.
 
-In Chapter One, I will discuss my understanding of the "univer" architecture, how it modularize components, and the dependencies between these modules. I will then place "univer" within the MVC architectural pattern and analyze its model layer, view layer, controllers' boundaries, and responsibilities.
+Chapter One will delve into my comprehension of the architecture of "univer," discussing how "univer" modularizes and establishes dependencies among its modules. Subsequently, we will integrate "univer" into the MVC architectural pattern, dissecting the boundaries and responsibilities of its model layer, view layer, and controllers.
 
-In Chapter Two, we will delve into the data structure design of "univer sheet," distinguishing between workbook, sheet, row, column, style, and understanding their relationships, which will be helpful for a deeper comprehension of the code.
+In Chapter Two, we will initially explore the data structure design of the model layer in the "univer sheet," distinguishing between entities such as workbooks, sheets, rows, columns, and styles. Understanding their hierarchical relationships will facilitate a deeper comprehension of the code.
 
-Chapters Three and Four will analyze the codebase from two control chains within "univer." One chain covers the process of "univer" startup and initial rendering, transitioning from the model layer to the view layer. The other chain involves "univer" responding to user events, triggering model layer data changes, and page re-rendering, transitioning from the view layer to the model layer. These sections will involve a significant amount of source code analysis while retaining the primary logic and omitting edge case code. Each code block's first line indicates the TS file it belongs to, facilitating direct code reading.
+Chapters Three and Four will analyze the codebase of "univer" through two control chains. One chain entails the process of initializing and rendering "univer," progressing from the model layer to the view layer. The other chain involves "univer" responding to user events, triggering data changes in the model layer, and subsequently re-rendering the page, moving from the view layer to the model layer. These sections will involve extensive source code analysis, focusing on the core logic while excluding edge cases. Additionally, each code block will be prefaced with the corresponding TypeScript file, enhancing the readability of the source code.
 
 ## Chapter One: Understanding the Code Architecture
 
-> "Outer beauty pleases the eye, inner beauty captivates the heart." —Voltaire
+> External beauty may please the eyes, but inner beauty can touch the soul. —Voltaire
 
-### Module Splitting and Dependency Relationships in Univer
+### Module Separation and Dependency Relationships in Univer
 
 #### Principle of No Dependency Cycles
 
-Software architecture rules essentially revolve around arranging code blocks. Based on the business domain, software architecture organizes project code into different modules, ensuring a separation of concerns among modules. Modules have clear dependencies between them, forming a directed acyclic graph, known as the principle of no dependency cycles. As illustrated below, system-level and application-level business logic are the core and most stable parts of the project, placed at the core of the architecture. Other elements like user interfaces, rendering engines, frontend frameworks, and persistent databases, which may be replaced during architecture evolution, depend on the central business entity, positioned on the outer layers.
+The rules of software architecture essentially revolve around arranging and combining code blocks. Software architecture organizes project code based on the business domain, breaking it down into different modules. Each module focuses on separation of concerns, with clear dependencies among them forming a directed acyclic graph, known as the Principle of Dependency Graphs. As illustrated below, system-level and application-level business logic constitute the core and most stable parts of the project, positioned at the innermost layer of the architecture. Components such as user interfaces, rendering engines, front-end frameworks, and persistent databases, which are subject to potential replacements during architectural evolution, depend on the central business entity, positioned in the outer layers.
 
 ![Univer Module Dependencies](./cover.png)
 
-(Core, sheet, engine-render, ui, sheet-ui correspond to different folders under the "packages" directory in the repository)
+(Note: core, sheet, engine-render, ui, sheet-ui correspond to different directories under the "packages" folder in the repository)
 
-In the architecture design of Univer, the core module strives to contain only the most essential business logic. Additional functionalities built on top of the core business logic are provided through plugins, following the **Micro kernel architecture** concept. In the diagram, engine-render, ui, sheet, etc., are modularized plugins that provide extra capabilities to the core. For example, the sheet plugin enhances sheet-related functions, the engine-render (canvas rendering engine) offers canvas rendering capabilities, and the formula engine provides formula-related calculations and parsing.
+In the architectural design of Univer, efforts are made to ensure that the core module contains only the most essential business logic. Additional functionalities built upon this core business logic are provided through a plugin-based approach, embodying the concept of a **microkernel architecture**. In the diagram above, modules like engine-render, ui, sheet are all plugin-based, offering supplementary capabilities to the core. For instance, the sheet module enhances sheet-related functionalities, the engine-render (canvas rendering engine) provides canvas rendering capabilities, and the formula engine offers computation and parsing of formulas.
 
 #### Dependency Inversion
 
-Initially, one might assume that the core module depends on the engine-render module for canvas rendering and on the ui module for page framework rendering and styling menus. This setup can lead to a problem where the core module relies on other unstable modules. For instance, styling menus may frequently change in position or appearance, potentially affecting the core module's stability. In Univer, the issue of core module dependency on unstable modules is mitigated through **Dependency Inversion**, as shown in the diagram. All outer rings depend on inner rings, while inner rings cannot depend on outer rings. Univer incorporates **Dependency Injection (DI)** to invert dependencies, ensuring that the core layer does not rely on outer layers. The following code examples illustrate this concept clearly:
+At first glance, one might assume that the core module in Univer depends on the engine-render module for canvas rendering and on the ui module for rendering the page framework and styling menus. However, this setup poses a challenge: the core module relies on other modules, which are often unstable. For instance, styling menus may frequently change in position or appearance, potentially destabilizing the core module. In Univer, the **Dependency Inversion** principle is employed to address this issue. As depicted in the diagram above, all outer layers depend on the inner layers, while the inner layers remain independent of the outer layers. In Univer, **Dependency Injection (DI)** is introduced to invert dependencies, avoiding direct dependencies from the core layer to the outer layer. The following code example clarifies this concept further:
 
-In the absence of dependency injection, code might look like this:
+Without dependency injection, one might write code like this:
 
 ```ts
 class SheetPlugin {
@@ -71,31 +71,31 @@ class SheetPlugin {
 }
 ```
 
-In the code snippet above, the `_commandService` property is declared to have the `ICommandService` interface. Through relevant dependency bindings, methods in `SheetPlugin` can call methods defined in the `ICommandService` interface. This decouples the direct dependency relationship between `SheetPlugin` and `CommandService`. The diagram below illustrates this concept:
+In the code above, the _commandService property is declared to possess the ICommandService interface. Through relevant dependency bindings, methods defined in the ICommandService interface can be invoked within SheetPlugin's methods. This way, SheetPlugin depends on the ICommandService interface, while the CommandService class implements this interface. This decouples the direct dependency relationship between SheetPlugin and CommandService, as illustrated below:
 
 <img src="https://github.com/Jocs/jocs.github.io/assets/9712830/d5eaaf25-8ad8-423b-8437-fc06551e8a92" width="600" style="margin: 0 auto; display: block;" >
 
-By implementing the `ICommandService` interface, and through dependency injection, the direct dependency between `SheetPlugin` and `CommandService` is decoupled, ultimately ensuring the stability of core business logic.
+Through the ICommandService interface, dependency inversion is achieved. Without the ICommandService interface, SheetPlugin would directly depend on CommandService, potentially destabilizing the core business logic (SheetPlugin). By introducing the ICommandService interface and employing dependency injection, if we consider the dashed box as a whole, with the CommandService class pointing to (implementing) the dashed box, we ultimately achieve dependency inversion, ensuring the stability of the core business logic.
 
 ### A Brief Discussion on the MVC Architecture in Univer
 
 <img src="https://github.com/Jocs/jocs.github.io/assets/9712830/f4c3a675-c836-48fd-b606-55a44cf318f7" width="600" style="margin: 0 auto; display: block;" >
 
-MVC has a history of over 50 years in the GUI programming domain, yet it has never had a clear definition. The diagram above depicts two typical variations of MVC. In [MVC with ASP.NET](http://asp.net/), the controller manages the view and model layers. When the controller alters data in the model layer, the view layer directly reads data from the model layer through subscription mechanisms to update the view. In **MVC with Rails**, the view layer does not directly interact with the model layer. Instead, it goes through the controller as an intermediary to fetch data from the model layer for rendering. This approach ensures a complete decoupling of the view and model layers, making the control flow clearer.
+MVC has a history of over 50 years in the entire GUI programming domain, yet it has never had a precise definition. The diagram above illustrates two typical variants of MVC. In [MVC with ASP.NET](http://asp.net/), the controller is responsible for managing the view and model. When the controller modifies data in the model layer, the view layer directly reads data from the model layer through some subscription mechanism and updates the view. In **MVC with Rails**, the view layer does not directly interact with the model layer. Instead, it acts as an intermediary through the controller. The view layer needs to fetch data from the model layer via the controller for rendering. This approach decouples the view layer from the model layer entirely, leading to clearer control flow.
 
-Upon examining the Univer project's codebase, one can observe numerous files named with suffixes like `controller`, `view`, and `model`. This naming convention indicates that Univer follows the traditional MVC architectural pattern. Univer's MVC architecture is more similar to MVC with Rails because the view layer does not directly read data from the model layer or subscribe to changes in the model layer (as will be mentioned later—it subscribes to Mutations). Instead, it acts as a data cache (similar to a ViewModel), managed by the SheetSkeleton class.
+Upon examining the Univer project codebase, one can observe numerous files named with the suffixes `controller`, `view`, and `model`, indicating the adoption of a traditional MVC architectural pattern. In Univer, the MVC architecture more closely resembles MVC with Rails, as the view layer does not directly read data from the model layer or subscribe to changes in the model layer (which will be discussed further below, as it subscribes to Mutations), instead employing a layer of data caching (similar to a ViewModel), as seen in the SheetSkeleton class.
 
-When initially exploring the codebase, some doubts may linger:
+Initially delving into the project code raised several questions:
 
 1. How does Univer organize and manage the model layer?
-2. What are the responsibilities of controllers in Univer, and how is controller code architecture kept clear?
+2. What are the responsibilities of controllers in Univer, and how is the clarity of controller code architecture ensured?
 3. How is the view layer in Univer organized and managed?
 
-By reading the source code, we can discuss how Univer answers these questions from an architectural perspective.
+By examining the source code, let's explore how Univer addresses these questions from an architectural perspective.
 
-#### Model Layer
+#### Model Layer (Model)
 
-In Univer, the entire model layer is relatively thin. Taking Univer sheet as an example, in the core module, the management of sheet-related model data is done through the Workbook and Worksheet classes, providing storage and management functionalities for the relevant model data. For instance, in the Worksheet class, there are row-manager, column-manager, and related classes and methods to manage each sheet's model data. For example, with the row-manager, we can obtain information and data about table rows:
+The model layer in Univer tends to be relatively thin. Taking Univer sheet as an example, in the core module, the Workbook and Worksheet classes are utilized to manage sheet-related model data, providing the necessary data storage and management functionalities. For instance, in the Worksheet class, there are row-manager, column-manager, and related classes and methods to manage each sheet's model data. For instance, regarding the row-manager, we can retrieve information and data about table rows:
 
 ```ts
 getRowData(): ObjectArray<IRowData>;
@@ -104,63 +104,71 @@ getRowOrCreate(rowPos: number): IRowData;
 // ...
 ```
 
-It's easy to understand that the data we render cannot directly use the underlying model data. Often, it needs to undergo certain calculations to generate a "model layer" suitable for direct view rendering. For instance, during view rendering, we need to calculate the total height of rows and columns. By considering the content of each row, we calculate the minimum row height required to accommodate the row's content. Through a series of calculations, we ultimately determine the layout of the sheet page for the final rendering. All these calculations are encapsulated in the SheetSkeleton class in the view layer.
+It is essential to understand that the data we render cannot directly use underlying model data; it often requires some calculations to generate a "model layer" suitable for direct view rendering. For example, during rendering, we need to calculate the total height of rows and columns. By analyzing the content of each row, we can determine the minimum row height required to accommodate the data. Through a series of calculations, the layout of the sheet page is ultimately determined for final rendering. These calculations are primarily housed in the view layer's SheetSkeleton class.
 
 #### Responsibilities of Controllers
 
 <img src="https://github.com/Jocs/jocs.github.io/assets/9712830/b8651083-0af7-47dd-874a-5970e02a43de" width="400" style="margin: 0 auto; display: block;" >
 
-In traditional MVC architecture, the responsibilities of the view and model layers are often clear, while the controller bears the main business logic responsibilities, managing the view layer and model layer tasks. Controllers can become bulky, handling various tasks. How does Univer avoid bloated controllers? In Univer, the controller (in the MVC sense) is further broken down into **Controllers** (in the narrow sense in Univer), **Commands**, and **Services**. Almost all the application's business logic is encapsulated in controllers, each with distinct roles, ensuring the normal operation of the Univer application.
+In traditional MVC architecture, the roles of the view and model layers are usually more distinct, with the controller assuming the primary business logic responsibilities and managing tasks related to the view and model layers. Controllers often tend to become cumbersome, so how does Univer prevent bloated controllers? In Univer, the controller (in the MVC sense) is further broken down into **Controllers** (narrow sense controllers in Univer), **Commands**, and **Services**. Additionally, almost all of Univer's business logic is encapsulated within the controllers, each fulfilling specific roles to ensure the smooth operation of the Univer application.
 
 **Responsibilities of Controllers**
 
-- Initialize some rendering logic and event listeners, such as in the SheetRenderController class, executed during the Rendered lifecycle of the application. It initializes the page data refresh (_initialRenderRefresh), listens to Command executions involving Mutations to modify the model layer, and triggers page rendering logic.
-- Interact with the view layer, retrieve some data information from the view layer. For example, in the AutoHeightController class, it calculates sheet auto row height based on Commands' requirements through the view layer.
-- Bind UI events, such as in the HeaderResizeController class, executed during the Rendered lifecycle of the application. During initialization, it binds hover events for spreadsheetRowHeader, spreadsheetColumnHeader to show and hide resize headers (used to adjust row and column heights and widths). It also binds pointer down/move/up events to the resize header, enabling it to respond to drag movements, handle relevant user operations, and ultimately reflect changes to the model layer and view layer.
+- Initializing rendering logic and event listeners, such as in the SheetRenderController class, executed during the application's Rendered lifecycle. It initializes page data refresh (_initialRenderRefresh), listens for Command executions, involves Mutations to modify the model layer, and triggers page rendering logic.
+- Interacting with the view layer to obtain certain data information. For instance, in the AutoHeightController class, automatic row height for the sheet is computed based on Commands' requirements.
+- Binding UI events, as seen in the HeaderResizeController class, executed during the application's Rendered lifecycle. During initialization, it binds hover events for spreadsheetRowHeader and spreadsheetColumnHeader to show and hide resize headers (for adjusting row and column heights). It also binds pointer down/move/up events to the resize header, allowing it to respond to drag movements, handle user interactions, and ultimately reflect changes in the model layer and updates in the view layer.
 
 **Responsibilities of Commands**
 
-Commands can be understood as single user interaction operations, such as merging cells, clearing selections, inserting rows/columns, setting cell styles, etc., and modifying the model layer, triggering view layer rendering. `Commands` have three types: `COMMAND`, `MUTATION`, `OPERATION`.
+Commands can be viewed as individual user interaction operations, such as merging cells, clearing selections, inserting rows/columns, setting cell styles, etc., which modify the model layer and trigger view layer rendering. `Commands` come in three types: `COMMAND`, `MUTATION`, `OPERATION`.
 
-- **COMMAND** represents a single user interaction operation triggered by user behavior. It can spawn another COMMAND, for example, when a user clicks on the text wrap menu item in the menu, it triggers `SetTextWrapCommand`, which can spawn `SetStyleCommand` to handle all style changes uniformly. A `COMMAND` can spawn another `COMMAND`, but it cannot fork, as we need to handle undo/redo operations in `COMMAND` (undo/redo might be moved to the data layer later). However, a `COMMAND` can spawn multiple `MUTATION` and `OPERATION`.
-- **MUTATION** is an atomic operation on model layer data, such as `SetRangeValuesMutation` to modify cell styles and values within a selection range, or SetWorksheetRowHeightMutation to change the height of rows within a selection range. Executing a `MUTATION` not only modifies model data but also triggers view re-rendering. Data modifications in MUTATION need to be coordinated and conflicts resolved.
-- **OPERATION** is a change in application state, representing a temporary state of the application, such as page scroll position, user cursor position, current selection, etc. It does not involve coordination or conflict resolution, mainly used for future functionalities like live share (similar to Feishu's magic share).
+- **COMMAND** represents a user's single interaction operation triggered by user actions. It can spawn another COMMAND, such as clicking the text wrap menu item in the menu triggering the SetTextWrapCommand, which then spawns the SetStyleCommand to handle all style changes. A COMMAND can spawn another COMMAND but cannot fork, as we need to handle undo/redo operations within COMMAND (undo/redo might be moved to the data layer later). However, a COMMAND can spawn multiple MUTATIONS and OPERATIONS.
+- **MUTATION** can be understood as atomic operations on model layer data, like SetRangeValuesMutation modifying cell styles and values within the selected range, or SetWorksheetRowHeightMutation altering row heights within the selected range. Executing a MUTATION not only modifies model data but also triggers view re-rendering. Data modifications in MUTATION need to be coordinated and conflict resolved.
+- **OPERATION** pertains to changes in application state, representing a temporary state of the application, such as page scroll position, user cursor position, current selection, etc., without involving coordination or conflict resolution, primarily used for future functionalities like live share (similar to Feishu's magic share).
 
 **Responsibilities of Services**
 
-Services provide various services for the entire Univer application, serving as the bearer of Separation of Concerns in the Univer project architecture.
+Services provide various services to the entire Univer application, embodying the concept of Separation of Concerns in the Univer project architecture.
 
-- Manage the application lifecycle, such as the LifecycleService class, which stores the application's lifecycle state values and provides the subscribeWithPrevious method for other modules to subscribe to changes in the application's lifecycle state values and perform responsive tasks, such as initialization of dependencies.
-- Handle application history operations and store historical operations, allowing users to undo/redo previous actions. In the LocalUndoRedoService class, the `pushUndoRedo` method pushes undo/redo information onto the stack, and the `updateStatus` method triggers undo/redo operations.
-- Manage network IO and websocket connections.
+- Managing application lifecycle, as seen in the LifecycleService class, which stores the status values of the application lifecycle and provides the subscribeWithPrevious method for other modules to subscribe to changes in application lifecycle status values and execute responsive tasks like dependency initialization.
+- Handling application history operations and storing historical operations, enabling users to undo/redo previous actions. In the LocalUndoRedoService class, undo/redo information is pushed onto a stack through the pushUndoRedo method, and the updateStatus method triggers undo/redo operations.
+- Managing network IO and WebSocket connections.
 
-In summary, Controllers, Commands, and Services are collectively referred to as controllers in the MVC pattern, handling a significant amount of business logic in Univer. The main responsibilities are listed above (more detailed analysis of how controllers work will be provided in Sections Three and Four).
+In summary, Controllers, Commands, and Services collectively referred to as controllers in MVC, carry out a significant amount of business logic in Univer. The main responsibilities include (further detailed analysis on how controllers operate will be provided in subsequent sections):
 
-#### View Layer
+1. Managing the entire application's lifecycle
+2. Binding and responding to UI events, such as double-clicks, cursor movements, etc.
+3. Controlling view rendering and triggering rendering logic
+4. Communicating with the view layer to retrieve computed page layout information
+5. Modifying the model layer through Command/Mutation to trigger interface rendering
+6. Handling undo/redo-related tasks
+7. Managing collaboration and network IO
 
-In Univer, there are two rendering approaches: Canvas rendering engine and React rendering through the DOM. The Canvas rendering engine primarily renders the main part of the sheet: row headers, column headers, sheet cells, selections, cell editors, etc. React is mainly used to render the top menu bar, context menu bar, pop-ups, etc.
+#### View Layer (View)
 
-The main body of the sheet is rendered using the Canvas rendering engine, ensuring optimal performance and smooth animation effects for table rendering under large data sets. Menus, on the other hand, require event responsiveness, where DOM has advantages over Canvas.
+In Univer, there are two rendering methods: canvas rendering engine and React rendering through the DOM. The canvas rendering engine primarily renders the main components of the sheet: row headers, column headers, sheet cells, selections, cell editors, etc. React is mainly used to render the top menu bar, context menu bar, pop-ups, etc.
 
-Components and services required for Canvas rendering are located in the `base-render` folder, handling sheet rendering components like Spreadsheet, SpreadsheetRowHeader, SpreadsheetColumnHeader, etc. Event response mechanisms are defined on Canvas components to ensure independent event handling for each component, although event handling is not performed in the view layer. These events need to be handled in Controllers.
+Canvas rendering is utilized for rendering the main body of the sheet, ensuring an optimal performance experience for table rendering with large datasets and smooth animation effects. On the other hand, menus require responsiveness to user events, where DOM often holds an advantage over Canvas.
 
-The `base-ui/Components` folder is responsible for rendering basic menu components and publishing user events. The base-ui module is also responsible for rendering the entire Univer sheet page framework and handling user interaction operations, such as keyboard shortcuts, copy-paste, etc.
+Components and services required for Canvas rendering are located in the `base-render` folder, encompassing sheet rendering-related components such as Spreadsheet, SpreadsheetRowHeader, SpreadsheetColumnHeader, etc. Additionally, a set of event response mechanisms is defined on Canvas components to ensure that each component can independently respond to events but does not handle these events in the view layer. These events need to be managed in the Controllers.
+
+The `Base-ui/Components` folder code is responsible for rendering basic menu components and publishing user events. The base-ui module is also responsible for rendering the entire application framework. For instance, in the DesktopUIController class, bootstrapWorkbench initiates the rendering of the entire application framework and mounts the Canvas element.
 
 ## Chapter Two: Univer Sheet Data Structure
 
-To understand a project, let's start with its data structure.
+Understanding a project often begins with delving into its data structures.
 
-The data types related to sheets are defined in the [Interfaces](https://github.com/dream-num/univer/tree/dev/packages/core/src/Types/Interfaces) folder, with the following relationships:
+The definitions of data types related to the Univer sheet are housed in the [Interfaces](https://github.com/dream-num/univer/tree/dev/packages/core/src/Types/Interfaces) directory. The hierarchical relationships are illustrated below:
 
 <img src="https://github.com/Jocs/jocs.github.io/assets/9712830/51109cec-c76f-46c1-be53-d26add7fbdd6" width="500" style="margin: 0 auto; display: block;" >
 
-The overall data type definition of Univer sheet is as shown in the above diagram. A workbook contains multiple sheets, and the styles referenced by sheets are defined at the top-level workbook to ensure style reuse, reducing memory overhead, which is consistent with Excel. In the IWorksheetConfig, the cellData field is defined as a two-dimensional matrix used to persist cell information, as defined in the type information of ICellData. **'p' indicates rich text, an interface type IDocumentData, essentially an Univer document, which is a unique feature of Univer's design - each cell in Univer sheet can be transformed into an Univer document**. The 's' field mostly contains a string ID pointing to the styles field in IWorkbookConfig, from which the style information for that cell can be retrieved.
+The overall data type definitions for Univer sheets are depicted in the above diagram. A workbook encompasses multiple sheets, with the styles referenced by sheets defined at the top-level workbook. This design choice ensures style reusability, reducing memory overhead, aligning with Excel's structure. Within the IWorksheetConfig interface, the cellData field is defined as a two-dimensional matrix, persisting cell information, as specified in the ICellData type. Notably, the p field denotes rich text, referencing the interface type IDocumentData, essentially representing a Univer document. This unique feature underscores Univer's distinctive design aspect, where each cell in a Univer sheet can transform into a Univer document. The s field predominantly consists of a string id, pointing to the styles field in IWorkbookConfig, facilitating the retrieval of style information for the respective cell.
 
-The diagram does not include all the fields defined in each interface. For more information, it is recommended to directly refer to the [type definition file](https://github.com/dream-num/univer/blob/9a505ec3ba9de96677b9caaa821e287e71ebe0cf/packages/core/src/Types/Interfaces/IWorkbookData.ts#L12) above, where corresponding comments are also provided.
+While the diagram does not encompass all fields defined within each interface, for a comprehensive understanding, it is recommended to directly explore the aforementioned [type definition file](https://github.com/dream-num/univer/blob/9a505ec3ba9de96677b9caaa821e287e71ebe0cf/packages/core/src/Types/Interfaces/IWorkbookData.ts#L12), which also includes relevant annotations for further clarity.
 
-## Chapter Three: Application Startup to Rendering Process
+## Chapter Three: Application Initialization to Rendering Process
 
-How does Univer render pages? It's essentially the entire process of starting the Univer application, and also the process from the model layer to the view layer. Before understanding page rendering, let's first understand the lifecycle of Univer, which was also mentioned in the Services section above.
+Understanding how Univer renders its pages essentially encompasses the entire process of Univer application startup, also representing the transition from the model layer to the view layer. Before delving into page rendering, let's first grasp the lifecycle of Univer, which was briefly mentioned in the Services section.
 
 ### Application Lifecycle
 
@@ -186,19 +194,19 @@ export const enum LifecycleStages {
 }
 ```
 
-Univer has four stages in its lifecycle: `Starting`, `Ready`, `Rendered`, and `Steady`. In the Starting stage, plugins are registered with Univer. In the Ready stage, UniverSheet is instantiated, and the initialization functions of various plugins are executed. The Rendered stage completes the first rendering, and in the Steady stage, the application is fully launched, and users can use all features.
+The Univer lifecycle comprises four stages: `Starting`, `Ready`, `Rendered`, and `Steady`. During the `Starting` stage, plugins are registered in Univer. Upon entering the `Ready` stage, Univer business instances (UniverDoc / UniverSheet / UniverSlide) are created, and services or controllers provided by plugins are initialized. The application is then prepared for the initial rendering. Subsequently, the `Rendered` stage signifies the completion of the first rendering, while the `Steady` stage indicates that all deferred tasks are finished, and the application is fully operational for user interaction.
 
-When do the various lifecycle stages get triggered?
+When are the various lifecycle stages triggered?
 
-**Starting Stage**: In the `_tryStart` method, the LifecycleService class is instantiated, and the application enters the Starting stage. **At this stage, the onStarting hooks of plugins are also executed**.
+**Starting Stage**: In the `_tryStart` method, the LifecycleService class is instantiated, marking the application's entry into the Starting stage. During this phase, plugins' `onStarting` hooks are executed.
 
-**Ready Stage**: After instantiating UniverSheet, in the `_tryProgressToReady` method, the LifecycleService stage value is set to Ready. **At this stage, the onReady hooks of various plugins are also executed**.
+**Ready Stage**: After instantiating UniverSheet, in the `_tryProgressToReady` method, the LifecycleService stage value is set to Ready. At this point, plugins' `onReady` hooks are executed.
 
-**Rendered Stage**: In the DesktopUIController, after bootstrapping the entire application, the LifecycleService stage value is marked as Rendered.
+**Rendered Stage**: In the DesktopUIController, after bootstrapping the entire application, the LifecycleService stage value is set to Rendered.
 
-**Steady Stage**: After the Rendered stage, the Steady stage is triggered after a delay of 3000 seconds.
+**Steady Stage**: Following the Rendered stage, the Steady stage is triggered after a delay of 3000 milliseconds.
 
-Through the `@OnLifecycle` annotation, we can precisely control when a class is instantiated during a specific lifecycle stage, as shown below:
+Through the `@OnLifecycle` annotation, precise control over when a class is instantiated during a specific lifecycle stage can be achieved, as demonstrated below:
 
 ```ts
 @OnLifecycle(LifecycleStages.Rendered, SheetRenderController)
@@ -207,23 +215,23 @@ export class SheetRenderController extends Disposable {
 }
 ```
 
-In the above code snippet, SheetRenderController will be instantiated during the Rendered stage.
+In the above code snippet, SheetRenderController is instantiated during the Rendered stage.
 
 ### The Entire Process from Startup to Rendering
 
 <img src="https://github.com/Jocs/jocs.github.io/assets/9712830/cc814af5-6706-4552-9d03-1657708ef911" width="600" style="margin: 0 auto; display: block;" >
 
-**Step One**: Create Univer instance, register necessary plugins for the sheet, and create the Univer sheet instance.
+**Step One**: Creating the Univer instance, registering necessary plugins for sheets, and creating the Univer sheet instance.
 
-The registered plugins and their functionalities are as follows:
+The registered plugins and their functionalities include:
 
 - base-docs: Used for cell and formula editing.
-- base-render: Canvas rendering engine, including basic components required for sheet, doc, slide, responsible for the entire canvas rendering process.
-- base-sheets: Manages sheet canvas-related rendering, such as row header, column header, cells, and also handles a large amount of sheet-related business logic.
-- base-ui: Manages the rendering of basic components in React DOM, such as menu-related components. Also responsible for rendering the entire Univer sheet page framework and user interaction operations, such as keyboard shortcuts, copy-paste, etc.
-- ui-plugin-sheets: Responsible for rendering some basic UI and business logic, such as context menus, tasks related to rich text editing in cells.
+- base-render: Canvas rendering engine, containing essential components for sheet, document, and slide rendering.
+- base-sheets: Manages sheet canvas-related rendering such as row headers, column headers, cells, and handles a significant amount of sheet-related business logic.
+- base-ui: Manages basic React DOM rendering components for menus and the entire Univer sheet page framework rendering. It also handles user interaction operations like keyboard shortcuts registration, copy-paste functionalities, etc.
+- ui-plugin-sheets: Responsible for rendering basic UI elements and business logic related to right-click menus and rich text editing in cells.
 
-After registering plugins, the createUniverSheet method creates the Univer sheet instance.
+Upon completing plugin registration, the `createUniverSheet` method creates the Univer sheet instance.
 
 ```ts
 /**
@@ -257,9 +265,9 @@ createUniverSheet(config: Partial<IWorkbookConfig>): Workbook {
 
 Through the above code, we can see that Univer re-registers the plugins of type PluginType.Sheet from the registered plugins mentioned above to the UniverSheet instance. Then, by using _tryStart, the application enters the Starting stage, initializes, and instantiates a Workbook through addSheet, completing the initialization of the model layer. At this point, the model data preparation is complete, and Univer transitions to the Ready stage.
 
-**Step Two**: Initialize the page framework and render the page framework.
+**Step Two**: Initializing the page framework and rendering the page framework.
 
-During the Univer application lifecycle explanation, it was mentioned that plugins execute at different lifecycle stages. In this step, we focus on the base-ui plugin.
+During the Univer application lifecycle, plugins execute specific actions at different stages. In this step, the focus is on the base-ui plugin.
 
 ```ts
 // base-ui-plugin.ts
