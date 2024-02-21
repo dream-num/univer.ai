@@ -1,6 +1,6 @@
 ---
-title: Univer 文档排版设计初探
-desc: Univer 文档是 Univer 办公套件之一，如果你想了解 Univer 文档架构，建议先阅读《Univer 文档架构及模块设计》，里面有关于 Univer 文档架构的思考和模块划分的设计，本篇文章主要关注文档排版需求及 Univer 文档是如何通过架构设计来服务这些需求的
+title: Initial Exploration of Document Typesetting Design in Univer
+desc: Univer Documents, a component of the Univer office suite, can be better understood by delving into the "Architectural Framework and Module Design of Univer Documents" document. This publication offers insights into the structural considerations and module delineations within the Univer Documents framework. The primary focus of this article lies in elucidating the document typesetting requisites and elucidating how Univer Documents caters to these needs through its architectural design.
 tags:
   - Typesetting
   - Architecture
@@ -12,44 +12,44 @@ lang: en-us
 slug: en-us/blog/doc-typesetting-design
 ---
 
-> Univer 文档是 Univer 办公套件之一，如果你想了解 Univer 文档架构，建议先阅读《Univer 文档架构及模块设计》，里面有关于 Univer 文档架构的思考和模块划分的设计，本篇文章主要关注文档排版需求及 Univer 文档是如何通过架构设计来服务这些需求的
+> Univer Documents, a component of the Univer office suite, can be better understood by delving into the "Architectural Framework and Module Design of Univer Documents" document. This publication offers insights into the structural considerations and module delineations within the Univer Documents framework. The primary focus of this article lies in elucidating the document typesetting requisites and elucidating how Univer Documents caters to these needs through its architectural design.
 
-## 文档排版的技术选型
+## Technical Selection for Document Typesetting
 
-我们使用编辑器的目的之一就是进行文档的编辑和排版，如使用 Word 和 LaTeX 等专业排版系统，进行学术论文、法律文书、企业合同等的编写和排版，作为一款旨在提供极致的文档编辑体验、及优良的排版系统的软件，Univer 文档从一开始就在架构设计及技术选型上做了取舍，为之后高度定制化的文档排版提供可能
+The utilization of editors serves the purpose of document editing and typesetting, whether through specialized typesetting systems like Word and LaTeX for crafting academic papers, legal documents, or corporate contracts. As software aimed at delivering an unparalleled document editing experience and a robust typesetting system, Univer Documents made decisive choices in its architectural design and technological selection from the outset to enable highly customized document typesetting.
 
-Univer 文档编辑器放弃了传统的通过 DOM contenteditable 属性来实现富文本编辑器，而是选型了难度系数更高，挑战更大的 Canvas 元素来渲染整篇文档内容，因为 Canvas 可以在绘制文本位置、标点符号大小、行内样式等上高度自定义，并且实现复杂的中西文混合排版，这在 DOM contenteditable 实现的富文本编辑器上是难以实现的
+Univer Document Editor eschewed the conventional approach of using the DOM `contenteditable` attribute to achieve a rich text editor. Instead, it opted for the more challenging and sophisticated Canvas element to render the entire document content. This decision was made because Canvas allows for highly customizable aspects such as text position, punctuation size, inline styles, and the implementation of complex mixed typesetting of Eastern and Western languages, a feat challenging to achieve with a rich text editor implemented through DOM `contenteditable`.
 
-下面罗列一些我们排版上的需求功能点：
+Below are some key functional requirements in our typesetting:
 
-- _多语言多地区的支持，中文排版、日文排版以及西文排版都有些微差异，我们需要支持差异化排版需求，即使在中文排版中，香港、澳门、台湾的中文排版也有差异_
-- _在进行文字排版时，除了汉字外也有标点符号，也会与阿拉伯数字、拉丁文字、希腊文字等西文混排_
-- _需支持横排、竖排，密排、疏排、均排等_
-- _需支持多种字体及引入自定义字体_
-- _文字尺寸、字体种类、文字书写方向（竖排、横排、斜排等）、分栏（栏数及栏距）、图文混排、文字和表格的混排、一页的行数、网格、字距、行距等_
-- _标点符号的字形、尺寸与字面的分布，标点符号宽度调整_
-- _行首、行尾标点符号禁则_
-- _行尾点号悬挂_
-- _行内挤压和拉升_
-- _中文排版中相邻行汉字上下对齐_
+- _Support for multiple languages and regions, with subtle differences in Chinese, Japanese, and Western typesetting. We need to accommodate diverse typesetting requirements, including variations in Chinese typesetting across regions like Hong Kong, Macau, and Taiwan._
+- _In text typesetting, aside from Chinese characters, there are punctuation marks, Arabic numerals, Latin script, Greek characters, and other Western elements that may be interspersed._
+- _Support for horizontal and vertical layout, tight or loose spacing, and uniform spacing._
+- _Support for various fonts and the ability to introduce custom fonts._
+- _Text size, font types, writing directions (vertical, horizontal, slanted), columns (number and spacing), mixing of text and images, text and table integration, number of lines per page, grids, letter spacing, line spacing, etc._
+- _Punctuation glyph shapes, sizes, and distribution, punctuation width adjustments._
+- _Rules for leading and trailing punctuation marks._
+- _Hanging punctuation at the end of lines._
+- _Inline compression and expansion._
+- _Alignment of adjacent Chinese characters in Chinese typesetting._
 
-上面还只是罗列了在文字排版需求上的冰山一角，完全依赖于浏览器 DOM 元素（contenteditable 实现的文字排版系统）自身的文字排版系统已经开始捉襟见肘了，这也是为什么一些阅读软件（微信阅读）在做技术选型上选择 Canvas 来排版和渲染的原因之一
+The aforementioned requirements only scratch the surface of text typesetting demands. Relying solely on the browser's DOM elements (text typesetting systems implemented through `contenteditable`) has started to show limitations, prompting some reading software like 'WeChat Reading' to opt for Canvas for typesetting and rendering, among other reasons.
 
-## 视图层的架构
+## Architecture of the View Layer
 
-有了上面的技术选型，我们来看看 Univer 文档视图层架构
+With the aforementioned technical choices in mind, let's delve into the architecture of the view layer in Univer Documents.
 
-### 2.1 整体架构图
+### 2.1 Overall Architecture Diagram
 
 ![](./0.png)
 
-自下而上来介绍视图层的架构：
+Let's explore the view layer architecture from bottom to top:
 
-**引擎层**：最底层是视图层的引擎层，它包含了 Canvas 类，Canvas 类是对浏览器 Canvas 元素的一个抽象，通过该层抽象，我们可以创建 Canvas 元素、设置 Canvas 元素尺寸，以及绑定 UniverRenderingContext2D 实例对象等，通过 UniverRenderingContext2D 对象，可以调用 Canvas Context2D 提供的所有绘制能力，比如绘制矩形、圆形、文字、线条、设置绘制样式等，有了这些绘制能力，就可以李彤 Canvas Context2D 来绘制 Doc 中的文字、删除线、下划线等内容了
+**Engine Layer**: At the foundation of the view layer lies the engine layer, which encompasses the Canvas class. This class serves as an abstraction of the browser's Canvas element. Through this abstraction, we can create Canvas elements, set their dimensions, and bind instances of UniverRenderingContext2D. Leveraging the UniverRenderingContext2D object allows us to utilize all the drawing capabilities provided by the Canvas Context2D, such as drawing rectangles, circles, text, lines, and setting drawing styles. With these drawing capabilities, we can utilize Canvas Context2D to render text, strikethroughs, underlines, and other content within the document.
 
-引擎层也提供了 Canvas 事件代理，构建了一套引擎层的用户交互事件系统，这样就可以事件分发给 Scene 中真实命中的 Object，然后由 Object 上的事件处理函数处理，关于事件系统的介绍可以参阅《Univer 文档架构及模块设计》
+The engine layer also offers Canvas event delegation, establishing a user interaction event system within the engine layer. This system dispatches events to objects accurately hit within the Scene, which are then handled by event processing functions on the objects. For a detailed overview of the event system, refer to the "Architectural Framework and Module Design of Univer Documents."
 
-同时引擎层提供了 render 循环，支持同时运行多个 render function，通过一个定时器会去循环执行 render function，进行页面渲染绘制，这也是在数据层修改后，视图层能够及时更新渲染的页面的原因所在，下面是 render loop 的核心代码：
+Additionally, the engine layer provides a render loop that supports running multiple render functions concurrently. Through a timer mechanism, the render loop iterates over render functions, facilitating page rendering and updating in real-time following modifications in the data layer. Below is the core code snippet for the render loop:
 
 ```typescript
 runRenderLoop(renderFunction: () _=>_ _void_): _void_ {
@@ -67,106 +67,106 @@ runRenderLoop(renderFunction: () _=>_ _void_): _void_ {
 }
 ```
 
-**Scene 层**：位于引擎层之上，依赖于引擎层提供的绘制能力，可以将其理解成一个装绘制元素的容器，同时提供了一些其他的功能，一个 Scene 对象中包含多个 Layer，Layer 中可以包含多个 Object，同时 Layer 还可以缓存绘制对象，提升整体绘制性能。一个 Scene 也可以包含多个 Viewport 对象，Viewport 可以理解过视窗，通过这个视窗来观察 Canvas 绘制的元素，在视窗内的元素我们才能看到，Scene 的尺寸可能会大于 Viewport，所以在 Viewport 还需要支持横向和纵向的滚动条，来调整视窗的位置，来观察整个 Scene 中绘制的元素。Scene 中最基本的元素就是 Object 了，其他绘制元素都是从 BaseObject 衍生而来，包括矩形、富文本、路径等
+**Scene Layer**: Positioned above the engine layer, the Scene layer relies on the drawing capabilities provided by the engine layer. It can be envisioned as a container for drawing elements, housing multiple Layers within a Scene object. Each Layer can contain multiple Objects and may cache drawing objects to enhance overall performance. A Scene can encompass multiple Viewport objects, serving as windows to observe elements drawn on the Canvas. Elements within the viewport are visible, and the viewport may necessitate horizontal and vertical scrollbars for adjusting the viewport's position to view all elements within the Scene. The fundamental element within a Scene is the Object, derived from the BaseObject, encompassing entities like rectangles, rich text, and paths.
 
-**Docs 层**：Docs 层离业务更近，Engine 层和 Scene 层都还是偏底层能力，而在 Docs 层中，就更偏应用层了，在 Docs 层中主要有以下一些核心模块：
+**Docs Layer**: Closer to the business logic, the Docs layer is more application-oriented compared to the lower-level capabilities of the Engine and Scene layers. In the Docs layer, several core modules are prominent:
 
-1. View Model 的定义和实现，View Model 是页面渲染最初的数据模型，有了 View Model，Document Skeleton 才能进行布局计算，进而渲染页面
-2. Unicode line break 算法的实现，在 Docs 层中，有 unicode line break 的完成实现，unicode line break 算法主要决定哪些字符后进行断行，比如有些标点符号不能够出现在行首，在后面第 4 节-Line Break 算法，来专门介绍断行算法
-3. Document Skeleton 类的定义，Doc Skeleton 主要根据 View Model 的数据然后进行布局计算，后面 2.2 节中会详细介绍
-4. 选区及光标的绘制和管理，选区和光标是 Univer 文档基础且业务高度相关的核心模块，主要负责选区及光标的绘制，选区及光标的设置、定位等，在 《Univer 文档架构及模块设计》 文章中有比较详细的介绍
-5. 同时在该层还提供了 Document 对象，它是文档渲染的核心对象，从 BaseObject 衍生而来，通过该对象，利用 Document Skeleton 的布局计算结果，我们可以渲染整个 Univer 文档。
+1. Definition and implementation of the View Model, the initial data model for page rendering. With the View Model, the Document Skeleton can perform layout calculations and subsequently render pages.
+2. Implementation of the Unicode line break algorithm, crucial for determining line breaks in the Docs layer.
+3. Definition of the Document Skeleton class, responsible for layout calculations based on View Model data.
+4. Handling the drawing and management of selections and cursors, crucial and business-relevant modules responsible for their rendering and positioning.
+5. Provision of the Document object, the core object for document rendering derived from the BaseObject. Through this object and leveraging the layout calculations from the Document Skeleton, the entire Univer document can be rendered.
 
-Document 类支持 extension 扩展绘制能力，绘制不同的子元素使用不同的扩展
+The Document class supports extension for enhanced drawing capabilities, enabling the use of different extensions for drawing various sub-elements:
 
-- Font and base line 扩展：绘制文字
-- Line 扩展：绘制下划线、删除线等，支持不同的线样式
-- Background 扩展：绘制背景色
+- Font and baseline extension: for text rendering
+- Line extension: for drawing underlines, strikethroughs, supporting different line styles
+- Background extension: for drawing background colors
 
-未来会支持更多的绘制扩展，比如绘制表格的扩展、绘制标点符号的扩展等
+Future enhancements will include additional drawing extensions, such as extensions for drawing tables and punctuation symbols.
 
-### 2.2 Document Skeleton 介绍
+### 2.2 Introduction to Document Skeleton
 
-DocSkeleton 类是文档排版中最核心的模块之一，它负责整个文档的布局计算、文档渲染节点元素定位等，在这一节，我们将探究 Skeleton 中的关键概念及布局计算的大致原理
+The DocSkeleton class stands as one of the core modules in document typesetting, responsible for layout calculations, node element positioning, and more. In this section, we will explore key concepts within the Skeleton and the principles of layout calculations.
 
-#### 2.2.1 Skeleton 的渲染节点
+#### 2.2.1 Rendering Nodes in the Skeleton
 
-作为前端工程师，我们对 DOM 对象非常熟悉，DOM 对象是一个树形结构，root 是 HTML 元素，HTML 元素下有 HEAD、BODY 元素，BODY 元素下面又有其他一些子元素，A 标签，H1 标签等。如下图 DOM 树形结构：
+As frontend engineers, we are well-acquainted with DOM objects, structured in a tree format where the root is the HTML element, containing HEAD and BODY elements, further nested with child elements like A tags, H1 tags, and more.
 
 ![](./1.png)
 
-上面的各种 DOM 元素构成一棵 DOM 树形结构，在结合 CSS 样式，通过布局计算，完成整个网页渲染
+This DOM tree structure, in conjunction with CSS styles, completes the webpage rendering process.
 
-在 Univer 文档中，也有一棵对应的树形结构，其设计符合文档排版的需求
+Similarly, in Univer Documents, a corresponding tree structure is designed to meet document typesetting needs.
 
 ![](./2.png)
 
-在 Univer 渲染节点对象中，一篇文档（Doc）包含多个页面（Pages），一个页面包含多个节（Sections），一个节又包含了多个列（Columns），一个列包含多个行（Lines），一行包含多个 divides，一个 divide 又包含了多个 spans，这样就把一篇文档拆分成了不同的渲染元素，布局的过程就是确定不同元素的包含关系以及位置布局信息。
+Within the Univer rendering node objects, a document (Doc) comprises multiple pages, each page containing sections, each section containing columns, each column containing lines, each line containing divides, and each divide containing spans. This breakdown segments a document into distinct rendering elements, with the layout process determining the relationships and positional layout information of these elements.
 
-_为什么这样设计呢？_
+_Why is this design chosen?_
 
-**Page 渲染节点**就是传统文档中页的概念，可以设置页面的样式，比如页边距、页大小等，所以我们需要有一个渲染对象 Page 来承载这些样式属性。在 Page 渲染节点上，还有页码、渲染相关的配置、页面边距信息、页面的宽度、高度、页面方向、页眉、页脚等信息
+**Page Rendering Node** embodies the traditional concept of pages in documents, allowing for the customization of page styles such as margins and dimensions. Hence, we require a rendering entity, Page, to carry these style attributes. Within the Page rendering node, attributes include page numbers, rendering configurations, page margin details, page width and height, page orientation, headers, footers, and more.
 
-**Section 渲染节点**就是传统文档中节的概念，如在 Word 中，我们可以插入分节符，在 Univer 文档中，也有节的设计，通过字符 `\n` 来表示一节的结束，在渲染节点对象中，通过 Section 来表示一节，Section 相关的描述都在 <u>ISectionBreak</u> 接口中定义，在 Section 渲染节点上有如下属性
+**Section Rendering Node** reflects the traditional notion of sections in documents. In applications like Word, section breaks can be inserted, and in Univer Documents, sections are delineated using the character `\n` to signify the end of a section. Within the rendering node object, a Section represents a section, with related descriptions defined in the <u>ISectionBreak</u> interface. Attributes of the Section rendering node include:
 
-- columns：栏相关的数据
-- colCount：栏的数量
-- height：节的高度
-- parent：其父渲染节点，也就是 Page 渲染节点
-- st、sd：节开始和结束的索引
+- columns: data related to columns
+- colCount: number of columns
+- height: section height
+- parent: its parent rendering node, namely the Page rendering node
+- st, sd: start and end indices of the section
 
-**Column 渲染节点**是 Section 的子节点，一个 Column 对应一栏，一个 Section 可能包含多栏，在 Column 上有如下属性：
+**Column Rendering Node** serves as a child node of a Section, where each Column corresponds to a column within a Section. Attributes of a Column include:
 
-- lines：行相关的信息
-- left：距离左侧的位置信息
-- width：栏的宽度
-- st：栏开始的位置信息
-- ed：栏结束的位置信息
+- lines: information related to lines
+- left: position information from the left
+- width: column width
+- st: start position information of the column
+- ed: end position information of the column
 
-**Line 渲染节点**是 Column 的子节点，在 Univer 文档中，表示一行文本内容，在 line 上有如下一些属性：
+**Line Rendering Node** acts as a child node of a Column, representing a line of text content within Univer Documents. Attributes of a Line include:
 
-- lineIndex：行号
-- paragraphStart：是否是段落开始的第一行
-- contentHeight：内容高度
-- lineHeight：行高
-- paddingTop、paddingBottom、marginTop：内边距、外边距相关描述
+- lineIndex: line number
+- paragraphStart: indicates if it is the first line of a paragraph
+- contentHeight: content height
+- lineHeight: line height
+- paddingTop, paddingBottom, marginTop: descriptions related to padding and margin
 
-**Divide 渲染节点**是 Line 子节点，divide 节点主要用于处理图文混排的场景，将一个 line 分成多个 divide，divide 上有如下属性：
+**Divide Rendering Node** functions as a child node of a Line, primarily used for scenarios involving mixed text and images. Divides divide a line into multiple segments and possess attributes such as:
 
-- spanGroup：divide 上的 span 元素集合
-- width：divide 的宽度
-- left：被分割后的偏移位置
-- paddingLeft：根据 horizonAlign 和 width 计算的对齐偏移
-- isFull：内容是否填满
-- st、sd：开始和结束的位置偏移信息
+- spanGroup: collection of span elements on the divide
+- width: width of the divide
+- left: offset position after division
+- paddingLeft: alignment offset calculated based on horizonAlign and width
+- isFull: indicates if content fills the divide
+- st, sd: start and end position offset information
 
-**Span 渲染节点**是 Divide 的子节点，Span 渲染节点是 Univer 文档最底层的节点（没有子节点），也是光标和选区能够移动或者选择的最小单位，在 Span 节点上有如下属性：
+**Span Rendering Node** acts as a child node of a Divide, representing the lowest level node in Univer Documents without child nodes. Spans are the smallest units for cursor movement or selection. Attributes of a Span include:
 
-- content：span 节点的内容，比如一个汉字，一个标点符号等
-- ts：文本的样式信息，比如字体、字号、加粗、斜体等
-- fontStyle：字体相关样式信息，包括 fontString、fontSize、fontFamily
-- width：span 的宽度
-- bBox：Bounding Box，包含了 [TextMetrics](https://developer.mozilla.org/en-US/docs/Web/API/TextMetrics) 相关的数据，如 actualBoundingBoxAscent、actualBoundingBoxDescent、fontBoundingBoxAscent 等属性，具体定义在 <u>IDocumentSkeletonBoundingBox </u>接口中
-- paddingLeft：当文字需要对其网格时，`paddingLeft = (width - contentWidth) / 2`
-- left：span 距离 divide 最开始的距离
-- spanType：Span 的类型，包括 LETTER、WORD、LIST、PLACEHOLDER 等，在 <u>SpanType </u>枚举值中定义
-- count：span 内容的长度，`content.length`，主要用于计算光标的移动位置，因为光标的最小移动单元就是一个 span，需要移动的长度值就是 `span.count`
+- content: content of the span, such as a Chinese character or a punctuation mark
+- ts: text style information like font, font size, bold, italics, etc.
+- fontStyle: font-related style information including fontString, fontSize, fontFamily
+- width: width of the span
+- bBox: Bounding Box containing [TextMetrics](https://developer.mozilla.org/en-US/docs/Web/API/TextMetrics)-related data like actualBoundingBoxAscent, actualBoundingBoxDescent, fontBoundingBoxAscent, defined in the <u>IDocumentSkeletonBoundingBox</u> interface
+- paddingLeft: when text needs to align to a grid, `paddingLeft = (width - contentWidth) / 2`
+- left: distance of the span from the start of the divide
+- spanType: type of the span, including LETTER, WORD, LIST, PLACEHOLDER, defined in the <u>SpanType</u> enumeration
+- count: length of the span content, `content.length`, crucial for calculating cursor movement positions as the cursor's minimum unit of movement is a span, requiring the length value of `span.count`
 
-#### 2.2.2 布局计算到页面渲染
+### 2.2.2 From Layout Calculation to Page Rendering
 
-在上面一节，我们介绍了渲染节点及其功能和属性，在这一节，我们将介绍布局计算到页面渲染的过程，布局计算就是确定上面渲染节点在整个文档内的位置信息，然后交给渲染引擎进行渲染，整个渲染过程分为 Layout 和 Render：
+In the previous section, we elucidated the rendering nodes, their functionalities, and attributes. In this section, we shall expound on the process from layout calculation to page rendering. The layout calculation involves determining the positional information of the rendering nodes throughout the document, subsequently rendering them using the rendering engine. The entire rendering process is divided into Layout and Render stages:
 
-![](./3.png)
+![Layout and Render Process](./3.png)
 
-**Layout 过程**：layout 过程主要就是计算 Skeleton 中各元素的位置信息，整个代码位于 `_createSkeleton` 方法中，首先通过 `getViewModel` 方法获取视图层模型数据，这就是我们用于生成 Skeleton 的数据。在 layout 过程中，最小的布局单元是 span，span 包含一个或多个字符（通常是一个）的布局相关的所有信息，如 content、文本样式、宽度、bBox（boundingBox）、span 类型、count（content.length）等信息，当我们知道 span 信息，以及一行的宽度，我们也就能够进行布局排版了，逐个把 span 放在当前 divide，当 divide 排满之后，就创建一个新的 divide，当 line 排满之后，就创建新的 column，以此类推直到创建新的的页面。在 layout 的过程中，我们会计算没有渲染节点的位置、大小。当然在逐字排版的时候，我们也会遵守一些约定的规则，比如标点符号不能出现在行首等，这些规则都定义在了 Unicode line break 算法中，在下面介绍 line break 算法的时候会详细讨论
+**Layout Process**: The layout process primarily entails computing the position information of elements within the Skeleton. This process is encapsulated within the `_createSkeleton` method. Initially, the `getViewModel` method is utilized to acquire data from the view layer model, essential for generating the Skeleton data. Within the layout process, the smallest layout unit is the span, encompassing all layout-related information for one or more characters (typically one). Essential information within a span includes content, text style, width, Bounding Box (bBox), span type, and content length (`content.length`). With this span information and the width of a line, layout and typesetting operations can be executed, positioning spans within the current divide. As divides are filled, new ones are created, and this process continues with the creation of new columns, lines, and so forth until a new page is generated. Throughout the layout process, positions and sizes of non-rendered nodes are calculated. Adherence to established rules, such as punctuation not appearing at the beginning of a line, is crucial. These rules are defined within the Unicode line break algorithm, which will be elaborated on in the subsequent section discussing the line break algorithm.
 
-**Render 过程**：渲染的过程，就是将上一步计算得到的包含文字位置信息的 skeleton 数据，渲染到页面上。首先我们需要在渲染引擎上注册绘制不同形状元素的扩展，比如绘制文字的 <u>FontAndBaseLine </u>类，绘制下划线、删除线 <u>Line</u>类，当注册好绘制扩展之后，会逐层遍历 pages、sections、columns、lines、divides、spans 然后将带有样式信息的 span 内容绘制到页面上
+**Render Process**: The rendering process involves taking the skeleton data, which includes position information for text, and rendering it onto the page. Initially, different shape elements' drawing extensions are registered on the rendering engine, such as the <u>FontAndBaseLine</u> class for text rendering and the <u>Line</u> class for drawing underlines and strikethroughs. Once these extensions are registered, pages, sections, columns, lines, divides, and spans are iterated through layer by layer, and spans with style information are rendered onto the page.
 
-## 处理中西文混合排版
+## Handling Mixed Chinese and Western Text Typesetting
 
-在 Univer 文字排版过程中，中文和西文混排经常出现，比如汉字和拉丁字母、希腊字母或者阿拉伯数字等西文混排经常出现。在进行中西文混排时，原则上应该使用中文的标点，遵守中文的标点使用习惯，同时为了排版上的美观，我们会在汉字与西文字母之间加一个西文词间空格（U+0020 SPACE [ ]，其宽度随不同字体有所变化）
+Within the text typesetting process in Univer, it is common to encounter a mix of Chinese and Western characters, such as Chinese characters alongside Latin letters, Greek letters, or Arabic numerals. When dealing with this mix, it is advisable to use Chinese punctuation in accordance with Chinese punctuation conventions. Additionally, for aesthetic purposes, a word space (U+0020 SPACE [ ]) is typically inserted between Chinese characters and Western letters to enhance layout aesthetics. The width of this space may vary depending on the font used.
 
-代码实现如下：
+The code implementation is as follows:
 
 ```javascript
 // Last span is western char and the current span is Chinese word or vice verse.
@@ -188,59 +188,59 @@ _为什么这样设计呢？_
   }
 ```
 
-首先，通过 `hasMixedTextLayout` 方法，判断前后两个字符是否存在中西文混排。如果存在中西文混排，将通过 CanvasRenderingContext2D: measureText 方法，测量西文词间空格 `U+0020` 的宽度。最后，将测得的宽度加到中西文混排右侧字符的宽度上，这样在渲染的时候，就会在中西文之间渲染一个西文词间空格了，并且该空格是不存在文档内容中的，只在渲染时插入到中西文混排中
+Initially, the `hasMixedTextLayout` method is employed to determine if there is a mix of Chinese and Western characters. If such a mix exists, the width of the Western word space `U+0020` is measured using the CanvasRenderingContext2D: measureText method. Subsequently, this measured width is added to the width of the character on the right side of the mixed Chinese and Western text. This process ensures that a Western word space is rendered between the Chinese and Western characters during rendering, serving as a visual element that is not part of the document content but is inserted during rendering.
 
-当然，在中西文混排中，我们还需要处理横排和竖排，竖排中西文字符的渲染，以及标点符号的位置，有兴趣欢迎直接阅读排版相关源码
+Furthermore, in handling mixed Chinese and Western text typesetting, considerations include horizontal and vertical layout, rendering of vertical Chinese and Western characters, as well as the positioning of punctuation marks. For those interested, delving into the source code related to text typesetting is recommended for a deeper understanding.
 
-## Line break 算法
+## Line Break Algorithm
 
-所谓 line break（行分割），就是将一段文本根据指定的宽度拆分成不同的行，以便内容能够很好的放在页面中，[Unicode Line Break 算法](https://unicode.org/reports/tr14/)只完成了部分上述工作，他为我们提供了一系列可以用来断行的点（break opportunities），我们可以从这些点中，选择其一进行断行。具体选择哪个 break opportunities 进行断行，则需要额外的信息，比如页面的宽度以及单个字符排版所需的宽度和高度等，在 [Knuth & Plass line-breaking](https://defoe.sourceforge.net/folio/knuth-plass.html) 算法中，有关于这部分工作的描述
+The concept of line break involves segmenting a text into different lines based on a specified width to ensure optimal placement of content on a page. The [Unicode Line Break Algorithm](https://unicode.org/reports/tr14/) partially accomplishes this task by providing a series of break opportunities that can be utilized to determine where line breaks should occur. The selection of a specific break opportunity requires additional information such as page width and the width and height required for typesetting individual characters. The [Knuth & Plass line-breaking](https://defoe.sourceforge.net/folio/knuth-plass.html) algorithm elaborates on this aspect.
 
-### 4.1 Unicode Line Break 算法
+### 4.1 Unicode Line Break Algorithm
 
-在 Univer 文档排版中，我们选用了 Unicode Line Break 算法，Unicode Line Break 算法是 Unicode 标准中定义的一种算法，用于确定文本断行的位置。在不同语言和文化中，断行的规则可能会有所不同，但 Unicode Line Break 算法提供了一个通用的解决方案，可以适用于多种语言和环境
+In the context of text composition within Univer documents, we have adopted the Unicode Line Break Algorithm, a method defined in the Unicode standard for determining text line breaks. Line breaking rules may vary across different languages and cultures, but the Unicode Line Break Algorithm offers a universal solution applicable to diverse languages and environments.
 
-在 Unicode Line Break 算法中，定义了字符属性、断行规则、直接和间接断行、以及算法实现上的建议
+The Unicode Line Break Algorithm encompasses character properties, line breaking rules, direct and indirect line breaks, and implementation recommendations:
 
-**字符属性**：每个 Unicode 字符都被分配了一个行分隔属性，这个属性表明了该字符在行分隔上的行为。这些属性包括强制断行（如换行符）、非断行（如字母和数字）、空格、断行符号等
+- **Character Properties**: Each Unicode character is assigned a line break property indicating its behavior regarding line breaks. These properties include mandatory breaks (e.g., newline characters), non-breaking characters (e.g., letters and numbers), spaces, and line breaking symbols.
+  
+- **Line Breaking Rules**: The algorithm defines a set of rules based on the properties of adjacent characters to determine whether a line break can occur between them. These rules are defined as a series of conditions for break opportunities and prohibitions.
+  
+- **Direct and Indirect Line Breaks**: The algorithm distinguishes between direct line breaks (occurring directly between two characters) and indirect line breaks (requiring consideration of surrounding context).
+  
+- **Mandatory Breaks**: Certain characters mandate a line break, such as newline characters (LF) and carriage return characters (CR).
 
-**断行规则**：算法定义了一系列断行规则，这些规则基于相邻字符的属性来确定是否可以在它们之间断行。这些规则被定义为一系列对（Break Opportunities）和禁止（No Break）的条件
+In the algorithm's implementation, a table known as the "Pair Table" is utilized to determine line breaking behavior between characters. This table uses the Line Break Class of two adjacent characters to decide whether a line break is permissible. These classes include categories such as letters, numbers, spaces, and punctuation, each with its own set of line breaking rules.
 
-**直接和间接断行**：算法区分直接断行（在两个字符之间直接断行）和间接断行（需要考虑周围的上下文）
+The basic steps of the algorithm involve:
 
-**强制断行**：某些字符表示强制断行，如换行符（LF）和回车符（CR）
+1. **Text Analysis**: Initially, the algorithm traverses each character in the text and assigns each character to a Line Break Class based on the Unicode standard.
+2. **Utilizing the Pair Table**: Subsequently, the algorithm examines pairs of adjacent characters' Line Break Classes and utilizes the Pair Table to determine whether a line break is permissible between these two categories.
 
-在算法实现上，Unicode Line Break 算法使用了一个称为“Pair Table”的表格，这个表格定义了字符之间的断行行为。Pair Table 基于两个相邻字符的类别（Line Break Class）来决定是否可以在它们之间断行。这些类别包括字母、数字、空格、标点符号等，每一类都有自己的断行规则
+   - The Pair Table is a two-dimensional matrix where rows and columns represent the Line Break Class of preceding and succeeding characters, respectively.
+   - Each cell in the table contains a line breaking action (such as "allow line break," "disallow line break," "direct line break," etc.).
+3. **Line Breaking Rules**: The line breaking rules in the Pair Table may also be influenced by other factors, such as:
 
-算法的基本思路可以分为以下几个步骤：
+   - **Mandatory Break**: Certain characters (e.g., newline characters) necessitate a line break after them.
+   - **Direct Break**: Some character pairs can directly allow a line break without further examination.
+   - **Indirect Break**: Certain character pairs may permit a line break, but the presence of whitespace characters needs to be checked.
+   - **Prohibited Break**: Line breaks are not permitted between certain character pairs.
+4. **Determining Line Break Points**: Finally, based on the aforementioned rules, all potential line break points are identified. The text layout system can utilize these break points to determine the actual line break positions within the text.
 
-1. **文本分析**：首先，算法会遍历文本中的每个字符，并根据 Unicode 标准将每个字符分配给一个 Line Break Class
-2. **应用 Pair Table**：然后，算法会查看相邻字符对（pair）的 Line Break Class，并使用 Pair Table 来确定这两个类别的字符之间是否可以断行
+The above description outlines the implementation process of the Unicode Line Break Algorithm. In our code implementation, we drew inspiration from the _foliojs/linebreak_ implementation and made appropriate enhancements and modifications. Those interested may explore the relevant source code for further insights.
 
-   - Pair Table 是一个二维矩阵，行和列分别代表前后字符的 Line Break Class
-   - 表中的每个单元格包含一个断行动作（如“允许断行”、“不允许断行”、“直接断行”等）
-3. **断行规则**：Pair Table 中的断行规则可能还会受到其他因素的影响，比如：
+### 4.2 Optimal Line Break Position Selection
 
-   - **Mandatory Break**：在某些字符（比如换行符）之后必须断行
-   - **Direct Break**：在某些字符对之间可以直接断行，不需要进一步的检查
-   - **Indirect Break**：在某些字符对之间可能断行，但需要检查是否有空格字符
-   - **Prohibited Break**：在某些字符对之间不允许断行
-4. **确定断行点**：最后，根据以上规则确定所有可能的断行点。文本排版系统可以根据这些断行点来决定文本的实际断行位置
+As previously discussed, the Unicode Line Break Algorithm merely presents potential break positions (break opportunities). The specific choice of positions for line breaks is determined by various factors such as page width and individual character width. One commonly employed algorithm for selecting appropriate line breaks is the [Knuth & Plass line-breaking](https://defoe.sourceforge.net/folio/knuth-plass.html) algorithm.
 
-上面描述了 Unicode Line Break 算法的实现过程，在代码上我们借鉴了 _foliojs/linebreak_ 的实现，并做了相应的补充和修改，有兴趣可以阅读相关源码
+The Knuth & Plass line-breaking algorithm, introduced by Donald Knuth and Michael Plass in 1981, represents a method for text composition. This algorithm is particularly suited for high-quality text typesetting, with the TeX typesetting system being a notable user of this algorithm. Its objective is to identify the optimal line break points throughout an entire paragraph, as opposed to focusing solely on local optimization as traditional methods do.
 
-### 4.2 选择合适的断行位置
+In traditional document typesetting, emphasis is placed on local optimization, proceeding line by line where each line is filled before moving to the next. However, this approach can lead to uneven word distribution across lines, resulting in an aesthetically unpleasing layout. The Knuth & Plass algorithm employs dynamic programming, shifting away from single-line typesetting. It progressively constructs a sequence of optimal line break points starting from the beginning of a paragraph, with each step building upon the results of preceding steps. This methodology ensures the discovery of globally optimal combinations of line break points within the entire paragraph.
 
-正如上面描述，Unicode Line Break 只是提供了可能得断行位置（break opportunities），我们具体采用哪些位置来作为断行是根据其他因素来决定的，比如页面的宽度和单个字符的宽度等，一种常用选择合适断行的算法是  [Knuth & Plass line-breaking](https://defoe.sourceforge.net/folio/knuth-plass.html)
+Currently, due to performance considerations in Univer documents, the Knuth & Plass line-breaking algorithm has not been implemented. Real-time calculation of document layout following user input is a critical requirement in Univer documents, demanding high performance. The computational complexity of the Knuth & Plass algorithm is higher compared to line-by-line text layout, potentially leading to longer processing times. Therefore, for performance reasons, Univer documents continue to utilize a line-by-line local optimization algorithm. Additionally, we are exploring chunk-based layout calculation algorithms and considering leveraging WebAssembly to enhance layout calculation performance. Consequently, in the near future, we are investigating the feasibility of transitioning to the Knuth & Plass line-breaking algorithm.
 
-Knuth & Plass 断行算法是 Donald Knuth 和 Michael Plass 在 1981 年提出的一种文本排版的方法。这个算法特别适用于高质量的文本排版，例如 TeX 排版系统就使用了这个算法。它的目标是在整个段落中找到最佳的断行点，而不是像传统方法那样仅仅考虑局部最优
+## Summary
 
-在传统的文档排版上，只考虑了局部的最优化，逐行进行排版，一行排满再排下一行，这样有个不好的地方就是，单词在各行中分布可能会很不均匀，有的行单词偏多，有的行单词偏少，导致整个排版不美观，而 Knuth & Plass 算法采用动态规划，不再只考虑单行的排版，它从段落的开始逐步构建一个最优断行点的序列，每一步都基于前面步骤的结果。这种方法确保了在整个段落中找到全局最优的断行点组合
+Given the diverse requirements in document typesetting, our design of the entire document layout system encompasses a multitude of factors. These include considerations such as the design of rendering nodes, handling mixed Eastern and Western text typesetting, and line-breaking algorithms. The Univer document layout system is continuously exploring avenues for optimization, aiming to deliver the utmost in typesetting and editing experiences for our users. This pursuit aligns with our core objective in developing Univer documents.
 
-目前 Univer 文档出于排版性能的考虑，暂时没有采用 Knuth & Plass 断行算法，因为在 Univer 文档中需要在用户输入后实时计算文档布局，对性能要求比较高，而 Knuth & Plass 断行算法计算复杂性比较高，会比逐行文本排版耗时更长，所以出于性能考虑，目前 Univer 文档依然采用的是逐行-局部最优的算法，同时，我们也在思考一些分块布局计算的算法，以及通过 WebAssembly 来提升布局计算性能，因此在不远将来，我们也在探索切换到 Knuth & Plass 断行算法的可能性
-
-## 总结
-
-由于排版需求较多，所以我们在设计整个文档排版系统时，也会考虑比较多的因素，如渲染节点的设计、中西文混合排版的考虑、断行算法等，Univer 文档排版系统也会在不断的探索中寻求优化，希望为广大用户提供极致的排版和编辑体验，这也是我们做 Univer 文档的初衷
-
-<p style="color: #666; font-size: 14px;">作者：<a href="https://github.com/Jocs">Jocs</a>， <a href="https://github.com/marktext/marktext">MarkText</a> 作者，Univer 核心开发者，负责 Univer Doc 架构及开发</p>
+<p style="color: #666; font-size: 14px;">Author: <a href="https://github.com/Jocs">Jocs</a>, Creator of <a href="https://github.com/marktext/marktext">MarkText</a>, Core Developer at Univer, responsible for Univer Doc architecture and development.</p>
