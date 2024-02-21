@@ -1,6 +1,6 @@
 ---
-title: Univer 文档架构及模块设计
-desc: Univer 文档是 Univer 办公套件之一，旨在提供一流的文档编辑和排版体验，我们不仅在产品形态上的融合，通过无界模式来减少在不同套件之间的切换开销，同时让数据在不同套件之间联通。在技术架构上，我们也尽量通过一套架构来实现，既保证了开发体验的高效，同时也为产品形态的融合提供更多的想象空间
+title: University Document Architecture and Module Design
+desc: Univer Document is one of the components of the Univer office suite, aimed at providing a top-notch document editing and typesetting experience. We not only integrate in terms of product form, reducing switching costs between different suites through a boundary-less mode, but also enable data interoperability across different suites. In terms of technical architecture, we strive to achieve implementation through a unified architecture, ensuring efficient development experience while also providing more room for imagination in the integration of product forms.
 tags: 
   - Univer Doc
   - Architecture
@@ -12,31 +12,31 @@ lang: en-us
 slug: en-us/blog/univer-doc-architecture
 ---
 
-## 1. Univer 文档项目架构
+## 1. Univer Document Architecture
 
-Univer 文档是 Univer 办公套件之一，旨在提供一流的文档编辑和排版体验，我们不仅在产品形态上的融合，通过无界模式来减少在不同套件之间的切换开销，同时让数据在不同套件之间联通。在技术架构上，我们也尽量通过一套架构来实现，既保证了开发体验的高效，同时也为产品形态的融合提供更多的想象空间
+Univer Document is one of the components of the Univer office suite, aimed at providing a top-notch document editing and typesetting experience. We not only integrate in terms of product form, reducing switching costs between different suites through a boundary-less mode, but also enable data interoperability across different suites. In terms of technical architecture, we strive to achieve implementation through a unified architecture, ensuring efficient development experience while also providing more room for imagination in the integration of product forms.
 
->如果你对 Univer 架构还比较陌生，建议先阅读《[Univer 架构](https://univer.ai/guides/architecture/architecture/)》、《[这就是 Univer](https://zhuanlan.zhihu.com/p/666298812)》，在这两篇文章中有关于 Univer 整体架构的描述，Univer 中的命令系统、底层数据模型、渲染引擎等介绍，同时也分析了从数据层到视图层渲染，从视图层事件响应到数据层数据更新的整个过程
+>If you are still relatively unfamiliar with the Univer architecture, it is recommended to first read "[Univer Architecture](https://univer.ai/guides/architecture/architecture/)" and "[This is Univer](https://zhuanlan.zhihu.com/p/666298812)". In these two articles, there are descriptions of the overall architecture of Univer, including the command system, underlying data model, rendering engine, and analysis of the entire process from the data layer to the view layer rendering, from view layer event response to data layer data updates.
 
-本篇文章主要聚焦在 Univer 文档的技术架构和模块设计，我们先从一张架构图开始：
+This article primarily focuses on the technical architecture and module design of the Univer document. Let's begin with an architectural diagram:
 
-### 1.1 项目架构图
+### 1.1 Project Architecture Diagram
 
 ![](./0.png)
 
-由上面架构图大致可以看出，Univer 文档整体符合 MVVM 的架构模型。自下而上分别是数据模型层、视图模型层、视图层。整个文档项目拆分成 3 层多个模块：
+From the above architectural diagram, it is apparent that the Univer document adheres to the MVVM architectural model. Progressing from bottom to top, we have the data model layer, the view model layer, and the view layer. The entire document project is divided into three layers with multiple modules:
 
-1. 数据模型层，主要由 DocumentDataModel 类进行数据模型的管理，以及数据的更新
-2. 视图模型层，包含了视图模型，视图模型通过底层数据模型构建，主要用于视图的渲染，同时在视图模型层中还包含了命令系统，比如响应视图层事件，进而触发视图模型和数据模型的更新
-3. 视图层，在视图层主要完成两件事情，第一件事情，通过视图模型层的数据进行布局计算，也就是所谓的排版，这一步发生在 DocumentRenderModel（Document Skeleton） 中，主要完成页面内容样式布局计算。第二件事情，将布局计算的结果，通过渲染引擎渲染到页面上
+1. Data Model Layer: This layer is primarily managed by the DocumentDataModel class for data model management and data updates.
+2. View Model Layer: It encompasses the view models, which are constructed through the underlying data model and primarily used for view rendering. Additionally, the view model layer includes the command system, such as responding to view layer events, thereby triggering updates to the view model and data model.
+3. View Layer: In the view layer, two main tasks are accomplished. Firstly, through the data in the view model layer, layout calculations are performed, known as typesetting, which occurs in the DocumentRenderModel (Document Skeleton) to determine the layout of page content styles. Secondly, the results of the layout calculations are rendered onto the page through the rendering engine.
 
-在接下来几个小节中，我将更加详细的描述不同层的数据结构、职责及功能
+In the following subsections, I will provide a more detailed description of the data structures, responsibilities, and functions of the different layers.
 
-### 1.2 数据模型层
+### 1.2 Data Model Layer
 
-#### 1.2.1 文档模型层数据结构
+#### 1.2.1 Document Model Layer Data Structure
 
-文档的数据结构如下：
+The data structure of the document is as follows:
 
 ```typescript
 // i-document-data.ts
@@ -59,15 +59,15 @@ export interface IDocumentBody {
 }
 ```
 
-文档的数据结构定义主要在 IDocumentData 和 IDocumentBody 两个接口中，在 IDocumentData 中包括文档的标题、id、body、样式等信息，而 IDocumentBody 接口定义了文档内容的所有信息
+The definition of the document's data structure primarily resides in two interfaces: IDocumentData and IDocumentBody. Within IDocumentData, there are details such as the document's title, ID, body, and styles, while the IDocumentBody interface delineates all the information pertaining to the document content.
 
-- dataStream 是一个字符串类型，就是我们文档的文本内容
-- textRuns 中定义了文档的行内样式，比如粗体、斜体、颜色、背景色、字体、字体大小等，它通过 st 和 ed 两个位置索引，来标识行内样式应用到文档的内容范围
-- paragraphs 字段包含了段落信息，包括段落的开始位置以及段落的样式，比如悬挂、缩进以及列表样式等。在 Univer 文档中，paragraph 通过 \r在 dataStream 进行占位
-- sectionBreaks 字段包含了节相关信息，section 通过 `\n` 在 dataStream 中进行占位，所以在 dataStream 中遇到 `\n` 也就标识这是一个节的结束，所有的 univer 文档都需要以 `\r\n` 结尾
-- customBlocks 字段包含用户自定义的 block
-- tables 字段包含表格相关的信息
-- customRanges 字段包括可重叠的文档信息，比如评论、超链接等
+- The dataStream is a string type, representing the textual content of our document.
+- Within textRuns, inline styles of the document are defined, such as bold, italic, color, background color, font, font size, etc. It uses the st and ed position indices to identify the range of content to which inline styles are applied.
+- The paragraphs field contains paragraph information, including the starting position of the paragraph and its styles, such as hanging indentation, indentation, and list styles. In Univer documents, paragraphs are denoted by \r in the dataStream.
+- The sectionBreaks field encompasses section-related information. Sections are marked by `\n` in the dataStream, so encountering `\n` signifies the end of a section. All Univer documents must conclude with `\r\n`.
+- The customBlocks field includes user-defined blocks.
+- The tables field contains information related to tables.
+- The customRanges field comprises overlapping document information, such as comments, hyperlinks, etc.
 
 ```ts
 export const DEFAULT_DOCUMENT_DATA_SIMPLE: IDocumentData = {
@@ -104,27 +104,27 @@ export const DEFAULT_DOCUMENT_DATA_SIMPLE: IDocumentData = {
 };
 ```
 
-上面是一个简单的文档示例，整个文档包含两个段落一个 section，在 dataStream 中有两个 `\r` 进行段落占位，一个 `\n` 进行 section 占位，textRuns 中包含一条行内样式，对正文 `st:0 ~ ed:4` 范围内的文字加粗，并且字体大小是24号，字体微软雅黑
+The aforementioned is a simple document example, consisting of two paragraphs and one section. Within the dataStream, there are two `\r` placeholders for paragraphs and one `\n` placeholder for the section. In the textRuns, there is a single inline style specified, which bolds the text within the range `st:0 ~ ed:4`, with a font size of 24 and the font set to Microsoft YaHei.
 
-#### 1.2.2 管理数据模型的类
+#### 1.2.2 Managing the Data Model Class
 
-数据模型是通过 `DocumentDataModel` 类来进行管理的，该类位于 core 模块中，数据模型的修改需要通过 mutation 来变更，通过应用 `DocumentDataModel` 上的 apply 方法，将 mutations 应用到数据模型上，最终达到修改底层数据的目的
+The data model is managed through the `DocumentDataModel` class, located in the core module. Modifying the data model requires mutations for changes. By applying the `apply` method on the `DocumentDataModel`, mutations are applied to the data model, ultimately achieving the goal of modifying the underlying data.
 
-在文档中，mutation 抽象成了 3 中类型，`retain`、`insert` 和 `delete`，`retain` 操作可以理解过移动光标或者应用样式修改，`insert` 操作是插入文档内容，插入的内容可以包含样式（textRuns），`delete` 操作是删除文档内容，只需要传入 `len` 属性就行，表示需要删除的长度
+In the document, mutations are abstracted into three types: `retain`, `insert`, and `delete`. The `retain` operation involves moving the cursor or applying style modifications, `insert` is for inserting document content, which can include styles (textRuns), and `delete` is for removing document content, requiring only the `len` attribute to indicate the length to be deleted.
 
-由于文档需要支持历史栈，即通过 undo 和 redo 来回到之前的文档状态，所以以上三种操作还需要支持 invert 操作，即他们的反向操作，如 insert 的反向操作是 delete，delete 的反向操作是 insert，同时由于还需要支持多人协作等，所以我们还需要对 mutation 进行 transform 和 compose 操作，关于这部分内容，后面会有相关文章来介绍文档协作编辑，由于篇幅所限，这儿就不再赘述
+As the document needs to support a history stack, enabling users to revert to previous document states through undo and redo functionalities, these three operations also need to support an `invert` operation, representing their reverse actions. For instance, the inverse of an insert operation is delete, and the inverse of delete is insert. Additionally, to support features like collaborative editing, mutations require `transform` and `compose` operations. There will be forthcoming articles discussing collaborative document editing. Due to space constraints, further elaboration will not be provided here.
 
-### 1.3 视图模型层
+### 1.3 View Model Layer
 
-在视图模型层，主要涉及到 DocumentViewModel 和 DocumentSkeleton 的管理，以及文档的控制器、Services 和命令系统
+In the view model layer, the management of DocumentViewModel and DocumentSkeleton is crucial, alongside the document's controllers, services, and command system.
 
-#### 1.3.1 View Model 管理
+#### 1.3.1 View Model Management
 
-DocumentViewModel 类的定义是在 engine-render 模块中，其实也不难理解，因为 View Model 的主要职责也就是为渲染（视图渲染层）服务，所以相关接口和类也就定义在了 engine-render 模块中，DocumentViewModel 实例的管理是在 docs 模块中进行，对于代码在 doc-view-model-manager.service.ts 文件中
+The definition of the DocumentViewModel class is within the engine-render module. This placement is logical, as the primary responsibility of the View Model is to serve the rendering (view rendering layer). Therefore, the relevant interfaces and classes are defined within the engine-render module. The management of DocumentViewModel instances occurs in the docs module, specifically in the `doc-view-model-manager.service.ts` file.
 
-DocumentViewModel 的主要职责就是根据最新的 DocumentDataModel 生成最新的 View Model，然后供 Document Skeleton（后面会介绍到） 消费，那为什么还需要一个专门的 service 来进行管理呢，而非单实例的呢？正如前文所描述，Univer 并非只包含文档，它也包含表格、演示文稿等，在表格中，它的单元格编辑器以及公式栏编辑器都是一个文档编辑器，也就是说任意一个表格单元格也是通过文档来管理和渲染的，同时 Univer 也支持多实例，所以我们需要通过 service 来进行 View Model 的管理
+The primary responsibility of DocumentViewModel is to generate the latest View Model based on the most recent DocumentDataModel, which is then consumed by the Document Skeleton (to be discussed later). Why then is there a need for a dedicated service for management, rather than a singleton instance? As previously described, Univer encompasses not only documents but also tables, presentations, and more. In tables, both the cell editor and formula bar editor are document editors. This means that even a table cell is managed and rendered through a document. Additionally, Univer supports multiple instances, necessitating the use of a service for View Model management.
 
-一篇文档对应一个 DocumentViewModel 实例，当监听到有文档创建或更新时，docViewModelManagerService 会去创建或者更新文档 view model，使其保持最新状态，以供对应的 Document Skeleton 消费使用
+Each document corresponds to a DocumentViewModel instance. When a document creation or update is detected, the `docViewModelManagerService` creates or updates the document view model to keep it in sync, ready for consumption by the corresponding Document Skeleton.
 
 ```ts
 // doc-canvas-view.ts
@@ -139,11 +139,11 @@ private _initialize() {
 }
 ```
 
-正如以上代码，监听到 Doc 新增或者修改，都会调用 docViewModelManagerService 上的 setCurrent 方法，对 view model 进行更新
+Just as depicted in the above code, upon detecting the addition or modification of a document (Doc), the `setCurrent` method on the `docViewModelManagerService` is invoked to update the view model.
 
-#### 1.3.2 Document Skeleton 的管理
+#### 1.3.2 Managing the Document Skeleton
 
-上面也提到，视图模型层不仅管理 view model，同时也管理 DocumentSkeleton，也就是文档布局相关的信息，相关代码在 doc-skeleton-manager.service.ts 文件中（在《Univer 文档排版设计》文章中，将更加详尽介绍 Document Skeleton），和 view model 一样，一篇 Univer 文档对应一份 Document Skeleton 实例，通过唯一的 `unitId` 和 `subUnitId` 来唯一标识，当监听到 view model 更新后，对应的 skeleton 实例也需要进行创建或者更新
+As previously mentioned, the view model layer not only manages the view model but also oversees the Document Skeleton, which pertains to layout-related information of the document. The relevant code can be found in the `doc-skeleton-manager.service.ts` file. (A more detailed exposition on Document Skeleton will be provided in the "Univer Document Layout Design" article.) Similar to the view model, each Univer document corresponds to a single Document Skeleton instance, uniquely identified by `unitId` and `subUnitId`. Upon detecting an update in the view model, the corresponding skeleton instance also necessitates creation or update.
 
 ```ts
 // doc-skeleton-manager.service.ts
@@ -172,49 +172,48 @@ private _setCurrent(docViewModelParam: IDocumentViewModelManagerParam): Nullable
 }
 ```
 
-如上代码所示，当监听到 view model 变更后，会调用 _setCurrent 方法，通过最近的 view model 来创建或者更新 skeleton
+As depicted in the above code, upon detecting a change in the view model, the `_setCurrent` method is invoked to create or update the skeleton based on the most recent view model.
 
-#### 1.3.3 控制器和命令系统
+#### 1.3.3 Controllers and Command System
 
-在视图层中，还包括控制器、Services 和命令系统相关的代码，控制器主要用来控制编辑器响应视图层发出的事件，以及处理页面初始渲染相关事宜，比如：
+Within the view layer, there are codes related to controllers, services, and the command system. Controllers are primarily responsible for controlling how the editor responds to events from the view layer and handling matters related to initial page rendering, such as:
 
-- Clipboard Controller: 处理剪切板相关的工作，如富文本的复制、剪切和黏贴
-- Inline Format Controller：处理行内样式相关的工作，如对文本进行加粗、斜体改变颜色等
-- Text Selection Controller：监听视图层事件，处理双击、三击、以及绘制选区相关的工作，由于 Univer 是支持多实例的，一个 Univer 实例中可能存在多个 Doc 实例，所以该控制器也负责切换选区绘制的运行时等
-- 
-Service 服务，其实在上文中已经提到了视图模型层中两个重量级的服务了，View Model Manager Service 和 Doc Skeleton Manager Service，分别用来管理 view model 和 doc skeleton。其实还包含其他一些 Service：
-- Clipboard Service：剪切板相关的服务，主要提供获取剪切板内容，并将剪切板内容转为 Univer 所需格式，设置剪切板内容，将 Univer 文档格式转为剪切板所需格式等服务
-- Text Selection Manager Service：可以将该服务视为底层 Text Selection Render Manager 的一个上层服务，**在开发业务时，我们会尽量避免直接调用底层 Text Selection Render Manager 中的方法，而应该使用 Text Selection Manager 提供的方法**，比如刷新选区、获取所有选区以及替换（设置）选区等，最常用的 getSelections 获取所有选区，getActiveRange 获取活跃选区
-- ...
+- Clipboard Controller: Manages clipboard-related tasks, such as rich text copying, cutting, and pasting.
+- Inline Format Controller: Handles inline style-related tasks, like applying bold, italics, or color changes to text.
+- Text Selection Controller: Listens to view layer events, manages double-clicks, triple-clicks, and selection drawing tasks. Given that Univer supports multiple instances, and a Univer instance may contain multiple Doc instances, this controller also handles switching the runtime for selection drawing.
 
-命令系统，在命令系统中，处理了大量的业务逻辑，几乎所有的业务逻辑都在命令系统中找到它们的身影，在《这就是 Univer》中也提到，命令主要有 3 中类型：command、mutation 和 operation，command 可以理解为用户的某次操作行为，如创建段落、通过 Backspace 键删除光标前的文字或者选区的内容等，Command 会去触发 mutation 来达到数据模型的修改，同时也会去修改视图模型，触发 Skeleton 重新计算，最终反应到视图层的修改，不涉及到协同的操作会放到 operation 中，如光标和选区的变化，通过 live share 同步到其他用户端
+Services, as previously mentioned in the view model layer, encompass two heavyweight services: the View Model Manager Service and the Doc Skeleton Manager Service, responsible for managing the view model and doc skeleton, respectively. Other services include:
 
-- Break Line Command：监听 Enter 键盘事件，创建新的段落
-- IME Input Command：处理输入法事件，进行文本输入
-- Inline Format Command：所有行内样式的 Command，如通过菜单对文本进行加粗、斜体改变颜色等
-- ...
+- Clipboard Service: Manages clipboard-related tasks, facilitating content retrieval, conversion of clipboard content to Univer-compatible formats, setting clipboard content, converting Univer document formats to clipboard-friendly formats, and more.
+- Text Selection Manager Service: This service can be viewed as an upper-level service of the underlying Text Selection Render Manager. When developing business logic, *it is advisable to avoid directly calling methods from the lower-level Text Selection Render Manager and instead utilize methods provided by the Text Selection Manager*, such as refreshing selections, obtaining all selections, and replacing (setting) selections. The most commonly used methods include `getSelections` for obtaining all selections and `getActiveRange` for retrieving the active selection.
 
-## 1.4 视图层
+The command system handles a plethora of business logic, encompassing nearly all business logic within it. In "This is Univer," it is mentioned that commands primarily fall into three categories: command, mutation, and operation. A command can be understood as a user's specific operation, such as creating a paragraph or deleting text or selection using the Backspace key. Commands trigger mutations to modify the data model, update the view model, prompt the Skeleton to recalculate, and ultimately reflect the modifications in the view layer. Operations, on the other hand, handle non-collaborative actions, such as changes in cursor and selection, which are synchronized to other user terminals through live share.
 
-视图层位于整个项目架构的最顶层，也是和用户直接交互的地方，视图层相关代码位于 engine-render 模块中。将文档内容通过 Canvas 渲染到页面中，这样用户就可以看到文档的文字、图片内容等，同时视图层也负责接收并触发用户键盘和鼠标事件，比如用户通过键盘输入文字内容，我们应该及时更新数据及界面渲染内容，所输及所得。在这部分，我们将重点介绍视图层中两个核心模块：**事件系统**、**选区光标**，熟悉这两个模块也就对文档视图层有了基本的映像
+- Break Line Command: Listens for the Enter key event to create a new paragraph.
+- IME Input Command: Handles input method editor events for text input.
+- Inline Format Command: Covers all inline style commands, such as applying bold, italics, or color changes to text through the menu.
 
-> 视图层还涉及到 Document Skeleton 和文档排版设计，后面会有单独一篇文章《Univer 文档排版设计》来介绍，这儿就不赘述了
+### 1.4 View Layer
 
-#### 1.4.1 事件系统
+The view layer resides at the topmost level of the entire project architecture and serves as the direct interface with which users interact. The code related to the view layer is located within the engine-render module. By rendering document content onto the page via Canvas, users can view the text, image content, and more within the document. Additionally, the view layer is responsible for receiving and triggering user keyboard and mouse events. For instance, when a user inputs text via the keyboard, we should promptly update both the data and the interface rendering content—the input and the output. In this section, we will focus on two core modules within the view layer: the **event system** and **selection cursor**. Understanding these modules will provide a foundational understanding of the document's view layer.
 
-在了解事件系统前，我们需要对渲染引擎的架构有所了解，欢迎阅读《[渲染引擎架构设计](https://univer.ai/guides/architecture/renderer/)》，里面有关于渲染引擎的设计，在这篇文章中，介绍了如何在一个渲染引擎下，进行表格、文档、演示文稿的绘制和渲染，以及分层渲染、Viewport 设计以及贴图渲染，对渲染引擎有个大致了解后，我们来聊聊 Univer 中的事件系统
+> The view layer also involves the Document Skeleton and document layout design, which will be covered in a separate article titled "Univer Document Layout Design." Therefore, we will not delve into these aspects here.
 
-在 DOM 的事件系统中，我们可以单独为某一个元素（如 DIV）绑定事件，事件在没有阻止冒泡的前提下，该事件会向父级元素冒泡，也就是该事件绑定元素祖先元素也能接受到该事件，最终会冒泡到 document 元素上，我们通过事件代理可以在祖先元素上绑定一次事件，然后监听不同的触发元素。但是在 Canvas 中，只有一个 Canvas 元素，我们怎么进行事件绑定呢？事件又是如何分发到各个 Canvas 绘制的 Object 上的呢？
+#### 1.4.1 Event System
 
-在渲染引擎的事件系统中，我们借鉴了 DOM 的事件派发和处理系统，一句话解释下渲染引擎的事件系统：
+Before delving into the event system, it is essential to have an understanding of the architecture of the rendering engine. I invite you to read the "[Renderer Architecture Design](https://univer.ai/guides/architecture/renderer/)" article, which delves into the design of the rendering engine. This article explains how drawing and rendering of tables, documents, and presentation slides are achieved within a rendering engine, along with layered rendering, Viewport design, and texture rendering. Once you have a general understanding of the rendering engine, we can discuss the event system within Univer.
 
->我们对 Canvas Element 元素绑定各种事件，如 mouseenter、mousemove、mouseleave 等，然后对事件对象进行包装，然后通过当前鼠标位置信息，找到最上层的 Canvas 绘制的 Object，然后触发该 Object 上的绑定的对应事件，如果没有阻止事件冒泡，那么该事件将继续往上传递，最终传递到 Scene 上，如果 Scene 上也有对应的事件处理函数，也会被执行
+In the DOM event system, we can bind events to individual elements (such as DIV). Unless propagation is prevented, an event will bubble up to ancestor elements, allowing ancestor elements of the event-bound element to receive the event. Ultimately, the event will bubble up to the document element. Through event delegation, we can bind an event to an ancestor element once and then listen for different triggering elements. However, in the context of Canvas, where there is only one Canvas element, how do we bind events and distribute them to various objects drawn on the Canvas?
 
-哈，上面不止一句话了，下面我将从源码层面来详细解释 Univer 渲染引擎中的事件系统
+In the event system of the rendering engine, we draw inspiration from the event dispatching and handling system of the DOM. To summarize the event system of the rendering engine in a single sentence:
+
+> We bind various events, such as mouseenter, mousemove, and mouseleave, to the Canvas Element element. Subsequently, we wrap the event objects and, using the current mouse position information, identify the topmost object drawn on the Canvas. We then trigger the corresponding events bound to that object. If event bubbling is not prevented, the event will continue to propagate, eventually reaching the Scene. If there are corresponding event handling functions on the Scene, they will also be executed.
+
+Above, I may have exceeded one sentence; below, I will provide a detailed explanation of the event system within the Univer rendering engine at the source code level.
 
 ![](./1.png)
 
-第一步：在 Canvas 元素上绑定事件，并对事件对象进行包装
+Step One: Bind events to the Canvas element and wrap the event objects.
 
 ```ts
 // engine.ts
@@ -237,9 +236,9 @@ this._pointerDownEvent = (nativeEvent: Event) => {
 this._canvasEle.addEventListener(`${eventPrefix}down`, this._pointerDownEvent);
 ```
 
-如上代码，在 canvasEle 上绑定 pointerdown 事件，在  _pointerDownEvent 函数中，对事件对象进行相应包装，然后通过 onInputChangedObservable 将事件抛出，传递给 Scene 处理。在上面的代码中，有个需要注意的地方，我们对 canvasEle 进行 setPointerCapture，该方法将制定 canvasEle 为未来指针事件的捕获目标，指针的后续事件都将以捕获元素为目标，直到捕获被释放（[Element.releasePointerCapture()](https://developer.mozilla.org/en-US/docs/Web/API/Element/releasePointerCapture) ），这样保证了 pointerup 也在该元素上触发
+As per the above code, bind the `pointerdown` event to the `canvasEle`. In the `_pointerDownEvent` function, wrap the event object accordingly, and then throw the event using `onInputChangedObservable`, passing it to the Scene for processing. In the code snippet above, there is a noteworthy point: we use `setPointerCapture` on `canvasEle`. This method designates `canvasEle` as the capture target for future pointer events. Subsequent pointer events will target the capturing element until the capture is released ([Element.releasePointerCapture()](https://developer.mozilla.org/en-US/docs/Web/API/Element/releasePointerCapture)), ensuring that `pointerup` is also triggered on this element.
 
-第二步：将事件对象传递给 Scene，并调用对应的事件处理函数
+Step Two: Pass the event object to the Scene and invoke the corresponding event handling function.
 
 ```ts
 // scene.input-manager.ts
@@ -260,32 +259,32 @@ this._onPointerDown = (evt: IPointerEvent) => {
 };
 ```
 
-如上代码，首先为 onInputChangedObservable 添加 pointerdown 事件处理函数，在 _onPointerDown 事件处理函数中，通过当前 evt 的坐标信息找到最上层的 Object，触发该 Object 上的 PointerDown 事件处理函数，如果事件没有被阻止，将继续冒泡
+In the above code, firstly add a pointerdown event handling function to the `onInputChangedObservable`. In the `_onPointerDown` event handling function, identify the topmost Object based on the coordinate information of the current event (`evt`), trigger the PointerDown event handling function on that Object. If the event is not prevented, it will continue to bubble up.
 
-第三步：冒泡到最顶层，触发 Scene 上的事件处理函数
+Step Three: Bubble up to the topmost level and trigger the event handling function on the Scene.
 
-上面源码删除了实现细节和边界 case，欢迎直接阅读相关源码，了解更多细节，比如如何通过指针坐标找到最上层的 Object？如何阻止事件冒泡？为什么 Scene 上也可以绑定事件？
+The above source code has omitted implementation details and edge cases. Feel free to directly read the relevant source code to understand more details, such as how to find the topmost Object using pointer coordinates, how to prevent event bubbling, and why events can also be bound to the Scene.
 
-#### 1.4.2 选区及光标介绍
+#### 1.4.2 Selection and Cursor Introduction
 
-**选区及光标可以说是富文本编辑器中与业务逻辑直接相关的最核心的模块**，因为几乎所有的业务逻辑，第一步都是先获取当前光标和选区，然后在实现对应的业务逻辑，在文章第二部分，我们有比较详尽的用例介绍
+**Selection and cursor can be considered the most core modules directly related to business logic in a rich text editor**. Nearly all business logic typically starts by obtaining the current cursor and selection before implementing the corresponding business logic. In the second part of the article, we provide a comprehensive use case introduction.
 
-和 DOM contenteditable 实现的富文本编辑器有所不同，通过 Canvas 实现的富文本编辑器，光标和选区都需要自己实现，不能够使用浏览器提供的选区对象，但是这样也有个好处，我们可以高度定制化，比如在主流浏览器中，不支持多 Range（仅 firefox 支持），也就是不支持同时设置多个选区，但是如果通过 Canvas 来实现选区，那么我们就可以对选区进行高度定制，比如多选区的支持，选区的大小、颜色、闪烁动画等
+Different from rich text editors implemented through DOM `contenteditable`, in a rich text editor implemented through Canvas, the cursor and selection need to be custom-implemented. Browser-provided selection objects cannot be used. However, this customization allows for a high degree of customization. For instance, mainstream browsers do not support multiple Ranges (only Firefox does), meaning they do not support setting multiple selections simultaneously. By implementing selections through Canvas, we can customize selections extensively, such as supporting multiple selections, and customizing selection size, color, blinking animation, etc.
 
-还是一句话来描述下自定义选区是如何实现的：
+To describe how custom selections are implemented in a nutshell:
 
->我们会在 Document（渲染引擎中的 Document 对象，而非 DOM 中的 document 对象） 对象上，监听 pointerdown、pointermove 和 pointerup 等事件，根据相关事件的位置信息，我们会通过 TextRange 对象来绘制矩形的选区或者光标
+>We listen to events like `pointerdown`, `pointermove`, and `pointerup` on the Document object (the Document object in the rendering engine, not the `document` object in the DOM). Based on the position information of relevant events, we draw rectangular selections or cursors using the TextRange object.
 
-那么问题来了，我们如何描述选区和定位选区位置呢？选区上又有哪些属性呢？
+Now, how do we describe selections and position selections? What attributes are present on selections?
 
-选区属性及方法定义都在 TextRange 对象上：
+Selection attributes and methods are defined on the TextRange object:
 
-- anchorNodePosition：选区开始的 Univer 文档节点在文档流中位置，文档节点是 Document Skeleton 中的一个概念，可以理解成类似于 DOM 中的一个元素，如 SPAN 元素或者文本节点
-- focusNodePosition：选区结束的 Univer 文档节点在文档流中的位置
-- startOffset： 选区开始偏移的位置信息，相对于文档开始位置
-- endOffset： 选区结束的偏移位置信息，相对于文档开始位置
-- collapsed：选区是否闭合，当 startOffset 等于 endOffset，那么 collapsed 为 true，否则为 false
-- direction：选区的方向，是 anchorNode 指向 focusNode 的方向，有如下三个枚举值：
+- `anchorNodePosition`: The position of the starting Univer document node in the document flow. A document node is a concept in the Document Skeleton, similar to an element in the DOM, such as a SPAN element or a text node.
+- `focusNodePosition`: The position of the ending Univer document node in the document flow.
+- `startOffset`: The offset position where the selection starts, relative to the document's starting position.
+- `endOffset`: The offset position where the selection ends, relative to the document's starting position.
+- `collapsed`: Indicates if the selection is collapsed. When `startOffset` equals `endOffset`, `collapsed` is `true`; otherwise, it is `false`.
+- `direction`: The direction of the selection, pointing from `anchorNode` to `focusNode`, with three possible enum values:
 
 ```ts
 export enum RANGE_DIRECTION {
@@ -295,17 +294,17 @@ export enum RANGE_DIRECTION {
 }
 ```
 
-有了以上属性，我们就可以在文档中位置对应位置的选区了，本篇文章主要还是介绍文档架构和模块设计，所以文本选区部分先有个大致了解，后面会有专门文章来介绍《Univer 文档选区及光标的设计》及相关避坑指南，敬请期待
+With the aforementioned attributes, we can now create selections at corresponding positions in the document. This article primarily focuses on document architecture and module design, so the text selection section provides a general understanding for now. A dedicated article on "Design of Selections and Cursors in Univer Documents" and related pitfalls to avoid will be presented later. Stay tuned for more information.
 
-## 2. 数据更新到渲染的过程
+## 2. Process of Updating Data to Rendering
 
-在第一部分，我们了解了 Univer 文档分层架构，数据模型层、视图模型层、视图层，以及各层的数据结构和各个模块的功能职责。在这一部分，我们将以设置行内样式这一功能为例，探索用户交互、数据变更再到页面渲染的整个过程
+In the first section, we explored the layered architecture of Univer documents, including the data model layer, view model layer, and view layer, along with the data structures of each layer and the functional responsibilities of various modules. In this section, we will use the setting inline style functionality as an example to delve into the entire process from user interaction, data changes, to page rendering.
 
 ![](./2.png)
 
-### 2.1 菜单和 Command 关联
+### 2.1 Menu and Command Association
 
-第一步：给 Bold 菜单绑定对应的 Command，这样在菜单点击后，执行 `SetInlineFormatBoldCommand` 命名
+Step One: Associate the Bold menu with the corresponding Command. This way, upon clicking the menu, execute the `SetInlineFormatBoldCommand`.
 
 ```ts
 export function BoldMenuItemFactory(accessor: IAccessor): IMenuButtonItem {
@@ -322,11 +321,11 @@ export function BoldMenuItemFactory(accessor: IAccessor): IMenuButtonItem {
 }
 ```
 
-上面代码中，其中 `id` 字段就是对应 `SetInlineFormatBoldCommand` 的 `id`
+In the code snippet above, the `id` field corresponds to the `id` of the `SetInlineFormatBoldCommand`.
 
-### 2.2 处理行内样式业务逻辑
+### 2.2 Handling Inline Style Business Logic
 
-第二步：处理行内样式业务逻辑。几乎所有的业务逻辑都在 Command 中完成，设置行内样式也不例外，有一个统一的 SetInlineFormatCommand 来处理所有的行内样式，包括给文本加粗、斜体、字体颜色、字体大小、背景色等，在我们的例子中，以文本加粗为例。SetInlineFormatBoldCommand 会将加粗的行内样式转发给 SetInlineFormatCommand 来统一处理
+Step Two: Handle the business logic of inline styles. Almost all business logic is completed within Commands, and setting inline styles is no exception. There is a unified `SetInlineFormatCommand` to handle all inline styles, including bolding text, italicizing, changing font color, font size, background color, and so on. In our example, we will focus on text bolding. The `SetInlineFormatBoldCommand` will forward the bold inline style to `SetInlineFormatCommand` for unified processing.
 
 ```ts
 export const SetInlineFormatCommand: ICommand<ISetInlineFormatCommandParams> = {
@@ -365,11 +364,11 @@ export const SetInlineFormatCommand: ICommand<ISetInlineFormatCommandParams> = {
 };
 ```
 
-如上代码所示，首先通过 getSelections 来获取所有的选区（这也是为什么说选区和光标是所有业务逻辑的核心模块），有了选区后，通过 getReverseFormatValueInSelection 方法来获取当前选区相对的行内样式状态，比如当前选区内已经有加粗的字体了，那么点击加粗按钮，就应该是取消加粗，反之是加粗的效果。所有的数据模型更改需要通过 mutation 来触发，最终调用 RichTextEditingMutation 来修改数据模型和视图模型
+As shown in the code snippet above, the first step is to use `getSelections` to retrieve all selections (which is why selections and cursors are considered the core modules of all business logic). Once we have the selections, we use the `getReverseFormatValueInSelection` method to obtain the current inline style status relative to the selection. For instance, if the text within the current selection is already bold, clicking the bold button should unbold it; otherwise, it should apply the bold effect. All data model changes need to be triggered through mutations, ultimately calling `RichTextEditingMutation` to modify the data model and view model.
 
-### 2.3 更新数据模型和视图模型
+### 2.3 Updating Data Model and View Model
 
-第三步，更新数据模型和视图模型，完成页面刷新
+Step Three: Update the data model and view model to complete the page refresh.
 
 ```ts
 export const RichTextEditingMutation: IMutation<IRichTextEditingMutationParams, IRichTextEditingMutationParams> = {
@@ -388,16 +387,15 @@ export const RichTextEditingMutation: IMutation<IRichTextEditingMutationParams, 
 };
 ```
 
-如上代码所示，RichTextEditingMutation 主要完成了两件事：
+The `RichTextEditingMutation` in the code above primarily accomplishes two tasks:
 
-第一件事，调用 documentDataModel 上 apply 方法更新 Data Model
+1. It calls the `apply` method on the `documentDataModel` to update the Data Model.
+2. It calls the `reset` method on the View Model to rebuild the View Model. Changes in the data model will be synchronized with other clients, while changes in the view model layer will trigger page layout calculations and ultimately refresh the view layer.
 
-第二件事，调用 View Model 上的 reset 方法，重新构建 View Model。数据模型的变更会协同到其他客户端。视图模型层的变更会触发页面的重新布局计算，最终刷新视图层
+This completes all the work related to setting the inline style to bold.
 
-以上就完成了设置行内样式加粗的所有工作
+## 3. Comprehensive Review
 
-## 3. 全文回顾
+In this article, we first introduced the project architecture of Univer documents, which adheres to the standard MVVM architectural model, dividing the entire project into data model layer, view model layer, and view layer. Next, we provided a layered introduction to the core modules and data structures in each architectural layer, such as the `DocumentDataModel` class in the data model layer, view model management in the view model layer, controllers and command systems, and how user events are dispatched in the view layer. We also briefly discussed how Univer documents handle cursors and selections, emphasizing their importance as core modules of Univer documents. Lastly, through an example, we interconnected various modules to analyze how they collaborate to achieve document business functionalities.
 
-在这篇文章中，首先，介绍了 Univer 文档的项目架构，它符合标准的 MVVM 架构模型，将整个项目拆分成数据模型层、视图模型层和视图层。其次，分层介绍了各个架构层级中核心模块和数据结构，如数据模型层中的 DocumentDataModel 类、视图模型层中的 View Model 管理、控制器和命令系统、视图层中，用户事件是如何调度，以及简单介绍了下 Univer 文档如何处理光标和选区，以及为什么说光标和选区是 Univer 文档的核心模块之一。最后，我们通过一个示例，来将各个模块串联起来，分析各个模块如何协作，完成文档业务功能
-
-<p style="color: #666; font-size: 14px;">作者：<a href="https://github.com/Jocs">Jocs</a>， <a href="https://github.com/marktext/marktext">MarkText</a> 作者，Univer 核心开发者，负责 Univer Doc 架构及开发</p>
+<p style="color: #666; font-size: 14px;">Author: <a href="https://github.com/Jocs">Jocs</a>, creator of <a href="https://github.com/marktext/marktext">MarkText</a>, core developer of Univer, responsible for Univer Doc architecture and development.</p>

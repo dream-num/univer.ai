@@ -181,10 +181,11 @@ private _setCurrent(docViewModelParam: IDocumentViewModelManagerParam): Nullable
 - Clipboard Controller: 处理剪切板相关的工作，如富文本的复制、剪切和黏贴
 - Inline Format Controller：处理行内样式相关的工作，如对文本进行加粗、斜体改变颜色等
 - Text Selection Controller：监听视图层事件，处理双击、三击、以及绘制选区相关的工作，由于 Univer 是支持多实例的，一个 Univer 实例中可能存在多个 Doc 实例，所以该控制器也负责切换选区绘制的运行时等
-- 
+
 Service 服务，其实在上文中已经提到了视图模型层中两个重量级的服务了，View Model Manager Service 和 Doc Skeleton Manager Service，分别用来管理 view model 和 doc skeleton。其实还包含其他一些 Service：
+
 - Clipboard Service：剪切板相关的服务，主要提供获取剪切板内容，并将剪切板内容转为 Univer 所需格式，设置剪切板内容，将 Univer 文档格式转为剪切板所需格式等服务
-- Text Selection Manager Service：可以将该服务视为底层 Text Selection Render Manager 的一个上层服务，**在开发业务时，我们会尽量避免直接调用底层 Text Selection Render Manager 中的方法，而应该使用 Text Selection Manager 提供的方法**，比如刷新选区、获取所有选区以及替换（设置）选区等，最常用的 getSeletions 获取所有选区，getActiveRange 获取活跃选区
+- Text Selection Manager Service：可以将该服务视为底层 Text Selection Render Manager 的一个上层服务，**在开发业务时，我们会尽量避免直接调用底层 Text Selection Render Manager 中的方法，而应该使用 Text Selection Manager 提供的方法**，比如刷新选区、获取所有选区以及替换（设置）选区等，最常用的 getSelections 获取所有选区，getActiveRange 获取活跃选区
 - ...
 
 命令系统，在命令系统中，处理了大量的业务逻辑，几乎所有的业务逻辑都在命令系统中找到它们的身影，在《这就是 Univer》中也提到，命令主要有 3 中类型：command、mutation 和 operation，command 可以理解为用户的某次操作行为，如创建段落、通过 Backspace 键删除光标前的文字或者选区的内容等，Command 会去触发 mutation 来达到数据模型的修改，同时也会去修改视图模型，触发 Skeleton 重新计算，最终反应到视图层的修改，不涉及到协同的操作会放到 operation 中，如光标和选区的变化，通过 live share 同步到其他用户端
@@ -194,7 +195,7 @@ Service 服务，其实在上文中已经提到了视图模型层中两个重量
 - Inline Format Command：所有行内样式的 Command，如通过菜单对文本进行加粗、斜体改变颜色等
 - ...
 
-## 1.4 视图层
+### 1.4 视图层
 
 视图层位于整个项目架构的最顶层，也是和用户直接交互的地方，视图层相关代码位于 engine-render 模块中。将文档内容通过 Canvas 渲染到页面中，这样用户就可以看到文档的文字、图片内容等，同时视图层也负责接收并触发用户键盘和鼠标事件，比如用户通过键盘输入文字内容，我们应该及时更新数据及界面渲染内容，所输及所得。在这部分，我们将重点介绍视图层中两个核心模块：**事件系统**、**选区光标**，熟悉这两个模块也就对文档视图层有了基本的映像
 

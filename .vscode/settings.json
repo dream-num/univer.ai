@@ -51,6 +51,7 @@
     "astro",
     "Babylonjs",
     "Konva",
+    "MVVM",
     "Univer"
   ]
 }
