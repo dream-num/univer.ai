@@ -1,19 +1,13 @@
 ---
 import { Github } from './Github/index'
 import { Locale } from './Locale/index'
-import { getLangFromUrl, useI18nUrl, useTranslations } from '@/i18n/utils'
+import { getLangFromUrl, languages, useI18nUrl, useTranslations } from '@/i18n/utils'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 const l = useI18nUrl(lang)
 
 const currentPath = Astro.url.pathname.replace(`/${lang}`, '')
-
-const langMap: Record<typeof lang, string> = {
-  'zh-cn': '简体中文',
-  'en-us': 'English',
-  'ja-jp': '日本語',
-};
 ---
 
 <header class="header">
@@ -36,7 +30,7 @@ const langMap: Record<typeof lang, string> = {
     </section>
 
     <section class="right">
-      <Locale client:load lang={langMap[lang]} currentPath={currentPath} />
+      <Locale client:load lang={languages[lang]} currentPath={currentPath} />
 
       <a class="github" href="https://github.com/dream-num/univer">
         <Github client:load />
