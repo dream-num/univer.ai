@@ -104,7 +104,13 @@ export function Demo(props: IProps) {
         {
           activeDemo?.type === 'StackBlitz'
             ? (
-              <iframe id={embedDomId} className={styles.iframe} src="about:blank"></iframe>
+              <iframe
+                id={embedDomId}
+                allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+                sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+                className={styles.iframe}
+                src="about:blank"
+              />
               )
             : (
               <iframe
