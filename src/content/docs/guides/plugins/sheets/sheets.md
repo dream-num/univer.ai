@@ -22,8 +22,6 @@ title: "@univerjs/sheets"
 3. sheet 数据验证
 4. sheet 数据透视表
 
-等等。
-
 具体的使用方法请参考 API 文档。
 
 ### **何时使用 `SheetInterceptorService`，何时不要使用？**

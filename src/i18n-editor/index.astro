@@ -1,0 +1,49 @@
+---
+import fs from 'node:fs'
+import BlankLayout from '../layouts/BlankLayout.astro'
+
+function walkDir(dir: string, ignores: string[]) {
+  const files = fs.readdirSync(dir)
+  const result: string[] = []
+
+  for (const file of files) {
+    if (ignores.includes(file)) {
+      continue
+    }
+    const filePath = `${dir}/${file}`
+    const stat = fs.statSync(filePath)
+    if (stat.isDirectory()) {
+      result.push(...walkDir(filePath, ignores))
+    } else if (file.endsWith('.md') || file.endsWith('mdx')) {
+      result.push(filePath)
+    }
+  }
+
+  return result
+}
+
+const ignores = ['en-us', 'ja-jp']
+const sourceFiles = walkDir('./src/content/docs', ignores).map((path) => {
+  const ext = path.split('.').pop() ?? ''
+  const filePath = path.replace(`.${ext}`, '')
+
+  return {
+    path: filePath,
+    ext,
+  }
+})
+---
+
+<BlankLayout lang="zh-cn" title="i18n Editor">
+  <section>
+    <ul>
+      {sourceFiles.map(({ path, ext }) => (
+        <li>
+          <span>{path}.{ext}</span>
+          <a href={`/i18n-editor/editor?path=${path}&ext=${ext}&lang=en-us`}>en-us</a>
+          <a href={`/i18n-editor/editor?path=${path}&ext=${ext}&lang=ja-jp`}>ja-jp</a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BlankLayout>
