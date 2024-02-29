@@ -5,7 +5,12 @@ import TypeDoc from 'typedoc'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
-const __packages = resolve(__dirname, './node_modules/univer/packages')
+const __packageDir = resolve(__dirname, './node_modules/univer')
+
+const __packageJson = JSON.parse(fs.readFileSync(resolve(__packageDir, './package.json'), 'utf8'))
+const __version = __packageJson.version
+
+const __packages = resolve(__packageDir, './packages')
 const __output = resolve(__dirname, './api')
 
 // clean output
@@ -33,10 +38,11 @@ for (const pkg of packages) {
     excludePrivate: true,
     excludeProtected: true,
     disableGit: true,
-    disableSources: true,
+    disableSources: false,
     customCss: './style.css',
     readme: 'none',
     hideGenerator: true,
+    sourceLinkTemplate: `https://github.com/dream-num/univer/blob/v${__version}/{path}#L{line}`,
   })
 
   const project = await app.convert()
