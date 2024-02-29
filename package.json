@@ -35,7 +35,7 @@
     "postinstall": "cd ./node_modules/univer && pnpm install --ignore-scripts",
     "dev": "cross-env APP_MODE=development astro dev",
     "build": "cross-env APP_MODE=production pnpm run build:site && pnpm run build:api",
-    "build:site": "astro build",
+    "build:site": "cross-env APP_MODE=production astro build",
     "build:api": "node ./generate-api.mjs && cp -r ./api/* ./dist/api",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
