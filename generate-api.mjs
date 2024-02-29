@@ -32,7 +32,10 @@ for (const pkg of packages) {
   const app = await TypeDoc.Application.bootstrapWithPlugins({
     entryPoints: resolve(__packages, pkg, 'src/index.ts'),
     tsconfig: resolve(__packages, pkg, 'tsconfig.json'),
-    externalPattern: ['**/node_modules/univer/node_modules/**'],
+    externalPattern: [
+      '**/node_modules/univer/node_modules/**',
+      '**/.pnpm/**',
+    ],
     excludeExternals: true,
     excludeInternal: true,
     excludePrivate: true,
@@ -42,6 +45,8 @@ for (const pkg of packages) {
     customCss: './style.css',
     readme: 'none',
     hideGenerator: true,
+    includeVersion: true,
+    basePath: resolve(__packageDir),
     sourceLinkTemplate: `https://github.com/dream-num/univer/blob/v${__version}/{path}#L{line}`,
   })
 
