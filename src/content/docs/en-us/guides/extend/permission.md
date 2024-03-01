@@ -1,17 +1,17 @@
 ---
-title: 权限
+title: Permission
 ---
 
-在 `Univer` 中有一套依赖第三方鉴权的权限机制,权限的最小单位为`PermissionPoint`.`PermissionPoint`的`value`存储权限的元信息(比如第三方存储的索引键,比如白名单/黑名单列表),`id`表示该权限的业务点位.
+In Univer, there is a permission mechanism that relies on third-party authentication. The smallest unit of permission is called `PermissionPoint`. The value attribute of PermissionPoint stores the metadata of the permission (such as the index key stored by the third party, such as whitelist/blacklist), and the id attribute represents the business point of that permission.
 
-1. `Univer` 级别的编辑权限,如果本权限被关闭,所有依赖`Univer`编辑权限的的功能将被关闭.
+1. If the Univer level editing permission is disabled, all functionalities that depend on the Univer editing permission will be disabled as well.
 
 ```ts
 import { UniverPermissionService } from '@univerjs/core';
 
 class CustomerService{
     constructor(@Inject(UniverPermissionService) _univerPermissionService:UniverPermissionService){
-        _univerPermissionService.setEditable('your unitId',false)// 整个 Univer 将不可编辑
+        _univerPermissionService.setEditable('your unitId',false)// If the entire Univer system is set to be false, it means that no editing actions can be performed on any component or feature within the Univer system
     }
     getUniverEditable(){
         return this._univerPermissionService.getEditable()
@@ -19,7 +19,7 @@ class CustomerService{
 }
 ```
 
-其中的 `UniverEditablePermission` 的类型如下
+The type of `UniverEditablePermission` is as follows:
 
 ```ts
 export const UniverEditablePermissionPoint = 'univer.editable';
@@ -34,14 +34,14 @@ export class UniverEditablePermission extends PermissionPoint<boolean> {
 }
 ```
 
-2. 业务层级,拿 `sheet` 举例, `sheet` 可以针对某个 `worksheet` 进行权限设置.
+2. At the business level, taking sheet as an example, you can set permissions for a specific worksheet.
 
 ```ts
 import { SheetPermissionService } from '@univerjs/sheets';
 
 class CustomerService{
     constructor(@Inject(SheetPermissionService) _sheetPermissionService:SheetPermissionService){
-        _sheetPermissionService.setSheetEditable(false,'your unitId','your subUnitId')// 对应的 worksheet 将不可编辑。
+        _sheetPermissionService.setSheetEditable(false,'your unitId','your subUnitId')// The corresponding worksheet will become uneditable.
     }
 
     getSheetEditable(worksheetId:string){
@@ -50,7 +50,8 @@ class CustomerService{
 }
 ```
 
-其中的 `SheetEditablePermission` 的类型如下
+The type of `SheetEditablePermission` is as follows:
+
 
 ```ts
 const SheetEditablePermissionPoint = 'univer.sheet.editable';
@@ -70,7 +71,7 @@ export class SheetEditablePermission extends PermissionPoint<boolean> {
 }
 ```
 
-3. 业务自定义权限
+3. Business custom permissions
 
 ```ts
 import  { IPermissionService,PermissionPoint } from '@univerjs/core';
