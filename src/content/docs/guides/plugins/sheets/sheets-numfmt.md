@@ -10,6 +10,29 @@ title: "@univerjs/sheets-numfmt"
 数字格式是电子表格的核心功能之一，因此数字格式的解析处理是在 @univerjs/sheets 中进行的。
 :::
 
+## 使用介绍
+在你的入口文件处，引用 `@univerjs/sheets-numfmt`.
+```ts
+import { LocaleType, LogLevel, Univer } from '@univerjs/core';
+import { defaultTheme } from '@univerjs/design';
+import { UniverSheetsNumfmtPlugin } from '@univerjs/sheets-numfmt';
+
+
+// univer
+const univer = new Univer({
+    theme: defaultTheme,
+    locale: LocaleType.ZH_CN,
+    locales,
+    logLevel: LogLevel.VERBOSE,
+});
+
+// ... 其他插件注册
+
+univer.registerPlugin(UniverSheetsNumfmtPlugin);
+```
+:::note
+如果你需要导出快照支持导出数据格式,需要额外新增[一部分代码](/guides/extend/model/#本地化快照方案)
+:::
 
 ## 依赖的插件
 
