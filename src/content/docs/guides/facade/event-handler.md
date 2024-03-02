@@ -34,7 +34,7 @@ Univer 提供了一些有用 API 来执行和监听命令，例如上面提到 
 
 Univer 命令分为 3 种类型：Command、Operation、Mutation。
 
-- Command：通常是一些用户操作的抽象，例如设置表格选区、修改选区值等，这类命令通常由用户操作触发。
+- Command：通常是用户在 Univer 界面的具体操作，例如设置表格选区、修改选区值等，这类命令通常由用户操作触发。
 - Mutation：通常是一些会对 Univer 业务数据（指文档和表格的数据）产生影响的命令，例如修改选区值，这类命令通常由 Command 内部调用，撤销和重做由 Command 来管理。
 - Operation：通常是一些不会对 Univer 业务数据产生影响的命令，例如设置表格选区，这类命令不会被撤销和重做。
 
@@ -123,11 +123,11 @@ univerAPI.executeCommand('')
 
 ```javascript
 const univerAPI = FUniver.newAPI(univer);
-univerAPI.beforeCommandExecute((command, next)=>{
+univerAPI.beforeCommandExecute((command)=>{
   const { id, type, params } = command;
   if (id === 'sheet.mutation.set-range-values') {
     // 阻止命令执行
-    next(false);
+    return false;
   }
 })
 ```
