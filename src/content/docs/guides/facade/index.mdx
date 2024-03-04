@@ -1,48 +1,48 @@
 ---
-title: 使用 Facade
+title: Using Facade
 sidebar:
   order: 1
 ---
 
-如果你只想使用一个开箱即用的电子表格，不想使用 Univer 的底层 API，或者你更偏向于 Luckysheet 的使用方式，你可以使用 @univerjs/facade 提供的面板（**Facade**） API。
-
-本小节介绍 Facade 的安装和基本使用方法。
+If you prefer to use a ready-to-use spreadsheet and don't want to deal with the underlying API of Univer, or if you are more inclined towards the usage style of Luckysheet, you can utilize the Panel API provided by `@univerjs/facade`. 
 
 :::note
-实际上，[Uniscript](/guides/plugins/common/uniscript/) 也使用了 @univerjs/facade 提供的这套 API，因此 @univerjs/facade 提供的能力就是 Uniscript 能够提供的能力。
+In fact, Uniscript also uses the same API provided by `@univerjs/facade`, so the capabilities provided by `@univerjs/facade` align with what Uniscript offers.
 :::
 
-:::note[⚗️ 施工中]
-我们仍在扩展 Facade 的能力，部分底层 API 支持的能力可能还没有被 Facade 支持，如果你发现了这样的问题，请向我们[提交 issue](/guides/contributing#github-issues) 或者[提交 Pull Request](http://localhost:4321/guides/contributing#contributing-code)。
+In this section, we will introduce the installation and basic usage of Facade.
+
+:::note[⚗️ Under Construction]
+We are still expanding the capabilities of Facade, and some functionalities supported by the underlying API may not be supported by Facade yet. If you encounter any such issues, please submit an issue to us or consider contributing with a pull request.
 :::
 
-:::note[我应该使用 Facade 还是底层 API？]
-我们建议有下面需求的用户使用 API：
+:::note[Should I use Facade or the underlying API?]
+We recommend using the API if you fall into one of the following categories:
 
-1. 第一次接触 Univer，或者是 Luckysheet 老用户，想尽快上手 Univer
-2. 不太关心 Univer 的插件化能力
+1. You are new to Univer or are a Luckysheet user who wants to quickly get started with Univer.
+2. You are not very concerned with the plugin capabilities of Univer.
 
-建议有如下需求的用户使用底层 API：
+We recommend using the underlying API if you have the following requirements:
 
-1. 已经对 Univer 比较熟悉
-1. 需要根据需求调整安装在 Univer 上的插件
-1. 需要自定义开发插件，调用更多 Univer 核心和其他插件的能力
-1. 追求极致的构建产物体积和性能
+1. You are already familiar with Univer.
+2. You need to adjust the installed plugins on Univer according to your requirements.
+3. You need to develop custom plugins and access more of Univer's core and other plugins' capabilities.
+4. You seek optimal build size and performance.
 
-注意，Facade 和底层 API 并不是互斥关系，你完全可以同时使用它们。
+Note that Facade and the underlying API are not mutually exclusive. You can use them simultaneously.
 :::
 
-## 安装
+## Installation
 
-使用你的 npm 包管理器安装：
+Install via your favorite package manager:
 
 ```shell
 pnpm install @univerjs/facade
 ```
 
-## 使用
+## Usage
 
-@univerjs/facade 提供的 API 是对 `Univer` 实例的封装，因此你需要在创建了 `Univer` 实例之后，再用 `FUniver` 包裹这个实例：
+The API provided by `@univerjs/facade` is a wrapper around the `Univer` instance. Therefore, after creating a `Univer` instance, you need to wrap it with `FUniver`:
 
 ```typescript title="main.ts"
 import { FUniver } from "@univerjs/facade";
@@ -50,10 +50,10 @@ import { FUniver } from "@univerjs/facade";
 const univerAPI = FUniver.newAPI(univer);
 ```
 
-然后你就可以通过调用 `univerAPI` 的方法来使用 Univer 了，例如获取当前激活的 Workbook：
+You can then use the Univer functionality by calling methods on the `univerAPI` object. For example, get the currently activated Workbook:
 
 ```typescript title="main.ts"
 univerAPI.getActiveWorkbook();
 ```
 
-你可以查看 [Facade API](/api/facade/) 来查看 Facade 的全部能力。接下来几个小节会演示一些常见的使用场景。
+You can refer to the [Facade API documentation](/api/facade/) for a more detailed description of what you can achieve with Facade. In the following sections, we will demonstrate some common usage scenarios.

@@ -1,22 +1,22 @@
 ---
-title: 安装和引入
+title: Installation & Usage
 sidebar:
   order: 1
 ---
 
-我们推荐使用 [Vite](https://vitejs.dev/)、[esbuild](https://esbuild.github.io/) 或 [Webpack 5](https://webpack.js.org/) 等对 ES Module 支持较好的构建工具来构建 Univer 应用。如果你使用了其它构建工具（例如 Webpack 4），可能会需要一些额外的配置，请阅读 [更多](/guides/quick-start/#更多) 以及 [常见问题](/guides/troubleshooting) 获取更多信息。
+We recommend using build tools such as [Vite](https://vitejs.dev/), [esbuild](https://esbuild.github.io/), or [Webpack 5](https://webpack.js.org/) that have good support for ES Modules to build Univer applications. If you are using other build tools like Webpack 4, you may require some additional configurations. For more information, please refer to [Read More](/en-us/guides/quick-start#read-more) and the [Troubleshooting](/en-us/guides/troubleshooting).
 
-## 安装
+## Installation
 
-Univer 的前端通过多个 npm 包发布，你可以根据需要安装对应的包。
+To facilitate the deployment of Univer's frontend, a variety of npm packages are utilized. You may install the requisite packages based on your specific requirements.
 
-安装 Sheets 所需的包：
+To install the packages necessary for Sheets, please follow the instructions below:
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 
 <Tabs>
   <TabItem label="npm">
-    推荐使用 npm >= 8.0.0，以便自动安装 peerDependencies。
+    We recommend using npm >= 8.0.0 to automatically install peerDependencies.
 
     ```shell
     npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
@@ -30,9 +30,9 @@ import { Tabs, TabItem } from "@astrojs/starlight/components";
   </TabItem>
 </Tabs>
 
-## 使用
+## Usage
 
-你需要在项目中引入 Univer 的样式文件，以及一些必要的插件：
+To employ Univer in your project, you must include the style sheet provided and incorporate the necessary plugins:
 
 ```ts title="main.ts"
 import "@univerjs/design/lib/index.css";
@@ -53,7 +53,7 @@ import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
 import { UniverUIPlugin } from "@univerjs/ui";
 ```
 
-然后创建一个 Univer 实例，并注册这些插件：
+Next, instantiate an Univer object and register these plugins:
 
 ```ts title="main.ts" {9}
 const univer = new Univer({
@@ -82,25 +82,25 @@ univer.registerPlugin(UniverSheetsUIPlugin);
 univer.registerPlugin(UniverSheetsFormulaPlugin);
 ```
 
-注意，在注册 `UniverUIPlugin` 的时候，你需要传递一个 `container` 参数，这个参数是一个 CSS 选择器，用于指定 Univer 的容器元素。
+Please be informed that when registering the `UniverUIPlugin`, it is necessary to provide a `container` parameter. This parameter represents a CSS selector that serves the purpose of specifying the container element for Univer.
 
 :::note
-你可以通过创建多个 Univer 对象，并在注册 `UniverUIPlugin` 时提供不同的容器，从而在一个页面上创建多个 Univer！请参考我们的 [playground](/playground/?title=Multi%20Instance)。
+You have the flexibility to create multiple instances of Univer by creating multiple `Univer` objects and supplying different containers when registering the `UniverUIPlugin`. This allows you to incorporate multiple instances of Univer within a single webpage! For further guidance, kindly refer to our [playground](/playground/?title=Multi%20Instance).
 :::
 
-最后通过 `createUniverSheet` 方法创建一个空白的 Univer Sheet：
+Finally, create an empty Workbook using the `createUniverSheet` method:
 
 ```ts title="main.ts"
 univer.createUniverSheet({});
 ```
 
-关于如何在新创建的 Univer 加载电子表格，请参考[下一节](/guides/quick-start/data)。
+For instructions on how to load a spreadsheet into a newly created Univer instance, please consult the [next section](/en-us/guides/quick-start/data) of our documentation.
 
-## 更多
+## Read More
 
-我们提供了一些示例帮助你在不同的脚手架工具中引入 Univer：
+We have provided some examples to assist you in incorporating Univer using various scaffolding tools:
 
 - [Vite](/playground/?title=Vite)
 - [Webpack 4](/playground/?title=Webpack%204)
 
-你可以通过 `<script>` 标签的方式引入 Univer，请参考 [使用 UMD](/guides/quick-start/umd/)。
+Alternatively, you can also include Univer using the `<script>` tag. Please refer to the [Using UMD](/guides/quick-start/umd/) guide for further instructions.

@@ -1,16 +1,18 @@
 ---
-title: Web Worker 架构
+title: Architecture of Web Worker
 ---
 
-一些模块，例如公式引擎，天生是比较消耗资源的，为了避免阻塞主线程从而影响交互体验，Univer 支持将这些模块运行在 Web Worker 当中。
+Here's a more polished version of your text:
 
-运行在 Web Worker 当中的 Univer 代码实际上也是一个 `Univer` 实例，两个 Univer 实例之间通过 @univerjs/rpc 包提供的 RPC 机制进行通信，@univerjs/rpc 插件还提供了在两个 Univer 实例之间同步数据和 mutation 的机制。
+Certain modules, such as the formula engine, are naturally resource-intensive. To prevent them from blocking the main thread and degrading the interactive user experience, Univer supports running these modules within Web Workers.
 
-## 例子
+A Univer codebase running within a Web Worker is essentially a separate `Univer` instance, and instances communicate with each other via the RPC mechanism provided by the `@univerjs/rpc` package. This plugin also offers a mechanism for synchronizing data and mutations between the two Univer instances.
 
-在 Univer 当中使用 Web Worker 并使用基于 Web Worker 的公式计算非常简单。
+## Example
 
-在主线程的 Univer 实例中引入 @univerjs/rpc 插件，指定要加载的 Web Worker 入口文件的路径，并将主线程中的公式插件配置为无需计算公式：
+Utilizing Web Workers in Univer is quite simple.
+
+In the main thread's Univer instance, import the `@univerjs/rpc` plugin, specify the path of the Web Worker entry file, and configure the formula plugin in the main thread to not compute formulas.
 
 ```ts
 import type { IUniverRPCMainThreadConfig } from '@univerjs/rpc';
@@ -29,7 +31,7 @@ univer.registerPlugin(UniverRPCMainThread, {
 });
 ```
 
-在 Web Worker 的入口文件中实例化另一个 Univer 实例，并注册需要的插件：
+In the Web Worker's entry file, instantiate another Univer instance and register the required plugins.
 
 ```ts
 import { UniverFormulaEngine } from '@univerjs/engine-formula';
@@ -46,34 +48,34 @@ univer.registerPlugin(UniverFormulaEngine);
 univer.registerPlugin(UniverSheetsFormula);
 ```
 
-运行之后，就会看到 Web Worker 线程，并且公式计算会在其中进行。
+After running the code, you will notice a Web Worker thread, and formula computations will occur within it.
 
 :::tip
-可以看到因为在 Web Worker 中无需关心 UI 和渲染，所以引入的 plugin 比主线程中少很多，这就是插件化架构带来的好处之一：在任何环境中 Univer 都能做到以最小的资源运行。
+Because there's no need to worry about UI and rendering in the Web Worker, the plugins introduced are significantly fewer than in the main thread. This is one of the advantages of a pluginized architecture - enabling Univer to run with minimal resources in any environment.
 :::
 
-详细内容请参考 [examples/sheets](https://github.com/dream-num/univer/tree/dev/examples/sheets)。
+For more information, please refer to [examples/sheets](https://github.com/dream-num/univer/tree/dev/examples/sheets).
 
-## 整体架构
+## Overall Architecture
 
-Univer 的 Web Worker 架构图下图所示：
+The architecture of Univer's Web Worker is as follows:
 
 ![](@/assets/img/web-worker-architecture.png)
 
-主线程中的创建的文档和发生的编辑会被同步到 Web Worker：
+Documents created and edits made in the main thread will be synchronized to the Web Worker through the following steps:
 
-1. 主线程中的 Univer 实例在文档创建时，位于主线程的 `DataSyncPrimaryController` 会监听到该事件，然后调用 Web Worker 中的 `IRemoteInstanceService` 的 `createInstance` 方法创建一个同样的文档实例。
-2. 主线程中的 Univer 实例在执行 mutation 时，位于主线程的 `DataSyncPrimaryController` 会监听到该事件，然后调用 Web Worker 中的 `IRemoteInstanceService` 的 `syncMutation` 方法将该 mutation 应用到 Web Worker 中的 Univer 实例。
+1. When a document is created in the main thread, the `DataSyncPrimaryController` in the main thread detects the event and calls the `createInstance` method of the `IRemoteInstanceService` in the Web Worker to create the same document instance.
+2. When mutation occurs in the main thread, the `DataSyncPrimaryController` in the main thread detects the event and calls the `syncMutation` method of the `IRemoteInstanceService` in the Web Worker to apply the mutation to the Univer instance in the Web Worker.
 
-Web Worker 的公式计算结果如何写回主线程：
+The calculation results of the Web Worker's formula are written back to the main thread as follows:
 
-1. Web Worker 中的 Univer 实例在公式计算完毕时会生成一个 mutation 并引用，位于 Web Worker 的 `DataSyncReplicaController` 会监听到该事件，然后调用主线程中的 `IRemoteSyncService` 的 `syncMutation` 方法将该 mutation 应用到主线程中的 Univer 实例。
+1. When the Univer instance in the Web Worker completes formula calculation, it generates a mutation and references it. The `DataSyncReplicaController` in the Web Worker detects the event and calls the `syncMutation` method of the `IRemoteSyncService` in the main thread to apply the mutation to the Univer instance in the main thread.
 
-## RPC 机制
+## RPC Mechanism
 
-从上面的叙述中，可以看到位于不同线程中的 Univer 模块似乎可以直接调用对方的方法，这是因为 @univerjs/rpc 插件提供了 RPC 机制。
+As shown in the previous explanation, modules of Univer in different threads appear to be able to directly call each other's methods, which is provided by the RPC mechanism of the `@univerjs/rpc` plugin.
 
-以主线程调用 Web Worker 线程中 `IRemoteInstanceService` 为例。在作为客户端的主线程中，需要声明一个 `IRemoteInstanceService` 接口作为依赖，而这个依赖的具体实现，则是 RPC 模块提供的 `toModule` 方法，该方法接受一个 `Channel` 作为参数，返回一个实现了 `IRemoteInstanceService` 接口的对象，该对象实际上是一个 `Proxy`，对该对象的方法的调用会被 `Proxy` 拦截，channel 名称，方法名称和参数会被 RPC 模块序列化之后发送到 Web Worker 线程。
+As an example, let's consider the main thread calling the `IRemoteInstanceService` in the Web Worker thread. In the main thread, acting as a client, an `IRemoteInstanceService` interface needs to be declared as a dependency, and the specific implementation is provided by the `toModule` method of the RPC module. This method accepts a `Channel` as a parameter and returns an object that implements the `IRemoteInstanceService` interface. This object is actually a `Proxy`, and calls to its methods are intercepted by the `Proxy`. The channel name, method name, and arguments are serialized by the RPC module and sent to the Web Worker thread.
 
 ```ts
 export class UniverRPCMainThread extends Plugin {
@@ -93,7 +95,7 @@ export class UniverRPCMainThread extends Plugin {
 }
 ```
 
-在 Web Worker 线程中，需要实现 `IRemoteInstanceService` 接口，然后将其注册到 `ChannelServer` 中，这样 Web Worker 线程的 RPC 模块就可以将主线程中的 RPC 调用转发到 Web Worker 线程中的 `IRemoteInstanceService` 实现。
+In the Web Worker thread, the `IRemoteInstanceService` interface must be implemented and registered to `ChannelServer`, so the RPC module in the Web Worker thread can forward RPC calls from the main thread to the implementation of `IRemoteInstanceService` in the Web Worker thread.
 
 ```ts
 /**
@@ -113,4 +115,4 @@ export class UniverRPCWorkerThreadPlugin extends Plugin {
 }
 ```
 
-实际上，@univerjs/rpc 插件提供的 RPC 机制可以用于位于任意两个环境中的 Univer 实例之间的通信，不仅限于主线程和 Web Worker，所以实现服务端计算或者是基于 Electron 的多进程也是简单易行的，只需要实现对应环境中的通信机制（即 `messageProtocol`）即可。
+Indeed, the RPC mechanism provided by the `@univerjs/rpc` plugin can be used for communication between any two Univer instances, not limited to the main thread and Web Worker. Therefore, implementing server-side calculations or using multi-process with Electron is also straightforward. All that is needed is to implement the corresponding communication mechanism (`messageProtocol`) in the corresponding environment.
