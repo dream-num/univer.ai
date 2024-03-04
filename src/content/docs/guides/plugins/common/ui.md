@@ -27,16 +27,8 @@ UI 服务定义了一些在客户端运行，但与特定的宿主无关（例�
 
 @univerjs/ui 的 API 请参考 API 文档。
 
-
-本插件运行依赖以下插件：
-
-- @univerjs/core
-- @univerjs/design
-- @univerjs/engine-render
-
 <!--package-locales start-->
 <!--package-locales end-->
 
 <!--package-assets start-->
 <!--package-assets end-->
-

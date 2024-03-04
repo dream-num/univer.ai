@@ -11,32 +11,27 @@ import UniscriptImg from "@/assets/img/uniscript.jpeg";
 
 [![npm version](https://img.shields.io/npm/v/@univerjs/uniscript)](https://npmjs.org/package/@univerjs/uniscript)
 
-@univerjs/uniscript 提供了一个基于 TypeScript 的 DSL，可以用来操作 Univer 的数据结构和业务逻辑。
+
+`@univerjs/uniscript` uses the DSL (Domain-Specific Language) provided by `@univerjs/facade` and creates a code editor for Users to write code for operating Univer's data structures and business logic.
+
 
 <Image src={UniscriptImg} alt="Uniscript" />
 
-用户可以在 @univerjs/uniscript 提供的代码编辑器中编写业务逻辑，以达成更加灵活的业务需求。如图所示，用户可以编写一段 Uniscript 用于从选区中读取身份证号并验证这些身份证号的合法性，把不合法的身份证号的背景标记为红色。
+Users can write business logic in the code editor to meet more flexible business requirements. For instance, as shown in the illustration, users can write a Uniscript to read identity card numbers from a selected area and validate their legality, and mark the background of invalid identity card numbers with red.
 
-:::caution[试验性]
-Uniscript 仍在试验阶段，建议不要在生产环境中使用。你可以在[路线图](/guides/roadmap)了解 Uniscript 的迭代计划。
+:::caution[Experimental]
+The Uniscript is currently in the experimental stage, and it is not recommended to use it in production environments. You can refer to the [Roadmap](/en-us/guides/roadmap) to understand the iteration plan of Uniscript.
 :::
 
-:::tip
-Uniscript 的 DSL 实际上是一套封装 Univer 内部实现细节的 Facade API，这套 API 定义在[这里](/guides/facade)。
-:::
+## Get the Editor Instance
 
-## 获取编辑器实例
-
-@univerjs/uniscript 内部使用了 [monaco editor](https://microsoft.github.io/monaco-editor/) 作为代码编辑器，你可以通过以下方式获取编辑器实例：
+The `@univerjs/uniscript` uses [Monaco Editor](https://microsoft.github.io/monaco-editor/) as its code editor. You can obtain an instance of the editor through the following method:
 
 ```ts
-const editor = univer
-  .__getInjector()
-  .get(ScriptEditorService)
-  .getEditorInstance();
+const editor = univer.__getInjector().get(ScriptEditorService).getEditorInstance();
 ```
 
-或者在你的模块中注入 `ScriptEditorService` 以获取编辑器实例。
+Or inject `ScriptEditorService` into your module to obtain the editor instance.
 
 ```ts
 export class YourModule {
@@ -50,21 +45,8 @@ export class YourModule {
 }
 ```
 
-
-## 依赖的插件
-
-本插件运行依赖以下插件：
-
-- @univerjs/core
-- @univerjs/design
-- @univerjs/facade
-- @univerjs/sheets
-- @univerjs/sheets-ui
-- @univerjs/ui
-
 {/* package-locales start */}
 {/* package-locales end */}
 
 {/* package-assets start */}
 {/* package-assets end */}
-

@@ -1,4 +1,4 @@
-import { MoreDownSingle } from '@univerjs/icons'
+import { LanguageSingle, MoreSingle } from '@univerjs/icons'
 import { useEffect, useState } from 'react'
 
 import styles from './index.module.less'
@@ -9,7 +9,7 @@ interface Iprops {
 }
 
 export function Locale(props: Iprops) {
-  const { lang, currentPath } = props
+  const { currentPath } = props
 
   const [visible, setVisible] = useState(false)
 
@@ -34,16 +34,17 @@ export function Locale(props: Iprops) {
   return (
     <div className={styles.locale}>
       <a onClick={handleToggleVisible}>
-        {lang}
-        <MoreDownSingle />
+        {/* {lang} */}
+        <LanguageSingle />
+        <MoreSingle className={styles.more} />
       </a>
 
       <ul className={visible ? styles.visible : ''}>
         <li>
-          <a href={`${currentPath}`}>简体中文</a>
+          <a href={currentPath === '' ? '/' : currentPath}>English</a>
         </li>
         <li>
-          <a href={`/en-us${currentPath}`}>English</a>
+          <a href={`/zh-cn${currentPath}`}>简体中文</a>
         </li>
         <li>
           <a href={`/ja-jp${currentPath}`}>日本語</a>

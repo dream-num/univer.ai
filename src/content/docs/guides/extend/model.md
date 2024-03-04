@@ -1,10 +1,10 @@
 ---
-title: 插件自定义模型
+title: Plug-in custom model
 ---
 
-Univer 允许用户自定义插件需要存储在文档快照上的模型。
+Univer allows users to customize the models that plug-ins need to store on a document snapshot
 ![image](@/assets/img/resource.jpg)
-在 `@univer/core` 中存在一个 `ResourceManagerService` 实例,你可以在自己新建的 plugin 中注册对应的 `hook` ,将数据绑定到 `snapshot` 上.
+Register a hook with the the `ResourceManagerService` service in package `@univer/core` to persist the data
 
 ```ts
 import { IResourceManagerService } from "@univerjs/core";
@@ -31,23 +31,22 @@ class CustomerService {
   }
 
   _toJson(unitID: string) {
-    // 将你需要存储的数据转为 json 字符串存储。
+    // Convert the data you need to store to a JSON string store.
     const model = this.getModel(unitID);
     return JSON.stringify(model);
   }
 
   parseJson(json: string) {
-    // 将 json 字符串数据反序列化为对象。
+    // Deserializes JSON string data into objects.
     return JSON.parse(json);
   }
 }
 ```
+After your data is connected to 'Resourcemanagerservice' , it will be processed according to the persistence method you choose. There are two different snapshot schemes depending on how you land.
 
-当你的数据已经接入 `ResourceManagerService` 后,将根据你后续选择的持久化方式进行落盘处理.这里根据落盘的方式差异有 2 种快照方案.
+## Localized snapshot schemes
 
-## 本地化快照方案
-
-在以上注册逻辑生效后,需要执行初始化/落盘两步的操作,可以模拟以下 service 实现.
+After the above registration logic takes effect, we need to perform the initialization/deactivation steps. We can simulate the following service implementation.
 
 ```ts
 import type { ISnapshotPersistenceService, Workbook } from "@univerjs/core";
@@ -116,37 +115,30 @@ export class LocalSnapshotService
 }
 ```
 
-具体实现可参考 [本地如何保存插件快照](https://github.com/dream-num/univer/blob/dev/examples/src/plugins/local-save/services/local-snapshot.service.ts)
+pecific implementation can be referenced [How to save a plug-in snapshot locally](https://github.com/dream-num/univer/blob/dev/examples/src/plugins/local-save/services/local-snapshot.service.ts)
 
-### 获取当前资源快照
+### Gets a snapshot of the current resource
 
 如果你已经有一个保存完好的快照需要初始化，此时会在 `_initWorkbookFromSnapshot` 函数中，完成数据的初始化，通过注册的 `hook` ，调用 onchange 通知自定义插件执行自己的初始化逻辑.
+If you already have a well-preserved snapshot that needs to be initialized, this will be done in `_initWorkbookFromSnapshot`,  through the registered 'hook' .Call onchange to notify the custom plug-in to perform its own initialization logic.
+### Save to snapshot
+Get `LocalSnapshotService` instance from DI, call `LocalSnapshotService.saveWorkbook`  to get a snapshot
 
-### 保存快照
+## Remote Snapshot Scheme
 
-通过 DI 拿到 `LocalSnapshotService` 实例后,调用 `LocalSnapshotService.saveWorkbook` 方法，可以获得一个序列化的 json 对象.
+Specific documents and other collaborative programs after the release of synchronization.
 
-## 远端快照方案
+## Model referencing
 
-具体文档等协同方案公布后同步。
+Duplicate strings are mapped using a short code to reduce memory/bandwidth overhead.
 
-## 模型引用化
+### Referencing at run time
 
-将重复的字符串使用一个短码进行映射，以减少内存/带宽开销.
+Runtime referencing, primarily to reduce memory overhead at runtime.
 
-### 运行时引用化
+Specific implementation can refer to [How data formats are referenced](https://github.com/dream-num/univer/blob/dev/packages/sheets/src/services/numfmt/numfmt.service.ts)
 
-运行时引用化，主要是为来缩减运行时的内存开销.
-在 `model` 层,我们会设计一个 `shadowModel`,以及一个 `mappingModel`.
+### Referencing at transport time
 
-`mappingModel` 用来存储 id 与具体值的映射关系.
-:::note
-后续的 `id` 特指 `mappingModel` 中的 `id`.
-:::
-`shadowModel` 用来存储 id 与具体渲染的映射关系.比如某个单元格与其对应的 id.
+Specific documents and other collaborative programs after the release of synchronization.
 
-具体实现可以参考 [数据格式如何做引用化](https://github.com/dream-num/univer/blob/dev/packages/sheets/src/services/numfmt/numfmt.service.ts)
-
-### 传输时引用化
-
-具体文档等协同方案公布后同步。

@@ -1,60 +1,60 @@
 ---
-title: 功能一览
+title: Features
 ---
 
-Univer 致力于为用户实现完整的办公文档解决方案，以下是我们目前已经实现的产品和特性。
+Univer is committed to providing users with a complete office document solution. Here are the current products and features that we have implemented.
 
-想要了解后续的开发计划，请参考[路线图](/guides/roadmap)。你也可以通过 Feature Request 的方式提交你的需求，请参考[贡献指南](/guides/contributing)，我们会结合社区的反馈调整开发计划。
+For information about our future development plans, please refer to the [Roadmap](/guides/roadmap). You can also submit your requirements through Feature Requests following our [Contribution Guide](/guides/contributing). We will adjust our development plans based on community feedback.
 
-## 通用能力
+## General Capabilities
 
-### 编辑操作
+### Editing Operations
 
-- 撤消、重做
-- 复制粘贴
+- Undo/Redo
+- Copy/Paste
 
-### 浏览
+### Viewing
 
-- 基于 Canvas，支持多种文档类型的高性能渲染引擎
-- 滚动和缩放
+- High-performance rendering engine based on Canvas, supporting multiple document types
+- Scroll and zoom
 
 ### UI
 
-- 可配置的工作区，包括标题栏、工具栏、侧边栏、状态栏、右键菜单等
-- 跨操作系统的快捷键支持
-- 快捷键面板
+- Configurable workspace, including title bar, toolbar, sidebar, status bar, context menu, etc.
+- Cross-platform shortcut key support
+- Shortcut key panel
 
 ## Univer Sheet
 
-### 编辑操作
+### Editing Operations
 
-- 新建、删除、移动子表
-- 单元格样式：加粗、斜体、下划线、删除线、字体、字号、字体颜色、背景颜色、边框样式、对齐方式、文字旋转
-- 合并单元格：合并和取消合并单元格，按照不同的方向合并单元格
-- 行列操作：插入、删除与移动行列，修改行高列宽
-- 复制粘贴：仅粘贴值、仅粘贴样式、仅粘贴公式、仅粘贴列宽、仅粘贴边框样式
-- 清除内容：仅清除内容、仅清除样式、清除全部
-- 单元格编辑：单元格编辑器，单元格内富文本
-- 插入和删除单元格
-- 下拉填充
-- 格式刷
+- Create, delete, and move sheets
+- Cell Styles: Bold, Italic, Underline, Strikethrough, Font Family, Font Size, Font Color, Background Color, Border Style, Alignment, Text Rotation
+- Merge Cells: Merge and unmerge cells, merge cells in different directions
+- Row/Column Operations: Insert, delete, and move rows/columns, modify row height and column width
+- Copy/Paste: Paste values only, paste format only, paste formula only, paste column width only, paste border style only
+- Clear Content: Clear content only, clear style only, clear all
+- Cell Editing: Cell editor, rich text within cells
+- Insert and delete cells
+- Fill Down
+- Format Painter
 
-### 浏览
+### Viewing
 
-- 冻结行列
-- 统计栏
-  - 求和、最大值、最小值、平均值、计数
+- Freeze Panes
+- Summary Bar
+  - Sum, Max, Min, Average, Count
 
-### 数据与计算
+### Data and Calculation
 
-- 公式
-  - Fx 栏（公式编辑器）
-  - 公式高亮
-  - 内置多种公式
-  - 基于 Web Worker 的公式计算（可选）
-- 数字格式
-  - 常规、会计、货币、日期、千分位符
+- Formulas
+  - Fx Bar (formula editor)
+  - Formula highlighting
+  - Built-in formulas
+  - Formula calculation using Web Workers (optional)
+- Number Formats
+  - General, Accounting, Currency, Date, Thousands Separator
 
-### 自动化
+### Automation
 
-- Uniscript 脚本 (alpha)
+- Uniscript Scripting (alpha version)
