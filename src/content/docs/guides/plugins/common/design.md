@@ -4,19 +4,15 @@ title: "@univerjs/design"
 
 [![npm version](https://img.shields.io/npm/v/@univerjs/design)](https://npmjs.org/package/@univerjs/design)
 
-为了让 Univer 的插件 UI 能够有更好的一致性，也为了降低用户自定义开发时的工作量，我们提供了一些基础的设计规范和组件。
+To ensure better consistency in the UI of Univer plugins and to reduce the effort required for custom development, we provide some fundamental design guidelines and components.
 
-组件基于 React 和 less 开发，可以访问[组件库网站](https://univer-design.vercel.app)了解更多信息。
+The components are developed using React and less, and you can find out more information by visiting the [component library website](https://univer-design.vercel.app).
 
 ![](/img/design.jpeg)
 
 :::note
-如果你只需要扩展工具栏、右键菜单等，可以直接使用 @univerjs/ui 提供的扩展接口，无需自行实现 UI。请参考[扩展 UI](/guides/extend/ui)。
+If you only need to extend the toolbar, right-click menu, and so on, you can directly use the extension interfaces provided by `@univerjs/ui` without implementing the UI yourself. For more information, please refer to [Extending UI](/en-us/guides/extend/ui).
 :::
-
-## 依赖的插件
-
-本插件运行不依赖其他插件。
 
 <!--package-locales start-->
 <!--package-locales end-->

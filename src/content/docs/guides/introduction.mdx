@@ -1,67 +1,60 @@
 ---
-title: Univer 介绍
+title: Introduction to Univer
 ---
 
-import { Image } from "astro:assets";
-import QrCodeImg from "@/assets/img/business-qr-code.png";
+Univer is an enterprise document and data collaboration solution that encompasses three major document types: spreadsheets, documents, and slides. Its design exhibits exceptional scalability, empowering developers to customize personalized functionalities atop the foundation of Univer.
 
-Univer 是一套企业文档与数据协同解决方案，包括电子表格、文档和幻灯片三大文档类型，高可扩展性设计使得开发者可以在 Univer 的基础上定制个性化功能。
+## Features
 
-## 特性
+- 📈 Univer supports spreadsheets. Documents and slides will be supported in the future.
+- 🌌 Highly extensible architecture design.
+  - 🔌 Plug-in architecture, the capabilities of documents can be combined on demand, support third-party plug-ins, and facilitate customization development.
+  - 💄 Provide component library and icons to help developers present a consistent user experience.
+- ⚡ High performance.
+  - ✏️ Unified and efficient rendering engine and formula engine, based on Canvas.
+  - 🧮 High-performance formula engine, supports Web Worker.
+- 🌍 Internationalization support.
 
-- 📈 支持电子表格，后续还会支持文档和幻灯片
-- 🌌 高度可扩展的架构设计
-  - 🔌 插件化架构，文档的能力可按需组合，支持自定义插件，方便二次开发
-  - 💄 提供组件库和图标以帮助开发者呈现一致的用户体验
-- ⚡ 高性能
-  - ✏️ 统一高效的渲染引擎和公式引擎，基于 Canvas
-  - 🧮 高性能的公式引擎，支持 Web Worker
-- 🌍 国际化支持
+Click [here](/en-us/guides/features) to familiarize oneself with the functionalities already introduced in Univer.
 
-点击[这里](/guides/features)以了解 Univer 目前已经推出的功能。
+## How to Use
 
-## 如何使用
+If you prefer not to set up a local development environment, we have prepared an online IDE to help you quickly experience using Univer. Click [here](/playground).
 
-如果你不想在本地设置开发环境，我们准备了一个在线 IDE 来帮助你快速体验使用 Univer 开发，点击[这里](/playground)。
+If you prefer the local development approach, please refer to the [Quick Start](/en-us/guides/quick-start) guide.
 
-如果你喜欢本地的开发方式，请参考[快速上手](/guides/quick-start)。
+## Examples
 
-## 例子
+We have prepared a large number of examples for you, which you can find [here](/playground).
 
-我们为你准备了大量的范例，你可以在[这里](/playground)找到它们。
+## How to Contribute
 
-## 如何贡献
+We welcome any form of contribution, including but not limited to [submitting issues](https://github.com/dream-num/univer/issues/new/choose), submitting PRs, participating in discussions, and more. Please read the [Contribution Guidelines](https://github.com/dream-num/univer/blob/dev/CONTRIBUTING.md) before getting involved in the development of Univer.
 
-我们欢迎任何形式的贡献，包括但不限于[提交 issue](https://github.com/dream-num/univer/issues/new/choose)、提交 PR、参与讨论等。请在参与 Univer 的开发之前阅读[贡献指南](https://github.com/dream-num/univer/blob/dev/CONTRIBUTING.md)。
+## Community
 
-## 社区
+If you encounter any issues while using Univer, you can seek help in the following communities:
 
-如果你在使用过程中碰到问题，可以在以下社区寻求帮助：
+1. [Discord Community](https://discord.gg/XPGnMBmpd6)
+2. [GitHub Discussions](https://github.com/dream-num/univer/discussions)
 
-1. [Discord 社区](https://discord.gg/XPGnMBmpd6)
-1. [GitHub Discussions](https://github.com/dream-num/univer/discussions)
-1. 扫描下方二维码，加入 Univer 中文社群
+## Links
 
-<Image src={QrCodeImg} width={300} alt="DreamNum QR Code" />
-
-## 链接
-
-- [官网](https://univer.ai)
+- [Official Website](https://univer.ai)
 - [GitHub](https://github.com/dream-num/univer)
-- [知乎专栏](https://www.zhihu.com/org/meng-shu-ke-ji)
 
-## 开源协议
+## Open Source License
 
-[Univer 的核心代码](https://github.com/dream-num/univer)在 Apache-2.0 协议下开源，任何组织和个人都可以免费使用其源代码和 npm 包。
+The core code of Univer, available on [GitHub](https://github.com/dream-num/univer), is open source under the Apache-2.0 license. Organizations and individuals are free to use its source code and npm package.
 
-[本文档](https://github.com/dream-num/docs)在 CC-BY-NC-SA 4.0 协议下开源，任何组织和个人都可以免费使用，但不允许用于商业目的。
+This documentation, available on [GitHub](https://github.com/dream-num/docs), is open source under the CC-BY-NC-SA 4.0 license. Organizations and individuals are free to use it, but commercial use is not allowed.
 
-## 商业版本
+## Enterprise Edition
 
-Univer 同时提供商业版本，提供以下开箱即用的功能：
+Univer also offers a commercial version that provides the following out-of-the-box features:
 
-- 👨‍💻 多人协同编辑和协同浏览
-- 🛜 数据连接器
-- 🎚️ 协同浏览（Live Share）
+- 👨‍💻 Collaborative editing and browsing
+- 🛜 Data connectors
+- 🎚️ Live Share for collaborative browsing
 
-想进一步了解我们的商业版或者申请试用，请移步[这里](/enterprises)。
+To learn more about our commercial edition or request a trial, please visit [here](/en-us/enterprises).

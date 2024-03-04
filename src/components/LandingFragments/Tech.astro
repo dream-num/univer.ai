@@ -35,7 +35,7 @@ const tech = [{
   <section class="list">
     {tech.map(item => (
       <div class="block" style={{ '--tech-icon-color': item.color }}>
-        <img src={item.icon} alt={item.title} draggable={false} />
+        <img src={item.icon} alt={item.title.toString()} draggable={false} />
         <h3>{item.title}</h3>
         <p>{item.desc}</p>
       </div>
@@ -45,6 +45,8 @@ const tech = [{
 
 <style lang="less" scoped>
 .tech {
+  padding-bottom: 10rem;
+
   .title {
     margin-bottom: 3rem;
     text-align: center;
@@ -80,8 +82,8 @@ const tech = [{
     }
 
     .block {
-      width: 16rem;
-      height: 16.1rem;
+      width: 16.75rem;
+      height: 21.75rem;
       padding: 1.6rem 1.8rem;
       border-radius: 20px;
       background: rgba(228, 244, 254, 0.55);
@@ -108,6 +110,7 @@ const tech = [{
       h3 {
         margin: 0 0 0.5rem;
         color: #1F2327;
+        line-height: 1.4rem;
         font-size: 1rem;
         font-weight: 600;
       }
@@ -115,8 +118,8 @@ const tech = [{
       p {
         margin: 0;
         color: #999;
-        line-height: 1.4rem;
-        font-size: 0.8rem;
+        line-height: 1.5rem;
+        font-size: 0.875rem;
       }
     }
   }

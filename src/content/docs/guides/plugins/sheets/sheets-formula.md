@@ -4,60 +4,60 @@ title: "@univerjs/sheets-formula"
 
 [![npm version](https://img.shields.io/npm/v/@univerjs/sheets-formula)](https://npmjs.org/package/@univerjs/sheets-formula)
 
-`@univerjs/sheets-formula` 提供了在电子表格中编辑公式的能力，例如自动补全、公式提示、公式的下拉填充以及复制粘贴等等。
+`@univerjs/sheets-formula` provides the ability to edit formulas in spreadsheets, including features such as auto-completion, formula suggestions, drop-down filling for formulas, and copy-paste functionality.
 
 :::note
-公式计算是电子表格的核心功能之一，因此公式计算调度是在 `@univerjs/sheets` 中进行的。
+Formula calculation is one of the core functionalities of spreadsheets, and formula calculation scheduling is done in `@univerjs/sheets`.
 :::
 
-## 添加公式前置条件
+## Add formula preconditions
 
-如果官方提供的公式不满足您的需求，可以自己扩展公式。根据不同的需求，我们提供了多种方式来支持注册一个或多个自定义公式。
+If the officially provided formula does not meet your needs, you can expand the formula yourself. Depending on different needs, we provide multiple ways to support registering one or more custom formulas.
 
-您需要先准备好公式提示所需要的国际化文案和算法，然后参考我们的[贡献指南](https://github.com/dream-num/univer/blob/dev/CONTRIBUTING.md)运行 Univer 项目，再开始添加公式。
+You need to first prepare the international copywriting and algorithms required for formula prompts, and then refer to our [Contribution Guide](https://github.com/dream-num/univer/blob/dev/CONTRIBUTING.md) to run the Univer project , and then start adding formulas.
 
-## 如何使用 Uniscript 添加公式
+## How to add formulas using Uniscript
 
-使用 Uniscript 脚本，可以方便快速的在当前 Univer 实例中注册自定义公式。
+Using Uniscript scripts, you can quickly and easily register custom formulas in the current Univer instance.
 
-如下案例所示，使用 `registerFunction` 将一个 `CUSTOMSUM` 公式所需要的算法、名称、描述一次性注册到公式插件，执行之后就可以使用公式了。在任一空白单元格输入 `=CUSTOMSUM` 可以看到提示。
+As shown in the following case, use `registerFunction` to register the algorithm, name, and description required by a `CUSTOMSUM` formula into the formula plug-in at one time. After execution, the formula can be used. Enter `=CUSTOMSUM` in any blank cell to see the prompt.
 
 ```js
 univerAPI.registerFunction({
-    calculate: [
-        [function (...variants) {
-            let sum = 0;
+     calculate: [
+         [function (...variants) {
+             let sum = 0;
 
-            for(const variant of variants){
-                sum += Number(variant) || 0;
-            }
+             for(const variant of variants){
+                 sum += Number(variant) || 0;
+             }
 
-            return sum;
-        }, 'CUSTOMSUM', '求参数的和'],
-        // ... 更多公式
-    ]
+             return sum;
+         }, 'CUSTOMSUM', 'Adds its arguments'],
+         // ... more formulas
+     ]
 })
 ```
 
-使用 `unregisterFunction` 方法能快速卸载自定义公式
+Use the `unregisterFunction` method to quickly unregister custom formulas
 
 ```ts
 univerAPI.unregisterFunction({
-    functionNames: ['CUSTOMSUM']
+     functionNames: ['CUSTOMSUM']
 })
 ```
 
-如果想要提供更完善的国际化内容和描述，还可以配置 `locales` 和 `description` 字段。如下所示。
+If you want to provide more complete international content and description, you can also configure the `locales` and `description` fields. As follows.
 
 ```js
 const FUNCTION_NAMES_USER = {
-    CUSTOMSUM: 'CUSTOMSUM'
+     CUSTOMSUM: 'CUSTOMSUM'
 }
 univerAPI.registerFunction({
-    locales:{
-        'zhCN': {
-            formulaCustom: {
-                CUSTOMSUM: {
+     locales:{
+         'zhCN': {
+             formulaCustom: {
+                 CUSTOMSUM: {
                     description: '将单个值、单元格引用或是区域相加，或者将三者的组合相加。',
                     abstract: '求参数的和',
                     links: [
@@ -77,106 +77,106 @@ univerAPI.registerFunction({
                         },
                     },
                 },
-                // ... 更多公式
-            },
-        },
-        'enUS':{
-            formulaCustom:{
-                CUSTOMSUM: {
-                    description: `You can add individual values, cell references or ranges or a mix of all three.`,
-                    abstract: `Adds its arguments`,
-                    links: [
-                        {
-                            title: 'Instruction',
-                            url: 'https://support.microsoft.com/en-us/office/sum-function-043e1c7d-7726-4e80-8f32-07b23e057f89',
-                        },
-                    ],
-                    functionParameter: {
-                        number1: {
-                            name: 'number1',
-                            detail: 'The first number you want to add. The number can be like 4, a cell reference like B6, or a cell range like B2:B8.',
-                        },
-                        number2: {
-                            name: 'number2',
-                            detail: 'This is the second number you want to add. You can specify up to 255 numbers in this way.',
-                        },
-                    },
-                },
-            }
-        }
-    },
-    description:[
-         {
-            functionName: FUNCTION_NAMES_USER.CUSTOMSUM,
-            aliasFunctionName: 'formulaCustom.CUSTOMSUM.aliasFunctionName',
-            functionType: 15,
-            description: 'formulaCustom.CUSTOMSUM.description',
-            abstract: 'formulaCustom.CUSTOMSUM.abstract',
-            functionParameter: [
-                {
-                    name: 'formulaCustom.CUSTOMSUM.functionParameter.number1.name',
-                    detail: 'formulaCustom.CUSTOMSUM.functionParameter.number1.detail',
-                    example: 'A1:A20',
-                    require: 1,
-                    repeat: 0,
-                },
-                {
-                    name: 'formulaCustom.CUSTOMSUM.functionParameter.number2.name',
-                    detail: 'formulaCustom.CUSTOMSUM.functionParameter.number2.detail',
-                    example: 'B2:B10',
-                    require: 0,
-                    repeat: 1,
-                },
-            ],
-        },
-        // ... 更多公式
-    ],
-    calculate: [
-        [function (...variants) {
-            let sum = 0;
+                 // ... more formulas
+             },
+         },
+         'enUS':{
+             formulaCustom:{
+                 CUSTOMSUM: {
+                     description: `You can add individual values, cell references or ranges or a mix of all three.`,
+                     abstract: `Adds its arguments`,
+                     links: [
+                         {
+                             title: 'Instruction',
+                             url: 'https://support.microsoft.com/en-us/office/sum-function-043e1c7d-7726-4e80-8f32-07b23e057f89',
+                         },
+                     ],
+                     functionParameter: {
+                         number1: {
+                             name: 'number1',
+                             detail: 'The first number you want to add. The number can be like 4, a cell reference like B6, or a cell range like B2:B8.',
+                         },
+                         number2: {
+                             name: 'number2',
+                             detail: 'This is the second number you want to add. You can specify up to 255 numbers in this way.',
+                         },
+                     },
+                 },
+             }
+         }
+     },
+     description:[
+          {
+             functionName: FUNCTION_NAMES_USER.CUSTOMSUM,
+             aliasFunctionName: 'formulaCustom.CUSTOMSUM.aliasFunctionName',
+             functionType: 15,
+             description: 'formulaCustom.CUSTOMSUM.description',
+             abstract: 'formulaCustom.CUSTOMSUM.abstract',
+             functionParameter: [
+                 {
+                     name: 'formulaCustom.CUSTOMSUM.functionParameter.number1.name',
+                     detail: 'formulaCustom.CUSTOMSUM.functionParameter.number1.detail',
+                     example: 'A1:A20',
+                     require: 1,
+                     repeat: 0,
+                 },
+                 {
+                     name: 'formulaCustom.CUSTOMSUM.functionParameter.number2.name',
+                     detail: 'formulaCustom.CUSTOMSUM.functionParameter.number2.detail',
+                     example: 'B2:B10',
+                     require: 0,
+                     repeat: 1,
+                 },
+             ],
+         },
+         // ... more formulas
+     ],
+     calculate: [
+         [function (...variants) {
+             let sum = 0;
 
-            for(const variant of variants){
-                sum += Number(variant) || 0;
-            }
+             for(const variant of variants){
+                 sum += Number(variant) || 0;
+             }
 
-            return sum;
-        }, FUNCTION_NAMES_USER.CUSTOMSUM],
-        // ... 更多公式
-    ]
+             return sum;
+         }, FUNCTION_NAMES_USER.CUSTOMSUM],
+         // ... more formulas
+     ]
 })
 ```
 
-说明
+Note
 
-- `locales` 下可以设置多种语言，命名规则参考 [LocaleType](/api/core/enums/LocaleType.html)。可以在 `functionList` 下添加多个公式的翻译。详细的字段说明请参考[如何在 UniverFormulaEnginePlugin 中添加公式](./#如何在-univerformulaengineplugin-中添加公式)的部分。
-- `description` 设置自定义公式的描述。
-- `calculate` 编写计算公式的具体算法和名称映射。入参为使用公式时用户输入的内容，可能为数字、字符串、布尔值，或者一个范围，也是返回同样的格式。
+-   Multiple languages can be set under `locales`. For naming rules, please refer to [LocaleType](/api/core/enums/LocaleType.html). Translations for multiple formulas can be added under `functionList`. For detailed field descriptions, please refer to the [How to add formulas in UniverFormulaEnginePlugin](./#how-to-add-formulas-in-univerformulaengineplugin) section.
+-   `description` sets the description of the custom formula.
+-   `calculate` writes the specific algorithm and name mapping of the calculation formula. The input parameter is the content entered by the user when using the formula, which may be a number, a string, a Boolean value, or a range, and the same format is returned.
 
-同样的， 如果使用 `unregisterFunction` 方法，推荐你把国际化文件也移除。下方示例是将中文和英文的 `formulaCustom` 节点移除。
+Likewise, if using the `unregisterFunction` method, it is recommended that you remove the internationalization files as well. The example below removes the Chinese and English `formulaCustom` nodes.
 
 ```ts
 univerAPI.unregisterFunction({
-    localeKeys: {
-         'zhCN': ['formulaCustom'],
-         'enUS': ['formulaCustom'],
-        },
-    functionNames: ['CUSTOMSUM']
+     localeKeys: {
+          'zhCN': ['formulaCustom'],
+          'enUS': ['formulaCustom'],
+         },
+     functionNames: ['CUSTOMSUM']
 })
 ```
 
-Uniscript 底层使用了 `@univerjs/facade`，你也可以直接在项目中使用类似 Uniscript 的 API，请参考 [注册公式](/guides/facade/register-function)。
+Uniscript uses `@univerjs/facade` under the hood. You can also use Uniscript-like APIs directly in your project. Please refer to [Registering Function](/en-us/guides/facade/register-function).
 
-## 如何在初始化 Univer 时添加公式
+## How to add formulas when initializing Univer
 
-按照以下步骤来实现一个自定义公式 `CUSTOMSUM`。
+Follow the steps below to implement a custom formula `CUSTOMSUM`.
 
-你可以新建一个 `custom-function.ts` 文件来专门放置自定义公式相关模块，或者直接写在 `univer` 初始化之前。
+You can create a new `custom-function.ts` file to specifically place custom formula-related modules, or write it directly before `univer` is initialized.
 
-1. 定义公式名称
+1. Define formula name
 
-    首先为公式起一个名称，我们要求不能同已有公式名称重复，已有公式主要是从 [Office Excel](https://support.microsoft.com/zh-cn/office/excel-%E5%87%BD%E6%95%B0-%E6%8C%89%E7%B1%BB%E5%88%AB%E5%88%97%E5%87%BA-5f91f4e9-7b42-46d2-9bd1-63f26a86c0eb) 参考。
+    First, give the formula a name. We require that it cannot be repeated with the name of the existing formula. The existing formula is mainly from [Office Excel](https://support.microsoft.com/en-us/office/excel-functions-by-category-5f91f4e9-7b42-46d2-9bd1-63f26a86c0eb) refer to.
 
-    我们把多个自定义公式搜集在一个枚举中。
+    We collect multiple custom formulas in an enumeration.
 
     ```ts
     /**
@@ -187,13 +187,13 @@ Uniscript 底层使用了 `@univerjs/facade`，你也可以直接在项目中使
     }
     ```
 
-2. 定义国际化
+2. Define internationalization
 
-    定义你所需要的国际化内容，详细的字段说明请参考[如何在 UniverFormulaEnginePlugin 中添加公式](./#如何在-univerformulaengineplugin-中添加公式)的部分。同样的，多个公式就用公式名称作为 `key` 值区分。
+    Define the international content you need. For detailed field descriptions, please refer to the [How to add formulas in UniverFormulaEnginePlugin](./#how-to-add-formulas-in-univerformulaengineplugin) section. Similarly, multiple formulas are distinguished by using the formula name as the `key` value.
 
     ```ts
     /**
-     * i18n
+     *i18n
      */
     export const functionEnUS = {
         formulaCustom: {
@@ -246,9 +246,9 @@ Uniscript 底层使用了 `@univerjs/facade`，你也可以直接在项目中使
     };
     ```
 
-3. 注册国际化
+3. Registration internationalization
 
-    在原有的国际化对象中扩展你定义的国际化内容。
+    Expand the internationalization content you defined in the original internationalization object.
 
     ```ts
     export const locales = {
@@ -266,9 +266,9 @@ Uniscript 底层使用了 `@univerjs/facade`，你也可以直接在项目中使
     };
     ```
 
-4. 定义描述
+4. Definition description
 
-    公式的描述中主要是配置国际化字段，用于公式搜索提示、详情面板等。
+    The description of the formula mainly configures internationalized fields, which are used for formula search prompts, details panels, etc.
 
     ```ts
     import type { IFunctionInfo } from '@univerjs/engine-formula';
@@ -304,20 +304,20 @@ Uniscript 底层使用了 `@univerjs/facade`，你也可以直接在项目中使
     ];
     ```
 
-5. 注册描述
+5. Registration description
 
-    注册公式插件时传入你定义的描述对象。
+    Pass in the description object you defined when registering the formula plug-in.
 
     ```ts
-    // univer
+    // universal
     univer.registerPlugin(UniverSheetsFormulaPlugin, {
         description: FUNCTION_LIST_USER,
     });
     ```
 
-6. 定义公式算法
+6. Define formula algorithm
 
-    编写具体的公式计算逻辑，并将算法和公式名称映射起来。
+    Write specific formula calculation logic, map algorithms and formula names.
 
     ```ts
     import type { ArrayValueObject, BaseValueObject, IFunctionInfo } from '@univerjs/engine-formula';
@@ -355,9 +355,9 @@ Uniscript 底层使用了 `@univerjs/facade`，你也可以直接在项目中使
     export const functionUser = [[Customsum, FUNCTION_NAMES_USER.CUSTOMSUM]];
     ```
 
-7. 注册公式算法
+7. Registration formula algorithm
 
-    在 `UniverFormulaEnginePlugin` 传入你定义的公式算法对象。
+    Pass in the formula algorithm object you defined in `UniverFormulaEnginePlugin`.
 
     ```ts
     univer.registerPlugin(UniverFormulaEnginePlugin, {
@@ -365,21 +365,21 @@ Uniscript 底层使用了 `@univerjs/facade`，你也可以直接在项目中使
     });
     ```
 
-    请注意：如果 `UniverFormulaEnginePlugin` 在 `worker` 中有实例化，则需要在 `worker` 中的 `UniverFormulaEnginePlugin` 注册公式算法，否则无法获取执行自定义公式。
+    Please note: If `UniverFormulaEnginePlugin` is instantiated in `worker`, you need to register the formula algorithm in `UniverFormulaEnginePlugin` in `worker`, otherwise the custom formula cannot be executed.
 
-8. 测试
+8. Test
 
-    到这里就完成了自定义公式的开发，现在可以测试一下。任一空白单元格输入 `=CUSTOMSUM` 预期能得到公式提示。这里提供一个[自定义公式 Demo](/playground?title=Custom%20Function)，供参考。
+    At this point, the development of the custom formula is completed, and now it is time to test it. Enter `=CUSTOMSUM` in any blank cell and expect to get a formula prompt. Here is a [Custom Formula Demo](/playground?title=Custom%20Function) for reference.
 
-## 如何在第三方插件中添加公式
+## How to add formulas in third-party plug-ins
 
-如果你正在开发一个 Univer 插件，你可以直接在这个插件中新增自定义公式，方便代码在一个插件仓库中管理。
+If you are developing a Univer plug-in, you can add custom formulas directly to the plug-in to facilitate code management in a plug-in repository.
 
-我们内部的 `UniverFormulaEnginePlugin` 插件提供了一个 `function.service`，专门用来注册公式的描述和算法。
+Our internal `UniverFormulaEnginePlugin` plug-in provides a `function.service` specifically for registering formula descriptions and algorithms.
 
-首先参考 [自定义插件](/guides/extend/write-a-plugin/)，新建一个插件，然后就可以开始添加自定义公式。
+First refer to [Custom Plugin](/en-us/guides/extend/write-a-plugin/) to create a new plug-in, and then you can start adding custom formulas.
 
-1. `common` 文件内新建 `custom-function.ts` 文件，将公式所需要的基础模块全部写好。
+1. Create a new `custom-function.ts` file in the `common` file and write all the basic modules required for the formula.
 
     ```ts
     import type { ArrayValueObject, BaseValueObject, IFunctionInfo } from '@univerjs/engine-formula';
@@ -393,7 +393,7 @@ Uniscript 底层使用了 `@univerjs/facade`，你也可以直接在项目中使
     }
 
     /**
-     * i18n
+     *i18n
      */
     export const functionEnUS = {
         formulaCustom: {
@@ -505,7 +505,7 @@ Uniscript 底层使用了 `@univerjs/facade`，你也可以直接在项目中使
     export const functionUser = [[Customsum, FUNCTION_NAMES_USER.CUSTOMSUM]];
     ```
 
-2. `controllers` 文件夹下新建 `custom-description.controller.ts` 用于注册公式国际化内容和描述。
+2. Create a new `custom-description.controller.ts` under the `controllers` folder to register formula internationalization content and description.
 
     ```ts
     import { Disposable, LifecycleStages, LocaleService, OnLifecycle } from '@univerjs/core';
@@ -543,7 +543,7 @@ Uniscript 底层使用了 `@univerjs/facade`，你也可以直接在项目中使
     }
     ```
 
-3. `controllers` 文件夹下新建 `custom-function.controller.ts` 用于注册公式算法。
+3. Create a new `custom-function.controller.ts` under the `controllers` folder to register formula algorithms.
 
     ```ts
     import { Disposable, LifecycleStages, OnLifecycle } from '@univerjs/core';
@@ -578,14 +578,14 @@ Uniscript 底层使用了 `@univerjs/facade`，你也可以直接在项目中使
     }
     ```
 
-4. 在插件入口文件 `plugin.ts` 中，将 `custom-description.controller.ts` 和 `custom-function.controller.ts` 注册到 DI 系统中。
+4. In the plug-in entry file `plugin.ts`, register `custom-description.controller.ts` and `custom-function.controller.ts` into the DI system.
 
     ```ts
     initialize(): void {
-        // ... 其它逻辑
+        // ... other logic
 
         const dependencies: Dependency[] = [
-             // ... 其它模块
+             // ... other modules
             [CustomFunctionController],
             [CustomDescriptionController],
         ];
@@ -594,12 +594,12 @@ Uniscript 底层使用了 `@univerjs/facade`，你也可以直接在项目中使
     }
     ```
 
-    启动 Univer，任一空白单元格输入 `=CUSTOMSUM` 即可测试这个新添加的公式。
+    Start Univer and enter `=CUSTOMSUM` in any blank cell to test this newly added formula.
 
-请注意：如果 `UniverFormulaEnginePlugin` 在 `worker` 中有实例化，则需要在 `worker`中注册公式算法，否则无法获取执行自定义公式。
-除了通过 `UniverFormulaEnginePlugin` 配置的形式来注册，还可以将公式算法模块单独包装成一个插件来注册。
+Please note: If `UniverFormulaEnginePlugin` is instantiated in `worker`, you need to register the formula algorithm in `worker`, otherwise the custom formula cannot be executed.
+In addition to registering through the `UniverFormulaEnginePlugin` configuration, the formula algorithm module can also be separately packaged as a plug-in for registration.
 
-首先 `plugin.ts` 中就不需要注册 `CustomFunctionController` 了，同级目录新建一个 `custom-function-plugin.ts`，专门用于注册 `CustomFunctionController`。
+First of all, there is no need to register `CustomFunctionController` in `plugin.ts`. Create a new `custom-function-plugin.ts` in the same directory, specifically for registering `CustomFunctionController`.
 
 ```ts
 import { Plugin, PluginType } from '@univerjs/core';
@@ -610,187 +610,173 @@ import { FORMULA_UI_PLUGIN_NAME } from './common/plugin-name';
 import { CustomFunctionController } from './controllers/custom-function.controller';
 
 export class UniverSheetsCustomFunctionPlugin extends Plugin {
-    static override type = PluginType.Sheet;
+     static override type = PluginType.Sheet;
 
-    constructor(@Inject(Injector) override readonly _injector: Injector) {
-        super(FORMULA_UI_PLUGIN_NAME);
-    }
+     constructor(@Inject(Injector) override readonly _injector: Injector) {
+         super(FORMULA_UI_PLUGIN_NAME);
+     }
 
-    initialize(): void {
-        const dependencies: Dependency[] = [[CustomFunctionController]];
+     initialize(): void {
+         const dependencies: Dependency[] = [[CustomFunctionController]];
 
-        dependencies.forEach((dependency) => this._injector.add(dependency));
-    }
+         dependencies.forEach((dependency) => this._injector.add(dependency));
+     }
 
-    override onReady(): void {
-        this.initialize();
-    }
+     override onReady(): void {
+         this.initialize();
+     }
 }
 ```
 
-然后在 `index.ts` 中导出
+Then export it in `index.ts`
 
 ```ts
 export { UniverSheetsFormulaPlugin } from './formula-ui-plugin';
 ```
 
-最后你的 `worker` 入口初始化这个插件。
+Finally, your `worker` entry initializes the plugin.
 
 ```ts
 import { UniverSheetsCustomFunctionPlugin } from '@univerjs/sheets-formula';
 
-// ... 初始化其他插件
+// ...initialize other plugins
 univer.registerPlugin(UniverSheetsCustomFunctionPlugin);
 ```
 
-这样就可以在 `worker` 中注册公式了。
+This way you can register the formula in `worker`.
 
-## 如何在 UniverFormulaEnginePlugin 中添加公式
+## How to add formulas in UniverFormulaEnginePlugin
 
-### 参考文档
+### Reference Documentation
 
-[Office Excel 函数（按类别列出）](https://support.microsoft.com/zh-cn/office/excel-%E5%87%BD%E6%95%B0-%E6%8C%89%E7%B1%BB%E5%88%AB%E5%88%97%E5%87%BA-5f91f4e9-7b42-46d2-9bd1-63f26a86c0eb)
+[Office Excel functions (by category)](https://support.microsoft.com/en-us/office/excel-functions-by-category-5f91f4e9-7b42-46d2-9bd1-63f26a86c0eb)
 
-### 类别
+### Categories
 
-详细 API 参考 [FunctionType](/api/engine-formula/enums/FunctionType.html)
+Detailed API reference [FunctionType](/api/engine-formula/enums/FunctionType.html)
 
-- Financial
-- Date
-- Math
-- Statistical
-- Lookup
-- Database
-- Text
-- Logical
-- Information
-- Engineering
-- Cube
-- Compatibility
-- Web
-- Array
-- Univer
-- User
+-   Financial
+-   Date
+-   Math
+-   Statistical
+-   Lookup
+-   Database
+-   Text
+-   Logical
+-   Information
+-   Engineering
+-   Cube
+-   Compatibility
+-   Web
+-   Array
+-   Univer
+-   User
 
-### 要求
+### Requirements
 
-要实现一个公式，需要添加公式描述、国际化和公式算法，以 `SUMIF` 函数的写法为例作为参考
+To implement a formula, you need to add formula description, internationalization, and formula algorithm. Take the `SUMIF` function as an example for reference.
 
-1. 添加函数名称
+1. Add Function Name
 
-    位置在 [packages/engine-formula/src/functions/math/function-names.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-formula/src/functions/math/function-names.ts)。
+    Location: [packages/engine-formula/src/functions/math/function-names.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-formula/src/functions/math/function-names.ts).
 
-    每个分类都有一个文件夹，包含一个 `function-names` 文件用于统一管理这个分类的所有函数名。我们先添加上函数名称，在 `sheets-formula` 插件中会用到。
+    Each category has a folder containing a `function-names` file to manage all function names in that category. Add the function name, which will be used in the `sheets-formula` plugin.
 
-    注意，Excel 中一个函数可能属于多个分类，比如 `FLOOR` 在兼容性和数学函数中出现，我们将它归类到数学分类下。其他函数也是这样处理，以确切的分类为依据。
+    Note that a function in Excel may belong to multiple categories. For example, `FLOOR` appears in Compatibility and Math Functions, and we classify it under the Math category. Other functions are treated similarly, based on the exact classification.
 
-    > 大多数 Excel 函数已经写好了函数名。新的函数可以在末尾添加
+    > Most Excel functions have already written function names. New functions can be added at the end
 
-2. 国际化文件
+2. Internationalization Files
 
-    位置在 [packages/sheets-formula/src/locale/function-list/math/en-US.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-formula/src/locale/function-list/math/en-US.ts)。
+    Location: [packages/sheets-formula/src/locale/function-list/math/en-US.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-formula/src/locale/function-list/math/en-US.ts).
 
-    国际化也是一个分类一个文件。简介从 Office 函数分类页参考。
+    Internationalization is organized by category, with a file for each category. Refer to the Office function category page for a brief overview.
     ![office excel](./assets/img/office-excel.png)
 
-    函数描述和参数描述从 Office 函数详情页参考
-    ![sumif](./assets//img/sumif.png)
+    Refer to the Office function details page for function descriptions and parameter descriptions.
+    ![sumif](./assets/img/sumif.png)
 
-    大部分的函数名称我们已经写好了基础的描述、简介、链接、参数结构，推荐您在此基础上进行修改，如果没有的函数需要自己加在末尾。
+    Most function names already have basic description, abstract, links, and parameter structures. It is recommended to modify them based on this foundation. If a function is not present, add it to the end.
 
-    要求：
+    Requirements:
 
-    - 函数翻译的参数 `key` 使用这个函数的每个参数英文名称，比如 `SUMIF`，除非有错误，一般不用改动
-    - `description` 参数需要综合下内容进行提取，因为有的 Excel 描述很长，需要简化
-    - `abstract` 和 `links` 基本上不需要做改动
-    - `aliasFunctionName` 是可选参数，大部分公式不需要填写（也可以只设置某个国家的别名），暂时还未找到有公式别名文档来参考。目前找到一个函数翻译插件可能提供类似功能 [Excel 函数翻译工具](https://support.microsoft.com/zh-cn/office/excel-%E5%87%BD%E6%95%B0%E7%BF%BB%E8%AF%91%E5%B7%A5%E5%85%B7-f262d0c0-991c-485b-89b6-32cc8d326889)
-    - `functionParameter` 中需要为每个参数设定一个名称，我们推荐根据参数的含义进行变化，比如数值类型的 `key` 为 `number`（仅有一个数值参数的时候）或者 `number1`、`number2`（有多个数值参数的时候），范围为 `range`，条件为 `criteria`，求和范围为 `sum_range`（多个单词之间用 `_` 分割）
-    - Office 函数文档中文翻译猜测用的机翻，部分翻译不容易理解，需要自己修改，一部分专用名词如下。
-        - 单元格参考 => 单元格引用
-        - 数字类型的参数统一翻译为：数值
-    - `abstract` 结尾不要加句号（用在用户输入单元格时的搜索列表中，但是部分国家的语言有加句号的习惯，比如日本语，参照 Excel 的简介信息即可），`description` 和 `detail` 结尾加句号（用在描述中）
-    - 英文句子的首字母大写
-    - 注意所有的现有的国际化文件都需要填写，目前只有中英日（Excel 介绍页底部可以切换语言）
+    - Use the English names of function parameters as the `key` for translation, e.g., `SUMIF`. Generally, do not modify unless there is an error.
+    - Extract the `description` from the content, as some Excel descriptions are lengthy and need simplification.
+    - `abstract` and `links` generally do not need modification.
+    - `aliasFunctionName` is optional; most formulas do not need to be filled (or can be set for aliases in specific countries). Currently, there is no documentation for formula aliases. Currently I have found a function translation plug-in that may provide similar functions [Excel Functions Translator](https://support.microsoft.com/en-us/office/excel-functions-translator-f262d0c0-991c-485b-89b6-32cc8d326889)
+    - `functionParameter` needs a name for each parameter. We recommend varying names based on the parameter's meaning, e.g., use `number` for a numeric parameter (if there is only one) or `number1`, `number2` for multiple numeric parameters. Use `range` for a range, `criteria` for conditions, and `sum_range` for the sum range (separated by `_` for multiple words).
+    - Some Chinese translations in the Office function documentation are machine-translated and may be unclear. Modify as needed. For example, `单元格参考` (Cell Reference) should be translated as `单元格引用`. Numeric type parameters are uniformly translated as: `数值`.
+    - Do not end `abstract` with a period (used in the search list when users input cells), but end `description` and `detail` with a period (used in descriptions).
+    - Capitalize the first letter of English sentences.
+    - Ensure that all existing internationalization files are filled. Currently, there are only Chinese, English, and Japanese translations (languages can be switched at the bottom of the Excel introduction page).
 
-3. 公式描述
+3. Formula Descriptions
 
-    `SUMIF` 属于 `math` 分类，描述信息在 [packages/sheets-formula/src/services/function-list/math.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-formula/src/services/function-list/math.ts)，这个文件负责整个 `math` 分类所有函数。
+    `SUMIF` belongs to the `math` category, and the description is in [packages/sheets-formula/src/services/function-list/math.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-formula/src/services/function-list/math.ts), which manages all functions in the `math` category.
 
-    大部分的函数名称我们已经写好了基础的描述结构，推荐您在此基础上进行修改，如果没有的函数需要自己加在末尾。
+    Most function names already have basic description structure. It is recommended to modify them based on this foundation. If a function is not present, add it to the end.
 
-    要求：
+    Requirements:
 
-    - 在 `FUNCTION_LIST_MATH` 数组中增加公式，我们建议保持和国际化文件中的顺序一致，便于管理和查找
-    - `functionName` 需要引用之前定义的 `FUNCTION_NAMES_MATH` 枚举
-    - `aliasFunctionName` 也是可选的，如果国际化文件中没有别名，这里也不用添加
-    - 国际化字段注意对应好函数名和参数名
-    - 注意修改函数参数的信息， `example` 参数示例（比如范围写 `"A1:A20"`，条件写 `">5"` ），`require` 是否必需（1 必需，0 可选） ，`repeat` 是否允许重复（1 允许重复，0 不允许重复），详细说明参考文件内的接口 [IFunctionParam](https://github.com/dream-num/univer/blob/dev/packages/engine-formula/src/basics/function.ts)
+    - Add the formula to the `FUNCTION_LIST_MATH` array. It is recommended to keep the order consistent with the internationalization file for easy management and retrieval.
+    - Reference the previously defined `FUNCTION_NAMES_MATH` enum for the `functionName`.
+    - `aliasFunctionName` is also optional; if there are no aliases in the internationalization file, you do not need to add them here.
+    - Pay attention to the correspondence between internationalization fields and function and parameter names.
+    - Modify function parameter information, including the `example` parameter example (e.g., for a range, use `"A1:A20"`; for conditions, use `">5"`), the `require` parameter (1 for required, 0 for optional), and the `repeat` parameter (1 for allowed, 0 for not allowed). For detailed information, refer to the interface [IFunctionParam](https://github.com/dream-num/univer/blob/dev/packages/engine-formula/src/basics/function.ts).
 
-4. 公式算法
+4. Formula Algorithm
 
-    位置在 [packages/engine-formula/src/functions/math/sumif/index.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-formula/src/functions/math/sumif/index.ts)。
+    Location: [packages/engine-formula/src/functions/math/sumif/index.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-formula/src/functions/math/sumif/index.ts).
 
-    在当前公式的分类文件夹下新建公式文件夹，一个公式一个文件夹。然后新建 `index.ts` 文件来写公式算法，公式 `class` 的名称采用大驼峰的写法，认为公式是一个单词，带 `_` 或者 `.` 的公式认为是两个单词，比如
+    Create a new folder for the formula under the current formula category, with one folder per formula. Then create an `index.ts` file to write the formula algorithm. Use camel case for the formula `class` name, considering the formula as one word. If a formula contains `_` or `.`, treat it as two words, such as:
 
     - `SUMIF` => `Sumif`
     - `NETWORKDAYS.INTL` => `Networkdays_Intl`
     - `ARRAY_CONSTRAIN` => `Array_Constrain`
 
-    同级新建 `__tests__` 来写编写单元测试。写完之后，记得在分类目录下的 `function-map` 文件中添加公式算法和函数名映射用于注册这个函数算法。
+    Create a `__tests__` folder at the same level to write unit tests. After writing, remember to add the formula algorithm and function name mapping in the `function-map` file in the category directory to register the formula algorithm.
 
-    位置在 [packages/engine-formula/src/functions/math/function-map.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-formula/src/functions/math/function-map.ts)。
+    Location: [packages/engine-formula/src/functions/math/function-map.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-formula/src/functions/math/function-map.ts).
 
-5. 单元测试
+5. Unit Tests
 
-    位置在 [packages/engine-formula/src/functions/math/sumif/\_\_tests\_\_/index.spec.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-formula/src/functions/math/sumif/__tests__/index.spec.ts)
+    Location: [packages/engine-formula/src/functions/math/sumif/\_\_tests\_\_/index.spec.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-formula/src/functions/math/sumif/__tests__/index.spec.ts)
 
-    注意：
+    Note:
 
-    - 补充 `sheetData`, 根据公式计算的需要构建好 `cellData`, 确定 `rowCount`、`columnCount`
-    - 手动初始化公式 `new Sumif(FUNCTION_NAMES_MATH.SUMIF)`
-    - 每个测试中手动构建好公式入参，最后 `calculate` 执行即可
-    - 单个公式的测试一般用于当前单个公式的算法，如果需要测试多个公式的嵌套，可以手动嵌套，或者到 `/packages/engine-formula/src/functions/__tests__` 目录下执行嵌套的复杂公式
+    - Supplement `sheetData` according to the formula's calculation needs, construct `cellData` based on the calculated data, and determine `rowCount` and `columnCount`.
+    - Manually initialize the formula with `new Sumif(FUNCTION_NAMES_MATH.SUMIF)`.
+    - Manually build the formula parameters for each test, and execute `calculate` at the end.
+    - Single formula tests are generally used for testing the algorithm of the current formula. If testing nested formulas with multiple formulas is needed, manually nest them or go to the `/packages/engine-formula/src/functions/__tests__` directory to execute complex nested formulas.
 
-6. 功能测试
+6. Functional Tests
 
-    启动 Univer 开发模式，在界面上测试公式，预先构造好数据，
+    Start Univer in development mode, test formulas on the interface, and preconstruct data.
 
-    - 在任一空白单元格输入 `=sumif`，预期会有搜索提示列表弹出
-    - 确认选择 `SUMIF` 或者 输入 `=sumif(` 之后，触发公式详细介绍弹窗，仔细检查介绍页内容是否完整
-    - 选择数据范围，确认之后触发计算，检查公式计算结果是否正确
+    - In any blank cell, enter `=sumif`. Expect a search prompt list to appear.
+    - After selecting `SUMIF` or entering `=sumif(`, trigger the formula details popup and carefully check the contents.
+    - Select the data range, trigger the calculation, and check if the formula calculation result is correct.
 
-### 公式实现注意事项
+### Considerations for Formula Implementation
 
-- 任何公式的入参和出参都可以是 `A1`、`A1:B10`，调研 Excel 的时候需要把所有情况考虑到，比如 `=SIN(A1:B10)`，会展开一个正弦计算后的范围。
-
-  - 例如 `XLOOKUP` 函数，要求两个入参的行或列至少又一个大小相等，这样才能进行矩阵计算。
-  - 例如 `SUMIF` 函数，大家以为是求和，但是它是可以根据第二个参数进行展开的
+-   Any formula's input and output can be `A1`, `A1:B10`, etc. When researching Excel, consider all cases, such as `=SIN(A1:B10)`, which expands to the calculated range.
+    -   For example, the `XLOOKUP` function requires at least one of the rows or columns of its two inputs to be of equal size for matrix calculation.
+    -   For example, the `SUMIF` function, although commonly used for summation, can expand based on the second parameter.
         ![sumif array](./assets/img/sumif-array.png)
         ![sumif array result](./assets/img/sumif-array-result.png)
-  - Excel 的公式计算，越来越像 numpy，比如
+    -   Excel formula calculation is becoming more like numpy, for example:
         ![numpy](./assets/img/numpy.png)
+-   For numerical calculations in formulas, use built-in methods and try to avoid obtaining values for manual calculation. Because formula parameters can be values, arrays, or references. You can refer to existing `sum` and `minus` functions.
+-   Precision issues: The formula introduces `big.js`, and using built-in methods will call this library. However, it is nearly 100 times slower than native calculations. Therefore, for methods like `sin`, it is advisable to use native implementations.
+-   For custom calculations, use the `product` function, suitable for calculating two input parameters. Call `map` to iterate over the values for changes to a parameter's own values.
 
-- 公式的数值计算，需要使用内置的方法，尽量不要获取值自行计算。因为公式的参数可以是值、数组、引用。可以参考已有的 `sum`、`minus` 函数。
-- 精度问题，公式引入了 `big.js`，使用内置方法会调用该库，但是相比原生计算会慢接近 100 倍，所以像 `sin` 等 `js` 方法，尽量用原生实现。
-- 需要自定义计算，使用 `product` 函数，适合两个入参的计算，调用 `map` 对值自身进行迭代计算，适合对一个入参本身的值进行改变。
+### Formula Basic Tools
 
-### 公式基础工具
-
-1. `ValueObjectFactory` 用来自动识别参数格式创建一个参数实例，范围类型的数据用 `RangeReferenceObject` 来创建参数实例
-2. 数组 `toArrayValueObject` 可以与值直接运算，得到新的数组
-
-
-## 依赖的插件
-
-本插件运行依赖以下插件：
-
-- @univerjs/core
-- @univerjs/engine-formula
-- @univerjs/engine-render
+1. `ValueObjectFactory` is used to automatically recognize parameter formats and create a parameter instance. Use `RangeReferenceObject` to create parameter instances for range-type data.
+2. The array `toArrayValueObject` can be operated directly with values to get a new array.
 
 <!--package-locales start-->
 <!--package-locales end-->
 
 <!--package-assets start-->
 <!--package-assets end-->
-

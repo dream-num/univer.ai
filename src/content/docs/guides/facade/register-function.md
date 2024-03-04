@@ -1,12 +1,12 @@
 ---
-title: 注册公式
+title: Registering Functions
 sidebar:
   order: 3
 ---
 
-## 注册公式
+## Register Functions
 
-使用 `registerFunction` 可以注册自定义公式
+Use `registerFunction` to register custom functions.
 
 ```typescript title="main.ts"
 import type { PrimitiveValueType } from '@univerjs/engine-formula';
@@ -21,13 +21,13 @@ univerAPI.registerFunction({
             }
 
             return sum;
-        }, 'CUSTOMSUM', '求参数的和'],
-        // ... 更多公式
+        }, 'CUSTOMSUM', 'Sum of arguments'],
+        // ... more functions
     ]
 });
 ```
 
-如果想要提供更完善的国际化内容和描述，还可以配置 `locales` 和 `description` 字段。如下所示。
+To provide more comprehensive internationalization content and descriptions, you can also configure `locales` and `description` fields. As shown below.
 
 ```typescript title="main.ts"
 import type { PrimitiveValueType } from '@univerjs/engine-formula';
@@ -59,7 +59,7 @@ univerAPI.registerFunction({
                         },
                     },
                 },
-                // ... 更多公式
+                // ... more functions
             },
         },
         'enUS':{
@@ -111,7 +111,7 @@ univerAPI.registerFunction({
                 },
             ],
         },
-        // ... 更多公式
+        // ... more functions
     ],
     calculate: [
         [function (...variants: Array<PrimitiveValueType | PrimitiveValueType[][]>) {
@@ -122,15 +122,15 @@ univerAPI.registerFunction({
             }
 
             return sum;
-        }, 'CUSTOMSUM', '求参数的和'],
-        // ... 更多公式
+        }, 'CUSTOMSUM', 'Sum of arguments'],
+        // ... more functions
     ]
 });
 ```
 
-## 卸载公式
+## Unregister Functions
 
-使用 `unregisterFunction` 可以卸载自定义公式
+Use `unregisterFunction` to unregister custom functions.
 
 ```typescript title="main.ts"
 univerAPI.unregisterFunction({
@@ -138,7 +138,7 @@ univerAPI.unregisterFunction({
 })
 ```
 
-如果配置了国际化内容，也需要移除
+If internationalization content was configured, it also needs to be removed.
 
 ```typescript title="main.ts"
 univerAPI.unregisterFunction({

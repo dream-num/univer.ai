@@ -2,50 +2,52 @@
 title: Windows
 ---
 
-## 快速上手
+## Quick Start
 
-### 1. 获取Univer服务
+### 1. Obtain Univer Service
 
-下载二进制压缩包
+Download the binary compressed package
 
 ``` url
 https://release-univer.oss-cn-shenzhen.aliyuncs.com/release-demo/windows.zip
 ```
 
-创建单独目录并将压缩包所有内容解压到该目录下
+Create a separate directory and extract all the contents of the compressed package to that directory
 
-### 2. 启动Univer服务
+### 2. Start Univer Service
 
 ```bash
-双击运行start_apps.bat文件
+Execute the `start_apps.bat` file with a double-click.
 ```
 
-### 3. 创建文档并访问
+### 3. Create and Access
 
-复制url链接到浏览器，本地体验 Univer 的乐趣
+Copy the URL link into the browser, locally experience the joy of Univer collaboration
 
 ```url
 http://localhost:3010/
 ```
 
-![例子](../imgs/img1.png)
-注：本地可打开不同浏览器或使用无痕模式体验协同
-![例子](../imgs/img2.png)
+![Example](../imgs/img1.png)
 
-### 4. 分享
+Note: Locally open different browsers or use incognito mode to experience collaboration!
 
-还可以复制浏览器链接，发送给局域网中的朋友一起感受 Univer 协同的魅力
+![Example](../imgs/img2.png)
 
-需要替换 localhost 为本地 ip
+### 4. Share
+
+You can also copy the browser link and send it to friends in the same network to experience Univer collaboration together
+
+Remember to replace localhost with the local IP url
 
 ```url
 http://localhost:3010/?unit=17443300120626831361&type=2
 //如 http://192.168.50.172:3010/?unit=17443300120626831361&type=2
 ```
 
-## 备注
+## Remarks
 
-### 如何查找本地IP
+### How to Find Local IP
 
 1.按下 Win+R
 

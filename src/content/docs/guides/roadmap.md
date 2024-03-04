@@ -1,28 +1,28 @@
 ---
-title: 路线图
+title: Roadmap
 ---
 
-## 开源版研发计划
+## Open-source Development Roadmap
 
-你可以通过 Feature Request 向我们提交需求，请参考[贡献指南](/guides/contributing)，我们会结合社区的反馈调整开发计划。
-
-### 2024 Q1
-
-* 查找替换
-* 条件格式
-* 数据验证
-* 保护区域（子表和范围权限控制）
-* 筛选
-* 排序
-* 浮动图片 
-* 批注
-* 更多的公式
-
-## 商业版研发计划
-
-我们也会在社区同步商业授权版（企业版）的开发计划和进度，如果你对商业授权提供的能力感兴趣，可以[联系我们](/guides/introduction#商业授权)。
+You can submit your requirements through Feature Requests, please refer to the [Contribution Guide](/guides/contributing). We will adjust the development roadmap based on community feedback.
 
 ### 2024 Q1
 
-* 导入导出
-* 打印
+* Find and Replace
+* Conditional Formatting
+* Data Validation
+* Sheet Protection (Sub-sheet and Range Permissions)
+* Filtering
+* Sorting
+* Floating Images
+* Comments
+* More Formulas
+
+## Commercial Version Development Roadmap
+
+We will also synchronize the development roadmap and progress of the commercial licensed version (Enterprise Edition) with the community. If you are interested in the capabilities provided by the commercial license, you can [contact us](/en-us/guides/introduction/#enterprise-edition).
+
+### 2024 Q1
+
+* Import / Export
+* Printing

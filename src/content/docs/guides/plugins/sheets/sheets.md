@@ -4,39 +4,31 @@ title: "@univerjs/sheets"
 
 [![npm version](https://img.shields.io/npm/v/@univerjs/sheets)](https://npmjs.org/package/@univerjs/sheets)
 
-@univerjs/sheet 承载 sheet 的主要（基础）业务逻辑，base-sheets 被设计为 UI 无关，因此也可以运行在 Node.js 环境中，借此可以实现协同编辑等功能。
+@univerjs/sheet serves as the foundation for the core business logic of spreadsheets, with base-sheets designed to be UI-agnostic, allowing for functionality such as collaborative editing to be implemented in a Node.js environment.
 
-@univerjs/sheets 为 Univer Sheet 提供了以下能力：
+@univerjs/sheets provides the following capabilities for Univer Sheet:
 
-* 提供核心能力，例如数字格式、选区管理、权限等等
-* 更改电子表格数据的 commands / mutations
-* 公式核心能力
-* 数字格式核心能力
+* Core functionality, including numerical formatting, selection management, permissions, etc.
+* Commands/mutations for modifying spreadsheet data
+* Formula core functionality
+* Core numerical formatting functionality
 
 ## `SheetInterceptorService`
 
-`SheetInterceptorService` 是 @univerjs/sheets 提供的一个较为特殊的服务，它允许上层业务修改从 Worksheet 中获取单元格数据、获取行列隐藏信息等操作的结果，以及在特定的 command 执行时补充 mutation 或者 operation。这个服务的主要目的是为了实现一些特殊的功能，例如：
+`SheetInterceptorService` is a more specialized service provided by @univerjs/sheets that allows higher-level business to modify the results of operations such as obtaining cell data, retrieving row/column hiding information from a Worksheet, and supplementing mutations or operations at specific command executions. This service's primary goal is to enable specific functionalities, including:
 
-1. sheet 公式
-2. sheet 条件格式
-3. sheet 数据验证
-4. sheet 数据透视表
+1. Sheet formulas
+2. Sheet conditional formatting
+3. Sheet data validation
+4. Sheet pivot tables
 
-具体的使用方法请参考 API 文档。
+For detailed usage, please refer to the API documentation.
 
-### **何时使用 `SheetInterceptorService`，何时不要使用？**
+### When to use `SheetInterceptorService` and when not to?
 
-当各个功能需要操作同一块数据或者状态，但是它们之前并没有明确的依赖关系时使用 `SheetInterceptorService`，例如：数据透视表、公式、条件格式、数据验证、单元格原始数据都可能影响其他功能对单元格内容的取值结果，但是它们之间并没有明确的依赖关系，因此使用 `SheetInterceptorService` 来实现这些功能是比较合适的。
+Use `SheetInterceptorService` when multiple features need to operate on the same data or state, but do not have a clear dependency relationship. For example: pivot tables, formulas, conditional formatting, data validation, and raw cell data can all affect how other features retrieve a cell's value, but they do not depend on each other. In this case, using `SheetInterceptorService` to implement these features is appropriate.
 
-如果一个功能明确地依赖其他功能，例如公式需要在下拉填充或复制粘贴功能被调用时做一些操作，那么公式模块应该直接依赖下拉填充和复制粘贴模块，而不是通过 `SheetInterceptorService` 来实现。
-
-## 依赖的插件
-
-本插件运行依赖以下插件：
-
-* @univerjs/core
-* @univerjs/engine-formula
-* @univerjs/engine-render
+However, if one feature relies explicitly on another feature, such as a formula needing to perform certain actions when the fill down or copy-paste functions are called, the formula module should directly depend on the fill down and copy-paste modules, instead of using `SheetInterceptorService` for implementation.
 
 <!--package-locales start-->
 <!--package-locales end-->
