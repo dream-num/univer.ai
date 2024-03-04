@@ -1,29 +1,29 @@
 ---
-title: 其他发行版
+title: Releases
 ---
 
 ## Alpha Release
 
-目前非稳定版本分为 alpha 和 beta 发布通道，alpha 版本通过 `@alpha` 标签发布，beta 版本直接通过 `@latest` 发布。
+Currently, the unstable versions are divided into the alpha and beta release channels. The alpha version is released with the `@alpha` tag, while the beta version is released directly with `@latest`.
 
-安装 alpha 版本
+To install the alpha version, use the following command:
 
 ```shell
-npm install @univerjs/<包名>@alpha
+npm install @univerjs/<package-name>@alpha
 ```
 
 ## Nightly Release
 
-Univer 每晚都会构建一个版本，用于测试最新功能和修复的 bug。
+Every night, Univer builds a version that includes the latest features and bug fixes for testing purposes. To install this version.
 
-我们推荐在项目根目录下创建一个 `.npmrc` 文件来配置 npm 源，内容如下：
+To install the nightly version, we recommend creating a `.npmrc` file in the root directory of your project to configure the npm source, with the following content:
 
 ```Properties title=".npmrc"
 @univerjs:registry=https://verdaccio.univer.work/
 ```
 
-然后安装 nightly 版本
+Then, you can install the nightly version using the following command:
 
 ```shell
-npm install @univerjs/<包名>@nightly
+npm install @univerjs/<package-name>@nightly
 ```

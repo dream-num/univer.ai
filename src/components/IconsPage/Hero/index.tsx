@@ -21,7 +21,7 @@ export function Hero() {
           <h1>
             <a href="/">
               <img src={LogoImg.src} alt="logo" />
-              Univer Icon
+              Univer Icons
             </a>
           </h1>
 

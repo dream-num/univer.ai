@@ -2,21 +2,21 @@
 title: Mac
 ---
 
-## 快速上手
+## Quick Start
 
-### 1. 获取Univer服务
+### 1. Obtain Univer Service
 
-下载二进制压缩包
+Download the binary compressed package
 
 ``` url
 https://release-univer.oss-cn-shenzhen.aliyuncs.com/release-demo/darwin.zip
 ```
 
-创建单独目录并将压缩包所有内容解压到该目录下
+Create a separate directory and extract all the contents of the compressed package to that directory
 
-### 2. 启动Univer服务
+### 2. Start Univer Service
 
-执行命令
+Execute the command
 
 ```bash
 chmod +x ./start_apps.sh
@@ -28,39 +28,39 @@ chmod +x ./start_apps.sh
 
 注：mac需要在设置与隐私中允许非 App store 应用运行，[详见](#如何允许非app-store应用访问)
 
-### 3. 创建文档并访问
+### 3. Create and Access
 
-复制url链接到浏览器，本地体验 Univer 的乐趣
+Copy the URL link into the browser, locally experience the joy of Univer collaboration
 
 ```url
 http://localhost:3010/
 ```
 
-![例子](../imgs/img1.png)
+![Example](../imgs/img1.png)
 
-注：本地可打开不同浏览器或使用无痕模式体验协同
-![例子](../imgs/img2.png)
+Note: Locally open different browsers or use incognito mode to experience collaboration!
+![Example](../imgs/img2.png)
 
-### 4. 分享
+### 4. Share
 
-还可以复制浏览器链接，发送给局域网中的朋友一起感受 Univer 协同的魅力
+You can also copy the browser link and send it to friends in the same network to experience Univer collaboration together
 
-需要替换 localhost 为本地 ip
+Remember to replace localhost with the local IP url
 
 ```url
 http://localhost:3010/?unit=17443300120626831361&type=2
-//如 http://192.168.50.172:3010/?unit=17443300120626831361&type=2
+//Example http://192.168.50.172:3010/?unit=17443300120626831361&type=2
 ```
 
-## 备注
+## Remarks
 
 ### 如何允许非App store应用访问
 
 ![允许访问](../imgs/mac1.png)
 
-### 如何查找本地IP
+### How to Find Local IP
 
-运行以下命令
+Execute the command
 
 ``` bash
 ifconfig |grep -w  'inet' |grep -v "127.0.0.1" | awk '{print $2}'
@@ -68,7 +68,7 @@ ifconfig |grep -w  'inet' |grep -v "127.0.0.1" | awk '{print $2}'
 
 ![mac_ip](../imgs/mac_ip.png)
 
-### 如何停止服务
+### How to stop the service
 
 ```bash
 chmod +x ./stop_apps.sh
@@ -78,7 +78,7 @@ chmod +x ./stop_apps.sh
 ./stop_apps.sh
 ```
 
-## 占用端口
+## Port Usage
 
 | service       | port      | description          |
 |---------------|-----------|----------------------|

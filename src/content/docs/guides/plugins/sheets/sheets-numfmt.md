@@ -4,14 +4,14 @@ title: "@univerjs/sheets-numfmt"
 
 [![npm version](https://img.shields.io/npm/v/@univerjs/sheets-numfmt)](https://npmjs.org/package/@univerjs/sheets-numfmt)
 
-提供数字格式的编辑/渲染能力，例如编辑面板、工具栏按钮、实时预览、行列变化等等。
+Providing editing/rendering capabilities around `number format`, such as edit panels, toolbar buttons, real-time previews, row/column variations, etc.
 
-:::note
-数字格式是电子表格的核心功能之一，因此数字格式的解析处理是在 @univerjs/sheets 中进行的。
+:::Note
+Numerical format is one of the core functions of electronic spreadsheets, and therefore, parsing and handling of numerical format is done within `@univerjs/sheets`.
 :::
 
-## 使用介绍
-在你的入口文件处，引用 `@univerjs/sheets-numfmt`.
+## How to use
+Import `@univerjs/sheets-numfmt`  at the entrance .
 ```ts
 import { LocaleType, LogLevel, Univer } from '@univerjs/core';
 import { defaultTheme } from '@univerjs/design';
@@ -26,29 +26,18 @@ const univer = new Univer({
     logLevel: LogLevel.VERBOSE,
 });
 
-// ... 其他插件注册
+// ... Other plug-ins are registered
 
 univer.registerPlugin(UniverSheetsNumfmtPlugin);
 ```
+
 :::note
-如果你需要导出快照支持导出数据格式,需要额外新增[一部分代码](/guides/extend/model/#本地化快照方案)
+If you need to export the snapshot to support the export data format, you need to add [some additional code](/)
 :::
 
-## 依赖的插件
-
-本插件运行依赖以下插件：
-
-- @univerjs/core
-- @univerjs/design
-- @univerjs/engine-numfmt
-- @univerjs/engine-render
-- @univerjs/sheets
-- @univerjs/sheets-ui
-- @univerjs/ui
 
 <!--package-locales start-->
 <!--package-locales end-->
 
 <!--package-assets start-->
 <!--package-assets end-->
-

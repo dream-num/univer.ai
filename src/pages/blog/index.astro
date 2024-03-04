@@ -7,7 +7,7 @@ import PostList from '@/components/PostList/index.astro'
 import Layout from '@/layouts/Layout.astro'
 
 const posts = await getCollection('blog', ({ data }) => {
-  return data.lang === 'zh-cn'
+  return data.lang === 'en-us'
 })
 
 posts.sort((a, b) => {
@@ -15,7 +15,7 @@ posts.sort((a, b) => {
 })
 ---
 
-<Layout lang="zh-cn" title="Blog | Univer">
+<Layout lang="en-us" title="Blog | Univer">
   <Hero />
 
   <PostList posts={posts} />

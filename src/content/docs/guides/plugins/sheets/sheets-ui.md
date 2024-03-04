@@ -4,30 +4,17 @@ title: "@univerjs/sheets-ui"
 
 [![npm version](https://img.shields.io/npm/v/@univerjs/sheets-ui)](https://npmjs.org/package/@univerjs/sheets-ui)
 
-@univerjs/sheets-ui 提供了 sheet 的 UI，包括：
 
-* sheet 基础功能的快捷键
-* 复制粘贴服务，业务可以调用复制粘贴服务提供的方法来自定义某项功能的复制粘贴行为
-* 下拉填充服务，业务可以调用下拉填充服务提供的方法来自定义某项功能的下拉填充行为
-* 单元格编辑器服务
+The `@univerjs/sheets-ui` library provides the user interface (UI) for sheets, including:
 
-
-## 依赖的插件
-
-本插件运行依赖以下插件：
-
-* @univerjs/core
-* @univerjs/design
-* @univerjs/docs
-* @univerjs/engine-formula
-* @univerjs/engine-numfmt
-* @univerjs/engine-render
-* @univerjs/sheets
-* @univerjs/ui
+* Keyboard shortcuts and menu items for basic sheet functions
+* Copy-paste service, allowing customization of copy-paste behavior for specific features via the provided methods
+* Autofill service, enabling customization of autofill behavior for specific features via the provided methods
+* Cell editor and formula editor
+* Rendering spreadsheets in canvas
 
 <!--package-locales start-->
 <!--package-locales end-->
 
 <!--package-assets start-->
 <!--package-assets end-->
-

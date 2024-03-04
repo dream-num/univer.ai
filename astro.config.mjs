@@ -53,12 +53,12 @@ const integrations = [
     defaultLocale: 'root',
     locales: {
       root: {
-        label: '简体中文',
-        lang: 'zh-CN',
-      },
-      'en-us': {
         label: 'English',
         lang: 'en-US',
+      },
+      'zh-cn': {
+        label: '简体中文',
+        lang: 'zh-CN',
       },
       'ja-jp': {
         label: '日本語',

@@ -1,10 +1,10 @@
 ---
-title: 自定义主题
+title: Custom Theme
 ---
 
-## 使用内置主题
+## Use built-in theme
 
-Univer 内置了两套主题，分别是 `defaultTheme` 和 `greenTheme`，他们在 `@univerjs/design` 包中，你可以根据自己的需求选择其中一个主题。
+Univer has two built-in themes, `defaultTheme` and `greenTheme`, which are in the `@univerjs/design` package. You can choose one of them according to your needs.
 
 ```typescript
 import { defaultTheme } from "@univerjs/design";
@@ -16,11 +16,11 @@ const univer = new Univer({
 });
 ```
 
-## 自定义主题
+## Custom Theme
 
-Univer 的主题是基于 css 变量实现的，你完全可以通过覆盖这些变量来自定义主题。
+Univer's theme is based on css variables, and you can customize the theme by overriding these variables.
 
-请参考[这里](https://github.com/dream-num/univer/blob/dev/packages/design/src/themes/default.module.less)来了解默认主题的变量是如何定义的。
+Please refer to [here](https://github.com/dream-num/univer/blob/dev/packages/design/src/themes/default.module.less) to learn how the variables of the default theme are defined.
 
 ```css title="custom-theme.css"
 .univer-theme {
@@ -31,7 +31,7 @@ Univer 的主题是基于 css 变量实现的，你完全可以通过覆盖这�
 
 ```typescript title="main.ts"
 import { defaultTheme } from "@univerjs/design";
-// 在这里导入你自定义的主题
+// Import your custom theme here
 import './custom-theme.css';
 
 const univer = new Univer({
@@ -39,7 +39,7 @@ const univer = new Univer({
 });
 ```
 
-如果你的构建工具支持 css modules 的一些特殊语法，你可以使用 `:export` 来导出变量，这样你就可以在 js 中使用这些变量了。
+If your build tool supports some special syntax of css modules, you can use `:export` to export variables, so that you can use these variables in js.
 
 ```css title="custom-theme.css"
 :export {

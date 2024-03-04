@@ -8,7 +8,7 @@ export async function getStaticPaths() {
   const blogEntries = await getCollection('blog')
 
   return blogEntries.map(entry => ({
-    params: { slug: entry.slug.replace('blog/', '') },
+    params: { slug: entry.slug.replace('en-us/blog/', '') },
     props: { entry },
   }))
 }
@@ -17,7 +17,7 @@ const { entry } = Astro.props
 const { Content } = await entry.render()
 ---
 
-<Layout lang="zh-cn" title={`${entry.data.title} | Univer`}>
+<Layout lang="en-us" title={`${entry.data.title} | Univer`}>
   <Post post={entry}>
     <Content />
   </Post>
