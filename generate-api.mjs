@@ -22,6 +22,13 @@ if (fs.existsSync(__output)) {
   fs.mkdirSync(__output)
 }
 
+if (fs.existsSync(__metaOutput)) {
+  fs.rmdirSync(__metaOutput, { recursive: true })
+  fs.mkdirSync(__metaOutput)
+} else {
+  fs.mkdirSync(__metaOutput)
+}
+
 const packages = fs.readdirSync(__packages)
   .filter((pkg) => {
     const pkgJson = fs.readFileSync(resolve(__packages, pkg, './package.json'), 'utf8')
@@ -87,12 +94,13 @@ for (const pkg of packages) {
   const project = await app.convert()
 
   if (project) {
-    const outputDir = resolve(__output, pkg)
     const commands = getCommands(project)
+    if (commands.length > 0) {
+      const outputMetaFile = resolve(__metaOutput, `${pkg}.json`)
+      fs.writeFileSync(outputMetaFile, JSON.stringify(commands, null, 2))
+    }
 
-    const outputMetaFile = resolve(__metaOutput, `${pkg}.json`)
-    fs.writeFileSync(outputMetaFile, JSON.stringify(commands, null, 2))
-
+    const outputDir = resolve(__output, pkg)
     await app.generateDocs(project, outputDir)
   }
 }
