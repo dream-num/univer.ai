@@ -9,7 +9,7 @@ cover: ./0.png
 date: 2024-01-11
 author: Jocs
 lang: zh-cn
-slug: blog/doc-typesetting-design
+slug: zh-cn/blog/doc-typesetting-design
 ---
 
 > Univer 文档是 Univer 办公套件之一，如果你想了解 Univer 文档架构，建议先阅读《Univer 文档架构及模块设计》，里面有关于 Univer 文档架构的思考和模块划分的设计，本篇文章主要关注文档排版需求及 Univer 文档是如何通过架构设计来服务这些需求的
