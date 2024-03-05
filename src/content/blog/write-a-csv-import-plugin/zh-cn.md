@@ -10,7 +10,7 @@ cover: ./cover.png
 date: 2024-01-24
 author: Song Xiang
 lang: zh-cn
-slug: blog/write-a-csv-import-plugin
+slug: zh-cn/blog/write-a-csv-import-plugin
 ---
 
 我们将通过编写一个实际案例，来学习如何编写一个 Univer 插件。

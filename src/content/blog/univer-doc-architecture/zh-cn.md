@@ -9,7 +9,7 @@ cover: ./2.png
 date: 2024-01-11
 author: Jocs
 lang: zh-cn
-slug: blog/univer-doc-architecture
+slug: zh-cn/blog/univer-doc-architecture
 ---
 
 ## 1. Univer 文档项目架构
