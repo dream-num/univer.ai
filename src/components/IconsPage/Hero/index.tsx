@@ -1,10 +1,8 @@
 import { GithubSingle24 } from '@univerjs/icons'
-import pkg from '@univerjs/icons/package.json'
 import clsx from 'clsx'
 import HeroImg from './hero.png'
 
 import styles from './index.module.less'
-import LogoImg from '@/assets/logo.svg'
 
 export function Hero() {
   return (
