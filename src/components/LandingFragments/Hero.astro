@@ -3,7 +3,7 @@ import { getLangFromUrl, useI18nUrl, useTranslations } from '@/i18n/utils'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
-const l = useI18nUrl(lang);
+const l = useI18nUrl(lang)
 ---
 
 <section class="hero">
@@ -35,7 +35,7 @@ const l = useI18nUrl(lang);
       <div class="material dot dot-8" />
       <div class="material dot dot-9" />
 
-      <img class="sheets" src="/images/hero.png" alt="univer sheets" draggable={false} />
+      <img class="sheets" src={`/images/${lang}/hero.png`} alt="univer sheets" draggable={false} />
     </div>
   </section>
 </section>
@@ -53,7 +53,7 @@ const l = useI18nUrl(lang);
 
 <style lang="less" scoped>
 .hero {
-  margin-top: 1.9rem;
+  margin-top: 3.875rem;
   padding-bottom: 14.15rem;
   overflow-x: hidden;
   @media (max-width: 1024px) {
@@ -61,8 +61,10 @@ const l = useI18nUrl(lang);
   }
 
   .title {
-    margin: 0 0 1.2rem;
-    line-height: 1.7;
+    max-width: 50.625rem;
+    margin: 0 auto 1.2rem;
+    text-align: center;
+    line-height: 4.25rem;
     display: flex;
     justify-content: center;
     user-select: none;
@@ -94,7 +96,7 @@ const l = useI18nUrl(lang);
   .btn {
     width: 12rem;
     height: 3.3rem;
-    margin: 0 auto 2.8rem auto;
+    margin: 0 auto 3.125rem auto;
     color: #fff;
     text-align: center;
     line-height: 3.3rem;
@@ -132,6 +134,8 @@ const l = useI18nUrl(lang);
     .sheets {
       position: relative;
       width: 100%;
+      border-radius: 12px;
+      box-shadow: 0px 8px 24px 0px #1F23271F;
       display: block;
       z-index: 0;
     }
