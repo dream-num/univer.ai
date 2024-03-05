@@ -44,6 +44,7 @@ Univer 也可以通过 UMD 的方式引入，我们在 [Playground](https://univ
     <script src="https://unpkg.com/@univerjs/ui/lib/umd/index.js"></script>
     <script src="https://unpkg.com/@univerjs/sheets/lib/umd/index.js"></script>
     <script src="https://unpkg.com/@univerjs/docs/lib/umd/index.js"></script>
+    <script src="https://unpkg.com/@univerjs/docs-ui/lib/umd/index.js"></script>
     <script src="https://unpkg.com/@univerjs/sheets-ui/lib/umd/index.js"></script>
     <script src="https://unpkg.com/@univerjs/sheets-formula/lib/umd/index.js"></script>
     <script src="https://unpkg.com/@univerjs/sheets-numfmt/lib/umd/index.js"></script>
@@ -63,6 +64,7 @@ Univer 也可以通过 UMD 的方式引入，我们在 [Playground](https://univ
       univer.registerPlugin(window.UniverDocs.UniverDocsPlugin, {
         hasScroll: false,
       });
+      univer.registerPlugin(window.UniverDocsUi.UniverDocsUIPlugin);
       univer.registerPlugin(window.UniverEngineRender.UniverRenderEnginePlugin);
       univer.registerPlugin(window.UniverUi.UniverUIPlugin, {
         container: "app",
