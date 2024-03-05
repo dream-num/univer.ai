@@ -10,7 +10,7 @@ cover: ./cover.png
 date: 2024-01-06
 author: Jocs
 lang: zh-cn
-slug: blog/this-is-univer
+slug: zh-cn/blog/this-is-univer
 ---
 
 ## 零. 开篇

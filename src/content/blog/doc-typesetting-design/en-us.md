@@ -9,7 +9,7 @@ cover: ./0.png
 date: 2024-01-11
 author: Jocs
 lang: en-us
-slug: en-us/blog/doc-typesetting-design
+slug: blog/doc-typesetting-design
 ---
 
 > Univer Documents, a component of the Univer office suite, can be better understood by delving into the "Architectural Framework and Module Design of Univer Documents" document. This publication offers insights into the structural considerations and module delineations within the Univer Documents framework. The primary focus of this article lies in elucidating the document typesetting requisites and elucidating how Univer Documents caters to these needs through its architectural design.
