@@ -9,7 +9,7 @@ cover: ./2.png
 date: 2024-01-11
 author: Jocs
 lang: en-us
-slug: en-us/blog/univer-doc-architecture
+slug: blog/univer-doc-architecture
 ---
 
 ## 1. Univer Document Architecture

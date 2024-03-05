@@ -10,7 +10,7 @@ cover: ./cover.png
 date: 2024-01-06
 author: Jocs
 lang: en-us
-slug: en-us/blog/this-is-univer
+slug: blog/this-is-univer
 ---
 
 ## Chapter Zero: Introduction

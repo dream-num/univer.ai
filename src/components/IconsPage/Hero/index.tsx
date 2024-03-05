@@ -17,20 +17,6 @@ export function Hero() {
       </div>
 
       <section className={styles.wrapper}>
-        <nav>
-          <h1>
-            <a href="/">
-              <img src={LogoImg.src} alt="logo" />
-              Univer Icons
-            </a>
-          </h1>
-
-          <label>
-            v
-            {pkg.version}
-          </label>
-        </nav>
-
         <section className={styles.content}>
           <label>
             <span>基于 SVG</span>
