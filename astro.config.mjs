@@ -174,6 +174,10 @@ const integrations = [
           },
           {
             label: '源码阅读指引',
+            translations: {
+              'en-US': 'Source code reading guide',
+              'ja-JP': 'ソースコードリーディングガイド',
+            },
             link: 'guides/read-source',
           },
         ],
