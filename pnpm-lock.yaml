@@ -30,8 +30,8 @@ dependencies:
     specifier: ^18.2.19
     version: 18.2.19
   '@univerjs/icons':
-    specifier: ^0.1.34
-    version: 0.1.34(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^0.1.39
+    version: 0.1.39(react-dom@18.2.0)(react@18.2.0)
   astro:
     specifier: ^4.4.6
     version: 4.4.6(less@4.2.0)(typescript@5.3.3)
@@ -1730,8 +1730,8 @@ packages:
   /@ungap/structured-clone@1.2.0:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
-  /@univerjs/icons@0.1.34(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-PR/na5OLGSXXIV693PRrB3jB7sCr79dZCWag0HBEGHPYJbV4dcmCJMcxpYXOGxItBSrtA/EXtRxLiOBUQDRslg==}
+  /@univerjs/icons@0.1.39(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-LlvMLjF18VM1KKLybMpCEnetnyvQgb5ZvJA0HeWRnTNO8HFXlEpCJmXpAIajNGL+PjtZU4LTj3tMf/2C6prn/w==}
     peerDependencies:
       react: '*'
       react-dom: '*'
