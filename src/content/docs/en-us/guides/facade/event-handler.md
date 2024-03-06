@@ -110,7 +110,11 @@ For example, we can modify the table value `sheet.mutation.set-range-values` as 
 
 ```javascript
 const univerAPI = FUniver.newAPI(univer);
-univerAPI.executeCommand('')
+// set the value of the first cell in the first sheet to "Hello World"
+univerAPI.executeCommand('sheet.command.set-range-values', {
+  value: { v: "Hello World" },
+  range: { startRow: 0, startColumn: 0, endRow: 0, endColumn: 0 }
+})
 ```
 
 ### Preventing Command execution
@@ -146,7 +150,7 @@ When we judge commands and filter commands, it is recommended to use the ID prop
 
 Univer events are usually used internally by Univer plugins, such as listening to native browser events like mouse, keyboard, and screen scrolling, etc.
 
-and some events or hooks designed internally by the plugins, users generally do not need to care too much, for some useful events, they will also be provided to users after being encapsulated by the Facade API.
+and some events or hooks designed internally by the plugins, users generally do not need to care too much, for some useful events, they will also be provided to users after being encapsulated by the Facade API, please refer to the [Facade API](/guides/facade/).
 
 ## Reference
 

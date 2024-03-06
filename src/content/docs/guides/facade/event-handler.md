@@ -110,7 +110,11 @@ Facade API 中也提供了 `executeCommand` 和 `syncExecuteCommand` 方法�
 
 ```javascript
 const univerAPI = FUniver.newAPI(univer);
-univerAPI.executeCommand('')
+// set the value of the first cell A1 in the first sheet to "Hello World"
+univerAPI.executeCommand('sheet.command.set-range-values', {
+  value: { v: "Hello World" },
+  range: { startRow: 0, startColumn: 0, endRow: 0, endColumn: 0 }
+})
 ```
 
 ### 阻止命令执行
@@ -146,7 +150,7 @@ univerAPI.beforeCommandExecute((command)=>{
 
 事件通常是 Univer 插件在内部使用，例如监听浏览器的鼠标、键盘、屏幕滚动等底层事件。
 
-以及各插件内部设计的一些事件或者钩子（Hook），用户一般不不需要太关心，对于一些有用的事件，也会经过 Facade API 封装后提供给用户。
+以及各插件内部设计的一些事件或者钩子（Hook），用户一般不不需要太关心，对于一些有用的事件，也会经过 Facade API 封装后提供给用户，请参考 [Facade API](/guides/facade/)。
 
 ## 参考
 
