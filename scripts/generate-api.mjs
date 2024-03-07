@@ -5,7 +5,7 @@ import TypeDoc from 'typedoc'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
-const __packageDir = resolve(__dirname, './node_modules/.univer/repo')
+const __packageDir = resolve(__dirname, '../node_modules/.univer/repo')
 
 const __packageJson = JSON.parse(fs.readFileSync(resolve(__packageDir, './package.json'), 'utf8'))
 const __version = __packageJson.version
