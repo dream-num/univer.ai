@@ -107,11 +107,8 @@ devDependencies:
     specifier: ^2.10.0
     version: 2.10.0
   typedoc:
-    specifier: ^0.25.10
-    version: 0.25.10(typescript@5.3.3)
-  univer:
-    specifier: github:dream-num/univer#main
-    version: github.com/dream-num/univer/b3a4e47c54093dcac5b0bd91a4a0fb270056fbf5
+    specifier: ^0.25.11
+    version: 0.25.11(typescript@5.3.3)
 
 packages:
 
@@ -1194,6 +1191,7 @@ packages:
     resolution: {integrity: sha512-0fZBq27b+D7Ar5CQMofVN8sggOVhEtzFUwOwPppQt0k+VR+7UHMZZY4y+64WJ06XOhBTKXtQB/Sv0NwQMXyNAA==}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     dev: false
     optional: true
@@ -1202,6 +1200,7 @@ packages:
     resolution: {integrity: sha512-eTvzUS3hhhlgeAv6bfigekzWZjaEX9xP9HhxB0Dvrdbkk5w/b+1Sxct2ZuDxNJKzsRStSq1EaEkVSEe7A7ipgQ==}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
     requiresBuild: true
     dev: false
     optional: true
@@ -1210,6 +1209,7 @@ packages:
     resolution: {integrity: sha512-ix+qAB9qmrCRiaO71VFfY8rkiAZJL8zQRXveS27HS+pKdjwUfEhqo2+YF2oI+H/22Xsiski+qqwIBxVewLK7sw==}
     cpu: [riscv64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     dev: false
     optional: true
@@ -1218,6 +1218,7 @@ packages:
     resolution: {integrity: sha512-TenQhZVOtw/3qKOPa7d+QgkeM6xY0LtwzR8OplmyL5LrgTWIXpTQg2Q2ycBf8jm+SFW2Wt/DTn1gf7nFp3ssVA==}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     dev: false
     optional: true
@@ -1226,6 +1227,7 @@ packages:
     resolution: {integrity: sha512-LfFdRhNnW0zdMvdCb5FNuWlls2WbbSridJvxOvYWgSBOYZtgBfW9UGNJG//rwMqTX1xQE9BAodvMH9tAusKDUw==}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
     requiresBuild: true
     dev: false
     optional: true
@@ -7163,8 +7165,8 @@ packages:
       possible-typed-array-names: 1.0.0
     dev: true
 
-  /typedoc@0.25.10(typescript@5.3.3):
-    resolution: {integrity: sha512-v10rtOFojrjW9og3T+6wAKeJaGMuojU87DXGZ33sfs+554wgPTRG+s07Ag1BjPZI85Y5QPVouPI63JQ6fcQM5w==}
+  /typedoc@0.25.11(typescript@5.3.3):
+    resolution: {integrity: sha512-5MbI1W/FOG6oXsd8bdssQidSTeKh8Kt3xA5uKVzI+K99uzP8EGN45uPnPvQesyaWdD+89s4wCQdtWEd8QUbiRg==}
     engines: {node: '>= 16'}
     hasBin: true
     peerDependencies:
@@ -7817,11 +7819,3 @@ packages:
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
-
-  github.com/dream-num/univer/b3a4e47c54093dcac5b0bd91a4a0fb270056fbf5:
-    resolution: {tarball: https://codeload.github.com/dream-num/univer/tar.gz/b3a4e47c54093dcac5b0bd91a4a0fb270056fbf5}
-    name: univer
-    version: 0.1.1
-    engines: {node: '>=18.0.0', pnpm: '>=8.5.0'}
-    requiresBuild: true
-    dev: true

@@ -32,7 +32,7 @@
   },
   "scripts": {
     "prepare": "simple-git-hooks",
-    "postinstall": "cd ./node_modules/univer && pnpm install --ignore-scripts",
+    "postinstall": "node ./scripts/install-univer.mjs",
     "dev": "cross-env APP_MODE=development astro dev",
     "build": "cross-env APP_MODE=production pnpm run build:site && pnpm run build:api",
     "build:site": "cross-env APP_MODE=production astro build",
@@ -77,8 +77,7 @@
     "less": "^4.2.0",
     "lint-staged": "^15.2.2",
     "simple-git-hooks": "^2.10.0",
-    "typedoc": "^0.25.10",
-    "univer": "github:dream-num/univer#main"
+    "typedoc": "^0.25.11"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
