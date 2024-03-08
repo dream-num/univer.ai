@@ -49,9 +49,9 @@
     "@astrojs/starlight": "^0.21.1",
     "@rc-component/color-picker": "^1.5.2",
     "@stackblitz/sdk": "^1.9.0",
-    "@types/react-dom": "^18.2.19",
+    "@types/react-dom": "^18.2.21",
     "@univerjs/icons": "^0.1.40",
-    "astro": "^4.4.11",
+    "astro": "^4.4.15",
     "clsx": "^2.1.0",
     "dayjs": "^1.11.10",
     "mdast-zone": "^6.1.0",
@@ -59,12 +59,12 @@
     "rc-slider": "^10.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.2"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.8.0",
     "@types/diff": "^5.0.9",
-    "@types/react": "^18.2.61",
+    "@types/react": "^18.2.64",
     "astro-eslint-parser": "^0.16.3",
     "cross-env": "^7.0.3",
     "diff": "^5.2.0",
@@ -77,7 +77,7 @@
     "less": "^4.2.0",
     "lint-staged": "^15.2.2",
     "simple-git-hooks": "^2.10.0",
-    "typedoc": "^0.25.10",
+    "typedoc": "^0.25.11",
     "univer": "github:dream-num/univer#main"
   },
   "simple-git-hooks": {
