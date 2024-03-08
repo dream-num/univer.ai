@@ -40,24 +40,13 @@ const l = useI18nUrl(lang)
   </section>
 </section>
 
-<style lang="less" is:global>
-.feature-active {
-  color: #1F2327 !important;
-
-  p {
-    padding-top: 0.6rem;
-    height: auto !important;
-  }
-}
-</style>
-
 <style lang="less" scoped>
 .hero {
   margin-top: 3.875rem;
   padding-bottom: 14.15rem;
   overflow-x: hidden;
   @media (max-width: 1024px) {
-    padding-bottom: 11.0625rem;
+    padding-bottom: 5rem;
   }
 
   .title {
@@ -78,7 +67,9 @@ const l = useI18nUrl(lang)
       -webkit-text-fill-color: transparent;
       display: block;
       @media (max-width: 1024px) {
-        font-size: 2rem;
+        padding: 0 48px;
+        font-size: 1.375rem;
+        line-height: 28px;
       }
     }
   }
@@ -89,7 +80,10 @@ const l = useI18nUrl(lang)
     text-align: center;
     font-size: 1.1rem;
     @media (max-width: 1024px) {
+      padding: 0 48px;
+      color: #868686;
       font-size: 0.875rem;
+      line-height: 18px;
     }
   }
 
@@ -109,7 +103,7 @@ const l = useI18nUrl(lang)
     display: block;
     transition: all .15s;
     @media (max-width: 1024px) {
-      width: 6rem;
+      width: 7.25rem;
       height: 2.25rem;
       line-height: 2.25rem;
       font-size: 0.875rem;
