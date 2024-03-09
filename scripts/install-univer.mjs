@@ -16,9 +16,10 @@ function warpExec(command, cwd = undefined) {
     console.error(stderr)
   })
 }
+const __filename = url.fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
-const currentFilePath = path.dirname(url.fileURLToPath(new URL(import.meta.url)))
-const workPath = path.join(currentFilePath, '../', 'node_modules/.univer/')
+const workPath = path.join(__dirname, '../', 'node_modules/.univer/')
 const univerRepoPath = path.join(workPath, './repo/')
 const git = 'git'
 const pnpm = 'pnpm'
