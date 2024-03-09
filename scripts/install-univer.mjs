@@ -7,14 +7,8 @@ import path from 'node:path'
 import url from 'node:url'
 
 function warpExec(command, cwd = undefined) {
-  execSync(command, { cwd }, (err, stdout, stderr) => {
-    if (err) {
-      console.error(err)
-      return
-    }
-    console.log(stdout)
-    console.error(stderr)
-  })
+  const result = execSync(command, { cwd })
+  console.log(result.toString())
 }
 const __filename = url.fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
