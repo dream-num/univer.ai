@@ -17,7 +17,7 @@ function warpExec(command, cwd = undefined) {
   })
 }
 const __filename = url.fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+const __dirname = path.dirname(__filename)
 
 const workPath = path.join(__dirname, '../', 'node_modules/.univer/')
 const univerRepoPath = path.join(workPath, './repo/')

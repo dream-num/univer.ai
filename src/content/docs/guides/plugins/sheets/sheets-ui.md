@@ -3,7 +3,9 @@ title: "@univerjs/sheets-ui"
 ---
 
 [![npm version](https://img.shields.io/npm/v/@univerjs/sheets-ui)](https://npmjs.org/package/@univerjs/sheets-ui)
+[![license](https://img.shields.io/npm/l/@univerjs/sheets-ui)](https://img.shields.io/npm/l/@univerjs/sheets-ui)
 
+## Introduction
 
 The `@univerjs/sheets-ui` library provides the user interface (UI) for sheets, including:
 
@@ -13,8 +15,14 @@ The `@univerjs/sheets-ui` library provides the user interface (UI) for sheets, i
 * Cell editor and formula editor
 * Rendering spreadsheets in canvas
 
-<!--package-locales start-->
-<!--package-locales end-->
+## Usage
 
-<!--package-assets start-->
-<!--package-assets end-->
+### Installation
+
+```shell
+# Using npm
+npm install @univerjs/sheets-ui
+
+# Using pnpm
+pnpm add @univerjs/sheets-ui
+```

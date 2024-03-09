@@ -3,17 +3,20 @@ title: "@univerjs/engine-numfmt"
 ---
 
 [![npm version](https://img.shields.io/npm/v/@univerjs/engine-numfmt)](https://npmjs.org/package/@univerjs/engine-numfmt)
+[![license](https://img.shields.io/npm/l/@univerjs/engine-numfmt)](https://img.shields.io/npm/l/@univerjs/engine-numfmt)
 
-@univerjs/engine-numfmt 提供在不同的文档中对数字进行格式化的能力。
+## 简介
 
-## 依赖的插件
+`@univerjs/engine-formula` 是一个公式引擎，它提供了一套公式计算的基础能力。包括公式字符串解析，公式计算，公式依赖分析等。
 
-本插件运行依赖以下插件：
+## 使用指南
 
-- @univerjs/core
+### 安装
 
-<!--package-locales start-->
-<!--package-locales end-->
+```shell
+# 使用 npm
+npm install @univerjs/engine-numfmt
 
-<!--package-assets start-->
-<!--package-assets end-->
+# 使用 pnpm
+pnpm add @univerjs/engine-numfmt
+```

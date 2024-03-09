@@ -6,24 +6,38 @@ sidebar:
     variant: caution
 ---
 
-import { Image } from "astro:assets";
-import UniscriptImg from "@/assets/img/uniscript.jpeg";
-
 [![npm version](https://img.shields.io/npm/v/@univerjs/uniscript)](https://npmjs.org/package/@univerjs/uniscript)
+[![license](https://img.shields.io/npm/l/@univerjs/uniscript)](https://img.shields.io/npm/l/@univerjs/uniscript)
 
+## Introduction
+
+![](./assets//uniscript.jpeg)
 
 `@univerjs/uniscript` uses the DSL (Domain-Specific Language) provided by `@univerjs/facade` and creates a code editor for Users to write code for operating Univer's data structures and business logic.
 
-
-<Image src={UniscriptImg} alt="Uniscript" />
-
 Users can write business logic in the code editor to meet more flexible business requirements. For instance, as shown in the illustration, users can write a Uniscript to read identity card numbers from a selected area and validate their legality, and mark the background of invalid identity card numbers with red.
 
-:::caution[Experimental]
-The Uniscript is currently in the experimental stage, and it is not recommended to use it in production environments. You can refer to the [Roadmap](/en-us/guides/roadmap) to understand the iteration plan of Uniscript.
+:::caution
+The Uniscript is currently in the experimental stage, and it is not recommended to use it in production environments. You can refer to the [Roadmap](https://univer.ai/en-us/guides/roadmap/) to understand the iteration plan of Uniscript.
 :::
 
-## Get the Editor Instance
+:::tip
+Indeed, Uniscript's Domain-Specific Language (DSL) is a set of Facade APIs that encapsulate the internal implementation details of Univer. This API is defined [here](https://univer.ai/en-us/guides/facade/).
+:::
+
+## Usage
+
+### Installation
+
+```shell
+# Using npm
+npm install @univerjs/uniscript
+
+# Using pnpm
+pnpm add @univerjs/uniscript
+```
+
+### Get the Editor Instance
 
 The `@univerjs/uniscript` uses [Monaco Editor](https://microsoft.github.io/monaco-editor/) as its code editor. You can obtain an instance of the editor through the following method:
 
@@ -44,9 +58,3 @@ export class YourModule {
   }
 }
 ```
-
-{/* package-locales start */}
-{/* package-locales end */}
-
-{/* package-assets start */}
-{/* package-assets end */}

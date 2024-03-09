@@ -2,25 +2,21 @@
 title: "@univerjs/sheets-zen-editor"
 ---
 
-[![npm version](https://img.shields.io/npm/v/@univerjs/sheets-zen-editor)](https://npmjs.org/package/@univerjs/sheets-zen-editor)
+[![npm version](https://img.shields.io/npm/v/@univerjs/sheets-zen-editor)](https://npmjs.org/packages/@univerjs/sheets-zen-editor)
+[![license](https://img.shields.io/npm/l/@univerjs/sheets-zen-editor)](https://img.shields.io/npm/l/@univerjs/sheets-zen-editor)
 
-@univerjs/sheets-zen-editor 为 sheets 的每个 cell 提供了沉浸式编辑的体验。
+## 简介
 
+`@univerjs/sheets-zen-editor` 为 sheets 的每个 cell 提供了沉浸式编辑的体验。
 
-## 依赖的插件
+## 使用指南
 
-本插件的运行依赖以下插件：
+### 安装
 
-- @univerjs/core
-- @univerjs/design
-- @univerjs/docs
-- @univerjs/engine-render
-- @univerjs/sheets
-- @univerjs/sheets-ui
-- @univerjs/ui
+```shell
+# 使用 npm
+npm install @univerjs/sheets-zen-editor
 
-<!--package-locales start-->
-<!--package-locales end-->
-
-<!--package-assets start-->
-<!--package-assets end-->
+# 使用 pnpm
+pnpm add @univerjs/sheets-zen-editor
+```

@@ -1,30 +1,26 @@
 ---
 title: "@univerjs/docs-ui"
-sidebar:
-  badge:
-      text: experimental
-      variant: caution
 ---
 
 [![npm version](https://img.shields.io/npm/v/@univerjs/docs-ui)](https://npmjs.org/package/@univerjs/docs-ui)
 [![license](https://img.shields.io/npm/l/@univerjs/docs-ui)](https://img.shields.io/npm/l/@univerjs/docs-ui)
 
-## 简介
+## Introduction
 
-`@univerjs/docs-ui` 提供了 Doc 的 UI。
+`@univerjs/docs-ui` package provides the User Interface for Docs.
 
 :::info
-`@univerjs/docs-ui` 仍在试验阶段，建议不要在生产环境中使用。你可以在[路线图](/guides/roadmap)了解迭代计划。
+`@univerjs/docs-ui` is still in the experimental phase. It is not recommended for use in production environments. You can learn about the iteration plans on the [roadmap](/guides/roadmap).
 :::
 
-## 使用指南
+## Usage
 
-### 安装
+### Installation
 
 ```shell
-# 使用 npm
+# Using npm
 npm install @univerjs/docs-ui
 
-# 使用 pnpm
+# Using pnpm
 pnpm add @univerjs/docs-ui
 ```

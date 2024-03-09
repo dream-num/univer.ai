@@ -2,12 +2,21 @@
 title: "@univerjs/sheets-zen-editor"
 ---
 
-[![npm version](https://img.shields.io/npm/v/@univerjs/sheets-zen-editor)](https://npmjs.org/package/@univerjs/sheets-zen-editor)
+[![npm version](https://img.shields.io/npm/v/@univerjs/sheets-zen-editor)](https://npmjs.org/packages/@univerjs/sheets-zen-editor)
+[![license](https://img.shields.io/npm/l/@univerjs/sheets-zen-editor)](https://img.shields.io/npm/l/@univerjs/sheets-zen-editor)
+
+## Introduction
 
 `@univerjs/sheets-zen-mode-editor` enhances the immersive editing experience for cells in sheets.
 
-<!--package-locales start-->
-<!--package-locales end-->
+## Usage
 
-<!--package-assets start-->
-<!--package-assets end-->
+### Installation
+
+```shell
+# Using npm
+npm install @univerjs/sheets-zen-editor
+
+# Using pnpm
+pnpm add @univerjs/sheets-zen-editor
+```
