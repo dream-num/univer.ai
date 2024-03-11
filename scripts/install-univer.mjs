@@ -25,7 +25,7 @@ if (!fs.existsSync(workPath)) {
 if (fs.existsSync(univerRepoPath)) {
   warpExec(`${git} pull`, univerRepoPath)
 } else {
-  warpExec(`${git} clone --depth 1 -b main git@github.com:dream-num/univer.git ${univerRepoPath}`)
+  warpExec(`${git} clone --depth 1 -b main https://github.com/dream-num/univer.git ${univerRepoPath}`)
 }
 
 warpExec(`${pnpm} install --ignore-scripts  `, univerRepoPath)
