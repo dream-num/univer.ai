@@ -17,7 +17,7 @@ Here are some guidelines, you can choose the module you are interested in to sta
 ## Basic Example
 
 :::tip
-It is recommended to experience the basic functions of Univer in the [playground](/en-us/playground) before reading this section.
+It is recommended to experience the basic functions of Univer in the [playground](/playground) before reading this section.
 :::
 
 - document example [examples/src/docs/main.ts](https://github.com/dream-num/univer/blob/dev/examples/src/docs/main.ts)
