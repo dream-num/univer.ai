@@ -14,14 +14,14 @@ If you want to further understand the implementation details of Univer, you can 
 
 Here are some guidelines, you can choose the module you are interested in to start reading, which is convenient for quick start.
 
-## 基础示例
+## Basic Example
 
 :::tip
 It is recommended to experience the basic functions of Univer in the [playground](/en-us/playground) before reading this section.
-建议在阅读本小节内容之前先在 [演练场](/playground) 体验 Univer 的基础功能。
 :::
-document example [examples/src/docs/main.ts](https://github.com/dream-num/univer/blob/dev/examples/src/docs/main.ts)
--sheet example [examples/src/sheets/main.ts](https://github.com/dream-num/univer/blob/dev/examples/src/sheets/main.ts)
+
+- document example [examples/src/docs/main.ts](https://github.com/dream-num/univer/blob/dev/examples/src/docs/main.ts)
+- sheet example [examples/src/sheets/main.ts](https://github.com/dream-num/univer/blob/dev/examples/src/sheets/main.ts)
 
 ## Core Package
 
