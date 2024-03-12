@@ -28,3 +28,9 @@
   border-radius: 6px;
   box-shadow: 0 8px 24px #1f23271f;
 }
+
+.sidebar-pane {
+  scrollbar-color: #73737366 transparent;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+}

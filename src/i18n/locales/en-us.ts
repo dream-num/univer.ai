@@ -2,8 +2,8 @@ export const languageKey = 'en-us'
 export const languageName = 'English'
 
 export const locales = {
-  'header.docs': 'Developer Docs',
-  'header.api': 'API',
+  'header.docs': 'Guides',
+  'header.api': 'API Reference',
   'header.concat': 'Contact Us',
   'header.blog': 'Blog',
   'header.icons': 'Icons',
@@ -37,8 +37,8 @@ export const locales = {
   'footer.nav.company.blog': 'Blog',
   'footer.nav.company.concat': 'Contact Us',
   'footer.nav.resource.title': 'Resources',
-  'footer.nav.resource.docs': 'Developer Docs',
-  'footer.nav.resource.api': 'API',
+  'footer.nav.resource.docs': 'Guides',
+  'footer.nav.resource.api': 'API Reference',
   'footer.nav.resource.icons': 'Univer Icons',
   'footer.nav.community.title': 'Community',
   'footer.nav.community.discord': 'Discord',
@@ -50,6 +50,14 @@ export const locales = {
   'footer.copyright': 'Copyright © 2021-2024 Dreamnum Co,Ltd.',
   'blog.title': 'Blog',
   'blog.desc': 'Updates, sharing and tutorials from Univer Team',
+  'startlight.header.guides': 'Guides',
+  'startlight.header.api': 'API Reference',
+  'startlight.header.playground': 'Playground',
+  'startlight.header.community': 'Community',
+  'startlight.header.community.blog': 'Blog',
+  'startlight.header.community.discord': 'Discord Community',
+  'startlight.header.community.github': 'Github Discussions',
+  'startlight.header.community.concat': 'Contact Us',
 }
 
 export type localesType = typeof locales

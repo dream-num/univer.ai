@@ -1,0 +1,98 @@
+---
+import AstroSidebar from '@astrojs/starlight/components/Sidebar.astro'
+import type { Props } from '@astrojs/starlight/props'
+
+const isApiPage = Astro.url.pathname.startsWith('/api')
+
+const packages = [
+  'core',
+  'design',
+  'docs',
+  'docs-ui',
+  'engine-formula',
+  'engine-numfmt',
+  'engine-render',
+  'facade',
+  'find-replace',
+  'network',
+  'rpc',
+  'sheets',
+  'sheets-formula',
+  'sheets-numfmt',
+  'sheets-ui',
+  'sheets-zen-editor',
+  'ui',
+  'uniscript',
+]
+---
+
+{isApiPage
+  ? (
+    <ul class="api-menu">
+      {packages.map(pkg => (
+        <li>
+          <a
+            href={`/api/${pkg}`}
+            aria-current={Astro.url.pathname === `/api/${pkg}` ? 'page' : undefined}
+          >
+            @univerjs/{pkg}
+          </a>
+        </li>
+      ))}
+    </ul>
+    )
+  : (
+      <AstroSidebar {...Astro.props}>
+        <slot />
+      </AstroSidebar>
+    )}
+
+<script>
+function isElementVisibleInContainer(element: Element, container: Element) {
+  const elementRect = element.getBoundingClientRect()
+  const containerRect = container.getBoundingClientRect()
+
+  return (
+    elementRect.top >= containerRect.top
+    && elementRect.left >= containerRect.left
+    && elementRect.bottom <= containerRect.bottom
+    && elementRect.right <= containerRect.right
+  )
+}
+
+// Function to persist scroll position on page change
+function setScrollPosition() {
+  const sidebar = document.querySelector('#starlight__sidebar')
+  const selectedMenuItem = document.querySelector(
+    '#starlight__sidebar a[aria-current=\'page\']',
+  )
+  if (
+    sidebar
+    && selectedMenuItem
+    && !isElementVisibleInContainer(selectedMenuItem, sidebar)
+  ) {
+    selectedMenuItem.scrollIntoView()
+  }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  setScrollPosition()
+})
+</script>
+
+<style lang="less">
+.api-menu {
+  --sl-sidebar-item-padding-inline: 0.5rem;
+  list-style: none;
+  padding: 0;
+
+  li {
+    a {
+      padding: 0.2em var(--sl-sidebar-item-padding-inline);
+      color: inherit;
+      line-height: 1.4;
+      text-decoration: none;
+    }
+  }
+}
+</style>

@@ -64,7 +64,8 @@ async function generateDocs() {
       disableGit: true,
       disableSources: false,
       customCss: './style.css',
-      readme: 'none',
+      name: `@univerjs/${pkg}`,
+      readme: resolve(__packages, pkg, 'README.md'),
       hideGenerator: true,
       includeVersion: true,
       basePath: resolve(__packageDir),
@@ -88,10 +89,10 @@ function copyToDist() {
 }
 
 function main() {
+  copyToDist()
   cleanOutput()
   fetchUniver()
   generateDocs()
-  copyToDist()
 }
 
 main()

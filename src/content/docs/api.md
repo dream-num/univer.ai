@@ -2,23 +2,4 @@
 title: 🔌 API Reference
 ---
 
-| Package                                                         |
-| --------------------------------------------------------------- |
-| [@univerjs/core](/api/core)                                     |
-| [@univerjs/design](/api/design)                                 |
-| [@univerjs/docs](/api/docs)                                     |
-| [@univerjs/docs-ui](/api/docs-ui)                               |
-| [@univerjs/engine-formula](/api/engine-formula)                 |
-| [@univerjs/engine-numfmt](/api/engine-numfmt)                   |
-| [@univerjs/engine-render](/api/engine-render)                   |
-| [@univerjs/facade](/api/facade)                                 |
-| [@univerjs/find-replace](/api/find-replace)                     |
-| [@univerjs/network](/api/network)                               |
-| [@univerjs/rpc](/api/rpc)                                       |
-| [@univerjs/sheets](/api/sheets)                                 |
-| [@univerjs/sheets-formula](/api/sheets-formula)                 |
-| [@univerjs/sheets-numfmt](/api/sheets-numfmt)                   |
-| [@univerjs/sheets-ui](/api/sheets-ui)                           |
-| [@univerjs/sheets-zen-editor](/api/sheets-zen-editor)           |
-| [@univerjs/ui](/api/ui)                                         |
-| [@univerjs/uniscript](/api/uniscript)                           |
+This reference attempts to document every function, hook, component, and type exported by Univer. If you are looking for guides and tutorials, please refer to our [guides](/guides/introduction) section.
