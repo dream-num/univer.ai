@@ -3,8 +3,6 @@ import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import starlight from '@astrojs/starlight'
 import { defineConfig, squooshImageService } from 'astro/config'
-import { packageAssetsPlugin } from './plugins/packageAssetsPlugin.js'
-import { packageLocalesPlugin } from './plugins/packageLocalesPlugin.js'
 
 const isProd = process.env.APP_MODE === 'production'
 
@@ -37,17 +35,17 @@ function i18nEditor() {
 const integrations = [
   sitemap(),
   starlight({
-    title: 'Univer Docs',
+    title: 'Univer',
     logo: {
       light: './src/assets/logo-dark.svg',
       dark: './src/assets/logo-light.svg',
     },
     social: {
       github: 'https://github.com/dream-num/univer',
-      discord: 'https://discord.gg/z3NKNT6D2f',
     },
     components: {
-      Sidebar: './src/components/Sidebar/index.astro',
+      Header: './src/components/Starlight/Header.astro',
+      Sidebar: './src/components/Starlight/Sidebar.astro',
     },
     customCss: ['./src/styles/starlight.css'],
     defaultLocale: 'root',
@@ -205,14 +203,6 @@ const integrations = [
           },
         ],
       },
-      {
-        label: '🔌 API Reference',
-        link: '../api',
-      },
-      {
-        label: '🧩 Playground',
-        link: '../playground',
-      },
     ],
   }),
   react(),
@@ -238,10 +228,4 @@ export default defineConfig({
   },
   output: isProd ? 'static' : 'server',
   integrations,
-  markdown: {
-    remarkPlugins: [
-      packageAssetsPlugin,
-      packageLocalesPlugin,
-    ],
-  },
 })

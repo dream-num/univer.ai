@@ -5,7 +5,7 @@ export const languageName = '简体中文'
 
 export const locales: localesType = {
   'header.docs': '文档',
-  'header.api': 'API',
+  'header.api': 'API 参考',
   'header.concat': '联系我们',
   'header.blog': '博客',
   'header.icons': '图标库',
@@ -40,7 +40,7 @@ export const locales: localesType = {
   'footer.nav.company.concat': '联系我们',
   'footer.nav.resource.title': '相关资源',
   'footer.nav.resource.docs': '文档',
-  'footer.nav.resource.api': 'API',
+  'footer.nav.resource.api': 'API 参考',
   'footer.nav.resource.icons': ' 图标库',
   'footer.nav.community.title': '社区',
   'footer.nav.community.discord': 'Discord',
@@ -52,4 +52,12 @@ export const locales: localesType = {
   'footer.copyright': '上海梦数科技 版权所有',
   'blog.title': '博客',
   'blog.desc': 'Univer 最新咨讯、技术分享、视频教学',
+  'startlight.header.guides': '指南',
+  'startlight.header.api': 'API 参考',
+  'startlight.header.playground': '在线演示',
+  'startlight.header.community': '社区',
+  'startlight.header.community.blog': '博客',
+  'startlight.header.community.discord': 'Discord 社区',
+  'startlight.header.community.github': 'Github Discussions',
+  'startlight.header.community.concat': '联系我们',
 }

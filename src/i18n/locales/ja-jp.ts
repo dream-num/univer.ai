@@ -5,7 +5,7 @@ export const languageName = '日本語'
 
 export const locales: localesType = {
   'header.docs': 'ドキュメント',
-  'header.api': 'API',
+  'header.api': 'API Reference',
   'header.concat': 'お問い合わせ',
   'header.blog': 'ブログ',
   'header.icons': 'アイコン',
@@ -40,7 +40,7 @@ export const locales: localesType = {
   'footer.nav.company.concat': 'お問い合わせ',
   'footer.nav.resource.title': '関連リソース',
   'footer.nav.resource.docs': 'ドキュメント',
-  'footer.nav.resource.api': 'API',
+  'footer.nav.resource.api': 'API Reference',
   'footer.nav.resource.icons': 'Univer Icons',
   'footer.nav.community.title': 'コミュニティ',
   'footer.nav.community.discord': 'Discord',
@@ -52,4 +52,12 @@ export const locales: localesType = {
   'footer.copyright': 'Copyright © 2021-2024 Dreamnum Co,Ltd.',
   'blog.title': 'ブログ',
   'blog.desc': 'Univerの最新情報、技術共有、ビデオチュートリアル',
+  'startlight.header.guides': 'ガイド',
+  'startlight.header.api': 'API Reference',
+  'startlight.header.playground': 'オンラインデモ',
+  'startlight.header.community': 'コミュニティ',
+  'startlight.header.community.blog': 'ブログ',
+  'startlight.header.community.discord': 'Discord コミュニティ',
+  'startlight.header.community.github': 'Github Discussions',
+  'startlight.header.community.concat': 'お問い合わせ',
 }
