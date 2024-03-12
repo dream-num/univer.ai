@@ -1,0 +1,325 @@
+---
+title: Write a CSV Import Plugin for Univer.
+desc: Write a Univer plugin to add a button icon to the toolbar, click to import a CSV file into the table by following this case.
+tags: 
+  - Sheet
+  - Import
+  - CSV
+  - Guide
+cover: ./cover.png
+date: 2024-01-24
+author: Song Xiang
+lang: en-us
+slug: en-us/blog/write-a-csv-import-plugin
+---
+
+We will learn how to write a Univer plugin by writing a real case.
+
+By learning this case, you can learn the following:
+
+- How to create a Univer plugin
+- How to mount the plugin to the Univer instance
+- How to use the plugin's lifecycle
+- How to use the Univer dependency injection system
+- How to customize the UI of Univer
+- How to access and use the underlying API of Univer
+
+Assuming you already have the following knowledge reserves:
+
+- Basic JavaScript
+- Basic TypeScript
+
+## Case Introduction
+
+This plugin allows users to import CSV files into Univer tables.
+
+Let's experience the effect of this plugin first.
+
+Online experience: [CSV Import Plugin](/playground?title=CSV%20Import%20Plugin)
+
+## Requirement decomposition
+
+The plugin needs to complete the following functions:
+
+1. Append a menu button to the toolbar through the Univer API, and define the icon, text, and other properties of the menu button.
+2. Respond to the click event of the menu button. After clicking the menu button, a file selection box will pop up in the browser, and the CSV file will be selected.
+3. Convert the CSV content into the data structure of Univer.
+4. Set the data to the current table cell through the Univer API.
+
+## Preparation
+
+### 1. Create a plugin
+
+Univer does not limit the way you create plugins. To achieve a higher engineering standard, it is recommended to create it through the [command line tool](/en-us/guides/extend/write-a-plugin/#create-a-project).
+
+For the convenience of demonstration, we directly create the plugin manually in this article. You can follow this article to practice together. We will develop based on the [Vite initial Demo](https://github.com/awesome-univer/sheets-vite-demo) source code and enter the [Playground](/playground/?title=Vite) to start together.
+
+We create the `ImportCSVButton.ts` file in the `src/plugins` directory, the code is as follows:
+
+```ts
+import { Plugin, Univer } from "@univerjs/core";
+import { Inject, Injector } from '@wendellhu/redi';
+
+/**
+ * Import CSV Button Plugin 
+ * A simple Plugin example, show how to write a plugin.
+ */
+class ImportCSVButtonPlugin extends Plugin {
+  constructor (
+    // inject injector, required
+    @Inject(Injector) override readonly _injector: Injector
+  ) {
+    super('import-csv-plugin');     // plugin id
+  }
+
+  /** Plugin onStarting lifecycle */
+  onStarting () {
+    console.log('onStarting');     // todo something
+  }
+}
+
+export default ImportCSVButtonPlugin;
+```
+
+The plugin needs to inherit the `Plugin` class, which provides the basic functions of the plugin, such as the lifecycle of the plugin, the dependency injection of the plugin, etc.
+
+The plugin ID is passed into the parent class constructor method through `super`, which is used to identify the plugin and must be unique.
+
+The plugin's constructor function injects the `Injector` object through the `@Inject` decorator, which can be used to obtain other objects of Univer.
+
+If we need to use other objects of Univer, we can use the `@Inject` decorator to inject them, which will be explained later.
+
+We output a log in the `onStarting` lifecycle of the plugin, which will be executed when the plugin is mounted to the Univer instance. We initialize the internal module of the plugin in this lifecycle.
+
+For more information about the lifecycle of the plugin, you can check [Plugin Lifecycle](/guides/architecture/architecture/#plugin-lifecycle) for more information.
+
+### 2. Mount the plugin to the Univer instance
+
+By querying the API documentation, we can find the `Univer.registerPlugin` method, which can mount the plugin to the Univer instance.
+
+We mount the plugin in `src/index.ts`, the code is as follows:
+
+```ts
+import { Univer } from "@univerjs/core";
+import ImportCSVButtonPlugin from "../plugins/ImportCSVButton";
+//  ...omit other code
+
+const univer = new Univer();
+//  ...omit other code
+
+univer.registerPlugin(csvImportPlugin);
+```
+
+Refresh the page, you can see that the `onStarting` log is output, indicating that the plugin has been mounted to the Univer instance and the `onStarting` lifecycle has been executed.
+
+:::note
+The mounting order of plugins depends on the internal dependency relationship of the plugin. If plugin A depends on plugin B, then plugin B must be mounted to the Univer instance before plugin A.
+:::
+
+Document：[Univer.registerPlugin](/api/core/classes/Univer.html#registerPlugin)
+
+## Develop the plugin
+
+### 1. Register the menu button UI
+
+We append the toolbar button in the `onStarting` lifecycle of the plugin.
+
+We append the action bar menu button using the `IMenuService.addMenuItem` method, which takes an `IMenuItem` object as a parameter, which defines the properties of the menu button, such as the icon, text, display position, etc.
+
+We need to define an `IMenuItem` object first, the code is as follows:
+
+```ts
+const menuItem: IMenuItem = {
+    id: 'import-csv-button',    // button id, also used as the click event command id
+    title: 'Import CSV',        // button text
+    tooltip: 'Import CSV',      // tooltip text
+    icon: 'RenameSingle',       // button icon
+    type: MenuItemType.BUTTON,  // button type
+    positions: [MenuPosition.TOOLBAR_START], // add to toolbar
+};
+```
+
+Then, we need to access the `IMenuService` instance object, which can be obtained through the `@Inject` decorator.
+
+:::note
+Through the injection of the ID, we can obtain the corresponding object instance from the DI container. The injection ID can be a string constant. For the sake of maintenance, a variable name is often defined to store the injection ID.
+
+In Univer, the injection ID is usually the same as the interface name. For example, the variable name of the injection ID of the class instance object that implements the `IMenuService` interface type is also `IMenuService`.
+:::
+
+We inject the class instance object that implements the `IMenuService` interface type into the plugin constructor function, the code is as follows:
+
+```ts
+import { IMenuService } from "@univerjs/core";
+// ...omit other code
+
+class ImportCSVButtonPlugin extends Plugin {
+  constructor (
+    // inject injector, required
+    @Inject(Injector) override readonly _injector: Injector,
+    // inject menu service, to add toolbar button
+    @Inject(IMenuService) private menuService: IMenuService,
+  ) {
+    // ...omit other code
+  }
+  // ...omit other code
+}
+// ...omit other code
+```
+
+Then,we can append the menu button through the `IMenuService` instance object in the `onStarting` lifecycle of the plugin, the code is as follows:
+
+```ts
+// ...omit other code
+onStarting () {
+  // ...omit other code
+  this.menuService.addMenuItem(menuItem);
+}
+// ...omit other code
+```
+
+Refresh the page, you can see that the toolbar has a menu button, but you can't click it yet, because we haven't defined the click event of the menu button.
+
+### 2. Register a command to respond to the click event of the menu button
+
+In Univer, the click of the menu button in the Univer menu toolbar will trigger a command with the same `id` as the menu button. Therefore, we only need to register the same command to respond to the click event of the menu button.
+
+We can register a new command through the `ICommandService.registerCommandHandler` method. Similarly, we can obtain the corresponding object instance by injecting the ID of `ICommandService`. We add the following code to the plugin constructor function:
+
+```ts
+import { ICommandService } from "@univerjs/core";
+// ...omit other code
+constructor (
+  // ...omit other code
+  // inject command service, to register command handler
+  @Inject(ICommandService) readonly commandService: ICommandService
+) {
+  // ...omit other code
+}
+// ...omit other code
+
+```
+
+Then, we can register the command handler in the `onStarting` lifecycle of the plugin, the code is as follows:
+
+```ts
+// ...omit other code
+onStarting () {
+  // ...omit other code
+
+  const command: ICommand = {
+    id: "import-csv-button",             // command id, same as menu button id
+    type: CommandType.OPERATION,
+    handler: (accessor: IAccessor) => {
+      console.log('click button');       // todo something
+      return true;
+    }
+  }
+
+  // register command handler
+  this.commandService.registerCommand(command);
+}
+// ...omit other code
+```
+
+ICommand.handler is the event handler function. When the command is triggered, the function will be called.
+
+:::note
+The parameter `accessor` of the event handler function is an `IAccessor` object, which can access other objects in the DI container. `IAccessor.get` is similar to the `Inject` decorator, both are part of the dependency injection system of Univer.
+
+`IAccessor` decouples the `Command` from other objects in Univer, making the organization of code more flexible and maintainable.
+:::
+
+Fresh the page, you can see that after clicking the button, the console outputs the `click button` log, indicating that the button click event has been successfully registered.
+
+Reference document：
+
+- [ICommandService.registerCommandHandler](/api/core/interfaces/ICommandService.html#registerCommandHandler)
+- [ICommand](/api/core/interfaces/ICommand.html)
+
+### 3. Convert CSV to ICellData
+
+Next, we need to pop up the file selection box in the click event, read the CSV file selected by the user.Because this code does not involve Univer, so it will not be elaborated in this article. You can check the method `waitUserSelectCSVFile` [source code](https://github.com/awesome-univer/csv-import-plugin-demo/blob/main/src/plugins/ImportCSVButton.ts#L21).
+
+Let's talk about how to convert the CSV two-dimensional array into the data structure `ICellData` of Univer.
+
+`ICellData` is the cell data structure in Univer, which contains the value and style of the cell, where the value is stored in the `v` attribute, and the style is stored in the `s` attribute, the simplified code is as follows:
+
+```ts
+import type { ICellData } from "@univerjs/core";
+// ...omit other code
+
+const parseCSVToUniverData = (csv: string[][]): ICellData[][] => {
+  return csv.map((row) => {
+    return row.map((cell) => {
+      return {
+        v: cell || '',
+      }
+    })
+  })
+}
+// ...omit other code
+```
+
+Reference document：[ICellData](/api/core/interfaces/ICellData.html)
+
+### 4. Set the data to the table
+
+Finally, we need to set the CSV data to the current table, which can be achieved by calling the `SetRangeValuesCommand` command through the `ICommandService.executeCommand` method.
+
+:::note
+The vast majority of operations in Univer are registered with commands, providing a unified user experience for developers, and facilitating expansion and maintenance.
+
+In addition, the menu button click event we just defined can also be triggered by other plugins or users through commands.
+
+If you want to learn more about commands, you can check [Command System](/guides/architecture/architecture/#command-system) for more information.
+:::
+
+We can use `this.commandService.executeCommand` to access the instance object of `ICommandService`, but for the decoupling of the code and the independence of the Command, we can also use `IAccessor.get` to obtain the instance object of `ICommandService`.
+
+```ts
+import { SetRangeValuesCommand } from "@univerjs/sheets";
+// ...omit other code
+  handler: (accessor: IAccessor) => {
+    // ...omit other code
+
+    // get command service
+    const commandService = accessor.get(ICommandService);
+    // wait user select csv file
+    waitUserSelectCSVFile({ csv, rowsCount, colsCount }) => {
+      // set sheet data
+      commandService.executeCommand(SetRangeValuesCommand.id, {
+        range: {
+          startColumn: 0,  // start column index
+          startRow: 0, // start row index
+          endColumn: colsCount - 1, // end column index
+          endRow: rowsCount - 1,  // end row index
+        },
+        value: parseCSV2UniverData(csv),
+      });
+    })
+    // ...omit other code
+    return true;
+  }
+// ...omit other code
+```
+
+At this point, we have completed the development of the plugin. Refresh the page, you can see that after clicking the menu button, the file selection box will pop up, and after selecting the CSV file, the content of the CSV file will be displayed in the table.
+
+## Summary
+
+The complete code of the plugin can be found in[ImportCSVButton.ts](https://github.com/awesome-univer/csv-import-plugin-demo/blob/main/src/plugins/ImportCSVButton.ts).
+
+This plugin demonstrates how to extend the UI and functionality of Univer through the Univer plugin system. I hope this article can help you quickly get started with Univer plugin development.
+
+As the scale of plugins increases, it is recommended to further understand the [Plugin Lifecycle](/guides/architecture/architecture/#plugin-lifecycle) to better understand the plugin system of Univer.
+
+univer is still in its infancy, if you have any questions or suggestions, please feel free to submit PR or Issue.
+
+## Reference document
+
+- [Plugin Lifecycle](/guides/architecture/architecture/#Plugin Lifecycle)
+- [Univer.registerPlugin](/api/core/classes/Univer.html#registerPlugin)
+- [ICellData](/api/core/interfaces/ICellData.html)
+- [ICommandService.registerCommandHandler](/api/core/interfaces/ICommandService.html#registerCommandHandler)
+- [ICommand](/api/core/interfaces/ICommand.html)
