@@ -32,18 +32,16 @@
   },
   "scripts": {
     "prepare": "simple-git-hooks",
-    "postinstall": "node ./scripts/install-univer.mjs",
     "dev": "cross-env APP_MODE=development astro dev",
     "build": "cross-env APP_MODE=production pnpm run build:site && pnpm run build:api",
     "build:site": "cross-env APP_MODE=production astro build",
-    "build:api": "node ./generate-api.mjs && cp -r ./api/* ./dist/api",
+    "build:api": "node ./generate-api.mjs",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "update:packages-meta": "node ./scripts/init-packages-meta.mjs"
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.6",
-    "@astrojs/react": "^3.0.10",
+    "@astrojs/react": "^3.1.0",
     "@astrojs/rss": "^4.0.5",
     "@astrojs/sitemap": "^3.1.1",
     "@astrojs/starlight": "^0.21.1",
@@ -51,15 +49,14 @@
     "@stackblitz/sdk": "^1.9.0",
     "@types/react-dom": "^18.2.21",
     "@univerjs/icons": "^0.1.40",
-    "astro": "^4.4.15",
+    "astro": "^4.5.0",
     "clsx": "^2.1.0",
     "dayjs": "^1.11.10",
     "mdast-zone": "^6.1.0",
     "modern-normalize": "^2.0.0",
     "rc-slider": "^10.5.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "typescript": "^5.4.2"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.8.0",
@@ -77,7 +74,8 @@
     "less": "^4.2.0",
     "lint-staged": "^15.2.2",
     "simple-git-hooks": "^2.10.0",
-    "typedoc": "^0.25.12"
+    "typedoc": "^0.25.12",
+    "typescript": "^5.4.2"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
