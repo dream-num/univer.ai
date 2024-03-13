@@ -10,44 +10,44 @@ Facade provides a convenient API `createSocket` for creating a Websocket, simply
 
 ```typescript title="main.ts"
 // Replace the URL with the address of your own Websocket service
-const ws = univerAPI.createSocket("ws://47.100.177.253:8449/ws");
+const ws = univerAPI.createSocket('ws://47.100.177.253:8449/ws')
 
 ws.open$.subscribe(() => {
-  console.log("websocket opened");
-  ws.send("hello");
-});
+  console.log('websocket opened')
+  ws.send('hello')
+})
 
 ws.message$.subscribe((message) => {
-  console.log("websocket message", message);
+  console.log('websocket message', message)
   const content = JSON.parse(message.data).content
-  if (content.indexOf('command') === -1) {
-    return;
+  if (!content.includes('command')) {
+    return
   }
 
-  const commandInfo = JSON.parse(content);
-  const { command, options } = commandInfo;
-  const { id, params } = command;
+  const commandInfo = JSON.parse(content)
+  const { command, options } = commandInfo
+  const { id, params } = command
 
   // Upon receiving collaborative data, it is locally saved
   univerAPI.executeCommand(id, params, options)
-});
+})
 
 ws.close$.subscribe(() => {
-  console.log("websocket closed");
-});
+  console.log('websocket closed')
+})
 
 ws.error$.subscribe((error) => {
-  console.log("websocket error", error);
-});
+  console.log('websocket error', error)
+})
 
 univerAPI.onCommandExecuted((command, options) => {
   // Only synchronize local mutations
   if (command.type !== 2 || options?.fromCollab || options?.onlyLocal || command.id === 'doc.mutation.rich-text-editing') {
-    return;
+    return
   }
 
   const commandInfo = JSON.stringify({ command, options: { fromCollab: true } })
-  ws.send(commandInfo);
+  ws.send(commandInfo)
 })
 ```
 

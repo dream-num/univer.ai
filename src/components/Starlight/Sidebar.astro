@@ -4,8 +4,6 @@ import type { Props } from '@astrojs/starlight/props'
 
 import { getLangFromUrl, useI18nUrl } from '@/i18n/utils'
 
-const isApiPage = Astro.url.pathname.startsWith('/api')
-
 const packages = [
   'core',
   'design',
@@ -29,6 +27,8 @@ const packages = [
 
 const lang = getLangFromUrl(Astro.url)
 const l = useI18nUrl(lang)
+
+const isApiPage = Astro.url.pathname.startsWith(`/${lang}/api`) || Astro.url.pathname.startsWith('/api')
 ---
 
 {isApiPage

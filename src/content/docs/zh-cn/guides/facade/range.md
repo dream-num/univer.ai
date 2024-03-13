@@ -44,13 +44,13 @@ range1.setValues([[1,1],[1,1]]);
 const range2 = activeSheet.getRange(2, 3, 2, 2);
 range2.setValues({
     2:{
-        3: { 
+        3: {
             v: 3,
             s: {
                 bg: { rgb: 'yellow' }
             }
         },
-        4: { 
+        4: {
             v: 4,
             s: {
                 bg: { rgb: 'green' }
@@ -58,13 +58,13 @@ range2.setValues({
         },
     },
     3:{
-        3: { 
+        3: {
             v: 5,
             s: {
                 bg: { rgb: 'orange' }
             }
         },
-        4: { 
+        4: {
             v: 6,
             s: {
                 bg: { rgb: 'red' }

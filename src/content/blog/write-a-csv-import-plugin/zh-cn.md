@@ -1,7 +1,7 @@
 ---
 title: 为 Univer 编写一个 CSV 导入插件
 desc: 跟随本案例编写一个 Univer 插件，在操作栏添加一个按钮图标，点击后可以导入 CSV 文件到表格中。
-tags: 
+tags:
   - Sheet
   - Import
   - CSV
@@ -56,29 +56,29 @@ Univer 并不限制你创建插件的方式，为了达到更高的工程化标�
 
 我们在 `src/plugins` 目录下创建 `ImportCSVButton.ts` 文件，代码如下：
 
-```ts
-import { Plugin, Univer } from "@univerjs/core";
-import { Inject, Injector } from '@wendellhu/redi';
+```typescript
+import { Plugin, Univer } from '@univerjs/core'
+import { Inject, Injector } from '@wendellhu/redi'
 
 /**
- * Import CSV Button Plugin 
+ * Import CSV Button Plugin
  * A simple Plugin example, show how to write a plugin.
  */
 class ImportCSVButtonPlugin extends Plugin {
-  constructor (
+  constructor(
     // inject injector, required
     @Inject(Injector) override readonly _injector: Injector
   ) {
-    super('import-csv-plugin');     // plugin id
+    super('import-csv-plugin') // plugin id
   }
 
   /** Plugin onStarting lifecycle */
-  onStarting () {
-    console.log('onStarting');     // todo something
+  onStarting() {
+    console.log('onStarting') // todo something
   }
 }
 
-export default ImportCSVButtonPlugin;
+export default ImportCSVButtonPlugin
 ```
 
 插件需要继承 `Plugin` 类，该类提供了插件的基础功能，如插件的生命周期、插件的依赖注入等。
@@ -99,15 +99,15 @@ export default ImportCSVButtonPlugin;
 
 我们在 `src/index.ts` 中挂载插件，代码如下：
 
-```ts
-import { Univer } from "@univerjs/core";
-import ImportCSVButtonPlugin from "../plugins/ImportCSVButton";
+```typescript
+import { Univer } from '@univerjs/core'
+import ImportCSVButtonPlugin from '../plugins/ImportCSVButton'
 //  ...omit other code
 
-const univer = new Univer();
+const univer = new Univer()
 //  ...omit other code
 
-univer.registerPlugin(csvImportPlugin);
+univer.registerPlugin(csvImportPlugin)
 ```
 
 刷新页面，可以看到控制台输出了 `onStarting` 日志，说明插件已经挂载到 Univer 实例中并执行了 `onStarting` 生命周期。
@@ -128,15 +128,15 @@ univer.registerPlugin(csvImportPlugin);
 
 首先，我们需要定义一个 `IMenuItem` 对象，代码如下：
 
-```ts
+```typescript
 const menuItem: IMenuItem = {
-    id: 'import-csv-button',    // button id, also used as the click event command id
-    title: 'Import CSV',        // button text
-    tooltip: 'Import CSV',      // tooltip text
-    icon: 'RenameSingle',       // button icon
-    type: MenuItemType.BUTTON,  // button type
-    positions: [MenuPosition.TOOLBAR_START], // add to toolbar
-};
+  id: 'import-csv-button', // button id, also used as the click event command id
+  title: 'Import CSV', // button text
+  tooltip: 'Import CSV', // tooltip text
+  icon: 'RenameSingle', // button icon
+  type: MenuItemType.BUTTON, // button type
+  positions: [MenuPosition.TOOLBAR_START], // add to toolbar
+}
 ```
 
 然后，我们需要访问到 `IMenuService` 的实例对象，该对象可以通过 `@Inject(注入ID)` 装饰器从 DI 容器中获取。
@@ -149,12 +149,12 @@ const menuItem: IMenuItem = {
 
 我们在插件构造函数中注入 `IMenuService` 接口的类实现的实例对象，代码如下：
 
-```ts
-import { IMenuService } from "@univerjs/core";
+```typescript
+import { IMenuService } from '@univerjs/core'
 // ...omit other code
 
 class ImportCSVButtonPlugin extends Plugin {
-  constructor (
+  constructor(
     // inject injector, required
     @Inject(Injector) override readonly _injector: Injector,
     // inject menu service, to add toolbar button
@@ -169,7 +169,7 @@ class ImportCSVButtonPlugin extends Plugin {
 
 这样，我们就可以在插件的 `onStarting` 生命周期中，访问 `IMenuService` 的实例对象追加菜单按钮了，代码如下：
 
-```ts
+```typescript
 // ...omit other code
 onStarting () {
   // ...omit other code
@@ -186,7 +186,7 @@ onStarting () {
 
 通过 `ICommandService.registerCommandHandler` 我们可以注册一个新命令，与 `IMenuService` 同理，通过注入ID `ICommandService` 可以获取对应的对象实例，我们在插件构造函数添加如下代码：
 
-```ts
+```typescript
 import { ICommandService } from "@univerjs/core";
 // ...omit other code
 constructor (
@@ -197,12 +197,11 @@ constructor (
   // ...omit other code
 }
 // ...omit other code
-
 ```
 
 然后，我们在插件的 `onStarting` 生命周期中，注册该菜单按钮点击事件的命令，代码如下：
 
-```ts
+```typescript
 // ...omit other code
 onStarting () {
   // ...omit other code
@@ -245,11 +244,11 @@ onStarting () {
 
 `ICellData` 是 Univer 中的单元格数据结构，它包含了单元格的值和样式，其中值存放在 `v` 属性中，样式存放在 `s` 属性中，简化后的代码如下：
 
-```ts
-import type { ICellData } from "@univerjs/core";
+```typescript
+import type { ICellData } from '@univerjs/core'
 // ...omit other code
 
-const parseCSVToUniverData = (csv: string[][]): ICellData[][] => {
+function parseCSVToUniverData(csv: string[][]): ICellData[][] {
   return csv.map((row) => {
     return row.map((cell) => {
       return {
@@ -277,7 +276,7 @@ Univer 中绝大多数的操作都注册有命令，为开发者提供统一的�
 
 可以使用 `this.commandService.executeCommand` 访问 `ICommandService` 的实例对象，但为了代码的解耦，保持 Command 的独立性，这里我们还可以通过 `IAccessor.get` 来获取 `ICommandService` 的实例对象。
 
-```ts
+```typescript
 import { SetRangeValuesCommand } from "@univerjs/sheets";
 // ...omit other code
   handler: (accessor: IAccessor) => {

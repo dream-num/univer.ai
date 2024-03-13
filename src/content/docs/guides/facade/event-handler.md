@@ -5,7 +5,7 @@ sidebar:
 ---
 
 :::tip
-It is recommended to familiarize oneself with the [Univer command system](/en-us/guides/architecture/architecture/#command-system) before reading this section.
+It is recommended to familiarize oneself with the [Univer command system](/guides/architecture/architecture/#command-system) before reading this section.
 :::
 
 There are two types of events in Univer: Univer commands and events.
@@ -35,7 +35,7 @@ Univer commands are divided into 3 types: Command, Operation, Mutation.
 - Operation: Usually some commands that will not affect the Univer business data. For example, setting the sheet selection, these commands will not be undone and redone.
 
 :::tip
-Please read [Univer Command System](/en-us/guides/architecture/architecture/#command-system) for more information.
+Please read [Univer Command System](/guides/architecture/architecture/#command-system) for more information.
 :::
 
 ## Facade API Command Operation
@@ -45,7 +45,7 @@ Use the Facade API to listen to the execution of commands, you can insert custom
 You can try the following example code in the [Playground](/playground/).
 
 :::tip
-Before using the Facade API, please check if you have installed and registered the `@univerjs/facade` plugin, please refer to [Facade Usage](/en-us/guides/facade/#installation).
+Before using the Facade API, please check if you have installed and registered the `@univerjs/facade` plugin, please refer to [Facade Usage](/guides/facade/#installation).
 :::
 
 ### Listening Commands
@@ -54,7 +54,7 @@ Currently, there are two ways to listen to commands, before the command is execu
 
 Before the command is executed, you can register a custom preprocessing listener by passing a callback function to the `FUniver.onBeforeCommandExecute` API.
 
- Before the command is executed, the preprocessing listener will be triggered first, and you can customize some preprocessing logic.
+Before the command is executed, the preprocessing listener will be triggered first, and you can customize some preprocessing logic.
 
 ```javascript
 const univerAPI = FUniver.newAPI(univer);
@@ -154,4 +154,4 @@ and some events or hooks designed internally by the plugins, users generally do 
 
 ## Reference
 
-If you are writing a plugin and want to register a command, you can refer to [Plugin Development](/en-us/guides/extend/command/).
+If you are writing a plugin and want to register a command, you can refer to [Plugin Development](/guides/extend/command/).

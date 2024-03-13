@@ -2,4 +2,4 @@
 title: 🔌 API Reference
 ---
 
-This reference attempts to document every function, hook, component, and type exported by Univer. If you are looking for guides and tutorials, please refer to our [guides](/ja-jp/guides/introduction) section.
+このリファレンスでは、Univer がエクスポートするすべての関数、フック、コンポーネント、および型を文書化しようとしています。ガイドやチュートリアルをお探しの場合は、[ガイド](/ja-jp/guides/introduction)セクションをご参照ください。

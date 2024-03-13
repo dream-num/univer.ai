@@ -1,7 +1,7 @@
 ---
 title: 这就是 Univer
 desc: 这篇文章旨在帮助新人快速熟悉开源项目 univer 的架构及代码，也是我过去一段时间参与到 univer 开发中的学习和总结，肯定有不够准确或者理解偏差，欢迎大家评论指正
-tags: 
+tags:
   - Sheet
   - Architecture
   - MVC
@@ -43,9 +43,9 @@ Univer 在整个架构设计中，尽量保证核心模块（core）仅包含最
 
 举个例子，在没有依赖注入，我们可能会写这样的代码：
 
-```ts
+```typescript
 class SheetPlugin {
-    private _commandService = new CommandService(); 
+  private _commandService = new CommandService()
 }
 ```
 
@@ -55,21 +55,21 @@ class SheetPlugin {
 
 我们通过依赖注入，代码如下：
 
-```ts
+```typescript
 class SheetPlugin {
-    constructor(
-        // ...
-        @ICommandService private readonly _commandService: ICommandService,
-        // ...
-    )
+  constructor(
+    // ...
+    @ICommandService private readonly _commandService: ICommandService,
+    // ...
+  )
 
-    otherMethod(){
-        this._commandService.registerCommand(SomeCommand);
-    }
+  otherMethod(){
+    this._commandService.registerCommand(SomeCommand);
+  }
 }
 ```
 
-在上面的代码中，声明了 _commandService 属性拥有 ICommandService 接口，通过相关的依赖绑定，就可以在 SheetPlugin 的方法中调用 ICommandService 接口所定义的方法了。这样 SheetPlugin 依赖于 ICommandService 接口，同时 CommandService 类实现了这个接口。这样就解耦了 SheetPlugin 和 CommandService 之间的直接依赖关系，图示如下：
+在上面的代码中，声明了 \_commandService 属性拥有 ICommandService 接口，通过相关的依赖绑定，就可以在 SheetPlugin 的方法中调用 ICommandService 接口所定义的方法了。这样 SheetPlugin 依赖于 ICommandService 接口，同时 CommandService 类实现了这个接口。这样就解耦了 SheetPlugin 和 CommandService 之间的直接依赖关系，图示如下：
 
 <img src="https://github.com/Jocs/jocs.github.io/assets/9712830/d5eaaf25-8ad8-423b-8437-fc06551e8a92" width="600" style="margin: 0 auto; display: block;" >
 
@@ -95,7 +95,7 @@ MVC 在整个 GUI 编程领域已经有了 50 多年的历史了，但是 MVC �
 
 Univer 的整个模型层会比较薄，拿 univer sheet 来举例，在 core 模块中，通过 Workbook 和 Worksheet 类来管理和 sheet 相关的模型数据，提供了相关模型数据存储和管理的工作。如在 Worksheet 类中，有 row-manager、column-manager、相关的类和方法来管理每个 sheet 模型数据，拿row-manager来说，我们可以获取表格行的一些信息和数据：
 
-```ts
+```typescript
 getRowData(): ObjectArray<IRowData>;
 getRowHeight(rowPos: number): number;
 getRowOrCreate(rowPos: number): IRowData;
@@ -112,7 +112,7 @@ getRowOrCreate(rowPos: number): IRowData;
 
 **Controllers 职责**
 
-- 初始化一些渲染逻辑和事件的监听，如在 SheetRenderController 类中，在应用 Rendered生命周期执行，会去初始化页面的数据刷新（_initialRenderRefresh），会去监听 Commands 的执行，涉及到 Mutation 修改模型层，还会触发页面渲染逻辑
+- 初始化一些渲染逻辑和事件的监听，如在 SheetRenderController 类中，在应用 Rendered生命周期执行，会去初始化页面的数据刷新（\_initialRenderRefresh），会去监听 Commands 的执行，涉及到 Mutation 修改模型层，还会触发页面渲染逻辑
 - 和视图层交互，拿到视图层的一些数据信息。如在 AutoHeightController 类中，会根据 Commands 所需，通过视图层计算 sheet 自动行高
 - 绑定 UI 事件，如在 HeaderResizeController 类中，会在应用 Rendered生命周期执行，在初始化中，为spreadsheetRowHeader、spreadsheetColumnHeader 绑定 hover 事件，显示和隐藏 resize header（用于调节行列高度和宽度），也为 resize header 绑定 pointer down/move/up 等事件，这样 resize header 就会响应拖拽移动，处理相关用户操作，最终也会反应到模型层的修改和视图层的更新
 
@@ -170,25 +170,25 @@ Univer 如何渲染页面，其实就是 univer 应用启动的整个过程，�
 
 ### 应用的生命周期
 
-```ts
+```typescript
 export const enum LifecycleStages {
-    /**
-     * Register plugins to Univer.
-     */
-    Starting,
-    /**
-     * Univer business instances (UniverDoc / UniverSheet / UniverSlide) are created and services or controllers provided by
-     * plugins get initialized. The application is ready to do the first-time rendering.
-     */
-    Ready,
-    /**
-     * First-time rendering is completed.
-     */
-    Rendered,
-    /**
-     * All lazy tasks are completed. The application is fully ready to provide features to users.
-     */
-    Steady,
+  /**
+   * Register plugins to Univer.
+   */
+  Starting,
+  /**
+   * Univer business instances (UniverDoc / UniverSheet / UniverSlide) are created and services or controllers provided by
+   * plugins get initialized. The application is ready to do the first-time rendering.
+   */
+  Ready,
+  /**
+   * First-time rendering is completed.
+   */
+  Rendered,
+  /**
+   * All lazy tasks are completed. The application is fully ready to provide features to users.
+   */
+  Steady,
 }
 ```
 
@@ -196,9 +196,9 @@ Univer 生命周期有四个阶段，`Starting`、`Ready`、`Rendered` 和 `Stea
 
 各个生命周期状态在什么时候触发呢？
 
-**Starting 状态**：在 _tryStart方法中，LifecycleService 类实例化，应用进入 Staring 阶段，**在这个阶段也会去执行插件的 onStarting 钩子函数**
+**Starting 状态**：在 \_tryStart方法中，LifecycleService 类实例化，应用进入 Staring 阶段，**在这个阶段也会去执行插件的 onStarting 钩子函数**
 
-**Ready 状态**：在实例化 UniverSheet 后，在 _tryProgressToReady方法中，设置 LifecycleService stage 值为 Ready，**在这个阶段也会执行各个插件的 onReady 钩子函数**
+**Ready 状态**：在实例化 UniverSheet 后，在 \_tryProgressToReady方法中，设置 LifecycleService stage 值为 Ready，**在这个阶段也会执行各个插件的 onReady 钩子函数**
 
 **Rendered 状态**：在 DesktopUIController 中，bootStrap 整个应用后，标记 LifecycleService stage 值为 Rendered
 
@@ -206,10 +206,10 @@ Univer 生命周期有四个阶段，`Starting`、`Ready`、`Rendered` 和 `Stea
 
 通过 @OnLifecycle 注解，我们可以精确控制某个类在什么生命周期阶段实例化，如下：
 
-```ts
+```typescript
 @OnLifecycle(LifecycleStages.Rendered, SheetRenderController)
 export class SheetRenderController extends Disposable {
-    //...
+  // ...
 }
 ```
 
@@ -231,99 +231,99 @@ export class SheetRenderController extends Disposable {
 
 插件注册完成，通过 createUniverSheet 方法，创建 univer sheet 实例
 
-```ts
+```typescript
 /**
  * Create a univer sheet instance with internal dependency injection.
  */
 createUniverSheet(config: Partial<IWorkbookConfig>): Workbook {
-    let workbook: Workbook;
-    const addSheet = () => {
-        workbook = this._univerSheet!.createSheet(config);
-        this._currentUniverService.addSheet(workbook);
-    };
+  let workbook: Workbook;
+  const addSheet = () => {
+    workbook = this._univerSheet!.createSheet(config);
+    this._currentUniverService.addSheet(workbook);
+  };
 
-    if (!this._univerSheet) {
-        this._univerSheet = this._rootInjector.createInstance(UniverSheet);
+  if (!this._univerSheet) {
+    this._univerSheet = this._rootInjector.createInstance(UniverSheet);
 
-        this._univerPluginRegistry
-            .getRegisterPlugins(PluginType.Sheet)
-            .forEach((p) => this._univerSheet!.addPlugin(p.plugin as unknown as PluginCtor<any>, p.options));
-        this._tryStart();
-        this._univerSheet.init();
-        addSheet();
+    this._univerPluginRegistry
+      .getRegisterPlugins(PluginType.Sheet)
+      .forEach((p) => this._univerSheet!.addPlugin(p.plugin as unknown as PluginCtor<any>, p.options));
+    this._tryStart();
+    this._univerSheet.init();
+    addSheet();
 
-        this._tryProgressToReady();
-    } else {
-        addSheet();
-    }
+    this._tryProgressToReady();
+  } else {
+    addSheet();
+  }
 
-    return workbook!;
- }
+  return workbook!;
+}
 ```
 
-通过上面代码，我们可以看到，univer 将上面注册的插件中 PluginType.Sheet 类型的插件，重新注册到了 univerSheet 实例上，然后通过 _tryStart 应用进入 Starting 阶段，然后初始化，通过 addSheet 实例化 Workbook，完成了模型层的初始化。到这里模型数据准备完毕，univer 进入到 Ready 阶段
+通过上面代码，我们可以看到，univer 将上面注册的插件中 PluginType.Sheet 类型的插件，重新注册到了 univerSheet 实例上，然后通过 \_tryStart 应用进入 Starting 阶段，然后初始化，通过 addSheet 实例化 Workbook，完成了模型层的初始化。到这里模型数据准备完毕，univer 进入到 Ready 阶段
 
 **第二步**：初始化页面框架，渲染页面框架
 在上面讲述 Univer 应用生命周期时，提到过插件会在 univer 不同的生命周期执行，在这一步，我们重点关注 base-ui 插件
 
-```ts
+```typescript
 // base-ui-plugin.ts
 override onStarting(_injector: Injector): void {
-    this._initDependencies(_injector);
+  this._initDependencies(_injector);
 }
 
 override onReady(): void {
-    his._initUI();
+  his._initUI();
 }
 ```
 
 如上代码，base-ui 插件在 onStarting 阶段会去声明和添加依赖，在 onReady 阶段，会去初始化渲染整个页面框架，将 View 界面挂载到 container 上。
 
-```ts
+```typescript
 // ui-desktop.controller.tsx
 bootstrapWorkbench(options: IWorkbenchOptions): void {
-    this.disposeWithMe(
-        bootStrap(this._injector, options, (canvasElement, containerElement) => {
-            this._initializeEngine(canvasElement);
-            this._lifecycleService.stage = LifecycleStages.Rendered;
-            this._focusService.setContainerElement(containerElement);
+  this.disposeWithMe(
+    bootStrap(this._injector, options, (canvasElement, containerElement) => {
+      this._initializeEngine(canvasElement);
+      this._lifecycleService.stage = LifecycleStages.Rendered;
+      this._focusService.setContainerElement(containerElement);
 
-            setTimeout(() => (this._lifecycleService.stage = LifecycleStages.Steady), STEADY_TIMEOUT);
-        })
-    );
+      setTimeout(() => (this._lifecycleService.stage = LifecycleStages.Steady), STEADY_TIMEOUT);
+    })
+  );
 }
 // ...
 function bootStrap(
-    injector: Injector,
-    options: IWorkbenchOptions,
-    callback: (canvasEl: HTMLElement, containerElement: HTMLElement) => void
+  injector: Injector,
+  options: IWorkbenchOptions,
+  callback: (canvasEl: HTMLElement, containerElement: HTMLElement) => void
 ): IDisposable {
-    let mountContainer: HTMLElement;
-    // ...
-    const root = createRoot(mountContainer);
-    const ConnectedApp = connectInjector(App, injector);
-    const desktopUIController = injector.get(IUIController) as IDesktopUIController;
-    const onRendered = (canvasElement: HTMLElement) => callback(canvasElement, mountContainer);
+  let mountContainer: HTMLElement;
+  // ...
+  const root = createRoot(mountContainer);
+  const ConnectedApp = connectInjector(App, injector);
+  const desktopUIController = injector.get(IUIController) as IDesktopUIController;
+  const onRendered = (canvasElement: HTMLElement) => callback(canvasElement, mountContainer);
 
-    function render() {
-        const headerComponents = desktopUIController.getHeaderComponents();
-        const contentComponents = desktopUIController.getContentComponents();
-        const footerComponents = desktopUIController.getFooterComponents();
-        const sidebarComponents = desktopUIController.getSidebarComponents();
-        root.render(
-            <ConnectedApp
-                {...options}
-                headerComponents={headerComponents}
-                contentComponents={contentComponents}
-                onRendered={onRendered}
-                footerComponents={footerComponents}
-                sidebarComponents={sidebarComponents}
-            />
-        );
-    }
+  function render() {
+    const headerComponents = desktopUIController.getHeaderComponents();
+    const contentComponents = desktopUIController.getContentComponents();
+    const footerComponents = desktopUIController.getFooterComponents();
+    const sidebarComponents = desktopUIController.getSidebarComponents();
+    root.render(
+      <ConnectedApp
+        {...options}
+        headerComponents={headerComponents}
+        contentComponents={contentComponents}
+        onRendered={onRendered}
+        footerComponents={footerComponents}
+        sidebarComponents={sidebarComponents}
+      />
+    );
+  }
 
-    // ...
-    render();
+  // ...
+  render();
     // ...
 }
 ```
@@ -334,66 +334,66 @@ function bootStrap(
 
 其实这个过程在应用 Ready 阶段就已经开始了 sheet canvas 的初始化和组件组装和添加
 
-```ts
+```typescript
 // sheet-canvas-view.ts
 @OnLifecycle(LifecycleStages.Ready, SheetCanvasView)
 export class SheetCanvasView {
+  // ...
+  constructor(
     // ...
-    constructor(
-        // ...
-    ) {
-        this._currentUniverService.currentSheet$.subscribe((workbook) => {
-            // ...
-            const unitId = workbook.getUnitId();
-            if (!this._loadedMap.has(unitId)) {
-                this._currentWorkbook = workbook;
-                this._addNewRender();
-                this._loadedMap.add(unitId);
-            }
-        });
-    }
+  ) {
+    this._currentUniverService.currentSheet$.subscribe((workbook) => {
+      // ...
+      const unitId = workbook.getUnitId()
+      if (!this._loadedMap.has(unitId)) {
+        this._currentWorkbook = workbook
+        this._addNewRender()
+        this._loadedMap.add(unitId)
+      }
+    })
+  }
 
-    private _addNewRender() {
-        // ...
-        if (currentRender != null) {
-            this._addComponent(currentRender);
-        }
-        const should = workbook.getShouldRenderLoopImmediately();
-        if (should && !isAddedToExistedScene) {
-            engine.runRenderLoop(() => {
-                scene.render();
-            });
-        }
-        // ...
+  private _addNewRender() {
+    // ...
+    if (currentRender != null) {
+      this._addComponent(currentRender)
     }
+    const should = workbook.getShouldRenderLoopImmediately()
+    if (should && !isAddedToExistedScene) {
+      engine.runRenderLoop(() => {
+        scene.render()
+      })
+    }
+    // ...
+  }
 
-    private _addComponent(currentRender: IRender) {
-        // ...
-        currentRender.mainComponent = spreadsheet;
-        currentRender.components.set(SHEET_VIEW_KEY.MAIN, spreadsheet);
-        currentRender.components.set(SHEET_VIEW_KEY.ROW, spreadsheetRowHeader);
-        currentRender.components.set(SHEET_VIEW_KEY.COLUMN, spreadsheetColumnHeader);
-        currentRender.components.set(SHEET_VIEW_KEY.LEFT_TOP, SpreadsheetLeftTopPlaceholder);
-        // ...
-        this._sheetSkeletonManagerService.setCurrent({ sheetId, unitId });
-    }
+  private _addComponent(currentRender: IRender) {
+    // ...
+    currentRender.mainComponent = spreadsheet
+    currentRender.components.set(SHEET_VIEW_KEY.MAIN, spreadsheet)
+    currentRender.components.set(SHEET_VIEW_KEY.ROW, spreadsheetRowHeader)
+    currentRender.components.set(SHEET_VIEW_KEY.COLUMN, spreadsheetColumnHeader)
+    currentRender.components.set(SHEET_VIEW_KEY.LEFT_TOP, SpreadsheetLeftTopPlaceholder)
+    // ...
+    this._sheetSkeletonManagerService.setCurrent({ sheetId, unitId })
+  }
 
-    private _addViewport(worksheet: Worksheet) {
-        // ...
-        scene
-            .addViewport(
-                viewMain,
-                viewColumnLeft,
-                viewColumnRight,
-                viewRowTop,
-                viewRowBottom,
-                viewLeftTop,
-                viewMainLeftTop,
-                viewMainLeft,
-                viewMainTop
-            )
-            .attachControl();
-    }
+  private _addViewport(worksheet: Worksheet) {
+    // ...
+    scene
+      .addViewport(
+        viewMain,
+        viewColumnLeft,
+        viewColumnRight,
+        viewRowTop,
+        viewRowBottom,
+        viewLeftTop,
+        viewMainLeftTop,
+        viewMainLeft,
+        viewMainTop
+      )
+      .attachControl()
+  }
 }
 ```
 
@@ -401,7 +401,7 @@ export class SheetCanvasView {
 
 在上面过程，完成了 sheet 所需 canvas 组件的组装以及添加 viewport，那么 canvas 的首次渲染发生在什么地方呢？和什么生命周期阶段呢？sheet canvas 的渲染被 SheetRenderController 类所管理，该类管理了 sheet canvas 的初始化渲染以及监听 Mutations 的变更，然后按需渲染 Canvas 界面
 
-```ts
+```typescript
 // sheet-render.controller.ts
 @OnLifecycle(LifecycleStages.Rendered, SheetRenderController)
 export class SheetRenderController extends Disposable {}
@@ -409,57 +409,57 @@ export class SheetRenderController extends Disposable {}
 
 上面的代码可以看到，sheet canvas 的渲染时间点是在整个应用 Rendered 阶段，其实也好理解，这个阶段，页面框架才完成挂载到 container 上，同时 sheet canvas 也完成了初始化工作。在 Rendered 阶段，会去订阅 currentSkeleton$ 改变，然后去更新 skeleton，完成页面首次渲染。
 
-```ts
+```typescript
 // sheet-render.controller.ts
 private _commandExecutedListener() {
-    this.disposeWithMe(
-         his._commandService.onCommandExecuted((command: ICommandInfo) => {
-            // ...
-            if (COMMAND_LISTENER_SKELETON_CHANGE.includes(command.id)) {
-                // ...
-                if (command.id !== SetWorksheetActivateMutation.id) {
-                    this._sheetSkeletonManagerService.makeDirty(
-                        {
-                            unitId,
-                            sheetId,
-                            commandId: command.id,
-                         ,
-                        true
-                    );
-                }
+  this.disposeWithMe(
+    this._commandService.onCommandExecuted((command: ICommandInfo) => {
+      // ...
+      if (COMMAND_LISTENER_SKELETON_CHANGE.includes(command.id)) {
+          // ...
+          if (command.id !== SetWorksheetActivateMutation.id) {
+            this._sheetSkeletonManagerService.makeDirty(
+              {
+                unitId,
+                sheetId,
+                commandId: command.id,
+              },
+              true
+            );
+          }
 
-                 this._sheetSkeletonManagerService.setCurrent({
-                    unitId,
-                    sheetId,
-                    commandId: command.id,
-                });
-           }
+          this._sheetSkeletonManagerService.setCurrent({
+            unitId,
+            sheetId,
+            commandId: command.id,
+          });
+      }
 
-            this._renderManagerService.getRenderById(unitId)?.mainComponent?.makeDirty(); // refresh spreadsheet
-        })
-    );
+      this._renderManagerService.getRenderById(unitId)?.mainComponent?.makeDirty(); // refresh spreadsheet
+    })
+  );
 }
 ```
 
-上面代码发生在 SheetRenderController 类，在 _commandExecutedListener 方法中，会去监听 Command 执行，如果在 `COMMAND_LISTENER_SKELETON_CHANGE` 列表内，标记当前 skeleton 为 dirty，mainComponent 为 dirty，这样 Canvas 渲染引擎就会在下个渲染循环中重新渲染页面了
+上面代码发生在 SheetRenderController 类，在 \_commandExecutedListener 方法中，会去监听 Command 执行，如果在 `COMMAND_LISTENER_SKELETON_CHANGE` 列表内，标记当前 skeleton 为 dirty，mainComponent 为 dirty，这样 Canvas 渲染引擎就会在下个渲染循环中重新渲染页面了
 
 **第四步**：单元格编辑器初始化
 
 其实在第三步，基本已经完成了整个 sheet 界面的渲染，我们再来关注一下单元格编辑器的初始化过程。在应用 Rendered 阶段，univer 会去初始化两个 Doc 实例，一个用于单元格的编辑，另一个用于公式输入框的编辑。
 
-```ts
+```typescript
 // initialize-editor.controller.ts
 private _initialize() {
-    this._currentUniverService.createDoc({
-        id: DOCS_NORMAL_EDITOR_UNIT_ID_KEY,
-        documentStyle: {},
-    });
-    // create univer doc formula bar editor instance
+  this._currentUniverService.createDoc({
+    id: DOCS_NORMAL_EDITOR_UNIT_ID_KEY,
+    documentStyle: {},
+  });
+  // create univer doc formula bar editor instance
 
-    this._currentUniverService.createDoc({
-        id: DOCS_FORMULA_BAR_EDITOR_UNIT_ID_KEY,
-        documentStyle: {},
-    });
+  this._currentUniverService.createDoc({
+    id: DOCS_FORMULA_BAR_EDITOR_UNIT_ID_KEY,
+    documentStyle: {},
+  });
 }
 ```
 
@@ -473,119 +473,117 @@ private _initialize() {
 
 **第一步**：用户点击菜单中 text wrap 菜单项。
 
-```ts
- // menu.ts
- export function WrapTextMenuItemFactory(accessor: IAccessor): IMenuSelectorItem<WrapStrategy> {
+```typescriptx
+// menu.ts
+export function WrapTextMenuItemFactory(accessor: IAccessor): IMenuSelectorItem<WrapStrategy> {
+  // ...
+  return {
+    id: SetTextWrapCommand.id,
     // ...
-    return {
-        id: SetTextWrapCommand.id,
-        // ...
-    };
+  }
 }
+
 // ToolbarItem.tsx
- <Select
-    // ...
-    onClick={(value) => {
-        let commandId = id;
-        // ...
-        commandService.executeCommand(commandId, value);
-     }}
-     // ...
- />
+<Select
+  onClick={(value) => {
+    const commandId = id
+    commandService.executeCommand(commandId, value)
+  }}
+/>
 ```
 
 上面是菜单栏中 text wrap 菜单项的 Select 组件，可以看到在上面绑定了 click 事件处理函数，当点击后，commandService 将执行 commandId，也就是在 WrapTextMenuItemFactory 中配置的 id 值：SetTextWrapCommand 的 id
 
 **第二步**：在 SetTextWrapCommand 中，包装一下参数，然后执行了统一设置样式的 Command，SetStyleCommand
 
-```ts
+```typescript
 export const SetTextWrapCommand: ICommand<ISetTextWrapCommandParams> = {
-    type: CommandType.COMMAND,
-    id: 'sheet.command.set-text-wrap',
-    handler: async (accessor, params) => {
-        // ...
-        const commandService = accessor.get(ICommandService);
-        const setStyleParams: ISetStyleParams<WrapStrategy> = {
-            style: {
-                type: 'tb',
-                value: params.value,
-            },
-        };
+  type: CommandType.COMMAND,
+  id: 'sheet.command.set-text-wrap',
+  handler: async (accessor, params) => {
+    // ...
+    const commandService = accessor.get(ICommandService)
+    const setStyleParams: ISetStyleParams<WrapStrategy> = {
+      style: {
+        type: 'tb',
+        value: params.value,
+      },
+    }
 
-        return commandService.executeCommand(SetStyleCommand.id, setStyleParams);
-    },
-};
+    return commandService.executeCommand(SetStyleCommand.id, setStyleParams)
+  },
+}
 ```
 
 **第三步**：在 SetStyleCommand 中，因为改变了选区内样式值，所以需要组装 SetRangeValuesMutation 的参数，比如将选区内所有单元格的 tb 设置为 WrapStrategy.WRAP。由于选区内 text wrap 的改变，同时该行是自动调整行高的，那么还需要去计算该行的一个 autoHeight，也就是容纳该行内容的一个最低高度。计算自动行高之前，需要先执行 SetRangeValuesMutation，因为 autoHeight 计算是依赖于更新后的视图数据的。 通过 SheetInterceptorService 中注册的 interceptor 拿到 autoHeight 的值（redos 中）
 
-```ts
- // set-style.command.ts
- const { undos, redos } = accessor.get(SheetInterceptorService).onCommandExecute({
-       id: SetStyleCommand.id,
-        params,
- });
+```typescript
+// set-style.command.ts
+const { undos, redos } = accessor.get(SheetInterceptorService).onCommandExecute({
+  id: SetStyleCommand.id,
+  params,
+})
 ```
 
 **第四步**：之所以上面能够拿到 autoHeight 的值，主要还是归因于 AutoHeightController 类，该类在 LifecycleStages.Ready 阶段被实例化，并且添加了会影响到行自动行高的所有 Command 的拦截，如对 SetStylecommand 拦截。
 
-```ts
+```typescript
 // auto-height.controller.ts
 // for intercept set style command.
 sheetInterceptorService.interceptCommand({
-     getMutations: (command: { id: string; params: ISetStyleParams<number> }) => {
-          if (command.id !== SetStyleCommand.id) {
-              return {
-                  redos: [],
-                  undos: [],
-              };
-          }
-          // ...
-          const selections = selectionManagerService.getSelectionRanges();
+  getMutations: (command: { id: string, params: ISetStyleParams<number> }) => {
+    if (command.id !== SetStyleCommand.id) {
+      return {
+        redos: [],
+        undos: [],
+      }
+    }
+    // ...
+    const selections = selectionManagerService.getSelectionRanges()
 
-          return this._getUndoRedoParamsOfAutoHeight(selections);
-      },
-  });
+    return this._getUndoRedoParamsOfAutoHeight(selections)
+  },
+})
 ```
 
 第五步：因为计算行的自动行高需要用到文档模型以及单元格布局的相关计算，所相关计算都放在了管理Spreadsheet 的 SheetSkeleton 类中(视图层)， 通过该类中 calculateAutoHeightInRange 方法最终计算出行的自动行高
 
-```ts
+```typescript
 // auto-height.controller.ts
 private _getUndoRedoParamsOfAutoHeight(ranges: IRange[]) {
-    // ...
-    const { skeleton } = sheetSkeletonService.getCurrent()!;
-    const rowsAutoHeightInfo = skeleton.calculateAutoHeightInRange(ranges);
-    // ...     
+  // ...
+  const { skeleton } = sheetSkeletonService.getCurrent()!;
+  const rowsAutoHeightInfo = skeleton.calculateAutoHeightInRange(ranges);
+  // ...
 }
 ```
 
 **第六步**：当拿到 autoHeight 的数据后，会触发 SetWorksheetRowHeightMutation。无论是上面触发的 SetRangeValuesMutation 还是 SetWorksheetRowHeightMutation，都会更改模型层，并且标记 sheetSkeleton 和 mainComponent 为 dirty，在 sheetSkeletion 重新计算布局等相关渲染所需信息，然后渲染页面
 
-```ts
+```typescript
 // sheet-render.controller.ts
 private _commandExecutedListener() {
-    this.disposeWithMe(
-        this._commandService.onCommandExecuted((command: ICommandInfo) => {
-            // ...
-            if (COMMAND_LISTENER_SKELETON_CHANGE.includes(command.id)) {
-                 // ...
-                 if (command.id !== SetWorksheetActivateMutation.id) {
-                    this._sheetSkeletonManagerService.makeDirty(
-                        {
-                            unitId,
-                            sheetId,
-                            commandId: command.id,
-                        },
-                        true
-                    );
-                  }
-                  // ...
-              }
-              this._renderManagerService.getRenderById(unitId)?.mainComponent?.makeDirty(); // refresh spreadsheet
-         })
-     );
- }
+  this.disposeWithMe(
+    this._commandService.onCommandExecuted((command: ICommandInfo) => {
+      // ...
+      if (COMMAND_LISTENER_SKELETON_CHANGE.includes(command.id)) {
+        // ...
+        if (command.id !== SetWorksheetActivateMutation.id) {
+          this._sheetSkeletonManagerService.makeDirty(
+            {
+              unitId,
+              sheetId,
+              commandId: command.id,
+            },
+            true
+          );
+        }
+        // ...
+      }
+      this._renderManagerService.getRenderById(unitId)?.mainComponent?.makeDirty(); // refresh spreadsheet
+    })
+  );
+}
 ```
 
 以上就完成了从事件触发到修改模型层，进而视图层更新的整个过程

@@ -7,7 +7,7 @@ title: 源码阅读指引
 :::
 
 :::tip
-建议在阅读本小节内容之前先阅读 [Univer 架构](/guides/architecture/architecture/)、[这就是 Univer](/blog/this-is-univer) 和 [Univer 文档架构及模块设计](/blog/univer-doc-architecture) 了解 Univer 的整体架构设计。
+建议在阅读本小节内容之前先阅读 [Univer 架构](/zh-cn/guides/architecture/architecture/)、[这就是 Univer](/zh-cn/blog/this-is-univer) 和 [Univer 文档架构及模块设计](/zh-cn/blog/univer-doc-architecture) 了解 Univer 的整体架构设计。
 :::
 
 如果你想进一步了解 Univer 的实现细节，你还可以阅读源码。
@@ -33,7 +33,7 @@ title: 源码阅读指引
 ### 命令
 
 :::tip
-建议在阅读本小节内容之前先阅读 [架构设计#命令系统](/guides/architecture/architecture/#命令系统) 了解 Univer 命令系统的设计。
+建议在阅读本小节内容之前先阅读 [架构设计#命令系统](/zh-cn/guides/architecture/architecture/#命令系统) 了解 Univer 命令系统的设计。
 :::
 
 - 命令管理 [packages/core/src/services/command/command.service.ts](https://github.com/dream-num/univer/blob/dev/packages/core/src/services/command/command.service.ts)
@@ -42,7 +42,7 @@ title: 源码阅读指引
 ### 渲染
 
 :::tip
-建议在阅读本小节内容之前先阅读 [渲染引擎架构设计](/guides/architecture/renderer/) 和 [Univer 文档排版设计初探](/blog/doc-typesetting-design)， 了解 Univer 渲染引擎的整体架构设计。
+建议在阅读本小节内容之前先阅读 [渲染引擎架构设计](/zh-cn/guides/architecture/renderer/) 和 [Univer 文档排版设计初探](/zh-cn/blog/doc-typesetting-design)， 了解 Univer 渲染引擎的整体架构设计。
 :::
 
 - 渲染引擎 [packages/engine-render/src/engine.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-render/src/engine.ts)

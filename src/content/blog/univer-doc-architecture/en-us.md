@@ -1,7 +1,7 @@
 ---
 title: University Document Architecture and Module Design
 desc: Univer Document is one of the components of the Univer office suite, aimed at providing a top-notch document editing and typesetting experience. We not only integrate in terms of product form, reducing switching costs between different suites through a boundary-less mode, but also enable data interoperability across different suites. In terms of technical architecture, we strive to achieve implementation through a unified architecture, ensuring efficient development experience while also providing more room for imagination in the integration of product forms.
-tags: 
+tags:
   - Univer Doc
   - Architecture
   - MVVM
@@ -16,7 +16,7 @@ slug: blog/univer-doc-architecture
 
 Univer Document is one of the components of the Univer office suite, aimed at providing a top-notch document editing and typesetting experience. We not only integrate in terms of product form, reducing switching costs between different suites through a boundary-less mode, but also enable data interoperability across different suites. In terms of technical architecture, we strive to achieve implementation through a unified architecture, ensuring efficient development experience while also providing more room for imagination in the integration of product forms.
 
->If you are still relatively unfamiliar with the Univer architecture, it is recommended to first read "[Univer Architecture](https://univer.ai/guides/architecture/architecture/)" and "[This is Univer](https://zhuanlan.zhihu.com/p/666298812)". In these two articles, there are descriptions of the overall architecture of Univer, including the command system, underlying data model, rendering engine, and analysis of the entire process from the data layer to the view layer rendering, from view layer event response to data layer data updates.
+> If you are still relatively unfamiliar with the Univer architecture, it is recommended to first read "[Univer Architecture](https://univer.ai/guides/architecture/architecture/)" and "[This is Univer](https://zhuanlan.zhihu.com/p/666298812)". In these two articles, there are descriptions of the overall architecture of Univer, including the command system, underlying data model, rendering engine, and analysis of the entire process from the data layer to the view layer rendering, from view layer event response to data layer data updates.
 
 This article primarily focuses on the technical architecture and module design of the Univer document. Let's begin with an architectural diagram:
 
@@ -41,21 +41,21 @@ The data structure of the document is as follows:
 ```typescript
 // i-document-data.ts
 export interface IDocumentData extends IReferenceSource, IExtraModelData {
-    /** unit ID */
-    id: string;
-    title?: string;
-    body?: IDocumentBody;
-    documentStyle: IDocumentStyle;
-    // ...
+  /** unit ID */
+  id: string;
+  title?: string;
+  body?: IDocumentBody;
+  documentStyle: IDocumentStyle;
+  // ...
 }
 export interface IDocumentBody {
-    dataStream: string;
-    textRuns?: ITextRun[]; // textRun 样式，交互
-    paragraphs?: IParagraph[]; // paragraph
-    sectionBreaks?: ISectionBreak[]; // SectionBreak
-    customBlocks?: ICustomBlock[]; // customBlock 用户通过插件自定义的block
-    tables?: ITable[]; // Table
-    customRanges?: ICustomRange[]; // plugin注册，实现针对stream的特殊逻辑，超链接，field，structured document tags， bookmark，comment
+  dataStream: string;
+  textRuns?: ITextRun[]; // textRun 样式，交互
+  paragraphs?: IParagraph[]; // paragraph
+  sectionBreaks?: ISectionBreak[]; // SectionBreak
+  customBlocks?: ICustomBlock[]; // customBlock 用户通过插件自定义的block
+  tables?: ITable[]; // Table
+  customRanges?: ICustomRange[]; // plugin注册，实现针对stream的特殊逻辑，超链接，field，structured document tags， bookmark，comment
 }
 ```
 
@@ -69,39 +69,39 @@ The definition of the document's data structure primarily resides in two interfa
 - The tables field contains information related to tables.
 - The customRanges field comprises overlapping document information, such as comments, hyperlinks, etc.
 
-```ts
+```typescript
 export const DEFAULT_DOCUMENT_DATA_SIMPLE: IDocumentData = {
-    id: 'default-document-id',
-    body: {
-        dataStream: '荷塘月色\r作者：朱自清\r\n',
-        textRuns: [
-            {
-                st: 0,
-                ed: 4,
-                ts: {
-                    fs: 24,
-                    ff: 'Microsoft YaHei',
-                    bl: BooleanNumber.TRUE,
-                },
-            },
-        ],
-        paragraphs: [
-            {
-                startIndex: 4,
-                paragraphStyle: { /*...*/ },
-            },
-            {
-                startIndex: 11,
-            },
-        ],
-        sectionBreaks: [
-            {
-                startIndex: 12,
-            },
-        ],
-    },
-    documentStyle: { /*...*/ },
-};
+  id: 'default-document-id',
+  body: {
+    dataStream: '荷塘月色\r作者：朱自清\r\n',
+    textRuns: [
+      {
+        st: 0,
+        ed: 4,
+        ts: {
+          fs: 24,
+          ff: 'Microsoft YaHei',
+          bl: BooleanNumber.TRUE,
+        },
+      },
+    ],
+    paragraphs: [
+      {
+        startIndex: 4,
+        paragraphStyle: { /* ... */ },
+      },
+      {
+        startIndex: 11,
+      },
+    ],
+    sectionBreaks: [
+      {
+        startIndex: 12,
+      },
+    ],
+  },
+  documentStyle: { /* ... */ },
+}
 ```
 
 The aforementioned is a simple document example, consisting of two paragraphs and one section. Within the dataStream, there are two `\r` placeholders for paragraphs and one `\n` placeholder for the section. In the textRuns, there is a single inline style specified, which bolds the text within the range `st:0 ~ ed:4`, with a font size of 24 and the font set to Microsoft YaHei.
@@ -126,16 +126,16 @@ The primary responsibility of DocumentViewModel is to generate the latest View M
 
 Each document corresponds to a DocumentViewModel instance. When a document creation or update is detected, the `docViewModelManagerService` creates or updates the document view model to keep it in sync, ready for consumption by the corresponding Document Skeleton.
 
-```ts
+```typescript
 // doc-canvas-view.ts
 private _initialize() {
-    this._currentUniverService.currentDoc$.pipe(takeUntil(this.dispose$)).subscribe((documentModel) => {
-        const unitId = documentModel.getUnitId();
-        // Build the view model and notify the skeleton manager to create the skeleton.
-        this._docViewModelManagerService.setCurrent(unitId);
+  this._currentUniverService.currentDoc$.pipe(takeUntil(this.dispose$)).subscribe((documentModel) => {
+    const unitId = documentModel.getUnitId();
+    // Build the view model and notify the skeleton manager to create the skeleton.
+    this._docViewModelManagerService.setCurrent(unitId);
 
-        // ...
-    });
+    // ...
+  });
 }
 ```
 
@@ -145,30 +145,30 @@ Just as depicted in the above code, upon detecting the addition or modification 
 
 As previously mentioned, the view model layer not only manages the view model but also oversees the Document Skeleton, which pertains to layout-related information of the document. The relevant code can be found in the `doc-skeleton-manager.service.ts` file. (A more detailed exposition on Document Skeleton will be provided in the "Univer Document Layout Design" article.) Similar to the view model, each Univer document corresponds to a single Document Skeleton instance, uniquely identified by `unitId` and `subUnitId`. Upon detecting an update in the view model, the corresponding skeleton instance also necessitates creation or update.
 
-```ts
+```typescript
 // doc-skeleton-manager.service.ts
 private _setCurrent(docViewModelParam: IDocumentViewModelManagerParam): Nullable<IDocSkeletonManagerParam> {
-        const { unitId } = docViewModelParam;
+  const { unitId } = docViewModelParam;
 
-        if (!this._docSkeletonMap.has(unitId)) {
-            const skeleton = this._buildSkeleton(docViewModelParam.docViewModel);
+  if (!this._docSkeletonMap.has(unitId)) {
+    const skeleton = this._buildSkeleton(docViewModelParam.docViewModel);
 
-            skeleton.calculate();
+    skeleton.calculate();
 
-            this._docSkeletonMap.set(unitId, {
-                unitId,
-                skeleton,
-                dirty: false,
-            });
-        } else {
-            const skeletonParam = this.getSkeletonByUnitId(unitId)!;
-            skeletonParam.skeleton.calculate();
-            skeletonParam.dirty = true;
-        }
+    this._docSkeletonMap.set(unitId, {
+      unitId,
+      skeleton,
+      dirty: false,
+    });
+  } else {
+    const skeletonParam = this.getSkeletonByUnitId(unitId)!;
+    skeletonParam.skeleton.calculate();
+    skeletonParam.dirty = true;
+  }
 
-        // ...
-        this._currentSkeleton$.next(this.getCurrent());
-        return this.getCurrent();
+  // ...
+  this._currentSkeleton$.next(this.getCurrent());
+  return this.getCurrent();
 }
 ```
 
@@ -185,7 +185,7 @@ Within the view layer, there are codes related to controllers, services, and the
 Services, as previously mentioned in the view model layer, encompass two heavyweight services: the View Model Manager Service and the Doc Skeleton Manager Service, responsible for managing the view model and doc skeleton, respectively. Other services include:
 
 - Clipboard Service: Manages clipboard-related tasks, facilitating content retrieval, conversion of clipboard content to Univer-compatible formats, setting clipboard content, converting Univer document formats to clipboard-friendly formats, and more.
-- Text Selection Manager Service: This service can be viewed as an upper-level service of the underlying Text Selection Render Manager. When developing business logic, *it is advisable to avoid directly calling methods from the lower-level Text Selection Render Manager and instead utilize methods provided by the Text Selection Manager*, such as refreshing selections, obtaining all selections, and replacing (setting) selections. The most commonly used methods include `getSelections` for obtaining all selections and `getActiveRange` for retrieving the active selection.
+- Text Selection Manager Service: This service can be viewed as an upper-level service of the underlying Text Selection Render Manager. When developing business logic, _it is advisable to avoid directly calling methods from the lower-level Text Selection Render Manager and instead utilize methods provided by the Text Selection Manager_, such as refreshing selections, obtaining all selections, and replacing (setting) selections. The most commonly used methods include `getSelections` for obtaining all selections and `getActiveRange` for retrieving the active selection.
 
 The command system handles a plethora of business logic, encompassing nearly all business logic within it. In "This is Univer," it is mentioned that commands primarily fall into three categories: command, mutation, and operation. A command can be understood as a user's specific operation, such as creating a paragraph or deleting text or selection using the Backspace key. Commands trigger mutations to modify the data model, update the view model, prompt the Skeleton to recalculate, and ultimately reflect the modifications in the view layer. Operations, on the other hand, handle non-collaborative actions, such as changes in cursor and selection, which are synchronized to other user terminals through live share.
 
@@ -215,48 +215,48 @@ Above, I may have exceeded one sentence; below, I will provide a detailed explan
 
 Step One: Bind events to the Canvas element and wrap the event objects.
 
-```ts
+```typescript
 // engine.ts
 this._pointerDownEvent = (nativeEvent: Event) => {
-     const evt = nativeEvent as IPointerEvent;
-     if (deviceType === DeviceType.Mouse) {
-          if (!document.pointerLockElement) {
-              this._canvasEle.setPointerCapture(this._mouseId);
-          }
-     } else {
-          // Touch; Since touches are dynamically assigned, only set capture if we have an id
-          if (evt.pointerId && !document.pointerLockElement) {
-              this._canvasEle.setPointerCapture(evt.pointerId);
-          }
-     }
+  const evt = nativeEvent as IPointerEvent
+  if (deviceType === DeviceType.Mouse) {
+    if (!document.pointerLockElement) {
+      this._canvasEle.setPointerCapture(this._mouseId)
+    }
+  } else {
+    // Touch; Since touches are dynamically assigned, only set capture if we have an id
+    if (evt.pointerId && !document.pointerLockElement) {
+      this._canvasEle.setPointerCapture(evt.pointerId)
+    }
+  }
 
-     // ...
-     this.onInputChangedObservable.notifyObservers(deviceEvent);
- };
-this._canvasEle.addEventListener(`${eventPrefix}down`, this._pointerDownEvent);
+  // ...
+  this.onInputChangedObservable.notifyObservers(deviceEvent)
+}
+this._canvasEle.addEventListener(`${eventPrefix}down`, this._pointerDownEvent)
 ```
 
 As per the above code, bind the `pointerdown` event to the `canvasEle`. In the `_pointerDownEvent` function, wrap the event object accordingly, and then throw the event using `onInputChangedObservable`, passing it to the Scene for processing. In the code snippet above, there is a noteworthy point: we use `setPointerCapture` on `canvasEle`. This method designates `canvasEle` as the capture target for future pointer events. Subsequent pointer events will target the capturing element until the capture is released ([Element.releasePointerCapture()](https://developer.mozilla.org/en-US/docs/Web/API/Element/releasePointerCapture)), ensuring that `pointerup` is also triggered on this element.
 
 Step Two: Pass the event object to the Scene and invoke the corresponding event handling function.
 
-```ts
+```typescript
 // scene.input-manager.ts
 this._onInputObserver = engine.onInputChangedObservable.add((eventData: IEvent) => {
-    // ...
-    this._onPointerDown(evt as IPointerEvent);
-});
+  // ...
+  this._onPointerDown(evt as IPointerEvent)
+})
 this._onPointerDown = (evt: IPointerEvent) => {
-     const currentObject = this._getCurrentObject(evt.offsetX, evt.offsetY);
+  const currentObject = this._getCurrentObject(evt.offsetX, evt.offsetY)
 
-     const isStop = currentObject?.triggerPointerDown(evt);
+  const isStop = currentObject?.triggerPointerDown(evt)
 
-     if (this._checkDirectSceneEventTrigger(!isStop, currentObject)) {
-         if (this._scene.onPointerDownObserver.hasObservers()) {
-              this._scene.onPointerDownObserver.notifyObservers(evt);
-         }
-     }
-};
+  if (this._checkDirectSceneEventTrigger(!isStop, currentObject)) {
+    if (this._scene.onPointerDownObserver.hasObservers()) {
+      this._scene.onPointerDownObserver.notifyObservers(evt)
+    }
+  }
+}
 ```
 
 In the above code, firstly add a pointerdown event handling function to the `onInputChangedObservable`. In the `_onPointerDown` event handling function, identify the topmost Object based on the coordinate information of the current event (`evt`), trigger the PointerDown event handling function on that Object. If the event is not prevented, it will continue to bubble up.
@@ -273,7 +273,7 @@ Different from rich text editors implemented through DOM `contenteditable`, in a
 
 To describe how custom selections are implemented in a nutshell:
 
->We listen to events like `pointerdown`, `pointermove`, and `pointerup` on the Document object (the Document object in the rendering engine, not the `document` object in the DOM). Based on the position information of relevant events, we draw rectangular selections or cursors using the TextRange object.
+> We listen to events like `pointerdown`, `pointermove`, and `pointerup` on the Document object (the Document object in the rendering engine, not the `document` object in the DOM). Based on the position information of relevant events, we draw rectangular selections or cursors using the TextRange object.
 
 Now, how do we describe selections and position selections? What attributes are present on selections?
 
@@ -286,11 +286,11 @@ Selection attributes and methods are defined on the TextRange object:
 - `collapsed`: Indicates if the selection is collapsed. When `startOffset` equals `endOffset`, `collapsed` is `true`; otherwise, it is `false`.
 - `direction`: The direction of the selection, pointing from `anchorNode` to `focusNode`, with three possible enum values:
 
-```ts
+```typescript
 export enum RANGE_DIRECTION {
-    NONE = 'none',
-    BACKWARD = 'backward',
-    FORWARD = 'forward',
+  NONE = 'none',
+  BACKWARD = 'backward',
+  FORWARD = 'forward',
 }
 ```
 
@@ -306,18 +306,18 @@ In the first section, we explored the layered architecture of Univer documents, 
 
 Step One: Associate the Bold menu with the corresponding Command. This way, upon clicking the menu, execute the `SetInlineFormatBoldCommand`.
 
-```ts
+```typescript
 export function BoldMenuItemFactory(accessor: IAccessor): IMenuButtonItem {
-    return {
-        id: SetInlineFormatBoldCommand.id,
-        group: MenuGroup.TOOLBAR_FORMAT,
-        type: MenuItemType.BUTTON,
-        icon: 'BoldSingle',
-        title: 'Set bold',
-        tooltip: 'toolbar.bold',
-        positions: [MenuPosition.TOOLBAR_START],
-        hidden$: getMenuHiddenObservable(accessor, UniverInstanceType.DOC),
-    };
+  return {
+    id: SetInlineFormatBoldCommand.id,
+    group: MenuGroup.TOOLBAR_FORMAT,
+    type: MenuItemType.BUTTON,
+    icon: 'BoldSingle',
+    title: 'Set bold',
+    tooltip: 'toolbar.bold',
+    positions: [MenuPosition.TOOLBAR_START],
+    hidden$: getMenuHiddenObservable(accessor, UniverInstanceType.DOC),
+  }
 }
 ```
 
@@ -327,41 +327,41 @@ In the code snippet above, the `id` field corresponds to the `id` of the `SetInl
 
 Step Two: Handle the business logic of inline styles. Almost all business logic is completed within Commands, and setting inline styles is no exception. There is a unified `SetInlineFormatCommand` to handle all inline styles, including bolding text, italicizing, changing font color, font size, background color, and so on. In our example, we will focus on text bolding. The `SetInlineFormatBoldCommand` will forward the bold inline style to `SetInlineFormatCommand` for unified processing.
 
-```ts
+```typescript
 export const SetInlineFormatCommand: ICommand<ISetInlineFormatCommandParams> = {
-    id: 'doc.command.set-inline-format',
-    type: CommandType.COMMAND,
-    handler: async (accessor, params: ISetInlineFormatCommandParams) => {
-        // ...
-        // 获取所有选区
-        const selections = textSelectionManagerService.getSelections();
+  id: 'doc.command.set-inline-format',
+  type: CommandType.COMMAND,
+  handler: async (accessor, params: ISetInlineFormatCommandParams) => {
+    // ...
+    // 获取所有选区
+    const selections = textSelectionManagerService.getSelections()
 
-        // 获取当前行内样式状态相对的状态
-        const formatValue = getReverseFormatValueInSelection(
-            docsModel.getBody()!.textRuns!,
-            preCommandId,
-            selections
-        );
-        // ...
-        const doMutation: IMutationInfo<IRichTextEditingMutationParams> = {
-            id: RichTextEditingMutation.id,
-            params: {
-                unitId,
-                mutations: [],
-            },
-        };
-        // ...
-        const result = commandService.syncExecuteCommand<
+    // 获取当前行内样式状态相对的状态
+    const formatValue = getReverseFormatValueInSelection(
+      docsModel.getBody()!.textRuns!,
+      preCommandId,
+      selections
+    )
+    // ...
+    const doMutation: IMutationInfo<IRichTextEditingMutationParams> = {
+      id: RichTextEditingMutation.id,
+      params: {
+        unitId,
+        mutations: [],
+      },
+    }
+    // ...
+    const result = commandService.syncExecuteCommand<
             IRichTextEditingMutationParams,
             IRichTextEditingMutationParams
-        >(doMutation.id, doMutation.params);
+        >(doMutation.id, doMutation.params)
         // refresh selection.
-        if (REFRESH_SELECTION_COMMAND_LIST.includes(preCommandId)) {
-            textSelectionManagerService.refreshSelection();
-        }
-        // ...
-    },
-};
+    if (REFRESH_SELECTION_COMMAND_LIST.includes(preCommandId)) {
+      textSelectionManagerService.refreshSelection()
+    }
+    // ...
+  },
+}
 ```
 
 As shown in the code snippet above, the first step is to use `getSelections` to retrieve all selections (which is why selections and cursors are considered the core modules of all business logic). Once we have the selections, we use the `getReverseFormatValueInSelection` method to obtain the current inline style status relative to the selection. For instance, if the text within the current selection is already bold, clicking the bold button should unbold it; otherwise, it should apply the bold effect. All data model changes need to be triggered through mutations, ultimately calling `RichTextEditingMutation` to modify the data model and view model.
@@ -370,21 +370,21 @@ As shown in the code snippet above, the first step is to use `getSelections` to 
 
 Step Three: Update the data model and view model to complete the page refresh.
 
-```ts
+```typescript
 export const RichTextEditingMutation: IMutation<IRichTextEditingMutationParams, IRichTextEditingMutationParams> = {
-    id: 'doc.mutation.rich-text-editing',
-    type: CommandType.MUTATION,
-    handler: (accessor, params) => {
-        // ...
-        // Step 1: Update Doc Data Model.
-        const undoMutations = documentDataModel.apply(mutations);
+  id: 'doc.mutation.rich-text-editing',
+  type: CommandType.MUTATION,
+  handler: (accessor, params) => {
+    // ...
+    // Step 1: Update Doc Data Model.
+    const undoMutations = documentDataModel.apply(mutations)
 
-        // Step 2: Update Doc View Model.
-        // ...
-        segmentViewModel.reset(segmentDocumentDataModel);
-        // ...
-    },
-};
+    // Step 2: Update Doc View Model.
+    // ...
+    segmentViewModel.reset(segmentDocumentDataModel)
+    // ...
+  },
+}
 ```
 
 The `RichTextEditingMutation` in the code above primarily accomplishes two tasks:

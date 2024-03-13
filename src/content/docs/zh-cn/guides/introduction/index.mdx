@@ -1,0 +1,156 @@
+---
+title: Univer 介绍
+sidebar:
+  order: 1
+---
+
+import { Image } from "astro:assets";
+import QrCodeImg from "./business-qr-code.png";
+
+Univer 提供了一个全面的企业级文档与数据协同的解决方案，支持**电子表格**、**文本文档**和**演示幻灯片**三大核心文档类型。通过灵活的 API 和插件机制，开发者可以在 Univer 的基础上进行个性化功能的定制和扩展，以适应不同用户在不同场景下的特定需求。
+
+export const features = [{
+  title: '🚀 高性能',
+  description: '基于 Canvas 的渲染引擎和公式引擎，支持 Web Worker，保证了高性能的同时，也能够支持大规模的数据处理。'
+}, {
+  title: '🧩 插件化',
+  description: 'Univer 的核心功能和能力都是通过插件的方式提供的，开发者可以自由组合所需功能或扩展自定义插件。'
+}, {
+  title: '🪄 可定制',
+  description: '通过导入自定义主题、图标、组件库等方式，开发者可以定制化 Univer 的外观和交互。'
+}, {
+  title: '🌍 国际化',
+  description: '支持多语言，开发者可以自由切换语言，也可以自定义语言包。'
+}, {
+  title: '📖 开源',
+  description: 'Univer 的核心代码在 Apache-2.0 协议下开源，任何组织和个人都可以免费使用其源代码和 npm 包。'
+}, {
+  title: '🌿 生态',
+  description: '丰富的生态，借助命令行工具、构建工具插件、示例库等等，方便开发者快速上手。'
+}, {
+  title: '💬 社区支持',
+  description: '提供 Discord 社区和 GitHub Discussions，方便开发者交流和寻求帮助。'
+}, {
+  title: '📈 持续更新',
+  description: 'Univer 团队会持续更新和维护 Univer，保证其稳定性和可靠性。'
+}, {
+  title: '💼 商业版',
+  description: '为有特定需求的企业提供商业版，包括但不限于多人协同编辑和协同浏览、数据连接器、协同浏览（Live Share）等功能。'
+}]
+
+## 核心特性
+
+import FeatureBox from '../../../guides//introduction/_components/FeatureBox.astro'
+
+<FeatureBox features={features} />
+
+## 功能
+
+### 🛠 通用功能
+
+#### 编辑操作
+
+- 撤销 / 重做
+- 复制 / 粘贴
+
+#### 浏览
+
+- 基于 Canvas，支持多种文档类型的高性能渲染引擎
+- 滚动、缩放
+
+#### UI
+
+- 可配置的工作区，包括标题栏、工具栏、侧边栏、状态栏、右键菜单等
+- 跨操作系统的快捷键支持
+- 快捷键面板
+
+### 📊 电子表格功能支持
+
+> Univer Sheet 已经完成了大部分基础功能的开发，但仍有关键功能呢尚未完善。请关注我们的[路线图](/zh-cn/guides/introduction/roadmap)以了解最新进展。
+
+#### 编辑操作
+
+- 新建、删除、移动子表
+- 单元格样式：加粗、斜体、下划线、删除线、字体、字号、字体颜色、背景颜色、边框样式、对齐方式、文字旋转
+- 合并单元格：合并和取消合并单元格，按照不同的方向合并单元格
+- 行列操作：插入、删除与移动行列，修改行高列宽
+- 复制粘贴：仅粘贴值、仅粘贴样式、仅粘贴公式、仅粘贴列宽、仅粘贴边框样式
+- 清除内容：仅清除内容、仅清除样式、清除全部
+- 单元格编辑：单元格编辑器，单元格内富文本
+- 插入和删除单元格
+- 下拉填充
+- 格式刷
+
+#### 浏览
+
+- 冻结行列
+- 统计栏
+  - 求和、最大值、最小值、平均值、计数
+
+#### 数据与计算
+
+- 公式
+  - Fx 栏（公式编辑器）
+  - 公式高亮
+  - 内置多种公式
+  - 基于 Web Worker 的公式计算（可选）
+- 数字格式
+  - 常规、会计、货币、日期、千分位符
+
+#### 自动化
+
+- Uniscript 脚本 (alpha)
+
+#### 其他功能
+
+- 禅编辑模式（可选）
+
+### 📝 文本文档功能支持
+
+> Univer Doc 目前处于早期开发阶段，功能尚未完善。请关注我们的[路线图](/zh-cn/guides/introduction/roadmap)以了解最新进展。
+
+#### 编辑操作
+
+- 文本样式：加粗、斜体、下划线、删除线、字体、字号、字体颜色
+
+### 🎨 演示文稿功能支持
+
+> Univer Slide 目前处于早期开发阶段，我们正在努力将其尽快带给您。请关注我们的[路线图](/zh-cn/guides/introduction/roadmap)以了解最新进展。
+
+## 下一步
+
+如果你已经迫不及待地想要体验 univer，请参考[快速上手](/zh-cn/guides/quick-start)。
+
+或者加入我们的开发者社区，和我们一起讨论：
+
+- [Discord 社区](https://discord.gg/XPGnMBmpd6)
+- [GitHub Discussions](https://github.com/dream-num/univer/discussions)
+- 扫描下方二维码，加入 Univer 中文社群
+
+<Image src={QrCodeImg} style="margin: auto" width={300} alt="DreamNum QR Code" />
+
+你也可以在以下平台关注我们的动态：
+
+- [官网](https://univer.ai)
+- [GitHub](https://github.com/dream-num/univer)
+- [知乎专栏](https://www.zhihu.com/org/meng-shu-ke-ji)
+
+## 如何贡献
+
+我们欢迎任何形式的贡献，包括但不限于[提交 issue](https://github.com/dream-num/univer/issues/new/choose)、提交 PR、参与讨论等。请在参与 Univer 的开发之前阅读[贡献指南](https://github.com/dream-num/univer/blob/dev/CONTRIBUTING.md)。
+
+## 开源协议
+
+[Univer 的核心代码](https://github.com/dream-num/univer)在 Apache-2.0 协议下开源，任何组织和个人都可以免费使用其源代码和 npm 包。
+
+[本文档](https://github.com/dream-num/univer-docs)在 CC-BY-NC-SA 4.0 协议下开源，任何组织和个人都可以免费使用，但不允许用于商业目的。
+
+## 商业版本
+
+Univer 同时提供商业版本，提供以下开箱即用的功能：
+
+- 👨‍💻 多人协同编辑和协同浏览
+- 🛜 数据连接器
+- 🎚️ 协同浏览（Live Share）
+
+想进一步了解我们的商业版或者申请试用，请移步[这里](/zh-cn/enterprises)。

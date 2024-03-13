@@ -1,7 +1,7 @@
 ---
 title: Univer 文档架构及模块设计
 desc: Univer 文档是 Univer 办公套件之一，旨在提供一流的文档编辑和排版体验，我们不仅在产品形态上的融合，通过无界模式来减少在不同套件之间的切换开销，同时让数据在不同套件之间联通。在技术架构上，我们也尽量通过一套架构来实现，既保证了开发体验的高效，同时也为产品形态的融合提供更多的想象空间
-tags: 
+tags:
   - Univer Doc
   - Architecture
   - MVVM
@@ -16,7 +16,7 @@ slug: zh-cn/blog/univer-doc-architecture
 
 Univer 文档是 Univer 办公套件之一，旨在提供一流的文档编辑和排版体验，我们不仅在产品形态上的融合，通过无界模式来减少在不同套件之间的切换开销，同时让数据在不同套件之间联通。在技术架构上，我们也尽量通过一套架构来实现，既保证了开发体验的高效，同时也为产品形态的融合提供更多的想象空间
 
->如果你对 Univer 架构还比较陌生，建议先阅读《[Univer 架构](https://univer.ai/guides/architecture/architecture/)》、《[这就是 Univer](https://zhuanlan.zhihu.com/p/666298812)》，在这两篇文章中有关于 Univer 整体架构的描述，Univer 中的命令系统、底层数据模型、渲染引擎等介绍，同时也分析了从数据层到视图层渲染，从视图层事件响应到数据层数据更新的整个过程
+> 如果你对 Univer 架构还比较陌生，建议先阅读《[Univer 架构](https://univer.ai/guides/architecture/architecture/)》、《[这就是 Univer](https://zhuanlan.zhihu.com/p/666298812)》，在这两篇文章中有关于 Univer 整体架构的描述，Univer 中的命令系统、底层数据模型、渲染引擎等介绍，同时也分析了从数据层到视图层渲染，从视图层事件响应到数据层数据更新的整个过程
 
 本篇文章主要聚焦在 Univer 文档的技术架构和模块设计，我们先从一张架构图开始：
 
@@ -41,21 +41,21 @@ Univer 文档是 Univer 办公套件之一，旨在提供一流的文档编辑�
 ```typescript
 // i-document-data.ts
 export interface IDocumentData extends IReferenceSource, IExtraModelData {
-    /** unit ID */
-    id: string;
-    title?: string;
-    body?: IDocumentBody;
-    documentStyle: IDocumentStyle;
-    // ...
+  /** unit ID */
+  id: string;
+  title?: string;
+  body?: IDocumentBody;
+  documentStyle: IDocumentStyle;
+  // ...
 }
 export interface IDocumentBody {
-    dataStream: string;
-    textRuns?: ITextRun[]; // textRun 样式，交互
-    paragraphs?: IParagraph[]; // paragraph
-    sectionBreaks?: ISectionBreak[]; // SectionBreak
-    customBlocks?: ICustomBlock[]; // customBlock 用户通过插件自定义的block
-    tables?: ITable[]; // Table
-    customRanges?: ICustomRange[]; // plugin注册，实现针对stream的特殊逻辑，超链接，field，structured document tags， bookmark，comment
+  dataStream: string;
+  textRuns?: ITextRun[]; // textRun 样式，交互
+  paragraphs?: IParagraph[]; // paragraph
+  sectionBreaks?: ISectionBreak[]; // SectionBreak
+  customBlocks?: ICustomBlock[]; // customBlock 用户通过插件自定义的block
+  tables?: ITable[]; // Table
+  customRanges?: ICustomRange[]; // plugin注册，实现针对stream的特殊逻辑，超链接，field，structured document tags， bookmark，comment
 }
 ```
 
@@ -69,39 +69,39 @@ export interface IDocumentBody {
 - tables 字段包含表格相关的信息
 - customRanges 字段包括可重叠的文档信息，比如评论、超链接等
 
-```ts
+```typescript
 export const DEFAULT_DOCUMENT_DATA_SIMPLE: IDocumentData = {
-    id: 'default-document-id',
-    body: {
-        dataStream: '荷塘月色\r作者：朱自清\r\n',
-        textRuns: [
-            {
-                st: 0,
-                ed: 4,
-                ts: {
-                    fs: 24,
-                    ff: 'Microsoft YaHei',
-                    bl: BooleanNumber.TRUE,
-                },
-            },
-        ],
-        paragraphs: [
-            {
-                startIndex: 4,
-                paragraphStyle: { /*...*/ },
-            },
-            {
-                startIndex: 11,
-            },
-        ],
-        sectionBreaks: [
-            {
-                startIndex: 12,
-            },
-        ],
-    },
-    documentStyle: { /*...*/ },
-};
+  id: 'default-document-id',
+  body: {
+    dataStream: '荷塘月色\r作者：朱自清\r\n',
+    textRuns: [
+      {
+        st: 0,
+        ed: 4,
+        ts: {
+          fs: 24,
+          ff: 'Microsoft YaHei',
+          bl: BooleanNumber.TRUE,
+        },
+      },
+    ],
+    paragraphs: [
+      {
+        startIndex: 4,
+        paragraphStyle: { /* ... */ },
+      },
+      {
+        startIndex: 11,
+      },
+    ],
+    sectionBreaks: [
+      {
+        startIndex: 12,
+      },
+    ],
+  },
+  documentStyle: { /* ... */ },
+}
 ```
 
 上面是一个简单的文档示例，整个文档包含两个段落一个 section，在 dataStream 中有两个 `\r` 进行段落占位，一个 `\n` 进行 section 占位，textRuns 中包含一条行内样式，对正文 `st:0 ~ ed:4` 范围内的文字加粗，并且字体大小是24号，字体微软雅黑
@@ -126,16 +126,16 @@ DocumentViewModel 的主要职责就是根据最新的 DocumentDataModel 生成�
 
 一篇文档对应一个 DocumentViewModel 实例，当监听到有文档创建或更新时，docViewModelManagerService 会去创建或者更新文档 view model，使其保持最新状态，以供对应的 Document Skeleton 消费使用
 
-```ts
+```typescript
 // doc-canvas-view.ts
 private _initialize() {
-    this._currentUniverService.currentDoc$.pipe(takeUntil(this.dispose$)).subscribe((documentModel) => {
-        const unitId = documentModel.getUnitId();
-        // Build the view model and notify the skeleton manager to create the skeleton.
-        this._docViewModelManagerService.setCurrent(unitId);
+  this._currentUniverService.currentDoc$.pipe(takeUntil(this.dispose$)).subscribe((documentModel) => {
+    const unitId = documentModel.getUnitId();
+    // Build the view model and notify the skeleton manager to create the skeleton.
+    this._docViewModelManagerService.setCurrent(unitId);
 
-        // ...
-    });
+    // ...
+  });
 }
 ```
 
@@ -145,30 +145,30 @@ private _initialize() {
 
 上面也提到，视图模型层不仅管理 view model，同时也管理 DocumentSkeleton，也就是文档布局相关的信息，相关代码在 doc-skeleton-manager.service.ts 文件中（在《Univer 文档排版设计》文章中，将更加详尽介绍 Document Skeleton），和 view model 一样，一篇 Univer 文档对应一份 Document Skeleton 实例，通过唯一的 `unitId` 和 `subUnitId` 来唯一标识，当监听到 view model 更新后，对应的 skeleton 实例也需要进行创建或者更新
 
-```ts
+```typescript
 // doc-skeleton-manager.service.ts
 private _setCurrent(docViewModelParam: IDocumentViewModelManagerParam): Nullable<IDocSkeletonManagerParam> {
-        const { unitId } = docViewModelParam;
+  const { unitId } = docViewModelParam;
 
-        if (!this._docSkeletonMap.has(unitId)) {
-            const skeleton = this._buildSkeleton(docViewModelParam.docViewModel);
+  if (!this._docSkeletonMap.has(unitId)) {
+    const skeleton = this._buildSkeleton(docViewModelParam.docViewModel);
 
-            skeleton.calculate();
+    skeleton.calculate();
 
-            this._docSkeletonMap.set(unitId, {
-                unitId,
-                skeleton,
-                dirty: false,
-            });
-        } else {
-            const skeletonParam = this.getSkeletonByUnitId(unitId)!;
-            skeletonParam.skeleton.calculate();
-            skeletonParam.dirty = true;
-        }
+    this._docSkeletonMap.set(unitId, {
+      unitId,
+      skeleton,
+      dirty: false,
+    });
+  } else {
+    const skeletonParam = this.getSkeletonByUnitId(unitId)!;
+    skeletonParam.skeleton.calculate();
+    skeletonParam.dirty = true;
+  }
 
-        // ...
-        this._currentSkeleton$.next(this.getCurrent());
-        return this.getCurrent();
+  // ...
+  this._currentSkeleton$.next(this.getCurrent());
+  return this.getCurrent();
 }
 ```
 
@@ -209,7 +209,7 @@ Service 服务，其实在上文中已经提到了视图模型层中两个重量
 
 在渲染引擎的事件系统中，我们借鉴了 DOM 的事件派发和处理系统，一句话解释下渲染引擎的事件系统：
 
->我们对 Canvas Element 元素绑定各种事件，如 mouseenter、mousemove、mouseleave 等，然后对事件对象进行包装，然后通过当前鼠标位置信息，找到最上层的 Canvas 绘制的 Object，然后触发该 Object 上的绑定的对应事件，如果没有阻止事件冒泡，那么该事件将继续往上传递，最终传递到 Scene 上，如果 Scene 上也有对应的事件处理函数，也会被执行
+> 我们对 Canvas Element 元素绑定各种事件，如 mouseenter、mousemove、mouseleave 等，然后对事件对象进行包装，然后通过当前鼠标位置信息，找到最上层的 Canvas 绘制的 Object，然后触发该 Object 上的绑定的对应事件，如果没有阻止事件冒泡，那么该事件将继续往上传递，最终传递到 Scene 上，如果 Scene 上也有对应的事件处理函数，也会被执行
 
 哈，上面不止一句话了，下面我将从源码层面来详细解释 Univer 渲染引擎中的事件系统
 
@@ -217,48 +217,48 @@ Service 服务，其实在上文中已经提到了视图模型层中两个重量
 
 第一步：在 Canvas 元素上绑定事件，并对事件对象进行包装
 
-```ts
+```typescript
 // engine.ts
 this._pointerDownEvent = (nativeEvent: Event) => {
-     const evt = nativeEvent as IPointerEvent;
-     if (deviceType === DeviceType.Mouse) {
-          if (!document.pointerLockElement) {
-              this._canvasEle.setPointerCapture(this._mouseId);
-          }
-     } else {
-          // Touch; Since touches are dynamically assigned, only set capture if we have an id
-          if (evt.pointerId && !document.pointerLockElement) {
-              this._canvasEle.setPointerCapture(evt.pointerId);
-          }
-     }
+  const evt = nativeEvent as IPointerEvent
+  if (deviceType === DeviceType.Mouse) {
+    if (!document.pointerLockElement) {
+      this._canvasEle.setPointerCapture(this._mouseId)
+    }
+  } else {
+    // Touch; Since touches are dynamically assigned, only set capture if we have an id
+    if (evt.pointerId && !document.pointerLockElement) {
+      this._canvasEle.setPointerCapture(evt.pointerId)
+    }
+  }
 
-     // ...
-     this.onInputChangedObservable.notifyObservers(deviceEvent);
- };
-this._canvasEle.addEventListener(`${eventPrefix}down`, this._pointerDownEvent);
+  // ...
+  this.onInputChangedObservable.notifyObservers(deviceEvent)
+}
+this._canvasEle.addEventListener(`${eventPrefix}down`, this._pointerDownEvent)
 ```
 
-如上代码，在 canvasEle 上绑定 pointerdown 事件，在  _pointerDownEvent 函数中，对事件对象进行相应包装，然后通过 onInputChangedObservable 将事件抛出，传递给 Scene 处理。在上面的代码中，有个需要注意的地方，我们对 canvasEle 进行 setPointerCapture，该方法将制定 canvasEle 为未来指针事件的捕获目标，指针的后续事件都将以捕获元素为目标，直到捕获被释放（[Element.releasePointerCapture()](https://developer.mozilla.org/en-US/docs/Web/API/Element/releasePointerCapture) ），这样保证了 pointerup 也在该元素上触发
+如上代码，在 canvasEle 上绑定 pointerdown 事件，在 _pointerDownEvent 函数中，对事件对象进行相应包装，然后通过 onInputChangedObservable 将事件抛出，传递给 Scene 处理。在上面的代码中，有个需要注意的地方，我们对 canvasEle 进行 setPointerCapture，该方法将制定 canvasEle 为未来指针事件的捕获目标，指针的后续事件都将以捕获元素为目标，直到捕获被释放（[Element.releasePointerCapture()](https://developer.mozilla.org/en-US/docs/Web/API/Element/releasePointerCapture) ），这样保证了 pointerup 也在该元素上触发
 
 第二步：将事件对象传递给 Scene，并调用对应的事件处理函数
 
-```ts
+```typescript
 // scene.input-manager.ts
 this._onInputObserver = engine.onInputChangedObservable.add((eventData: IEvent) => {
-    // ...
-    this._onPointerDown(evt as IPointerEvent);
-});
+  // ...
+  this._onPointerDown(evt as IPointerEvent)
+})
 this._onPointerDown = (evt: IPointerEvent) => {
-     const currentObject = this._getCurrentObject(evt.offsetX, evt.offsetY);
+  const currentObject = this._getCurrentObject(evt.offsetX, evt.offsetY)
 
-     const isStop = currentObject?.triggerPointerDown(evt);
+  const isStop = currentObject?.triggerPointerDown(evt)
 
-     if (this._checkDirectSceneEventTrigger(!isStop, currentObject)) {
-         if (this._scene.onPointerDownObserver.hasObservers()) {
-              this._scene.onPointerDownObserver.notifyObservers(evt);
-         }
-     }
-};
+  if (this._checkDirectSceneEventTrigger(!isStop, currentObject)) {
+    if (this._scene.onPointerDownObserver.hasObservers()) {
+      this._scene.onPointerDownObserver.notifyObservers(evt)
+    }
+  }
+}
 ```
 
 如上代码，首先为 onInputChangedObservable 添加 pointerdown 事件处理函数，在 _onPointerDown 事件处理函数中，通过当前 evt 的坐标信息找到最上层的 Object，触发该 Object 上的 PointerDown 事件处理函数，如果事件没有被阻止，将继续冒泡
@@ -275,7 +275,7 @@ this._onPointerDown = (evt: IPointerEvent) => {
 
 还是一句话来描述下自定义选区是如何实现的：
 
->我们会在 Document（渲染引擎中的 Document 对象，而非 DOM 中的 document 对象） 对象上，监听 pointerdown、pointermove 和 pointerup 等事件，根据相关事件的位置信息，我们会通过 TextRange 对象来绘制矩形的选区或者光标
+> 我们会在 Document（渲染引擎中的 Document 对象，而非 DOM 中的 document 对象） 对象上，监听 pointerdown、pointermove 和 pointerup 等事件，根据相关事件的位置信息，我们会通过 TextRange 对象来绘制矩形的选区或者光标
 
 那么问题来了，我们如何描述选区和定位选区位置呢？选区上又有哪些属性呢？
 
@@ -288,11 +288,11 @@ this._onPointerDown = (evt: IPointerEvent) => {
 - collapsed：选区是否闭合，当 startOffset 等于 endOffset，那么 collapsed 为 true，否则为 false
 - direction：选区的方向，是 anchorNode 指向 focusNode 的方向，有如下三个枚举值：
 
-```ts
+```typescript
 export enum RANGE_DIRECTION {
-    NONE = 'none',
-    BACKWARD = 'backward',
-    FORWARD = 'forward',
+  NONE = 'none',
+  BACKWARD = 'backward',
+  FORWARD = 'forward',
 }
 ```
 
@@ -308,18 +308,18 @@ export enum RANGE_DIRECTION {
 
 第一步：给 Bold 菜单绑定对应的 Command，这样在菜单点击后，执行 `SetInlineFormatBoldCommand` 命名
 
-```ts
+```typescript
 export function BoldMenuItemFactory(accessor: IAccessor): IMenuButtonItem {
-    return {
-        id: SetInlineFormatBoldCommand.id,
-        group: MenuGroup.TOOLBAR_FORMAT,
-        type: MenuItemType.BUTTON,
-        icon: 'BoldSingle',
-        title: 'Set bold',
-        tooltip: 'toolbar.bold',
-        positions: [MenuPosition.TOOLBAR_START],
-        hidden$: getMenuHiddenObservable(accessor, UniverInstanceType.DOC),
-    };
+  return {
+    id: SetInlineFormatBoldCommand.id,
+    group: MenuGroup.TOOLBAR_FORMAT,
+    type: MenuItemType.BUTTON,
+    icon: 'BoldSingle',
+    title: 'Set bold',
+    tooltip: 'toolbar.bold',
+    positions: [MenuPosition.TOOLBAR_START],
+    hidden$: getMenuHiddenObservable(accessor, UniverInstanceType.DOC),
+  }
 }
 ```
 
@@ -329,41 +329,41 @@ export function BoldMenuItemFactory(accessor: IAccessor): IMenuButtonItem {
 
 第二步：处理行内样式业务逻辑。几乎所有的业务逻辑都在 Command 中完成，设置行内样式也不例外，有一个统一的 SetInlineFormatCommand 来处理所有的行内样式，包括给文本加粗、斜体、字体颜色、字体大小、背景色等，在我们的例子中，以文本加粗为例。SetInlineFormatBoldCommand 会将加粗的行内样式转发给 SetInlineFormatCommand 来统一处理
 
-```ts
+```typescript
 export const SetInlineFormatCommand: ICommand<ISetInlineFormatCommandParams> = {
-    id: 'doc.command.set-inline-format',
-    type: CommandType.COMMAND,
-    handler: async (accessor, params: ISetInlineFormatCommandParams) => {
-        // ...
-        // 获取所有选区
-        const selections = textSelectionManagerService.getSelections();
+  id: 'doc.command.set-inline-format',
+  type: CommandType.COMMAND,
+  handler: async (accessor, params: ISetInlineFormatCommandParams) => {
+    // ...
+    // 获取所有选区
+    const selections = textSelectionManagerService.getSelections()
 
-        // 获取当前行内样式状态相对的状态
-        const formatValue = getReverseFormatValueInSelection(
-            docsModel.getBody()!.textRuns!,
-            preCommandId,
-            selections
-        );
-        // ...
-        const doMutation: IMutationInfo<IRichTextEditingMutationParams> = {
-            id: RichTextEditingMutation.id,
-            params: {
-                unitId,
-                mutations: [],
-            },
-        };
-        // ...
-        const result = commandService.syncExecuteCommand<
+    // 获取当前行内样式状态相对的状态
+    const formatValue = getReverseFormatValueInSelection(
+      docsModel.getBody()!.textRuns!,
+      preCommandId,
+      selections
+    )
+    // ...
+    const doMutation: IMutationInfo<IRichTextEditingMutationParams> = {
+      id: RichTextEditingMutation.id,
+      params: {
+        unitId,
+        mutations: [],
+      },
+    }
+    // ...
+    const result = commandService.syncExecuteCommand<
             IRichTextEditingMutationParams,
             IRichTextEditingMutationParams
-        >(doMutation.id, doMutation.params);
+        >(doMutation.id, doMutation.params)
         // refresh selection.
-        if (REFRESH_SELECTION_COMMAND_LIST.includes(preCommandId)) {
-            textSelectionManagerService.refreshSelection();
-        }
-        // ...
-    },
-};
+    if (REFRESH_SELECTION_COMMAND_LIST.includes(preCommandId)) {
+      textSelectionManagerService.refreshSelection()
+    }
+    // ...
+  },
+}
 ```
 
 如上代码所示，首先通过 getSelections 来获取所有的选区（这也是为什么说选区和光标是所有业务逻辑的核心模块），有了选区后，通过 getReverseFormatValueInSelection 方法来获取当前选区相对的行内样式状态，比如当前选区内已经有加粗的字体了，那么点击加粗按钮，就应该是取消加粗，反之是加粗的效果。所有的数据模型更改需要通过 mutation 来触发，最终调用 RichTextEditingMutation 来修改数据模型和视图模型
@@ -372,21 +372,21 @@ export const SetInlineFormatCommand: ICommand<ISetInlineFormatCommandParams> = {
 
 第三步，更新数据模型和视图模型，完成页面刷新
 
-```ts
+```typescript
 export const RichTextEditingMutation: IMutation<IRichTextEditingMutationParams, IRichTextEditingMutationParams> = {
-    id: 'doc.mutation.rich-text-editing',
-    type: CommandType.MUTATION,
-    handler: (accessor, params) => {
-        // ...
-        // Step 1: Update Doc Data Model.
-        const undoMutations = documentDataModel.apply(mutations);
+  id: 'doc.mutation.rich-text-editing',
+  type: CommandType.MUTATION,
+  handler: (accessor, params) => {
+    // ...
+    // Step 1: Update Doc Data Model.
+    const undoMutations = documentDataModel.apply(mutations)
 
-        // Step 2: Update Doc View Model.
-        // ...
-        segmentViewModel.reset(segmentDocumentDataModel);
-        // ...
-    },
-};
+    // Step 2: Update Doc View Model.
+    // ...
+    segmentViewModel.reset(segmentDocumentDataModel)
+    // ...
+  },
+}
 ```
 
 如上代码所示，RichTextEditingMutation 主要完成了两件事：

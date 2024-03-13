@@ -203,11 +203,11 @@ In the context of text composition within Univer documents, we have adopted the 
 The Unicode Line Break Algorithm encompasses character properties, line breaking rules, direct and indirect line breaks, and implementation recommendations:
 
 - **Character Properties**: Each Unicode character is assigned a line break property indicating its behavior regarding line breaks. These properties include mandatory breaks (e.g., newline characters), non-breaking characters (e.g., letters and numbers), spaces, and line breaking symbols.
-  
+
 - **Line Breaking Rules**: The algorithm defines a set of rules based on the properties of adjacent characters to determine whether a line break can occur between them. These rules are defined as a series of conditions for break opportunities and prohibitions.
-  
+
 - **Direct and Indirect Line Breaks**: The algorithm distinguishes between direct line breaks (occurring directly between two characters) and indirect line breaks (requiring consideration of surrounding context).
-  
+
 - **Mandatory Breaks**: Certain characters mandate a line break, such as newline characters (LF) and carriage return characters (CR).
 
 In the algorithm's implementation, a table known as the "Pair Table" is utilized to determine line breaking behavior between characters. This table uses the Line Break Class of two adjacent characters to decide whether a line break is permissible. These classes include categories such as letters, numbers, spaces, and punctuation, each with its own set of line breaking rules.

@@ -56,6 +56,10 @@ const isApiPage = Astro.url.pathname.startsWith(`/${lang}/api`) || Astro.url.pat
       </div>
     </nav>
 
+    <ThemeSelect {...Astro.props} />
+
+    <LanguageSelect {...Astro.props} />
+
     <div class="sl-flex search">
       <Search {...Astro.props} />
     </div>
@@ -63,10 +67,6 @@ const isApiPage = Astro.url.pathname.startsWith(`/${lang}/api`) || Astro.url.pat
     <div class="sl-flex social-icons">
       <SocialIcons {...Astro.props} />
     </div>
-
-    <ThemeSelect {...Astro.props} />
-
-    <LanguageSelect {...Astro.props} />
   </div>
 </div>
 
@@ -156,22 +156,48 @@ $list?.addEventListener('click', (e) => {
       }
     }
 
+    .search {
+      :global(site-search) {
+        :global(button[data-open-modal]) {
+          width: 142px;
+          height: 36px;
+          border-radius: 40px;
+        }
+      }
+    }
+
     .social-icons {
       :global(a) {
         color: inherit;
         font-size: 24px;
       }
     }
-  }
-}
-</style>
 
-<style lang="less" is:global>
-site-search {
-  button[data-open-modal] {
-    width: 142px;
-    height: 36px;
-    border-radius: 40px;
+    :global(starlight-theme-select) {
+      :global(svg) {
+        width: 1rem;
+        height: 1rem;
+      }
+      :global(select) {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        width: 1rem;
+        color: transparent;
+      }
+    }
+
+    :global(starlight-lang-select) {
+      :global(svg) {
+        width: 1rem;
+        height: 1rem;
+      }
+      :global(select) {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        width: 1rem;
+        color: transparent;
+      }
+    }
   }
 }
 </style>
