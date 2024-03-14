@@ -1,16 +1,5 @@
 ---
-title: 为 Univer 编写一个 CSV 导入插件
-desc: 跟随本案例编写一个 Univer 插件，在操作栏添加一个按钮图标，点击后可以导入 CSV 文件到表格中。
-tags:
-  - Sheet
-  - Import
-  - CSV
-  - Guide
-cover: ./cover.png
-date: 2024-01-24
-author: Song Xiang
-lang: zh-cn
-slug: zh-cn/blog/write-a-csv-import-plugin
+title: 编写一个 CSV 导入插件
 ---
 
 我们将通过编写一个实际案例，来学习如何编写一个 Univer 插件。

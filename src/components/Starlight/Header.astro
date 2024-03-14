@@ -100,8 +100,11 @@ $list?.addEventListener('click', (e) => {
 
     .nav {
       font-size: 0.875rem;
-      display: flex;
+      display: none;
       gap: 1rem;
+      @media (min-width: 50rem) {
+        display: flex;
+      }
 
       a {
         color: inherit;
@@ -118,6 +121,10 @@ $list?.addEventListener('click', (e) => {
 
       .community-list {
         position: relative;
+        display: none;
+        @media (min-width: 50rem) {
+          display: block;
+        }
 
         :global(svg) {
           position: relative;
@@ -159,9 +166,12 @@ $list?.addEventListener('click', (e) => {
     .search {
       :global(site-search) {
         :global(button[data-open-modal]) {
-          width: 142px;
+          width: 36px;
           height: 36px;
           border-radius: 40px;
+          @media (min-width: 50rem) {
+            width: 142px;
+          }
         }
       }
     }
@@ -174,6 +184,10 @@ $list?.addEventListener('click', (e) => {
     }
 
     :global(starlight-theme-select) {
+      display: none;
+      @media (min-width: 50rem) {
+        display: block;
+      }
       :global(svg) {
         width: 1rem;
         height: 1rem;
@@ -187,6 +201,10 @@ $list?.addEventListener('click', (e) => {
     }
 
     :global(starlight-lang-select) {
+      display: none;
+      @media (min-width: 50rem) {
+        display: block;
+      }
       :global(svg) {
         width: 1rem;
         height: 1rem;

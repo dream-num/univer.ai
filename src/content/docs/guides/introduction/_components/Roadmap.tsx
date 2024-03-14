@@ -1,16 +1,21 @@
 import { Chart } from '@antv/g2'
+import dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 import React, { useEffect, useRef } from 'react'
 
+dayjs.extend(customParseFormat)
+
 interface IProps {
-  values: {
+  data: {
     start: string
     end: string
-    type: string
-    text: string
+    name: string
   }[]
 }
 
-export default function Roadmap(_props: IProps) {
+export default function Roadmap(props: IProps) {
+  const { data } = props
+
   const chartRef = useRef(null)
 
   useEffect(() => {
@@ -24,45 +29,44 @@ export default function Roadmap(_props: IProps) {
 
     chart.coordinate({ transform: [{ type: 'transpose' }] })
 
-    const data = [
-      { name: 'a', month: 'Jan.', start: 1, end: 12 },
-      { name: 'b', month: 'Feb.', start: 1, end: 12 },
-      { name: 'c', month: 'Mar.', start: 1, end: 12 },
-      { name: 'd', month: 'Apr.', start: 1, end: 12 },
-      { name: 'e', month: 'May', start: 1, end: 12 },
-      { name: 'f', month: 'Jun', start: 3, end: 12 },
-      { name: 'g', month: 'Jul.', start: 1, end: 12 },
-      { name: 'h', month: 'Aug.', start: 1, end: 12 },
-      { name: 'i', month: 'Sep.', start: 1, end: 12 },
-      { name: 'j', month: 'Oct.', start: 1, end: 12 },
-      { name: 'k', month: 'Nov.', start: 1, end: 12 },
-      { name: 'l', month: 'Dec.', start: 1, end: 12 },
-      { name: 'Total', start: 1, end: 12 },
-    ]
-
     chart
+      .title('Roadmap')
       .interval()
-      .data(data)
+      .data(data.map(item => ({
+        name: item.name,
+        start: dayjs(item.start).startOf('M').valueOf(),
+        end: dayjs(item.end).endOf('M').valueOf(),
+      })))
       .encode('x', 'name')
       .encode('y', ['end', 'start'])
+      .encode('size', 40)
       .encode('color', (d: typeof data[number]) => d.name)
+      .axis('x', false)
       .axis('y', {
-        title: 'Frequency',
-        labelFormatter: (_d: any) => 'd.repeat(3)',
-        // titlePosition: 'top',
-        // labelFormatter: (d, b, data) => {
-        //   console.log(d, b, data)
-        //   return data.month
-        // },
+        title: 'Month',
+        labelFormatter: (_d: number) => dayjs(_d).format('MMM YYYY'),
       })
-      .tooltip(['start', 'end'])
+      .label({
+        formatter: (_: number, raw: typeof data[number]) => raw.name,
+        position: 'left',
+        x: 8,
+        backgroundRadius: 20,
+      })
+      .style('radius', 20)
+      .tooltip({
+        items: [{
+          field: 'start',
+          valueFormatter: (d: number) => dayjs(d).format('MMM YYYY'),
+        }, {
+          field: 'end',
+          valueFormatter: (d: number) => dayjs(d).format('MMM YYYY'),
+        }],
+      })
 
     chart.render()
   }, [])
 
   return (
-    <div>
-      <div ref={chartRef} />
-    </div>
+    <div ref={chartRef} />
   )
 }

@@ -14,6 +14,7 @@
   -webkit-font-smoothing: antialiased;
 
   --sl-color-accent: #274fee !important;
+  --sl-content-width: 52rem;
 
   --sl-text-h1: var(--sl-text-4xl);
   --sl-text-h2: var(--sl-text-3xl);
@@ -46,6 +47,11 @@
   box-shadow: 0 8px 24px #1f23271f;
 }
 
+.sl-markdown-content a:not(:where(.not-content *)) {
+  text-decoration-thickness: from-font;
+  text-underline-position: from-font;
+}
+
 .sl-container {
   margin: auto;
 }
@@ -58,4 +64,27 @@
   scrollbar-color: #73737366 transparent;
   scrollbar-gutter: stable;
   scrollbar-width: thin;
+}
+
+@media (min-width: 100rem) {
+  .sidebar-pane {
+    width: 16rem;
+    margin-left: 50%;
+    background-color: transparent;
+    transform: translateX(-45rem);
+  }
+
+  .right-sidebar-container {
+    width: 16rem;
+  }
+
+  [data-has-sidebar][data-has-toc] .main-pane {
+    width: calc(100% - 16rem);
+  }
+
+  .main-frame {
+    width: 90rem;
+    margin: 0 auto;
+    padding-left: 16rem;
+  }
 }

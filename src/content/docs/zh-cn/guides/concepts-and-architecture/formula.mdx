@@ -237,25 +237,25 @@ Service 为计算过程提供各种各样的服务，这里介绍几个重要的
 
 ```typescript
 export class Sum extends BaseFunction {
-    override calculate(...variants: BaseValueObject[]) {
-        // 新建一个用于累加的 0 变量
-        let accumulatorAll: BaseValueObject = new NumberValueObject(0);
+  override calculate(...variants: BaseValueObject[]) {
+    // 新建一个用于累加的 0 变量
+    let accumulatorAll: BaseValueObject = new NumberValueObject(0);
 
-        // Sum 函数的入参数量由用户决定，这里循环获取并计算。
-        for (let i = 0; i < variants.length; i++) {
-            let variant = variants[i];
+    // Sum 函数的入参数量由用户决定，这里循环获取并计算。
+    for (let i = 0; i < variants.length; i++) {
+      let variant = variants[i];
 
-            // 如果入参是 A1:B10 的引用范围，上层会把它自动转换为一个 ArrayValueObject，
-            if (variant.isArray()) {
-                // 调用 ArrayValueObject 上的 sum 函数，累加所有的 valueObject 值
-                variant = (variant as ArrayValueObject).sum();
-            }
+      // 如果入参是 A1:B10 的引用范围，上层会把它自动转换为一个 ArrayValueObject，
+      if (variant.isArray()) {
+        // 调用 ArrayValueObject 上的 sum 函数，累加所有的 valueObject 值
+        variant = (variant as ArrayValueObject).sum();
+      }
 
-            // 调用 ValueObject 上的数值计算函数 Plus 进行累加
-            accumulatorAll = accumulatorAll.plus(variant);
-        }
-
-        return accumulatorAll;
+      // 调用 ValueObject 上的数值计算函数 Plus 进行累加
+      accumulatorAll = accumulatorAll.plus(variant);
     }
+
+    return accumulatorAll;
+  }
 }
 ```

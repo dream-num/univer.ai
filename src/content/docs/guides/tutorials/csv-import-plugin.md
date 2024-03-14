@@ -1,16 +1,5 @@
 ---
-title: Write a CSV Import Plugin for Univer.
-desc: Write a Univer plugin to add a button icon to the toolbar, click to import a CSV file into the table by following this case.
-tags:
-  - Sheet
-  - Import
-  - CSV
-  - Guide
-cover: ./cover.png
-date: 2024-01-24
-author: Song Xiang
-lang: en-us
-slug: en-us/blog/write-a-csv-import-plugin
+title: How to write a CSV import plugin
 ---
 
 We will learn how to write a Univer plugin by writing a real case.

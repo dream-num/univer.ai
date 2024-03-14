@@ -4,7 +4,6 @@ import clsx from 'clsx'
 import HeroImg from './hero.png'
 
 import styles from './index.module.less'
-import LogoImg from '@/assets/logo.svg'
 
 export function Hero() {
   return (
@@ -37,6 +36,8 @@ export function Hero() {
               <GithubSingle24 />
               Github
             </a>
+
+            <label>v{pkg.version}</label>
           </footer>
         </section>
       </section>

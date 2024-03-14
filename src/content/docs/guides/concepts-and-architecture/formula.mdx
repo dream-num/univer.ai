@@ -208,27 +208,27 @@ The formula engine references Numpy's matrix operation concept, reducing the amo
 
 The following is an example of a Sum formula implementation:
 
-```typescript
+```ts
 export class Sum extends BaseFunction {
-    override calculate(...variants: BaseValueObject[]) {
-        // Initialize an accumulator variable for summing
-        let accumulatorAll: BaseValueObject = new NumberValueObject(0);
+  override calculate(...variants: BaseValueObject[]) {
+    // Initialize an accumulator variable for summing
+    let accumulatorAll: BaseValueObject = new NumberValueObject(0);
 
-        // The number of parameters for the Sum function is determined by the user. The following loop obtains and calculates.
-        for (let i = 0; i < variants.length; i++) {
-            let variant = variants[i];
+    // The number of parameters for the Sum function is determined by the user. The following loop obtains and calculates.
+    for (let i = 0; i < variants.length; i++) {
+      let variant = variants[i];
 
-            // If the input is a reference range like A1:B10, the upper layer will automatically convert it to an ArrayValueObject.
-            if (variant.isArray()) {
-                // Call the sum function on ArrayValueObject to sum the value of all ValueObjects
-                variant = (variant as ArrayValueObject).sum();
-            }
+      // If the input is a reference range like A1:B10, the upper layer will automatically convert it to an ArrayValueObject.
+      if (variant.isArray()) {
+        // Call the sum function on ArrayValueObject to sum the value of all ValueObjects
+        variant = (variant as ArrayValueObject).sum();
+      }
 
-            // Call the numerical computation function Plus on ValueObject to perform the sum
-            accumulatorAll = accumulatorAll.plus(variant);
-        }
-
-        return accumulatorAll;
+      // Call the numerical computation function Plus on ValueObject to perform the sum
+      accumulatorAll = accumulatorAll.plus(variant);
     }
+
+    return accumulatorAll;
+  }
 }
 ```

@@ -11,7 +11,7 @@ export default defineConfig({
   },
   vite: {
     ssr: {
-      noExternal: ['@univerjs/*', '@antv/*'],
+      noExternal: ['@univerjs/*', '@wendellhu/redi', '@antv/*'],
     },
   },
   image: {
@@ -50,106 +50,88 @@ export default defineConfig({
       },
       sidebar: [
         {
-          label: '🔰 指南',
+          label: '📃 简介',
           translations: {
-            'en-US': '🔰 Guides',
-            'ja-JP': '🔰 ガイド',
+            'en-US': '📃 Introduction',
+            'ja-JP': '📃 はじめに',
           },
           autogenerate: {
-            directory: 'guides/*.md',
+            directory: 'guides/introduction',
           },
-          items: [
-            {
-              label: '简介',
-              translations: {
-                'en-US': 'Introduction',
-                'ja-JP': 'はじめに',
-              },
-              autogenerate: {
-                directory: 'guides/introduction',
-              },
-            },
-            {
-              label: '快速上手',
-              translations: {
-                'en-US': 'Quickstart',
-                'ja-JP': 'クイックスタート',
-              },
-              autogenerate: {
-                directory: 'guides/quick-start',
-              },
-            },
-            {
-              label: '新手入门',
-              translations: {
-                'en-US': 'Getting Started',
-                'ja-JP': 'はじめる',
-              },
-              autogenerate: {
-                directory: 'guides/getting-started',
-              },
-            },
-            {
-              label: '扩展 Univer',
-              translations: {
-                'en-US': 'Customizing Univer',
-                'ja-JP': 'カスタマイズ',
-              },
-              autogenerate: {
-                directory: 'guides/customizing',
-              },
-            },
-            {
-              label: '进阶使用',
-              translations: {
-                'en-US': 'Advanced Use',
-                'ja-JP': 'アドバンスド',
-              },
-              autogenerate: {
-                directory: 'guides/advanced-use',
-              },
-            },
-            {
-              label: '教程',
-              translations: {
-                'en-US': 'Tutorials',
-                'ja-JP': 'チュートリアル',
-              },
-              autogenerate: {
-                directory: 'guides/tutorials',
-              },
-            },
-            {
-              label: '概念与架构',
-              translations: {
-                'en-US': 'Concepts & Architecture',
-                'ja-JP': 'アーキテクチャ & コンセプト',
-              },
-              autogenerate: {
-                directory: 'guides/concepts-and-architecture',
-              },
-            },
-            {
-              label: '常见问题',
-              translations: {
-                'en-US': 'Troubleshooting',
-                'ja-JP': 'よくある質問',
-              },
-              autogenerate: {
-                directory: 'guides/troubleshooting',
-              },
-            },
-          ],
         },
         {
-          label: '💼 服务端私有部署',
+          label: '🚀 快速上手',
           translations: {
-            'en-US': '💼 Enterprise',
-            'ja-JP': '💼 エンタープライズ',
+            'en-US': '🚀 Quickstart',
+            'ja-JP': '🚀 クイックスタート',
+          },
+          link: 'guides/quickstart',
+        },
+        {
+          label: '🔰 新手入门',
+          translations: {
+            'en-US': '🔰 Getting Started',
+            'ja-JP': '🔰 はじめる',
           },
           autogenerate: {
-            directory: 'enterprises',
+            directory: 'guides/getting-started',
           },
+        },
+        {
+          label: '🏗️ 进阶使用',
+          translations: {
+            'en-US': '🏗️ Advanced Use',
+            'ja-JP': '🏗️ アドバンスド',
+          },
+          autogenerate: {
+            directory: 'guides/advanced-use',
+          },
+        },
+        {
+          label: '📚 教程',
+          translations: {
+            'en-US': '📚 Tutorials',
+            'ja-JP': '📚 チュートリアル',
+          },
+          autogenerate: {
+            directory: 'guides/tutorials',
+          },
+        },
+        {
+          label: '🧱 概念与架构',
+          translations: {
+            'en-US': '🧱 Concepts & Architecture',
+            'ja-JP': '🧱 アーキテクチャ & コンセプト',
+          },
+          autogenerate: {
+            directory: 'guides/concepts-and-architecture',
+          },
+        },
+        {
+          label: '🪄 扩展 Univer',
+          translations: {
+            'en-US': '🪄 Customizing Univer',
+            'ja-JP': '🪄 カスタマイズ',
+          },
+          autogenerate: {
+            directory: 'guides/customizing',
+          },
+        },
+        {
+          label: '🔧 常见问题',
+          translations: {
+            'en-US': '🔧 Troubleshooting',
+            'ja-JP': '🔧 よくある質問',
+          },
+          link: 'guides/troubleshooting',
+        },
+        {
+          label: '🗺️ 贡献指南',
+          translations: {
+            'en-US': '🗺️ Contributing Guidelines',
+            'ja-JP': '🗺️ コントリビューションガイドライン',
+          },
+          link: 'guides/contributing',
         },
       ],
     }),
