@@ -68,6 +68,49 @@ import FeatureBox from '../../../guides//introduction/_components/FeatureBox.ast
 
 > Univer Sheet 已经完成了大部分基础功能的开发，但仍有关键功能呢尚未完善。请关注我们的[路线图](/zh-cn/guides/introduction/roadmap)以了解最新进展。
 
+#### 示例
+
+import Sandbox from '@/components/Sandbox'
+
+export const code = `function UniverSheet () {
+  const univerRef = useRef(null);
+
+  useEffect(() => {
+    const univer = new Univer({
+      theme: defaultTheme,
+    });
+
+    // core plugins
+    univer.registerPlugin(UniverRenderEnginePlugin);
+    univer.registerPlugin(UniverFormulaEnginePlugin);
+    univer.registerPlugin(UniverUIPlugin, {
+      container: univerRef.current,
+      header: true,
+      toolbar: true,
+      footer: true,
+    });
+
+    // doc plugins
+    univer.registerPlugin(UniverDocsPlugin, {
+      hasScroll: false,
+    });
+    univer.registerPlugin(UniverDocsUIPlugin);
+
+    // sheet plugins
+    univer.registerPlugin(UniverSheetsPlugin);
+    univer.registerPlugin(UniverSheetsUIPlugin);
+    univer.registerPlugin(UniverSheetsFormulaPlugin);
+
+    univer.createUniverSheet({});
+  }, []);
+
+  return (
+    <div ref={univerRef} style={{ height: '400px' }} />
+  )
+}`
+
+<Sandbox client:only="react" src="/sandbox" code={code} hideEditor />
+
 #### 编辑操作
 
 - 新建、删除、移动子表

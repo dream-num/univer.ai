@@ -100,7 +100,7 @@ We provide preview deployments for Pull Requests. You can view the preview deplo
 We use Storybook for component development and testing. You can start Storybook with the following command:
 
 ```bash
-pnpm dev:storybook
+pnpm storybook:dev
 ```
 
 A preview of Storybook will be automatically deployed alongside your Pull Request.
