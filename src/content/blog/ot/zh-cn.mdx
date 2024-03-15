@@ -9,7 +9,7 @@ cover: ./4.png
 author: Wenzhao Hu
 date: 2024-01-12
 lang: zh-cn
-slug: blog/ot
+slug: zh-cn/blog/ot
 ---
 
 > 这篇博客是 [Univer 团队](https://github.com/dream-num)内部分享整理而成。在 Univer 我们经常对有趣的技术问题进行分享和讨论，如果你喜欢这篇博客，不妨考虑[加入我们](mailto:huwenzhao@univer.ai)。
@@ -59,7 +59,7 @@ PPS：近些年来 [CRDT（Conflict-free Replicated Data Type，无冲突复制�
 
 例如，上面提到的插入列的编辑行为可以表示为这样的一个操作：
 
-```ts
+```typescript
 const insertColOp = {
   type: "insertCol",
   coord: { col: 1 },
@@ -69,7 +69,7 @@ const insertColOp = {
 
 在单元格插入内容的编辑行为可以这样表示：
 
-```ts
+```typescript
 const insertCell = {
   type: "insertCell",
   coord: { row: 1, col: 2 },
@@ -101,7 +101,7 @@ const insertCell = {
 
 我们这里引入版本号的概念：定义一个副本的版本号为 `x`，应用一个操作之后，副本的版本号为 `x+1`，此时应用的这个操作的版本号就定义为 `x+1`，用代码的来描述就是把这个操作的 `revision` 属性赋值为 `x+1`。这样，我们就可以通过版本号来定义操作的顺序了。
 
-```ts {5}
+```typescript {5}
 const insertCell = {
   type: "insertCell",
   coord: { row: 1, col: 2 },
@@ -112,7 +112,7 @@ const insertCell = {
 
 另外，如果一个操作发生时，发生操作的这个副本的版本号为 `y`，那么就说这个操作的 `baseRevision` 为 `y`。这样我们也可以用 `baseRevision` 来定义并发的操作，即两个操作拥有相同的 `baseRevision`。
 
-```ts {6}
+```typescript {6}
 const insertCell = {
   type: "insertCell",
   coord: { row: 1, col: 2 },
@@ -146,7 +146,7 @@ const insertCell = {
 
 我们假设有 A B C 三个副本都处于 12 版本，此时它们都发生了一个操作，这三个操作的 `baseRevision` 都为 12，我们将这三个操作分别命名为 `a`、`b`、`c`，并且假设它们的 `revision` 属性都为 `0`，即还没有被服务器分配版本号。用伪代码表示如下：
 
-```ts
+```typescript
 const opa = {
   // ... other fields
   baseRevision: 12,
@@ -168,7 +168,7 @@ const opc = {
 
 A B C 三个副本都向服务器发送了这三个操作（上图中 1），服务器收到了这三个操作，将它们的 `revision` 属性分别赋值为 13 14 15（上图中 2），并将它们返回给 A B C 三个副本（上图中 3）。这三个副本按照 `revision` 的顺序应用这三个操作，此时 A B C 三个副本的版本号都为 15，且它们的内容都是一致的。
 
-```ts
+```typescript
 const opa = {
   // ... other fields
   baseRevision: 12,
@@ -225,7 +225,7 @@ const opc = {
 
 用伪代码描述如下：
 
-```ts
+```typescript
 const a = {
   type: "insertCell",
   coord: { row: 1, col: 2 },
@@ -279,7 +279,7 @@ B 收到 `a` 之后，发现 `a` 的 `revision` 为 13，而 B 的版本号为 1
 
 回到我们的例子，在 B 的副本上，`a'` 的内容用伪代码描述应该是：
 
-```ts
+```typescript
 const aPrime = {
   type: "insertCell",
   coord: { row: 1, col: 3 },
@@ -293,7 +293,7 @@ B 在转换得到 `b'` 之后，虽不需要应用到本地，但是需要将 `b
 
 `b'` 的内容用伪代码描述应该是：
 
-```ts
+```typescript
 const bPrime = {
   type: "insertCol",
   coord: { col: 2 },
@@ -415,7 +415,7 @@ C 对于 `a` 的处理和 B 类似，不再赘述。
 
 Univer 技术栈中的所使用的依赖注入框架支持插件对一些内核服务进行覆盖，协同编辑对于 undo redo 的处理依赖这一特性。Univer 当中 undo redo 服务的依赖注入 token 为 `IUndoRedoService`，默认实现为 `LocalUndoRedoService`，它并不支持对 undo redo 栈中的操作做转换，而 Univer 的协同编辑插件会将实现替换为 `CollaborativeUndoRedoService` 以支持 undo redo 转换：
 
-```ts {17}
+```typescript {17}
 export class CollaborativeUndoRedoService extends LocalUndoRedoService implements ICollaborativeUndoRedoService {
     // ...
 }

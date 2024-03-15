@@ -1,8 +1,26 @@
 :root {
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "noto sans", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'PingFang SC',
+    'Hiragino Sans GB',
+    'noto sans',
+    'Microsoft YaHei',
+    'Helvetica Neue',
+    Helvetica,
+    Arial,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
 
-  --sl-color-accent: #274FEE !important;
+  --sl-color-accent: #274fee !important;
+  --sl-content-width: 52rem;
+
+  --sl-text-h1: var(--sl-text-4xl);
+  --sl-text-h2: var(--sl-text-3xl);
+  --sl-text-h3: var(--sl-text-2xl);
+  --sl-text-h4: var(--sl-text-xl);
+  --sl-text-h5: var(--sl-text-lg);
 }
 
 .site-title {
@@ -10,16 +28,63 @@
 }
 
 .pagination-links a {
-  --sl-shadow-md: 0px 0px 24px 0px rgba(31,35,39,0.04);
+  --sl-shadow-md: 0px 0px 24px 0px rgba(31, 35, 39, 0.04);
   padding: 0.5rem;
   font-size: 0.8rem;
   border: none;
   transition: all 0.15s;
 }
 .pagination-links a:hover {
-  background: #F5F5F5;
+  background: #f5f5f5;
 }
 
 .link-title {
   --sl-text-2xl: 1rem;
+}
+
+.sl-markdown-content img {
+  border-radius: 6px;
+  box-shadow: 0 8px 24px #1f23271f;
+}
+
+.sl-markdown-content a:not(:where(.not-content *)) {
+  text-decoration-thickness: from-font;
+  text-underline-position: from-font;
+}
+
+.sl-container {
+  margin: auto;
+}
+
+.right-sidebar .sl-container {
+  margin: 0;
+}
+
+.sidebar-pane {
+  scrollbar-color: #73737366 transparent;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+}
+
+@media (min-width: 100rem) {
+  .sidebar-pane {
+    width: 16rem;
+    margin-left: 50%;
+    background-color: transparent;
+    transform: translateX(-45rem);
+  }
+
+  .right-sidebar-container {
+    width: 16rem;
+  }
+
+  [data-has-sidebar][data-has-toc] .main-pane {
+    width: calc(100% - 16rem);
+  }
+
+  .main-frame {
+    width: 90rem;
+    margin: 0 auto;
+    padding-left: 16rem;
+  }
 }

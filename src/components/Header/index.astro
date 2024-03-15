@@ -23,9 +23,9 @@ const currentPath = Astro.url.pathname.replace(`/${lang}`, '')
       <nav class="nav">
         <a href={l('/guides/introduction')}>{t('header.docs')}</a>
         <a href={l('/api')}>{t('header.api')}</a>
-        <a href={l('/enterprises#获取商业版')}>{t('header.concat')}</a>
         <a href={l('/blog')}>{t('header.blog')}</a>
         <a href="/icons">{t('header.icons')}</a>
+        <a href={l('/enterprises#获取商业版')}>{t('header.concat')}</a>
       </nav>
     </section>
 
@@ -42,6 +42,9 @@ const currentPath = Astro.url.pathname.replace(`/${lang}`, '')
 
 <style lang="less" scoped>
 .header {
+  position: relative;
+  z-index: 1;
+
   .wrapper {
     margin: auto;
     height: 5.8rem;
@@ -57,7 +60,7 @@ const currentPath = Astro.url.pathname.replace(`/${lang}`, '')
     .left {
       display: flex;
       align-items: center;
-      gap: 3rem;
+      gap: 2.25rem;
 
       .title {
         position: relative;

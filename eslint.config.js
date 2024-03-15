@@ -27,7 +27,12 @@ const rules = {
 export default antfu({
   react: true,
   yaml: true,
-  markdown: false,
+  typescript: true,
+  formatters: {
+    css: true,
+    html: true,
+    markdown: 'dprint',
+  },
 
   rules,
 }, {

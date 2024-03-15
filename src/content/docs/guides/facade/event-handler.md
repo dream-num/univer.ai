@@ -1,157 +1,157 @@
 ---
-title: 监听和触发事件
+title: listening and triggering events
 sidebar:
   order: 2
 ---
 
 :::tip
-建议在阅读本小节内容之前先[了解 Univer 的命令系统](/guides/architecture/architecture/#命令系统)。
+It is recommended to familiarize oneself with the [Univer command system](/guides/architecture/architecture/#command-system) before reading this section.
 :::
 
-Univer 中事件大致可以分为两类：Univer 命令和事件。
+There are two types of events in Univer: Univer commands and events.
 
-1. Univer 命令（Commands）：通常会涉及 Univer 内部状态的变更，由 Univer 插件提供，例如设置表格选区、修改选区赋值等。
+1. Univer Commands: They usually involve changing the internal state of Univer, provided by Univer plugins, such as setting sheet selection, modifying selection values, etc.
 
-2. 事件：通常不直接涉及到 Univer 状态的变更，只在 Univer 插件内部使用，例如浏览器的鼠标、键盘、屏幕滚动等原生事件等。
+2. Events: They usually do not directly involve changing the internal state of Univer, only used internally by Univer plugins, such as native browser events like mouse, keyboard, and screen scrolling, etc.
 
-在接下来的内容中，我们将分别介绍 Univer 命令和事件，以及如何使用 Facade API 来监听和触发它们。
+In the following content, we will introduce Univer commands and events separately, and how to use the Facade API to listen and trigger them.
 
-## Univer 命令
+## Univer Commands
 
-Univer 命令由 Univer 的插件各自实现和提供，命令注册发生在我们将插件挂载到 Univer 实例时 ([`Univer.registerPlugin`](/api/core/classes/Univer.html#registerPlugin)) ，之后 Univer 就可以使用这些命令。
+Univer commands are provided by Univer plugins, and the command registration occurs when we mount the plugin to the Univer instance ([`Univer.registerPlugin`](/api/core/classes/Univer.html#registerPlugin)), and then Univer can use these commands.
 
-Univer 插件会把用户的操作封装成不同命令，例如插件`@univerjs/sheets`中有修改表格选区、修改选区值等命令。
+Univer plugins will encapsulate user operations into different commands, such as the `@univerjs/sheets` plugin has commands like modifying sheet selection, modifying selection values, etc.
 
-命令可以被监听、执行、撤销（undo）和重做（redo），通过监听和触发命令，可以实现对用户操作的监控和响应，为协同功能提供了基础。理解命令有助于更好地使用 Univer 来实现自己的业务逻辑。
+We can be listen , execute, undo, and redo commands. By listening and triggering commands, we can monitor and respond to user operations, providing a foundation for collaborative features. Understanding commands can help us better using Univer to implement our own business logic.
 
-Univer 提供了一些有用 API 来执行和监听命令，例如 `executeCommand`、`syncExecuteCommand` 用来执行命令， `beforeCommandExecuted` 和 `onCommandExecuted` 可以在命令执行前后执行自定义的逻辑。
+Univer provides some useful APIs to execute and listen to commands, such as `executeCommand`, `syncExecuteCommand` to execute commands, `beforeCommandExecuted` and `onCommandExecuted` to execute custom logic before and after the command is executed.
 
-### 命令的类型
+### Types of Commands
 
-Univer 命令分为 3 种类型：Command、Operation、Mutation。
+Univer commands are divided into 3 types: Command, Operation, Mutation.
 
-- Command：通常是用户在 Univer 界面的具体操作。例如设置表格选区、修改选区值等，这类命令通常由用户操作触发。
-- Mutation：通常是一些会改变 Univer 业务数据（指文档和表格的数据）的命令。例如修改选区值，这类命令通常在 Command 内部调用。Mutation 的撤销和重做也由 Command 来管理。
-- Operation：通常是一些不会对 Univer 业务数据产生影响的命令。例如设置表格选区，这类命令不会被撤销和重做。
+- Command: Usually the specific operation of the user in the Univer interface. Such as setting the sheet selection, modifying the selection value, etc., these commands are usually triggered by user operations.
+- Mutation: Usually some commands that will change the Univer business data (referring to the data of documents and sheets). For example, modifying the selection value, these commands are usually called internally by the Command. The undo and redo of Mutation are also managed by the Command.
+- Operation: Usually some commands that will not affect the Univer business data. For example, setting the sheet selection, these commands will not be undone and redone.
 
 :::tip
-请阅读 [Univer 命令系统](/guides/architecture/architecture/#命令系统) 了解更多。
+Please read [Univer Command System](/guides/architecture/architecture/#command-system) for more information.
 :::
 
-## Facade API 命令操作
+## Facade API Command Operation
 
-使用 Facade API 来监听命令的执行，可以在命令执行前后插入自定义的逻辑。
+Use the Facade API to listen to the execution of commands, you can insert custom logic before and after the command is executed.
 
-你可以在 [Playground](/playground/) 中尝试以下示例代码。
+You can try the following example code in the [Playground](/playground/).
 
 :::tip
-使用 Facade API 前请检查你安装和注册了 `@univerjs/facade` 插件，请参考 [Facade 使用](/guides/facade/#安装)。
+Before using the Facade API, please check if you have installed and registered the `@univerjs/facade` plugin, please refer to [Facade Usage](/guides/facade/#installation).
 :::
 
-### 监听命令
+### Listening Commands
 
-目前提供有 2 种监听命令的时机，分别是命令执行前和命令执行后。
+Currently, there are two ways to listen to commands, before the command is executed and after the command is executed.
 
-在命令执行之前，可以向 (`FUniver.onBeforeCommandExecute`) API 传入一个回调函数来注册自定义的预处理监听器。
+Before the command is executed, you can register a custom preprocessing listener by passing a callback function to the `FUniver.onBeforeCommandExecute` API.
 
-当命令执行前，会先触发预处理监听器，可以自定义些预处理逻辑。
+Before the command is executed, the preprocessing listener will be triggered first, and you can customize some preprocessing logic.
 
 ```javascript
 const univerAPI = FUniver.newAPI(univer);
 
 univerAPI.onBeforeCommandExecute((command)=>{
   const { id, type, params } = command;
-  // 在命令执行前执行自定义逻辑
+  // custom preprocessing logic before the command is executed
 })
 ```
 
-在命令执行之后，我们也可以向 `FUniver.onCommandExecuted` API 传入一个回调函数来注册自定义的后处理监听器。
+After the command is executed, you can register a custom post-processing listener by passing a callback function to the `FUniver.onCommandExecuted` API.
 
-当命令执行后，会触发后处理监听器，可以自定义些后处理逻辑。
+when the command is executed, the post-processing listener will be triggered, and you can customize some post-processing logic.
 
 ```javascript
 const univerAPI = FUniver.newAPI(univer);
 
 univerAPI.onCommandExecuted((command)=>{
   const { id, type, params } = command;
-  // 在命令执行后执行自定义逻辑
+  // custom post-processing logic after the command is executed
 })
 ```
 
-### 取消监听
+### Destroying Listeners
 
-注册事件监听器的方法会返回一个 `IDisposable` 对象，调用该对象`dispose`就会销毁监听器。
+Registering an event listener method will return an `IDisposable` object, calling the `dispose` method of the object will destroy the listener.
 
-建议您及时销毁不再使用的监听器，有助于提高程序的健壮性。
+Advice you to destroy the listener when you no longer need it, to avoid memory leaks.
 
 ```javascript
 const univerAPI = FUniver.newAPI(univer);
 
-// 注册监听器
+// Register a listener
 const disposable = univerAPI.onBeforeCommandExecute((command)=>{
-  // 在命令执行前执行自定义逻辑
+  // custom preprocessing logic before the command is executed
 })
 
 setTimeout(()=>{
-  // 取消监听
+  // Destroy the listener
   disposable.dispose();
 }, 1000);
 ```
 
-### 执行命令
+### Triggering Commands
 
-实际上所有命令在 Univer 内部也是通过调用 `ICommandService` 的 `executeCommand` 或 `syncExecuteCommand` 方法来触发执行。
+In fact, all commands are triggered internally by calling the `ICommandService`'s `executeCommand` or `syncExecuteCommand` method.
 
-Facade API 中也提供了 `executeCommand` 和 `syncExecuteCommand` 方法，我们可以通过这两个方法来触发命令。
+The Facade API also provides `executeCommand` and `syncExecuteCommand` methods, we can use these two methods to trigger commands.
 
-区别是 `executeCommand` 是异步执行命令，会返回一个 Promise 对象，`syncExecuteCommand` 是同步执行命令，直接返回执行结果。
+The difference between `executeCommand` and `syncExecuteCommand` is that `executeCommand` is an asynchronous execution command, which will return a Promise object, and `syncExecuteCommand` is a synchronous execution command, which directly returns the execution result.
 
-以修改表格值 `sheet.mutation.set-range-values` 为例，对数据的变更都是 Mutation 类型的命令，Mutation 都是同步执行的，所以我们可以使用 `syncExecuteCommand` 来触发命令。
+For example, we can modify the table value `sheet.mutation.set-range-values` as an example, all data changes are Mutation type commands, and Mutations are executed synchronously, so we can use `syncExecuteCommand` to trigger the command.
 
 ```javascript
 const univerAPI = FUniver.newAPI(univer);
-// set the value of the first cell A1 in the first sheet to "Hello World"
+// set the value of the first cell in the first sheet to "Hello World"
 univerAPI.executeCommand('sheet.command.set-range-values', {
   value: { v: "Hello World" },
   range: { startRow: 0, startColumn: 0, endRow: 0, endColumn: 0 }
 })
 ```
 
-### 阻止命令执行
+### Preventing Command execution
 
 ```javascript
 const univerAPI = FUniver.newAPI(univer);
 univerAPI.beforeCommandExecute((command)=>{
   const { id, type, params } = command;
   if (id === 'sheet.mutation.set-range-values') {
-    // 阻止命令执行
+    // Prevent the command from executing
     return false;
   }
 })
 ```
 
-在 0.1.2 版本前，你可以在 `beforeCommandExecute` 回调函数中 `throw` 一个异常来阻止命令执行。
+Before version 0.1.2, you can `throw` an exception in the `beforeCommandExecute` callback function to prevent the command from executing.
 
-## 常用命令
+## Most used Commands
 
-我们将一些常用的命令封装成了 Facade API，这些 API 可以帮助我们更方便地监听和触发命令。
+We have encapsulated some common commands into the Facade API, which can help us to listen and trigger commands more conveniently.
 
-对于还没有封装的命令，我们也可以使用上面介绍的 `executeCommand` 和 `syncExecuteCommand` 来触发命令。
+For commands that have not been encapsulated, we can also use the `executeCommand` and `syncExecuteCommand` methods introduced above to trigger commands.
 
-由于命令是插件提供的，我们在使用 Univer 时，可以根据插件的文档来了解插件提供了哪些命令。
+Since the commands are provided by the plugins, when we use Univer, we can learn what commands the plugins provide according to the plugins' documentation.
 
-并且在判断命令和过滤命令时，推荐使用插件导出的命令的 ID 属性，这样可以避免因为命令的 ID 值变化而导致的错误。
+When we judge commands and filter commands, it is recommended to use the ID property exported by the plugin, so as to avoid errors caused by the change of the command's ID value.
 
-- 设置表格选区
-- 设置选区值
-- 插入节点
+- Set the table selection
+- Set the selection value
+- Insert node
 
-## 事件
+## Events
 
-事件通常是 Univer 插件在内部使用，例如监听浏览器的鼠标、键盘、屏幕滚动等底层事件。
+Univer events are usually used internally by Univer plugins, such as listening to native browser events like mouse, keyboard, and screen scrolling, etc.
 
-以及各插件内部设计的一些事件或者钩子（Hook），用户一般不不需要太关心，对于一些有用的事件，也会经过 Facade API 封装后提供给用户，请参考 [Facade API](/guides/facade/)。
+and some events or hooks designed internally by the plugins, users generally do not need to care too much, for some useful events, they will also be provided to users after being encapsulated by the Facade API, please refer to the [Facade API](/guides/facade/).
 
-## 参考
+## Reference
 
-如果你在编写插件，想要注册命令，可以参考 [插件开发](/guides/extend/command/)。
+If you are writing a plugin and want to register a command, you can refer to [Plugin Development](/guides/extend/command/).

@@ -1,0 +1,106 @@
+---
+title: Installation & Usage
+sidebar:
+  order: 1
+---
+
+We recommend using build tools such as [Vite](https://vitejs.dev/), [esbuild](https://esbuild.github.io/), or [Webpack 5](https://webpack.js.org/) that have good support for ES Modules to build Univer applications. If you are using other build tools like Webpack 4, you may require some additional configurations. For more information, please refer to [Read More](/guides/quickstart#read-more) and the [Troubleshooting](/guides/troubleshooting).
+
+## Installation
+
+To facilitate the deployment of Univer's frontend, a variety of npm packages are utilized. You may install the requisite packages based on your specific requirements.
+
+To install the packages necessary for Sheets, please follow the instructions below:
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+<Tabs>
+  <TabItem label="npm">
+    We recommend using npm >= 8.0.0 to automatically install peerDependencies.
+
+    ```shell
+    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+    ```
+  </TabItem>
+
+  <TabItem label="pnpm">
+    ```shell
+    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+    ```
+  </TabItem>
+</Tabs>
+
+## Usage
+
+To employ Univer in your project, you must include the style sheet provided and incorporate the necessary plugins:
+
+```typescript title="main.ts"
+import "@univerjs/design/lib/index.css";
+import "@univerjs/ui/lib/index.css";
+import "@univerjs/docs-ui/lib/index.css";
+import "@univerjs/sheets-ui/lib/index.css";
+import "@univerjs/sheets-formula/lib/index.css";
+
+import { Univer } from "@univerjs/core";
+import { defaultTheme } from "@univerjs/design";
+import { UniverDocsPlugin } from "@univerjs/docs";
+import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
+import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
+import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
+import { UniverSheetsPlugin } from "@univerjs/sheets";
+import { UniverSheetsFormulaPlugin } from "@univerjs/sheets-formula";
+import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
+import { UniverUIPlugin } from "@univerjs/ui";
+```
+
+Next, instantiate an Univer object and register these plugins:
+
+```typescript title="main.ts" {9}
+const univer = new Univer({
+  theme: defaultTheme,
+});
+
+// core plugins
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+univer.registerPlugin(UniverUIPlugin, {
+  container: "app",
+  header: true,
+  toolbar: true,
+  footer: true,
+});
+
+// doc plugins
+univer.registerPlugin(UniverDocsPlugin, {
+  hasScroll: false,
+});
+univer.registerPlugin(UniverDocsUIPlugin);
+
+// sheet plugins
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
+```
+
+Please be informed that when registering the `UniverUIPlugin`, it is necessary to provide a `container` parameter. This parameter represents a CSS selector that serves the purpose of specifying the container element for Univer.
+
+:::note
+You have the flexibility to create multiple instances of Univer by creating multiple `Univer` objects and supplying different containers when registering the `UniverUIPlugin`. This allows you to incorporate multiple instances of Univer within a single webpage! For further guidance, kindly refer to our [playground](/playground/?title=Multi%20Instance).
+:::
+
+Finally, create an empty Workbook using the `createUniverSheet` method:
+
+```typescript title="main.ts"
+univer.createUniverSheet({});
+```
+
+For instructions on how to load a spreadsheet into a newly created Univer instance, please consult the [next section](/guides/quickstart/data) of our documentation.
+
+## Read More
+
+We have provided some examples to assist you in incorporating Univer using various scaffolding tools:
+
+- [Vite](/playground/?title=Vite)
+- [Webpack 4](/playground/?title=Webpack%204)
+
+Alternatively, you can also include Univer using the `<script>` tag. Please refer to the [Using UMD](/guides/quickstart/umd/) guide for further instructions.

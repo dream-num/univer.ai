@@ -1,7 +1,7 @@
 ---
 title: This is Univer
 desc: This article aims to help newbies quickly familiarize themselves with the architecture and code of the open-source project "univer", which is also my learning and summary of participating in the development of "univer" over the past period of time
-tags: 
+tags:
   - Sheet
   - Architecture
   - MVC
@@ -10,7 +10,7 @@ cover: ./cover.png
 date: 2024-01-06
 author: Jocs
 lang: en-us
-slug: en-us/blog/this-is-univer
+slug: blog/this-is-univer
 ---
 
 ## Chapter Zero: Introduction
@@ -45,9 +45,9 @@ At first glance, one might assume that the core module in Univer depends on the 
 
 Without dependency injection, one might write code like this:
 
-```ts
+```typescript
 class SheetPlugin {
-    private _commandService = new CommandService(); 
+  private _commandService = new CommandService()
 }
 ```
 
@@ -57,17 +57,17 @@ In the code above, the `SheetPlugin` class depends on the `CommandService` class
 
 Through dependency injection, the code is structured as follows:
 
-```ts
+```typescript
 class SheetPlugin {
-    constructor(
-        // ...
-        @ICommandService private readonly _commandService: ICommandService,
-        // ...
-    )
+  constructor(
+    // ...
+    @ICommandService private readonly _commandService: ICommandService,
+    // ...
+  )
 
-    otherMethod(){
-        this._commandService.registerCommand(SomeCommand);
-    }
+  otherMethod(){
+    this._commandService.registerCommand(SomeCommand);
+  }
 }
 ```
 
@@ -97,7 +97,7 @@ By examining the source code, let's explore how Univer addresses these questions
 
 The model layer in Univer tends to be relatively thin. Taking Univer sheet as an example, in the core module, the Workbook and Worksheet classes are utilized to manage sheet-related model data, providing the necessary data storage and management functionalities. For instance, in the Worksheet class, there are row-manager, column-manager, and related classes and methods to manage each sheet's model data. For instance, regarding the row-manager, we can retrieve information and data about table rows:
 
-```ts
+```typescript
 getRowData(): ObjectArray<IRowData>;
 getRowHeight(rowPos: number): number;
 getRowOrCreate(rowPos: number): IRowData;
@@ -172,25 +172,25 @@ Understanding how Univer renders its pages essentially encompasses the entire pr
 
 ### Application Lifecycle
 
-```ts
+```typescript
 export const enum LifecycleStages {
-    /**
-     * Register plugins to Univer.
-     */
-    Starting,
-    /**
-     * Univer business instances (UniverDoc / UniverSheet / UniverSlide) are created and services or controllers provided by
-     * plugins get initialized. The application is ready to do the first-time rendering.
-     */
-    Ready,
-    /**
-     * First-time rendering is completed.
-     */
-    Rendered,
-    /**
-     * All lazy tasks are completed. The application is fully ready to provide features to users.
-     */
-    Steady,
+  /**
+   * Register plugins to Univer.
+   */
+  Starting,
+  /**
+   * Univer business instances (UniverDoc / UniverSheet / UniverSlide) are created and services or controllers provided by
+   * plugins get initialized. The application is ready to do the first-time rendering.
+   */
+  Ready,
+  /**
+   * First-time rendering is completed.
+   */
+  Rendered,
+  /**
+   * All lazy tasks are completed. The application is fully ready to provide features to users.
+   */
+  Steady,
 }
 ```
 
@@ -208,10 +208,10 @@ When are the various lifecycle stages triggered?
 
 Through the `@OnLifecycle` annotation, precise control over when a class is instantiated during a specific lifecycle stage can be achieved, as demonstrated below:
 
-```ts
+```typescript
 @OnLifecycle(LifecycleStages.Rendered, SheetRenderController)
 export class SheetRenderController extends Disposable {
-    //...
+  // ...
 }
 ```
 
@@ -233,34 +233,34 @@ The registered plugins and their functionalities include:
 
 Upon completing plugin registration, the `createUniverSheet` method creates the Univer sheet instance.
 
-```ts
+```typescript
 /**
  * Create a univer sheet instance with internal dependency injection.
  */
 createUniverSheet(config: Partial<IWorkbookConfig>): Workbook {
-    let workbook: Workbook;
-    const addSheet = () => {
-        workbook = this._univerSheet!.createSheet(config);
-        this._currentUniverService.addSheet(workbook);
-    };
+  let workbook: Workbook;
+  const addSheet = () => {
+    workbook = this._univerSheet!.createSheet(config);
+    this._currentUniverService.addSheet(workbook);
+  };
 
-    if (!this._univerSheet) {
-        this._univerSheet = this._rootInjector.createInstance(UniverSheet);
+  if (!this._univerSheet) {
+    this._univerSheet = this._rootInjector.createInstance(UniverSheet);
 
-        this._univerPluginRegistry
-            .getRegisterPlugins(PluginType.Sheet)
-            .forEach((p) => this._univerSheet!.addPlugin(p.plugin as unknown as PluginCtor<any>, p.options));
-        this._tryStart();
-        this._univerSheet.init();
-        addSheet();
+    this._univerPluginRegistry
+      .getRegisterPlugins(PluginType.Sheet)
+      .forEach((p) => this._univerSheet!.addPlugin(p.plugin as unknown as PluginCtor<any>, p.options));
+    this._tryStart();
+    this._univerSheet.init();
+    addSheet();
 
-        this._tryProgressToReady();
-    } else {
-        addSheet();
-    }
+    this._tryProgressToReady();
+  } else {
+    addSheet();
+  }
 
-    return workbook!;
- }
+  return workbook!;
+}
 ```
 
 Through the above code, we can see that Univer re-registers the plugins of type PluginType.Sheet from the registered plugins mentioned above to the UniverSheet instance. Then, by using _tryStart, the application enters the Starting stage, initializes, and instantiates a Workbook through addSheet, completing the initialization of the model layer. At this point, the model data preparation is complete, and Univer transitions to the Ready stage.
@@ -269,64 +269,64 @@ Through the above code, we can see that Univer re-registers the plugins of type 
 
 During the Univer application lifecycle, plugins execute specific actions at different stages. In this step, the focus is on the base-ui plugin.
 
-```ts
+```typescript
 // base-ui-plugin.ts
 override onStarting(_injector: Injector): void {
-    this._initDependencies(_injector);
+  this._initDependencies(_injector);
 }
 
 override onReady(): void {
-    this._initUI();
+  his._initUI();
 }
 ```
 
 In the above code, the base-ui plugin declares and adds dependencies in the onStarting stage and initializes the rendering of the entire page framework in the onReady stage, mounting the View interface onto the container.
 
-```ts
+```typescript
 // ui-desktop.controller.tsx
 bootstrapWorkbench(options: IWorkbenchOptions): void {
-    this.disposeWithMe(
-        bootStrap(this._injector, options, (canvasElement, containerElement) => {
-            this._initializeEngine(canvasElement);
-            this._lifecycleService.stage = LifecycleStages.Rendered;
-            this._focusService.setContainerElement(containerElement);
+  this.disposeWithMe(
+    bootStrap(this._injector, options, (canvasElement, containerElement) => {
+      this._initializeEngine(canvasElement);
+      this._lifecycleService.stage = LifecycleStages.Rendered;
+      this._focusService.setContainerElement(containerElement);
 
-            setTimeout(() => (this._lifecycleService.stage = LifecycleStages.Steady), STEADY_TIMEOUT);
-        })
-    );
+      setTimeout(() => (this._lifecycleService.stage = LifecycleStages.Steady), STEADY_TIMEOUT);
+    })
+  );
 }
 // ...
 function bootStrap(
-    injector: Injector,
-    options: IWorkbenchOptions,
-    callback: (canvasEl: HTMLElement, containerElement: HTMLElement) => void
+  injector: Injector,
+  options: IWorkbenchOptions,
+  callback: (canvasEl: HTMLElement, containerElement: HTMLElement) => void
 ): IDisposable {
-    let mountContainer: HTMLElement;
-    // ...
-    const root = createRoot(mountContainer);
-    const ConnectedApp = connectInjector(App, injector);
-    const desktopUIController = injector.get(IUIController) as IDesktopUIController;
-    const onRendered = (canvasElement: HTMLElement) => callback(canvasElement, mountContainer);
+  let mountContainer: HTMLElement;
+  // ...
+  const root = createRoot(mountContainer);
+  const ConnectedApp = connectInjector(App, injector);
+  const desktopUIController = injector.get(IUIController) as IDesktopUIController;
+  const onRendered = (canvasElement: HTMLElement) => callback(canvasElement, mountContainer);
 
-    function render() {
-        const headerComponents = desktopUIController.getHeaderComponents();
-        const contentComponents = desktopUIController.getContentComponents();
-        const footerComponents = desktopUIController.getFooterComponents();
-        const sidebarComponents = desktopUIController.getSidebarComponents();
-        root.render(
-            <ConnectedApp
-                {...options}
-                headerComponents={headerComponents}
-                contentComponents={contentComponents}
-                onRendered={onRendered}
-                footerComponents={footerComponents}
-                sidebarComponents={sidebarComponents}
-            />
-        );
-    }
+  function render() {
+    const headerComponents = desktopUIController.getHeaderComponents();
+    const contentComponents = desktopUIController.getContentComponents();
+    const footerComponents = desktopUIController.getFooterComponents();
+    const sidebarComponents = desktopUIController.getSidebarComponents();
+    root.render(
+      <ConnectedApp
+        {...options}
+        headerComponents={headerComponents}
+        contentComponents={contentComponents}
+        onRendered={onRendered}
+        footerComponents={footerComponents}
+        sidebarComponents={sidebarComponents}
+      />
+    );
+  }
 
-    // ...
-    render();
+  // ...
+  render();
     // ...
 }
 ```
@@ -337,66 +337,66 @@ In the above code snippet, after mounting and rendering the page framework, the 
 
 This process actually began in the Ready stage, where the initialization and assembly of components for the sheet canvas were started.
 
-```ts
+```typescript
 // sheet-canvas-view.ts
 @OnLifecycle(LifecycleStages.Ready, SheetCanvasView)
 export class SheetCanvasView {
+  // ...
+  constructor(
     // ...
-    constructor(
-        // ...
-    ) {
-        this._currentUniverService.currentSheet$.subscribe((workbook) => {
-            // ...
-            const unitId = workbook.getUnitId();
-            if (!this._loadedMap.has(unitId)) {
-                this._currentWorkbook = workbook;
-                this._addNewRender();
-                this._loadedMap.add(unitId);
-            }
-        });
-    }
+  ) {
+    this._currentUniverService.currentSheet$.subscribe((workbook) => {
+      // ...
+      const unitId = workbook.getUnitId()
+      if (!this._loadedMap.has(unitId)) {
+        this._currentWorkbook = workbook
+        this._addNewRender()
+        this._loadedMap.add(unitId)
+      }
+    })
+  }
 
-    private _addNewRender() {
-        // ...
-        if (currentRender != null) {
-            this._addComponent(currentRender);
-        }
-        const should = workbook.getShouldRenderLoopImmediately();
-        if (should && !isAddedToExistedScene) {
-            engine.runRenderLoop(() => {
-                scene.render();
-            });
-        }
-        // ...
+  private _addNewRender() {
+    // ...
+    if (currentRender != null) {
+      this._addComponent(currentRender)
     }
+    const should = workbook.getShouldRenderLoopImmediately()
+    if (should && !isAddedToExistedScene) {
+      engine.runRenderLoop(() => {
+        scene.render()
+      })
+    }
+    // ...
+  }
 
-    private _addComponent(currentRender: IRender) {
-        // ...
-        currentRender.mainComponent = spreadsheet;
-        currentRender.components.set(SHEET_VIEW_KEY.MAIN, spreadsheet);
-        currentRender.components.set(SHEET_VIEW_KEY.ROW, spreadsheetRowHeader);
-        currentRender.components.set(SHEET_VIEW_KEY.COLUMN, spreadsheetColumnHeader);
-        currentRender.components.set(SHEET_VIEW_KEY.LEFT_TOP, SpreadsheetLeftTopPlaceholder);
-        // ...
-        this._sheetSkeletonManagerService.setCurrent({ sheetId, unitId });
-    }
+  private _addComponent(currentRender: IRender) {
+    // ...
+    currentRender.mainComponent = spreadsheet
+    currentRender.components.set(SHEET_VIEW_KEY.MAIN, spreadsheet)
+    currentRender.components.set(SHEET_VIEW_KEY.ROW, spreadsheetRowHeader)
+    currentRender.components.set(SHEET_VIEW_KEY.COLUMN, spreadsheetColumnHeader)
+    currentRender.components.set(SHEET_VIEW_KEY.LEFT_TOP, SpreadsheetLeftTopPlaceholder)
+    // ...
+    this._sheetSkeletonManagerService.setCurrent({ sheetId, unitId })
+  }
 
-    private _addViewport(worksheet: Worksheet) {
-        // ...
-        scene
-            .addViewport(
-                viewMain,
-                viewColumnLeft,
-                viewColumnRight,
-                viewRowTop,
-                viewRowBottom,
-                viewLeftTop,
-                viewMainLeftTop,
-                viewMainLeft,
-                viewMainTop
-            )
-            .attachControl();
-    }
+  private _addViewport(worksheet: Worksheet) {
+    // ...
+    scene
+      .addViewport(
+        viewMain,
+        viewColumnLeft,
+        viewColumnRight,
+        viewRowTop,
+        viewRowBottom,
+        viewLeftTop,
+        viewMainLeftTop,
+        viewMainLeft,
+        viewMainTop
+      )
+      .attachControl()
+  }
 }
 ```
 
@@ -404,7 +404,7 @@ The above code actually represents the entire process of rendering the sheet can
 
 In the above process, the assembly of the necessary canvas components for the sheet and the addition of the viewport are completed. So, where does the initial rendering of the canvas occur? And in which lifecycle stage? The rendering of the sheet canvas is managed by the SheetRenderController class, which handles the initialization rendering of the sheet canvas, listens for mutations, and then selectively renders the canvas interface.
 
-```ts
+```typescript
 // sheet-render.controller.ts
 @OnLifecycle(LifecycleStages.Rendered, SheetRenderController)
 export class SheetRenderController extends Disposable {}
@@ -412,35 +412,34 @@ export class SheetRenderController extends Disposable {}
 
 In the above code, we can see that the rendering of the sheet canvas occurs during the entire application's Rendered stage. This is quite understandable because at this stage, the page framework has been mounted on the container, and the sheet canvas has completed its initialization work. During the Rendered stage, it subscribes to changes in `currentSkeleton$`, then updates the skeleton to complete the initial rendering of the page.
 
-```ts
-// sheet-render.controller.ts
+```typescript
 private _commandExecutedListener() {
-    this.disposeWithMe(
-         his._commandService.onCommandExecuted((command: ICommandInfo) => {
-            // ...
-            if (COMMAND_LISTENER_SKELETON_CHANGE.includes(command.id)) {
-                // ...
-                if (command.id !== SetWorksheetActivateMutation.id) {
-                    this._sheetSkeletonManagerService.makeDirty(
-                        {
-                            unitId,
-                            sheetId,
-                            commandId: command.id,
-                         ,
-                        true
-                    );
-                }
+  this.disposeWithMe(
+    this._commandService.onCommandExecuted((command: ICommandInfo) => {
+      // ...
+      if (COMMAND_LISTENER_SKELETON_CHANGE.includes(command.id)) {
+          // ...
+          if (command.id !== SetWorksheetActivateMutation.id) {
+            this._sheetSkeletonManagerService.makeDirty(
+              {
+                unitId,
+                sheetId,
+                commandId: command.id,
+              },
+              true
+            );
+          }
 
-                 this._sheetSkeletonManagerService.setCurrent({
-                    unitId,
-                    sheetId,
-                    commandId: command.id,
-                });
-           }
+          this._sheetSkeletonManagerService.setCurrent({
+            unitId,
+            sheetId,
+            commandId: command.id,
+          });
+      }
 
-            this._renderManagerService.getRenderById(unitId)?.mainComponent?.makeDirty(); // refresh spreadsheet
-        })
-    );
+      this._renderManagerService.getRenderById(unitId)?.mainComponent?.makeDirty(); // refresh spreadsheet
+    })
+  );
 }
 ```
 
@@ -450,19 +449,19 @@ The above code occurs in the SheetRenderController class. In the `_commandExecut
 
 In fact, by the third step, the rendering of the entire sheet interface is essentially complete. Let's now focus on the initialization process of the cell editors. During the application's Rendered stage, Univer will initialize two Doc instances—one for cell editing and the other for formula input box editing.
 
-```ts
+```typescript
 // initialize-editor.controller.ts
 private _initialize() {
-    this._currentUniverService.createDoc({
-        id: DOCS_NORMAL_EDITOR_UNIT_ID_KEY,
-        documentStyle: {},
-    });
-    // create univer doc formula bar editor instance
+  this._currentUniverService.createDoc({
+    id: DOCS_NORMAL_EDITOR_UNIT_ID_KEY,
+    documentStyle: {},
+  });
+  // create univer doc formula bar editor instance
 
-    this._currentUniverService.createDoc({
-        id: DOCS_FORMULA_BAR_EDITOR_UNIT_ID_KEY,
-        documentStyle: {},
-    });
+  this._currentUniverService.createDoc({
+    id: DOCS_FORMULA_BAR_EDITOR_UNIT_ID_KEY,
+    documentStyle: {},
+  });
 }
 ```
 
@@ -476,58 +475,56 @@ The following sequence diagram describes the entire process from event response 
 
 **Step 1**: The user clicks on the "text wrap" menu item in the menu.
 
-```typescript
- // menu.ts
- export function WrapTextMenuItemFactory(accessor: IAccessor): IMenuSelectorItem<WrapStrategy> {
+```typescriptx
+// menu.ts
+export function WrapTextMenuItemFactory(accessor: IAccessor): IMenuSelectorItem<WrapStrategy> {
+  // ...
+  return {
+    id: SetTextWrapCommand.id,
     // ...
-    return {
-        id: SetTextWrapCommand.id,
-        // ...
-    };
+  }
 }
+
 // ToolbarItem.tsx
- <Select
-    // ...
-    onClick={(value) => {
-        let commandId = id;
-        // ...
-        commandService.executeCommand(commandId, value);
-     }}
-     // ...
- />
+<Select
+  onClick={(value) => {
+    const commandId = id
+    commandService.executeCommand(commandId, value)
+  }}
+/>
 ```
 
 Above is the Select component for the "text wrap" menu item in the menu bar. It can be seen that a click event handler is bound to it. When clicked, the `commandService` will execute the `commandId`, which is the id value configured in `WrapTextMenuItemFactory`: `SetTextWrapCommand`'s id.
 
 **Step 2**: In `SetTextWrapCommand`, the parameters are wrapped, and then a Command for setting styles uniformly, `SetStyleCommand`, is executed.
 
-```ts
+```typescript
 export const SetTextWrapCommand: ICommand<ISetTextWrapCommandParams> = {
-    type: CommandType.COMMAND,
-    id: 'sheet.command.set-text-wrap',
-    handler: async (accessor, params) => {
-        // ...
-        const commandService = accessor.get(ICommandService);
-        const setStyleParams: ISetStyleParams<WrapStrategy> = {
-            style: {
-                type: 'tb',
-                value: params.value,
-            },
-        };
+  type: CommandType.COMMAND,
+  id: 'sheet.command.set-text-wrap',
+  handler: async (accessor, params) => {
+    // ...
+    const commandService = accessor.get(ICommandService)
+    const setStyleParams: ISetStyleParams<WrapStrategy> = {
+      style: {
+        type: 'tb',
+        value: params.value,
+      },
+    }
 
-        return commandService.executeCommand(SetStyleCommand.id, setStyleParams);
-    },
-};
+    return commandService.executeCommand(SetStyleCommand.id, setStyleParams)
+  },
+}
 ```
 
 **Step 3**: In `SetStyleCommand`, as the style values within the selection are changed, the parameters for `SetRangeValuesMutation` need to be assembled. For example, setting the `tb` of all cells in the selection to `WrapStrategy.WRAP`. Due to the change in text wrap within the selection, and since the row height is automatically adjusted, the calculation of an `autoHeight` for that row is required. Before calculating the auto row height, `SetRangeValuesMutation` needs to be executed because the autoHeight calculation depends on the updated view data. The value of `autoHeight` is obtained through the interceptor registered in `SheetInterceptorService` (in `redos`).
 
 ```typescript
- // set-style.command.ts
- const { undos, redos } = accessor.get(SheetInterceptorService).onCommandExecute({
-       id: SetStyleCommand.id,
-        params,
- });
+// set-style.command.ts
+const { undos, redos } = accessor.get(SheetInterceptorService).onCommandExecute({
+  id: SetStyleCommand.id,
+  params,
+})
 ```
 
 **Step 4**: The ability to obtain the `autoHeight` value as mentioned above is primarily attributed to the `AutoHeightController` class. This class is instantiated in the `LifecycleStages.Ready` stage and adds interception for all Commands that affect row auto height, such as intercepting `SetStyleCommand`.
@@ -536,19 +533,19 @@ export const SetTextWrapCommand: ICommand<ISetTextWrapCommandParams> = {
 // auto-height.controller.ts
 // for intercept set style command.
 sheetInterceptorService.interceptCommand({
-     getMutations: (command: { id: string; params: ISetStyleParams<number> }) => {
-          if (command.id !== SetStyleCommand.id) {
-              return {
-                  redos: [],
-                  undos: [],
-              };
-          }
-          // ...
-          const selections = selectionManagerService.getSelectionRanges();
+  getMutations: (command: { id: string, params: ISetStyleParams<number> }) => {
+    if (command.id !== SetStyleCommand.id) {
+      return {
+        redos: [],
+        undos: [],
+      }
+    }
+    // ...
+    const selections = selectionManagerService.getSelectionRanges()
 
-          return this._getUndoRedoParamsOfAutoHeight(selections);
-      },
-  });
+    return this._getUndoRedoParamsOfAutoHeight(selections)
+  },
+})
 ```
 
 **Step 5**: Since calculating the auto row height requires the document model and related calculations of cell layout, all related calculations are placed in the `SheetSkeleton` class that manages the `Spreadsheet` (view layer). The `calculateAutoHeightInRange` method in this class ultimately calculates the auto row height.
@@ -556,10 +553,10 @@ sheetInterceptorService.interceptCommand({
 ```typescript
 // auto-height.controller.ts
 private _getUndoRedoParamsOfAutoHeight(ranges: IRange[]) {
-    // ...
-    const { skeleton } = sheetSkeletonService.getCurrent()!;
-    const rowsAutoHeightInfo = skeleton.calculateAutoHeightInRange(ranges);
-    // ...     
+  // ...
+  const { skeleton } = sheetSkeletonService.getCurrent()!;
+  const rowsAutoHeightInfo = skeleton.calculateAutoHeightInRange(ranges);
+  // ...
 }
 ```
 
@@ -568,27 +565,27 @@ private _getUndoRedoParamsOfAutoHeight(ranges: IRange[]) {
 ```typescript
 // sheet-render.controller.ts
 private _commandExecutedListener() {
-    this.disposeWithMe(
-        this._commandService.onCommandExecuted((command: ICommandInfo) => {
-            // ...
-            if (COMMAND_LISTENER_SKELETON_CHANGE.includes(command.id)) {
-                 // ...
-                 if (command.id !== SetWorksheetActivateMutation.id) {
-                    this._sheetSkeletonManagerService.makeDirty(
-                        {
-                            unitId,
-                            sheetId,
-                            commandId: command.id,
-                        },
-                        true
-                    );
-                  }
-                  // ...
-              }
-              this._renderManagerService.getRenderById(unitId)?.mainComponent?.makeDirty(); // refresh spreadsheet
-         })
-     );
- }
+  this.disposeWithMe(
+    this._commandService.onCommandExecuted((command: ICommandInfo) => {
+      // ...
+      if (COMMAND_LISTENER_SKELETON_CHANGE.includes(command.id)) {
+        // ...
+        if (command.id !== SetWorksheetActivateMutation.id) {
+          this._sheetSkeletonManagerService.makeDirty(
+            {
+              unitId,
+              sheetId,
+              commandId: command.id,
+            },
+            true
+          );
+        }
+        // ...
+      }
+      this._renderManagerService.getRenderById(unitId)?.mainComponent?.makeDirty(); // refresh spreadsheet
+    })
+  );
+}
 ```
 
 The above completes the entire process from event triggering to modifying the model layer, and subsequently updating the view layer.

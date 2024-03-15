@@ -1,0 +1,30 @@
+---
+title: Loading Data and Storing Data
+sidebar:
+  order: 3
+---
+
+In the previous section's code, you have already created a Univer instance and an empty spreadsheet. However, in most cases, you will likely need to load existing data into Univer. This section will explain how to load data into Univer and retrieve data from it.
+
+## Loading Data
+
+By calling the `createUniverSheet` method of `Univer`, you can create a new `Workbook` instance. The method's first parameter is an object that contains the data for the `Workbook`, which should adhere to the `IWorkbookData` interface.
+
+```typescript
+import { IWorkbookData } from "@univerjs/core";
+
+// ... create univer instance and load plugins
+
+const data: IWorkbookData = {};
+const workbook = univer.createUniverSheet(data);
+```
+
+You can find the complete list of supported fields for `IWorkbookData` [here](/api/core/interfaces/IWorkbookData.html).
+
+## Storing Data
+
+By calling the `save` method of the `Workbook`, you can obtain an `IWorkbookData` object that contains the data within the spreadsheet.
+
+```typescript
+const savedData = workbook.save();
+```

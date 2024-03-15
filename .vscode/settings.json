@@ -34,13 +34,16 @@
     "typescriptreact",
     "vue",
     "html",
+    "css",
+    "less",
     "markdown",
     "json",
     "jsonc",
     "yaml",
     "yml",
     "toml",
-    "astro"
+    "astro",
+    "mdx"
   ],
 
   "[astro]": {

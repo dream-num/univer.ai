@@ -9,7 +9,7 @@ cover: ./4.png
 author: Wenzhao Hu
 date: 2024-01-12
 lang: en-us
-slug: en-us/blog/ot
+slug: blog/ot
 ---
 
 > This blog post is a compilation of internal discussions and insights from the [Univer team](https://github.com/dream-num). At Univer, we regularly share and discuss fascinating technical challenges. If you find this blog post engaging, we encourage you to consider [joining us](mailto:huwenzhao@univer.ai).
@@ -63,7 +63,7 @@ Firstly, let's provide a definition for **operations**. We define a user's editi
 
 For example, the editing behavior mentioned above, inserting a column, can be represented as an operation like this:
 
-```ts
+```typescript
 const insertColOp = {
   type: "insertCol",
   coord: { col: 1 },
@@ -73,7 +73,7 @@ const insertColOp = {
 
 The editing behavior of inserting content into a cell can be represented as follows:
 
-```ts
+```typescript
 const insertCell = {
   type: "insertCell",
   coord: { row: 1, col: 2 },
@@ -103,7 +103,7 @@ In other words, most operations do not satisfy the [commutative property](https:
 
 We introduce the concept of revision numbers here: we define the revision number of a copy as `x`. After applying an operation, the revision number of the copy becomes `x+1`. The revision number of the applied operation is then defined as `x+1`, which can be represented in code by assigning the `revision` property of the operation with the value `x+1`. With this approach, we can define the order of operations based on their revision numbers.
 
-```ts {5}
+```typescript {5}
 const insertCell = {
   type: "insertCell",
   coord: { row: 1, col: 2 },
@@ -136,7 +136,7 @@ To help you better understand the role of the coordinating server, let's conside
 
 Let's assume we have three replicas, A, B, and C, all at revision 12. At this point, each replica undergoes an operation with a `baseRevision` of 12. We'll name these three operations `a`, `b`, and `c`, and assume that their `revision` attributes are all set to `0`, indicating that they haven't been assigned revision numbers by the server yet. The pseudocode representation is as follows:
 
-```ts
+```typescript
 const opa = {
   // ... other fields
   baseRevision: 12,
@@ -158,7 +158,7 @@ const opc = {
 
 Replicas A, B, and C send these three operations to the server (as shown in the diagram marked as 1). The server receives the operations and assigns their `revision` attributes as 13, 14, and 15, respectively (as shown in the diagram marked as 2). Then, the server returns these operations to replicas A, B, and C (as shown in the diagram marked as 3). The replicas apply these operations in the order of their assigned `revision` values. At this point, all replicas A, B, and C have revision number 15, and their contents are consistent.
 
-```ts
+```typescript
 const opa = {
   // ... other fields
   baseRevision: 12,
@@ -265,7 +265,7 @@ From the definition, it is clear that the `baseRevision` of `a` and `b` must be 
 
 In our example, on replica B, the content of `a'` can be described in pseudocode as follows:
 
-```ts
+```typescript
 const aPrime = {
   type: "insertCell",
   coord: { row: 1, col: 3 },
@@ -279,7 +279,7 @@ After transforming to `b'`, although it does not need to be applied locally, the
 
 The content of `b'` can be described in pseudocode as follows:
 
-```ts
+```typescript
 const bPrime = {
   type: "insertCol",
   coord: { col: 2 },
@@ -401,7 +401,7 @@ In Univer, collaborative editing is not tightly integrated into the core system 
 
 The Univer tech stack utilizes a dependency injection framework that enables plugins to override certain core services. Collaborative editing relies on this feature for handling undo and redo operations. In Univer, the dependency injection token for the undo/redo service is `IUndoRedoService`, and the default implementation is `LocalUndoRedoService`, which does not support converting operations in the undo/redo stack. However, the collaborative editing plugin in Univer replaces this implementation with `CollaborativeUndoRedoService` to enable undo and redo operation conrevision.
 
-```ts {17}
+```typescript {17}
 export class CollaborativeUndoRedoService extends LocalUndoRedoService implements ICollaborativeUndoRedoService {
     // ...
 }

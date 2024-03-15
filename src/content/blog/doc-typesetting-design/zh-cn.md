@@ -9,7 +9,7 @@ cover: ./0.png
 date: 2024-01-11
 author: Jocs
 lang: zh-cn
-slug: blog/doc-typesetting-design
+slug: zh-cn/blog/doc-typesetting-design
 ---
 
 > Univer 文档是 Univer 办公套件之一，如果你想了解 Univer 文档架构，建议先阅读《Univer 文档架构及模块设计》，里面有关于 Univer 文档架构的思考和模块划分的设计，本篇文章主要关注文档排版需求及 Univer 文档是如何通过架构设计来服务这些需求的
@@ -231,7 +231,7 @@ _为什么这样设计呢？_
 
 ### 4.2 选择合适的断行位置
 
-正如上面描述，Unicode Line Break 只是提供了可能得断行位置（break opportunities），我们具体采用哪些位置来作为断行是根据其他因素来决定的，比如页面的宽度和单个字符的宽度等，一种常用选择合适断行的算法是  [Knuth & Plass line-breaking](https://defoe.sourceforge.net/folio/knuth-plass.html)
+正如上面描述，Unicode Line Break 只是提供了可能得断行位置（break opportunities），我们具体采用哪些位置来作为断行是根据其他因素来决定的，比如页面的宽度和单个字符的宽度等，一种常用选择合适断行的算法是 [Knuth & Plass line-breaking](https://defoe.sourceforge.net/folio/knuth-plass.html)
 
 Knuth & Plass 断行算法是 Donald Knuth 和 Michael Plass 在 1981 年提出的一种文本排版的方法。这个算法特别适用于高质量的文本排版，例如 TeX 排版系统就使用了这个算法。它的目标是在整个段落中找到最佳的断行点，而不是像传统方法那样仅仅考虑局部最优
 

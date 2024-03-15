@@ -1,0 +1,106 @@
+---
+title: インストールとインポート
+sidebar:
+  order: 1
+---
+
+Univer を構築する際には、ESモジュールのサポートが良い [Vite](https://vitejs.dev/)、[esbuild](https://esbuild.github.io/)、または [Webpack 5](https://webpack.js.org/) などのビルドツールを使用することをおすすめします。他のビルドツール（例：Webpack 4）を使用している場合は、いくつかの追加の設定が必要になる可能性があるため、[その他の情報](/ja-jp/guides/quickstart/#その他の情報)および[よくある質問](/ja-jp/guides/troubleshooting)をご覧いただき、詳細情報を入手してください。
+
+## インストール
+
+Univer のフロントエンドは、複数の npm パッケージとして公開されており、必要なパッケージをインストールできます。
+
+Sheets に必要なパッケージをインストールしてください：
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+<Tabs>
+  <TabItem label="npm">
+    peerDependencies を自動的にインストールするために、npm >= 8.0.0 を使用することをお勧めします。
+
+    ```shell
+    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+    ```
+  </TabItem>
+
+  <TabItem label="pnpm">
+    ```shell
+    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+    ```
+  </TabItem>
+</Tabs>
+
+## 使い方
+
+Univer のスタイルシートファイルと必要なプラグインをプロジェクトにインポートする必要があります：
+
+```typescript title="main.ts"
+import "@univerjs/design/lib/index.css";
+import "@univerjs/ui/lib/index.css";
+import "@univerjs/docs-ui/lib/index.css";
+import "@univerjs/sheets-ui/lib/index.css";
+import "@univerjs/sheets-formula/lib/index.css";
+
+import { Univer } from "@univerjs/core";
+import { defaultTheme } from "@univerjs/design";
+import { UniverDocsPlugin } from "@univerjs/docs";
+import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
+import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
+import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
+import { UniverSheetsPlugin } from "@univerjs/sheets";
+import { UniverSheetsFormulaPlugin } from "@univerjs/sheets-formula";
+import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
+import { UniverUIPlugin } from "@univerjs/ui";
+```
+
+次に、Univer のインスタンスを作成し、これらのプラグインを登録します：
+
+```typescript title="main.ts" {9}
+const univer = new Univer({
+  theme: defaultTheme,
+});
+
+// core plugins
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+univer.registerPlugin(UniverUIPlugin, {
+  container: "app",
+  header: true,
+  toolbar: true,
+  footer: true,
+});
+
+// doc plugins
+univer.registerPlugin(UniverDocsPlugin, {
+  hasScroll: false,
+});
+univer.registerPlugin(UniverDocsUIPlugin);
+
+// sheet plugins
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
+```
+
+`UniverUIPlugin` を登録する際には、`container` パラメーターを渡す必要があります。このパラメーターは、Univer のコンテナーエレメントを指定するための CSS セレクターです。
+
+:::note
+複数の Univer オブジェクトを作成し、異なるコンテナーを提供することで、1 つのページで複数の Univer を作成することができます！詳細については、[playground](/playground/?title=Multi%20Instance) を参照してください。
+:::
+
+最後に、`createUniverSheet` メソッドを使用して空白の Univer Sheet を作成します：
+
+```typescript title="main.ts"
+univer.createUniverSheet({});
+```
+
+新しく作成した Univer でスプレッドシートを読み込む方法については、[次のセクション](/guides/quickstart/data)を参照してください。
+
+## その他の情報
+
+Univer をさまざまなスケルトンツールに組み込む方法についてのいくつかの例を提供しています：
+
+- [Vite](/playground/?title=Vite)
+- [Webpack 4](/playground/?title=Webpack%204)
+
+また、`<script>` タグを使用して Univer をインポートする方法については、[UMD ビルド](/guides/quickstart/umd/)を参照してください。

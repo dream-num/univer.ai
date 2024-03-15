@@ -11,7 +11,6 @@
 .hero {
   position: relative;
   height: 25rem;
-  overflow: hidden;
 
   .materials {
     position: absolute;
@@ -38,7 +37,7 @@
         height: 20.8rem;
         margin-top: 10.8rem;
         margin-left: -45rem;
-        background: rgba(45, 174, 255, 0.20);
+        background: rgba(45, 174, 255, 0.2);
         border-radius: 37rem;
         filter: blur(1500px);
         transform: translateX(-50%) translateY(-50%);
@@ -51,7 +50,7 @@
         height: 8.85rem;
         margin-top: 2.8rem;
         margin-left: -22rem;
-        background: rgba(45, 174, 255, 0.20);
+        background: rgba(45, 174, 255, 0.2);
         border-radius: 15.75rem;
         filter: blur(200px);
         transform: translateX(-50%) translateY(-50%);
@@ -77,49 +76,12 @@
     display: flex;
     flex-direction: column;
 
-    nav {
-      height: 5.8rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-
-      h1 {
-        margin: 0;
-        font-weight: 600;
-        font-size: 1.25rem;
-  
-        a {
-          color: #1F2327;
-          text-decoration: none;
-          display: flex;
-          align-items: center;
-          gap: 0.5625rem;
-        }
-      }
-
-      label {
-        padding: 0.25rem 0.75rem;
-        color: #656565;
-        font-size: 0.875rem;
-        background: rgba(228, 244, 254, 0.20);
-        border: 1px solid #ECECEC;
-        border-radius: 46px;
-      }
-    }
-
     .content {
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
       gap: 1.6rem;
-
-      label {
-        color: #656565;
-        font-size: 0.825rem;
-        display: flex;
-        gap: 0.8rem;
-      }
 
       h2 {
         max-width: 26.4rem;
@@ -148,6 +110,17 @@
           svg {
             font-size: 1rem;
           }
+        }
+
+        label {
+          color: #656565;
+          font-size: 0.75rem;
+          padding: 0 0.4rem;
+          border: 1px solid currentColor;
+          border-radius: 28px;
+          display: flex;
+          align-items: center;
+          gap: 0.8rem;
         }
       }
     }

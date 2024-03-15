@@ -1,11 +1,10 @@
 ---
-import Footer from '@/components/Footer/index.astro'
 import { IconsPage } from '@/components/IconsPage'
-import BlankLayout from '@/layouts/BlankLayout.astro'
+import Layout from '@/layouts/Layout.astro'
 ---
 
-<BlankLayout lang="zh-cn" title="图标库 | Univer">
-  <IconsPage client:only />
-
-  <Footer />
-</BlankLayout>
+<Layout lang="en-us" title="Icons | Univer">
+  <main>
+    <IconsPage client:only />
+  </main>
+</Layout>

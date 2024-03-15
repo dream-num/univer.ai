@@ -23,7 +23,7 @@
 .rc-slider-tracks {
   position: absolute;
   height: 4px;
-  background-color: #274FEE;
+  background-color: #274fee;
   border-radius: 6px;
 }
 .rc-slider-track-draggable {
@@ -41,7 +41,7 @@
   height: 14px;
   margin-top: -5px;
   background-color: #fff;
-  border: solid 2px #274FEE;
+  border: solid 2px #274fee;
   border-radius: 50%;
   cursor: pointer;
   cursor: -webkit-grab;
@@ -49,24 +49,24 @@
   touch-action: pan-x;
 }
 .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {
-  border-color: #274FEE;
+  border-color: #274fee;
 }
 .rc-slider-handle:focus {
   outline: none;
   box-shadow: none;
 }
 .rc-slider-handle:focus-visible {
-  border-color: #274FEE;
+  border-color: #274fee;
 }
 .rc-slider-handle-click-focused:focus {
-  border-color: #274FEE;
+  border-color: #274fee;
   box-shadow: unset;
 }
 .rc-slider-handle:hover {
-  border-color: #274FEE;
+  border-color: #274fee;
 }
 .rc-slider-handle:active {
-  border-color: #274FEE;
+  border-color: #274fee;
   cursor: -webkit-grabbing;
   cursor: grabbing;
 }

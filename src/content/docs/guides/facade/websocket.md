@@ -1,55 +1,54 @@
 ---
-title: 创建 Websocket
+title: Creating Websocket
 sidebar:
   order: 4
 ---
 
-## 创建 Websocket [即将开放]
+## Creating a Websocket [Coming Soon]
 
-Facade 提供了一个便捷的 API `createSocket` 来创建 Websocket，传入一个 URL 即可。
-然后可以监听 open、message、close、error 事件，以及主动发送消息 send 方法和主动关闭 close 方法。
+Facade provides a convenient API `createSocket` for creating a Websocket, simply by passing in a URL. You can then listen to open, message, close, and error events, and actively send messages with the send method and actively close with the close method.
 
 ```typescript title="main.ts"
-// URL 换成你自己 Websocket 服务的地址
-const ws = univerAPI.createSocket("ws://47.100.177.253:8449/ws");
+// Replace the URL with the address of your own Websocket service
+const ws = univerAPI.createSocket('ws://47.100.177.253:8449/ws')
 
 ws.open$.subscribe(() => {
-  console.log("websocket opened");
-  ws.send("hello");
-});
+  console.log('websocket opened')
+  ws.send('hello')
+})
 
 ws.message$.subscribe((message) => {
-  console.log("websocket message", message);
+  console.log('websocket message', message)
   const content = JSON.parse(message.data).content
-  if (content.indexOf('command') === -1) {
-    return;
+  if (!content.includes('command')) {
+    return
   }
 
-  const commandInfo = JSON.parse(content);
-  const { command, options } = commandInfo;
-  const { id, params } = command;
+  const commandInfo = JSON.parse(content)
+  const { command, options } = commandInfo
+  const { id, params } = command
 
-  // 接受到协同数据，本地落盘
+  // Upon receiving collaborative data, it is locally saved
   univerAPI.executeCommand(id, params, options)
-});
+})
 
 ws.close$.subscribe(() => {
-  console.log("websocket closed");
-});
+  console.log('websocket closed')
+})
 
 ws.error$.subscribe((error) => {
-  console.log("websocket error", error);
-});
+  console.log('websocket error', error)
+})
 
 univerAPI.onCommandExecuted((command, options) => {
-  // 仅同步本地 mutation
+  // Only synchronize local mutations
   if (command.type !== 2 || options?.fromCollab || options?.onlyLocal || command.id === 'doc.mutation.rich-text-editing') {
-    return;
+    return
   }
 
   const commandInfo = JSON.stringify({ command, options: { fromCollab: true } })
-  ws.send(commandInfo);
+  ws.send(commandInfo)
 })
 ```
 
-注意：启动 Univer 的时候要确保有 unitID，不指定 unitID 的话无法协同。
+Note: Make sure there is a unitID when starting Univer. If the unitID is not specified, collaboration will not work.

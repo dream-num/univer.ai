@@ -1,109 +1,109 @@
 ---
-title: 源码阅读指引
+title: Source code reading guide
 ---
 
 :::note
-本章节内容具有时效性，如果你在阅读时发现内容与源码不符，请以最新版源码为准，如果你发现文档内容有误或者不完善，欢迎提交 PR 或者 Issue。
+The content of this chapter is time-sensitive. If you find that the content does not match the source code when reading, please refer to the latest version of the source code. If you find that the document content is incorrect or incomplete, please submit a PR or Issue.
 :::
 
 :::tip
-建议在阅读本小节内容之前先阅读 [Univer 架构](/guides/architecture/architecture/)、[这就是 Univer](/blog/this-is-univer) 和 [Univer 文档架构及模块设计](/blog/univer-doc-architecture) 了解 Univer 的整体架构设计。
+It is recommended to read [Univer Architecture](/guides/architecture/architecture/), [This is Univer](/blog/this-is-univer), and [Univer Document Architecture and Module Design](/blog/univer-doc-architecture) before reading this section to understand the overall architecture design of Univer.
 :::
 
-如果你想进一步了解 Univer 的实现细节，你还可以阅读源码。
+If you want to further understand the implementation details of Univer, you can read the source code.
 
-以下是一些指引，你可以选择感兴趣的模块开始阅读，便于快速上手。
+Here are some guidelines, you can choose the module you are interested in to start reading, which is convenient for quick start.
 
-## 基础示例
+## Basic Example
 
 :::tip
-建议在阅读本小节内容之前先在 [演练场](/playground) 体验 Univer 的基础功能。
+It is recommended to experience the basic functions of Univer in the [playground](/playground) before reading this section.
 :::
 
-- 文档示例 [examples/src/docs/main.ts](https://github.com/dream-num/univer/blob/dev/examples/src/docs/main.ts)
-- 表格示例 [examples/src/sheets/main.ts](https://github.com/dream-num/univer/blob/dev/examples/src/sheets/main.ts)
+- document example [examples/src/docs/main.ts](https://github.com/dream-num/univer/blob/dev/examples/src/docs/main.ts)
+- sheet example [examples/src/sheets/main.ts](https://github.com/dream-num/univer/blob/dev/examples/src/sheets/main.ts)
 
-## 通用模块
+## Core Package
 
-### 基础类型
+### Basic Types
 
 - Univer [packages/core/src/basics/univer.ts](https://github.com/dream-num/univer/blob/dev/packages/core/src/basics/univer.ts)
-- 插件基类定义 [packages/core/src/plugin/plugin.ts](https://github.com/dream-num/univer/blob/dev/packages/core/src/plugin/plugin.ts)
+- Plugin [packages/core/src/plugin/plugin.ts](https://github.com/dream-num/univer/blob/dev/packages/core/src/plugin/plugin.ts)
 
-### 命令
-
-:::tip
-建议在阅读本小节内容之前先阅读 [架构设计#命令系统](/guides/architecture/architecture/#命令系统) 了解 Univer 命令系统的设计。
-:::
-
-- 命令管理 [packages/core/src/services/command/command.service.ts](https://github.com/dream-num/univer/blob/dev/packages/core/src/services/command/command.service.ts)
-- 撤销回退 [packages/core/src/services/undoredo/undoredo.service.ts](https://github.com/github/dream-num/univer/blob/dev/packages/core/src/services/undoredo/undoredo.service.ts)
-
-### 渲染
+### Command
 
 :::tip
-建议在阅读本小节内容之前先阅读 [渲染引擎架构设计](/guides/architecture/renderer/) 和 [Univer 文档排版设计初探](/blog/doc-typesetting-design)， 了解 Univer 渲染引擎的整体架构设计。
+It is recommended to read [Architecture#Command System](/guides/architecture/architecture/#command-system) before reading this section to understand the design of the Univer command system.
 :::
 
-- 渲染引擎 [packages/engine-render/src/engine.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-render/src/engine.ts)
-  - 画布渲染引擎 [packages/engine-render/src/canvas.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-render/src/canvas.ts)
-- `BaseObject` 图元基类定义 [packages/engine-render/src/base-object.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-render/src/base-object.ts)
-  - `BaseObject` 是渲染的逻辑单元，`BaseObject` 定义了图元的基本属性，包括 `width`、`height`、`scaleX`、`scaleY`、`visible` 等用于渲染的底层属性。
-  - 渲染引擎会调用图元 `render` 的方法，在 `render` 内实现渲染逻辑，如调用渲染器或 Canvas API 来完成绘制。
-  - 图元内还定义了事件接口，为业务层事件处理提供了基础。
-- 文档渲染组件 [packages/engine-render/src/components/docs/doc-component.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-render/src/components/docs/doc-component.ts)
-  - 文档渲染组件继承了 `BaseObject`，是一个复杂图元。
-  - 文档渲染组件注册管理了许多 `ComponentExtension` 渲染器， 如 `FontAndBaseLine`、`Border`、`Background` 等。
-  - 文档渲染组件 `render` 时，会把 `Skeleton` 数据 （计算后的排版数据）分类型分发给不同的 `ComponentExtension` 渲染器进行 `draw` ，最终完成图元的渲染逻辑。
-- `DocSkeletonManagerService` 文档排版数据管理 [packages/docs/src/services/doc-skeleton-manager.service.ts](https://github.com/dream-num/univer/blob/dev/packages/docs/src/services/doc-skeleton-manager.service.ts)
-- `FontAndBaseLine` 文字渲染器 [packages/engine-render/src/components/docs/extensions/font-and-base-line.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-render/src/components/docs/extensions/font-and-base-line.ts)
-- 图元及渲染器清单 [packages/engine-render/src/components](https://github.com/dream-num/univer/blob/dev/packages/engine-render/src/components)
+- Command manage [packages/core/src/services/command/command.service.ts](https://github.com/dream-num/univer/blob/dev/packages/core/src/services/command/command.service.ts)
+- Command undo & redo [packages/core/src/services/undoredo/undoredo.service.ts](https://github.com/github/dream-num/univer/blob/dev/packages/core/src/services/undoredo/undoredo.service.ts)
 
-## 表格
+### Render
 
-### 表格基础数据结构
+:::tip
+It is recommended to read [Render Engine Architecture](/guides/architecture/renderer/) and [Univer Document Typesetting Design](/blog/doc-typesetting-design) before reading this section to understand the overall architecture design of the Univer rendering engine.
+:::
 
-- 数据结构定义 [packages/core/src/types/interfaces](https://github.com/dream-num/univer/blob/dev/packages/core/src/types/interfaces)
-  - 单元格数据结构定义 [packages/core/src/types/interfaces/i-cell-data.ts](https://github.com/dream-num/univer/blob/dev/packages/core/src/types/interfaces/i-cell-data.ts)
-  - 单元格样式数据结构定义 [packages/core/src/types/interfaces/i-style-data.ts](https://github.com/dream-num/univer/blob/dev/packages/core/src/types/interfaces/i-style-data.ts)
+- render engine [packages/engine-render/src/engine.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-render/src/engine.ts)
+  - canvas render engine [packages/engine-render/src/canvas.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-render/src/canvas.ts)
+- `BaseObject` Graph base object definition [packages/engine-render/src/base-object.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-render/src/base-object.ts)
+  - `BaseObject` is the logical unit of rendering. `BaseObject` defines the basic properties of the graph, including `width`, `height`, `scaleX`, `scaleY`, `visible`, etc. used for rendering.
+  - The rendering engine will call the `render` method of the graph, and implement the rendering logic in `render`, such as calling the renderer or Canvas API to complete the drawing.
+  - The graph also defines the event interface, providing a foundation for business layer event processing.
+- document component [packages/engine-render/src/components/docs/doc-component.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-render/src/components/docs/doc-component.ts)
+  - The document rendering component inherits `BaseObject` and is a complex graph.
+  - The document rendering component registers and manages many `ComponentExtension` renderers, such as `FontAndBaseLine`, `Border`, `Background`, etc.
+  - When the document rendering component `render`, it will distribute the `Skeleton` data (calculated typesetting data) to different `ComponentExtension` renderers for `draw`, and finally complete the rendering logic of the graph.
+- `DocSkeletonManagerService` Document typesetting data management [packages/docs/src/services/doc-skeleton-manager.service.ts](https://github.com/dream-num/univer/blob/dev/packages/docs/src/services/doc-skeleton-manager.service.ts)
+- `FontAndBaseLine` Text renderer [packages/engine-render/src/components/docs/extensions/font-and-base-line.ts](https://github.com/dream-num/univer/blob/dev/packages/engine-render/src/components/docs/extensions/font-and-base-line.ts)
+  -Graph and renderer list [packages/engine-render/src/components](https://github.com/dream-num/univer/blob/dev/packages/engine-render/src/components)
 
-### 表格核心模块
+## Sheets
 
-- 单元格选区管理 [packages/sheets/src/services/selection-manager.service.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets/src/services/selection-manager.service.ts)
-- 设置单元格值和样式 [packages/sheets/src/commands/commands/set-range-values.command.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets/src/commands/commands/set-range-values.command.ts)
+### Basic Data Structure
 
-### 表格 UI 和渲染
+- Data structure definition [packages/core/src/types/interfaces](https://github.com/dream-num/univer/blob/dev/packages/core/src/types/interfaces)
+  - Cell data structure definition [packages/core/src/types/interfaces/i-cell-data.ts](https://github.com/dream-num/univer/blob/dev/packages/core/src/types/interfaces/i-cell-data.ts)
+  - Cell style data structure definition [packages/core/src/types/interfaces/i-style-data.ts](https://github.com/dream-num/univer/blob/dev/packages/core/src/types/interfaces/i-style-data.ts)
 
-- 编辑器
-  - 单元格编辑器的实现复用了文档模式的编辑形态。
-  - 单元格编辑器 [packages/sheets-ui/src/views/editor-container/EditorContainer.tsx](https://github.com/dream-num/univer/blob/dev/packages/sheets-ui/src/views/editor-container/EditorContainer.tsx)
-  - 公式栏编辑器 [packages/sheets-ui/src/views/formula-bar/FormulaBar.tsx](https://github.com/dream-num/univer/blob/dev/packages/sheets-ui/src/views/formula-bar/FormulaBar.tsx)
-- 快捷键 [packages/sheets-ui/src/controllers/shortcuts](https://github.com/dream-num/univer/tree/dev/packages/sheets-ui/src/controllers/shortcuts)
-  - 单元格样式快捷键注册 [packages/sheets-ui/src/controllers/shortcuts/style.shortcut.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-ui/src/controllers/shortcuts/style.shortcut.ts)
-  - 缩放快捷键注册 [packages/sheets-ui/src/controllers/shortcuts/view.shortcut.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-ui/src/controllers/shortcuts/view.shortcut.ts)
-- 复制粘贴 [packages/sheets-ui/src/commands/commands/clipboard.command.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-ui/src/commands/commands/clipboard.command.ts)
+### Core Module
 
-## 文档
+- Cell selection manager [packages/sheets/src/services/selection-manager.service.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets/src/services/selection-manager.service.ts)
+- Set cell value and style [packages/sheets/src/commands/commands/set-range-values.command.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets/src/commands/commands/set-range-values.command.ts)
 
-### 文档基础数据结构
+### UI and Render
 
-- 文档数据结构[packages/core/src/types/interfaces/i-document-data.ts](https://github.com/dream-num/univer/blob/dev/packages/core/src/types/interfaces/i-document-data.ts)
+- Editor
+  - The implementation of the cell editor reuses the editing form of the document mode.
+  - EditorContainer[packages/sheets-ui/src/views/editor-container/EditorContainer.tsx](https://github.com/dream-num/univer/blob/dev/packages/sheets-ui/src/views/editor-container/EditorContainer.tsx)
+  - FormulaBar editor [packages/sheets-ui/src/views/formula-bar/FormulaBar.tsx](https://github.com/dream-num/univer/blob/dev/packages/sheets-ui/src/views/formula-bar/FormulaBar.tsx)
+    -shortcuts [packages/sheets-ui/src/controllers/shortcuts](https://github.com/dream-num/univer/tree/dev/packages/sheets-ui/src/controllers/shortcuts)
+  - Cell style shortcut registration [packages/sheets-ui/src/controllers/shortcuts/style.shortcut.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-ui/src/controllers/shortcuts/style.shortcut.ts)
+  - Zoom shortcut registration [packages/sheets-ui/src/controllers/shortcuts/view.shortcut.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-ui/src/controllers/shortcuts/view.shortcut.ts)
+- Copy and paste [packages/sheets-ui/src/commands/commands/clipboard.command.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-ui/src/commands/commands/clipboard.command.ts)
 
-### 文档核心模块
+## Document
 
-- 文字选区管理 [packages/docs/src/services/text-selection-manager](https://github.com/dream-num/univer/blob/dev/packages/docs/src/services/text-selection-manager.service.ts)
-- 复制粘贴 [packages/docs/src/commands/commands/clipboard.command.ts](https://github.com/dream-num/univer/blob/dev/packages/docs/src/commands/commands/clipboard.command.ts)
+### Basic Data Structure
 
-### 文档 UI 和渲染
+- Document data structure[packages/core/src/types/interfaces/i-document-data.ts](https://github.com/dream-num/univer/blob/dev/packages/core/src/types/interfaces/i-document-data.ts)
 
-- 操作栏菜单注册 [packages/docs-ui/src/controllers/doc-ui.controller.ts](https://github.com/dream-num/univer/blob/dev/packages/docs-ui/src/controllers/doc-ui.controller.ts)
+### Core Module
 
-## 扩展插件
+- Text selection manager [packages/docs/src/services/text-selection-manager.service.ts](https://github.com/dream-num/univer/blob/dev/packages/docs/src/services/text-selection-manager.service.ts)
+  -Copy and paste [packages/docs/src/commands/commands/clipboard.command.ts](https://github.com/dream-num/univer/blob/dev/packages/docs/src/commands/commands/clipboard.command.ts)
+
+### Document UI and Render
+
+-Control bar menu registration [packages/docs-ui/src/controllers/doc-ui.controller.ts](https://github.com/dream-num/univer/blob/dev/packages/docs-ui/src/controllers/doc-ui.controller.ts)
+
+##Plugin Extension
 
 ### Uniscript
 
-你可以阅读 Uniscript 的源码来了解如何开发一个插件。
+You can read the source code of Uniscript to understand how to develop a plugin.
 
-- 面板界面 [packages/uniscript/src/views/components/ScriptEditorPanel.tsx](https://github.com/dream-num/univer/blob/dev/packages/uniscript/src/views/components/ScriptEditorPanel.tsx)
-- 执行器 [packages/uniscript/src/services/script-execution.service.ts](https://github.com/dream-num/univer/blob/dev/packages/uniscript/src/services/script-execution.service.ts)
-- Uniscript 使用示例 [examples/src/uniscript](https://github.com/dream-num/univer/tree/dev/examples/src/uniscript)
+- ScriptEditorPanel [packages/uniscript/src/views/components/ScriptEditorPanel.tsx](https://github.com/dream-num/univer/blob/dev/packages/uniscript/src/views/components/ScriptEditorPanel.tsx)
+- Execution [packages/uniscript/src/services/script-execution.service.ts](https://github.com/dream-num/univer/blob/dev/packages/uniscript/src/services/script-execution.service.ts)
+  -Uniscript using example [examples/src/uniscript](https://github.com/dream-num/univer/tree/dev/examples/src/uniscript)
