@@ -42,7 +42,8 @@
     "yaml",
     "yml",
     "toml",
-    "astro"
+    "astro",
+    "mdx"
   ],
 
   "[astro]": {

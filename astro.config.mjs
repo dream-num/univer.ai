@@ -114,7 +114,7 @@ export default defineConfig({
             'ja-JP': '🪄 カスタマイズ',
           },
           autogenerate: {
-            directory: 'guides/customizing',
+            directory: 'guides/customization',
           },
         },
         {

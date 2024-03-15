@@ -2,4 +2,57 @@
 title: Quickstart
 ---
 
-11
+If you want to get started with Univer as quickly as possible, you've come to the right place! This page will guide you through building a working Univer app in just a few minutes.
+
+Univer Sheet / Univer Doc
+
+## Univer in 60 seconds
+
+{/* 这里需要一个视频 */}
+
+## Play Online
+
+## Vite Template
+
+## Next steps
+
+import Sandbox from '@/components/Sandbox'
+
+export const code = `function UniverSheet () {
+  const univerRef = useRef(null);
+
+  useEffect(() => {
+    const univer = new Univer({
+      theme: defaultTheme,
+    });
+
+    // core plugins
+    univer.registerPlugin(UniverRenderEnginePlugin);
+    univer.registerPlugin(UniverFormulaEnginePlugin);
+    univer.registerPlugin(UniverUIPlugin, {
+      container: univerRef.current,
+      header: true,
+      toolbar: true,
+      footer: true,
+    });
+
+    // doc plugins
+    univer.registerPlugin(UniverDocsPlugin, {
+      hasScroll: false,
+    });
+    univer.registerPlugin(UniverDocsUIPlugin);
+
+    // sheet plugins
+    univer.registerPlugin(UniverSheetsPlugin);
+    univer.registerPlugin(UniverSheetsUIPlugin);
+    univer.registerPlugin(UniverSheetsFormulaPlugin);
+
+    univer.createUniverSheet({});
+  }, []);
+
+  return (
+    <div ref={univerRef} style={{ height: '400px' }} />
+  )
+}`
+
+<Sandbox client:only="react" src="/sandbox" code={code} hideEditor />
