@@ -1,7 +1,7 @@
 ---
 title: listening and triggering events
 sidebar:
-  order: 2
+  order: 5
 ---
 
 :::tip

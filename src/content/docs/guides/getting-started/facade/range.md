@@ -1,7 +1,7 @@
 ---
 title: Operating Range
 sidebar:
-  order: 2
+  order: 6
 ---
 
 ## Setting a Single Value

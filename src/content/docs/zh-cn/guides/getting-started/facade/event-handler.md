@@ -1,7 +1,7 @@
 ---
 title: 监听和触发事件
 sidebar:
-  order: 2
+  order: 5
 ---
 
 :::tip

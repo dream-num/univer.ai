@@ -1,7 +1,7 @@
 ---
 title: Registering Functions
 sidebar:
-  order: 3
+  order: 7
 ---
 
 ## Register Functions

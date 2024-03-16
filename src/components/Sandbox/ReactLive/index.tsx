@@ -1,4 +1,4 @@
-import { Styles, Univer } from '@univerjs/core'
+import { Univer } from '@univerjs/core'
 import { defaultTheme } from '@univerjs/design'
 import '@univerjs/design/lib/index.css'
 import { UniverDocsPlugin } from '@univerjs/docs'
@@ -38,7 +38,6 @@ export default function Sheet() {
   const [hideEditor, setHideEditor] = useState(false)
 
   useEffect(() => {
-    // 向 iframe 发送加载完成通知
     window.parent.postMessage('loaded', '*')
 
     window.addEventListener('message', (e) => {

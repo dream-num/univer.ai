@@ -4,108 +4,224 @@ sidebar:
   order: 2
 ---
 
-Univer 也可以通过 UMD 的方式引入，我们在 [Playground](https://univer.ai/playground/?title=UMD) 提供了一个在线的示例。
+Univer 为每一个插件都提供了 UMD 包。基于插件化的设计，这些琐碎的 UMD 包会使得开发者拥有非常灵活的选择权，但也同样会让开发者面临一些新的挑战：
 
-## 使用 CDN 引入
+- 我要如何确定一个包的前置依赖？
+- 我要如何确定正确的引入顺序？
+- 我要如何确定一个功能究竟是由哪些包提供的？
 
-```html title="index.html"
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Univer</title>
-    <style>
-      html,
-      body,
-      #app {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
+如果对 Univer 的插件化机制没有一个非常清晰的了解的话，通常来说这些问题的背后就意味着无数种排列组合尝试的过程。
 
-    <link rel="stylesheet" href="https://unpkg.com/@univerjs/design/lib/index.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@univerjs/ui/lib/index.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@univerjs/sheets-ui/lib/index.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@univerjs/sheets-formula/lib/index.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@univerjs/sheets-numfmt/lib/index.css" />
+如果你确实遇到了这样的问题，那么下面我们提供的 [UMD 包生成工具](#umd-包生成工具)将会帮助你解决这些问题。当然，如果你已经对 Univer 的插件化机制了然于心，你也可以直接跳过这个工具，[使用 CDN 引入](#使用-cdn-引入)这些 UMD 包。
 
-    <script src="https://unpkg.com/clsx@2.0.0/dist/clsx.min.js"></script>
-    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/rxjs@7.8.1/dist/bundles/rxjs.umd.min.js"></script>
-    <script src="https://unpkg.com/@wendellhu/redi@0.12.13/dist/redi.js"></script>
-    <script src="https://unpkg.com/@wendellhu/redi@0.12.13/dist/react-bindings.js"></script>
+## UMD 包生成工具
 
-    <script src="https://unpkg.com/@univerjs/core/lib/umd/index.js"></script>
-    <script src="https://unpkg.com/@univerjs/design/lib/umd/index.js"></script>
-    <script src="https://unpkg.com/@univerjs/engine-render/lib/umd/index.js"></script>
-    <script src="https://unpkg.com/@univerjs/engine-formula/lib/umd/index.js"></script>
-    <script src="https://unpkg.com/@univerjs/ui/lib/umd/index.js"></script>
-    <script src="https://unpkg.com/@univerjs/sheets/lib/umd/index.js"></script>
-    <script src="https://unpkg.com/@univerjs/docs/lib/umd/index.js"></script>
-    <script src="https://unpkg.com/@univerjs/docs-ui/lib/umd/index.js"></script>
-    <script src="https://unpkg.com/@univerjs/sheets-ui/lib/umd/index.js"></script>
-    <script src="https://unpkg.com/@univerjs/sheets-formula/lib/umd/index.js"></script>
-    <script src="https://unpkg.com/@univerjs/sheets-numfmt/lib/umd/index.js"></script>
-  </head>
-  <body>
-    <div id="app"></div>
+UMD 包生成工具是一个在线的工具，它可以帮助你根据自己的需求，生成一个符合自己需求的 UMD 包。你只需要根据我们的提示回答一些问题，就可以获得对应的 UMD 包。
 
-    <script>
-      // univer
-      var univer = new window.UniverCore.Univer({
-        theme: window.UniverDesign.defaultTheme,
-        locale: window.UniverCore.LocaleType.ZH_CN,
-        logLevel: window.UniverCore.LogLevel.VERBOSE,
-      });
+import UMDGenerator from '../../../guides/getting-started/_components/UMDGenerator'
 
-      // core plugins
-      univer.registerPlugin(window.UniverDocs.UniverDocsPlugin, {
-        hasScroll: false,
-      });
-      univer.registerPlugin(window.UniverDocsUi.UniverDocsUIPlugin);
-      univer.registerPlugin(window.UniverEngineRender.UniverRenderEnginePlugin);
-      univer.registerPlugin(window.UniverUi.UniverUIPlugin, {
-        container: "app",
-        header: true,
-        toolbar: true,
-        footer: true,
-      });
-      univer.registerPlugin(window.UniverSheets.UniverSheetsPlugin);
-      univer.registerPlugin(window.UniverSheetsUi.UniverSheetsUIPlugin);
+<UMDGenerator client:only />
 
-      // sheet feature plugins
-      univer.registerPlugin(window.UniverSheetsNumfmt.UniverSheetsNumfmtPlugin);
-      univer.registerPlugin(window.UniverEngineFormula.UniverFormulaEnginePlugin);
-      univer.registerPlugin(window.UniverSheetsFormula.UniverSheetsFormulaPlugin);
-
-      // create univer sheet instance
-      univer.createUniverSheet({});
-    </script>
-  </body>
-</html>
-```
-
-## 使用命令行工具构建 UMD 包
-
-你也可以使用我们的命令行工具 [`@univerjs/create-cli`](https://github.com/dream-num/cli) 在本地构建一个符合自己需求的 UMD 包。
-
-根据命令行的提示，选择是否排除一些不需要的依赖，就会获得支持 UMD 的 css 和 js 文件。
+剩下要做的就是，将生成的代码复制到你的项目中，找到合适的地方引入之后就可以开始使用 Univer 了。
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 
 <Tabs>
-  <TabItem label="npm">
-    ```shell
-      npm create @univerjs/cli@latest
+  <TabItem label="Univer Sheet">
+    ```html title="index.html"
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <!-- ... -->
+          <link rel="stylesheet" href="/path/main.css" />
+          <script src="/path/main.js"></script>
+
+          <style>
+            #app {
+              height: 480px;
+            }
+          </style>
+        </head>
+        <body>
+          <div id="app"></div>
+
+          <script>
+            var { 
+              UniverCore,
+              UniverDesign,
+              UniverEngineRender,
+              UniverEngineFormula,
+              UniverDocs,
+              UniverDocsUi,
+              UniverUi,
+              UniverSheets,
+              UniverSheetsUi,
+              UniverSheetsNumfmt,
+              UniverSheetsFormula,
+              UniverFacade,
+            } = window
+
+            var univer = new UniverCore.Univer({
+              theme: UniverDesign.defaultTheme,
+              locale: UniverCore.LocaleType.ZH_CN,
+              logLevel: UniverCore.LogLevel.VERBOSE,
+            });
+
+            univer.registerPlugin(UniverEngineRender.UniverRenderEnginePlugin);
+            univer.registerPlugin(UniverEngineFormula.UniverFormulaEnginePlugin);
+
+            univer.registerPlugin(UniverUi.UniverUIPlugin, {
+              container: "app",
+              header: true,
+              toolbar: true,
+              footer: true,
+            });
+
+            univer.registerPlugin(UniverDocs.UniverDocsPlugin, {
+              hasScroll: false,
+            });
+            univer.registerPlugin(UniverDocsUi.UniverDocsUIPlugin);
+
+            univer.registerPlugin(UniverSheets.UniverSheetsPlugin);
+            univer.registerPlugin(UniverSheetsUi.UniverSheetsUIPlugin);
+            univer.registerPlugin(UniverSheetsNumfmt.UniverSheetsNumfmtPlugin);
+            univer.registerPlugin(UniverSheetsFormula.UniverSheetsFormulaPlugin);
+
+            univer.createUniverSheet({});
+
+            const univerAPI = UniverFacade.FUniver.newAPI(univer)
+          </script>
+        </body>
+      </html>
     ```
   </TabItem>
-  <TabItem label="pnpm">
-    ```shell
-      pnpm create @univerjs/cli@latest
+  <TabItem label="Univer Doc">
+    ```html title="index.html"
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <!-- ... -->
+          <link rel="stylesheet" href="/path/main.css" />
+          <script src="/path/main.js"></script>
+
+          <style>
+            #app {
+              height: 480px;
+            }
+          </style>
+        </head>
+        <body>
+          <div id="app"></div>
+
+          <script>
+            var { 
+              UniverCore,
+              UniverDesign,
+              UniverEngineRender,
+              UniverEngineFormula,
+              UniverDocs,
+              UniverDocsUi,
+              UniverUi,
+              UniverFacade,
+            } = window
+
+            var univer = new UniverCore.Univer({
+              theme: UniverDesign.defaultTheme,
+              locale: UniverCore.LocaleType.ZH_CN,
+              logLevel: UniverCore.LogLevel.VERBOSE,
+            });
+
+            univer.registerPlugin(UniverEngineRender.UniverRenderEnginePlugin);
+            univer.registerPlugin(UniverEngineFormula.UniverFormulaEnginePlugin);
+
+            univer.registerPlugin(UniverUi.UniverUIPlugin, {
+              container: "app",
+              header: true,
+              toolbar: true,
+            });
+
+            univer.registerPlugin(UniverDocs.UniverDocsPlugin, {
+              standalone: true,
+            });
+            univer.registerPlugin(UniverDocsUi.UniverDocsUIPlugin, {
+              container: 'univerdoc',
+              layout: {
+                docContainerConfig: {
+                  innerLeft: false,
+                },
+              },
+            });
+
+            univer.createUniverDoc({});
+
+            const univerAPI = UniverFacade.FUniver.newAPI(univer)
+          </script>
+        </body>
+      </html>
+    ```
+  </TabItem>
+</Tabs>
+
+## 使用 CDN 引入
+
+Univer 也可以通过 UMD 的方式引入，要格外注意的是，Univer 的插件机制有着严格的依赖关系，所以在引入的时候需要格外注意引入的顺序。
+
+<Tabs>
+  <TabItem label="Univer Sheet">
+    ```html title="index.html"
+      <head>
+        <link rel="stylesheet" href="https://unpkg.com/@univerjs/design/lib/index.css" />
+        <link rel="stylesheet" href="https://unpkg.com/@univerjs/ui/lib/index.css" />
+        <link rel="stylesheet" href="https://unpkg.com/@univerjs/docs-ui/lib/index.css" />
+        <link rel="stylesheet" href="https://unpkg.com/@univerjs/sheets-ui/lib/index.css" />
+        <link rel="stylesheet" href="https://unpkg.com/@univerjs/sheets-formula/lib/index.css" />
+        <link rel="stylesheet" href="https://unpkg.com/@univerjs/sheets-numfmt/lib/index.css" />
+
+        <script src="https://unpkg.com/clsx/dist/clsx.min.js"></script>
+        <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
+        <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/rxjs/dist/bundles/rxjs.umd.min.js"></script>
+        <script src="https://unpkg.com/@wendellhu/redi/dist/redi.js"></script>
+        <script src="https://unpkg.com/@wendellhu/redi/dist/react-bindings.js"></script>
+
+        <script src="https://unpkg.com/@univerjs/core/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs/design/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs/engine-render/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs/engine-formula/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs/ui/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs/docs/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs/docs-ui/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs/sheets/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs/sheets-ui/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs/sheets-formula/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs/sheets-numfmt/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs/facade/lib/umd/index.js"></script>
+      </head>
+    ```
+  </TabItem>
+  <TabItem label="Univer Doc">
+    ```html title="index.html"
+      <head>
+        <link rel="stylesheet" href="https://unpkg.com/@univerjs/design/lib/index.css" />
+        <link rel="stylesheet" href="https://unpkg.com/@univerjs/ui/lib/index.css" />
+        <link rel="stylesheet" href="https://unpkg.com/@univerjs/docs-ui/lib/index.css" />
+
+        <script src="https://unpkg.com/clsx/dist/clsx.min.js"></script>
+        <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
+        <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/rxjs/dist/bundles/rxjs.umd.min.js"></script>
+        <script src="https://unpkg.com/@wendellhu/redi/dist/redi.js"></script>
+        <script src="https://unpkg.com/@wendellhu/redi/dist/react-bindings.js"></script>
+
+        <script src="https://unpkg.com/@univerjs/core/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs/design/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs/engine-render/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs/engine-formula/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs/ui/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs/docs/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs/docs-ui/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs/facade/lib/umd/index.js"></script>
+      </head>
     ```
   </TabItem>
 </Tabs>
