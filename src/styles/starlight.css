@@ -21,6 +21,15 @@
   --sl-text-h3: var(--sl-text-2xl);
   --sl-text-h4: var(--sl-text-xl);
   --sl-text-h5: var(--sl-text-lg);
+
+  --sl-color-blue: rgb(159, 218, 255);
+  --sl-color-blue-low: rgb(0, 108, 174, 0.7);
+  --sl-color-blue-high: rgb(45, 174, 255);
+  &[data-theme='light'] {
+    --sl-color-blue: #274fee;
+    --sl-color-blue-low: #e8ecfd;
+    --sl-color-blue-high: #3a60f7;
+  }
 }
 
 .site-title {
@@ -114,4 +123,8 @@
 }
 .sl-markdown-content blockquote:not(:where(.not-content *)) {
   border-inline-width: 4px;
+}
+
+.starlight-aside {
+  border-radius: 6px;
 }
