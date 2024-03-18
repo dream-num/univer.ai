@@ -21,3 +21,5 @@ pnpm-debug.log*
 .DS_Store
 
 /api/
+src/content/docs/api/*
+!src/content/docs/api/index.md

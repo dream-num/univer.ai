@@ -95,7 +95,7 @@ During the copy-paste process, Univer will call the hook functions of `ISheetCli
 
 #### Create and Add a Hook
 
-```typescriptx
+```tsx
 import { Disposable, ISheetClipboardService } from '@univer/core'
 
 export class YourController extends Disposable {
@@ -156,7 +156,7 @@ The following methods are exposed in the hook to handle the paste process:
 
 In Univer tables, the number format is a top-level module, and its information is independent of cell information. In the case of internal copy-paste, it requires actively saving format information when copying and performing corresponding operations to add number format when pasting. Therefore, only the onBeforeCopy and onPasteCells hooks need to be implemented. In the onPasteCells implementation, it is necessary to distinguish whether it is cut or copy.
 
-```typescriptx
+```tsx
 export class NumfmtCopyPasteController extends Disposable {
   constructor(
         @Inject(Injector) private _injector: Injector,
@@ -271,7 +271,7 @@ In Univer, the drop-down filling is also implemented through hooks, similar to c
 
 #### Create and Add a Hook
 
-```typescriptx
+```tsx
 import { Disposable, IAutoFillService } from '@univer/core'
 
 export class YourController extends Disposable {
@@ -312,7 +312,7 @@ In Univer, the **default** drop-down filling is implemented using hooks, with th
 
 This default hook is similar to other hooks, except for its type is `AutoFillHookType.Default`. Only one such hook can be effective, and it will be the first to execute. Therefore, you can write your own default hook, as long as its Priority is greater than the default value of 0.
 
-```typescriptx
+```tsx
 const yourHook: ISheetAutoFillHook = {
   id: 'your-hook-id',
   priority: 1,
@@ -336,7 +336,7 @@ const yourHook: ISheetAutoFillHook = {
 
 If you want to execute some additional mutations during drop-down filling, such as having third-party values also fill down with the selection, you can add a hook object which type is `AutoFillHookType.Append`, and write your codes in the corresponding Hook Function. This type of hook will be executed after the default hook. it and can also be disabled using the disable method.
 
-```typescriptx
+```tsx
 const yourHook: ISheetAutoFillHook = {
   id: 'your-hook-id',
   priority: 0,

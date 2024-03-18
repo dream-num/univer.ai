@@ -128,3 +128,7 @@
 .starlight-aside {
   border-radius: 6px;
 }
+
+.sl-markdown-content a :is(img):not(:where(.not-content *)) {
+  display: inline-block;
+}

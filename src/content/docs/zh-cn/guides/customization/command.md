@@ -93,7 +93,7 @@ Univer 中的复制粘贴操作都是通过插件化的方式添加的，这意�
 
 #### 创建和添加 Hook
 
-```typescriptx
+```tsx
 import { Disposable, ISheetClipboardService } from '@univer/core'
 
 export class YourController extends Disposable {
@@ -163,7 +163,7 @@ Hook 中暴露如下方法来处理粘贴过程：
 
 在 Univer 表格中，数字格式是一个上层模块，其信息独立于单元格信息之外。在只考虑内部复制粘贴的情况下，它需要在复制时主动去保存格式信息，并在粘贴时执行对应的添加数字格式的操作，因此只需实现 Hook 中的 onBeforeCopy 和 onPasteCells。在 onPasteCells 的实现中，需要区分是剪切还是复制。
 
-```typescriptx
+```tsx
 export class NumfmtCopyPasteController extends Disposable {
   constructor(
         @Inject(Injector) private _injector: Injector,
@@ -278,7 +278,7 @@ Univer 中的下拉填充也是通过插件化的方式添加的，类似复制�
 
 #### 创建和添加 Hook
 
-```typescriptx
+```tsx
 import { Disposable, IAutoFillService } from '@univer/core'
 
 export class YourController extends Disposable {

@@ -475,7 +475,7 @@ The following sequence diagram describes the entire process from event response 
 
 **Step 1**: The user clicks on the "text wrap" menu item in the menu.
 
-```typescriptx
+```tsx
 // menu.ts
 export function WrapTextMenuItemFactory(accessor: IAccessor): IMenuSelectorItem<WrapStrategy> {
   // ...

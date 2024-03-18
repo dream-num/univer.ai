@@ -47,3 +47,24 @@ body {
   margin-block: -0.125rem;
   padding: 0.125rem 0.375rem;
 }
+
+.page-menu,
+.site-menu {
+  top: 84px;
+  padding: 1rem 0;
+  box-sizing: border-box;
+}
+
+.tsd-navigation.settings {
+  display: none;
+}
+
+.col-content {
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.container-main {
+  margin: 0;
+  box-sizing: border-box;
+}
