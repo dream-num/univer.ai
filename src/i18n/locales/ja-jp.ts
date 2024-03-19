@@ -6,10 +6,12 @@ export const languageName = '日本語'
 export const locales: localesType = {
   'header.docs': 'ドキュメント',
   'header.api': 'Plugins',
-  'header.concat': 'お問い合わせ',
   'header.blog': 'ブログ',
   'header.icons': 'アイコン',
   'header.playground': 'オンラインデモ',
+  'header.examples': 'Examples',
+  'header.workspace': 'Workspace',
+  'header.pro': 'Pro Version',
   'hero.title': '次世代のオープンソースオフィススイート',
   'hero.description': '企業システムに埋め込み · 効率的なデータ循環 · アプリケーションの孤立を打破',
   'hero.button': '今すぐ体験',

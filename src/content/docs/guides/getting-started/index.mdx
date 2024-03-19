@@ -10,96 +10,211 @@ We recommend using build tools such as [Vite](https://vitejs.dev/), [esbuild](ht
 
 To facilitate the deployment of Univer's frontend, a variety of npm packages are utilized. You may install the requisite packages based on your specific requirements.
 
-To install the packages necessary for Sheets, please follow the instructions below:
+The following example will guide you through which plugins are necessary and how to install them:
+
+:::tip
+If you are using npm, please ensure that you are using npm@7 or above. This is because npm@3 ~ npm@6 will not correctly install `peerDependencies`[^1].
+:::
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 
 <Tabs>
-  <TabItem label="npm">
-    We recommend using npm >= 8.0.0 to automatically install peerDependencies.
-
+  <TabItem label="📊 Univer Sheet">
     ```shell
+    # Using npm
     npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+
+    # Using pnpm
+    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
     ```
   </TabItem>
-
-  <TabItem label="pnpm">
+  <TabItem label="📝 Univer Doc">
     ```shell
-    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+    # Using npm
+    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/ui
+
+    # Using pnpm
+    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/ui
     ```
   </TabItem>
 </Tabs>
 
-## Usage
+If you want to get a more convenient development experience in the future, we also recommend you to install `@univerjs/facade`:
 
-To employ Univer in your project, you must include the style sheet provided and incorporate the necessary plugins:
+```shell
+# Using npm
+npm install @univerjs/facade
 
-```typescript title="main.ts"
-import "@univerjs/design/lib/index.css";
-import "@univerjs/ui/lib/index.css";
-import "@univerjs/docs-ui/lib/index.css";
-import "@univerjs/sheets-ui/lib/index.css";
-import "@univerjs/sheets-formula/lib/index.css";
-
-import { Univer } from "@univerjs/core";
-import { defaultTheme } from "@univerjs/design";
-import { UniverDocsPlugin } from "@univerjs/docs";
-import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
-import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
-import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
-import { UniverSheetsPlugin } from "@univerjs/sheets";
-import { UniverSheetsFormulaPlugin } from "@univerjs/sheets-formula";
-import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
-import { UniverUIPlugin } from "@univerjs/ui";
+# Using pnpm
+pnpm add @univerjs/facade
 ```
 
-Next, instantiate an Univer object and register these plugins:
+For more information about `@univerjs/facade`, please refer to the [Facade](/guides/getting-started/facade) section.
 
-```typescript title="main.ts" {9}
-const univer = new Univer({
+## Usage
+
+import Sandbox from '@/components/Sandbox'
+
+export const sheetCode = `const univer = new Univer({
   theme: defaultTheme,
 });
 
-// core plugins
 univer.registerPlugin(UniverRenderEnginePlugin);
 univer.registerPlugin(UniverFormulaEnginePlugin);
+
 univer.registerPlugin(UniverUIPlugin, {
-  container: "app",
+  container: 'app',
   header: true,
   footer: true,
 });
 
-// doc plugins
 univer.registerPlugin(UniverDocsPlugin, {
   hasScroll: false,
 });
 univer.registerPlugin(UniverDocsUIPlugin);
 
-// sheet plugins
 univer.registerPlugin(UniverSheetsPlugin);
 univer.registerPlugin(UniverSheetsUIPlugin);
 univer.registerPlugin(UniverSheetsFormulaPlugin);
-```
 
-Please be informed that when registering the `UniverUIPlugin`, it is necessary to provide a `container` parameter. This parameter represents a CSS selector that serves the purpose of specifying the container element for Univer.
+univer.createUniverSheet({});
+`
 
-:::note
-You have the flexibility to create multiple instances of Univer by creating multiple `Univer` objects and supplying different containers when registering the `UniverUIPlugin`. This allows you to incorporate multiple instances of Univer within a single webpage! For further guidance, kindly refer to our [playground](/playground/?title=Multi%20Instance).
+export const docCode = `const univer = new Univer({
+  theme: defaultTheme,
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  header: true,
+  footer: true,
+});
+
+univer.registerPlugin(UniverDocsPlugin, {
+  standalone: true,
+});
+univer.registerPlugin(UniverDocsUIPlugin, {
+  container: 'univerdoc',
+  layout: {
+    docContainerConfig: {
+      innerLeft: false,
+    },
+  },
+});
+
+univer.createUniverDoc({});
+`
+
+:::tip
+The order of importing the style files is important. Make sure you import the CSS styles of `@univerjs/design` and `@univerjs/ui` before importing the CSS styles of other plugins.
+
+**Which plugins need to import style files? Please refer to the [Plugins](/api).**
 :::
 
-Finally, create an empty Workbook using the `createUniverSheet` method:
+<Tabs>
+  <TabItem label="📊 Univer Sheet">
+    You need to import Univer's css files and some necessary plugins in your project:
 
-```typescript title="main.ts"
-univer.createUniverSheet({});
-```
+    ```typescript title="main.ts"
+    import "@univerjs/design/lib/index.css";
+    import "@univerjs/ui/lib/index.css";
+    import "@univerjs/docs-ui/lib/index.css";
+    import "@univerjs/sheets-ui/lib/index.css";
+    import "@univerjs/sheets-formula/lib/index.css";
 
-For instructions on how to load a spreadsheet into a newly created Univer instance, please consult the [next section](/guides/quickstart/data) of our documentation.
+    import { Univer } from "@univerjs/core";
+    import { defaultTheme } from "@univerjs/design";
 
-## Read More
+    import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
+    import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
 
-We have provided some examples to assist you in incorporating Univer using various scaffolding tools:
+    import { UniverUIPlugin } from "@univerjs/ui";
 
-- [Vite](/playground/?title=Vite)
-- [Webpack 4](/playground/?title=Webpack%204)
+    import { UniverDocsPlugin } from "@univerjs/docs";
+    import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
 
-Alternatively, you can also include Univer using the `<script>` tag. Please refer to the [Using UMD](/guides/quickstart/umd/) guide for further instructions.
+    import { UniverSheetsPlugin } from "@univerjs/sheets";
+    import { UniverSheetsFormulaPlugin } from "@univerjs/sheets-formula";
+    import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
+    ```
+
+    Then create a Univer instance and register these plugins:
+
+    <Sandbox client:only="react" height="720px" src="/sandbox" code={sheetCode} />
+  </TabItem>
+  <TabItem label="📝 Univer Doc">
+    You need to import Univer's css files and some necessary plugins in your project:
+
+    ```typescript title="main.ts"
+    import "@univerjs/design/lib/index.css";
+    import "@univerjs/ui/lib/index.css";
+    import "@univerjs/docs-ui/lib/index.css";
+
+    import { Univer } from "@univerjs/core";
+    import { defaultTheme } from "@univerjs/design";
+
+    import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
+    import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
+
+    import { UniverUIPlugin } from "@univerjs/ui";
+
+    import { UniverDocsPlugin } from "@univerjs/docs";
+    import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
+    ```
+
+    Then create a Univer instance and register these plugins:
+
+    <Sandbox client:only="react" height="720px" src="/sandbox" code={docCode} />
+  </TabItem>
+</Tabs>
+
+## Getting Started: Loading and Storing Data
+
+<Tabs>
+  <TabItem label="📊 Univer Sheet">
+    In the previous section's code, you have already created a Univer instance and an empty spreadsheet. However, in most cases, you will likely need to load existing data into Univer. This section will explain how to load data into Univer and retrieve data from it.
+
+    ### Loading Data
+
+    <Tabs>
+      <TabItem label="Using With Facade API">
+      </TabItem>
+      <TabItem label="Using Without Facade API">
+        By calling the `createUniverSheet` method of `Univer`, you can create a new `Workbook` instance. The method's first parameter is an object that contains the data for the `Workbook`, which should adhere to the `IWorkbookData` interface.
+
+        ```typescript
+        import { IWorkbookData } from "@univerjs/core";
+
+        // ... create univer instance and load plugins
+
+        const data: IWorkbookData = {};
+        const workbook = univer.createUniverSheet(data);
+        ```
+
+        You can find the complete list of supported fields for `IWorkbookData` [here](/api/core/interfaces/IWorkbookData.html).
+      </TabItem>
+    </Tabs>
+
+    ## Storing Data
+
+    <Tabs>
+      <TabItem label="Using With Facade API">
+      </TabItem>
+      <TabItem label="Using Without Facade API">
+        By calling the `save` method of the `Workbook`, you can obtain an `IWorkbookData` object that contains the data within the spreadsheet.
+
+        ```typescript
+        const savedData = workbook.save();
+        ```
+      </TabItem>
+    </Tabs>
+  </TabItem>
+</Tabs>
+
+
+---
+
+[^1]: https://blog.npmjs.org/post/110924823920/npm-weekly-5

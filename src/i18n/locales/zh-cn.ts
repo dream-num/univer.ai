@@ -6,10 +6,12 @@ export const languageName = '简体中文'
 export const locales: localesType = {
   'header.docs': '文档',
   'header.api': '插件',
-  'header.concat': '联系我们',
   'header.blog': '博客',
   'header.icons': '图标库',
   'header.playground': '在线演示',
+  'header.examples': 'Examples',
+  'header.workspace': 'Workspace',
+  'header.pro': 'Pro Version',
   'hero.title': '新一代开源办公套件',
   'hero.description': '嵌入企业系统 · 高效流转数据 · 打破应用孤岛',
   'hero.button': '立即体验',

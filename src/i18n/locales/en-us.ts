@@ -4,10 +4,12 @@ export const languageName = 'English'
 export const locales = {
   'header.docs': 'Guides',
   'header.api': 'Plugins',
-  'header.concat': 'Contact Us',
   'header.blog': 'Blog',
   'header.icons': 'Icons',
   'header.playground': 'Playground',
+  'header.examples': 'Examples',
+  'header.workspace': 'Workspace',
+  'header.pro': 'Pro Version',
   'hero.title': 'The next-generation open source office suite',
   'hero.description': 'Break application silos and connect business data to a single platform.',
   'hero.button': 'Get started',

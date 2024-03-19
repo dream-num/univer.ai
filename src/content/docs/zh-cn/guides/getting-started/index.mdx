@@ -108,9 +108,15 @@ univer.registerPlugin(UniverDocsUIPlugin, {
 univer.createUniverDoc({});
 `
 
+:::tip
+样式文件的引入顺序很重要，确保你在依次引入 `@univerjs/design`、`@univerjs/ui` 的 CSS 样式后再引入其他插件的样式文件。
+
+**哪些插件需要引入样式文件？请参考 [插件](/zh-cn/api)。**
+:::
+
 <Tabs>
   <TabItem label="📊 Univer Sheet">
-    然后创建一个 Univer 实例，并注册这些插件：
+    你需要在项目中引入 Univer 的样式文件，以及一些必要的插件：
 
     ```typescript title="main.ts"
     import "@univerjs/design/lib/index.css";
@@ -135,12 +141,12 @@ univer.createUniverDoc({});
     import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
     ```
 
-    你需要在项目中引入 Univer 的样式文件，以及一些必要的插件：
+    然后创建一个 Univer 实例，并注册这些插件：
 
     <Sandbox client:only="react" height="720px" src="/sandbox" code={sheetCode} />
   </TabItem>
   <TabItem label="📝 Univer Doc">
-    然后创建一个 Univer 实例，并注册这些插件：
+    你需要在项目中引入 Univer 的样式文件，以及一些必要的插件：
 
     ```typescript title="main.ts"
     import "@univerjs/design/lib/index.css";
@@ -159,7 +165,7 @@ univer.createUniverDoc({});
     import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
     ```
 
-    你需要在项目中引入 Univer 的样式文件，以及一些必要的插件：
+    然后创建一个 Univer 实例，并注册这些插件：
 
     <Sandbox client:only="react" height="720px" src="/sandbox" code={docCode} />
   </TabItem>

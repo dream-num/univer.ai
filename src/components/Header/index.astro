@@ -25,7 +25,7 @@ const currentPath = Astro.url.pathname.replace(`/${lang}`, '')
         <a href={l('/api')}>{t('header.api')}</a>
         <a href={l('/blog')}>{t('header.blog')}</a>
         <a href="/icons">{t('header.icons')}</a>
-        <a href={l('/enterprises#获取商业版')}>{t('header.concat')}</a>
+        <a href="/examples">{t('header.examples')}</a>
       </nav>
     </section>
 
@@ -35,7 +35,10 @@ const currentPath = Astro.url.pathname.replace(`/${lang}`, '')
       <a class="github" href="https://github.com/dream-num/univer">
         <Github client:load />
       </a>
-      <a class="playground" href="/playground">{t('header.playground')}</a>
+      {lang === 'zh-cn'
+        ? (<a class="playground" href="/pro">{t('header.pro')}</a>)
+        : (<a class="playground" href="/workspace">{t('header.workspace')}</a>)}
+
     </section>
   </div>
 </header>
