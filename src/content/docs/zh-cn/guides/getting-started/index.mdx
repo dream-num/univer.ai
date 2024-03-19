@@ -165,46 +165,54 @@ univer.createUniverDoc({});
   </TabItem>
 </Tabs>
 
-## 入门示例：加载数据和存储数据
+## 入门示例：加载数据、修改数据和存储数据
 
 <Tabs>
   <TabItem label="📊 Univer Sheet">
-    在上一小节的代码中，你已经创建了一个 Univer 实例并创建了一个空的电子表格，不过大部分情况下你可能需要的是在 Univer 当中加载已有数据。这一小节将会介绍如何向 Univer 加载数据以及如何从 Univer 中存储数据。
+    在上一小节的代码中，你已经创建了一个 Univer 实例并创建了一个空的电子表格，不过大部分情况下你可能需要的是在 Univer 当中加载已有数据。这一小节将会介绍如何向 Univer 加载数据、修改数据以及如何从 Univer 中存储数据。
 
     ### 加载数据
 
-    <Tabs>
-      <TabItem label="使用 Facade API">
-      </TabItem>
-      <TabItem label="不使用 Facade API">
-        通过调用 `Univer` 的 `createUniverSheet` 方法，可以创建一个新的 `Workbook` 实例。方法的第一个参数是一个对象，包含了 `Workbook` 的数据，应该符合 `IWorkbookData` 接口。
+    通过调用 `Univer` 的 `createUniverSheet` 方法，可以创建一个新的 `Workbook` 实例。方法的第一个参数是一个对象，包含了 `Workbook` 的数据，应该符合 `IWorkbookData` 接口。
 
-        ```typescript
-        import { IWorkbookData } from "@univerjs/core";
+    ```typescript
+    import { IWorkbookData } from "@univerjs/core";
 
-        // ... create univer instance and load plugins
+    // ... create univer instance and load plugins
 
-        const data: IWorkbookData = {};
-        const workbook = univer.createUniverSheet(data);
-        ```
+    const data: IWorkbookData = {};
+    const workbook = univer.createUniverSheet(data);
+    ```
 
-        你可以在[这里](/api/core/interfaces/IWorkbookData.html)了解 `IWorkbookData` 所支持的全部字段。
-      </TabItem>
-    </Tabs>
+    你可以在[这里](/api/core/interfaces/IWorkbookData.html)了解 `IWorkbookData` 所支持的全部字段。
+
+    ### 修改数据
+
+    @univerjs/facade 提供的 API 是对 `Univer` 实例的封装，因此你需要在创建了 `Univer` 实例之后，再用 `FUniver` 包裹这个实例：
+
+    ```typescript
+    import { FUniver } from "@univerjs/facade";
+
+    const univerAPI = FUniver.newAPI(univer);
+    ```
+
+    然后你就可以通过调用 `univerAPI` 的方法来使用 Univer 了，例如获取当前激活的 sheet，并在指定的范围更新值：
+
+    ```typescript
+    const activeSheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+    // A1 设置数字 1
+    const range1 = activeSheet.getRange(0, 0, 1, 1);
+    range1.setValue(1);
+    ```
 
     ### 存储数据
 
-    <Tabs>
-      <TabItem label="使用 Facade API">
-      </TabItem>
-      <TabItem label="不使用 Facade API">
-        通过调用 `Workbook` 的 `save` 方法，可以得到 `IWorkbookData` 对象，包含了表格内部的数据。
+    通过调用当前 `Workbook` 的 `getSnapshot` 方法，可以得到 `IWorkbookData` 对象，包含了表格内部的数据。
 
-        ```typescript
-        const savedData = workbook.save();
-        ```
-      </TabItem>
-    </Tabs>
+    ```typescript
+    const savedData = univerAPI.getActiveWorkbook().getSnapshot();
+    ```
   </TabItem>
 </Tabs>
 
