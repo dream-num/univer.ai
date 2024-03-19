@@ -114,6 +114,7 @@ univer端口见下表。
         | service | port | description |
         | --------- | ---- | --------------- |
         | universer | 8000 | api http server |
+        | univer-minio | 9000 | s3 server |
         | univer-client | 3010 | frontend |
     </TabItem>
     <TabItem label="lite">
@@ -154,5 +155,12 @@ univer端口见下表。
         ```
     </TabItem>
 </Tabs>
+
+### 7. Docker compose版的S3配置
+替换 .env 文件的 `S3_ENDPOINT_PUBLIC` 为本机ip，才能使局域网内`另存为`功能正常。
+```bash
+# 如 S3_ENDPOINT_PUBLIC=http://127.0.0.1:9000
+# 替换为 S3_ENDPOINT_PUBLIC=http://192.168.50.172:9000
+```
 
 若仍然不能解决您的问题，请[联系社区](/zh-cn/introduction#社区)获取帮助。
