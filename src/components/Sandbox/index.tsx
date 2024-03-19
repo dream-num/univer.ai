@@ -2,12 +2,13 @@ import { useEffect, useRef } from 'react'
 import styles from './index.module.less'
 
 interface IProps {
+  height?: string
   code: string
   hideEditor?: boolean
 }
 
 export default function Sandbox(props: IProps) {
-  const { code, hideEditor = false } = props
+  const { height = '460px', code, hideEditor = false } = props
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
   useEffect(() => {
@@ -22,6 +23,6 @@ export default function Sandbox(props: IProps) {
   })
 
   return (
-    <iframe ref={iframeRef} className={styles.sandbox} src="/sandbox" />
+    <iframe ref={iframeRef} className={styles.sandbox} style={{ height }} src="/sandbox" />
   )
 }

@@ -1,7 +1,7 @@
 ---
 title: Creating Websocket
 sidebar:
-  order: 4
+  order: 8
 ---
 
 ## Creating a Websocket [Coming Soon]

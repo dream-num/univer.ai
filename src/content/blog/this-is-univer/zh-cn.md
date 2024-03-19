@@ -473,7 +473,7 @@ private _initialize() {
 
 **第一步**：用户点击菜单中 text wrap 菜单项。
 
-```typescriptx
+```tsx
 // menu.ts
 export function WrapTextMenuItemFactory(accessor: IAccessor): IMenuSelectorItem<WrapStrategy> {
   // ...

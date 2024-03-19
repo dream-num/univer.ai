@@ -4,55 +4,74 @@ title: Quickstart
 
 If you want to get started with Univer as quickly as possible, you've come to the right place! This page will guide you through building a working Univer app in just a few minutes.
 
-Univer Sheet / Univer Doc
-
-## Univer in 60 seconds
+{/* ## Univer in 60 seconds */}
 
 {/* 这里需要一个视频 */}
 
 ## Play Online
 
-## Vite Template
+You can play with Univer online without installing anything. Just click the link below and start using Univer right away.
 
-## Next steps
+import PlaygroundBtns from './_components/PlaygroundBtns.astro'
 
-import Sandbox from '@/components/Sandbox'
+<PlaygroundBtns
+  items={[{
+    color: 'rgb(73, 184, 17)',
+    icon: '📊',
+    title: 'Univer Sheet',
+    href: 'https://stackblitz.com/~/github.com/awesome-univer/sheets-vite-demo',
+  }, {
+    color: 'rgb(11, 158, 251)',
+    icon: '📝',
+    title: 'Univer Doc',
+    href: 'https://stackblitz.com/~/github.com/awesome-univer/docs-vite-demo',
+    type: 'beta'
+  }, {
+    color: 'rgb(254, 75, 75)',
+    icon: '🎨',
+    title: 'Univer Slide',
+    type: 'dev',
+  }]}
+/>
 
-export const code = `function UniverSheet () {
-  const univerRef = useRef(null);
+## Starter Kit
 
-  useEffect(() => {
-    const univer = new Univer({
-      theme: defaultTheme,
-    });
+If you prefer to start with a local development environment, you can use the following starter kits to create a new Univer app in just a few seconds. We provide two starter kits for different types of apps:
 
-    // core plugins
-    univer.registerPlugin(UniverRenderEnginePlugin);
-    univer.registerPlugin(UniverFormulaEnginePlugin);
-    univer.registerPlugin(UniverUIPlugin, {
-      container: univerRef.current,
-      header: true,
-      toolbar: true,
-      footer: true,
-    });
+import { Tabs, TabItem } from "@astrojs/starlight/components";
 
-    // doc plugins
-    univer.registerPlugin(UniverDocsPlugin, {
-      hasScroll: false,
-    });
-    univer.registerPlugin(UniverDocsUIPlugin);
+<Tabs>
+  <TabItem label="npm">
+    ```shell
+      # 📊 create a univer sheet app
+      npx degit dream-num/univer-sheet-start-kit [your-app-name]
 
-    // sheet plugins
-    univer.registerPlugin(UniverSheetsPlugin);
-    univer.registerPlugin(UniverSheetsUIPlugin);
-    univer.registerPlugin(UniverSheetsFormulaPlugin);
+      # 📝 create a univer doc app
+      npx degit dream-num/univer-doc-start-kit [your-app-name]
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```shell
+      # 📊 create a univer sheet app
+      pnpm dlx degit dream-num/univer-sheet-start-kit [your-app-name]
 
-    univer.createUniverSheet({});
-  }, []);
+      # 📝 create a univer doc app
+      pnpm dlx degit dream-num/univer-doc-start-kit [your-app-name]
+    ```
+  </TabItem>
+</Tabs>
 
-  return (
-    <div ref={univerRef} style={{ height: '400px' }} />
-  )
-}`
+Great job on your first steps with Univer! You've successfully created your first project and gotten a taste of what Univer can do.
 
-<Sandbox client:only="react" src="/sandbox" code={code} hideEditor />
+## Next Steps
+
+Congratulations on making it this far! You're well on your way to mastering Univer. Here are some next steps to help you continue your journey:
+
+- **🔰 Getting Started**: If you want to learn how to manually set up a Univer project from scratch, check out the [Getting Started](/guides/getting-started) chapter. It will guide you through the process step by step.
+- **🏗️ Advanced Use**: Ready to take your Univer skills to the next level? The [Advanced Use](/guides/advanced-use) chapter covers more advanced topics and techniques for working with Univer.
+- **📚 Tutorials**: Looking for practical examples and real-world use cases? Head over to the [Tutorials](/guides/tutorials) chapter, where you'll find a collection of hands-on tutorials that demonstrate how to build various applications and features with Univer.
+- **🧱 Concepts & Architecture**: Want to dive deep into the inner workings of Univer? The [Concepts & Architecture](/guides/concepts-and-architecture/architecture/) chapter provides a comprehensive overview of Univer's architecture, core concepts, and design principles.
+- **🪄 Customizing Univer**: Interested in extending and customizing Univer to fit your specific needs? The [Customizing Univer](/guides/customization) chapter is your go-to resource for learning how to create custom plugins, themes, and extensions.
+- **🎢 Playground**: Don't forget to explore the [Playground page](/playground), where you can experiment with various Univer demos and see the library in action.
+
+No matter which path you choose, Univer is here to support you every step of the way. Happy coding!

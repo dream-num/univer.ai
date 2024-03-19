@@ -21,6 +21,21 @@
   --sl-text-h3: var(--sl-text-2xl);
   --sl-text-h4: var(--sl-text-xl);
   --sl-text-h5: var(--sl-text-lg);
+
+  --sl-color-blue: #9fdaff;
+  --sl-color-blue-low: #006caeb3;
+  --sl-color-blue-high: #2daeff;
+  --sl-color-purple: #c7abed;
+  --sl-color-purple-low: #510eb0b3;
+  --sl-color-purple-high: #9e6de3;
+  &[data-theme='light'] {
+    --sl-color-blue: #274fee;
+    --sl-color-blue-low: #e8ecfd;
+    --sl-color-blue-high: #3a60f7;
+    --sl-color-purple: #894ede;
+    --sl-color-purple-low: #f1eafa;
+    --sl-color-purple-high: #6721cb;
+  }
 }
 
 .site-title {
@@ -68,23 +83,58 @@
 
 @media (min-width: 100rem) {
   .sidebar-pane {
-    width: 16rem;
+    width: 18rem;
     margin-left: 50%;
     background-color: transparent;
     transform: translateX(-45rem);
   }
 
   .right-sidebar-container {
-    width: 16rem;
+    width: 18rem;
   }
 
   [data-has-sidebar][data-has-toc] .main-pane {
-    width: calc(100% - 16rem);
+    width: calc(100% - 18rem);
   }
 
   .main-frame {
     width: 90rem;
     margin: 0 auto;
-    padding-left: 16rem;
+    padding-left: 18rem;
   }
+}
+
+.expressive-code .frame {
+  box-shadow: none !important;
+}
+.expressive-code .frame.has-title:not(.is-terminal) .header,
+.expressive-code .frame.is-terminal .header {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+.expressive-code .frame.has-title:not(.is-terminal) .header .title {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+.expressive-code .frame.has-title pre,
+.expressive-code .frame.has-title code,
+.expressive-code .frame.is-terminal pre,
+.expressive-code .frame.is-terminal code {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.sl-markdown-content code:not(:where(.not-content *)) {
+  border-radius: 4px;
+}
+.sl-markdown-content blockquote:not(:where(.not-content *)) {
+  border-inline-width: 4px;
+}
+
+.starlight-aside {
+  border-radius: 6px;
+}
+
+.sl-markdown-content a :is(img):not(:where(.not-content *)) {
+  display: inline-block;
 }

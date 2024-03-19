@@ -1,0 +1,36 @@
+{
+  "name": "@univerjs/web-api",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@8.7.0",
+  "author": "DreamNum Inc. <developer@univer.ai>",
+  "licenses": [
+    {
+      "type": "CC-BY-NC-SA-4.0",
+      "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en"
+    },
+    {
+      "type": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/univer"
+  },
+  "homepage": "https://univer.ai",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dream-num/univer-docs"
+  },
+  "bugs": {
+    "url": "https://github.com/dream-num/univer-docs/issues"
+  },
+  "exports": {
+    ".": "./index.mjs"
+  },
+  "dependencies": {
+    "typedoc": "^0.25.12"
+  }
+}

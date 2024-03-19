@@ -100,7 +100,7 @@ Univer 的源码结构如下：
 我们使用 Storybook 来开发和测试组件。你可以通过以下命令启动 Storybook：
 
 ```bash
-pnpm dev:storybook
+pnpm storybook:dev
 ```
 
 创建 Pull Request 的同时，Storybook 的预览也会自动部署。
