@@ -15,7 +15,11 @@ async function main() {
   const api = new ApiGenerator(cloneRoot)
 
   const readmeRoot = resolve(__dirname, '../src/content/docs/api')
-  api.generatePluginsReadme(readmeRoot)
+  const readmeZhRoot = resolve(__dirname, '../src/content/docs/zh-cn/api')
+  api.generatePluginsReadme({
+    outputRoot: readmeRoot,
+    outputRootZh: readmeZhRoot,
+  })
 
   await api.generateDocs(outputRoot)
 }

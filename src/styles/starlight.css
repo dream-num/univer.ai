@@ -138,3 +138,9 @@
 .sl-markdown-content a :is(img):not(:where(.not-content *)) {
   display: inline-block;
 }
+
+.sl-markdown-content
+  a
+  + :is(img, picture, video, canvas, svg, iframe):not(:where(.not-content *)) {
+  display: inline-block;
+}

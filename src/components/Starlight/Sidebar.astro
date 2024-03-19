@@ -44,7 +44,10 @@ const isApiPage = Astro.url.pathname.startsWith(`/${lang}/api`) || Astro.url.pat
             {packages.map(pkg => (
               <li>
                 <a
-                  href={`/api/${pkg}`}
+                  class:list={[{
+                    active: Astro.url.pathname.endsWith(`/api/${pkg}`),
+                  }]}
+                  href={l(`/api/${pkg}`)}
                   aria-current={Astro.url.pathname === `/api/${pkg}` ? 'page' : undefined}
                 >
                   @univerjs/{pkg}
@@ -123,11 +126,17 @@ window.addEventListener('DOMContentLoaded', () => {
         border-inline-start: 1px solid var(--sl-color-hairline-light);
 
         a {
-          padding: 0.2em var(--sl-sidebar-item-padding-inline);
+          padding: 0.3em var(--sl-sidebar-item-padding-inline);
           color: inherit;
-          line-height: 1.4;
           font-size: var(--sl-text-sm);
           text-decoration: none;
+          border-radius: 0.25rem;
+          display: block;
+          &.active {
+            font-weight: 600;
+            color: var(--sl-color-text-invert);
+            background-color: var(--sl-color-text-accent);
+          }
         }
       }
     }

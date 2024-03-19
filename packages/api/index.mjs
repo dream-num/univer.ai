@@ -7,7 +7,6 @@ import {
   readFileSync,
   readdirSync,
   rmSync,
-  rmdirSync,
   writeFileSync,
 } from 'node:fs'
 import { dirname, resolve } from 'node:path'
@@ -50,33 +49,43 @@ export class ApiGenerator {
 
   static cleanOutput(outputRoot) {
     if (existsSync(outputRoot)) {
-      rmdirSync(outputRoot, { recursive: true })
+      rmSync(outputRoot, { recursive: true })
     } else {
       mkdirSync(outputRoot)
     }
   }
 
-  generatePluginsReadme(output) {
+  generatePluginsReadme({ outputRoot, outputRootZh }) {
     const packagesPath = resolve(this.cloneRoot, './packages')
 
     for (const pkg of this.packages) {
-      const readme = resolve(packagesPath, pkg, 'readme.md')
+      const readme = resolve(packagesPath, pkg, 'README.md')
+      const readmeZh = resolve(packagesPath, pkg, 'README-zh.md')
       const assets = resolve(packagesPath, pkg, 'assets')
 
-      if (existsSync(readme)) {
-        if (!existsSync(resolve(output, pkg))) {
-          mkdirSync(resolve(output, pkg), { recursive: true })
+      const generateReadme = (readmePath, outputPath) => {
+        if (existsSync(readmePath)) {
+          const outputDir = resolve(outputPath, pkg)
+          if (!existsSync(outputDir)) {
+            mkdirSync(outputDir, { recursive: true })
+          }
+
+          if (existsSync(assets)) {
+            cpSync(assets, resolve(outputDir, 'assets'), { recursive: true })
+          }
+
+          const content = readFileSync(readmePath, 'utf8')
+            .replace(
+              `# @univerjs/${pkg}`,
+              `---\ntitle: '@univerjs/${pkg}'\n---[![notice](/api/api-banner.svg)](/api/${pkg}/detail.html)`,
+            )
+
+          writeFileSync(resolve(outputDir, 'index.md'), content)
         }
-
-        if (existsSync(assets)) {
-          cpSync(assets, resolve(output, pkg, 'assets'), { recursive: true })
-        }
-
-        const content = readFileSync(readme, 'utf8')
-          .replace(`# @univerjs/${pkg}`, `---\ntitle: '@univerjs/${pkg}'\n---[![notice](/api/api-banner.svg)](/api/${pkg}/detail.html)`)
-
-        writeFileSync(resolve(output, pkg, 'index.md'), content)
       }
+
+      generateReadme(readme, outputRoot)
+      generateReadme(readmeZh, outputRootZh)
     }
   }
 
