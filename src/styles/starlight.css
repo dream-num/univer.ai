@@ -22,13 +22,19 @@
   --sl-text-h4: var(--sl-text-xl);
   --sl-text-h5: var(--sl-text-lg);
 
-  --sl-color-blue: rgb(159, 218, 255);
-  --sl-color-blue-low: rgb(0, 108, 174, 0.7);
-  --sl-color-blue-high: rgb(45, 174, 255);
+  --sl-color-blue: #9fdaff;
+  --sl-color-blue-low: #006caeb3;
+  --sl-color-blue-high: #2daeff;
+  --sl-color-purple: #c7abed;
+  --sl-color-purple-low: #510eb0b3;
+  --sl-color-purple-high: #9e6de3;
   &[data-theme='light'] {
     --sl-color-blue: #274fee;
     --sl-color-blue-low: #e8ecfd;
     --sl-color-blue-high: #3a60f7;
+    --sl-color-purple: #894ede;
+    --sl-color-purple-low: #f1eafa;
+    --sl-color-purple-high: #6721cb;
   }
 }
 

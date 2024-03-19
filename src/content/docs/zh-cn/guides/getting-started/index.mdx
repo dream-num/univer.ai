@@ -8,99 +8,207 @@ sidebar:
 
 ## 安装
 
-Univer 的前端通过多个 npm 包发布，你可以根据需要安装对应的包。
+Univer 以插件的形式提供了一系列功能，除了一些产品所必需的核心插件外，你还可以根据需要选择性地引入其它插件。
 
-安装 Sheets 所需的包：
+以下示例将会带你了解哪些插件是必需的，以及如何安装它们：
+
+:::tip
+如果你正在使用 npm，请确保使用的版本为 npm@7 以上。这是因为 npm@3 ~ npm@6 并不会正确地安装 `peerDependencies`[^1]。
+:::
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 
 <Tabs>
-  <TabItem label="npm">
-    推荐使用 npm >= 8.0.0，以便自动安装 peerDependencies。
-
+  <TabItem label="📊 Univer Sheet">
     ```shell
+    # 使用 npm
     npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+
+    # 使用 pnpm
+    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
     ```
   </TabItem>
-
-  <TabItem label="pnpm">
+  <TabItem label="📝 Univer Doc">
     ```shell
-    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+    # 使用 npm
+    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/ui
+
+    # 使用 pnpm
+    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/ui
     ```
   </TabItem>
 </Tabs>
 
-## 使用
+如果你想在后续的开发中获得更加便捷的开发体验，我们还推荐你安装 `@univerjs/facade`：
 
-你需要在项目中引入 Univer 的样式文件，以及一些必要的插件：
+```shell
+# 使用 npm
+npm install @univerjs/facade
 
-```typescript title="main.ts"
-import "@univerjs/design/lib/index.css";
-import "@univerjs/ui/lib/index.css";
-import "@univerjs/docs-ui/lib/index.css";
-import "@univerjs/sheets-ui/lib/index.css";
-import "@univerjs/sheets-formula/lib/index.css";
-
-import { Univer } from "@univerjs/core";
-import { defaultTheme } from "@univerjs/design";
-import { UniverDocsPlugin } from "@univerjs/docs";
-import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
-import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
-import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
-import { UniverSheetsPlugin } from "@univerjs/sheets";
-import { UniverSheetsFormulaPlugin } from "@univerjs/sheets-formula";
-import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
-import { UniverUIPlugin } from "@univerjs/ui";
+# 使用 pnpm
+pnpm add @univerjs/facade
 ```
 
-然后创建一个 Univer 实例，并注册这些插件：
+有关 `@univerjs/facade` 的更多信息，请参考 [Facade](/zh-cn/guides/getting-started/facade) 章节。
 
-```typescript title="main.ts" {9}
-const univer = new Univer({
+## 使用
+
+import Sandbox from '@/components/Sandbox'
+
+export const sheetCode = `const univer = new Univer({
   theme: defaultTheme,
 });
 
-// core plugins
 univer.registerPlugin(UniverRenderEnginePlugin);
 univer.registerPlugin(UniverFormulaEnginePlugin);
+
 univer.registerPlugin(UniverUIPlugin, {
-  container: "app",
+  container: 'app',
   header: true,
-  toolbar: true,
   footer: true,
 });
 
-// doc plugins
 univer.registerPlugin(UniverDocsPlugin, {
   hasScroll: false,
 });
 univer.registerPlugin(UniverDocsUIPlugin);
 
-// sheet plugins
 univer.registerPlugin(UniverSheetsPlugin);
 univer.registerPlugin(UniverSheetsUIPlugin);
 univer.registerPlugin(UniverSheetsFormulaPlugin);
-```
 
-注意，在注册 `UniverUIPlugin` 的时候，你需要传递一个 `container` 参数，这个参数是一个 CSS 选择器，用于指定 Univer 的容器元素。
-
-:::note
-你可以通过创建多个 Univer 对象，并在注册 `UniverUIPlugin` 时提供不同的容器，从而在一个页面上创建多个 Univer！请参考我们的 [playground](/playground/?title=Multi%20Instance)。
-:::
-
-最后通过 `createUniverSheet` 方法创建一个空白的 Univer Sheet：
-
-```typescript title="main.ts"
 univer.createUniverSheet({});
-```
+`
 
-关于如何在新创建的 Univer 加载电子表格，请参考[下一节](/zh-cn/guides/quickstart/data)。
+export const docCode = `const univer = new Univer({
+  theme: defaultTheme,
+});
 
-## 更多
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
 
-我们提供了一些示例帮助你在不同的脚手架工具中引入 Univer：
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  header: true,
+  footer: true,
+});
 
-- [Vite](/playground/?title=Vite)
-- [Webpack 4](/playground/?title=Webpack%204)
+univer.registerPlugin(UniverDocsPlugin, {
+  standalone: true,
+});
+univer.registerPlugin(UniverDocsUIPlugin, {
+  container: 'univerdoc',
+  layout: {
+    docContainerConfig: {
+      innerLeft: false,
+    },
+  },
+});
 
-你可以通过 `<script>` 标签的方式引入 Univer，请参考 [使用 UMD](/zh-cn/guides/quickstart/umd/)。
+univer.createUniverDoc({});
+`
+
+<Tabs>
+  <TabItem label="📊 Univer Sheet">
+    然后创建一个 Univer 实例，并注册这些插件：
+
+    ```typescript title="main.ts"
+    import "@univerjs/design/lib/index.css";
+    import "@univerjs/ui/lib/index.css";
+    import "@univerjs/docs-ui/lib/index.css";
+    import "@univerjs/sheets-ui/lib/index.css";
+    import "@univerjs/sheets-formula/lib/index.css";
+
+    import { Univer } from "@univerjs/core";
+    import { defaultTheme } from "@univerjs/design";
+
+    import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
+    import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
+
+    import { UniverUIPlugin } from "@univerjs/ui";
+
+    import { UniverDocsPlugin } from "@univerjs/docs";
+    import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
+
+    import { UniverSheetsPlugin } from "@univerjs/sheets";
+    import { UniverSheetsFormulaPlugin } from "@univerjs/sheets-formula";
+    import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
+    ```
+
+    你需要在项目中引入 Univer 的样式文件，以及一些必要的插件：
+
+    <Sandbox client:only="react" height="720px" src="/sandbox" code={sheetCode} />
+  </TabItem>
+  <TabItem label="📝 Univer Doc">
+    然后创建一个 Univer 实例，并注册这些插件：
+
+    ```typescript title="main.ts"
+    import "@univerjs/design/lib/index.css";
+    import "@univerjs/ui/lib/index.css";
+    import "@univerjs/docs-ui/lib/index.css";
+
+    import { Univer } from "@univerjs/core";
+    import { defaultTheme } from "@univerjs/design";
+
+    import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
+    import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
+
+    import { UniverUIPlugin } from "@univerjs/ui";
+
+    import { UniverDocsPlugin } from "@univerjs/docs";
+    import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
+    ```
+
+    你需要在项目中引入 Univer 的样式文件，以及一些必要的插件：
+
+    <Sandbox client:only="react" height="720px" src="/sandbox" code={docCode} />
+  </TabItem>
+</Tabs>
+
+## 入门示例：加载数据和存储数据
+
+<Tabs>
+  <TabItem label="📊 Univer Sheet">
+    在上一小节的代码中，你已经创建了一个 Univer 实例并创建了一个空的电子表格，不过大部分情况下你可能需要的是在 Univer 当中加载已有数据。这一小节将会介绍如何向 Univer 加载数据以及如何从 Univer 中存储数据。
+
+    ### 加载数据
+
+    <Tabs>
+      <TabItem label="使用 Facade API">
+      </TabItem>
+      <TabItem label="不使用 Facade API">
+        通过调用 `Univer` 的 `createUniverSheet` 方法，可以创建一个新的 `Workbook` 实例。方法的第一个参数是一个对象，包含了 `Workbook` 的数据，应该符合 `IWorkbookData` 接口。
+
+        ```typescript
+        import { IWorkbookData } from "@univerjs/core";
+
+        // ... create univer instance and load plugins
+
+        const data: IWorkbookData = {};
+        const workbook = univer.createUniverSheet(data);
+        ```
+
+        你可以在[这里](/api/core/interfaces/IWorkbookData.html)了解 `IWorkbookData` 所支持的全部字段。
+      </TabItem>
+    </Tabs>
+
+    ### 存储数据
+
+    <Tabs>
+      <TabItem label="使用 Facade API">
+      </TabItem>
+      <TabItem label="不使用 Facade API">
+        通过调用 `Workbook` 的 `save` 方法，可以得到 `IWorkbookData` 对象，包含了表格内部的数据。
+
+        ```typescript
+        const savedData = workbook.save();
+        ```
+      </TabItem>
+    </Tabs>
+  </TabItem>
+</Tabs>
+
+
+---
+
+[^1]: https://blog.npmjs.org/post/110924823920/npm-weekly-5

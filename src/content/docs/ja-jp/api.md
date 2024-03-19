@@ -1,5 +1,5 @@
 ---
-title: 🔌 API Reference
+title: 🔌 Plugins
 ---
 
 このリファレンスでは、Univer がエクスポートするすべての関数、フック、コンポーネント、および型を文書化しようとしています。ガイドやチュートリアルをお探しの場合は、[ガイド](/ja-jp/guides/introduction)セクションをご参照ください。

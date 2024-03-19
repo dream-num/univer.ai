@@ -69,42 +69,29 @@ import FeatureBox from './_components/FeatureBox.astro'
 
 import Sandbox from '@/components/Sandbox'
 
-export const code = `function UniverSheet () {
-  const univerRef = useRef(null);
+export const code = `const univer = new Univer({
+  theme: defaultTheme,
+});
 
-  useEffect(() => {
-    const univer = new Univer({
-      theme: defaultTheme,
-    });
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  header: true,
+  footer: true,
+});
 
-    // core plugins
-    univer.registerPlugin(UniverRenderEnginePlugin);
-    univer.registerPlugin(UniverFormulaEnginePlugin);
-    univer.registerPlugin(UniverUIPlugin, {
-      container: univerRef.current,
-      header: true,
-      toolbar: true,
-      footer: true,
-    });
+univer.registerPlugin(UniverDocsPlugin, {
+  hasScroll: false,
+});
+univer.registerPlugin(UniverDocsUIPlugin);
 
-    // doc plugins
-    univer.registerPlugin(UniverDocsPlugin, {
-      hasScroll: false,
-    });
-    univer.registerPlugin(UniverDocsUIPlugin);
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
 
-    // sheet plugins
-    univer.registerPlugin(UniverSheetsPlugin);
-    univer.registerPlugin(UniverSheetsUIPlugin);
-    univer.registerPlugin(UniverSheetsFormulaPlugin);
-
-    univer.createUniverSheet({});
-  }, []);
-
-  return (
-    <div ref={univerRef} style={{ height: '400px' }} />
-  )
-}`
+univer.createUniverSheet({});
+`
 
 <Sandbox client:only="react" src="/sandbox" code={code} hideEditor />
 

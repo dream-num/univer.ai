@@ -31,6 +31,7 @@ export default defineConfig({
       components: {
         Header: './src/components/Starlight/Header.astro',
         Sidebar: './src/components/Starlight/Sidebar.astro',
+        ThemeSelect: './src/components/Starlight/ThemeSelect.astro',
       },
       expressiveCode: {
         themes: ['synthwave-84', 'catppuccin-latte'],

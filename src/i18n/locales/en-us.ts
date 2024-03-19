@@ -3,7 +3,7 @@ export const languageName = 'English'
 
 export const locales = {
   'header.docs': 'Guides',
-  'header.api': 'API Reference',
+  'header.api': 'Plugins',
   'header.concat': 'Contact Us',
   'header.blog': 'Blog',
   'header.icons': 'Icons',
@@ -38,7 +38,7 @@ export const locales = {
   'footer.nav.company.concat': 'Contact Us',
   'footer.nav.resource.title': 'Resources',
   'footer.nav.resource.docs': 'Guides',
-  'footer.nav.resource.api': 'API Reference',
+  'footer.nav.resource.api': 'Plugins',
   'footer.nav.resource.icons': 'Univer Icons',
   'footer.nav.community.title': 'Community',
   'footer.nav.community.discord': 'Discord',
@@ -51,7 +51,7 @@ export const locales = {
   'blog.title': 'Blog',
   'blog.desc': 'Updates, sharing and tutorials from Univer Team',
   'startlight.header.guides': 'Guides',
-  'startlight.header.api': 'API Reference',
+  'startlight.header.api': 'Plugins',
   'startlight.header.playground': 'Playground',
   'startlight.header.community': 'Community',
   'startlight.header.community.blog': 'Blog',
