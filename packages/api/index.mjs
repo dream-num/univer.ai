@@ -77,7 +77,7 @@ export class ApiGenerator {
           const content = readFileSync(readmePath, 'utf8')
             .replace(
               `# @univerjs/${pkg}`,
-              `---\ntitle: '@univerjs/${pkg}'\n---[![notice](/api/api-banner.svg)](/api/${pkg}/detail.html)`,
+              `---\ntitle: '@univerjs/${pkg}'\n---\n[![notice](/api/api-banner.svg)](/api/${pkg}/detail.html)`,
             )
 
           writeFileSync(resolve(outputDir, 'index.md'), content)

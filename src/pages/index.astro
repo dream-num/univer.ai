@@ -2,7 +2,9 @@
 import Features from '@/components/LandingFragments/Features.astro'
 import Hero from '@/components/LandingFragments/Hero.astro'
 import Tech from '@/components/LandingFragments/Tech.astro'
+import LanguageConfirm from '@/components/LanguageConfirm'
 import Layout from '@/layouts/Layout.astro'
+
 ---
 
 <Layout lang="en-us" title="Univer">
@@ -12,5 +14,7 @@ import Layout from '@/layouts/Layout.astro'
     <Features />
 
     <Tech />
+
+    <LanguageConfirm client:only />
   </main>
 </Layout>
