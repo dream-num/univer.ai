@@ -140,6 +140,9 @@
 }
 
 .sl-markdown-content
+  :is(img, picture, video, canvas, svg, iframe):not(:where(.not-content *))
+  + :is(img, picture, video, canvas, svg, iframe):not(:where(.not-content *)),
+.sl-markdown-content
   a
   + :is(img, picture, video, canvas, svg, iframe):not(:where(.not-content *)) {
   display: inline-block;

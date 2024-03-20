@@ -36,7 +36,7 @@ const currentPath = Astro.url.pathname.replace(`/${lang}`, '')
         <Github client:load />
       </a>
       {lang === 'zh-cn'
-        ? (<a class="playground" href="/pro">{t('header.pro')}</a>)
+        ? (<a class="playground" href="/pro-examples">{t('header.pro')}</a>)
         : (<a class="playground" href="/workspace">{t('header.workspace')}</a>)}
 
     </section>

@@ -111,7 +111,7 @@ univer.createUniverDoc({});
 :::tip
 The order of importing the style files is important. Make sure you import the CSS styles of `@univerjs/design` and `@univerjs/ui` before importing the CSS styles of other plugins.
 
-**Which plugins need to import style files? Please refer to the [Plugins](/api).**
+**Which plugins need to import style files? Please refer to the [Plugins](/api) document with the ![CSS Included](https://img.shields.io/badge/CSS_Included-blue?logo=CSS3) badge.**
 :::
 
 <Tabs>
@@ -171,49 +171,57 @@ The order of importing the style files is important. Make sure you import the CS
   </TabItem>
 </Tabs>
 
-## Getting Started: Loading and Storing Data
+## Getting Started: Loading, modifying and storing data
 
 <Tabs>
   <TabItem label="📊 Univer Sheet">
-    In the previous section's code, you have already created a Univer instance and an empty spreadsheet. However, in most cases, you will likely need to load existing data into Univer. This section will explain how to load data into Univer and retrieve data from it.
+    In the previous section, you have already created a Univer instance and an empty spreadsheet. However, in most cases, you will likely need to load existing data into Univer. This section will explain how to load data into Univer and retrieve data from it.
 
     ### Loading Data
 
-    <Tabs>
-      <TabItem label="Using With Facade API">
-      </TabItem>
-      <TabItem label="Using Without Facade API">
-        By calling the `createUniverSheet` method of `Univer`, you can create a new `Workbook` instance. The method's first parameter is an object that contains the data for the `Workbook`, which should adhere to the `IWorkbookData` interface.
+    By calling the `createUniverSheet` method of `Univer`, you can create a new `Workbook` instance. The first parameter of the method is an object containing the data of the `Workbook`, which should conform to the `IWorkbookData` interface.
 
-        ```typescript
-        import { IWorkbookData } from "@univerjs/core";
+    ```typescript
+    import { IWorkbookData } from "@univerjs/core";
 
-        // ... create univer instance and load plugins
+    // ... create univer instance and load plugins
 
-        const data: IWorkbookData = {};
-        const workbook = univer.createUniverSheet(data);
-        ```
+    const data: IWorkbookData = {};
+    const workbook = univer.createUniverSheet(data);
+    ```
 
-        You can find the complete list of supported fields for `IWorkbookData` [here](/api/core/interfaces/IWorkbookData.html).
-      </TabItem>
-    </Tabs>
+    You can learn more about all the fields supported by `IWorkbookData` [here](/api/core/interfaces/IWorkbookData.html).
 
-    ## Storing Data
+    ### Modifying Data
 
-    <Tabs>
-      <TabItem label="Using With Facade API">
-      </TabItem>
-      <TabItem label="Using Without Facade API">
-        By calling the `save` method of the `Workbook`, you can obtain an `IWorkbookData` object that contains the data within the spreadsheet.
+    `@univerjs/facade` provides a set of APIs for modifying data in Univer. You can use these APIs to modify the data in the `Workbook` instance.
 
-        ```typescript
-        const savedData = workbook.save();
-        ```
-      </TabItem>
-    </Tabs>
+    ```typescript
+    import { FUniver } from "@univerjs/facade";
+
+    const univerAPI = FUniver.newAPI(univer);
+    ```
+
+    {/* 然后你就可以通过调用 `univerAPI` 的方法来使用 Univer 了，例如获取当前激活的 sheet，并在指定的范围更新值： */}
+    Then you can use the methods of `univerAPI` to use Univer, such as getting the currently active sheet and updating values in the specified range:
+
+    ```typescript
+    const activeSheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+    // Set the number 1 in A1
+    const range1 = activeSheet.getRange(0, 0, 1, 1);
+    range1.setValue(1);
+    ```
+
+    ### Storing Data
+
+    By calling the `getSnapshot` method of the current `Workbook`, you can get an `IWorkbookData` object containing the data inside the sheet.
+
+    ```typescript
+    const savedData = univerAPI.getActiveWorkbook().getSnapshot();
+    ```
   </TabItem>
 </Tabs>
-
 
 ---
 
