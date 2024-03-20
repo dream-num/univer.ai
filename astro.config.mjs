@@ -69,16 +69,18 @@ export default defineConfig({
             'en-US': '🚀 Quickstart',
             'ja-JP': '🚀 クイックスタート',
           },
-          link: 'guides/quickstart',
+          autogenerate: {
+            directory: 'guides/quick-start',
+          },
         },
         {
-          label: '🔰 新手入门',
+          label: '🔌 Facade API',
           translations: {
-            'en-US': '🔰 Getting Started',
-            'ja-JP': '🔰 はじめる',
+            'en-US': '🔌 Facade API',
+            'ja-JP': '🔌 ファサード API',
           },
           autogenerate: {
-            directory: 'guides/getting-started',
+            directory: 'guides/facade',
           },
         },
         {

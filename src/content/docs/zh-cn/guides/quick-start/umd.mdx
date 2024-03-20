@@ -1,28 +1,28 @@
 ---
-title: Using UMD
+title: 使用 UMD
 sidebar:
-  order: 1
+  order: 3
 ---
 
-Univer provides a UMD package for each plugin. Based on the plugin design, these trivial UMD packages will give developers a lot of flexibility, but they will also face some new challenges:
+Univer 为每一个插件都提供了 UMD 包。基于插件化的设计，这些琐碎的 UMD 包会使得开发者拥有非常灵活的选择权，但也同样会让开发者面临一些新的挑战：
 
-- How do I determine the pre-dependencies of a package?
-- How do I determine the correct import order?
-- How do I determine which packages provide a feature?
+- 我要如何确定一个包的前置依赖？
+- 我要如何确定正确的引入顺序？
+- 我要如何确定一个功能究竟是由哪些包提供的？
 
-If you don't have a very clear understanding of Univer's plugin mechanism, these problems usually mean countless attempts at permutation and combination.
+如果对 Univer 的插件化机制没有一个非常清晰的了解的话，通常来说这些问题的背后就意味着无数种排列组合尝试的过程。
 
-If you do encounter such problems, the [UMD package generation tool](#umd-package-generation-tool) we provide below will help you solve these problems. Of course, if you already have a clear understanding of Univer's plugin mechanism, you can skip this tool and [use CDN to import](#using-cdn-to-import-umd) these UMD packages directly.
+如果你确实遇到了这样的问题，那么下面我们提供的 [UMD 包生成工具](#umd-包生成工具)将会帮助你解决这些问题。当然，如果你已经对 Univer 的插件化机制了然于心，你也可以直接跳过这个工具，[使用 CDN 引入](#使用-cdn-引入)这些 UMD 包。
 
-## UMD Package Generation Tool
+## UMD 包生成工具
 
-The UMD package generation tool is an online tool that can help you generate a UMD package that meets your needs. You only need to answer some questions according to our prompts to get the corresponding UMD package.
+UMD 包生成工具是一个在线的工具，它可以帮助你根据自己的需求，生成一个符合自己需求的 UMD 包。你只需要根据我们的提示回答一些问题，就可以获得对应的 UMD 包。
 
-import UMDGenerator from './_components/UMDGenerator'
+import UMDGenerator from '../../../guides/quick-start/_components/UMDGenerator'
 
 <UMDGenerator client:only />
 
-After that, all you have to do is copy the generated code into your project and import it in the right place to start using Univer.
+剩下要做的就是，将生成的代码复制到你的项目中，找到合适的地方引入之后就可以开始使用 Univer 了。
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 
@@ -160,9 +160,9 @@ import { Tabs, TabItem } from "@astrojs/starlight/components";
   </TabItem>
 </Tabs>
 
-## Using CDN to import UMD
+## 使用 CDN 引入
 
-Univer can also be imported through UMD. It should be noted that Univer's plugin mechanism has strict dependency relationships, so special attention should be paid to the order of import.
+Univer 也可以通过 UMD 的方式引入，要格外注意的是，Univer 的插件机制有着严格的依赖关系，所以在引入的时候需要格外注意引入的顺序。
 
 <Tabs>
   <TabItem label="📊 Univer Sheet">

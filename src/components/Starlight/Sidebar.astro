@@ -37,7 +37,17 @@ const isApiPage = Astro.url.pathname.startsWith(`/${lang}/api`) || Astro.url.pat
     <>
       <ul class="api-menu">
         <li>
-          <a class="api-title" href={l('/api')}>🔌 Plugins</a>
+          <a
+            class:list={[
+              'api-title',
+              {
+                active: /\/api(\/)?(\/index.html)?$/.test(Astro.url.pathname),
+              },
+            ]}
+            href={l('/api')}
+          >
+            📦 Plugins
+          </a>
         </li>
         <li>
           <ul>
@@ -45,7 +55,7 @@ const isApiPage = Astro.url.pathname.startsWith(`/${lang}/api`) || Astro.url.pat
               <li>
                 <a
                   class:list={[{
-                    active: Astro.url.pathname.endsWith(`/api/${pkg}`),
+                    active: new RegExp(`/api/${pkg}(/)?(index.html)?$`).test(Astro.url.pathname),
                   }]}
                   href={l(`/api/${pkg}`)}
                   aria-current={Astro.url.pathname === `/api/${pkg}` ? 'page' : undefined}
@@ -110,10 +120,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
   > li {
     > a {
+      padding: 0.3em var(--sl-sidebar-item-padding-inline);
       font-weight: 600;
       color: var(--sl-color-white);
       line-height: 1.4;
       text-decoration: none;
+      border-radius: 0.25rem;
+      display: block;
+      &.active {
+        font-weight: 600;
+        color: var(--sl-color-text-invert);
+        background-color: var(--sl-color-text-accent);
+      }
     }
 
     ul {
