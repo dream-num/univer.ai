@@ -1,0 +1,29 @@
+---
+import Footer from '@/components/Workspace/Footer.astro'
+import Header from '@/components/Workspace/Header.astro'
+import BlankLayout from '@/layouts/BlankLayout.astro'
+---
+
+<BlankLayout lang="en-us" title="Univer Workspace | Univer">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" />
+
+  <section class="page">
+    <Header />
+
+    <header class="hero">
+      Banner
+    </header>
+
+    <article class="contact-us">
+      Article
+    </article>
+
+    <Footer />
+  </section>
+</BlankLayout>
+
+<style lang="less">
+.page {
+  font-family: Poppins;
+}
+</style>
