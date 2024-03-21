@@ -56,7 +56,7 @@
     "@univerjs/engine-formula": "^0.1.3",
     "@univerjs/engine-render": "^0.1.3",
     "@univerjs/facade": "^0.1.3",
-    "@univerjs/icons": "^0.1.41",
+    "@univerjs/icons": "^0.1.42",
     "@univerjs/sheets": "^0.1.3",
     "@univerjs/sheets-formula": "^0.1.3",
     "@univerjs/sheets-ui": "^0.1.3",
