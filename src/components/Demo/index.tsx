@@ -67,62 +67,70 @@ export function Demo(props: IProps) {
   }, [keyword])
 
   return (
-    <section className={styles.container}>
-      <aside className={styles.menu}>
-        <h2 className={styles.title}>Menu</h2>
+    <section className={styles.playground}>
+      <header className={styles.header}>
+        <a className={styles.logo} href="/guides/introduction">
+          <img src="/logo.svg" />
+        </a>
+      </header>
 
-        <input
-          className={styles.search}
-          placeholder="Search"
-          value={keyword}
-          onInput={handleSearch}
-        />
+      <section className={styles.container}>
+        <aside className={styles.menu}>
+          <h2 className={styles.title}>Menu</h2>
 
-        <ul>
-          {filteredDemo.map(group => (
-            <li key={group.title}>
-              <label>{group.title}</label>
+          <input
+            className={styles.search}
+            placeholder="Search"
+            value={keyword}
+            onInput={handleSearch}
+          />
 
-              <ul>
-                {group.children.map(item => (
-                  <li key={item.title}>
-                    <a
-                      className={item.title === activeDemo?.title ? styles.active : ''}
-                      href={`?title=${item.title}`}
-                    >
-                      {item.title}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
-      </aside>
+          <ul>
+            {filteredDemo.map(group => (
+              <li key={group.title}>
+                <label>{group.title}</label>
 
-      <main className={styles.main}>
-        {
-          activeDemo?.type === 'StackBlitz'
-            ? (
-              <iframe
-                id={embedDomId}
-                allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-                sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-                className={styles.iframe}
-                src="about:blank"
-              />
-              )
-            : (
-              <iframe
-                className={styles.iframe}
-                allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-                sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-                title={activeDemo?.title}
-                src={activeDemo?.src}
-              />
-              )
-        }
-      </main>
+                <ul>
+                  {group.children.map(item => (
+                    <li key={item.title}>
+                      <a
+                        className={item.title === activeDemo?.title ? styles.active : ''}
+                        href={`?title=${item.title}`}
+                      >
+                        {item.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        </aside>
+
+        <main className={styles.main}>
+          {
+            activeDemo?.type === 'StackBlitz'
+              ? (
+                <iframe
+                  id={embedDomId}
+                  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+                  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+                  className={styles.iframe}
+                  src="about:blank"
+                />
+                )
+              : (
+                <iframe
+                  className={styles.iframe}
+                  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+                  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+                  title={activeDemo?.title}
+                  src={activeDemo?.src}
+                />
+                )
+          }
+        </main>
+      </section>
     </section>
   )
 }
