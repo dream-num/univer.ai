@@ -1,0 +1,70 @@
+<svg width="1200" height="500" viewBox="0 0 1200 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g opacity="0.72">
+<mask id="mask0_1119_2988" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="1440" height="500">
+<path d="M0 0H1440V500H0V0Z" fill="url(#paint0_linear_1119_2988)"/>
+</mask>
+<g mask="url(#mask0_1119_2988)">
+<path d="M0 0V600" stroke="#E0E2E5"/>
+<path d="M32 0V600" stroke="#E0E2E5"/>
+<path d="M64 0V600" stroke="#E0E2E5"/>
+<path d="M96 0V600" stroke="#E0E2E5"/>
+<path d="M128 0V600" stroke="#E0E2E5"/>
+<path d="M160 0V600" stroke="#E0E2E5"/>
+<path d="M192 0V600" stroke="#E0E2E5"/>
+<path d="M224 0V600" stroke="#E0E2E5"/>
+<path d="M256 0V600" stroke="#E0E2E5"/>
+<path d="M288 0V600" stroke="#E0E2E5"/>
+<path d="M320 0V600" stroke="#E0E2E5"/>
+<path d="M352 0V600" stroke="#E0E2E5"/>
+<path d="M384 0V600" stroke="#E0E2E5"/>
+<path d="M416 0V600" stroke="#E0E2E5"/>
+<path d="M448 0V600" stroke="#E0E2E5"/>
+<path d="M480 0V600" stroke="#E0E2E5"/>
+<path d="M512 0V600" stroke="#E0E2E5"/>
+<path d="M544 0V600" stroke="#E0E2E5"/>
+<path d="M576 0V600" stroke="#E0E2E5"/>
+<path d="M608 0V600" stroke="#E0E2E5"/>
+<path d="M640 0V600" stroke="#E0E2E5"/>
+<path d="M672 0V600" stroke="#E0E2E5"/>
+<path d="M704 0V600" stroke="#E0E2E5"/>
+<path d="M736 0V600" stroke="#E0E2E5"/>
+<path d="M768 0V600" stroke="#E0E2E5"/>
+<path d="M800 0V600" stroke="#E0E2E5"/>
+<path d="M832 0V600" stroke="#E0E2E5"/>
+<path d="M864 0V600" stroke="#E0E2E5"/>
+<path d="M896 0V600" stroke="#E0E2E5"/>
+<path d="M928 0V600" stroke="#E0E2E5"/>
+<path d="M960 0V600" stroke="#E0E2E5"/>
+<path d="M992 0V600" stroke="#E0E2E5"/>
+<path d="M1024 0V600" stroke="#E0E2E5"/>
+<path d="M1056 0V600" stroke="#E0E2E5"/>
+<path d="M1088 0V600" stroke="#E0E2E5"/>
+<path d="M1120 0V600" stroke="#E0E2E5"/>
+<path d="M1152 0V600" stroke="#E0E2E5"/>
+<path d="M1184 0V600" stroke="#E0E2E5"/>
+<path d="M0 0H1440" stroke="#E0E2E5"/>
+<path d="M0 32H1440" stroke="#E0E2E5"/>
+<path d="M0 64H1440" stroke="#E0E2E5"/>
+<path d="M0 96H1440" stroke="#E0E2E5"/>
+<path d="M0 128H1440" stroke="#E0E2E5"/>
+<path d="M0 160H1440" stroke="#E0E2E5"/>
+<path d="M0 192H1440" stroke="#E0E2E5"/>
+<path d="M0 224H1440" stroke="#E0E2E5"/>
+<path d="M0 256H1440" stroke="#E0E2E5"/>
+<path d="M0 288H1440" stroke="#E0E2E5"/>
+<path d="M0 320H1440" stroke="#E0E2E5"/>
+<path d="M0 352H1440" stroke="#E0E2E5"/>
+<path d="M0 384H1440" stroke="#E0E2E5"/>
+<path d="M0 416H1440" stroke="#E0E2E5"/>
+<path d="M0 448H1440" stroke="#E0E2E5"/>
+<path d="M0 480H1440" stroke="#E0E2E5"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_1119_2988" x1="720" y1="52.5841" x2="720" y2="500" gradientUnits="userSpaceOnUse">
+<stop stop-color="white" stop-opacity="0"/>
+<stop offset="0.465" stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

@@ -1,0 +1,231 @@
+---
+import Footer from '@/components/Workspace/Footer.astro'
+import Header from '@/components/Workspace/Header.astro'
+import BlankLayout from '@/layouts/BlankLayout.astro'
+---
+
+<BlankLayout lang="en-us" title="Univer Workspace | Univer">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" />
+
+  <section class="page">
+    <Header />
+
+    <header class="header">
+      <h1>Univer Blog Title</h1>
+      <p>
+        Motivated by the desire to minimize the cost of context switching and solve real life use cases, Univer brings collaborative productivity software to you and your teams in a transformative way.
+      </p>
+
+      <section class="video">
+        <iframe
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          title="Rick Astley - Never Gonna Give You Up (Official Music Video)"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        />
+      </section>
+    </header>
+
+    <section class="post">
+      <aside class="toc">
+        <section class="container">
+          <label>Contents</label>
+          <ul>
+            <li>
+              <a class="active">Contents</a>
+            </li>
+            <li>
+              <a>Contents</a>
+            </li>
+            <li>
+              <a>Contents</a>
+            </li>
+          </ul>
+        </section>
+      </aside>
+
+      <article class="content">
+        <h2>Title</h2>
+
+        <h3>Univer enhances user experience with seamless interactions</h3>
+        <p>
+          Univer allows you to open or edit on a 2 way split editor window. With a simple drag and drop, you can move the chart generated from the data in the sheet into the slide. When you want to quickly find differences in pages, simply put them side by side and diffs between pages will get automatically highlighted. Plus with synchronous scrolling, you would be able to pinpoint and fixate on their goals in an instant.
+        </p>
+        <p>
+          There are more surprises waiting for you. If you are interested in it, please join the discord group chat and communicate with us!
+        </p>
+        <p>
+          To realize the borderless concept, the development team implemented numerous targeted designs for the architecture. Here, we wish to share some of our practical experiences with you all.
+        </p>
+
+        <h3>Univer enhances user experience with seamless interactions</h3>
+        <p>
+          Universal supports multiple document types, each with distinct data structures, UI, rendering, and business logic. Despite these differences, similar functions, such as menus, search and replace, and text styling, are required across different document types. To provide a seamless user experience across all document types while keeping the codebase decoupled, we designed a plugin-based architecture.
+        </p>
+        <p>
+          Universal boasts a compact yet highly extensible core, accompanied by a plethora of plugins. These plugins can extend Universal's capabilities, building upon the core and existing plugins.
+        </p>
+
+        <h2>Title 2</h2>
+        <p>
+          Take the toolbar as an example. The @univerjs/ui plugin provides an IMenuService for registering menu items, as well as a React component named Toolbar for rendering the toolbar on desktop clients. Meanwhile, the @univerjs/sheets-ui and @univerjs/docs-ui plugins implement the context menus for electronic tables and documents, respectively, and register these menu items with IMenuService. When registering menu items, plugins can specify the hidden$ property to determine when a particular menu item should be shown or hidden, such as hiding all electronic table menus when a user's focus is not on an electronic table document. This ensures consistent user interaction across document types and enables the rendering of appropriate buttons based on the user's current document type.
+        </p>
+        <p>
+          <img src="" />
+        </p>
+        <p>
+          To learn more about Univer's collaborative module, please read our blog.
+        </p>
+        <p>
+          <a>The OT algorithm and Univer&#39;s Collaborative Editing Design | Univer</a>
+        </p>
+
+        <h3>Univer enhances user experience with seamless interactions</h3>
+        <p>
+          Take the toolbar as an example. The @univerjs/ui plugin provides an IMenuService for registering menu items, as well as a React component named Toolbar for rendering the toolbar on desktop clients. Meanwhile, the @univerjs/sheets-ui and @univerjs/docs-ui plugins implement the context menus for electronic tables and documents, respectively, and register these menu items with IMenuService. When registering menu items, plugins can specify the hidden$ property to determine when a particular menu item should be shown or hidden, such as hiding all electronic table menus when a user's focus is not on an electronic table document. This ensures consistent user interaction across document types and enables the rendering of appropriate buttons based on the user's current document type.
+        </p>
+      </article>
+    </section>
+
+    <Footer />
+  </section>
+</BlankLayout>
+
+<style lang="less">
+.page {
+  font-family: Poppins;
+
+  .header {
+    max-width: 1200px;
+    margin: 0 auto 72px auto;
+    padding: 72px 32px 0;
+
+    h1 {
+      margin: 0 0 32px;
+      color: #0F172A;
+      text-align: center;
+      font-size: 56px;
+      font-style: italic;
+      font-weight: 600;
+      line-height: 56px;
+      letter-spacing: 0.56px;
+    }
+
+    p {
+      width: 758px;
+      margin: 0 auto 72px auto;
+      color: #0F172A;
+      text-align: center;
+      font-family: Poppins;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 36px;
+    }
+
+    .video {
+      height: 568px;
+      padding: 16px;
+      background: #F0F3FF;
+      border-radius: 16px;
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border-radius: 16px;
+      }
+    }
+  }
+
+  .post {
+    max-width: 1200px;
+    margin: 0 auto 72px auto;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: 192px 1fr 192px;
+
+    .toc {
+      .container {
+        position: sticky;
+        top: 140px;
+
+        label {
+          margin-bottom: 16px;
+          color: #6B7589;
+          font-size: 12px;
+          font-weight: 500;
+          display: block;
+        }
+
+        ul {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          display: grid;
+          gap: 16px;
+
+          li {
+            a {
+              color: #6B7589;
+              font-size: 14px;
+              font-weight: 400;
+              cursor: pointer;
+
+              &.active {
+                color: #0019FE;
+                font-weight: 500;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .content {
+      h2 {
+        margin: 0 0 40px;
+        color: #0F172A;
+        font-size: 36px;
+        font-weight: 500;
+        line-height: 44px;
+      }
+
+      h3 {
+        margin: 0 0 16px;
+        color: #0F172A;
+        font-size: 28px;
+        font-weight: 500;
+        line-height: 36px;
+      }
+
+      p {
+        margin: 24px 0;
+        color: #0F172A;
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 32px;
+
+        img {
+          width: 100%;
+          border-radius: 20px;
+          border: 10px solid #F0F3FF;
+          display: block;
+        }
+
+        a {
+          color: #0038FF;
+
+          font-family: Poppins;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 300;
+          line-height: 32px; /* 177.778% */
+          text-decoration-line: underline;
+        }
+
+      }
+    }
+  }
+}
+</style>

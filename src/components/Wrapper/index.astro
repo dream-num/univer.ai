@@ -1,4 +1,5 @@
 ---
+import '@univerjs/design/lib/index.css'
 import 'modern-normalize'
 
 interface Props {
@@ -55,5 +56,10 @@ hr {
   width: 60%;
   border: 1px solid #999;
 }
-
 </style>
+
+<script>
+import { defaultTheme, themeInstance } from '@univerjs/design'
+
+themeInstance.setTheme(document.body, defaultTheme);
+</script>

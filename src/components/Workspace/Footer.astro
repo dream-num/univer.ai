@@ -1,0 +1,107 @@
+---
+const nav = [{
+  name: 'Company',
+  children: [{
+    name: 'Blog',
+    link: '/workspace/blog',
+  }, {
+    name: 'Contact us',
+    link: '',
+  }],
+}, {
+  name: 'Resources',
+  children: [{
+    name: 'Developer Docs',
+    link: '/guides/introduction',
+  }, {
+    name: 'Plugins',
+    link: '/api',
+  }, {
+    name: 'Univer Icons',
+    link: '/icons',
+  }],
+}, {
+  name: 'Community',
+  children: [{
+    name: 'Discord',
+    link: '',
+  }, {
+    name: 'Zhihu',
+    link: '',
+  }],
+}, {
+  name: 'Help',
+  children: [{
+    name: 'Github Discussions',
+    link: '',
+  }, {
+    name: 'Troubleshooting',
+    link: '',
+  }, {
+    name: 'Bug Report',
+    link: '',
+  }],
+}]
+---
+
+<footer class="footer">
+  <nav class="navigation">
+    {nav.map(item => (
+      <div class="category">
+        <label>{item.name}</label>
+        <ul>
+          {item.children.map(child => (
+            <li>
+              <a href={child.link}>{child.name}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </nav>
+
+  <p class="copyright">
+    Copyright &copy; 2021-2024 Mengshu. All Rights Reserved. Copyright &copy; 2021-2024 Dreamnum Co,Ltd.
+  </p>
+</footer>
+
+<style lang="less">
+.footer {
+  padding-bottom: 60px;
+
+  .navigation {
+    width: 764px;
+    height: 144px;
+    margin: 0 auto 40px auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    .category {
+      label {
+        margin-bottom: 20px;
+        display: block;
+      }
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 20px;
+
+        a {
+          color: #868686;
+          font-size: 14px;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .copyright {
+    color: #868686;
+    text-align: center;
+    font-size: 13px;
+  }
+}
+</style>
