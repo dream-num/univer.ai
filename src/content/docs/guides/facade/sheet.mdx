@@ -4,19 +4,19 @@ sidebar:
   order: 3
 ---
 
-## 概念
+## Concepts
 
-Univer 表格相关概念会尽可能与 Excel 保持一致。
+Univer table-related concepts are designed to be as consistent as possible with Excel.
 
-## 工作簿 Workbook
+## Workbook
 
-一个工作簿里包含多个工作表，可以看作是一个 Excel 文件。
+A workbook contains multiple worksheets and can be thought of as an Excel file.
 
-`unitId` 可用作工作簿的唯一标识。
+The `unitId` can be used as a unique identifier for the workbook.
 
-### 创建工作簿
+### Create a Workbook
 
-`univer.createUniverSheet` 方法会创建并返回 `Workbook` 对象。
+The `univer.createUniverSheet` method creates and returns the `Workbook` object.
 
 import Sandbox from '@/components/Sandbox'
 
@@ -47,7 +47,7 @@ univer.createUniverSheet({});
 
 <Sandbox client:only="react" src="/sandbox" code={code}  />
 
-### 获取工作簿数据
+### Getting Workbook Data
 
 ```ts
 const univerAPI = FUniver.newAPI(univer);
@@ -55,45 +55,45 @@ const activeWorkbook = univerAPI.getActiveWorkbook()
 const saveData = activeWorkbook.getSnapshot();
 ```
 
-或者
+Or
 
 ```ts
 const workbook = univer.createUniverSheet({});
 const saveData = workbook.save();
 ```
 
-### 销毁工作簿
+### Destroying workbooks
 
-当我们不再需要工作簿时，可以调用 Univer 实例的 `dispose` 方法来销毁实例。
+When we no longer need the workbook, we can call the `dispose` method of the Univer instance to destroy the instance.
 
 ```ts
 univer.dispose();
 ```
 
-## 工作表 Worksheet
+## Worksheet
 
-工作表中存储着表格数据，工作表属于工作薄，
+Worksheets store table data, worksheets belong to the workbook.
 
-一个工作薄可以包含多个工作表，同一个工作薄中工作表的名称不能重复。
+A workbook can contain multiple worksheets, and the names of worksheets in the same workbook cannot be duplicated.
 
-`subUnitId` 可用作在工作薄中工作表的唯一标识。
+The `subUnitId` can be used to uniquely identify a sheet in a workbook.
 
-### 获取工作表
+### Get Worksheets
 
-获取工作薄中所有工作表
+Get all sheets in a sheet
 ```ts
 const activeWorkbook = univerAPI.getActiveWorkbook();
 const sheets = activeWorkbook.getSnapshot().sheets;
 ```
 
-获取工作薄中当前激活的工作表
+Get Active Worksheet
 
 ```ts
 const activeWorkbook = univerAPI.getActiveWorkbook();
 const activeSheet = activeWorkbook.getActiveSheet();
 ```
 
-### 获取工作表数据
+### Get Worksheet Data
 
 ```ts
 const activeWorkbook = univerAPI.getActiveWorkbook();
@@ -103,11 +103,11 @@ const sheet1 = Object.values(snapshot.sheets).find((sheet) => {
 })
 ```
 
-### 创建工作表
+### Create a Worksheet
 
-在创建工作薄时，如果不传入参数，会自动创建一个工作表。
+When creating a workbook, if no parameters are passed, a worksheet will be automatically created.
 
-下面例子展示通过 `Workbook.create` 方法创建一个工作表。
+The following example shows how to create a worksheet using the `Workbook.create` method.
 
 export const code2 = `const univer = new Univer({
   theme: defaultTheme,
@@ -142,18 +142,18 @@ const sheet = activeWorkbook.create('Sheet2', 10, 10)
 
 <Sandbox client:only="react" src="/sandbox" code={code2}  />
 
-### 删除工作表
+### Remove Worksheet
 
-删除工作表需要知道工作表的 Id。
+Remove Worksheet by worksheet id
 
 ```ts
 const sheetId = 'SheetId';
 univerAPI.executeCommand('sheet.command.remove-sheet', { subUnitId: sheetId });
 ```
 
-### 激活工作表
+### Activate Worksheet
 
-激活工作表需要知道工作薄的 Id 和工作表的 Id。
+To activate a worksheet, you need to know the workbook id and the sheet id.
 
 ```ts
 const workbookId = 'WorkbookId';
@@ -161,11 +161,11 @@ const sheetId = 'SheetId';
 univerAPI.executeCommand('sheet.command.active-sheet', { unitId: workbookId, subUnitId: sheetId });
 ```
 
-## 单元格 Cell
+## Cell
 
-单元格数据以二维数组的形式存储在工作表中，一二级索引分别代表行号和列号。
+Cell data is stored in the worksheet as a two-dimensional array, with the first and second indexes representing the row number and column number respectively.
 
-以下是一个典型的单元格对象：
+The following is a typical cell object:
 
 ```ts
 {
@@ -176,52 +176,52 @@ univerAPI.executeCommand('sheet.command.active-sheet', { unitId: workbookId, sub
 }
 ```
 
-- `v` 存放单元格的值，可以是字符串、数字、布尔值。有公式的单元格，`v` 存放公式的计算结果。
-- `s` 存放样式名称，指向工作簿中的样式表；或者存放样式对象。
-- `f` 存放公式
-- `t` 存放值的类型，不设置时 Univer 会自动识别，枚举文档见 [CellValueType](/api/core/enums/CellValueType.html)
-- `p` 存放富文本内容
+- `v` stores the value of the cell, which can be a string, number, or boolean. For cells with formulas, `v` stores the result of the formula.
+- `s` stores the style name, which points to the style sheet in the workbook; or stores the style object.
+- `f` stores the formula
+- `t` stores the value type, which is automatically recognized by Univer if not set. For the enumeration document, see [CellValueType](/api/core/enums/CellValueType.html)
+- `p` stores rich text content
 
 :::tip
-对单元格的操作可以看作对行高 1 、列宽 1 的范围进行操作，操作范围请阅读 [范围-range](#范围-range)。
+Cell operations can be regarded as operations on a range of rows and columns with a height of 1 and a width of 1. For the operation range, please refer to [Range](#range).
 :::
 
 :::tip
-插件还会将拓展的单元格属性存储在 `Workbook` 的 `resources` 属性中，详细请阅读 [插件自定义模型](/zh-cn/guides/customization/model/)。
+The Univer API plugin will also store the extended cell attributes in the `resources` property of the `Workbook`, please refer to [Plugin Custom Model](/guides/customization/model/).
 :::
 
-## 范围 Range
+## Range
 
-范围指工作表中的一块矩形区域，有起始行号、起始列号、长宽或者结束行号、结束列号来确定。
+A range refers to a rectangular area in a worksheet, which is determined by the starting row number, starting column number, length, and width, or ending row number, ending column number.
 
-### 创建范围
+### Create a Range
 
-获得一个范围需要知道起始行号、起始列号、长宽。
+To get a range you need to know the starting row number, starting column number, length and width.
 
-创建 A1 单元格的范围：
+Create a range of A1 cells:
 
 ```ts
 const activeSheet = univerAPI.getActiveWorkbook().getActiveSheet();
 const range = activeSheet.getRange(0, 0, 1, 1);
 ```
 
-创建 A1:B2 的范围：
+Creates a range of A1:B2:
 
 ```ts
 const activeSheet = univerAPI.getActiveWorkbook().getActiveSheet();
 const range = activeSheet.getRange(0, 0, 2, 2);
 ```
 
-### 获取范围数据
+### Get Range Data
 
-获取范围第一个单元格的值
+Get the value of the first cell in the range
 
 ```ts
 const range = activeSheet.getRange(0, 0, 2, 2);
 const value = range.getValue();
 ```
 
-获取范围的所有值
+Get all cell values in the range
 
 ```ts
 const range = activeSheet.getRange(0, 0, 2, 2);
@@ -229,22 +229,22 @@ range.forEach((cell, row, column) => {
   console.log(cell.getValue());
 });
 ```
-### 设置范围数据
+### Set Range Value
 
-#### 设置单一值
+#### Set a single value
 
-传入一个值或者单元格对象，将会覆盖范围内所有单元格，如果以 `=` 开头，将被解释为公式。
+If a value or cell object is passed in, all cells in the range will be overwritten. If it starts with `=`, it will be interpreted as a formula.
 
 ```ts
 const range = activeSheet.getRange(0, 0, 2, 2);
 range.setValue('Hello, Univer');
 ```
 
-#### 通过数组设置多个值
+#### Set multiple values with an array
 
-数组的长度和宽度必须和范围的长宽一致。
+The length and width of the array must match the length and width of the range.
 
-可以传入单元格值也可以传入单元格对象。
+You can pass in cell values or cell objects.
 
 ```ts
 const range = activeSheet.getRange(0, 0, 2, 2);
@@ -259,9 +259,9 @@ range.setValues([
 ]);
 ```
 
-#### 通过对象设置多个值
+#### Set multiple values with an object
 
-则对象的一级索引代表行号，二级索引代表列号，与范围的长宽无需一致。
+If an object is passed in, the primary index of the object represents the row number, and the secondary index represents the column number, and the length and width of the range do not need to match.
 
 ```ts
 const range = activeSheet.getRange(0, 0, 2, 2);
@@ -277,14 +277,14 @@ range.setValues({
 });
 ```
 
-### 获取范围样式
+### Get Range Style
 
 ```ts
 const range = activeSheet.getRange(0, 0, 2, 2);
 const style = range.getCellStyleData();
 ```
 
-### 设置范围样式
+### Set Range Style
 
 ```ts
 const range = activeSheet.getRange(0, 0, 2, 2);
@@ -296,7 +296,7 @@ range
   .setFontColor('red');
 ```
 
-### 清理范围样式
+### Clear Range Style
 
 ```ts
 const range = activeSheet.getRange(0, 0, 2, 2);
@@ -308,13 +308,13 @@ range
   .setFontColor(null);
 ```
 
-## 选区 Selection
+## Selection
 
-Univer 表格支持多选区，所以选区是一个范围数组，可以通过范围 API 来操作选区数据。
+Univer Sheets support multiple constituencies, so a constituency is an array of ranges, and you can manipulate the constituency data through the range API.
 
-我们还提供 API 来获取当前选区、设置选区和监听选区变化。
+We also provide APIs to get the current selection, set the selection, and listen for changes to the selection.
 
-### 获取激活选区的范围
+### Get Active Selection
 
 ```ts
 const activeSheet = univerAPI.getActiveWorkbook().getActiveSheet();
@@ -322,9 +322,9 @@ const selection = activeSheet.getSelection();
 const range = selection.getRange();
 ```
 
-### 设置选区
+### Set Selection
 
-设置 A1:B2 为选区
+Set A1:B2 as the selection
 
 ```ts
 const sheetId = 'SheetId';
@@ -344,7 +344,7 @@ univerAPI.executeCommand('sheet.operation.set-selections', {
 })
 ```
 
-### 监听选区变化
+### Listen for Selection Changes
 
 ```ts
 const activeWorkbook = univerAPI.getActiveWorkbook();
@@ -353,8 +353,8 @@ activeWorkbook.onSelectionChange((selection) => {
 });
 ```
 
-## 参考
+## Reference
 
-更多 API 请查看：
+Please refer to the following API documentation for more information:
 
 - [Facade API](/api/facade/)
