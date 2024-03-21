@@ -5,7 +5,6 @@ const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 const l = useI18nUrl(lang)
 
-const present = new Date().getFullYear()
 ---
 
 <footer class="footer">
@@ -47,7 +46,6 @@ const present = new Date().getFullYear()
   </nav>
 
   <p class="copyright">
-    <span>Copyright © 2021-{present} Mengshu. All Rights Reserved.</span>
     <span>{t('footer.copyright')}</span>
     <!-- <span>服务协议 | 隐私政策</span> -->
   </p>

@@ -70,7 +70,7 @@ const starlightConfig = {
     {
       label: '🏗️ 进阶使用',
       translations: {
-        'en-US': '🏗️ Advanced Use',
+        'en-US': '🏗️ Advanced Usage',
         'ja-JP': '🏗️ アドバンスド',
       },
       autogenerate: {
@@ -118,7 +118,7 @@ const starlightConfig = {
     {
       label: '🗺️ 贡献指南',
       translations: {
-        'en-US': '🗺️ Contributing Guidelines',
+        'en-US': '🗺️ Contributing Guides',
         'ja-JP': '🗺️ コントリビューションガイドライン',
       },
       link: 'guides/contributing',

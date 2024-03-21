@@ -308,7 +308,7 @@ univer is still in its infancy, if you have any questions or suggestions, please
 
 ## Reference document
 
-- [Plugin Lifecycle](/guides/architecture/architecture/#Plugin Lifecycle)
+- [Plugin Lifecycle](/guides/concepts-and-architecture/architecture/#plugin-life-cycle)
 - [Univer.registerPlugin](/api/core/classes/Univer.html#registerPlugin)
 - [ICellData](/api/core/interfaces/ICellData.html)
 - [ICommandService.registerCommandHandler](/api/core/interfaces/ICommandService.html#registerCommandHandler)
