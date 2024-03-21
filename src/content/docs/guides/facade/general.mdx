@@ -1,0 +1,294 @@
+---
+title: General API
+sidebar:
+  order: 2
+---
+
+On Univer, the Facade API that can be called varies according to the different types of documents. This chapter will introduce the general Facade API that applies to all types of documents.
+
+## Concepts
+
+### Commands
+
+The majority of operations in Univer are registered with the command system, and are triggered through the command system.
+
+This unified approach to operations enables Univer to readily implement features such as undo, redo, and collaboration, etc.
+
+:::tip
+Commands can be simply understood as unique "events" within Univer. For more details on the design, please refer to [command-system](/guides/concepts-and-architecture/architecture/#command-system).
+:::
+
+## Commands API
+
+Univer provides users with a unified command system, through which users can implement a variety of customized functionalities.
+
+### Listening Commands
+
+
+There are 2 times to listen for commands, before the command is executed and after the command is executed.
+
+Before the command is executed, we pass a callback function to the `FUniver.onBeforeCommandExecute` API to register a custom preprocessing listener.
+
+When the command is executed before, the logic inside the preprocessing listener is executed.
+
+```javascript
+const univerAPI = FUniver.newAPI(univer);
+
+univerAPI.onBeforeCommandExecute((command)=>{
+  const { id, type, params } = command;
+  // custom preprocessing logic before the command is executed
+})
+```
+
+The following example listens for commands in a Univer form using `FUniver.onCommandExecuted`, open the browser console and try manipulating the form, you will see what commands are executed.
+
+import Sandbox from '@/components/Sandbox'
+
+export const code = `const univer = new Univer({
+  theme: defaultTheme,
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  header: false,
+  footer: false,
+});
+
+univer.registerPlugin(UniverDocsPlugin, {
+  hasScroll: false,
+});
+univer.registerPlugin(UniverDocsUIPlugin);
+
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
+
+univer.createUniverSheet({});
+
+const univerAPI = FUniver.newAPI(univer);
+
+univerAPI.onCommandExecuted((command) => {
+  // Press "Ctrl + Shift + I" to open the console and do some operations then you can see the command
+  console.log(command);
+});
+`
+
+<Sandbox client:only="react" src="/sandbox" code={code}  />
+
+After the command is executed, we can also pass a callback function to the `FUniver.onCommandExecuted` API to register a custom post-processing listener.
+
+When the command is executed, the logic within the post-processing listener will be executed.
+
+```javascript
+const univerAPI = FUniver.newAPI(univer);
+
+univerAPI.onCommandExecuted((command)=>{
+  const { id, type, params } = command;
+  // custom post-processing logic after the command is executed
+})
+```
+
+### Cancel Listening
+
+The method that registers a command listener returns an `IDisposable` object, which can be destroyed by calling `IDisposable.dispose`.
+
+It is recommended that you destroy listeners that are no longer in use to help improve the robustness of your program.
+
+```javascript
+const univerAPI = FUniver.newAPI(univer);
+
+// Register a listener
+const disposable = univerAPI.onBeforeCommandExecute((command)=>{
+  // custom preprocessing logic before the command is executed
+})
+
+// Example: Destroy the listener after 1 second
+setTimeout(()=>{
+  // Destroy the listener
+  disposable.dispose();
+}, 1000);
+```
+
+### Execute Commands
+
+When you know the command ID and the parameters that need to be passed, you can execute the command using the `FUniver.executeCommand` method.
+
+The following example demonstrates how to use `FUniver.executeCommand` to change the value of cell A1 to `Hello, Univer!` using the `sheet.mutation.set-range-values` command.
+
+export const code2 = `const univer = new Univer({
+  theme: defaultTheme,
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  header: false,
+  footer: false,
+});
+
+univer.registerPlugin(UniverDocsPlugin, {
+  hasScroll: false,
+});
+univer.registerPlugin(UniverDocsUIPlugin);
+
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
+
+univer.createUniverSheet({});
+
+const univerAPI = FUniver.newAPI(univer);
+// set the value of the first cell A1 in the first sheet to "Hello, Univer!"
+univerAPI.executeCommand('sheet.command.set-range-values', {
+  value: { v: "Hello, Univer!" },
+  range: { startRow: 0, startColumn: 0, endRow: 0, endColumn: 0 }
+});
+`
+
+<Sandbox client:only="react" src="/sandbox" code={code2}  />
+
+:::tip
+Commands are provided by each plugin, please refer to the API documentation of each plugin for more useful commands.
+
+You can also check the execution status of commands by using [Listening Commands](#Listening Commands).
+
+We'll be optimizing the way we view commands in the future, so stay tuned.
+:::
+
+### Prevent Command Execution
+
+In the current version, you can block command execution by `throw` in the `onBeforeCommandExecute` listener callback.
+
+The following example demonstrates how to prevent the user from editing by blocking the execution of a command. Try editing a cell in a table and you'll see that the editing operation is blocked.
+
+export const code3 = `const univer = new Univer({
+  theme: defaultTheme,
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  header: false,
+  footer: false,
+});
+
+univer.registerPlugin(UniverDocsPlugin, {
+  hasScroll: false,
+});
+univer.registerPlugin(UniverDocsUIPlugin);
+
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
+
+univer.createUniverSheet({});
+
+const univerAPI = FUniver.newAPI(univer);
+
+// set the value of the first cell A1 in the first sheet 
+univerAPI.executeCommand('sheet.command.set-range-values', {
+  value: { v: "Try to edit me!" },
+  range: { startRow: 0, startColumn: 0, endRow: 0, endColumn: 0 }
+});
+
+// define a custom error
+class AbortCommandError extends Error {
+  constructor() {
+    super('Command blocked from execution');
+    this.name = 'AbortCommandError';
+  }
+}
+
+// listen to the error event and prevent the default behavior
+const errListener = (e: PromiseRejectionEvent | ErrorEvent) => {
+  const error = e instanceof PromiseRejectionEvent ? e.reason : e.error
+  if (error instanceof AbortCommandError) {
+    e.preventDefault();
+    console.warn(error.message);
+  }
+}
+window.addEventListener('error', errListener);
+window.addEventListener('unhandledrejection', errListener);
+
+// throw the custom error to prevent the command from executing
+univerAPI.onBeforeCommandExecute((command) => {
+  // you can also decide whether to block it or not by adding judgment to the situation.
+  throw new AbortCommandError();
+})
+`
+
+<Sandbox client:only="react" src="/sandbox" code={code3}  />
+
+## undo/redo
+
+### undo
+
+```ts
+univerAPI.executeCommand('univer.command.undo')
+```
+
+### redo
+
+```ts
+univerAPI.executeCommand('univer.command.redo')
+```
+
+## UI
+
+Please refer to the following documentation to extend the Univer UI :
+
+- [Extending Canvas](/guides/customization/canvas/)
+- [Custom Theme](/guides/customization/theme)
+
+## ws
+
+Facade provides a convenient API `createSocket` for creating a Websocket, simply by passing in a URL. You can then listen to open, message, close, and error events, and actively send messages with the send method and actively close with the close method.
+
+```typescript title="main.ts"
+// Replace the URL with the address of your own Websocket service
+const ws = univerAPI.createSocket('ws://47.100.177.253:8449/ws')
+
+ws.open$.subscribe(() => {
+  console.log('websocket opened')
+  ws.send('hello')
+})
+
+ws.message$.subscribe((message) => {
+  console.log('websocket message', message)
+  const content = JSON.parse(message.data).content
+  if (!content.includes('command')) {
+    return
+  }
+
+  const commandInfo = JSON.parse(content);
+  const { command, options } = commandInfo;
+  const { id, params } = command;
+
+  // Upon receiving collaborative data, it is locally saved
+  univerAPI.executeCommand(id, params, options)
+});
+
+ws.close$.subscribe(() => {
+  console.log("websocket closed");
+});
+
+ws.error$.subscribe((error) => {
+  console.log("websocket error", error);
+});
+
+univerAPI.onCommandExecuted((command, options) => {
+  // Only synchronize local mutations
+  if (command.type !== 2 || options?.fromCollab || options?.onlyLocal || command.id === 'doc.mutation.rich-text-editing') {
+    return;
+  }
+
+  const commandInfo = JSON.stringify({ command, options: { fromCollab: true } })
+  ws.send(commandInfo);
+})
+```
+
+Note: Make sure there is a unitID when starting Univer. If the unitID is not specified, collaboration will not work.
