@@ -1,0 +1,174 @@
+---
+title: Univer Sheet API
+sidebar:
+  order: 3
+---
+
+## 概念
+
+Univer 表格相关概念会尽可能与 Excel 保持一致。
+
+## 工作簿 Workbook
+
+工作簿是表格中的最顶层对象，一个 `Workbook` 可以包含多个 `Worksheet`。
+
+### 创建工作簿
+
+`univer.createUniverSheet` 方法会返回一个 `Workbook` 对象，我们可以通过这个对象来操作工作簿。
+
+import Sandbox from '@/components/Sandbox'
+
+export const code = `const univer = new Univer({
+  theme: defaultTheme,
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  header: true,
+  footer: true,
+});
+
+univer.registerPlugin(UniverDocsPlugin, {
+  hasScroll: false,
+});
+univer.registerPlugin(UniverDocsUIPlugin);
+
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
+
+// Passing in an empty object will automatically initialize the workbook
+univer.createUniverSheet({});
+`
+
+<Sandbox client:only="react" src="/sandbox" code={code}  />
+
+### 获取工作簿内容
+
+```ts
+const univerAPI = FUniver.newAPI(univer);
+const activeWorkbook = univerAPI.getActiveWorkbook()
+const saveData = activeWorkbook.getSnapshot();
+```
+
+或者
+
+```ts
+const workbook = univer.createUniverSheet({});
+const saveData = workbook.save();
+```
+
+### 销毁工作簿
+
+当我们不再需要工作簿时，可以调用 Univer 实例的 `dispose` 方法来销毁工作簿。
+
+```ts
+univer.dispose();
+```
+
+## 工作表 Worksheet
+
+工作表是工作簿中的一个表格，一个 `Workbook` 可以包含多个 `Worksheet`，每个 `Worksheet` 有一个名称，在工作簿中唯一。
+
+### 创建工作表
+
+export const code2 = `const univer = new Univer({
+  theme: defaultTheme,
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  header: true,
+  footer: true,
+});
+
+univer.registerPlugin(UniverDocsPlugin, {
+  hasScroll: false,
+});
+univer.registerPlugin(UniverDocsUIPlugin);
+
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
+
+// Passing in an empty object will automatically initialize the workbook
+univer.createUniverSheet({});
+
+const univerAPI = FUniver.newAPI(univer);
+const activeWorkbook = univerAPI.getActiveWorkbook();
+const sheet = activeWorkbook.create('Sheet2', 10, 10)
+`
+
+<Sandbox client:only="react" src="/sandbox" code={code2}  />
+
+### 删除工作表
+
+
+
+## 单元格 Cell
+
+单元格是表格中最基本的单位，对应表格上一个有行号和列号的矩形区域。
+
+以下是一个典型的单元格对象：
+
+```ts
+{
+  v: 'Hello, Univer',
+  s: 'styleName',
+  f: '=A1+B1',
+  t: CellValueType.STRING
+}
+```
+
+- `v` 是单元格的值，它可以是字符串、数字、布尔值。
+   
+  有公式的单元格，`v` 存储公式的计算结果。
+- `s` 存放样式名称，指向 Workbook 中的样式表
+- `f` 存放公式
+- `t` 存放值的类型，通常不需要设置， Univer 会自动识别，枚举文档见 [CellValueType](/api/core/enums/CellValueType.html)
+- `p` 存放富文本内容
+
+:::tip
+对单元格的操作可以看作对行高 1 、列宽 1 的范围进行操作，操作范围请阅读 [范围-range](#范围-range)。
+:::
+
+:::tip
+插件还会将拓展的单元格属性存储在 `Workbook` 的 `resources` 属性中，详细请阅读 [插件自定义模型](/zh-cn/guides/customization/model/)。
+:::
+
+## 范围 Range
+
+范围指工作表中的一块矩形区域，有起始行号、起始列号、长宽或者结束行号、结束列号来确定。
+
+### 获得一个范围
+
+获得一个范围需要知道起始行号、起始列号、长宽。
+
+```ts
+const activeSheet = univerAPI.getActiveWorkbook().getActiveSheet();
+const range = activeSheet.getRange(0, 0, 1, 1);
+```
+
+### 获得范围的值
+
+```ts
+const value = range.getValue();
+```
+
+### 设置范围的值
+
+### 获得范围的样式
+
+### 设置范围的样式
+
+## 选区 Selection
+
+选区是用户操作选中的单元格范围，我们提供 API 来获取当前选区和设置选区。
+
+
+
+
