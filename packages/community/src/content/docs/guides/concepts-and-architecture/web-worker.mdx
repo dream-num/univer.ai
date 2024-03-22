@@ -2,8 +2,6 @@
 title: Architecture of Web Worker
 ---
 
-Here's a more polished version of your text:
-
 Certain modules, such as the formula engine, are naturally resource-intensive. To prevent them from blocking the main thread and degrading the interactive user experience, Univer supports running these modules within Web Workers.
 
 A Univer codebase running within a Web Worker is essentially a separate `Univer` instance, and instances communicate with each other via the RPC mechanism provided by the `@univerjs/rpc` package. This plugin also offers a mechanism for synchronizing data and mutations between the two Univer instances.
