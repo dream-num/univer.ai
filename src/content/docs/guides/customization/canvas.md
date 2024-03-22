@@ -4,15 +4,15 @@ title: Extending Canvas
 
 ## How to Customize Rendering Extensions?
 
-The rendering of some Univer elements, such as borders and backgrounds, is accomplished using an extension mechanism. Common extension registration points include:
+The rendering of some Univer elements, such as borders and backgrounds, is accomplished using an extension mechanism. Facade has built-in common extension registration API:
 
-- Middle content area: SpreadsheetExtensionRegistry
-- Row headers: SheetRowHeaderExtensionRegistry
-- Column headers: SheetColumnHeaderExtensionRegistry
+- Middle content area: registerSheetMainExtension
+- Row header: registerSheetRowHeaderExtension
+- Column header: registerSheetColumnHeaderExtension
 
 By inheriting `SheetExtension` and providing a unique key, zIndex, and drawing logic, a sheet rendering extension can be implemented as follows:
 
-```typescript
+```ts
 class RowHeaderCustomExtension extends SheetExtension {
   override uKey = 'RowHeaderCustomExtension'
 
@@ -32,5 +32,11 @@ SheetRowHeaderExtensionRegistry.add(new RowHeaderCustomExtension())
 :::note
 The zIndex for row and column header extensions must be greater than 10, and for middle content area extensions, it must be greater than 50, otherwise, they will be overridden.
 :::
+
+Then register to the specified unitId
+
+```ts
+univerAPI.registerSheetRowHeaderExtension(unitId, new RowHeaderCustomExtension())
+```
 
 For reference, here is an online example of extending row and column headers: [Render Extension](/playground?title=Render%20Extension)
