@@ -1,5 +1,7 @@
 ---
 title: How to write a CSV import plugin
+sidebar:
+  order: 1
 ---
 
 We will learn how to write a Univer plugin by writing a real case.

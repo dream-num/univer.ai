@@ -1,0 +1,67 @@
+---
+title: 禅编辑器模式
+sidebar:
+  order: 2
+---
+
+为了让你体会到 Univer 所具有的高扩展性，我们还为 Univer Sheet 提供了一个可选的禅编辑器模式的插件。
+
+这个插件包含了一个单元格文档编辑器，它可以让你在一个单元格中编辑一个完整的文档。这个编辑器支持 Univer Doc 的大部分功能，可以让你沉浸式地编辑一个单元格的内容。
+
+## 安装
+
+```shell
+# 使用 npm
+npm install @univerjs/sheets-zen-editor
+
+# 使用 pnpm
+pnpm add @univerjs/sheets-zen-editor
+```
+
+## 使用
+
+在你的主文件中引入插件，并注册到 Univer 实例中即可。
+
+```typescript title="main.ts" ins={1-2} ins={8}
+import { UniverSheetsZenEditorPlugin } from '@univerjs/sheets-zen-editor';
+import '@univerjs/sheets-zen-editor/lib/index.css';
+
+const univer = new Univer({
+  theme: defaultTheme,
+});
+
+univer.registerPlugin(UniverSheetsZenEditorPlugin);
+```
+
+## 演示
+
+尝试在任意单元格上右键打开菜单，点击「禅模式编辑」即可进入禅编辑器模式。
+
+import Sandbox from '@/components/Sandbox'
+
+export const code = `const univer = new Univer({
+  theme: defaultTheme,
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  header: true,
+  footer: true,
+});
+
+univer.registerPlugin(UniverDocsPlugin, {
+  hasScroll: false,
+});
+univer.registerPlugin(UniverDocsUIPlugin);
+
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
+univer.registerPlugin(UniverSheetsZenEditorPlugin);
+
+univer.createUniverSheet({});
+`
+
+<Sandbox client:only="react" src="/sandbox" code={code} hideEditor />

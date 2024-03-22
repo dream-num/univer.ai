@@ -1,5 +1,7 @@
 ---
 title: 编写一个 CSV 导入插件
+sidebar:
+  order: 1
 ---
 
 我们将通过编写一个实际案例，来学习如何编写一个 Univer 插件。

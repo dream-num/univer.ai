@@ -38,8 +38,16 @@
   }
 }
 
-.site-title {
-  --sl-nav-gap: 0.5rem;
+.title-wrapper {
+  display: flex;
+  align-items: center;
+}
+.site-title span {
+  display: none;
+}
+.site-title img {
+  height: 32px;
+  display: block;
 }
 
 .pagination-links a {

@@ -41,7 +41,7 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@antv/g2": "^5.1.16",
+    "@antv/g2": "^5.1.17",
     "@astrojs/check": "^0.5.9",
     "@astrojs/react": "^3.1.0",
     "@astrojs/rss": "^4.0.5",
@@ -60,6 +60,7 @@
     "@univerjs/sheets": "^0.1.3",
     "@univerjs/sheets-formula": "^0.1.3",
     "@univerjs/sheets-ui": "^0.1.3",
+    "@univerjs/sheets-zen-editor": "^0.1.3",
     "@univerjs/ui": "^0.1.3",
     "astro": "^4.5.8",
     "clsx": "^2.1.0",
@@ -72,7 +73,7 @@
     "react-live": "^4.1.6"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.8.3",
+    "@antfu/eslint-config": "^2.9.0",
     "@types/react": "^18.2.67",
     "@types/react-dom": "^18.2.22",
     "@univerjs/web-api": "workspace:*",
