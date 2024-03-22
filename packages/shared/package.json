@@ -1,5 +1,5 @@
 {
-  "name": "@web/api",
+  "name": "@web/shared",
   "type": "module",
   "version": "0.1.0",
   "private": true,
@@ -28,12 +28,10 @@
     "url": "https://github.com/dream-num/univer-docs/issues"
   },
   "exports": {
-    ".": "./index.mjs"
-  },
-  "scripts": {
-    "build": "node ./index.mjs"
+    "./*": "./*"
   },
   "dependencies": {
-    "typedoc": "^0.25.12"
+    "@astrojs/starlight": "^0.21.2",
+    "@univerjs/icons": "^0.1.42"
   }
 }

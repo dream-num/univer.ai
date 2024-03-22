@@ -6,21 +6,21 @@ import { defineConfig, squooshImageService } from 'astro/config'
 const starlightConfig = {
   title: 'Univer',
   logo: {
-    light: './src/assets/logo-dark.svg',
-    dark: './src/assets/logo-light.svg',
+    light: '@web/shared/assets/logo-dark.svg',
+    dark: '@web/shared/assets/logo-light.svg',
   },
   social: {
     github: 'https://github.com/dream-num/univer',
   },
   components: {
-    Header: './src/components/Starlight/Header.astro',
-    Sidebar: './src/components/Starlight/Sidebar.astro',
-    ThemeSelect: './src/components/Starlight/ThemeSelect.astro',
+    Header: '@web/shared/components/Header.astro',
+    Sidebar: '@web/shared/components/Sidebar.astro',
+    ThemeSelect: '@web/shared/components/ThemeSelect.astro',
   },
   expressiveCode: {
     themes: ['synthwave-84', 'catppuccin-latte'],
   },
-  customCss: ['./src/styles/starlight.css'],
+  customCss: ['@web/shared/styles/starlight.css'],
   defaultLocale: 'root',
   locales: {
     root: {

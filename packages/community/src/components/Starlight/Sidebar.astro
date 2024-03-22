@@ -1,0 +1,163 @@
+---
+import AstroSidebar from '@astrojs/starlight/components/Sidebar.astro'
+import type { Props } from '@astrojs/starlight/props'
+
+import { getLangFromUrl, useI18nUrl } from '@web/shared/i18n/utils'
+
+const packages = [
+  'core',
+  'design',
+  'docs',
+  'docs-ui',
+  'engine-formula',
+  'engine-numfmt',
+  'engine-render',
+  'facade',
+  'find-replace',
+  'network',
+  'rpc',
+  'sheets',
+  'sheets-find-replace',
+  'sheets-formula',
+  'sheets-numfmt',
+  'sheets-ui',
+  'sheets-zen-editor',
+  'ui',
+  'uniscript',
+]
+
+const lang = getLangFromUrl(Astro.url)
+const l = useI18nUrl(lang)
+
+const isApiPage = Astro.url.pathname.startsWith(`/${lang}/api`) || Astro.url.pathname.startsWith('/api')
+---
+
+{isApiPage
+  ? (
+    <>
+      <ul class="api-menu">
+        <li>
+          <a
+            class:list={[
+              'api-title',
+              {
+                active: /\/api(\/)?(\/index.html)?$/.test(Astro.url.pathname),
+              },
+            ]}
+            href={l('/api')}
+          >
+            📦 Plugins
+          </a>
+        </li>
+        <li>
+          <ul>
+            {packages.map(pkg => (
+              <li>
+                <a
+                  class:list={[{
+                    active: new RegExp(`/api/${pkg}(/)?(index.html)?$`).test(Astro.url.pathname),
+                  }]}
+                  href={l(`/api/${pkg}`)}
+                  aria-current={Astro.url.pathname === `/api/${pkg}` ? 'page' : undefined}
+                >
+                  @univerjs/{pkg}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      </ul>
+    </>
+    )
+  : (
+      <AstroSidebar {...Astro.props}>
+        <slot />
+      </AstroSidebar>
+    )}
+
+<script>
+function isElementVisibleInContainer(element: Element, container: Element) {
+  const elementRect = element.getBoundingClientRect()
+  const containerRect = container.getBoundingClientRect()
+
+  return (
+    elementRect.top >= containerRect.top
+    && elementRect.left >= containerRect.left
+    && elementRect.bottom <= containerRect.bottom
+    && elementRect.right <= containerRect.right
+  )
+}
+
+// Function to persist scroll position on page change
+function setScrollPosition() {
+  const sidebar = document.querySelector('#starlight__sidebar')
+  const selectedMenuItem = document.querySelector(
+    '#starlight__sidebar a[aria-current=\'page\']',
+  )
+  if (
+    sidebar
+    && selectedMenuItem
+    && !isElementVisibleInContainer(selectedMenuItem, sidebar)
+  ) {
+    selectedMenuItem.scrollIntoView()
+  }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  setScrollPosition()
+})
+</script>
+
+<style lang="less">
+.api-title {
+  color: var(--sl-color-white);
+  font-weight: 600;
+}
+.api-menu {
+  --sl-sidebar-item-padding-inline: 0.5rem;
+  padding: 0;
+  list-style: none;
+
+  > li {
+    > a {
+      padding: 0.3em var(--sl-sidebar-item-padding-inline);
+      font-weight: 600;
+      color: var(--sl-color-white);
+      line-height: 1.4;
+      text-decoration: none;
+      border-radius: 0.25rem;
+      display: block;
+      &.active {
+        font-weight: 600;
+        color: var(--sl-color-text-invert);
+        background-color: var(--sl-color-text-accent);
+      }
+    }
+
+    ul {
+      padding: 0;
+      list-style: none;
+
+      li {
+        margin-inline-start: var(--sl-sidebar-item-padding-inline);
+        padding-inline-start: var(--sl-sidebar-item-padding-inline);
+        border-inline-start: 1px solid var(--sl-color-hairline-light);
+
+        a {
+          padding: 0.3em var(--sl-sidebar-item-padding-inline);
+          color: inherit;
+          font-size: var(--sl-text-sm);
+          text-decoration: none;
+          border-radius: 0.25rem;
+          display: block;
+          &.active {
+            font-weight: 600;
+            color: var(--sl-color-text-invert);
+            background-color: var(--sl-color-text-accent);
+          }
+        }
+      }
+    }
+  }
+}
+</style>

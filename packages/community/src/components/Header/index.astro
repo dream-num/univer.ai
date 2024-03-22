@@ -1,7 +1,7 @@
 ---
+import { getLangFromUrl, languages, useI18nUrl, useTranslations } from '@web/shared/i18n/utils'
 import { Github } from './Github/index'
 import { Locale } from './Locale/index'
-import { getLangFromUrl, languages, useI18nUrl, useTranslations } from '@/i18n/utils'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)

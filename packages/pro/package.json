@@ -1,5 +1,5 @@
 {
-  "name": "@web/api",
+  "name": "@web/pro",
   "type": "module",
   "version": "0.1.0",
   "private": true,
@@ -27,13 +27,28 @@
   "bugs": {
     "url": "https://github.com/dream-num/univer-docs/issues"
   },
-  "exports": {
-    ".": "./index.mjs"
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.5.0"
   },
   "scripts": {
-    "build": "node ./index.mjs"
+    "dev": "astro dev",
+    "build": "astro build"
   },
   "dependencies": {
-    "typedoc": "^0.25.12"
+    "@astrojs/check": "^0.5.9",
+    "@astrojs/react": "^3.1.0",
+    "@astrojs/sitemap": "^3.1.1",
+    "@astrojs/starlight": "^0.21.2",
+    "@web/shared": "workspace:*",
+    "astro": "^4.5.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.67",
+    "@types/react-dom": "^18.2.22",
+    "less": "^4.2.0",
+    "typescript": "^5.4.3"
   }
 }

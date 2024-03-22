@@ -6,9 +6,8 @@ import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro'
 import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro'
 import type { Props } from '@astrojs/starlight/props'
 import { MoreSingle } from '@univerjs/icons'
+import { getLangFromUrl, useI18nUrl, useTranslations } from '@web/shared/i18n/utils'
 import ThemeSelect from './ThemeSelect.astro'
-
-import { getLangFromUrl, useI18nUrl, useTranslations } from '@/i18n/utils'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
