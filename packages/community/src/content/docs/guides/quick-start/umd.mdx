@@ -138,9 +138,7 @@ import { Tabs, TabItem } from "@astrojs/starlight/components";
             header: true,
           });
 
-          univer.registerPlugin(UniverDocs.UniverDocsPlugin, {
-            standalone: true,
-          });
+          univer.registerPlugin(UniverDocs.UniverDocsPlugin);
           univer.registerPlugin(UniverDocsUi.UniverDocsUIPlugin, {
             container: 'univerdoc',
             layout: {
