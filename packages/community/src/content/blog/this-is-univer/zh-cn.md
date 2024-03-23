@@ -202,7 +202,7 @@ Univer 生命周期有四个阶段，`Starting`、`Ready`、`Rendered` 和 `Stea
 
 **Rendered 状态**：在 DesktopUIController 中，bootStrap 整个应用后，标记 LifecycleService stage 值为 Rendered
 
-**Steady 状态**：在 Rendered 状态后，延迟 3000 秒触发 Steady 状态
+**Steady 状态**：在 Rendered 状态后，延迟 3000 毫秒触发 Steady 状态
 
 通过 @OnLifecycle 注解，我们可以精确控制某个类在什么生命周期阶段实例化，如下：
 

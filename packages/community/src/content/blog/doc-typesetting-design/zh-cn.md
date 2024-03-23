@@ -45,7 +45,7 @@ Univer 文档编辑器放弃了传统的通过 DOM contenteditable 属性来实�
 
 自下而上来介绍视图层的架构：
 
-**引擎层**：最底层是视图层的引擎层，它包含了 Canvas 类，Canvas 类是对浏览器 Canvas 元素的一个抽象，通过该层抽象，我们可以创建 Canvas 元素、设置 Canvas 元素尺寸，以及绑定 UniverRenderingContext2D 实例对象等，通过 UniverRenderingContext2D 对象，可以调用 Canvas Context2D 提供的所有绘制能力，比如绘制矩形、圆形、文字、线条、设置绘制样式等，有了这些绘制能力，就可以李彤 Canvas Context2D 来绘制 Doc 中的文字、删除线、下划线等内容了
+**引擎层**：最底层是视图层的引擎层，它包含了 Canvas 类，Canvas 类是对浏览器 Canvas 元素的一个抽象，通过该层抽象，我们可以创建 Canvas 元素、设置 Canvas 元素尺寸，以及绑定 UniverRenderingContext2D 实例对象等，通过 UniverRenderingContext2D 对象，可以调用 Canvas Context2D 提供的所有绘制能力，比如绘制矩形、圆形、文字、线条、设置绘制样式等，有了这些绘制能力，就可以用 Canvas Context2D 来绘制 Doc 中的文字、删除线、下划线等内容了
 
 引擎层也提供了 Canvas 事件代理，构建了一套引擎层的用户交互事件系统，这样就可以事件分发给 Scene 中真实命中的 Object，然后由 Object 上的事件处理函数处理，关于事件系统的介绍可以参阅《Univer 文档架构及模块设计》
 
