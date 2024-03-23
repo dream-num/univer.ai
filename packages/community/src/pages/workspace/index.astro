@@ -40,7 +40,7 @@ const features = [{
     <header class="hero">
       <section class="hero-content">
         <h1 class="title">
-          <em>Express</em> ideas, <em>Organize</em> projects, <em>Faster</em> workflows.
+          <em>Express</em> ideas, <wbr /><em>Organize</em> projects, <wbr /><em>Faster</em> workflows.
         </h1>
 
         <p class="desc">
@@ -152,6 +152,7 @@ $chapter.forEach(chapter => {
     linear-gradient(0deg, transparent 24.5%, #E0E2E5 25%, #E0E2E5 25.5%, transparent 26%, transparent 74.5%, #E0E2E5 75%, #E0E2E5 75.5%, transparent 76%, transparent),
     linear-gradient(90deg, transparent 24.5%, #E0E2E5 25%, #E0E2E5 25.5%, transparent 26%, transparent 74.5%, #E0E2E5 75%, #E0E2E5 75.5%, transparent 76%, transparent);
   background-size: 80px 80px;
+  background-position: 0;
   display: flex;
   align-items: center;
   &::before {
@@ -164,6 +165,9 @@ $chapter.forEach(chapter => {
     background: radial-gradient(ellipse at 50% 40%, rgba(255, 255, 255, 0) 10.52%, rgba(255, 255, 255, 0.8) 70%);
     display: block;
   }
+  @media (max-width: 1024px) {
+    height: 436px;
+  }
 
   .hero-content {
     position: relative;
@@ -173,6 +177,9 @@ $chapter.forEach(chapter => {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    @media (max-width: 1024px) {
+      padding: 0 16px;
+    }
 
     .title {
       margin: 0 0 16px;
@@ -182,6 +189,10 @@ $chapter.forEach(chapter => {
       font-style: italic;
       font-weight: 700;
       line-height: 68px;
+      @media (max-width: 1024px) {
+        font-size: 32px;
+        line-height: 40px;
+      }
 
       em {
         padding-right: 1em;
@@ -249,6 +260,9 @@ $chapter.forEach(chapter => {
   display: flex;
   flex-direction: column;
   gap: 80px;
+  @media (max-width: 1200px) {
+    gap: 36px;
+  }
 
   .chapter {
     height: 380px;
@@ -316,6 +330,9 @@ $chapter.forEach(chapter => {
         background: linear-gradient(90deg, #5357ED 0%, #40B9FF 104.41%);
         border-radius: 50%;
         box-shadow: 0px 4px 12px 0px rgba(0, 102, 255, 0.16);
+        @media (max-width: 1024px) {
+          display: none;
+        }
       }
 
       h2 {
@@ -353,6 +370,10 @@ $chapter.forEach(chapter => {
     height: 100%;
     background: url("/workspace/contact-us-bg.svg") no-repeat;
   }
+  @media (max-width: 1024px) {
+    height: auto;
+    max-width: calc(100% - 32px);
+  }
 
   :global(#getWaitlistContainer) {
     font-family: Poppins;
@@ -368,6 +389,7 @@ $chapter.forEach(chapter => {
       font-weight: 600;
       background: linear-gradient(90deg, #5357ED 0%, #40B9FF 104.41%);
       border-radius: 32px;
+      border: none;
     }
 
     :global(input) {
@@ -381,6 +403,11 @@ $chapter.forEach(chapter => {
     padding: 60px;
     display: flex;
     gap: 60px;
+    @media (max-width: 1024px) {
+      padding: 16px;
+      flex-direction: column-reverse;
+      gap: 20px;
+    }
 
     .waitlist {
       width: 344px;
@@ -390,12 +417,19 @@ $chapter.forEach(chapter => {
       box-shadow: 0px 4px 24px 0px rgba(15, 23, 42, 0.12);
       flex-shrink: 0;
       display: flex;
+      @media (max-width: 1024px) {
+        width: 100%;
+        height: 296px;
+      }
     }
 
     .info {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      @media (max-width: 1024px) {
+        align-items: center;
+      }
 
       h2 {
         margin: 0 0 24px;
@@ -403,6 +437,10 @@ $chapter.forEach(chapter => {
         font-size: 48px;
         font-weight: 600;
         line-height: 52px;
+        @media (max-width: 1024px) {
+          font-size: 28px;
+          line-height: 36px;
+        }
       }
 
       p {
@@ -411,6 +449,11 @@ $chapter.forEach(chapter => {
         font-size: 18px;
         font-weight: 300;
         line-height: 28px;
+        @media (max-width: 1024px) {
+          text-align: center;
+          font-size: 16px;
+          line-height: 26px;
+        }
       }
 
       footer {

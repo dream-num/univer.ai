@@ -6,11 +6,18 @@ export default function LanguageConfirm() {
 
   useEffect(() => {
     const isChinese = navigator.language.toLowerCase().includes('zh')
-    const language = sessionStorage.getItem('language')
+    const language = localStorage.getItem('language')
 
-    if (isChinese && !language) {
+    if (language) {
+      const [, time] = language.split('/')
+      const diff = Date.now() - Number(time)
+      if (diff > 7 * 24 * 60 * 60 * 1000) {
+        setVisible(true)
+        localStorage.setItem('language', `zh-cn/${Date.now()}`)
+      }
+    } else if (isChinese && !language) {
       setVisible(true)
-      sessionStorage.setItem('language', 'zh-cn')
+      localStorage.setItem('language', `zh-cn/${Date.now()}`)
     }
   }, [])
 

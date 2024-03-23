@@ -70,11 +70,18 @@ const nav = [{
   padding-bottom: 60px;
 
   .navigation {
-    width: 764px;
+    max-width: 764px;
     height: 144px;
     margin: 0 auto 40px auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    @media (max-width: 1024px) {
+      width: 100%;
+      height: auto;
+      padding: 0 20px;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
 
     .category {
       label {
@@ -102,6 +109,10 @@ const nav = [{
     color: #868686;
     text-align: center;
     font-size: 13px;
+    @media (max-width: 1024px) {
+      padding: 0 20px;
+      line-height: 2;
+    }
   }
 }
 </style>
