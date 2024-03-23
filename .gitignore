@@ -4,6 +4,9 @@ dist/
 # generated types
 .astro/
 
+# turbo
+.turbo
+
 # dependencies
 node_modules/
 

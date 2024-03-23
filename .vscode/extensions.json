@@ -1,8 +1,7 @@
 {
   "recommendations": [
     "astro-build.astro-vscode",
-    "pomdtr.excalidraw-editor",
-    "hideoo.starlight-i18n"
+    "pomdtr.excalidraw-editor"
   ],
   "unwantedRecommendations": []
 }

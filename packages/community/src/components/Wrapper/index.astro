@@ -32,8 +32,11 @@ const { lang, title } = Astro.props
     <meta property="og:description" content="The next-generation open source office suite. Spreedsheets, documents, slides and more." />
     <meta property="og:image" content="/og.png" />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" href="https://univer.ai/zh-cn" hreflang="zh" />
+    <link rel="alternate" href="https://univer.ai/ja-jp" hreflang="ja" />
   </head>
   <body>
     <slot />

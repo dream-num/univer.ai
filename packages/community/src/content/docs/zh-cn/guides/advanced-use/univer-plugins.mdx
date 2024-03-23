@@ -1,0 +1,238 @@
+---
+title: 使用 Univer Plugins
+sidebar:
+  order: 1
+---
+
+对于初次接触 Univer 的人来说，插件化的设计可能会带来以下困惑:
+
+- 如何判断一个插件是否包含样式文件?
+- 如何确保插件样式文件的加载顺序正确?
+- 如何知晓一个插件是否包含语言包?
+
+这些问题的解答可能并不简单，因此我们提供了一些构建工具插件，它们是解决以上问题的最佳实践。这些插件会自动按需引入样式文件、生成语言包等，让你不再需要担心这些问题。
+
+我们提供了的构建工具插件支持以下构建工具，你可以根据自己的构建工具选择合适的插件。
+
+[![Vite](https://img.shields.io/static/v1?style=for-the-badge&message=Vite&color=222222&logo=Vite&logoColor=FFFFFF&label=)](https://github.com/dream-num/univer-plugins/packages/vite-plugin)
+[![esbuild](https://img.shields.io/static/v1?style=for-the-badge&message=esbuild&color=222222&logo=esbuild&logoColor=FFCF00&label=)](https://github.com/dream-num/univer-plugins/packages/esbuild-plugin)
+[![Webpack](https://img.shields.io/static/v1?style=for-the-badge&message=Webpack&color=222222&logo=Webpack&logoColor=8DD6F9&label=)](https://github.com/dream-num/univer-plugins/packages/webpack-plugin)
+
+## Vite 插件
+
+### 安装
+
+```shell
+# 使用 npm
+npm install @univerjs/vite-plugin -D
+
+# 使用 pnpm
+pnpm add @univerjs/vite-plugin -D
+```
+
+### 使用
+
+将插件添加到 `vite.config.ts`:
+
+```typescript
+import { defineConfig } from 'vite'
+import { univerPlugin } from '@univerjs/vite-plugin'
+
+export default defineConfig({
+  plugins: [
+    univerPlugin()
+  ]
+})
+```
+
+### 特性
+
+#### 自动引入样式文件
+
+这个特性默认是开启的。你可以通过传递 `css: false` 到插件选项来禁用它。
+
+```diff
+export default defineConfig({
+  plugins: [
+    univerPlugin({
++      css: false
+    })
+  ]
+})
+```
+
+#### 简化语言包引入
+
+插件提供了一个虚拟模块 `univer:locales`，它简化了语言包的引入。
+
+```typescript
+import { LocaleType } from '@univerjs/core'
+
+import { zhCN, enUS } from 'univer:locales'
+
+new Univer({
+  locales: {
+    [LocaleType.ZH_CN]: zhCN,
+    [LocaleType.EN_US]: enUS
+  }
+})
+```
+
+### TypeScript 支持
+
+为了让 TypeScript 能够识别 `univer:locales` 的引入，你需要在项目中添加一个 `src/vite-env.d.ts` 文件。
+
+```diff title="src/vite-env.d.ts"
+/// <reference types="vite/client" />
++ /// <reference types="@univerjs/vite-plugin/types" />
+```
+
+### 选项
+
+- `css`: `boolean` - 是否自动引入所需的 CSS。默认为 `true`。
+
+## ESbuild 插件
+
+### 安装
+
+```shell
+# 使用 npm
+npm install @univerjs/esbuild-plugin -D
+
+# 使用 pnpm
+pnpm add @univerjs/esbuild-plugin -D
+```
+
+### 使用
+
+如果你使用的是 `esbuild` API，你可以将插件添加到构建配置中:
+
+```typescript
+import esbuild from 'esbuild'
+
+esbuild.build({
+  plugins: [
+    univerPlugin()
+  ],
+})
+```
+
+### 特性
+
+#### 自动引入样式文件
+
+这个特性默认是开启的。你可以通过传递 `css: false` 到插件选项来禁用它。
+
+```diff
+esbuild.build({
+  plugins: [
+    univerPlugin({
++     css: false
+    })
+  ],
+})
+```
+
+#### 简化语言包引入
+
+插件提供了一个虚拟模块 `univer:locales`，它简化了语言包的引入。
+
+```typescript
+import { LocaleType } from '@univerjs/core'
+
+import { zhCN, enUS } from 'univer:locales'
+
+new Univer({
+  locales: {
+    [LocaleType.ZH_CN]: zhCN,
+    [LocaleType.EN_US]: enUS
+  }
+})
+```
+
+### TypeScript 支持
+
+为了让 TypeScript 能够识别 `univer:locales` 的引入，你需要在项目中添加一个 `tsconfig.json` 文件。
+
+```diff title="tsconfig.json"
+{
+  "compilerOptions": {
++    "types": ["@univerjs/esbuild-plugin/types"]
+  }
+}
+```
+
+### 选项
+
+- `css`: `boolean` - 是否自动引入所需的 CSS。默认为 `true`。
+
+## Webpack 插件
+
+### 安装
+
+```shell
+# 使用 npm
+npm install @univerjs/webpack-plugin -D
+
+# 使用 pnpm
+pnpm add @univerjs/webpack-plugin -D
+```
+
+### 使用
+
+将插件添加到 `webpack.config.js`：
+
+```typescript
+import { UniverPlugin } from '@univerjs/webpack-plugin'
+
+export default {
+  plugins: [
++    new UniverPlugin()
+  ]
+}
+```
+
+### 特性
+
+#### 自动引入样式文件
+
+这个特性默认是开启的。你可以通过传递 `css: false` 到插件选项来禁用它。
+
+```diff
+export default defineConfig({
+  plugins: [
+    new UniverPlugin({
++      css: false
+    })
+  ]
+})
+```
+
+#### 简化语言包引入
+
+插件提供了一个虚拟模块 `univer:locales`，它简化了语言包的引入。
+
+```typescript
+import { LocaleType } from '@univerjs/core'
+
+import { zhCN, enUS } from 'univer:locales'
+
+new Univer({
+  locales: {
+    [LocaleType.ZH_CN]: zhCN,
+    [LocaleType.EN_US]: enUS
+  }
+})
+```
+
+### TypeScript 支持
+
+为了让 TypeScript 能够识别 `univer:locales` 的引入，你需要在项目中添加一个 `src/webpack-env.d.ts` 文件。
+
+```diff title="src/webpack-env.d.ts"
++ /// <reference types="@univerjs/webpack-plugin/types" />
+```
+
+### 选项
+
+- `css`: `boolean` - 是否自动引入所需的 CSS。默认为 `true`。

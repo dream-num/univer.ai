@@ -56,6 +56,7 @@ export default defineConfig({
   base: '/pro',
   server: {
     host: '0.0.0.0',
+    port: 4322,
   },
   vite: {
     ssr: {

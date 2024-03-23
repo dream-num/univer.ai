@@ -7,29 +7,32 @@ import BlankLayout from '@/layouts/BlankLayout.astro'
 const features = [{
   title: 'The End of Fragmented File Sharing',
   desc: 'Say goodbye to the endless cycle of opening, editing, and sharing multiple files in different formats. Univer allows you to create or consolidate everything from data analysis to comprehensive reports into one Univer file, simplifying the way you share deliverables. No more juggling between attachments or navigating through zipped folders.',
-  preview: '',
+  preview: '/workspace/feature-1.mp4',
 }, {
   title: 'Powerful Data Processing',
   desc: 'Univer doesn\'t stop at merging documents, it brings cutting-edge data processing and automation across all its pages. We\'ve embedded over 500 Excel-syntax formulas within doc and slide, you can effortlessly reference and calculate data directly from sheet.',
-  preview: '',
+  preview: '/workspace/feature-2.mp4',
 }, {
   title: 'A User Experience Unmatched',
   desc: 'Ever needed to get a chart from a spreadsheet into a slide? Now it\'s as easy as dragging and dropping. No more copying and pasting, just pick it up and place it as you wish.',
-  preview: '',
+  preview: '/workspace/feature-3.mp4',
 }, {
   title: 'AI-Driven Automation',
   desc: 'Univer\'s AI-powered Uniscript opens new horizons for workflow automation. From generating tailored report templates to integrating specific data sources, Uniscript transforms tedious, repetitive tasks into automated processes. ',
-  preview: '',
+  preview: '/workspace/feature-4.mp4',
 }, {
   title: 'Streamlined Collaboration',
   desc: 'Fast-track your iterations with built-in chat and commenting. Collaborate seamlessly from anywhere, at any time.',
-  preview: '',
+  preview: '/workspace/feature-5.mp4',
 }]
 ---
 
 <BlankLayout lang="en-us" title="Univer Workspace | Univer">
   <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" />
   <link rel="stylesheet" href="//prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.css" />
+  {features.map(item => (
+    <link rel="preload" href={item.preview} as="video" type="video/mp4" />
+  ))}
 
   <section class="page">
     <Header />
@@ -65,7 +68,9 @@ const features = [{
           },
         ]}
         >
-          <img class="preview" src={item.preview} draggable={false} />
+          <video class="preview" controls={false} loop muted>
+            <source src={item.preview} type="video/mp4" />
+          </video>
 
           <div class="content">
             <div>{index + 1}</div>
@@ -105,7 +110,7 @@ const features = [{
 <script>
 const $chapter = document.querySelectorAll('.chapter')
 
-const observer = new IntersectionObserver((entries, observer) => {
+const observerEnter = new IntersectionObserver((entries, observer) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('enter')
@@ -114,8 +119,23 @@ const observer = new IntersectionObserver((entries, observer) => {
   })
 })
 
+const observerVideo = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const $video = entry.target.querySelector('video')
+      if ($video) {
+        $video.play()
+      }
+      observer.unobserve(entry.target)
+    }
+  })
+}, {
+  threshold: 0.5
+})
+
 $chapter.forEach(chapter => {
-  observer.observe(chapter)
+  observerEnter.observe(chapter)
+  observerVideo.observe(chapter)
 })
 </script>
 
@@ -243,6 +263,13 @@ $chapter.forEach(chapter => {
     &:nth-child(2) {
       animation-delay: 0.2s;
     }
+    @media (max-width: 1200px) {
+      flex-direction: column;
+      height: auto;
+      &.reverse {
+        flex-direction: column;
+      }
+    }
 
     @keyframes fade-in {
       from {
@@ -258,10 +285,13 @@ $chapter.forEach(chapter => {
     .preview {
       width: 608px;
       background: #D1DFFF;
-      border: 1px solid #E2EBFF;
       border-radius: 20px;
       display: block;
       flex-shrink: 0;
+      box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
+      @media (max-width: 1200px) {
+        width: 100%;
+      }
     }
 
     .content {
@@ -269,6 +299,9 @@ $chapter.forEach(chapter => {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      @media (max-width: 1200px) {
+        width: 100%;
+      }
 
       div {
         width: 48px;
@@ -305,7 +338,7 @@ $chapter.forEach(chapter => {
 
 .contact-us {
   position: relative;
-  width: 960px;
+  max-width: 960px;
   height: 448px;
   margin: 0 auto 80px auto;
   background: linear-gradient(90deg, #5357ED 0%, #40B9FF 104.41%);

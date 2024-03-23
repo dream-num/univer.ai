@@ -1,35 +1,17 @@
 ---
-title: 使用 Facade
+title: 使用 Facade API
 sidebar:
   order: 1
 ---
 
-如果你只想使用一个开箱即用的电子表格，不想使用 Univer 的底层 API，或者你更偏向于 Luckysheet 的使用方式，你可以使用 `@univerjs/facade` 提供的面板（**Facade**） API。
+Univer 的插件化能力非常强大，它几乎允许你对 Univer 的方方面面进行扩展。但在大多数情况下，过于灵活的扩展能力会使得开发者手足无措。因此我们提供了 `@univerjs/facade`，为 Univer 的用户提供一个更加简单易用的面板 API（Facade API）。
 
-本小节介绍 Facade 的安装和基本使用方法。
+`@univerjs/facade` 适用于任何人，尤其是那些熟悉 Luckysheet 的老用户，或者只是想简单地使用 Univer 的功能而并不打算深度扩展的用户。使用 `@univerjs/facade`，你可以快速上手，轻松实现各种常见的增删改查功能。
+
+本文档将详细介绍如何使用 `@univerjs/facade` 提供的 API，帮助你充分发挥 Univer 的潜力。如果你想查看所有的 Facade API，请参考 `@univerjs/facade` 的 [API 文档](/zh-cn/api/facade)。通过学习和使用这些 API，你将能够更高效、更便捷地开发出功能强大的办公应用。
 
 :::note
-实际上，[Uniscript](/zh-cn/guides/plugins/common/uniscript/) 也使用了 @univerjs/facade 提供的这套 API，因此 `@univerjs/facade` 提供的能力就是 Uniscript 能够提供的能力。
-:::
-
-:::note[⚗️ 施工中]
-我们仍在扩展 Facade 的能力，部分底层 API 支持的能力可能还没有被 Facade 支持，如果你发现了这样的问题，请向我们[提交 issue](/zh-cn/guides/contributing#github-issues) 或者[提交 Pull Request](http://localhost:4321/guides/contributing#contributing-code)。
-:::
-
-:::note[我应该使用 Facade 还是底层 API？]
-我们建议有下面需求的用户使用 API：
-
-1. 第一次接触 Univer，或者是 Luckysheet 老用户，想尽快上手 Univer
-2. 不太关心 Univer 的插件化能力
-
-建议有如下需求的用户使用底层 API：
-
-1. 已经对 Univer 比较熟悉
-1. 需要根据需求调整安装在 Univer 上的插件
-1. 需要自定义开发插件，调用更多 Univer 核心和其他插件的能力
-1. 追求极致的构建产物体积和性能
-
-注意，Facade 和底层 API 并不是互斥关系，你完全可以同时使用它们。
+实际上，[Uniscript](/zh-cn/api/uniscript) 也使用了 `@univerjs/facade`，因此你可以在 `@univerjs/uniscript` 创建的 Uniscript 面板中直接使用 `@univerjs/facade` 提供的 API。
 :::
 
 ## 安装
@@ -59,5 +41,3 @@ const univerAPI = FUniver.newAPI(univer);
 ```typescript title="main.ts"
 univerAPI.getActiveWorkbook();
 ```
-
-你可以查看 [Facade API](/api/facade/) 来了解 Facade 的全部能力。接下来几个小节会演示一些常见的使用场景。

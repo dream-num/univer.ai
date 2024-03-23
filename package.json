@@ -33,13 +33,13 @@
   },
   "scripts": {
     "prepare": "simple-git-hooks",
-    "build": "pnpm --filter './packages/*' build && node ./scripts/build.mjs",
+    "build": "turbo build && node ./scripts/build.mjs",
+    "dev": "turbo dev",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.9.0",
-    "@univerjs/web-api": "workspace:*",
     "astro-eslint-parser": "^0.16.3",
     "eslint": "^8.57.0",
     "eslint-plugin-astro": "^0.32.0",
@@ -49,6 +49,7 @@
     "eslint-plugin-react-refresh": "^0.4.6",
     "lint-staged": "^15.2.2",
     "simple-git-hooks": "^2.11.0",
+    "turbo": "^1.13.0",
     "typescript": "^5.4.3"
   },
   "simple-git-hooks": {

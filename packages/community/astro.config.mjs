@@ -131,6 +131,7 @@ export default defineConfig({
   site: 'https://univer.ai',
   server: {
     host: '0.0.0.0',
+    port: 4321,
   },
   vite: {
     ssr: {
