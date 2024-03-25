@@ -1,5 +1,5 @@
 ---
-title: University Document Architecture and Module Design
+title: Univer Document Architecture and Module Design
 desc: Univer Document is one of the components of the Univer office suite, aimed at providing a top-notch document editing and typesetting experience. We not only integrate in terms of product form, reducing switching costs between different suites through a boundary-less mode, but also enable data interoperability across different suites. In terms of technical architecture, we strive to achieve implementation through a unified architecture, ensuring efficient development experience while also providing more room for imagination in the integration of product forms.
 tags:
   - Univer Doc
