@@ -36,17 +36,17 @@
     "build": "astro build"
   },
   "dependencies": {
-    "@astrojs/check": "^0.5.9",
+    "@astrojs/check": "^0.5.10",
     "@astrojs/react": "^3.1.0",
     "@astrojs/sitemap": "^3.1.1",
     "@astrojs/starlight": "^0.21.2",
     "@web/shared": "workspace:*",
-    "astro": "^4.5.8",
+    "astro": "^4.5.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.67",
+    "@types/react": "^18.2.69",
     "@types/react-dom": "^18.2.22",
     "less": "^4.2.0",
     "typescript": "^5.4.3"
