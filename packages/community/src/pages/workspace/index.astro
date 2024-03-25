@@ -48,8 +48,7 @@ const features = [{
         </p>
 
         <div class="actions">
-          <!-- <a class="primary" href="/workspace/blog"> -->
-          <a class="primary">
+          <a class="primary" href="/workspace/blog">
             Learn More
           </a>
           <a class="github" href="https://github.com/dream-num/univer">
@@ -95,7 +94,7 @@ const features = [{
             Our product is still under development. If you are interested in it, please join the waitlist by leaving an email address or join our discord space to stay up to date!
           </p>
           <footer>
-            <a>
+            <a href="https://discord.gg/z3NKNT6D2f">
               <DiscordSingle24 />
               Join Discord
             </a>
@@ -383,6 +382,10 @@ $chapter.forEach(chapter => {
       display: none;
     }
 
+    :global(.gw-p-7) {
+      padding: 0 20px;
+    }
+
     :global(button) {
       font-family: Poppins;
       font-size: 14px;
@@ -464,6 +467,7 @@ $chapter.forEach(chapter => {
           font-size: 16px;
           font-weight: 600;
           line-height: 48px;
+          text-decoration: none;
           background: #0F172A;
           border-radius: 32px;
           display: inline-flex;

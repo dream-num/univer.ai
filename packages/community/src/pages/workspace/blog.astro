@@ -171,6 +171,8 @@ window.addEventListener('scroll', () => {
     }
 
     .content {
+      padding: 0 20px;
+
       :global(h2) {
         margin: 0 0 40px;
         color: #0F172A;
@@ -185,6 +187,46 @@ window.addEventListener('scroll', () => {
         font-size: 28px;
         font-weight: 500;
         line-height: 36px;
+      }
+
+      :global(ul) {
+        :global(a) {
+          color: #0038FF;
+          font-size: 18px;
+          font-weight: 300;
+          line-height: 32px;
+          text-decoration-line: underline;
+          text-decoration-thickness: from-font;
+          text-underline-position: from-font;
+        }
+      }
+
+      :global(table) {
+        border-spacing: 0;
+        word-break: break-word;
+        cursor: text;
+        table-layout: fixed;
+        position: relative;
+        border-collapse: initial;
+
+        :global(tr) {
+          :global(td),
+          :global(th) {
+            min-height: 38px;
+            min-width: 120px;
+            border-right: 1px solid #dee0e3;
+            border-bottom: 1px solid #dee0e3;
+            padding: 10px 16px;
+            &:first-child {
+              border-left: 1px solid #dee0e3;
+            }
+          }
+
+          :global(th) {
+            font-weight: 600;
+            border-top: 1px solid #dee0e3;
+          }
+        }
       }
 
       :global(p) {
@@ -203,12 +245,12 @@ window.addEventListener('scroll', () => {
 
         :global(a) {
           color: #0038FF;
-
-          font-family: Poppins;
           font-size: 18px;
           font-weight: 300;
           line-height: 32px;
           text-decoration-line: underline;
+          text-decoration-thickness: from-font;
+          text-underline-position: from-font;
         }
       }
     }
