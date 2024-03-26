@@ -33,9 +33,24 @@ const isProPage = Astro.url.pathname.startsWith('/pro')
       <a href="/playground">
         {t('startlight.header.playground')}
       </a>
-      <a class:list={[{ active: isProPage }]} href={`/pro/${lang === 'en-us' ? '' : `${lang}/`}enterprises/`}>
-        ⭐️ Pro
-      </a>
+      <div class="community-list">
+        <a data-pro-btn class:list={[{ active: isProPage }]}>
+          ⭐️ Pro
+          <MoreSingle />
+        </a>
+
+        <ul data-pro-list>
+          <li>
+            <a href={`/pro/${lang === 'en-us' ? '' : `${lang}/`}enterprises/`}>
+              Guides
+            </a>
+          </li>
+          <li>
+            <a href="/pro-examples/">Examples</a>
+          </li>
+        </ul>
+      </div>
+
       <div class="community-list">
         <a data-community-btn>
           {t('startlight.header.community')}
@@ -74,19 +89,34 @@ const isProPage = Astro.url.pathname.startsWith('/pro')
 </div>
 
 <script>
-const $btn = document.querySelector('[data-community-btn]')
-const $list = document.querySelector('[data-community-list]')
+const $communityBtn = document.querySelector('[data-community-btn]')
+const $communityList = document.querySelector('[data-community-list]')
+
+const $proBtn = document.querySelector('[data-pro-btn]')
+const $proList = document.querySelector('[data-pro-list]')
 
 document.body.addEventListener('click', (e) => {
-  $list?.classList.remove('active')
+  $communityList?.classList.remove('active')
+  $proList?.classList.remove('active')
 })
 
-$btn?.addEventListener('click', (e) => {
+$communityBtn?.addEventListener('click', (e) => {
   e.stopPropagation()
-  $list?.classList.toggle('active')
+  $communityList?.classList.toggle('active')
+  $proList?.classList.remove('active')
 })
 
-$list?.addEventListener('click', (e) => {
+$communityList?.addEventListener('click', (e) => {
+  e.stopPropagation()
+})
+
+$proBtn?.addEventListener('click', (e) => {
+  e.stopPropagation()
+  $proList?.classList.toggle('active')
+  $communityList?.classList.remove('active')
+})
+
+$proList?.addEventListener('click', (e) => {
   e.stopPropagation()
 })
 </script>

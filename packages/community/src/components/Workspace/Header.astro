@@ -1,5 +1,7 @@
 ---
 import { GithubSingle24 } from '@univerjs/icons'
+
+const isBlogPage = Astro.url.pathname.includes('blog')
 ---
 
 <header class="header">
@@ -11,6 +13,22 @@ import { GithubSingle24 } from '@univerjs/icons'
     </div>
 
     <div class="right">
+      <a
+        class:list={['link', {
+          active: !isBlogPage,
+        }]}
+        href="/workspace"
+      >
+        Univer Workspace
+      </a>
+      <a
+        class:list={['link', {
+          active: isBlogPage,
+        }]}
+        href="/workspace/blog"
+      >
+        Blog
+      </a>
       <a class="github" href="https://github.com/dream-num/univer">
         <GithubSingle24 />
       </a>
@@ -53,9 +71,23 @@ import { GithubSingle24 } from '@univerjs/icons'
       align-items: center;
       gap: 20px;
 
-      .github {
-        color: inherit;
+      .link {
+        color: #0F172A;
+        text-decoration: none;
+        font-size: 16px;
+        line-height: 2;
+        &.active {
+          background-image: linear-gradient(90deg, #5357ED 0%, #40B9FF 104.41%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        @media (max-width: 1024px) {
+          display: none;
+        }
+      }
 
+      .github {
+        color: #0F172A;
         :global(svg) {
           font-size: 32px;
         }
