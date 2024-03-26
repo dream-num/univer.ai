@@ -34,7 +34,7 @@ const isProPage = Astro.url.pathname.startsWith('/pro')
         {t('startlight.header.playground')}
       </a>
       <a class:list={[{ active: isProPage }]} href={`/pro/${lang === 'en-us' ? '' : `${lang}/`}enterprises/`}>
-        Pro
+        ⭐️ Pro
       </a>
       <div class="community-list">
         <a data-community-btn>
@@ -53,7 +53,7 @@ const isProPage = Astro.url.pathname.startsWith('/pro')
             <a href="https://github.com/dream-num/univer/discussions">{t('startlight.header.community.github')}</a>
           </li>
           <li>
-            <a>{t('startlight.header.community.concat')}</a>
+            <a href="/workspace/#contact-us">{t('startlight.header.community.concat')}</a>
           </li>
         </ul>
       </div>
