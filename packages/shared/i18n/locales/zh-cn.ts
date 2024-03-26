@@ -51,7 +51,7 @@ export const locales: localesType = {
   'footer.nav.help.github': 'Github Discussions',
   'footer.nav.help.troubleshooting': '常见问题',
   'footer.nav.help.bug': '报告 Bug',
-  'footer.copyright': '上海梦数科技 版权所有',
+  'footer.copyright': '版权所有 © 2021-2024 上海梦数科技 ',
   'blog.title': '博客',
   'blog.desc': 'Univer 最新咨讯、技术分享、视频教学',
   'startlight.header.guides': '指南',
