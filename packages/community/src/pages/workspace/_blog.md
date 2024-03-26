@@ -10,13 +10,16 @@ Univer was born from a simple yet profound insight: the need for a seamless, int
 
 Univer has embraced cutting-edge architectural concepts to achieve an all-in-one solution through documents, files and formats. We abstracted productivity tools into three key applications: table, text, and canvas. Through a unified design, these three applications are able to share one core architectural framework. Furthermore, by implementing the plug-in architecture, common functionalities such as images, shapes, charts, and comments can be reused across all three applications.
 
-暂时无法在飞书文档外展示此内容
+<video
+  src="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/blog-all-in-one.mp4"
+  controls
+/>
 
-This approach also enables data to be shared and exchanged between applications.
+<figcaption>This approach also enables data to be shared and exchanged between applications.</figcaption>
 
 Taking the toolbar as an example, the @univerjs/ui plugin offers the IMenuService for registering menu items, as well as rendering the toolbar for desktop environment. Meanwhile, the @univerjs/sheets-ui and @univerjs/docs-ui plugins can implement the right-click menu items for spreadsheets and documents, respectively, and register these items with IMenuService. When registering menu items, plugins can determine to show or hide certain menu items by specifying the hidden$ property, such as hiding all spreadsheet menus if the input focus is not on a spreadsheet. This approach not only provides consistent user interaction across various document formats, but also renders the correct buttons based on the type of document the user is currently working with.
 
-[图片]
+![](/workspace/img1.png)
 
 Univer’s infrastructure integrates plugins with universality and inclusivity in mind, supporting features like:
 
@@ -31,41 +34,56 @@ For detailed information, please check out the [Univer Architecture Document](/g
 
 The primary challenge of Univer’s formula engine is to support various applications such as table, text, and canvas, along with associated capabilities such as condition format, data validation, and pivot table to be integrated into the formula dependency calculation mechanism. And of course, we don’t accept any compromise in performance and stability when developing this formula engine.
 
-暂时无法在飞书文档外展示此内容
+<video
+  src="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/blog-formula.mp4"
+  controls
+/>
 
 Specifically, when loading a Foreign Formula Field, the formula would register its dependencies to the formula engine's Dependency module. You can assume the Foreign Formula Field as a cell in a virtual worksheet, and the advantage of this approach is that it implements formula dependency and calculation cohesively. Once the formula calculation is done, one can intercept the operation of writing the calculation results to the virtual worksheet, and ultimately write the calculation results into the cache of the Foreign Formula Field. For detailed information, please check out the [Formula Engine Architecture Document](/guides/concepts-and-architecture/formula).
 
-[图片]
+![](/workspace/img2.png)
 
 Additionally, Univer’s formula engine now supports executing calculation within web-worker, allowing formula calculation with zero blockage for user experience. More importantly, we aimed to make cross-thread communication between the main-thread and web-worker as straightforward as communicating within the same thread. To achieve this, we developed the @univerjs/rpc plugin. For detailed information, please check out the [Web Worker Architecture Document](/guides/concepts-and-architecture/web-worker).
 
-暂时无法在飞书文档外展示此内容
+<video
+  src="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/formula20000.mp4"
+  controls
+/>
 
-Univer does not block user experience when computing 20,000 functions.
+<figcaption>Univer does not block user experience when computing 20,000 functions.</figcaption>
 
 ## AI-Drive Automation with Command System
 
 Data is vital for AI applications. We strongly believe in the power of converting user behavior into data for AI training, which can lead to revolution breakthrough in the office domain. This is why we created Uniscript, by integrating it with the command system, we’ve taken steps from learning user behaviors to applying them in everyday scenarios. Univer’s AI-powered Uniscript opens new horizons for workflow automation. From generating tailored report templates to integrating specific data sources, Uniscript transforms tedious, repetitive tasks into automated processes.
 
-暂时无法在飞书文档外展示此内容
+<video
+  src="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/uniscript.mp4"
+  controls
+/>
 
-Execute Uniscript code to generate the Univer logo.
+<figcaption>Execute Uniscript code to generate the Univer logo.</figcaption>
 
 The command system opens up numerous possibilities for Univer, transforming user actions into digital user behavior. By recording and replaying these data, it enables functionalities like undo/redo, collaborative editing, offline cache, live share, and server-side computing. Moreover, this data on user behavior can be utilized for AI training, unlocking endless potentials for efficiency.
 
-[图片]
+![](/workspace/img3.png)
 
-暂时无法在飞书文档外展示此内容
+<video
+  src="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/live-share.mp4"
+  controls
+/>
 
-The live share feature implemented by the command system.
+<figcaption>The live share feature implemented by the command system.</figcaption>
 
 ## Compatibility with Office File Formats
 
 Despite the vast array of SaaS productivity tools in the market, Office and Google Suite are still the most widely adopted. Therefore, our strategy focuses on maintaining compatibility with traditional formats while optimizing the user experience to boost productivity. To achieve this, we’ve developed a set of import/export feature, which ensures maximum format compatibility.
 
-暂时无法在飞书文档外展示此内容
+<video
+  src="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/import-and-export-text.mp4"
+  controls
+/>
 
-Import and Export xlsx Files, online demo.
+<figcaption>Import and Export xlsx Files, online demo.</figcaption>
 
 | Spread Cell Count              | Import (s) | Export (s) |
 | :----------------------------- | :--------- | :--------- |
@@ -83,17 +101,23 @@ To enhance the integration of doc, sheet, and slide for an unparalleled experien
 
 For an illustration of how this works, please check out the example below.
 
-暂时无法在飞书文档外展示此内容
+<video
+  src="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/zen-editor.mp4"
+  controls
+/>
 
-Univer's Full-screen editing feature.
+<figcaption>Univer's Full-screen editing feature.</figcaption>
 
 A more complex and intriguing challenge would be: How can we enable doc, sheet and slide to nest with each other, and render on the same canvas?
 
-[图片]
+![](/workspace/img4.png)
 
-暂时无法在飞书文档外展示此内容
+<video
+  src="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/nested.mp4"
+  controls
+/>
 
-Insert sheet/doc into Univer Slide
+<figcaption>Insert sheet/doc into Univer Slide</figcaption>
 
 For detailed information, please check out the [Architecture of Rendering Engine Document](/guides/concepts-and-architecture/rendering).
 
@@ -101,27 +125,33 @@ For detailed information, please check out the [Architecture of Rendering Engine
 
 In Univer, the presence of various document types makes collaborative editing a complex issue, involving cross-platform consistency, offline availablity, history log, undo&redo, etc. Since data processing is the priority for this platform, to better adapt to collaborative tasks in spreadsheet related scenarios and preserve user intent, we ultimately chose the [Operational Transformation](https://en.wikipedia.org/wiki/Operational_transformation) collaborative solution (OT). For detailed information, please check out the [OT algorithm and Univer's Collaborative Editing Design Document](/blog/ot).
 
-暂时无法在飞书文档外展示此内容
+<video
+  src="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/collaboration-playground.mp4"
+  controls
+/>
 
-Univer Collaborative Editing Debugging Environment
+<figcaption>Univer Collaborative Editing Debugging Environment</figcaption>
 
 Additionally, we’ve fully reused the collaborative scheduling algorithm. For every document, a collaborationEntity is generated by the collaborative editing module to manage its scheduling. Regarding Operational Transformation, we’ve developed a TransformService that allows Operational Transformation algorithm to be registered. Users can simply implement Operational Transformation algorithm, register it with TransformService, and then seamlessly integrate into the collaborative editing module.
 
-[图片]
+![](/workspace/img5.png)
 
 The Univer server focuses on scalability and performance, designed to support distributed systems for greater concurrency and performance. It primarily uses two programming languages: Golang and Node.js. Golang excels in handling intense concurrency and rapid network I/O, allowing the Univer collaboration engine to easily handle excessive client connection requests. Node.js shares JavaScript code with the frontend, significantly reducing the error rate in handling collaborative conflicts and establishing a crucial foundation for future server-side computation and rendering.
 
-[图片]
+![](/workspace/img6.png)
 
-暂时无法在飞书文档外展示此内容
+<video
+  src="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/micky.mp4"
+  controls
+/>
 
-Create a cute Mickey Mouse using Univer collaborative editing service.
+<figcaption>Create a cute Mickey Mouse using Univer collaborative editing service.</figcaption>
 
 The Univer Collaboration Engine performs excellently while ensuring stability and reliability. The benchmark test results of the Univer Collaboration Engine on a 4C8G server are as follows: simulating 100 users randomly editing the same table every 2 seconds. In the graph, the horizontal axis represents natural time (milliseconds), and the vertical axis represents collaboration delay (milliseconds), which is the delay from when an event is initiated by a client to when it is seen by others. **We can see that over 95% of editing events have a delay of less than 200ms!**
 
-[图片]
+![](/workspace/img7.jpg)
 
-Collaborative editing benchmark.
+<figcaption>Collaborative editing benchmark.</figcaption>
 
 ## Solutions
 

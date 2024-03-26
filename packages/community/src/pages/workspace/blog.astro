@@ -190,14 +190,17 @@ window.addEventListener('scroll', () => {
       }
 
       :global(ul) {
-        :global(a) {
-          color: #0038FF;
+        :global(li) {
           font-size: 18px;
           font-weight: 300;
           line-height: 32px;
-          text-decoration-line: underline;
-          text-decoration-thickness: from-font;
-          text-underline-position: from-font;
+
+          :global(a) {
+            color: #0038FF;
+            text-decoration-line: underline;
+            text-decoration-thickness: from-font;
+            text-underline-position: from-font;
+          }
         }
       }
 
@@ -227,6 +230,22 @@ window.addEventListener('scroll', () => {
             border-top: 1px solid #dee0e3;
           }
         }
+      }
+
+      :global(video) {
+        width: 100%;
+        border-radius: 20px;
+        border: 10px solid #F0F3FF;
+        display: block;
+      }
+
+      :global(figcaption) {
+        width: 100%;
+        margin-top: -0.5em;
+        margin-bottom: 40px;
+        font-size: 14px;
+        text-align: center;
+        display: block;
       }
 
       :global(p) {
