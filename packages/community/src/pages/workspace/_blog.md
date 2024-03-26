@@ -39,11 +39,11 @@ Taking the toolbar as an example, the `@univerjs/ui` plugin offers the `IMenuSer
 
 Univer’s infrastructure integrates plugins with universality and inclusivity in mind, supporting features like:
 
-- shortcut key
-- copy & paste
-- collaborative editing
-- find & replace
-- etc.
+- Shortcut key
+- Copy & paste
+- Collaborative editing
+- Find & replace
+- And more.
 
 For detailed information, please check out the [Univer Architecture Document](/guides/concepts-and-architecture/architecture).
 
