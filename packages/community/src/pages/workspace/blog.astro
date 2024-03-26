@@ -16,6 +16,12 @@ const headings = Post.getHeadings()
     <Header />
 
     <header class="header">
+      <div class="materials">
+        <div />
+        <div />
+        <div />
+      </div>
+
       <h1>{frontmatter.title}</h1>
       <p>{frontmatter.description}</p>
 
@@ -82,11 +88,42 @@ window.addEventListener('scroll', () => {
   font-family: Poppins;
 
   .header {
+    position: relative;
     max-width: 1440px;
     margin: 0 auto 72px auto;
     padding: 72px 78px 0;
     @media (max-width: 1024px) {
-      padding: 0 20px;
+      padding: 72px 20px 0;
+    }
+
+    .materials {
+      position: absolute;
+      top: -68px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 100px;
+
+      > div {
+        filter: blur(150px);
+
+        &:nth-child(1),
+        &:nth-child(2),
+        &:nth-child(3) {
+          width: 200px;
+          height: 120px;
+        }
+        &:nth-child(1) {
+          background: #D5FFF7;
+        }
+        &:nth-child(2) {
+          background: #D1EDFF;
+        }
+        &:nth-child(3) {
+          background: #CCD8FF;
+        }
+      }
     }
 
     h1 {
@@ -106,7 +143,7 @@ window.addEventListener('scroll', () => {
 
     p {
       width: 758px;
-      margin: 0 auto 72px auto;
+      margin: 0 auto 48px auto;
       color: #0F172A;
       text-align: center;
       font-family: Poppins;
