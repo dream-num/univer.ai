@@ -253,20 +253,20 @@ $chapter.forEach(chapter => {
 }
 
 .features {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto 80px auto;
   padding: 0 32px;
   display: flex;
   flex-direction: column;
   gap: 80px;
-  @media (max-width: 1200px) {
+  @media (max-width: 1024px) {
     gap: 36px;
   }
 
   .chapter {
-    height: 380px;
+    height: 430px;
     display: flex;
-    gap: 40px;
+    gap: 60px;
     opacity: 0;
     &.reverse {
       flex-direction: row-reverse;
@@ -277,7 +277,7 @@ $chapter.forEach(chapter => {
     &:nth-child(2) {
       animation-delay: 0.2s;
     }
-    @media (max-width: 1200px) {
+    @media (max-width: 1024px) {
       flex-direction: column;
       height: auto;
       &.reverse {
@@ -297,23 +297,23 @@ $chapter.forEach(chapter => {
     }
 
     .preview {
-      width: 608px;
+      width: 708px;
       background: #D1DFFF;
       border-radius: 20px;
       display: block;
       flex-shrink: 0;
       box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
-      @media (max-width: 1200px) {
+      @media (max-width: 1024px) {
         width: 100%;
       }
     }
 
     .content {
-      width: 488px;
+      width: 576px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      @media (max-width: 1200px) {
+      @media (max-width: 1024px) {
         width: 100%;
       }
 
@@ -347,7 +347,7 @@ $chapter.forEach(chapter => {
         color: #0F172A;
         font-size: 16px;
         font-weight: 400;
-        line-height: 26px;
+        line-height: 30px;
       }
     }
   }
@@ -360,6 +360,7 @@ $chapter.forEach(chapter => {
   margin: 0 auto 80px auto;
   background: linear-gradient(90deg, #5357ED 0%, #40B9FF 104.41%);
   border-radius: 32px;
+  scroll-margin-top: 68px;
   &::before {
     content: "";
     position: absolute;
