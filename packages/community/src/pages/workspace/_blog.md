@@ -228,7 +228,7 @@ The Univer server focuses on scalability and performance, designed to support di
 
 <figcaption>Create a cute Mickey Mouse using Univer collaborative editing service.</figcaption>
 
-The Univer Collaboration Engine performs well in terms of stability and reliability. Benchmark tests on a 4-core, 8GB server show the engine's performance when simulating user collaboration on editing tasks. The graph displays the relationship between the number of users (horizontal axis) and collaboration delay (vertical axis), which is the time it takes for an event initiated by one client to be seen by others. At around 200 users, the collaborative delay is approximately 1.3 seconds, indicating a balance between delay and user count.
+With those benchmark results, the Univer Collaboration Engine distinctly showcases outstanding performance in real-time collaboration while maintaining stability and reliability. The graph demonstrates that when handling **200 concurrent users** on a modest 4-core 8GB server, the engine manages to keep collaboration delays remarkably low at around **1.3 seconds**. We will continue to improve the engine’s ability to support a large number of concurrent users while keeping latency to a minimum.
 
 ![](/workspace/img7.png)
 
