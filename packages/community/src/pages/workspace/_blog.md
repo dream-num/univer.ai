@@ -56,7 +56,7 @@ The primary challenge of Univer’s formula engine is to support various applica
   controls
 />
 
-Formulas in documents or slides would be wrapped in a special data structure named _Foreign Formula Field_. When a _Foreign Formula Field_ gets loaded, the formula would register its dependencies to the formula engine's _Dependency_ module. You can assume the _Foreign Formula Field_ as a cell in a virtual worksheet. The advantage of this approach is that it implements formula dependency and calculation cohesively. Once the formula calculation is done, the operation of writing the calculation results back to the virtual worksheet would be intercepted and ultimately the results would be writen to _Foreign Formula Field_.
+Formulas in documents or slides would be wrapped in a special data structure named **_Foreign Formula Field_**. When a **_Foreign Formula Field_** gets loaded, the formula would register its dependencies to the formula engine's _Dependency_ module. You can assume the **_Foreign Formula Field_** as a cell in a virtual worksheet. The advantage of this approach is that it implements formula dependency and calculation cohesively. Once the formula calculation is done, the operation of writing the calculation results back to the virtual worksheet would be intercepted and ultimately the results would be writen to **_Foreign Formula Field_**.
 
 > For detailed information, please check out the [Formula Engine Architecture Document](/guides/concepts-and-architecture/formula).
 
@@ -118,13 +118,44 @@ Therefore, our strategy focuses on maintaining compatibility with traditional fo
 
 <figcaption>Import and Export xlsx Files, <a href="https://univer.ai/pro-examples/sheets-exchange/">online demo.</a></figcaption>
 
-| Spread Cell Count              | Import (s) | Export (s) |
-| :----------------------------- | :--------- | :--------- |
-| 100k (500rows/50cols/4sheets)  | 1.3        | 1.1        |
-| 500k (2500rows/50cols/4sheets) | 6.6        | 5.6        |
-| 1m (5000rows/50cols/4sheets)   | 13.4       | 11.6       |
-| 5m (25000rows/50cols/4sheets)  | 67.8       | 60.7       |
-| 10m (50000rows/50cols/4sheets) | 135.9      | 115.5      |
+<div class="table">
+  <table>
+    <thead>
+      <tr>
+        <th>Spread Cell Count</th>
+        <th>Import (s)</th>
+        <th>Export (s)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>100k (500rows/50cols/4sheets)</td>
+        <td>1.3</td>
+        <td>1.1</td>
+      </tr>
+      <tr>
+        <td>500k (2500rows/50cols/4sheets)</td>
+        <td>6.6</td>
+        <td>5.6</td>
+      </tr>
+      <tr>
+        <td>1m (5000rows/50cols/4sheets)</td>
+        <td>13.4</td>
+        <td>11.6</td>
+      </tr>
+      <tr>
+        <td>5m (25000rows/50cols/4sheets)</td>
+        <td>67.8</td>
+        <td>60.7</td>
+      </tr>
+      <tr>
+        <td>10m (50000rows/50cols/4sheets)</td>
+        <td>135.9</td>
+        <td>115.5</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <figcaption>Import and Export Performance Benchmark</figcaption>
 
@@ -156,6 +187,8 @@ A more complex and intriguing challenge would be:
 </div>
 
 ![](/workspace/img4.png)
+
+We have implemented a `SceneViewer` element, which can hold a `Scene` and can also be added as a rendering element to another `Scene`, with the ability to adjust the position and width-height of the `SceneViewer`. The `Scene` can be understood as a container for a document rendering element. During canvas drawing, it will use its own layout information as a layout constraint for the Scene it holds and then draw its content. In this way, different document contents can be drawn on the same canvas.
 
 <video
   src="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/nested.mp4"
@@ -229,4 +262,5 @@ In our technical blog, we will periodically update articles about Univer's core 
 We’re keen to hear your thoughts, feedback, and how you envision using Univer in your workflow. Join our Discord group chat to dive deeper into discussions, share insights, and connect with fellow users to explore the possibility of Univer. Let’s build better, together.
 
 - [Discord](https://discord.gg/z3NKNT6D2f)
-- [Github](https://github.com)
+- [Github](https://github.com/dream-num/univer)
+- [Twitter](https://twitter.com/univerHQ)

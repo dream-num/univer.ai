@@ -236,9 +236,15 @@ window.addEventListener('scroll', () => {
         }
       }
 
-      :global(table) {
+      :global(.table) {
+        width: 100%;
         margin: 0 auto 24px;
+        overflow: auto;
+      }
+
+      :global(table) {
         position: relative;
+        margin: 0 auto;
         border-spacing: 0;
         white-space: nowrap;
         word-break: break-word;
@@ -250,7 +256,6 @@ window.addEventListener('scroll', () => {
           :global(td),
           :global(th) {
             min-height: 38px;
-            min-width: 180px;
             border-right: 1px solid #dee0e3;
             border-bottom: 1px solid #dee0e3;
             padding: 10px 16px;
@@ -308,6 +313,10 @@ window.addEventListener('scroll', () => {
         margin: 0 0 24px;
         display: grid;
         grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        @media (max-width: 1024px) {
+          grid-template-columns: 1fr;
+        }
 
         :global(>div) {
           display: flex;
