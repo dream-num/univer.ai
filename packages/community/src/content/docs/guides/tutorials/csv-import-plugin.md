@@ -41,7 +41,7 @@ The plugin needs to complete the following functions:
 
 ### 1. Create a plugin
 
-Univer does not limit the way you create plugins. To achieve a higher engineering standard, it is recommended to create it through the [command line tool](/guides/extend/write-a-plugin/#create-a-project).
+Univer does not limit the way you create plugins. To achieve a higher engineering standard, it is recommended to create it through the [command line tool](/guides/concepts-and-architecture/write-a-plugin/#create-a-project).
 
 For the convenience of demonstration, we directly create the plugin manually in this article. You can follow this article to practice together. We will develop based on the [Vite initial Demo](https://github.com/awesome-univer/sheets-vite-demo) source code and enter the [Playground](/playground/?title=Vite) to start together.
 

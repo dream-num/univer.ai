@@ -181,6 +181,6 @@ When encapsulating services, it is recommended to use the principle of abstracti
 
 The above introduces the overall architecture of Univer. To learn about the architectural design of Univer's subsystems, you can read the following chapters:
 
-- [Formula System](/guides/architecture/formula)
-- [Rendering System](/guides/architecture/rendering)
-- [Web Worker](/guides/architecture/web-worker)
+- [Formula System](/guides/concepts-and-architecture/formula)
+- [Rendering System](/guides/concepts-and-architecture/rendering)
+- [Web Worker](/guides/concepts-and-architecture/web-worker)

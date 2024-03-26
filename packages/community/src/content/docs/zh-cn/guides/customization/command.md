@@ -3,7 +3,7 @@ title: 扩展命令
 ---
 
 :::info
-建议在阅读本小节内容之前先[了解 Univer 的命令系统](/zh-cn/guides/architecture/architecture/#命令系统)。
+建议在阅读本小节内容之前先[了解 Univer 的命令系统](/zh-cn/guides/concepts-and-architecture/architecture/#命令系统)。
 :::
 
 ## 创建新命令

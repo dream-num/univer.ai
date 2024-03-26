@@ -41,7 +41,7 @@ sidebar:
 
 ### 1. 创建插件
 
-Univer 并不限制你创建插件的方式，为了达到更高的工程化标准，推荐通过[命令行工具创建](/guides/extend/write-a-plugin/#创建项目)。
+Univer 并不限制你创建插件的方式，为了达到更高的工程化标准，推荐通过[命令行工具创建](/guides/concepts-and-architecture/write-a-plugin/#创建项目)。
 
 本文为了演示方便，我们直接手动编写的方式创建插件。你可以跟随本文一起动手实践，我们将基于 [Vite 初始 Demo](https://github.com/awesome-univer/sheets-vite-demo) 源码开发，进入 [Playground](/playground/?title=Vite) 一起开始。
 

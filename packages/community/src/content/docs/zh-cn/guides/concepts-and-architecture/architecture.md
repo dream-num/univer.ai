@@ -181,6 +181,6 @@ export interface ICommandInfo<T extends object = object> {
 
 以上介绍了 Univer 的整体架构。你可以阅读以下章节了解 Univer 子系统的架构设计：
 
-- [公式系统](/zh-cn/guides/architecture/formula)
-- [渲染系统](/zh-cn/guides/architecture/rendering)
-- [Web Worker](/zh-cn/guides/architecture/web-worker)
+- [公式系统](/zh-cn/guides/concepts-and-architecture/formula)
+- [渲染系统](/zh-cn/guides/concepts-and-architecture/rendering)
+- [Web Worker](/zh-cn/guides/concepts-and-architecture/web-worker)

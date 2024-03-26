@@ -3,7 +3,7 @@ title: Extending Commands
 ---
 
 :::info
-It is recommended to familiarize oneself with the [Univer command system](/guides/architecture/architecture/#command-system) before reading this section.
+It is recommended to familiarize oneself with the [Univer command system](/guides/concepts-and-architecture/architecture/#command-system) before reading this section.
 :::
 
 ## Create a New Command
