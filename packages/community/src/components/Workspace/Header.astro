@@ -1,12 +1,23 @@
+---
+import { GithubSingle24 } from '@univerjs/icons'
+---
+
 <header class="header">
   <nav class="nav">
-    <a class="logo" href="/">
-      <img src="/logo.svg" draggable={false} />
-    </a>
+    <div class="left">
+      <a class="logo" href="/">
+        <img src="/logo.svg" draggable={false} />
+      </a>
+    </div>
 
-    <a class="button" href="/workspace#contact-us">
-      Join Waitlist
-    </a>
+    <div class="right">
+      <a class="github" href="https://github.com/dream-num/univer">
+        <GithubSingle24 />
+      </a>
+      <a class="button" href="/workspace#contact-us">
+        Join Waitlist
+      </a>
+    </div>
   </nav>
 </header>
 
@@ -29,24 +40,41 @@
     align-items: center;
     justify-content: space-between;
 
-    .logo {
-      img {
-        display: block;
+    .left {
+      .logo {
+        img {
+          display: block;
+        }
       }
     }
 
-    .button {
-      height: 36px;
-      padding: 0 24px;
-      line-height: 36px;
-      color: #f8f9fc;
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: 32px;
-      background: linear-gradient(90deg, #5357ED 0%, #40B9FF 104.41%);
-      &:hover {
-        background: linear-gradient(90deg, #5357ed 0%, #5357ED 104.41%);
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      .github {
+        color: inherit;
+
+        :global(svg) {
+          font-size: 28px;
+        }
+      }
+
+      .button {
+        height: 36px;
+        padding: 0 24px;
+        line-height: 36px;
+        color: #f8f9fc;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 32px;
+        background: linear-gradient(90deg, #5357ED 0%, #40B9FF 104.41%);
+        display: block;
+        &:hover {
+          background: linear-gradient(90deg, #5357ed 0%, #5357ED 104.41%);
+        }
       }
     }
   }
