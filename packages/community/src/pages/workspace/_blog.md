@@ -45,7 +45,7 @@ Univer’s infrastructure integrates plugins with universality and inclusivity i
 - Find & replace
 - And more.
 
-For detailed information, please check out the [Univer Architecture Document](/guides/concepts-and-architecture/architecture).
+> For detailed information, please check out the [Univer Architecture Document](/guides/concepts-and-architecture/architecture).
 
 ## Formula Engine Linking Different Documents
 
@@ -56,7 +56,7 @@ The primary challenge of Univer’s formula engine is to support various applica
   controls
 />
 
-Formulas in documents or slides would be wrapped in a special data structure named **_Foreign Formula Field_**. When a **_Foreign Formula Field_** gets loaded, the formula would register its dependencies to the formula engine's _Dependency_ module. You can assume the **_Foreign Formula Field_** as a cell in a virtual worksheet. The advantage of this approach is that it implements formula dependency and calculation cohesively. Once the formula calculation is done, the operation of writing the calculation results back to the virtual worksheet would be intercepted and ultimately the results would be writen to **_Foreign Formula Field_**.
+Formulas in documents or slides would be wrapped in a special data structure named **Foreign Formula Field**. When a Foreign Formula Field gets loaded, the formula would register its dependencies to the formula engine's **Dependency** module. You can assume the Foreign Formula Field as a cell in a virtual worksheet. The advantage of this approach is that it implements formula dependency and calculation cohesively. Once the formula calculation is done, the operation of writing the calculation results back to the virtual worksheet would be intercepted and ultimately the results would be writen to Foreign Formula Field.
 
 > For detailed information, please check out the [Formula Engine Architecture Document](/guides/concepts-and-architecture/formula).
 
@@ -80,7 +80,7 @@ Additionally, Univer’s formula engine now supports executing calculation withi
   <p>Data is vital for AI applications. We strongly believe in the power of converting user behavior into data for AI training, which can lead to revolution breakthrough in the office domain.</p>
 </div>
 
-We created **Uniscript**. By integrating it with the command system, we’ve taken steps from learning user behaviors to applying them in everyday scenarios. Univer’s **AI-powered Uniscript** opens new horizons for workflow automation. From generating tailored report templates to integrating specific data sources, **Uniscript** transforms tedious, repetitive tasks into automated processes.
+This is why we created **Uniscript**. By integrating it with the command system, we’ve taken steps from learning user behaviors to applying them in everyday scenarios. Univer’s **AI-powered** Uniscript opens new horizons for workflow automation. From generating tailored report templates to integrating specific data sources, Uniscript transforms tedious, repetitive tasks into automated processes.
 
 <video
   src="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/uniscript.mp4"
@@ -107,9 +107,7 @@ The command system opens up numerous possibilities for Univer, transforming user
 
 ## Compatibility with Office File Formats
 
-> Despite the vast array of SaaS productivity tools in the market, Office and Google Suite are still the most widely adopted.
-
-Therefore, our strategy focuses on maintaining compatibility with traditional formats while optimizing the user experience to boost productivity. To achieve this, we’ve developed a set of **import / export** feature, which ensures maximum format compatibility.
+Despite the vast array of SaaS productivity tools in the market, Office and Google Suite are still the most widely adopted.Therefore, our strategy focuses on maintaining compatibility with traditional formats while optimizing the user experience to boost productivity. To achieve this, we’ve developed a set of **import / export** feature, which ensures maximum format compatibility.
 
 <video
   src="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/import-and-export-text.mp4"
@@ -214,7 +212,7 @@ Collaborative editing is a challenging issue. It involve **cross-platform consis
 
 <figcaption>Univer Collaborative Editing Debugging Environment</figcaption>
 
-The Univer server focuses on scalability and performance, designed to support distributed systems for greater concurrency and performance. It primarily uses two programming languages: _Golang_ and _Node.js_.
+The Univer server focuses on scalability and performance, designed to support distributed systems for greater concurrency and performance. It primarily uses two programming languages: **Golang** and **Node.js**.
 
 - Golang excels in handling intense concurrency and rapid network I/O, allowing the Univer collaboration engine to easily handle excessive client connection requests.
 - Node.js shares JavaScript code with the frontend, significantly reducing the error rate in handling collaborative conflicts and establishing a crucial foundation for future server-side computation and rendering.
