@@ -15,7 +15,7 @@ video: https://www.youtube.com/embed/kpV0MvQuFZA?si=aVLeeH-OBwec7eNo
 <link rel="preload" href="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/collaboration-playground.mp4" as="video" type="video/mp4" />
 <link rel="preload" href="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/micky.mp4" as="video" type="video/mp4" />
 
-Univer was born from a simple yet profound insight: the need for a one-stop productivity platform where data and information can flow freely, without the constraints of disjointed contexts or the hassle of switching formats. With Univer, we enable users to create 3 forms of page as they wish. By merging sheet, doc and slide's capabilities together, Univer empowers individuals and teams to create, organize and streamline workflows effortlessly.
+Univer was born from a simple yet profound insight: the need for a one-stop productivity platform where data and information can flow freely, without the constraints of disjointed contexts or the hassle of switching formats. With Univer, we enable users to create any forms of page as they wish. By merging sheet, doc and slide's capabilities together, Univer empowers individuals and teams to create, organize and streamline workflows without barriers.
 
 ## All-In-One Solution
 
