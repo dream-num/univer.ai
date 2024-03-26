@@ -1,7 +1,7 @@
 ---
 import { GithubSingle24 } from '@univerjs/icons'
 
-const isBlogPage = Astro.url.pathname.includes('blog')
+// const isBlogPage = Astro.url.pathname.includes('blog')
 ---
 
 <header class="header">
@@ -13,7 +13,7 @@ const isBlogPage = Astro.url.pathname.includes('blog')
     </div>
 
     <div class="right">
-      <a
+      <!-- <a
         class:list={['link', {
           active: !isBlogPage,
         }]}
@@ -28,7 +28,7 @@ const isBlogPage = Astro.url.pathname.includes('blog')
         href="/workspace/blog"
       >
         Blog
-      </a>
+      </a> -->
       <a class="github" href="https://github.com/dream-num/univer">
         <GithubSingle24 />
       </a>
