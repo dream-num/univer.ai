@@ -42,7 +42,7 @@ const isProPage = Astro.url.pathname.startsWith('/pro')
         <ul data-pro-list>
           <li>
             <a href={`/pro/${lang === 'en-us' ? '' : `${lang}/`}enterprises/`}>
-              Guides
+              {t('startlight.header.guides')}
             </a>
           </li>
           <li>

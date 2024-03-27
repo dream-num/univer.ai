@@ -56,7 +56,7 @@ export const locales: localesType = {
   'blog.desc': 'Univer 最新咨讯、技术分享、视频教学',
   'startlight.header.guides': '指南',
   'startlight.header.api': '插件',
-  'startlight.header.playground': '在线演示',
+  'startlight.header.playground': 'Playground',
   'startlight.header.community': '社区',
   'startlight.header.community.blog': '博客',
   'startlight.header.community.discord': 'Discord 社区',
