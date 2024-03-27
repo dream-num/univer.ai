@@ -1,4 +1,4 @@
-# Univer Docs <picture><source media="(prefers-color-scheme: dark)" srcset="./src/assets/logo-light.svg"><source media="(prefers-color-scheme: light)" srcset="./src/assets/logo-dark.svg"><img align="right" valign="center" height="100" src="./src/assets/logo-light.svg" alt="Univer Logo" /></picture>
+# Univer Docs <picture><source media="(prefers-color-scheme: dark)" srcset="./src/assets/logo-light.svg"><source media="(prefers-color-scheme: light)" srcset="./packages/shared/assets/logo-dark.svg"><img align="right" valign="center" height="100" src="./packages/shared/assets/logo-light.svg" alt="Univer Logo" /></picture>
 
 [![CC-BY-NC-SA-4.0](https://img.shields.io/badge/license-CC--BY--NC--SA--4.0-blue)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)
 [![Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue)](https://www.apache.org/licenses/LICENSE-2.0)
