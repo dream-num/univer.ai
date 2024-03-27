@@ -63,8 +63,6 @@ import { Tabs, TabItem } from "@astrojs/starlight/components";
 
           var univer = new UniverCore.Univer({
             theme: UniverDesign.defaultTheme,
-            locale: UniverCore.LocaleType.ZH_CN,
-            logLevel: UniverCore.LogLevel.VERBOSE,
           });
 
           univer.registerPlugin(UniverEngineRender.UniverRenderEnginePlugin);
@@ -126,8 +124,6 @@ import { Tabs, TabItem } from "@astrojs/starlight/components";
 
           var univer = new UniverCore.Univer({
             theme: UniverDesign.defaultTheme,
-            locale: UniverCore.LocaleType.ZH_CN,
-            logLevel: UniverCore.LogLevel.VERBOSE,
           });
 
           univer.registerPlugin(UniverEngineRender.UniverRenderEnginePlugin);
@@ -180,6 +176,7 @@ Univer 也可以通过 UMD 的方式引入，要格外注意的是，Univer 的�
       <script src="https://unpkg.com/@wendellhu/redi/dist/redi.js"></script>
       <script src="https://unpkg.com/@wendellhu/redi/dist/react-bindings.js"></script>
 
+      <script src="https://unpkg.com/@univerjs/protocol/lib/umd/index.js"></script>
       <script src="https://unpkg.com/@univerjs/core/lib/umd/index.js"></script>
       <script src="https://unpkg.com/@univerjs/design/lib/umd/index.js"></script>
       <script src="https://unpkg.com/@univerjs/engine-render/lib/umd/index.js"></script>
@@ -209,6 +206,7 @@ Univer 也可以通过 UMD 的方式引入，要格外注意的是，Univer 的�
       <script src="https://unpkg.com/@wendellhu/redi/dist/redi.js"></script>
       <script src="https://unpkg.com/@wendellhu/redi/dist/react-bindings.js"></script>
 
+      <script src="https://unpkg.com/@univerjs/protocol/lib/umd/index.js"></script>
       <script src="https://unpkg.com/@univerjs/core/lib/umd/index.js"></script>
       <script src="https://unpkg.com/@univerjs/design/lib/umd/index.js"></script>
       <script src="https://unpkg.com/@univerjs/engine-render/lib/umd/index.js"></script>

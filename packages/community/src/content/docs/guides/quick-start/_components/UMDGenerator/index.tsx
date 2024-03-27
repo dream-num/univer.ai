@@ -51,6 +51,7 @@ export default function UMDGenerator() {
       'https://unpkg.com/@wendellhu/redi/dist/redi.js',
       'https://unpkg.com/@wendellhu/redi/dist/react-bindings.js',
 
+      'https://unpkg.com/@univerjs/protocol/lib/umd/index.js',
       'https://unpkg.com/@univerjs/core/lib/umd/index.js',
       'https://unpkg.com/@univerjs/design/lib/umd/index.js',
 
