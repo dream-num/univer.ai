@@ -58,6 +58,16 @@ const starlightConfig = {
       },
     },
     {
+      label: '⚙️ 配置',
+      translations: {
+        'en-US': '⚙️ Configuration',
+        'ja-JP': '⚙️ 設定',
+      },
+      autogenerate: {
+        directory: 'guides/configuration',
+      },
+    },
+    {
       label: '🔌 Facade API',
       translations: {
         'en-US': '🔌 Facade API',
