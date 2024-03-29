@@ -87,6 +87,7 @@ export default function UMDGenerator() {
       '@univerjs/sheets-formula',
       '@univerjs/sheets-numfmt',
       '@univerjs/sheets-zen-editor',
+      '@univerjs/sheets-conditional-formatting',
       '@univerjs/uniscript',
     ]
     styleLibs.forEach((pkg) => {
@@ -247,6 +248,7 @@ export default function UMDGenerator() {
             : result.type === 'sheet'
               ? [
                   '@univerjs/sheets-find-replace',
+                  '@univerjs/sheets-conditional-formatting',
                   '@univerjs/sheets-zen-editor',
                 ].map(pkg => (
             <div className={styles.item} key={pkg}>
