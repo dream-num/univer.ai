@@ -1,0 +1,491 @@
+---
+import { DiscordSingle24, GithubSingle24 } from '@univerjs/icons'
+import Footer from '@/components/Workspace/Footer.astro'
+import Header from '@/components/Workspace/Header.astro'
+import BlankLayout from '@/layouts/BlankLayout.astro'
+
+const features = [{
+  title: 'The End of Fragmented File Sharing',
+  desc: 'Say goodbye to the endless cycle of opening, editing, and sharing multiple files in different formats. Univer allows you to create or consolidate everything from data analysis to comprehensive reports into one Univer file, simplifying the way you share deliverables. No more juggling between attachments or navigating through zipped folders.',
+  preview: '/workspace/feature-1.mp4',
+}, {
+  title: 'Powerful Data Processing',
+  desc: 'Univer doesn\'t stop at merging documents, it brings cutting-edge data processing and automation across all its pages. We\'ve embedded over 500 Excel-syntax formulas within doc and slide, you can effortlessly reference and calculate data directly from sheet.',
+  preview: '/workspace/feature-2.mp4',
+}, {
+  title: 'A User Experience Unmatched',
+  desc: 'Ever needed to get a chart from a spreadsheet into a slide? Now it\'s as easy as dragging and dropping. No more copying and pasting, just pick it up and place it as you wish.',
+  preview: '/workspace/feature-3.mp4',
+}, {
+  title: 'AI-Driven Automation',
+  desc: 'Univer\'s AI-powered Uniscript opens new horizons for workflow automation. From generating tailored report templates to integrating specific data sources, Uniscript transforms tedious, repetitive tasks into automated processes. ',
+  preview: '/workspace/feature-4.mp4',
+}, {
+  title: 'Streamlined Collaboration',
+  desc: 'Fast-track your iterations with built-in chat and commenting. Collaborate seamlessly from anywhere, at any time.',
+  preview: '/workspace/feature-5.mp4',
+}]
+---
+
+<BlankLayout lang="en-us" title="Univer Workspace | Univer">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="//prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.css" />
+  {features.map(item => (
+    <link rel="preload" href={item.preview} as="video" type="video/mp4" />
+  ))}
+
+  <section class="page">
+    <Header />
+
+    <header class="hero">
+      <section class="hero-content">
+        <h1 class="title">
+          <em>Express</em> ideas, <wbr /><em>Organize</em> projects, <wbr /><em>Faster</em> workflows.
+        </h1>
+
+        <p class="desc">
+          Univer empowers teams to manage, create, and collaborate without barriers.
+        </p>
+
+        <div class="actions">
+          <a class="primary" href="/workspace/blog">
+            Learn More
+          </a>
+          <a class="github" href="https://github.com/dream-num/univer">
+            <GithubSingle24 />
+            Github
+          </a>
+        </div>
+      </section>
+    </header>
+
+    <section class="features">
+      {features.map((item, index) => (
+        <section class:list={[
+          'chapter',
+          {
+            reverse: index % 2 !== 0,
+          },
+        ]}
+        >
+          <video class="preview" controls={false} loop muted>
+            <source src={item.preview} type="video/mp4" />
+          </video>
+
+          <div class="content">
+            <div>{index + 1}</div>
+            <h2>{item.title}</h2>
+            <p>{item.desc}</p>
+          </div>
+        </section>
+      ))}
+    </section>
+
+    <section id="contact-us" class="contact-us">
+      <div class="container">
+        <section class="waitlist">
+          <div id="getWaitlistContainer" data-waitlist_id="14766" data-widget_type="WIDGET_1" />
+          <script is:inline src="//prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.js"></script>
+        </section>
+
+        <section class="info">
+          <h2>Contact Us</h2>
+          <p>
+            Our product is still under development. If you are interested in it, please join the waitlist by leaving an email address or join our discord space to stay up to date!
+          </p>
+          <footer>
+            <a href="https://discord.gg/z3NKNT6D2f">
+              <DiscordSingle24 />
+              Join Discord
+            </a>
+          </footer>
+        </section>
+      </div>
+    </section>
+
+    <Footer />
+  </section>
+</BlankLayout>
+
+<script>
+const $chapter = document.querySelectorAll('.chapter')
+
+const observerEnter = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('enter')
+      observer.unobserve(entry.target)
+    }
+  })
+})
+
+const observerVideo = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const $video = entry.target.querySelector('video')
+      if ($video) {
+        $video.play()
+      }
+      observer.unobserve(entry.target)
+    }
+  })
+}, {
+  threshold: 0.5
+})
+
+$chapter.forEach(chapter => {
+  observerEnter.observe(chapter)
+  observerVideo.observe(chapter)
+})
+</script>
+
+<style lang="less">
+.page {
+  font-family: Poppins;
+}
+
+.hero {
+  position: relative;
+  height: 396px;
+  background-image:
+    linear-gradient(0deg, transparent 24.5%, #E0E2E5 25%, #E0E2E5 25.5%, transparent 26%, transparent 74.5%, #E0E2E5 75%, #E0E2E5 75.5%, transparent 76%, transparent),
+    linear-gradient(90deg, transparent 24.5%, #E0E2E5 25%, #E0E2E5 25.5%, transparent 26%, transparent 74.5%, #E0E2E5 75%, #E0E2E5 75.5%, transparent 76%, transparent);
+  background-size: 80px 80px;
+  background-position: 0;
+  display: flex;
+  align-items: center;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 50% 40%, rgba(255, 255, 255, 0) 10.52%, rgba(255, 255, 255, 0.8) 70%);
+    display: block;
+  }
+  @media (max-width: 1024px) {
+    height: 436px;
+  }
+
+  .hero-content {
+    position: relative;
+    width: 1136px;
+    height: 244px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    @media (max-width: 1024px) {
+      padding: 0 16px;
+    }
+
+    .title {
+      margin: 0 0 16px;
+      color: #0f172a;
+      text-align: center;
+      font-size: 60px;
+      font-style: italic;
+      font-weight: 700;
+      line-height: 68px;
+      @media (max-width: 1024px) {
+        font-size: 32px;
+        line-height: 40px;
+      }
+
+      em {
+        padding-right: 1em;
+        margin-right: -1em;
+        background-clip: text;
+        background-image: linear-gradient(90deg, #5357ED 0%, #40B9FF 104.41%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+
+    .desc {
+      margin: 0 0 24px;
+      color: #0f172a;
+      text-align: center;
+      font-size: 18px;
+      line-height: 28px;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+
+      a {
+        height: 40px;
+        padding: 0 24px;
+        color: #F8F9FC;
+        font-size: 16px;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 32px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: background 0.2s;
+
+        :global(svg) {
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      .primary {
+        background: linear-gradient(90deg, #5357ed 0%, #40b9ff 104.41%);
+        &:hover {
+          background: linear-gradient(90deg, #5357ed 0%, #5357ED 104.41%);
+        }
+      }
+
+      .github {
+        background: #393e46;
+        &:hover {
+          background: #4f545d;
+        }
+      }
+    }
+  }
+}
+
+.features {
+  max-width: 1440px;
+  margin: 0 auto 80px auto;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  @media (max-width: 1024px) {
+    gap: 36px;
+  }
+
+  .chapter {
+    height: 430px;
+    display: flex;
+    gap: 60px;
+    opacity: 0;
+    &.reverse {
+      flex-direction: row-reverse;
+    }
+    &.enter {
+      animation: fade-in 0.5s forwards ease-in-out;
+    }
+    &:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    @media (max-width: 1024px) {
+      flex-direction: column;
+      height: auto;
+      &.reverse {
+        flex-direction: column;
+      }
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .preview {
+      width: 708px;
+      background: #D1DFFF;
+      border-radius: 20px;
+      display: block;
+      flex-shrink: 0;
+      box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
+      @media (max-width: 1024px) {
+        width: 100%;
+      }
+    }
+
+    .content {
+      width: 576px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      @media (max-width: 1024px) {
+        width: 100%;
+      }
+
+      div {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 24px;
+        color: #fff;
+        font-size: 24px;
+        font-weight: 500;
+        text-align: center;
+        line-height: 48px;
+        background: linear-gradient(90deg, #5357ED 0%, #40B9FF 104.41%);
+        border-radius: 50%;
+        box-shadow: 0px 4px 12px 0px rgba(0, 102, 255, 0.16);
+        @media (max-width: 1024px) {
+          display: none;
+        }
+      }
+
+      h2 {
+        margin: 0 0 16px;
+        color: #0F172A;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 32px;
+      }
+
+      p {
+        margin: 0;
+        color: #0F172A;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 30px;
+      }
+    }
+  }
+}
+
+.contact-us {
+  position: relative;
+  max-width: 960px;
+  height: 448px;
+  margin: 0 auto 80px auto;
+  background: linear-gradient(90deg, #5357ED 0%, #40B9FF 104.41%);
+  border-radius: 32px;
+  scroll-margin-top: 68px;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("/workspace/contact-us-bg.svg") no-repeat;
+  }
+  @media (max-width: 1024px) {
+    height: auto;
+    max-width: calc(100% - 32px);
+  }
+
+  :global(#getWaitlistContainer) {
+    font-family: Poppins;
+
+    :global(.gw-mt-4:nth-last-child(2)),
+    :global(.gw-mt-4:last-child) {
+      display: none;
+    }
+
+    :global(.gw-p-7) {
+      padding: 0 20px;
+    }
+
+    :global(button) {
+      font-family: Poppins;
+      font-size: 14px;
+      font-weight: 600;
+      background: linear-gradient(90deg, #5357ED 0%, #40B9FF 104.41%);
+      border-radius: 32px;
+      border: none;
+    }
+
+    :global(input) {
+      border-radius: 8px;
+      border: 1px solid #E0E2E5 !important;
+    }
+  }
+
+  .container {
+    position: relative;
+    padding: 60px;
+    display: flex;
+    gap: 60px;
+    @media (max-width: 1024px) {
+      padding: 16px;
+      flex-direction: column-reverse;
+      gap: 20px;
+    }
+
+    .waitlist {
+      width: 344px;
+      height: 328px;
+      background: #FFF;
+      border-radius: 24px;
+      box-shadow: 0px 4px 24px 0px rgba(15, 23, 42, 0.12);
+      flex-shrink: 0;
+      display: flex;
+      @media (max-width: 1024px) {
+        width: 100%;
+        height: 296px;
+      }
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      @media (max-width: 1024px) {
+        align-items: center;
+      }
+
+      h2 {
+        margin: 0 0 24px;
+        color: #FFF;
+        font-size: 48px;
+        font-weight: 600;
+        line-height: 52px;
+        @media (max-width: 1024px) {
+          font-size: 28px;
+          line-height: 36px;
+        }
+      }
+
+      p {
+        margin: 0 0 28px;
+        color: #FFF;
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 28px;
+        @media (max-width: 1024px) {
+          text-align: center;
+          font-size: 16px;
+          line-height: 26px;
+        }
+      }
+
+      footer {
+        a {
+          padding: 0 24px;
+          height: 48px;
+          color: #fff;
+          font-size: 16px;
+          font-weight: 600;
+          line-height: 48px;
+          text-decoration: none;
+          background: #0F172A;
+          border-radius: 32px;
+          display: inline-flex;
+          align-items: center;
+          transition: background 0.2s;
+          gap: 4px;
+          &:hover {
+            background: #393E46;
+          }
+
+          :global(svg) {
+            width: 28px;
+            height: 28px;
+          }
+        }
+      }
+    }
+  }
+}
+</style>

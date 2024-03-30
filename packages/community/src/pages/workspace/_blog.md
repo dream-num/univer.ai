@@ -19,7 +19,7 @@ Univer was born from a simple yet profound insight: the need for a one-stop prod
 
 ## All-In-One Solution
 
-Univer has embraced cutting-edge architectural methodologies to achieve an all-in-one solution through documents, files and formats. We abstracted productivity tools into three key applications: **table, text, and canvas**. These three applications are developed on one core framework. Furthermore, by implementing a plug-in architecture, functionalities such as images, shapes, charts, and comments can be reused across all three applications.
+Univer has adopted cutting-edge architectural methodologies to build an all-in-one solution that combines kinds of documents, files and formats. We abstracted productivity tools into three key applications: **table, text, and canvas**. These three applications are developed on one core framework. Furthermore, by implementing a plug-in architecture, functionalities such as menus, images, shapes, charts, and comments can be reused across all three applications.
 
 <video
   src="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/blog-all-in-one.mp4"
@@ -28,41 +28,42 @@ Univer has embraced cutting-edge architectural methodologies to achieve an all-i
 
 <figcaption>This approach also enables data to be shared and exchanged between applications.</figcaption>
 
-Taking the toolbar as an example, the `@univerjs/ui` plugin offers the `IMenuService` for registering menu items, as well as rendering the toolbar for desktop devices. Meanwhile, the `@univerjs/sheets-ui` and `@univerjs/docs-ui` plugins can implement the context menu items for spreadsheets and documents, respectively, and register these items with `IMenuService`. When registering menu items, plugins can determine to show or hide certain menu items by specifying the `hidden$` property, for example, hiding all spreadsheet menu items if users are not working on a spreadsheet.
+Taking the toolbar as an example, the `@univerjs/ui` plugin offers the `IMenuService` for registering menu items, as well as rendering the toolbar for desktop devices. Meanwhile, the `@univerjs/sheets-ui` and `@univerjs/docs-ui` plugins can implement the context menu items for spreadsheets and documents, respectively, and register these items with `IMenuService`. When registering menu items, plugins can determine when to show or hide certain menu items by specifying the `hidden$` property, for example, hiding all spreadsheet menu items if users are not working on a spreadsheet.
 
 <div class="note">
   <span class="note-symbol">💡</span>
-  <p>This approach not only provides consistent user interaction across various document formats, but also renders the correct buttons based on the type of document the user is currently working with.</p>
+  <p>This approach not only provides consistent user interaction across various document formats.</p>
 </div>
 
 ![](/workspace/img1.png)
 
-Univer’s infrastructure integrates plugins with universality and inclusivity in mind, supporting features like:
+In the design of Univer, there are many designs involving "underlying mechanisms" and "plugin extensions", such as:
 
-- Shortcut key
+- Shortcuts
 - Copy & paste
 - Collaborative editing
 - Find & replace
-- And more.
+
+and more.
 
 > For detailed information, please check out the [Univer Architecture Document](/guides/concepts-and-architecture/architecture).
 
 ## Formula Engine Linking Different Documents
 
-The primary challenge of Univer’s formula engine is to support various applications such as **table, text, and canvas**, along with associated capabilities such as **condition format, data validation, and pivot table** to be integrated into the formula dependency calculation mechanism. And of course, we don’t accept any compromise in performance and stability when integrating these features.
+The primary challenge of Univer’s formula engine is to bring formulas into various applications (table, text, and canvas), and empower associated features such as **conditional formatting, data validation, and pivot table** to be integrated into the formula system. And of course, we don’t accept any compromise in performance and stability when integrating these features.
 
 <video
   src="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/blog-formula.mp4"
   controls
 />
 
-Formulas in documents or slides would be wrapped in a special data structure named **Foreign Formula Field**. When a Foreign Formula Field gets loaded, the formula would register its dependencies to the formula engine's **Dependency** module. You can assume the Foreign Formula Field as a cell in a virtual worksheet. The advantage of this approach is that it implements formula dependency and calculation cohesively. Once the formula calculation is done, the operation of writing the calculation results back to the virtual worksheet would be intercepted and ultimately the results would be writen to Foreign Formula Field.
+Here we would like to give further explanation of how we bring formulas to different kinds of applications. Formulas in documents or slides would be wrapped in a special data structure named **Foreign Formula Field**. When a Foreign Formula Field gets loaded, the formula would register its dependencies to the formula engine's **Dependency** module. You can assume the Foreign Formula Field as a cell in a virtual worksheet. The advantage of this approach is that it implements formula in documents or slides just as how it was implemented in spreadsheets. Once the formula calculation is done, the operation of writing the calculation results back to the virtual worksheet would be intercepted and ultimately the results would be written to Foreign Formula Field.
 
 > For detailed information, please check out the [Formula Engine Architecture Document](/guides/concepts-and-architecture/formula).
 
 ![](/workspace/img2.png)
 
-Additionally, Univer’s formula engine now supports executing calculation within **Web Worker**, allowing formula calculation with zero blockage for user experience. To faciliate this design, we developed the `@univerjs/rpc` plugin aimming to make cross-thread communication between the main-thread and web-worker as straightforward as communicating within the same thread. What's more, the rpc plugin makes the formula engine agnostic to the underlying message channel, so server side calculating would be easy to implement as it was for Web Worker.
+Additionally, Univer’s formula engine now can run within **Web Worker**, allowing formula calculation with zero blockage for user experience. To facilitate this design, we developed the `@univerjs/rpc` plugin aiming to make cross-thread communication between the main-thread and web-worker as straightforward as communicating within the same thread. What's more, the rpc plugin makes the formula engine agnostic to the underlying message channel, so server side calculating would be easy to implement as it was for Web Worker.
 
 > For detailed information, please check out the [Web Worker Architecture Document](/guides/concepts-and-architecture/web-worker).
 
@@ -71,7 +72,7 @@ Additionally, Univer’s formula engine now supports executing calculation withi
   controls
 />
 
-<figcaption>Univer does not block user experience when computing 20,000 functions.</figcaption>
+<figcaption>Univer does not makes interaction feels laggy even there are more than 20,000 functions.</figcaption>
 
 ## AI-Drive Automation with Command System
 
@@ -80,17 +81,14 @@ Additionally, Univer’s formula engine now supports executing calculation withi
   <p>Data is vital for AI applications. We strongly believe in the power of converting user behavior into data for AI training, which can lead to revolution breakthrough in the office domain.</p>
 </div>
 
-This is why we created **Uniscript**. By integrating it with the command system, we’ve taken steps from learning user behaviors to applying them in everyday scenarios. Univer’s **AI-powered** Uniscript opens new horizons for workflow automation. From generating tailored report templates to integrating specific data sources, Uniscript transforms tedious, repetitive tasks into automated processes.
+The command system opens up numerous possibilities for Univer, transforming user actions into digital user behavior. It enables functionalities like **undo/redo, collaborative editing, offline availability, live share, and server-side computing**.
 
 <video
-  src="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/uniscript.mp4"
+  src="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/live-share.mp4"
   controls
 />
 
-<figcaption>Execute Uniscript code to generate the Univer logo.</figcaption>
-
-The command system opens up numerous possibilities for Univer, transforming user actions into digital user behavior. By recording and replaying these data, it enables functionalities like **undo/redo, collaborative editing, offline cache, live share, and server-side computing**.
-
+<figcaption>Collaborative editing, cursors and Live Share is built on top of the command system.</figcaption>
 <div class="note">
   <span class="note-symbol">💡</span>
   <p>Moreover, this data on user behavior can be utilized for AI training, unlocking endless potentials for efficiency.</p>
@@ -98,12 +96,14 @@ The command system opens up numerous possibilities for Univer, transforming user
 
 ![](/workspace/img3.png)
 
+**Uniscript** is our **AI-powered** script-engine. By integrating it with the command system, we’ve taken steps from learning user behaviors to applying them in everyday scenarios. Uniscript opens new horizons for workflow automation. From generating tailored report templates to integrating specific data sources, Uniscript transforms tedious, repetitive tasks into automated processes.
+
 <video
-  src="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/live-share.mp4"
+  src="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/uniscript.mp4"
   controls
 />
 
-<figcaption>The live share feature implemented by the command system.</figcaption>
+<figcaption>Execute Uniscript code to generate the Univer logo.</figcaption>
 
 ## Compatibility with Office File Formats
 
@@ -199,7 +199,7 @@ We have implemented a `SceneViewer` element, which can hold a `Scene` and can al
 
 ## Collaborative Editing for All Document Types
 
-Collaborative editing is a challenging issue. It involve **cross-platform consistency, offline availablity, version management, undo & redo**, etc. In Univer, the presence of various document types makes collaborative editing even more complex. However, by reusing the collaborative mechanism for different types of documents, we cut off tons of complexity. Since data processing is the priority for this platform, to better adapt to collaborative tasks in spreadsheet related scenarios and preserve user intent, we ultimately chose the [Operational Transformation](https://en.wikipedia.org/wiki/Operational_transformation) collaborative solution (OT). We’ve developed a `TransformService` that allows transformation algorithms to be registered. So supporting different types of documents is just writing transformation algorithms and registering them to the service.
+Collaborative editing is a challenging issue. It involve **multi-replica consistency, offline availability, version management, undo & redo**, etc. In Univer, the presence of various document types makes collaborative editing even more complex. However, by reusing the collaborative mechanism for different types of documents, we cut off tons of complexity. In order to make Univer more adaptive to our users' scenarios, to resolve editing conflicts and to keep user intents in a more precise manner, we chose the [Operational Transformation](https://en.wikipedia.org/wiki/Operational_transformation) collaborative solution (OT). We’ve developed a `TransformService` that allows transformation algorithms to be registered. So supporting different types of documents is just writing transformation algorithms and registering them to the service.
 
 ![](/workspace/img5.png)
 
@@ -212,10 +212,10 @@ Collaborative editing is a challenging issue. It involve **cross-platform consis
 
 <figcaption>Univer Collaborative Editing Debugging Environment</figcaption>
 
-The Univer server focuses on scalability and performance, designed to support distributed systems for greater concurrency and performance. It primarily uses two programming languages: **Golang** and **Node.js**.
+The Univer server focuses on scalability and performance, designed to support distributed systems for greater concurrency and performance. It primarily uses two programming languages: **Golang** and **JavaScript**.
 
 - Golang excels in handling intense concurrency and rapid network I/O, allowing the Univer collaboration engine to easily handle excessive client connection requests.
-- Node.js shares JavaScript code with the frontend, significantly reducing the error rate in handling collaborative conflicts and establishing a crucial foundation for future server-side computation and rendering.
+- JavaScript (Node.js) makes code sharing between the backend and the frontend an piece of cake, significantly reducing the possibility of running into errors in handling conflicts and establishing a crucial foundation for future server-side computation and rendering.
 
 ![](/workspace/img6.png)
 
@@ -245,11 +245,6 @@ With those benchmark results, the Univer Collaboration Engine distinctly showcas
   </div>
 </div>
 
-In our technical blog, we will periodically update articles about Univer's core technology, for example:
-
-- [Document Typesetting Design](/blog/doc-typesetting-design)
-- [Univer Document Architecture](/blog/univer-doc-architecture)
-
 ## For Developers, by Developers
 
 <div class="note">
@@ -262,3 +257,8 @@ We’re keen to hear your thoughts, feedback, and how you envision using Univer 
 - [Discord](https://discord.gg/z3NKNT6D2f)
 - [Github](https://github.com/dream-num/univer)
 - [Twitter](https://twitter.com/univerHQ)
+
+In our technical blog, we will periodically update articles about Univer's core technology, for example:
+
+- [Document Typesetting Design](/blog/doc-typesetting-design)
+- [Univer Document Architecture](/blog/univer-doc-architecture)
