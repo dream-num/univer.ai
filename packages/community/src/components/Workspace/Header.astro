@@ -1,13 +1,20 @@
 ---
 import { GithubSingle24 } from '@univerjs/icons'
+import { getLangFromUrl, languages, useI18nUrl } from '@web/shared/i18n/utils'
+import { Locale } from '@/components/Header/Locale/index'
 
 // const isBlogPage = Astro.url.pathname.includes('blog')
+
+const lang = getLangFromUrl(Astro.url)
+const l = useI18nUrl(lang)
+
+const currentPath = Astro.url.pathname.replace(`/${lang}`, '')
 ---
 
 <header class="header">
   <nav class="nav">
     <div class="left">
-      <a class="logo" href="/">
+      <a class="logo" href={l('/')}>
         <img src="/logo.svg" draggable={false} />
       </a>
     </div>
@@ -29,10 +36,12 @@ import { GithubSingle24 } from '@univerjs/icons'
       >
         Blog
       </a> -->
+      <Locale client:load lang={languages[lang]} currentPath={currentPath} />
+
       <a class="github" href="https://github.com/dream-num/univer">
         <GithubSingle24 />
       </a>
-      <a class="button" href="/workspace#contact-us">
+      <a class="button" href={l('/workspace#contact-us')}>
         Join Waitlist
       </a>
     </div>

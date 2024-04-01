@@ -39,7 +39,7 @@
     "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.11.4",
+    "@antfu/eslint-config": "^2.11.6",
     "astro-eslint-parser": "^0.16.3",
     "eslint": "^8.57.0",
     "eslint-plugin-astro": "^0.33.1",

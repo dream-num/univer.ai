@@ -65,7 +65,7 @@ const headings = Post.getHeadings()
 <script>
 const $headings = document.querySelectorAll('.toc .container ul a')
 
-const ids = Array.from($headings).map($a => $a.href.split('#')[1])
+const ids = Array.from($headings).map(($a: any) => decodeURIComponent($a.href.split('#')[1]))
 
 const $titles = ids.map(id => document.getElementById(id))
 
@@ -73,7 +73,7 @@ window.addEventListener('scroll', () => {
   const scrollPosition = window.scrollY + 72;
 
   $titles.forEach((heading, index) => {
-    const headingPosition = heading.offsetTop;
+    const headingPosition = heading?.offsetTop ?? 0;
 
     if (scrollPosition >= headingPosition) {
       $headings.forEach((link) => link.classList.remove('active'));
