@@ -32,6 +32,6 @@
   },
   "dependencies": {
     "@astrojs/starlight": "^0.21.2",
-    "@univerjs/icons": "^0.1.42"
+    "@univerjs/icons": "^0.1.43"
   }
 }

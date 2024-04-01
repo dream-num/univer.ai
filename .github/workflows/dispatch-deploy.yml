@@ -22,7 +22,7 @@ jobs:
         uses: ./.github/actions/setup-node
 
       - name: Update @univerjs/icons
-        run: pnpm up @univerjs/icons
+        run: pnpm up @univerjs/icons -r
 
       - name: 📝 Commit and push changes
         run: |
