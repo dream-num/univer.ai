@@ -31,7 +31,7 @@
     "./*": "./*"
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.21.2",
+    "@astrojs/starlight": "^0.21.3",
     "@univerjs/icons": "^0.1.43"
   }
 }

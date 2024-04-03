@@ -37,16 +37,16 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.5.10",
-    "@astrojs/react": "^3.1.0",
+    "@astrojs/react": "^3.1.1",
     "@astrojs/sitemap": "^3.1.2",
-    "@astrojs/starlight": "^0.21.2",
+    "@astrojs/starlight": "^0.21.3",
     "@web/shared": "workspace:*",
-    "astro": "^4.5.12",
+    "astro": "^4.5.14",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.73",
+    "@types/react": "^18.2.74",
     "@types/react-dom": "^18.2.23",
     "less": "^4.2.0",
     "typescript": "^5.4.3"
