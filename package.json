@@ -39,10 +39,10 @@
     "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.12.1",
-    "astro-eslint-parser": "^0.16.3",
-    "eslint": "^8.57.0",
-    "eslint-plugin-astro": "^0.33.1",
+    "@antfu/eslint-config": "^2.12.2",
+    "astro-eslint-parser": "^0.17.0",
+    "eslint": "^9.0.0",
+    "eslint-plugin-astro": "^0.34.0",
     "eslint-plugin-format": "^0.1.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -50,7 +50,7 @@
     "lint-staged": "^15.2.2",
     "simple-git-hooks": "^2.11.1",
     "turbo": "^1.13.2",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.4"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

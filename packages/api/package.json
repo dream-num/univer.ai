@@ -34,6 +34,6 @@
     "build": "node ./index.mjs"
   },
   "dependencies": {
-    "typedoc": "^0.25.12"
+    "typedoc": "^0.25.13"
   }
 }

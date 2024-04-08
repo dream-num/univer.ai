@@ -39,16 +39,16 @@
     "@astrojs/check": "^0.5.10",
     "@astrojs/react": "^3.1.1",
     "@astrojs/sitemap": "^3.1.2",
-    "@astrojs/starlight": "^0.21.3",
+    "@astrojs/starlight": "^0.21.4",
     "@web/shared": "workspace:*",
-    "astro": "^4.5.14",
+    "astro": "^4.5.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.74",
-    "@types/react-dom": "^18.2.23",
+    "@types/react-dom": "^18.2.24",
     "less": "^4.2.0",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.4"
   }
 }

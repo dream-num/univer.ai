@@ -42,7 +42,7 @@
     "@astrojs/react": "^3.1.1",
     "@astrojs/rss": "^4.0.5",
     "@astrojs/sitemap": "^3.1.2",
-    "@astrojs/starlight": "^0.21.3",
+    "@astrojs/starlight": "^0.21.4",
     "@rc-component/color-picker": "^1.5.3",
     "@stackblitz/sdk": "^1.9.0",
     "@univerjs/core": "^0.1.6",
@@ -54,7 +54,7 @@
     "@univerjs/engine-render": "^0.1.6",
     "@univerjs/facade": "^0.1.6",
     "@univerjs/find-replace": "^0.1.6",
-    "@univerjs/icons": "^0.1.43",
+    "@univerjs/icons": "^0.1.44",
     "@univerjs/network": "^0.1.6",
     "@univerjs/rpc": "^0.1.6",
     "@univerjs/sheets": "^0.1.6",
@@ -66,7 +66,7 @@
     "@univerjs/ui": "^0.1.6",
     "@univerjs/uniscript": "^0.1.6",
     "@web/shared": "workspace:*",
-    "astro": "^4.5.14",
+    "astro": "^4.5.16",
     "clsx": "^2.1.0",
     "dayjs": "^1.11.10",
     "modern-normalize": "^2.0.0",
@@ -78,8 +78,8 @@
   },
   "devDependencies": {
     "@types/react": "^18.2.74",
-    "@types/react-dom": "^18.2.23",
+    "@types/react-dom": "^18.2.24",
     "less": "^4.2.0",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.4"
   }
 }
