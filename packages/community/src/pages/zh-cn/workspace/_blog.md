@@ -21,8 +21,6 @@ Univer 诞生于一个简单而深刻的洞见：人们需要一个一站式的�
 
 Univer 采用了前沿的架构设计方法论来融合不同的文档和类型，实现 all-in-one 的解决方案。我们将生产力工具抽象为三种关键的形态：表格、文本和画布。这三种形态构建在同一个核心架构上。并且通过插件化架构，诸如菜单、图片、图表和评论等通用功能可以在这三种形态之间共享和复用。
 
-下面这个换成国内的 OSS 和中文字幕版 ⬇️
-
 <video
   src="https://docs-assets-us-west.oss-us-west-1.aliyuncs.com/univer.ai/workspace/blog-all-in-one.mp4"
   controls
