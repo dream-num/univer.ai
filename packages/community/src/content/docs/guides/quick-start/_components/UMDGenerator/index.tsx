@@ -87,7 +87,7 @@ export default function UMDGenerator() {
       '@univerjs/sheets-formula',
       '@univerjs/sheets-numfmt',
       '@univerjs/sheets-zen-editor',
-      '@univerjs/sheets-conditional-formatting',
+      '@univerjs/sheets-conditional-formatting-ui',
       '@univerjs/uniscript',
     ]
     styleLibs.forEach((pkg) => {
@@ -227,6 +227,7 @@ export default function UMDGenerator() {
             '@univerjs/facade',
             '@univerjs/uniscript',
             '@univerjs/find-replace',
+            '@univerjs/data-validation',
           ].map(pkg => (
             <div className={styles.item} key={pkg}>
               <input
@@ -248,7 +249,8 @@ export default function UMDGenerator() {
             : result.type === 'sheet'
               ? [
                   '@univerjs/sheets-find-replace',
-                  '@univerjs/sheets-conditional-formatting',
+                  '@univerjs/sheets-conditional-formatting-ui',
+                  '@univerjs/sheets-data-validation',
                   '@univerjs/sheets-zen-editor',
                 ].map(pkg => (
             <div className={styles.item} key={pkg}>

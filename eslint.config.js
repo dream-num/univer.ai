@@ -1,8 +1,8 @@
 import antfu from '@antfu/eslint-config'
-import tsParser from '@typescript-eslint/parser'
-import astroParser from 'astro-eslint-parser'
+// import tsParser from '@typescript-eslint/parser'
+// import astroParser from 'astro-eslint-parser'
 
-import astro from 'eslint-plugin-astro'
+// import astro from 'eslint-plugin-astro'
 
 const rules = {
   curly: ['error', 'multi-line'],
@@ -28,33 +28,35 @@ export default antfu({
   react: true,
   yaml: true,
   typescript: true,
+  markdown: false,
   formatters: {
     css: true,
     html: true,
-    markdown: 'dprint',
+    markdown: false,
+    // markdown: 'dprint',
   },
 
   rules,
-}, {
-  files: ['**/*.astro'],
-  plugins: {
-    astro,
-  },
-  rules: {
-    ...astro.configs.recommended.rules,
-    ...rules,
-  },
-  languageOptions: {
-    parser: astroParser,
-    globals: {
-      astroHTML: true,
-    },
-    parserOptions: {
-      parser: tsParser,
-      extraFileExtensions: ['.astro'],
-      ecmaFeatures: {
-        jsx: true,
-      },
-    },
-  },
+// }, {
+//   files: ['**/*.astro'],
+//   plugins: {
+//     astro,
+//   },
+//   rules: {
+//     ...astro.configs.recommended.rules,
+//     ...rules,
+//   },
+//   languageOptions: {
+//     parser: astroParser,
+//     globals: {
+//       astroHTML: true,
+//     },
+//     parserOptions: {
+//       parser: tsParser,
+//       extraFileExtensions: ['.astro'],
+//       ecmaFeatures: {
+//         jsx: true,
+//       },
+//     },
+//   },
 })

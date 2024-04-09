@@ -1,0 +1,288 @@
+---
+title: 注册插件
+sidebar:
+  order: 1
+---
+
+本章节将介绍如何通过注册插件来扩展 Univer 的功能。
+
+要实现一个功能齐全的电子表格或文档，除了在[快速上手](/zh-cn/guides/quick-start/)中提到的必要插件外，你还需要根据具体需求安装并注册其他插件来扩展 Univer 的功能。
+
+本章节将介绍实现电子表格或文档中常用功能所需的插件，以及如何安装和注册这些插件。通过合理搭配和配置插件，你可以创建出满足各种场景需求的电子表格应用。
+
+## Univer Sheet
+
+### 核心包
+
+核心包是实现电子表格的基础包，包含了 Univer Sheet 的核心功能，如创建工作簿、单元格编辑、单元格选择等。
+
+#### 安装
+
+```bash
+pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+```
+
+#### 引入
+
+```typescript
+import "@univerjs/design/lib/index.css";
+import "@univerjs/ui/lib/index.css";
+import "@univerjs/docs-ui/lib/index.css";
+import "@univerjs/sheets-ui/lib/index.css";
+import "@univerjs/sheets-formula/lib/index.css";
+
+import { Univer } from "@univerjs/core";
+import { defaultTheme } from "@univerjs/design";
+
+import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
+import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
+
+import { UniverUIPlugin } from "@univerjs/ui";
+
+import { UniverDocsPlugin } from "@univerjs/docs";
+import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
+
+import { UniverSheetsPlugin } from "@univerjs/sheets";
+import { UniverSheetsFormulaPlugin } from "@univerjs/sheets-formula";
+import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
+```
+
+#### 注册
+
+```typescript
+const univer = new Univer({
+  theme: defaultTheme,
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  header: true,
+  footer: true,
+});
+
+univer.registerPlugin(UniverDocsPlugin, {
+  hasScroll: false,
+});
+univer.registerPlugin(UniverDocsUIPlugin);
+
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
+
+univer.createUniverSheet({});
+```
+
+### Facade API
+
+#### 安装
+
+```bash
+pnpm add @univerjs/facade
+```
+
+#### 引入
+
+```typescript
+import { FUniver } from "@univerjs/facade";
+```
+
+#### 注册
+
+```typescript
+const univerAPI = FUniver.newAPI(univer);
+```
+
+### 查找 & 替换
+
+#### 安装
+
+```bash
+pnpm add @univerjs/find-replace @univerjs/sheets-find-replace
+```
+
+#### 引入
+
+```typescript
+import '@univerjs/find-replace/lib/index.css';
+
+import { UniverFindReplacePlugin } from '@univerjs/find-replace';
+import { UniverSheetsFindReplacePlugin } from '@univerjs/sheets-find-replace';
+```
+
+#### 注册
+
+```typescript
+univer.registerPlugin(UniverFindReplacePlugin);
+univer.registerPlugin(UniverSheetsFindReplacePlugin);
+```
+
+### 数据验证
+
+#### 安装
+
+```bash
+pnpm add @univerjs/data-validation @univerjs/sheets-data-validation
+```
+
+#### 引入
+
+```typescript
+import '@univerjs/sheets-data-validation/lib/index.css';
+
+import { UniverSheetsDataValidationPlugin } from '@univerjs/data-validation';
+import { UniverDataValidationPlugin } from '@univerjs/sheets-data-validation';
+```
+
+#### 注册
+
+```typescript
+univer.registerPlugin(UniverDataValidationPlugin);
+univer.registerPlugin(UniverSheetsDataValidationPlugin);
+```
+
+### 条件格式
+
+#### 安装
+
+```bash
+pnpm add @univerjs/sheets-conditional-formatting-ui
+```
+
+#### 引入
+
+```typescript
+import '@univerjs/sheets-conditional-formatting-ui/lib/index.css';
+
+import { UniverSheetsConditionalFormattingUIPlugin } from '@univerjs/sheets-conditional-formatting-ui';
+```
+
+#### 注册
+
+```typescript
+univer.registerPlugin(UniverSheetsConditionalFormattingUIPlugin);
+```
+
+### Uniscript
+
+#### 安装
+
+```bash
+pnpm add @univerjs/uniscript
+```
+
+#### 引入
+
+```typescript
+import '@univerjs/uniscript/lib/index.css';
+
+import { UniverUniscriptPlugin } from '@univerjs/uniscript';
+```
+
+#### 注册
+
+```typescript
+univer.registerPlugin(UniverUniscriptPlugin);
+```
+
+### 禅编辑器
+
+#### 安装
+
+```bash
+pnpm add @univerjs/sheets-zen-editor
+```
+
+#### 引入
+
+```typescript
+import '@univerjs/sheets-zen-editor/lib/index.css';
+
+import { UniverSheetsZenEditorPlugin } from '@univerjs/sheets-zen-editor';
+```
+
+#### 注册
+
+```typescript
+univer.registerPlugin(UniverSheetsZenEditorPlugin);
+```
+
+## Univer Doc
+
+### 核心包
+
+#### 安装
+
+```bash
+pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/ui
+```
+
+#### 引入
+
+```typescript
+import "@univerjs/design/lib/index.css";
+import "@univerjs/ui/lib/index.css";
+import "@univerjs/docs-ui/lib/index.css";
+
+import { Univer } from "@univerjs/core";
+import { defaultTheme } from "@univerjs/design";
+
+import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
+import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
+
+import { UniverUIPlugin } from "@univerjs/ui";
+
+import { UniverDocsPlugin } from "@univerjs/docs";
+import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
+```
+
+#### 注册
+
+```typescript
+const univer = new Univer({
+  theme: defaultTheme,
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  header: true,
+  footer: true,
+});
+
+univer.registerPlugin(UniverDocsPlugin);
+univer.registerPlugin(UniverDocsUIPlugin, {
+  container: 'univerdoc',
+  layout: {
+    docContainerConfig: {
+      innerLeft: false,
+    },
+  },
+});
+
+univer.createUniverDoc({});
+```
+
+### Facade API
+
+#### 安装
+
+```bash
+pnpm add @univerjs/facade
+```
+
+#### 引入
+
+```typescript
+import { FUniver } from "@univerjs/facade";
+```
+
+#### 注册
+
+```typescript
+const univerAPI = FUniver.newAPI(univer);
+```

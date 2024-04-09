@@ -41,7 +41,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^2.12.2",
     "astro-eslint-parser": "^0.17.0",
-    "eslint": "^9.0.0",
+    "eslint": "8.57.0",
     "eslint-plugin-astro": "^0.34.0",
     "eslint-plugin-format": "^0.1.0",
     "eslint-plugin-react": "^7.34.1",
