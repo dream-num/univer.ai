@@ -19,20 +19,8 @@ function main() {
   const proRoot = resolve(packagesRoot, './pro')
 
   cpSync(resolve(communityRoot, 'dist'), target, { recursive: true })
+  cpSync(resolve(proRoot, 'dist'), 'dist', { recursive: true })
   cpSync(resolve(apiRoot, 'dist'), resolve(target, './api'), { recursive: true })
-
-  const proAstroRoot = resolve(proRoot, './dist/_astro')
-  const proPagefindRoot = resolve(proRoot, './dist/pagefind')
-  cpSync(proAstroRoot, resolve(target, './_astro'), { recursive: true })
-  cpSync(proPagefindRoot, resolve(target, './pagefind'), { recursive: true })
-
-  const proTarget = resolve(__dirname, '../dist/pro')
-
-  if (!existsSync(proTarget)) {
-    mkdirSync(proTarget, { recursive: true })
-  }
-
-  cpSync(resolve(proRoot, 'dist'), proTarget, { recursive: true })
 }
 
 main()

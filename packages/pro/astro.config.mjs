@@ -54,6 +54,7 @@ const starlightConfig = {
 export default defineConfig({
   site: 'https://univer.ai',
   base: '/pro',
+  outDir: './dist/pro',
   server: {
     host: '0.0.0.0',
     port: 4322,
