@@ -49,7 +49,7 @@ export const locales = {
   'footer.nav.help.github': 'Github Discussions',
   'footer.nav.help.troubleshooting': 'Troubleshooting',
   'footer.nav.help.bug': 'Bug report',
-  'footer.copyright': 'Copyright © 2019-2024 Shanghai DreamNum Technology Co., Ltd. All rights reserved.',
+  'footer.copyright': 'Copyright © 2019-2024 DreamNum Technology Co., Ltd. All rights reserved.',
   'blog.title': 'Blog',
   'blog.desc': 'Updates, sharing and tutorials from Univer Team',
   'startlight.header.guides': 'Guides',

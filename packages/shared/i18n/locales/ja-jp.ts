@@ -51,7 +51,7 @@ export const locales: localesType = {
   'footer.nav.help.github': 'Github Discussions',
   'footer.nav.help.troubleshooting': 'よくある質問',
   'footer.nav.help.bug': 'バグ報告',
-  'footer.copyright': 'Copyright © 2019-2024 Shanghai DreamNum Technology Co., Ltd. All rights reserved.',
+  'footer.copyright': 'Copyright © 2019-2024 DreamNum Technology Co., Ltd. All rights reserved.',
   'blog.title': 'ブログ',
   'blog.desc': 'Univerの最新情報、技術共有、ビデオチュートリアル',
   'startlight.header.guides': 'ガイド',
