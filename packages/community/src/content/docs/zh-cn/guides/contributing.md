@@ -108,3 +108,9 @@ pnpm storybook:dev
 #### Commit & Pull Request Message
 
 我们使用 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) 作为 Commit Message 的规范。不符合规范的 Commit Message 将无法通过 CI 检查。
+
+### 贡献插件
+
+如果你想为某个 Univer 插件贡献代码，插件可能会有自己的一些特殊规则，请务必详细阅读插件部分的贡献指南
+
+- [如何在 UniverFormulaEnginePlugin 中添加公式](/zh-cn/api/sheets-formula/#如何在-univerformulaengineplugin-中添加公式)
