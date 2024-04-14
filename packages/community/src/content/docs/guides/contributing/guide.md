@@ -1,5 +1,7 @@
 ---
 title: Contribution Guides
+sidebar:
+  order: 1
 ---
 
 First, please read our [Code of Conduct](https://github.com/dream-num/univer/blob/dev/CODE_OF_CONDUCT.md) to ensure that you can abide by our guidelines.
@@ -113,4 +115,4 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0
 
 If you want to contribute code to a Univer plugin, the plugin may have some special rules of its own, so be sure to read the contribution guidelines in the plugin section in detail
 
-- [How to add formulas in UniverFormulaEnginePlugin](/api/sheets-formula/#how-to-add-formulas-in-univerformulaengineplugin)
+- [Formula Contribution Guide](/guides/contributing/formula/)
