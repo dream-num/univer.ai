@@ -432,4 +432,8 @@ Note
 
 -   Multiple languages can be set under `locales`. For naming rules, please refer to [LocaleType](/api/core/enums/LocaleType.html). Translations for multiple formulas can be added under `functionList`. For detailed field descriptions, please refer to the [How to add formulas in Formula Engine](/guides/customization/formula/#how-to-add-formulas-in-formula-engine) section.
 -   `description` sets the description of the custom formula.
--   `calculate` writes the specific algorithm and name mapping of the calculation formula. The input parameter is the content entered by the user when using the formula, which may be a number, a string, a Boolean value, or a range, and the same format is returned.
+-   `calculate` writes the specific algorithm and name mapping of the calculation formula. The input parameter is the content entered by the user when using the formula, which may be a number, a string, a Boolean value, or a array.
+
+:::tip
+If you want to reuse the algorithm provided by the formula system and enhance the capability of the formula algorithm, you can register a custom formula through plug-in configuration. For detailed tutorials, please refer to [Custom Formula](/guides/customization/formula/).
+:::

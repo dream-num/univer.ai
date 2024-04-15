@@ -301,7 +301,7 @@ univerAPI.onCommandExecuted((command, options) => {
 如下案例所示，使用 `registerFunction` 将一个 `CUSTOMSUM` 公式所需要的算法、名称、描述一次性注册到公式插件，执行之后就可以使用公式了。在任一空白单元格输入 `=CUSTOMSUM` 可以看到提示。
 
 ```js
-const functionDisposable = univerAPI.registerFunction({
+univerAPI.registerFunction({
     calculate: [
         [function (...variants) {
             let sum = 0;
@@ -315,9 +315,6 @@ const functionDisposable = univerAPI.registerFunction({
         // ... 更多公式
     ]
 })
-
-// 卸载所注册的公式
-functionDisposable.dispose();
 ```
 
 如果需要卸载所注册的公式，可以调用 `dispose` 方法。
@@ -435,4 +432,8 @@ univerAPI.registerFunction({
 
 - `locales` 下可以设置多种语言，命名规则参考 [LocaleType](/api/core/enums/LocaleType.html)。可以在 `functionList` 下添加多个公式的翻译。详细的字段说明请参考 [如何在 Formula Engine 中添加公式](/zh-cn/guides/customization/formula/#如何在-formula-engine-中添加公式) 的部分。
 - `description` 设置自定义公式的描述。
-- `calculate` 编写计算公式的具体算法和名称映射。入参为使用公式时用户输入的内容，可能为数字、字符串、布尔值，或者一个范围，也是返回同样的格式。
+- `calculate` 编写计算公式的具体算法和名称映射。入参为使用公式时用户输入的内容，可能为数字、字符串、布尔值，或者一个数组。
+
+:::tip
+如果想复用公式系统提供的算法，增强公式算法的能力，可以通过插件配置的方式注册自定义公式，详细教程请参考 [自定义公式](/zh-cn/guides/customization/formula/)。
+:::
