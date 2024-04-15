@@ -1,7 +1,5 @@
 ---
 title: 贡献指南
-sidebar:
-  order: 1
 ---
 
 首先请阅读我们的 [Code of Conduct](https://github.com/dream-num/univer/blob/dev/CODE_OF_CONDUCT.md)，确保你能遵守我们的行为准则。
@@ -115,4 +113,4 @@ pnpm storybook:dev
 
 如果你想为某个 Univer 插件贡献代码，插件可能会有自己的一些特殊规则，请务必详细阅读插件部分的贡献指南
 
-- [公式贡献指南](/zh-cn/guides/contributing/formula/)
+- [公式贡献指南](/zh-cn/guides/customization/formula/#如何在-formula-engine-中添加公式)

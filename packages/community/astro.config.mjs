@@ -131,9 +131,7 @@ const starlightConfig = {
         'en-US': '🗺️ Contributing Guides',
         'ja-JP': '🗺️ コントリビューションガイドライン',
       },
-      autogenerate: {
-        directory: 'guides/contributing',
-      },
+      link: 'guides/contributing',
     },
   ],
 }
