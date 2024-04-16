@@ -1,5 +1,5 @@
 ---
-title: 拓展 Canvas
+title: 扩展 Canvas
 ---
 
 ## 如何自定义渲染扩展？

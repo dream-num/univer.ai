@@ -113,4 +113,4 @@ pnpm storybook:dev
 
 如果你想为某个 Univer 插件贡献代码，插件可能会有自己的一些特殊规则，请务必详细阅读插件部分的贡献指南
 
-- [如何在 UniverFormulaEnginePlugin 中添加公式](/zh-cn/api/sheets-formula/#如何在-univerformulaengineplugin-中添加公式)
+- [公式贡献指南](/zh-cn/guides/customization/formula/#如何在-formula-engine-中添加公式)
