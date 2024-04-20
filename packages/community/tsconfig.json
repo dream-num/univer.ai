@@ -4,6 +4,8 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
 
+    "experimentalDecorators": true,
+
     "baseUrl": ".",
 
     "paths": {

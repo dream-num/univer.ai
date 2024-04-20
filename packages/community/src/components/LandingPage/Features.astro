@@ -1,0 +1,295 @@
+---
+import { getLangFromUrl, useTranslations } from '@web/shared/i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+
+const features = [{
+  preview: `/images/${lang}/data.png`,
+  label: t('features.f1.title'),
+  desc: t('features.f1.desc') as string[],
+}, {
+  preview: `/images/${lang}/uniscript.png`,
+  label: t('features.f2.title'),
+  desc: t('features.f2.desc') as string[],
+}, {
+  preview: `/images/${lang}/boundaryless.png`,
+  label: t('features.f3.title'),
+  desc: t('features.f3.desc') as string[],
+}, {
+  preview: `/images/${lang}/collaboration.png`,
+  label: t('features.f4.title'),
+  desc: t('features.f4.desc') as string[],
+}]
+---
+
+<section class="features">
+  <section class="block">
+    <section data-univer-feature-preview class="preview">
+      {features.map(feature => (
+        <div data-univer-preview class="sheet-container">
+          <img class="sheet-box" src="/images/box.png" alt="univer sheets box" draggable={false} />
+          <img class="sheet" src={feature.preview} alt="univer sheets" draggable={false} />
+        </div>
+      ))}
+    </section>
+
+    <section class="list">
+      <h2 class="title">
+        <span>{t('features.title')}</span>
+      </h2>
+
+      <ul>
+        {features.map(feature => (
+          <li data-univer-feature>
+            <a>
+              <label>{feature.label}</label>
+              <p>
+                {feature.desc?.map((text: string) => (
+                  <span>{text}</span>
+                ))}
+              </p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </section>
+</section>
+
+<script>
+const $preview = document.querySelector('[data-univer-feature-preview]')
+const $features = document.querySelectorAll('[data-univer-feature]')
+const $previews = document.querySelectorAll('[data-univer-preview]')
+
+$features.forEach(($feature, index: number) => {
+  $feature.addEventListener('click', () => {
+    focusFeature(index)
+  })
+})
+
+$preview?.addEventListener('scroll', () => {
+  const { scrollLeft } = $preview
+  const index = Math.round(scrollLeft / document.body.clientWidth)
+
+  focusFeature(index)
+})
+
+function focusFeature (index: number) {
+  for (let i = 0; i < $features.length; i++) {
+    const $feature = $features[i]
+
+    if (i === index) {
+      $feature.classList.add('feature-active')
+      $previews[i].classList.add('preview-active')
+    } else {
+      $feature.classList.remove('feature-active')
+      $previews[i].classList.remove('preview-active')
+    }
+  }
+}
+
+focusFeature(0)
+</script>
+
+<style lang="less" is:global>
+.feature-active {
+  color: #1F2327 !important;
+  @media (max-width: 1024px) {
+    color: #868686 !important;
+    display: initial !important;
+  }
+
+  p {
+    padding-top: 0.8rem;
+    height: auto !important;
+  }
+}
+
+.preview-active {
+  opacity: 1 !important;
+}
+</style>
+
+<style lang="less" scoped>
+.features {
+  position: relative;
+  height: 37.5rem;
+  margin-bottom: 8.5rem;
+  background-color: #eef8ff;
+  @media (max-width: 1024px) {
+    height: auto;
+    margin-bottom: 0;
+    padding-bottom: 50%;
+    background-color: transparent;
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background-color: #eef8ff;
+    }
+  }
+
+  .block {
+    position: relative;
+    height: 100%;
+    padding: 0 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    @media (max-width: 1024px) {
+      flex-direction: column-reverse;
+      gap: 12px;
+    }
+  }
+
+  .preview {
+    position: relative;
+    width: 60.125rem;
+    height: 31.375rem;
+    z-index: 1;
+    @media (max-width: 1024px) {
+      width: 100%;
+      height: auto;
+    }
+
+    .sheet-container {
+      position: relative;
+      opacity: 0;
+      transition: all 0.5s;
+
+      .sheet-box {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 60.125rem;
+        height: 31.375rem;
+        @media (max-width: 1024px) {
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      .sheet {
+        position: absolute;
+        top: 1rem;
+        right: 6.4rem;
+        width: 47.375rem;
+        height: 28.875rem;
+        border-radius: 6px;
+        @media (max-width: 1024px) {
+          left: 50%;
+          width: calc(100% - 22%);
+          height: auto;
+          transform: translateX(-50%);
+        }
+      }
+    }
+  }
+
+  .list {
+    width: 19.625rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    @media (max-width: 1024px) {
+      width: 100%;
+      // margin-top: -50%;
+      align-items: center;
+    }
+
+    .title {
+      margin: 0 0 1.4rem;
+      @media (max-width: 1024px) {
+        width: 100%;
+        text-align: center;
+      }
+
+      span {
+        font-size: 2.25rem;
+        font-weight: 600;
+        background-image: linear-gradient(121deg, #0048FF 18.89%, #0C81ED 39.58%, #029DCE 59.87%, #00BBB0 74.37%, #00C5A8 79.64%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        @media (max-width: 1024px) {
+          font-size: 1.75rem;
+        }
+      }
+    }
+
+    ul {
+      width: 16.875rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 1.2rem;
+      @media (max-width: 1024px) {
+        width: 100%;
+        text-align: center;
+      }
+
+      li {
+        color: #8FBCFF;
+        font-size: 1rem;
+        transition: color .15s;
+        display: inline-flex;
+        @media (max-width: 1024px) {
+          display: none;
+        }
+
+        &:hover {
+          color: #1F2327;
+        }
+
+        &::before {
+          content: "";
+          position: relative;
+          top: 0.5rem;
+          width: 6px;
+          height: 6px;
+          margin-right: 0.6rem;
+          background: currentColor;
+          border-radius: 50%;
+          display: inline-block;
+          flex-shrink: 0;
+          @media (max-width: 1024px) {
+            display: none;
+          }
+        }
+
+        label {
+          position: relative;
+          font-weight: 500;
+          cursor: pointer;
+          display: inline-block;
+          z-index: 1;
+        }
+
+        p {
+          margin: 0;
+          height: 0;
+          color: #999;
+          font-size: 0.875rem;
+          line-height: 1.8;
+          overflow: hidden;
+          transition: all 0.15s;
+          @media (max-width: 1024px) {
+            display: none;
+          }
+
+          span {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}
+</style>

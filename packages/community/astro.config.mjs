@@ -1,6 +1,7 @@
 import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import starlight from '@astrojs/starlight'
+import { univerPlugin } from '@univerjs/vite-plugin'
 import { defineConfig, squooshImageService } from 'astro/config'
 
 const starlightConfig = {
@@ -147,6 +148,15 @@ export default defineConfig({
     ssr: {
       noExternal: ['@univerjs/*', '@wendellhu/redi', '@antv/*'],
     },
+    plugins: [univerPlugin()],
+    // server: {
+    //   proxy: {
+    //     '/universer-api': {
+    //       target: 'https://univer.ai',
+    //       changeOrigin: true,
+    //     },
+    //   },
+    // },
   },
   image: {
     service: squooshImageService(),

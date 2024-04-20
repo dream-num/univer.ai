@@ -1,20 +1,12 @@
 ---
-import Features from '@/components/LandingFragments/Features.astro'
-import Hero from '@/components/LandingFragments/Hero.astro'
-import Tech from '@/components/LandingFragments/Tech.astro'
+import LandingPage from '@/components/LandingPage/index.astro'
 import LanguageConfirm from '@/components/LanguageConfirm'
 import Layout from '@/layouts/Layout.astro'
 
 ---
 
 <Layout lang="en-us" title="Univer">
-  <main>
-    <Hero />
-
-    <Features />
-
-    <Tech />
-
+  <LandingPage>
     <LanguageConfirm client:only />
-  </main>
+  </LandingPage>
 </Layout>
