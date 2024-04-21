@@ -1,0 +1,27 @@
+.exchange {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+
+  &:hover {
+    background-color: rgb(var(--bg-color)) !important;
+  }
+
+  > div {
+    display: flex;
+    align-items: center;
+    margin-right: var(--margin-xs);
+
+    &:not(:last-child)::after {
+      content: '';
+
+      display: inline-block;
+
+      width: 1px;
+      height: 20px;
+      margin-left: var(--margin-xs);
+
+      background-color: rgb(var(--grey-400));
+    }
+  }
+}

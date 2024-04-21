@@ -26,6 +26,9 @@ jobs:
 
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
+        with:
+          registry-url: ${{ secrets.VERDACCIO_URL }}
+          node-auth-token: ${{ secrets.VERDACCIO_TOKEN }}
 
       - name: 🧪 Lint
         run: pnpm lint

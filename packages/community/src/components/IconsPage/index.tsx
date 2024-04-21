@@ -6,8 +6,9 @@ import { Hero } from './Hero'
 import { IconBox } from './IconBox'
 
 import styles from './index.module.less'
+
 import { Slider } from './Slider'
-import { Tabs } from '@/components/Tabs'
+import { Tabs } from './Tabs'
 
 const tabs = [{
   label: '可变单色',

@@ -12,6 +12,7 @@ const rules = {
   'style/brace-style': ['warn', '1tbs', { allowSingleLine: true }],
   'antfu/if-newline': 'off',
   'import/default': 'off',
+  'ts/ban-ts-comment': 'off',
   'import/order': [
     'error',
     {
