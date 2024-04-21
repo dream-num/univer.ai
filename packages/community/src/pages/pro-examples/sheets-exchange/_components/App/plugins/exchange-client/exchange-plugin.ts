@@ -1,4 +1,4 @@
-import { ISnapshotPersistenceService, LocaleService, Plugin, PluginType } from '@univerjs/core'
+import { LocaleService, Plugin, PluginType } from '@univerjs/core'
 import { HTTPService, IHTTPImplementation, XHRHTTPImplementation } from '@univerjs/network'
 import type { Dependency } from '@wendellhu/redi'
 import { Inject, Injector } from '@wendellhu/redi'
