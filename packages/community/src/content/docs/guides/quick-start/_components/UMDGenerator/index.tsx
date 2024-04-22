@@ -73,6 +73,14 @@ export default function UMDGenerator() {
       )
     }
 
+    if (result.facade) {
+      scripts.push(
+        'https://unpkg.com/@univerjs/network/lib/umd/index.js',
+        'https://unpkg.com/@univerjs/facade/lib/umd/index.js',
+        'https://unpkg.com/@univerjs/uniscript/lib/umd/index.js',
+      )
+    }
+
     result.additional.forEach((pkg) => {
       scripts.push(`https://unpkg.com/${pkg}/lib/umd/index.js`)
     })
@@ -137,6 +145,11 @@ export default function UMDGenerator() {
         ...result,
         type: value as 'doc' | 'sheet' | 'slide',
         additional: [],
+      })
+    } else if (name === 'facade') {
+      setResult({
+        ...result,
+        facade: checked,
       })
     } else if (name === 'additional') {
       setResult({
@@ -224,7 +237,6 @@ export default function UMDGenerator() {
           {[
             '@univerjs/network',
             '@univerjs/rpc',
-            '@univerjs/facade',
             '@univerjs/uniscript',
             '@univerjs/find-replace',
             '@univerjs/data-validation',
