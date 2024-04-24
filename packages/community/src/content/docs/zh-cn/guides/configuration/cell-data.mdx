@@ -42,6 +42,7 @@ Univer Sheet 中的单元格数据存储在 [IWorksheetData](/api/core/interface
 | p | 富文本，同时也是一个 📝 Univer Doc |
 | f | 公式 |
 | si | 公式 ID |
+| custom | 自定义字段 |
 
 详细了解 [ICellData](/api/core/interfaces/ICellData.html) 每个字段的类型信息。
 
@@ -430,7 +431,7 @@ Univer Sheet 中的单元格数据存储在 [IWorksheetData](/api/core/interface
 `cellData.si` 是一个字符串，表示公式 ID。Univer Sheet 支持对公式做引用优化，单元格中用 si 关联上当前公式后，其他单元格可以通过 si 引用到当前公式。
 
 ```typescript
-// IWorkbookData
+// IWorksheetData
 {
   cellData: {
     0: {
@@ -440,6 +441,25 @@ Univer Sheet 中的单元格数据存储在 [IWorksheetData](/api/core/interface
       },
       1: { 
         si: 'random_formula_id_1' // 计算时取此 id 对应的公式
+      },
+    },
+  }
+}
+```
+
+### 自定义字段
+
+`cellData.custom` 是一个对象，表示自定义字段。其中可以放入任何符合 JSON 格式的数据，用于自定义存储一些额外的信息。
+
+```typescript
+// IWorksheetData
+{
+  cellData: {
+    0: {
+      0: { 
+        custom: {
+          key: 'value'
+        }
       },
     },
   }

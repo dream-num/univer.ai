@@ -1,0 +1,47 @@
+---
+title: 迁移 Luckysheet
+sidebar:
+  order: 3
+---
+
+我们新设计的 Univer，相比较 Luckysheet，从架构、数据结构以及 API 等方面做了很大改进设计，所以 Luckysheet 已经无法 1 比 1 迁移到 Univer。
+
+不过基本的数据类型或者 API 都可以在 Univer 中找到，鉴于此，如果您仍然想要将 Luckysheet 的数据要迁移到 Univer，可以根据自己的需求，有针对性的做一些适配工作。
+
+这里给大家提供一个迁移指导方案。
+
+## 分析
+
+### 配置
+
+转换最核心的工作是对工作簿配置、工作表配置以及单元格信息进行适配，可以参考 Univer 的接口和 Luckysheet 的数据结构。
+
+|       | Univer         | Luckysheet |
+|-------|----------------|------------|
+| 工作簿配置 | [IWorkbookData](/api/core/interfaces/IWorkbookData.html)  | [总体配置](https://dream-num.github.io/LuckysheetDocs/zh/guide/config.html)  |
+| 工作表配置 | [IWorksheetData](/api/core/interfaces/IWorksheetData.html) | [工作表配置](https://dream-num.github.io/LuckysheetDocs/zh/guide/sheet.html)      |
+| 单元格 | [ICellData](/api/core/interfaces/ICellData.html)       | [单元格](https://dream-num.github.io/LuckysheetDocs/zh/guide/cell.html)   |
+
+### 插件
+
+Luckysheet 的初始化通过一个 JSON 配置来完成，而 Univer 做了拆分，将增强功能用插件来实现，所以部分功能需要分散到插件配置，比如
+
+|       | Univer         | Luckysheet |
+|-------|----------------|------------|
+| 条件格式 | [@univerjs/sheets-conditional-formatting](/zh-cn/api/sheets-conditional-formatting/)  | [luckysheet_conditionformat_save](https://dream-num.github.io/LuckysheetDocs/zh/guide/sheet.html#luckysheet-conditionformat-save)  |
+| 数据验证 | [@univerjs/sheets-data-validation](/zh-cn/api/sheets-data-validation/) | [dataverification](https://dream-num.github.io/LuckysheetDocs/zh/guide/sheet.html#dataverification)      |
+
+更多插件 [参考](/api/)
+
+### API
+
+对于 API 部分，Luckysheet API 统一挂载在 `window.luckysheet`，使用 Univer API 有两种方式
+
+- 调用封装好的 [Facade API](/zh-cn/guides/facade/)
+- 采用 Univer 的依赖注入系统，将插件的 service 能力注入到当前 Class 中，参考我们的 [插件教程](/zh-cn/guides/tutorials/csv-import-plugin/) 可以轻松的接入 Univer 依赖注入系统
+
+## 总结
+
+针对部分常用的基础数据，可以参考下 [Migrate Luckysheet Demo](/playground?title=Migrate%20Luckysheet)，再根据项目需求做定制。
+
+如果 Univer 现有功能不满足您的需要，还可以自行开发插件进行适配。
