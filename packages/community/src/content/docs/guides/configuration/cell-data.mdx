@@ -42,6 +42,7 @@ The complete cell information is as follows.
 | p | Rich text, also a 📝 Univer Doc |
 | f | Formula |
 | si | Formula id |
+| custom | Custom field |
 
 Check out the type information of each field of [ICellData](/api/core/interfaces/ICellData.html).
 
@@ -420,7 +421,7 @@ If the cell is a boolean type, the value of `cellData.v` is stored as `0` or `1`
   cellData: {
     0: {
       0: { 
-        f: '=SUM(A1:B1)' // Sum formula
+        f: '=SUM(A1:B1)' // function SUM
       },
     },
   }
@@ -432,7 +433,7 @@ If the cell is a boolean type, the value of `cellData.v` is stored as `0` or `1`
 `cellData.si` is a string that represents the formula ID. Univer Sheet supports reference optimization for formulas. After the current formula is associated with `si` in the cell, other cells can refer to the current formula through `si`.
 
 ```typescript
-// IWorkbookData
+// IWorksheetData
 {
   cellData: {
     0: {
@@ -442,6 +443,25 @@ If the cell is a boolean type, the value of `cellData.v` is stored as `0` or `1`
       },
       1: { 
         si: 'random_formula_id_1' // Take the formula corresponding to this ID during calculation
+      },
+    },
+  }
+}
+```
+
+### Custom Field
+
+`cellData.custom` is an object that represents a custom field. You can put any data that complies with the JSON format into it to customize the storage of some additional information.
+
+```typescript
+// IWorksheetData
+{
+  cellData: {
+    0: {
+      0: { 
+        custom: {
+          key: 'value'
+        }
       },
     },
   }
