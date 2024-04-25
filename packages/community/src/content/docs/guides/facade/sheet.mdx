@@ -163,24 +163,19 @@ univerAPI.executeCommand('sheet.command.active-sheet', { unitId: workbookId, sub
 
 ## Cell
 
-Cell data is stored in the worksheet as a two-dimensional array, with the first and second indexes representing the row number and column number respectively.
+Cell data is stored in the worksheet as a two-dimensional Map, with the first and second indexes representing the row number and column number respectively.
 
 The following is a typical cell object:
 
 ```ts
 {
   v: 'Hello, Univer',
-  s: 'styleName',
-  f: '=A1+B1',
+  s: 'styleId',
   t: CellValueType.STRING
 }
 ```
 
-- `v` stores the value of the cell, which can be a string, number, or boolean. For cells with formulas, `v` stores the result of the formula.
-- `s` stores the style name, which points to the style sheet in the workbook; or stores the style object.
-- `f` stores the formula
-- `t` stores the value type, which is automatically recognized by Univer if not set. For the enumeration document, see [CellValueType](/api/core/enums/CellValueType.html)
-- `p` stores rich text content
+For detailed field descriptions, please refer to [Configure Cell Data](/guides/configuration/cell-data/).
 
 :::tip
 Cell operations can be regarded as operations on a range of rows and columns with a height of 1 and a width of 1. For the operation range, please refer to [Range](#range).
@@ -235,9 +230,27 @@ range.forEach((cell, row, column) => {
 
 If a value or cell object is passed in, all cells in the range will be overwritten. If it starts with `=`, it will be interpreted as a formula.
 
+For example, to set the value of A1:B2 to `Hello, Univer`:
 ```ts
 const range = activeSheet.getRange(0, 0, 2, 2);
 range.setValue('Hello, Univer');
+```
+
+Set the value of A1+B1 to the formula:
+```ts
+const range = activeSheet.getRange(0, 0, 2, 2);
+range.setValue('=A1+B1');
+```
+
+Set the value of A1:B2 to the cell object:
+```ts
+const range = activeSheet.getRange(0, 0, 2, 2);
+range.setValue({ 
+  v: 'Hello, Univer',
+  custom: {
+      key: 'value',
+  },
+});
 ```
 
 #### Set multiple values with an array
