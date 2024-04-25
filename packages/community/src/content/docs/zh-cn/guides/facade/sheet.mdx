@@ -163,24 +163,19 @@ univerAPI.executeCommand('sheet.command.active-sheet', { unitId: workbookId, sub
 
 ## 单元格 Cell
 
-单元格数据以二维数组的形式存储在工作表中，一二级索引分别代表行号和列号。
+单元格数据以二维 Map 的形式存储在工作表中，一二级索引分别代表行号和列号。
 
 以下是一个典型的单元格对象：
 
 ```ts
 {
   v: 'Hello, Univer',
-  s: 'styleName',
-  f: '=A1+B1',
+  s: 'styleId',
   t: CellValueType.STRING
 }
 ```
 
-- `v` 存放单元格的值，可以是字符串、数字、布尔值。有公式的单元格，`v` 存放公式的计算结果。
-- `s` 存放样式名称，指向工作簿中的样式表；或者存放样式对象。
-- `f` 存放公式
-- `t` 存放值的类型，不设置时 Univer 会自动识别，枚举文档见 [CellValueType](/api/core/enums/CellValueType.html)
-- `p` 存放富文本内容
+详细的字段说明请参考 [单元格信息](/zh-cn/guides/configuration/cell-data/)。
 
 :::tip
 对单元格的操作可以看作对行高 1 、列宽 1 的范围进行操作，操作范围请阅读 [范围-range](#范围-range)。
@@ -235,9 +230,27 @@ range.forEach((cell, row, column) => {
 
 传入一个值或者单元格对象，将会覆盖范围内所有单元格，如果以 `=` 开头，将被解释为公式。
 
+比如，设置 A1:B2 的值为 `Hello, Univer`：
 ```ts
 const range = activeSheet.getRange(0, 0, 2, 2);
 range.setValue('Hello, Univer');
+```
+
+设置 A1+B1 的值为公式：
+```ts
+const range = activeSheet.getRange(0, 0, 2, 2);
+range.setValue('=A1+B1');
+```
+
+设置 A1:B2 的值为单元格对象：
+```ts
+const range = activeSheet.getRange(0, 0, 2, 2);
+range.setValue({ 
+  v: 'Hello, Univer',
+  custom: {
+      key: 'value',
+  },
+});
 ```
 
 #### 通过数组设置多个值

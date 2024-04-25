@@ -10,20 +10,26 @@ sidebar:
 
 ## 单元格位置
 
-Univer Sheet 中的单元格数据存储在 [IWorksheetData](/api/core/interfaces/IWorksheetData.html) 的 [cellData](/api/core/interfaces/IWorksheetData.html#cellData) 字段中，cellData 是一个二维 Map 结构，每个 key 值标记了单元格的位置，value 是一个 [ICellData](/api/core/interfaces/ICellData.html) 对象，包含了单元格值、样式、类型等所有单元格信息。
+Univer Sheet 中的单元格数据存储在 [IWorksheetData](/api/core/interfaces/IWorksheetData.html) 的 [cellData](/api/core/interfaces/IWorksheetData.html#cellData) 字段中，cellData 是一个二维 Map 结构，一二级索引分别代表行号和列号，每一个单元格是一个 [ICellData](/api/core/interfaces/ICellData.html) 对象，包含了单元格值、样式、类型等所有单元格信息。
 
-类似于这样。
+cellData 的结构如下
 
 ```typescript
 // IWorksheetData
 {   
   cellData: {
+    // 第一行
     0: {
+      // 第一列
       0: { v: 'A1' },
+      // 第二列
       1: { v: 'B1' },
     },
+    // 第二行
     1: {
+      // 第一列
       0: { v: 'A2' },
+      // 第二列
       1: { v: 'B2' },
     },
   }
@@ -37,7 +43,7 @@ Univer Sheet 中的单元格数据存储在 [IWorksheetData](/api/core/interface
 | 属性 | 说明 |
 | --- | --- |
 | v | 单元格的原始值 |
-| s | 单元格的样式对象或者样式 id |
+| s | 单元格的样式 id 或者样式对象 |
 | t | 单元格的类型 |
 | p | 富文本，同时也是一个 📝 Univer Doc |
 | f | 公式 |
@@ -48,7 +54,7 @@ Univer Sheet 中的单元格数据存储在 [IWorksheetData](/api/core/interface
 
 ### 单元格原始值
 
-`cellData.v` 存储了单元格的原始值，可以为字符串或者数字。
+`cellData.v` 存储了单元格的原始值，可以为字符串或者数字。有公式的单元格，`v` 存放公式的计算结果。
 
 如下展示了两种不同的单元格值。
 
@@ -66,7 +72,45 @@ Univer Sheet 中的单元格数据存储在 [IWorksheetData](/api/core/interface
 
 ### 单元格样式
 
-`cellData.s` 存储了单元格的样式，如果类型是一个对象，则表示一个完整的单元格样式对象 [IStyleData](/api/core/interfaces/IStyleData.html)。
+`cellData.s` 存储了单元格的样式 id 或者样式对象。
+
+如果 `s` 是一个字符串，表示样式 id。Univer Sheet 支持对样式做引用优化，将重复的样式对象存储在 IWorkbookData 的 [styles](/api/core/interfaces/IWorkbookData.html#styles) 字段中，是一个 Map 结构，每个 key 是样式 id，value 是样式对象。
+
+```typescript
+// IWorkbookData
+{
+  styles: {
+    'random_style_id_1': {
+      fs: 12,
+      bg: {
+        rgb: '#ff0000'
+      }
+    }
+  }
+}
+```
+
+然后将 id 存储到单元格样式中，达到样式复用的目的。
+
+```typescript
+// IWorksheetData
+{
+  cellData: {
+    0: {
+      0: { 
+        v: 'A1', 
+        s: 'random_style_id_1'
+      },
+      1: { 
+        v: 'B1', 
+        s: 'random_style_id_1'
+      },
+    },
+  }
+}
+```
+
+如果 `s` 是一个对象，则表示一个完整的单元格样式对象 [IStyleData](/api/core/interfaces/IStyleData.html)。
 
 完整的样式字段如下。
 
@@ -341,45 +385,9 @@ Univer Sheet 中的单元格数据存储在 [IWorksheetData](/api/core/interface
 } 
 ```
 
-单元格样式还有可能是一个字符串，表示样式 id。Univer Sheet 支持对样式做引用优化，将重复的样式对象存储在 IWorkbookData 的 [styles](/api/core/interfaces/IWorkbookData.html#styles) 字段中，是一个 Map 结构，每个 key 是样式 id，value 是样式对象。
-
-```typescript
-// IWorkbookData
-{
-  styles: {
-    'random_style_id_1': {
-      fs: 12,
-      bg: {
-        rgb: '#ff0000'
-      }
-    }
-  }
-}
-```
-
-然后将 id 存储到单元格样式中，达到样式复用的目的。
-
-```typescript
-// IWorksheetData
-{
-  cellData: {
-    0: {
-      0: { 
-        v: 'A1', 
-        s: 'random_style_id_1'
-      },
-      1: { 
-        v: 'B1', 
-        s: 'random_style_id_1'
-      },
-    },
-  }
-}
-```
-
 ### 单元格类型
 
-`cellData.t` 是一个枚举，表示单元格的类型。`1` 表示字符串，`2` 表示数字，`3` 表示布尔值，`4` 表示强制文本。
+`cellData.t` 是一个枚举 [CellValueType](/api/core/enums/CellValueType.html)，表示单元格的类型。`1` 表示字符串，`2` 表示数字，`3` 表示布尔值，`4` 表示强制文本，不设置时 Univer 会自动识别。
 
 其中，如果单元格是布尔类型，则 `cellData.v` 的值存储为 `0` 或 `1`，`0` 表示 false，`1` 表示 true。
 
