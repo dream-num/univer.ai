@@ -1,5 +1,5 @@
-import type { IWorkbookData } from '@univerjs/core'
-import { ILogService, IUniverInstanceService, LocaleService, textEncoder } from '@univerjs/core'
+import type { IWorkbookData, Univer, Workbook } from '@univerjs/core'
+import { ILogService, IUniverInstanceService, LocaleService, UniverInstanceType, textEncoder } from '@univerjs/core'
 import { MessageType } from '@univerjs/design'
 import { UniverType } from '@univerjs/protocol'
 import { IMessageService } from '@univerjs/ui'
@@ -10,13 +10,18 @@ import { IRequestService, ImportOutputType } from './request.service'
 import type { ISnapshotJsonResponse, RequestService } from './request.service'
 import { transformSnapshotJsonToWorkbookData, transformWorkbookDataToSnapshotJson } from './utils/snapshot'
 import { downloadFile, jsonStringToFile } from './utils/tool'
-import { createUniver } from './utils/univer'
 
 export interface IExchangeService {
   upload: (file: File | string) => Promise<void>
   uploadJson: (file: File | string) => Promise<void>
   download: () => Promise<void>
   downloadJson: () => Promise<void>
+}
+
+declare global {
+  interface Window {
+    univer?: Univer
+  }
 }
 
 // eslint-disable-next-line ts/no-redeclare
@@ -279,23 +284,24 @@ export class ExchangeService implements IExchangeService, IDisposable {
   }
 
   private _getUnitID(): string {
-    return this._univerInstanceService.getCurrentUniverSheetInstance().getUnitId()
+    return this._univerInstanceService.getCurrentUnitForType<Workbook>(UniverInstanceType.UNIVER_SHEET)!.getUnitId()
   }
 
   private _getUnitName(): string {
-    return this._univerInstanceService.getCurrentUniverSheetInstance().getActiveSpreadsheet().getName() || document.title
+    return this._univerInstanceService.getCurrentUnitForType<Workbook>(UniverInstanceType.UNIVER_SHEET)!.getActiveSpreadsheet().getName() || document.title
   }
 
   private async _getUnitJson(): Promise<ISnapshotJsonResponse> {
-    const univerInstance = this._univerInstanceService.getCurrentUniverSheetInstance()
+    const univerInstance = this._univerInstanceService.getCurrentUnitForType<Workbook>(UniverInstanceType.UNIVER_SHEET)!
     const workbookData = univerInstance.getSnapshot()
     const snapshotJson = await transformWorkbookDataToSnapshotJson(workbookData)
     return snapshotJson
   }
 
   private _refresh(workbookData: IWorkbookData) {
-    window.univer?.dispose()
-    createUniver(workbookData)
+    const unitID = this._univerInstanceService.getCurrentUnitForType<Workbook>(UniverInstanceType.UNIVER_SHEET)!.getUnitId()
+    this._univerInstanceService.disposeUnit(unitID)
+    this._univerInstanceService.createUnit(UniverInstanceType.UNIVER_SHEET, workbookData)
   }
 
   /**

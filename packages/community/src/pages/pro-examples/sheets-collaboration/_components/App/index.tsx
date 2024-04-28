@@ -17,6 +17,7 @@ import {
   COLLAB_SUBMIT_CHANGESET_URL_KEY,
   COLLAB_WEB_SOCKET_URL_KEY,
   CollaborationClientPlugin,
+  LOGIN_URL_KEY,
   SEND_CHANGESET_TIMEOUT_KEY,
   SNAPSHOT_SERVER_URL_KEY,
 } from '@univerjs-pro/collaboration-client'
@@ -65,6 +66,7 @@ export default function App() {
       configService.setConfig(SNAPSHOT_SERVER_URL_KEY, `${httpProtocol}://${host}/universer-api/snapshot`)
       configService.setConfig(COLLAB_SUBMIT_CHANGESET_URL_KEY, `${httpProtocol}://${host}/universer-api/comb`)
       configService.setConfig(COLLAB_WEB_SOCKET_URL_KEY, `${wsProtocol}://${host}/universer-api/comb/connect`)
+      configService.setConfig(LOGIN_URL_KEY, `${httpProtocol}://${host}/universer-api/oidc/authpage`)
 
       configService.setConfig(SEND_CHANGESET_TIMEOUT_KEY, 200)
 
@@ -112,6 +114,7 @@ export default function App() {
       univer.registerPlugin(CollaborationClientPlugin, {
         enableOfflineEditing: true,
         enableSingleActiveInstanceLock: true,
+        enableAuthServer: true,
       } as ICollaborationClientPluginConfig)
       univer.registerPlugin(LiveSharePlugin)
 

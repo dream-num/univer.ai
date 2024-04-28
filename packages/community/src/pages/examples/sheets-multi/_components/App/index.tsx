@@ -1,10 +1,13 @@
-import { LocaleType, Tools, Univer } from '@univerjs/core'
+import { LocaleType, Tools, Univer, UniverInstanceType } from '@univerjs/core'
+import { UniverDataValidationPlugin } from '@univerjs/data-validation'
 import { defaultTheme } from '@univerjs/design'
 import { UniverDocsPlugin } from '@univerjs/docs'
 import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
 import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
 import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
 import { UniverSheetsPlugin } from '@univerjs/sheets'
+import { UniverSheetsConditionalFormattingUIPlugin } from '@univerjs/sheets-conditional-formatting-ui'
+import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validation'
 import { UniverSheetsFormulaPlugin } from '@univerjs/sheets-formula'
 import { UniverSheetsNumfmtPlugin } from '@univerjs/sheets-numfmt'
 import { UniverSheetsUIPlugin } from '@univerjs/sheets-ui'
@@ -46,8 +49,15 @@ export default function App() {
     univer.registerPlugin(UniverSheetsFormulaPlugin)
     univer.registerPlugin(UniverSheetsZenEditorPlugin)
 
+    // data validation
+    univer.registerPlugin(UniverDataValidationPlugin)
+    univer.registerPlugin(UniverSheetsDataValidationPlugin)
+
+    // sheet condition formatting
+    univer.registerPlugin(UniverSheetsConditionalFormattingUIPlugin)
+
     // create univer sheet instance
-    univer.createUniverSheet(Tools.deepClone(ALL_FEATURES_WORKBOOK_DATA))
+    univer.createUnit(UniverInstanceType.UNIVER_SHEET, Tools.deepClone(ALL_FEATURES_WORKBOOK_DATA))
 
     univers.push(univer)
   }

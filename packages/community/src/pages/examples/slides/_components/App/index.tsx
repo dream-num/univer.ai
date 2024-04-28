@@ -1,4 +1,4 @@
-import { LocaleType, Univer } from '@univerjs/core'
+import { LocaleType, Univer, UniverInstanceType } from '@univerjs/core'
 import { defaultTheme } from '@univerjs/design'
 import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
 import { UniverSlidesPlugin } from '@univerjs/slides'
@@ -32,7 +32,7 @@ export default function App() {
     univer.registerPlugin(UniverSlidesPlugin)
     univer.registerPlugin(UniverSlidesUIPlugin)
 
-    univer.createUniverSlide(DEFAULT_SLIDE_DATA)
+    univer.createUnit(UniverInstanceType.UNIVER_SLIDE, DEFAULT_SLIDE_DATA)
   }, [])
 
   return (

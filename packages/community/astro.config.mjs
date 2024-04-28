@@ -149,14 +149,14 @@ export default defineConfig({
       noExternal: ['@univerjs/*', '@wendellhu/redi', '@antv/*'],
     },
     plugins: [univerPlugin()],
-    // server: {
-    //   proxy: {
-    //     '/universer-api': {
-    //       target: 'https://univer.ai',
-    //       changeOrigin: true,
-    //     },
-    //   },
-    // },
+    server: {
+      proxy: {
+        '/universer-api': {
+          target: 'https://univer.ai',
+          changeOrigin: true,
+        },
+      },
+    },
   },
   image: {
     service: squooshImageService(),

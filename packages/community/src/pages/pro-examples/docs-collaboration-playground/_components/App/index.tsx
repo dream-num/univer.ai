@@ -81,7 +81,7 @@ export default function App() {
     univer.registerPlugin(CollaborationClientPlugin, {
       enableOfflineEditing: false,
       enableSingleActiveInstanceLock: false,
-      collaborationUniverTypes: [UniverInstanceType.DOC],
+      collaborationUniverTypes: [UniverInstanceType.UNIVER_DOC],
       socketService: ManualCollaborationSocketService, // register custom socket service
     } as ICollaborationClientPluginConfig)
 

@@ -123,8 +123,6 @@ export interface IRequestService {
 
   getUrlContent: (url: string) => Promise<string | null>
 
-  download: () => Promise<IFileDownloadResponse | null>
-
   openModal: (content: string) => void
 
   closeModal: () => void
@@ -340,45 +338,6 @@ export class RequestService implements IRequestService, IDisposable {
     }
   }
 
-  /**
-   * upload file to server
-   * @param file
-   */
-  async download() {
-    try {
-      const url = this._getDownloadURL()
-
-      const options: IRequestParams = {
-        body: {
-          snapshot: this._getSnapshot(),
-        },
-        headers: {
-          'Content-Type': 'application/octet-stream',
-        },
-        responseType: 'blob',
-      }
-
-      const response = await this._httpService.get<IFileDownloadResponse>(url, options)
-      const data = response.body
-
-      this._modal.close()
-
-      if (data.error && data.error.code === ErrorCode.OK) {
-        this._messageService.show({
-          type: MessageType.Warning,
-          content: this._localeService.t('exchange.downloadSuccess'),
-        })
-
-        return data
-      }
-
-      return this._showNetworkError(data)
-    } catch (error) {
-      this._modal.close()
-      return this._showNetworkError()
-    }
-  }
-
   private async _parseFileURL(url: string) {
     try {
       const response = await fetch(url)
@@ -415,11 +374,6 @@ export class RequestService implements IRequestService, IDisposable {
 
   private _getDownloadURL(): string {
     return this._configService.getConfig(EXPORT_XLSX_SERVER_URL_KEY) ?? DEFAULT_EXPORT_XLSX_SERVER_URL
-  }
-
-  private _getSnapshot() {
-    const workbook = this._univerInstanceService.getCurrentUniverSheetInstance()
-    return workbook
   }
 
   private _showNetworkError(data?: IFileUploadResponse | IImportResponse | IGetTaskResponse | ISignUrlResponse | IFileDownloadResponse) {

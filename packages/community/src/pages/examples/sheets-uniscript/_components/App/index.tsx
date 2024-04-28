@@ -1,4 +1,4 @@
-import { LocaleType, Univer } from '@univerjs/core'
+import { LocaleType, Univer, UniverInstanceType } from '@univerjs/core'
 import { defaultTheme } from '@univerjs/design'
 import { UniverDocsPlugin } from '@univerjs/docs'
 
@@ -66,7 +66,7 @@ export default function App() {
     })
 
     // create univer sheet instance
-    univer.createUniverSheet(UNISCRIT_WORKBOOK_DATA_DEMO)
+    univer.createUnit(UniverInstanceType.UNIVER_SHEET, UNISCRIT_WORKBOOK_DATA_DEMO)
   }, [])
 
   return (

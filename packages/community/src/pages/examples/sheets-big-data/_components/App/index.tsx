@@ -1,4 +1,4 @@
-import { LocaleType, Univer } from '@univerjs/core'
+import { LocaleType, Univer, UniverInstanceType } from '@univerjs/core'
 import { defaultTheme } from '@univerjs/design'
 import { UniverDocsPlugin } from '@univerjs/docs'
 import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
@@ -52,7 +52,7 @@ export default function App() {
     // } as IUniverRPCMainThreadConfig);
     univer.registerPlugin(UniverSheetsZenEditorPlugin)
     // create univer sheet instance
-    univer.createUniverSheet(generateWorkbookData(1000000, 10))
+    univer.createUnit(UniverInstanceType.UNIVER_SHEET, generateWorkbookData(1000000, 10))
 
     // setTimeout(() => {
     //   import('./lazy').then((lazy) => {

@@ -1,22 +1,16 @@
-import { ILogService, LocaleType, LogLevel, Univer } from '@univerjs/core'
+import { ILogService, LocaleType, LogLevel, Univer, UniverInstanceType } from '@univerjs/core'
 import { greenTheme } from '@univerjs/design'
 import { UniverDocsPlugin } from '@univerjs/docs'
 import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
 import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
 import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
-import type { IUniverRPCMainThreadConfig } from '@univerjs/rpc'
-import { UniverRPCMainThreadPlugin } from '@univerjs/rpc'
 import { UniverSheetsPlugin } from '@univerjs/sheets'
 import { UniverSheetsFormulaPlugin } from '@univerjs/sheets-formula'
 import { UniverSheetsNumfmtPlugin } from '@univerjs/sheets-numfmt'
 import { UniverSheetsUIPlugin } from '@univerjs/sheets-ui'
 import { UniverSheetsZenEditorPlugin } from '@univerjs/sheets-zen-editor'
 import { UniverUIPlugin } from '@univerjs/ui'
-import { CollaborationPlugin } from '@univerjs-pro/collaboration'
-import type { ICollaborationClientPluginConfig } from '@univerjs-pro/collaboration-client'
-import {
-  CollaborationClientPlugin,
-} from '@univerjs-pro/collaboration-client'
+
 import '@univerjs-pro/collaboration-client/lib/index.css'
 import { SheetsPrintPlugin } from '@univerjs-pro/sheets-print'
 import { useEffect, useRef } from 'react'
@@ -51,27 +45,28 @@ export default function App() {
     // sheet basic plugins
     univer.registerPlugin(UniverSheetsNumfmtPlugin)
     univer.registerPlugin(UniverSheetsPlugin, {
-      notExecuteFormula: true, // using web worker
+      // notExecuteFormula: true, // using web worker
     })
     univer.registerPlugin(UniverSheetsUIPlugin)
     univer.registerPlugin(UniverSheetsFormulaPlugin)
     univer.registerPlugin(UniverSheetsZenEditorPlugin)
 
     // web worker
-    univer.registerPlugin(UniverRPCMainThreadPlugin, {
-      workerURL: './worker.js',
-    } as IUniverRPCMainThreadConfig)
+    // univer.registerPlugin(UniverRPCMainThreadPlugin, {
+    //   workerURL: './worker.js',
+    // } as IUniverRPCMainThreadConfig)
 
     // collaboration plugins
-    univer.registerPlugin(CollaborationPlugin)
-    univer.registerPlugin(CollaborationClientPlugin, {
-      enableOfflineEditing: true,
-      enableSingleActiveInstanceLock: true,
-    } as ICollaborationClientPluginConfig)
+    // univer.registerPlugin(CollaborationPlugin)
+    // univer.registerPlugin(CollaborationClientPlugin, {
+    //   enableOfflineEditing: true,
+    //   enableSingleActiveInstanceLock: true,
+    //   enableAuthServer: true,
+    // } as ICollaborationClientPluginConfig)
 
     univer.registerPlugin(SheetsPrintPlugin)
 
-    univer.createUniverSheet(workbookData)
+    univer.createUnit(UniverInstanceType.UNIVER_SHEET, workbookData)
   }, [])
 
   return (
