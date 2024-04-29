@@ -224,6 +224,14 @@ range.forEach((cell, row, column) => {
   console.log(cell.getValue());
 });
 ```
+
+Get all formulas in the range
+
+```ts
+const range = activeSheet.getRange(0, 0, 2, 2);
+console.log(range.getFormulas());
+```
+
 ### Set Range Value
 
 #### Set a single value
