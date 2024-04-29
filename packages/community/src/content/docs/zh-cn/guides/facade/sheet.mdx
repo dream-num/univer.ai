@@ -224,6 +224,14 @@ range.forEach((cell, row, column) => {
   console.log(cell.getValue());
 });
 ```
+
+获取范围的所有公式
+
+```ts
+const range = activeSheet.getRange(0, 0, 2, 2);
+console.log(range.getFormulas());
+```
+
 ### 设置范围数据
 
 #### 设置单一值
