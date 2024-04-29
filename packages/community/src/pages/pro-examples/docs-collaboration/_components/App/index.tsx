@@ -78,7 +78,7 @@ export default function App() {
       univer.registerPlugin(CollaborationClientPlugin, {
         enableOfflineEditing: true,
         enableSingleActiveInstanceLock: true,
-        collaborationUniverTypes: [UniverInstanceType.DOC],
+        collaborationUniverTypes: [UniverInstanceType.UNIVER_DOC],
       } as ICollaborationClientPluginConfig)
     }
 

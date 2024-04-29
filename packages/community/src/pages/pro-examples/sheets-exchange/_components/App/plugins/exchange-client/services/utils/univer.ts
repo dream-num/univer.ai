@@ -1,5 +1,5 @@
 import type { IWorkbookData } from '@univerjs/core'
-import { ILogService, LocaleType, LogLevel, Univer } from '@univerjs/core'
+import { ILogService, LocaleType, LogLevel, Univer, UniverInstanceType } from '@univerjs/core'
 import { greenTheme } from '@univerjs/design'
 import { UniverDocsPlugin } from '@univerjs/docs'
 import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
@@ -52,7 +52,7 @@ export function createUniver(workbookData: IWorkbookData) {
 
   univer.registerPlugin(ExchangeClientPlugin)
 
-  univer.createUniverSheet(workbookData)
+  univer.createUnit(UniverInstanceType.UNIVER_SHEET, workbookData)
 
   window.univer = univer
 }

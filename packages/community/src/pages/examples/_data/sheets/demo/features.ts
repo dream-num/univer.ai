@@ -10302,8 +10302,8 @@ export const ALL_FEATURES_WORKBOOK_DATA: IWorkbookData = {
       data: '{"model":{"sheet-01":{"21":{"3":{"i":"2"}}}},"refModel":[{"count":1,"i":"2","pattern":"\\"$\\"#,##0.00_);\\"$\\"#,##0.00","type":"currency"}]}',
     },
     {
-      name: 'SHEET_DATA_VALIDATION',
-      data: '{"sheet-03":[{"uid":"Ib_-Us","type":"checkbox","ranges":[{"startRow":5,"startColumn":0,"endRow":13,"endColumn":0,"rangeType":0}]},{"uid":"IFukfi","type":"list","formula1":"I5:I13","ranges":[{"startRow":5,"startColumn":1,"endRow":13,"endColumn":1,"rangeType":0}],"formula2":"#FEE7E7,#FEF0E6,#EFFBD0,#E4F4FE,#E8ECFD,#F1EAFA,#E5E5E5,#FDCECE,#FDC49B"},{"uid":"qTsxc-","type":"listMultiple","formula1":"Daily,Baseline,Buessiness","ranges":[{"startRow":5,"startColumn":4,"endRow":13,"endColumn":4,"rangeType":0}],"formula2":"#F1EAFA,#DEF6A2,#8BBB11"},{"uid":"DMzS5Z","type":"date","operator":"greaterThanOrEqual","formula1":"=today()","ranges":[{"startRow":5,"startColumn":2,"endRow":13,"endColumn":2,"rangeType":0}]}]}',
+      name: 'SHEET_DATA_VALIDATION_PLUGIN',
+      data: '{"sheet-03":[{"uid":"Ib_-Us","type":"checkbox","ranges":[{"startRow":5,"startColumn":0,"endRow":13,"endColumn":0,"rangeType":0}]},{"uid":"IFukfi","type":"list","formula1":"=I5:I13","ranges":[{"startRow":5,"startColumn":1,"endRow":13,"endColumn":1,"rangeType":0}],"formula2":"#FEE7E7,#FEF0E6,#EFFBD0,#E4F4FE,#E8ECFD,#F1EAFA,#E5E5E5,#FDCECE,#FDC49B"},{"uid":"qTsxc-","type":"listMultiple","formula1":"Daily,Baseline,Buessiness","ranges":[{"startRow":5,"startColumn":4,"endRow":13,"endColumn":4,"rangeType":0}],"formula2":"#F1EAFA,#DEF6A2,#8BBB11"},{"uid":"DMzS5Z","type":"date","operator":"greaterThanOrEqual","formula1":"=today()","ranges":[{"startRow":5,"startColumn":2,"endRow":13,"endColumn":2,"rangeType":0}]}]}',
     },
     {
       name: 'SHEET_CONDITIONAL_FORMATTING_PLUGIN',

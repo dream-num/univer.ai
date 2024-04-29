@@ -1,4 +1,4 @@
-import { LocaleService, Plugin, PluginType } from '@univerjs/core'
+import { LocaleService, Plugin, UniverInstanceType } from '@univerjs/core'
 import { HTTPService, IHTTPImplementation, XHRHTTPImplementation } from '@univerjs/network'
 import type { Dependency } from '@wendellhu/redi'
 import { Inject, Injector } from '@wendellhu/redi'
@@ -12,14 +12,14 @@ import { IRequestService, RequestService } from './services/request.service'
 export interface IExchangeClientPluginConfig {}
 
 export class ExchangeClientPlugin extends Plugin {
-  static override type = PluginType.Sheet
+  static override type = UniverInstanceType.UNIVER_SHEET
 
   constructor(
     config: IExchangeClientPluginConfig,
         @Inject(Injector) override readonly _injector: Injector,
         @Inject(LocaleService) private readonly _localeService: LocaleService,
   ) {
-    super('exchange-client')
+    super()
   }
 
   initialize(): void {
@@ -42,6 +42,4 @@ export class ExchangeClientPlugin extends Plugin {
   override onReady(): void {
     this.initialize()
   }
-
-  override onDestroy(): void {}
 }

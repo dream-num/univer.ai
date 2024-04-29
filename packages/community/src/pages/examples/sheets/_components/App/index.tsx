@@ -1,4 +1,4 @@
-import { LocaleType, Univer } from '@univerjs/core'
+import { LocaleType, Univer, UniverInstanceType } from '@univerjs/core'
 import { UniverDataValidationPlugin } from '@univerjs/data-validation'
 import { defaultTheme } from '@univerjs/design'
 import { UniverDocsPlugin } from '@univerjs/docs'
@@ -64,11 +64,10 @@ export default function App() {
     univer.registerPlugin(UniverSheetsFindReplacePlugin)
 
     // sheet condition formatting
+    univer.registerPlugin(UniverSheetsConditionalFormattingUIPlugin)
 
     // create univer sheet instance
-    univer.createUniverSheet(ALL_FEATURES_WORKBOOK_DATA)
-
-    univer.registerPlugin(UniverSheetsConditionalFormattingUIPlugin)
+    univer.createUnit(UniverInstanceType.UNIVER_SHEET, ALL_FEATURES_WORKBOOK_DATA)
   }, [])
 
   return (

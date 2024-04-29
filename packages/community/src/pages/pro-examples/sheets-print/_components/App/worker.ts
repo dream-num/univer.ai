@@ -12,5 +12,4 @@ univer.registerPlugin(UniverSheetsPlugin)
 univer.registerPlugin(UniverFormulaEnginePlugin)
 univer.registerPlugin(UniverRPCWorkerThreadPlugin)
 
-declare let self: WorkerGlobalScope & typeof globalThis & { univer: Univer }
-self.univer = univer
+globalThis.univer = univer
