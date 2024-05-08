@@ -55,19 +55,19 @@ const activeWorkbook = univerAPI.getActiveWorkbook()
 const saveData = activeWorkbook.getSnapshot();
 ```
 
-或者
-
+:::tip[对应的底层 API]
 ```ts
 const workbook = univer.createUniverSheet({});
 const saveData = workbook.save();
 ```
+:::
 
 ### 销毁工作簿
 
-当我们不再需要工作簿时，可以调用 Univer 实例的 `dispose` 方法来销毁实例。
+当我们不再需要工作簿时，可以调用 `FUniver` 的 `disposeUniverSheet` 方法来销毁实例。
 
 ```ts
-univer.dispose();
+univerAPI.disposeUnit('your-sheet-id');
 ```
 
 ## 工作表 Worksheet

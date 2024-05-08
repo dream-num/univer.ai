@@ -55,19 +55,19 @@ const activeWorkbook = univerAPI.getActiveWorkbook()
 const saveData = activeWorkbook.getSnapshot();
 ```
 
-Or
-
+:::tip[Corresponding low-level API]
 ```ts
 const workbook = univer.createUniverSheet({});
 const saveData = workbook.save();
 ```
+:::
 
-### Destroying workbooks
+### Unload Workbook
 
-When we no longer need the workbook, we can call the `dispose` method of the Univer instance to destroy the instance.
+When you no longer need a `Workbook`, you can call the `disposeUnit` method on the API instance to unload it.
 
 ```ts
-univer.dispose();
+univerAPI.disposeUnit('your-sheet-id')
 ```
 
 ## Worksheet

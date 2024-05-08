@@ -193,3 +193,9 @@ For instance, when drawing a spreadsheet content area, three components must be 
 Components support using a canvas as a buffer for caching and offscreen rendering, which significantly improves performance, especially during scrolling. The rendering engine currently only draws incremental views when scrolling the sheet.
 
 <Image alt='rendererTextureCache' src={rendererTextureCache}/>
+
+## Render Unit
+
+<Image alt="render unit architecture" src={renderUnitImage} />
+
+In order to support disposing units and creating new units, we have created a mechanism called `RenderUnit`. Each `RenderUnit` maps to a unit and holds an `Injector`. This injector is responsible for instantiating render controllers. A render controller is a class that is responsible for rendering a specific part of the unit, and it should implements interface `IRenderController`. 
