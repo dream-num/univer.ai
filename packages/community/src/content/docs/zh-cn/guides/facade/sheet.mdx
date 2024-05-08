@@ -185,6 +185,34 @@ univerAPI.executeCommand('sheet.command.active-sheet', { unitId: workbookId, sub
 插件还会将拓展的单元格属性存储在 `Workbook` 的 `resources` 属性中，详细请阅读 [插件自定义模型](/zh-cn/guides/customization/model/)。
 :::
 
+### 单元格 PointerMove
+
+```ts
+univerAPI.getSheetHooks().onCellPointerMove((cell) => {
+  // 拿到当前鼠标指向的单元格
+  console.log(cell);
+})
+```
+
+### 单元格进入编辑
+
+```ts
+univerAPI.onCommandExecuted((command) => {
+    if(command.id === 'sheet.operation.set-cell-edit-visible' && command.params.visible){
+        console.log('Cell edit visible')
+    }
+})
+```
+
+### 单元格退出编辑
+```ts
+univerAPI.onCommandExecuted((command) => {
+    if(command.id === 'sheet.operation.set-cell-edit-visible' && !command.params.visible){
+        console.log('Cell edit invisible')
+    }
+})
+```
+
 ## 范围 Range
 
 范围指工作表中的一块矩形区域，有起始行号、起始列号、长宽或者结束行号、结束列号来确定。
