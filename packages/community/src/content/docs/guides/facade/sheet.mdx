@@ -185,6 +185,34 @@ Cell operations can be regarded as operations on a range of rows and columns wit
 The Univer API plugin will also store the extended cell attributes in the `resources` property of the `Workbook`, please refer to [Plugin Custom Model](/guides/customization/model/).
 :::
 
+### Cell PointerMove
+
+```ts
+univerAPI.getSheetHooks().onCellPointerMove((cell) => {
+  // Get the cell currently pointed to by the mouse
+  console.log(cell);
+})
+```
+
+### Cell Enters Editing
+
+```ts
+univerAPI.onCommandExecuted((command) => {
+    if(command.id === 'sheet.operation.set-cell-edit-visible' && command.params.visible){
+        console.log('Cell edit visible')
+    }
+})
+```
+
+### Cell Exits Editing
+```ts
+univerAPI.onCommandExecuted((command) => {
+    if(command.id === 'sheet.operation.set-cell-edit-visible' && !command.params.visible){
+        console.log('Cell edit invisible')
+    }
+})
+```
+
 ## Range
 
 A range refers to a rectangular area in a worksheet, which is determined by the starting row number, starting column number, length, and width, or ending row number, ending column number.
