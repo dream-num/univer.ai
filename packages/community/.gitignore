@@ -1,7 +1,0 @@
-.astro/
-
-/api/
-src/content/docs/api/*
-!src/content/docs/api/index.md
-src/content/docs/zh-cn/api/*
-!src/content/docs/zh-cn/api/index.md

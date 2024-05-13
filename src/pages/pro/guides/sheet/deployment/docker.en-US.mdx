@@ -1,0 +1,77 @@
+# Deploying with Docker
+
+Get up and running quickly with our Docker deployment solution for the Univer Pro service, using Docker Compose for a hassle-free setup.
+
+## System Requirements
+
+1. CPU: Single core
+2. RAM: 2GB
+3. Storage: 10GB
+
+Ensure you have [Docker version 23 or higher](https://docs.docker.com/engine/install/).
+
+## Technical Stack
+
+Our architecture is built on PostgreSQL and RabbitMQ.
+
+## How to Deploy
+
+Compatible with Linux, Mac, and Windows/WSL environments.
+
+1. Download the appropriate [release](https://github.com/dream-num/helm-charts/releases),
+
+   Or use this link to download the setup: [Docker Compose Zip](https://release-univer.oss-cn-shenzhen.aliyuncs.com/release-demo/docker-compose.zip).
+
+2. Navigate to the `docker-compose` directory after extracting the files.
+
+```bash
+cd helm-charts/docker-compose
+```
+
+3. Launch the backend services.
+
+```bash
+bash run.sh
+```
+
+4. Service Verification
+
+Confirm that the document service has successfully started.
+
+```bash
+docker run --net=univer-prod --rm --name univer-collaboration-lite \
+  -p 3010:3010 univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/univer-collaboration-lite:latest
+```
+
+Access http://localhost:3010 in your web browser to create a new blank document, which will then redirect you to the document link (Internet Explorer is not supported).
+
+![Example Image](./imgs/img1.png)
+
+Also, verify the successful startup of the collaboration service.
+
+For a comprehensive test, try accessing it in various browsers or in private browsing mode to experience the full collaborative capabilities.
+
+![Example Image](./imgs/img2.png)
+
+## Port Check
+
+Ensure that the specified ports are not in use; if they are, terminate the conflicting processes before attempting to start again.
+
+Default ports for Univer services are listed below:
+
+| service Name | Port Number |  	Function |
+| --- | --- | --- |
+| universer | 8000 | Serves API over HTTP |
+| univer-minio | 9000 | Acts as the S3 storage server |
+| univer-client | 3010 | Provides the frontend interface |
+
+## Configuring S3 for Docker Compose
+
+To ensure the 'Save As' feature works properly on your local network, update the `S3_ENDPOINT_PUBLIC` in your `.env` file to match your machine's IP address.
+
+```bash
+# Original: S3_ENDPOINT_PUBLIC=http://univer-minio:9000
+# Update to: S3_ENDPOINT_PUBLIC=http://192.168.50.172:19000
+```
+
+If you're still encountering issues, reach out to our community for further support.

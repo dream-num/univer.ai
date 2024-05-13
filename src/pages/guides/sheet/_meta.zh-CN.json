@@ -1,0 +1,13 @@
+{
+  "introduction": "Univer Sheet 简介",
+  "roadmap": "路线图",
+  "getting-started": "开始使用",
+  "configuration": "配置",
+  "facade": "Facade API",
+  "advanced": "进阶使用",
+  "tutorials": "教程",
+  "architecture": "架构",
+  "customization": "扩展 Univer",
+  "troubleshooting": "常见问题",
+  "contributing": "贡献指南"
+}

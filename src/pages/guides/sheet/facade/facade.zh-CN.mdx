@@ -1,0 +1,46 @@
+import { Callout, Tabs } from 'nextra/components'
+
+# 使用 Facade API
+
+Univer 的插件化能力非常强大，它几乎允许你对 Univer 的方方面面进行扩展。但在大多数情况下，过于灵活的扩展能力会使得开发者手足无措。因此我们提供了 `@univerjs/facade`，为 Univer 的用户提供一个更加简单易用的面板 API（Facade API）。
+
+`@univerjs/facade` 适用于任何人，尤其是那些熟悉 Luckysheet 的老用户，或者只是想简单地使用 Univer 的功能而并不打算深度扩展的用户。使用 `@univerjs/facade`，你可以快速上手，轻松实现各种常见的增删改查功能。
+
+本文档将详细介绍如何使用 `@univerjs/facade` 提供的 API，帮助你充分发挥 Univer 的潜力。如果你想查看所有的 Facade API，请参考 `@univerjs/facade` 的 [API 文档](/zh-cn/api/facade)。通过学习和使用这些 API，你将能够更高效、更便捷地开发出功能强大的办公应用。
+
+<Callout type="info" emoji="ℹ️">
+  实际上，[Uniscript](/zh-cn/api/uniscript) 也使用了 `@univerjs/facade`，因此你可以在 `@univerjs/uniscript` 创建的 Uniscript 面板中直接使用 `@univerjs/facade` 提供的 API。
+</Callout>
+
+## 安装
+
+使用你的包管理器安装：
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/facade
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/facade
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## 使用
+
+`@univerjs/facade` 提供的 API 是对 `Univer` 实例的封装，因此你需要在创建了 `Univer` 实例之后，再用 `FUniver` 包裹这个实例：
+
+```typescript
+import { FUniver } from "@univerjs/facade";
+
+const univerAPI = FUniver.newAPI(univer);
+```
+
+然后你就可以通过调用 `univerAPI` 的方法来使用 Univer 了，例如获取当前激活的 Workbook：
+
+```typescript
+univerAPI.getActiveWorkbook();
+```

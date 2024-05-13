@@ -1,0 +1,67 @@
+# Deploying to Kubernetes
+
+Kubernetes is a powerful open-source platform for orchestrating containerized applications, automating their deployment, scaling, and management. In this guide, we'll leverage Helm, Kubernetes' package manager, to streamline our deployment process.
+
+## Technical Overview
+
+Deploying Univer Pro on Kubernetes entails several key components:
+
+- **Kubernetes Cluster**: The environment where your app resides.
+- **Helm**: The deployment and management tool for apps on Kubernetes.
+- **Database and Messaging**: PostgreSQL and RabbitMQ services.
+
+## Installing Helm
+
+Head over to the [Helm installation guide](https://helm.sh/docs/intro/install/) to get started.
+Once installed, confirm Helm's presence by executing:
+
+```bash
+helm version
+```
+
+## Deployment Steps
+
+Step 1: Kubernetes Cluster Setup
+
+Make sure you have an active Kubernetes cluster. For cloud providers like Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes Service (EKS), adhere to their specific instructions for cluster creation.
+
+Step 2: Deploying Univer Pro
+
+1. Use Helm to deploy Univer Pro:
+
+```bash
+helm install univer --create-namespace \
+    --set global.istioNamespace=univer \
+    oci://univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/helm-charts/univer-stack
+
+kubectl rollout restart deployment/collaboration-server -n univer
+kubectl rollout restart deployment/universer -n univer
+```
+
+2. To check if your deployment is up and running:
+
+```bash
+kubectl get pods
+```
+
+Step 3: Deployment Verification
+
+```bash
+# For quick testing, you might edit your local hosts file to map the domain.
+# Default domain: univer.example.com
+
+Visit: http://univer.example.com
+```
+
+{/* ## Services and Ports
+
+Here are the default services and ports provided by Univer Pro on Kubernetes: */}
+
+{/* ## Persistent Storage Setup
+For applications that need persistent storage, follow Kubernetes' documentation to set up Persistent Volumes and Persistent Volume Claims. */}
+
+##Troubleshooting
+
+If your service isn't launching, verify the status of your Kubernetes Pods and consult the logs for clues.
+
+If you're still stuck, reach out to the community for further help.

@@ -1,0 +1,155 @@
+import { Callout, Tabs } from 'nextra/components'
+import ReactLive from '@/official-site/components/ReactLive'
+
+# 安装和引入
+
+我们推荐使用 [Vite](https://vitejs.dev/)、[esbuild](https://esbuild.github.io/) 或 [Webpack 5](https://webpack.js.org/) 等对 ES Module 支持较好的构建工具来构建 Univer 应用。如果你使用了其它构建工具（例如 Webpack 4），可能会需要一些额外的配置，请阅读 [更多](/zh-cn/guides/quickstart/#更多) 以及 [常见问题](/zh-cn/guides/troubleshooting) 获取更多信息。
+
+## 安装
+
+Univer 以插件的形式提供了一系列功能，除了一些产品所必需的核心插件外，你还可以根据需要选择性地引入其它插件。
+
+以下示例将会带你了解哪些插件是必需的，以及如何安装它们：
+
+<Callout type="info" emoji="ℹ️">
+  如果你正在使用 npm，请确保使用的版本为 npm@7 以上。这是因为 npm@3 ~ npm@6 并不会正确地安装 `peerDependencies`[^1]。
+</Callout>
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+如果你想在后续的开发中获得更加便捷的开发体验，我们还推荐你安装 `@univerjs/facade`：
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/facade
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/facade
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+有关 `@univerjs/facade` 的更多信息，请参考 [Facade](/guides/sheet/facade/facade) 章节。
+
+## 使用
+
+<Callout type="info" emoji="ℹ️">
+  样式文件的引入顺序很重要，确保你在依次引入 `@univerjs/design`、`@univerjs/ui` 的 CSS 样式后再引入其他插件的样式文件。
+  **哪些插件需要引入样式文件？请参考 [插件](/zh-cn/api) 文档中标有 ![CSS Included](https://img.shields.io/badge/CSS_Included-blue?logo=CSS3) 的插件。**
+</Callout>
+
+你需要在项目中引入 Univer 的样式文件，以及一些必要的插件：
+
+```typescript
+import "@univerjs/design/lib/index.css";
+import "@univerjs/ui/lib/index.css";
+import "@univerjs/docs-ui/lib/index.css";
+import "@univerjs/sheets-ui/lib/index.css";
+import "@univerjs/sheets-formula/lib/index.css";
+
+import { Univer } from "@univerjs/core";
+import { defaultTheme } from "@univerjs/design";
+
+import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
+import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
+
+import { UniverUIPlugin } from "@univerjs/ui";
+
+import { UniverDocsPlugin } from "@univerjs/docs";
+import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
+
+import { UniverSheetsPlugin } from "@univerjs/sheets";
+import { UniverSheetsFormulaPlugin } from "@univerjs/sheets-formula";
+import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
+```
+
+然后创建一个 Univer 实例，并注册这些插件：
+
+export const code = `const univer = new Univer({
+  theme: defaultTheme,
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  header: true,
+  footer: true,
+});
+
+univer.registerPlugin(UniverDocsPlugin, {
+  hasScroll: false,
+});
+univer.registerPlugin(UniverDocsUIPlugin);
+
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
+
+univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});`
+
+<ReactLive code={code} />
+
+## 入门示例：加载数据、修改数据和存储数据
+
+在上一小节的代码中，你已经创建了一个 Univer 实例并创建了一个空的电子表格，不过大部分情况下你可能需要的是在 Univer 当中加载已有数据。这一小节将会介绍如何向 Univer 加载数据、修改数据以及如何从 Univer 中存储数据。
+
+### 加载数据
+
+通过调用 `Univer` 的 `createUniverSheet` 方法，可以创建一个新的 `Workbook` 实例。方法的第一个参数是一个对象，包含了 `Workbook` 的数据，应该符合 `IWorkbookData` 接口。
+
+```typescript
+import { IWorkbookData, UniverInstanceType } from "@univerjs/core";
+
+const data: IWorkbookData = {};
+const workbook = univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});
+```
+
+你可以在[这里](/api/core/interfaces/IWorkbookData.html)了解 `IWorkbookData` 所支持的全部字段。
+
+### 修改数据
+
+`@univerjs/facade` 提供的 API 是对 `Univer` 实例的封装，因此你需要在创建了 `Univer` 实例之后，再用 `FUniver` 包裹这个实例：
+
+```typescript
+import { FUniver } from "@univerjs/facade";
+
+const univerAPI = FUniver.newAPI(univer);
+```
+
+然后你就可以通过调用 `univerAPI` 的方法来使用 Univer 了，例如获取当前激活的 sheet，并在指定的范围更新值：
+
+```typescript
+const activeSheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+// A1 设置数字 1
+const range1 = activeSheet.getRange(0, 0, 1, 1);
+range1.setValue(1);
+```
+
+### 存储数据
+
+通过调用当前 `Workbook` 的 `getSnapshot` 方法，可以得到 `IWorkbookData` 对象，包含了表格内部的数据。
+
+```typescript
+const savedData = univerAPI.getActiveWorkbook().getSnapshot();
+```
+
+---
+
+[^1]: https://blog.npmjs.org/post/110924823920/npm-weekly-5

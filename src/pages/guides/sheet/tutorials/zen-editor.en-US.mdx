@@ -1,0 +1,95 @@
+import { Tabs } from 'nextra/components'
+import ReactLive from '@/official-site/components/ReactLive'
+
+# Zen Editor Mode
+
+For you to experience the high extensibility of Univer, we also provide an optional Zen Editor mode plugin for Univer Sheet.
+
+This plugin contains a cell document editor, which allows you to edit a complete document in a cell. This editor supports most of the features of Univer Doc, allowing you to edit the content of a cell in an immersive way.
+
+## Installation
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/sheets-zen-editor
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/sheets-zen-editor
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+Simply import the plugin in your main file and register it to the Univer instance.
+
+And don't forget to import the language pack.
+
+```typescript
+import {
+  UniverSheetsZenEditorPlugin,
+  enUS as UniverSheetsZenEditorEnUS
+} from '@univerjs/sheets-zen-editor';
+import '@univerjs/sheets-zen-editor/lib/index.css';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: {
+      ...UniverSheetsEnUS,
+      ...UniverDocsUIEnUS,
+      ...UniverSheetsUIEnUS,
+      ...UniverUIEnUS,
+      ...UniverDesignEnUS,
+      ...UniverSheetsZenEditorEnUS,
+    },
+  },
+});
+
+univer.registerPlugin(UniverSheetsZenEditorPlugin);
+```
+
+## Live Demo
+
+Try right-clicking on any cell to open the menu, then click "Full Screen Editor" to enter Zen Editor mode.
+
+export const code = `const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: {
+      ...UniverSheetsEnUS,
+      ...UniverDocsUIEnUS,
+      ...UniverSheetsUIEnUS,
+      ...UniverUIEnUS,
+      ...UniverDesignEnUS,
+      ...UniverSheetsZenEditorEnUS,
+    },
+  },
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  header: true,
+  footer: true,
+});
+
+univer.registerPlugin(UniverDocsPlugin, {
+  hasScroll: false,
+});
+univer.registerPlugin(UniverDocsUIPlugin);
+
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
+univer.registerPlugin(UniverSheetsZenEditorPlugin);
+
+univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});`
+
+<ReactLive code={code} />

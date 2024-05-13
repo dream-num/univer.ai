@@ -1,0 +1,298 @@
+import { Tabs } from 'nextra/components'
+
+# Register Plugin
+
+To implement a fully functional spreadsheet or document, in addition to the necessary plugins mentioned in [Installation & Usage](/guides/sheet/getting-started/installation), you also need to install and register other plugins according to specific requirements to extend the functionality of Univer.
+
+This chapter will introduce the plugins required to implement common functions in spreadsheets or documents, and how to install and register these plugins. By reasonably matching and configuring plugins, you can create a spreadsheet application that meets various scenario requirements.
+
+## Core Packages
+
+The core package is the basic package for implementing spreadsheets, which contains the core functions of Univer Sheet, such as creating workbooks, cell editing, cell selection, etc.
+
+### Installation
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Import
+
+```typescript
+import "@univerjs/design/lib/index.css";
+import "@univerjs/ui/lib/index.css";
+import "@univerjs/docs-ui/lib/index.css";
+import "@univerjs/sheets-ui/lib/index.css";
+import "@univerjs/sheets-formula/lib/index.css";
+
+import { Univer } from "@univerjs/core";
+import { defaultTheme } from "@univerjs/design";
+
+import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
+import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
+
+import { UniverUIPlugin } from "@univerjs/ui";
+
+import { UniverDocsPlugin } from "@univerjs/docs";
+import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
+
+import { UniverSheetsPlugin } from "@univerjs/sheets";
+import { UniverSheetsFormulaPlugin } from "@univerjs/sheets-formula";
+import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
+```
+
+### Register
+
+```typescript
+const univer = new Univer({
+  theme: defaultTheme,
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  header: true,
+  footer: true,
+});
+
+univer.registerPlugin(UniverDocsPlugin, {
+  hasScroll: false,
+});
+univer.registerPlugin(UniverDocsUIPlugin);
+
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
+
+univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});
+```
+
+## Facade API
+
+### Installation
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/facade
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/facade
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Import
+
+```typescript
+import { FUniver } from "@univerjs/facade";
+```
+
+### Register
+
+```typescript
+const univerAPI = FUniver.newAPI(univer);
+```
+
+## Number Format
+
+### Installation
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/sheets-numfmt
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/sheets-numfmt
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Import
+
+```typescript
+import '@univerjs/sheets-numfmt/lib/index.css';
+
+import { UniverSheetsNumfmtPlugin } from '@univerjs/sheets-numfmt';
+```
+
+### Register
+
+```typescript
+univer.registerPlugin(UniverSheetsNumfmtPlugin);
+```
+
+## Find & Replace
+
+### Installation
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/find-replace @univerjs/sheets-find-replace
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/find-replace @univerjs/sheets-find-replace
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Import
+
+```typescript
+import '@univerjs/find-replace/lib/index.css';
+
+import { UniverFindReplacePlugin } from '@univerjs/find-replace';
+import { UniverSheetsFindReplacePlugin } from '@univerjs/sheets-find-replace';
+```
+
+### Register
+
+```typescript
+univer.registerPlugin(UniverFindReplacePlugin);
+univer.registerPlugin(UniverSheetsFindReplacePlugin);
+```
+
+## Data Validation
+
+### Installation
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/data-validation @univerjs/sheets-data-validation
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/data-validation @univerjs/sheets-data-validation
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Import
+
+```typescript
+import '@univerjs/sheets-data-validation/lib/index.css';
+
+import { UniverDataValidationPlugin } from '@univerjs/data-validation';
+import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validation';
+```
+
+### Register
+
+```typescript
+univer.registerPlugin(UniverDataValidationPlugin);
+univer.registerPlugin(UniverSheetsDataValidationPlugin);
+```
+
+## Conditional Formatting
+
+### Installation
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/sheets-conditional-formatting-ui
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/sheets-conditional-formatting-ui
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Import
+
+```typescript
+import '@univerjs/sheets-conditional-formatting-ui/lib/index.css';
+
+import { UniverSheetsConditionalFormattingUIPlugin } from '@univerjs/sheets-conditional-formatting-ui';
+```
+
+### Register
+
+```typescript
+univer.registerPlugin(UniverSheetsConditionalFormattingUIPlugin);
+```
+
+## Uniscript
+
+### Installation
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/uniscript
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/uniscript
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Import
+
+```typescript
+import '@univerjs/uniscript/lib/index.css';
+
+import { UniverUniscriptPlugin } from '@univerjs/uniscript';
+```
+
+### Register
+
+```typescript
+univer.registerPlugin(UniverUniscriptPlugin);
+```
+
+## Zen Editor
+
+### Installation
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/sheets-zen-editor
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/sheets-zen-editor
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Import
+
+```typescript
+import '@univerjs/sheets-zen-editor/lib/index.css';
+
+import { UniverSheetsZenEditorPlugin } from '@univerjs/sheets-zen-editor';
+```
+
+### Register
+
+```typescript
+univer.registerPlugin(UniverSheetsZenEditorPlugin);
+```

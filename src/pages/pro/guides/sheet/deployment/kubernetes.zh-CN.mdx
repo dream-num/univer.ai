@@ -1,0 +1,75 @@
+---
+title: 部署到 Kubernetes
+sidebar:
+  order: 22
+---
+
+Kubernetes 是一个开源的容器编排平台，用于自动化部署、扩展和管理容器化应用程序。在本教程中，我们将使用 Helm —— Kubernetes 的包管理工具，来简化部署过程。
+
+## 技术架构
+
+Univer Pro 在 Kubernetes 上的部署将涉及以下组件：
+
+- Kubernetes Cluster: 您的应用程序将在这里运行。
+- helm: 用于在 Kubernetes 上部署和管理应用程序的工具。
+- PostgreSQL + RabbitMQ
+
+## 安装 Helm
+
+访问 Helm 的 [官方安装页面](https://helm.sh/docs/intro/install/)  并按照指南安装 Helm。
+验证 Helm 是否安装成功，运行以下命令：
+
+```bash
+helm version
+```
+
+## 部署
+
+步骤 1: 准备 Kubernetes 集群
+
+确保您有一个运行中的 Kubernetes 集群。如果您使用的是云服务提供商，如 Google Kubernetes Engine (GKE) 或 Amazon Elastic Kubernetes Service (EKS)，请按照他们的指南创建集群。
+
+步骤 2: 部署 Univer Pro
+
+1. 使用 Helm 安装 Univer Pro：
+
+```bash
+helm install -n univer --create-namespace \
+    --set global.istioNamespace="univer" \
+    univer-stack oci://univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/helm-charts/univer-stack
+
+kubectl rollout restart -n univer deployment/collaboration-server
+kubectl rollout restart -n univer deployment/universer
+```
+
+2. 检查部署状态：
+
+```bash
+kubectl get pods
+```
+
+步骤 3: 验证部署
+
+```bash
+# 可以简单修改本地 hosts 文件来解析域名。
+# 默认域名: univer.example.com
+
+open: http://univer.example.com
+```
+
+{/* ## 端口和服务
+
+Univer Pro 在 Kubernetes 上的默认服务和端口如下： */}
+
+
+{/* ## 持久化存储配置
+如果您的应用程序需要持久化存储，请按照 Kubernetes 的指南配置 Persistent Volumes 和 Persistent Volume Claims。 */}
+
+
+## 常见问题
+
+服务未启动: 检查 Kubernetes 的 Pod 是否正常运行，查看日志以确定问题所在。
+
+
+若仍然不能解决您的问题， [联系社区](/zh-cn/guides/introduction#下一步) 获取帮助。
+

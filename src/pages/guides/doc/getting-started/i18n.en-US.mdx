@@ -1,0 +1,30 @@
+import { Callout } from 'nextra/components'
+
+# Internationalization
+
+Some official plugins of Univer involving UI contain two languages: Simplified Chinese and English. The default language is Simplified Chinese.
+
+<Callout type="info" emoji="ℹ️">
+  **Which plugins contain internationalization language packs? Please refer to the [Plugins](/api) document with the ![i18n](https://img.shields.io/badge/zh--CN%20%7C%20en--US-cornflowerblue?label=i18n) badge.**
+</Callout>
+
+For changing the language, you need to refer to the following example to import the corresponding language pack as needed and assemble it into an object to pass it into the `Univer` instance:
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core';
+import { enUS as UniverDesignEnUS } from '@univerjs/design';
+import { enUS as UniverDocsUIEnUS } from '@univerjs/docs-ui';
+import { enUS as UniverUIEnUS } from '@univerjs/ui';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.EN_US]: Tools.deepMerge(
+      UniverDocsUIEnUS,
+      UniverUIEnUS,
+      UniverDesignEnUS,
+    ),
+  },
+});
+```

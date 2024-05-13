@@ -1,0 +1,10 @@
+{
+  "doc": {
+    "type": "page",
+    "title": "Univer Doc"
+  },
+  "sheet": {
+    "type": "page",
+    "title": "Univer Sheet"
+  }
+}

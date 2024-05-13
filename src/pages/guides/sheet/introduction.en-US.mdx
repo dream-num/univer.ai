@@ -1,0 +1,183 @@
+import { Callout } from 'nextra/components'
+import FeatureBox from '@/official-site/components/FeatureBox'
+import ReactLive from '@/official-site/components/ReactLive'
+
+# Introduction to Univer Sheet
+
+<Callout type="info" emoji="ℹ️">
+  Univer Sheet has completed most of the development of basic features, but there are still key features that have not been fully implemented. Please follow our [Roadmap](/guides/sheet/roadmap) to stay updated on our progress.
+</Callout>
+
+Univer provides a comprehensive enterprise-level solution for document and data collaboration, supporting three core document types: **spreadsheets**, [**documents**](/guides/doc/introduction), and [**slides**](/guides/slide/introduction). Through a flexible API and plugin mechanism, developers can customize and extend personalized features on Univer to meet the specific needs of different users in various scenarios.
+
+export const features = [{
+  title: '🚀 High Performance',
+  description: 'Univer uses a rendering engine based on Canvas and a formula engine that supports Web Worker, ensuring high performance on large-scale data rendering and processing.'
+}, {
+  title: '🧩 Plugin-based',
+  description: 'The core functionality and capabilities of Univer are provided through plugins, allowing developers to freely combine the required functionality or create custom plugins to extend Univer.'
+}, {
+  title: '🪄 Customizable',
+  description: 'Developers can customize the appearance and interaction of Univer by importing custom themes, icons, component libraries, etc.'
+}, {
+  title: '🌍 Internationalization',
+  description: 'Supports multiple languages, allowing developers to freely switch languages and customize language packs.'
+}, {
+  title: '📖 Open Source',
+  description: 'The core code of Univer is open source under the Apache-2.0 license. Organizations and individuals are free to use its source code and npm package.'
+}, {
+  title: '🌿 Rich Ecosystem',
+  description: 'A rich ecosystem, with command-line tools, build tool plugins, example libraries, and more, to help developers get started quickly.'
+}, {
+  title: '💬 Community Support',
+  description: 'Provides Discord community and GitHub Discussions to facilitate developer communication and support.'
+}, {
+  title: '📈 Continuous Updates',
+  description: 'The Univer team will continue to update and maintain Univer to ensure its rich-feature, stability and reliability.'
+}, {
+  title: '💼 Enterprise Edition',
+  description: 'Provides a commercial version for enterprises with specific needs, including but not limited to multi-person collaborative editing and browsing, data connectors, and Live Share for collaborative browsing.'
+}]
+
+## Highlights
+
+<FeatureBox features={features} />
+
+## Features
+
+### 🛠 General Capabilities
+
+#### Editing Operations
+
+- Undo / Redo
+- Copy / Paste
+
+#### Viewing
+
+- High-performance rendering engine based on Canvas, supporting multiple document types
+- Scroll and zoom
+
+#### UI
+
+- Configurable workspace, including title bar, toolbar, sidebar, status bar, context menu, etc.
+- Cross-platform shortcut key support
+- Shortcut key panel
+
+### 📊 Spreadsheet
+
+#### Showcases
+
+export const code = `const univer = new Univer({
+  locale: LocaleType.en_US,
+  theme: defaultTheme,
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  header: true,
+  footer: true,
+});
+
+univer.registerPlugin(UniverDocsPlugin, {
+  hasScroll: false,
+});
+univer.registerPlugin(UniverDocsUIPlugin);
+
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
+
+univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});`
+
+<ReactLive code={code} />
+
+#### Editing Operations
+
+- Create, delete and re-order worksheets
+- Cell styles: bold, italic, underline, strike-through, font family, font size, text color, background color, border style, text alignment, text rotation
+- Merged cells: merge and unmerge cells, merge cells in different directions
+- Row column operations: insert, delete, and move rows/columns, modify row height and column width
+- Copy & paste: paste values only, paste format only, paste formula only, paste column width only, paste border style only
+- Clear content: content only, style only, all
+- Cell editing: cell editor that support rich-format texts
+- Insert and delete cells
+- Auto fill
+- Format painter
+
+#### Viewing
+
+- Freeze column and/or rows
+- Summary bar
+  - Sum, Max, Min, Average, Count
+
+#### Data and Calculation
+
+- Formulas
+  - Fx bar (formula editor)
+  - Formula highlighting
+  - Built-in formulas
+  - Formula calculation using Web Workers (optional)
+- Number format: general, accounting, currency, date, thousands separator
+
+#### Automation
+
+- Uniscript Scripting (alpha version)
+
+#### Other Goodies
+
+- Zen Editor Mode (optional)
+
+## Environment Support
+
+Univer's compilation target is Chrome 70, but this does not mean that Univer can fully support all browsers. We will do our best to ensure that Univer runs smoothly in the following browsers:
+
+| [<img className="mx-auto" src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)IE / Edge | [<img className="mx-auto" src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)Firefox | [<img className="mx-auto" src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)Chrome | [<img className="mx-auto" src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)Safari | [<img className="mx-auto" src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/electron/electron_48x48.png" alt="Electron" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)Electron |
+| --------- | --------- | --------- | --------- | --------- |
+| Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions
+
+If you encounter compatibility issues, please try to solve them with the corresponding polyfill. If you still cannot solve the problem, please [submit an issue](https://github.com/dream-num/univer/issues/new/choose).
+
+## Typescript
+
+Univer provides a built-in type definition file, so developers can enjoy a better development experience when using Univer.
+
+## What's Next
+
+If you can't wait to experience Univer, please refer to the [QuickStart](/guides/sheet/getting-started/quickstart).
+
+Or join our developer community and discuss with us:
+
+- [Discord Community](https://discord.gg/XPGnMBmpd6)
+- [GitHub Discussions](https://github.com/dream-num/univer/discussions)
+
+You can also follow us on the following platforms:
+
+- [Official Website](https://univer.ai)
+- [GitHub](https://github.com/dream-num/univer)
+
+## How to Contribute
+
+We welcome any form of contribution, including but not limited to [submitting issues](https://github.com/dream-num/univer/issues/new/choose), submitting PRs, participating in discussions, and more. Please read the [Contribution Guidelines](https://github.com/dream-num/univer/blob/dev/CONTRIBUTING.md) before getting involved in the development of Univer.
+
+## Open Source License
+
+The core code of Univer, available on [GitHub](https://github.com/dream-num/univer), is open source under the Apache-2.0 license. Organizations and individuals are free to use its source code and npm package.
+
+This documentation, available on [GitHub](https://github.com/dream-num/univer.ai), is open source under the CC-BY-NC-SA 4.0 license. Organizations and individuals are free to use it, but commercial use is not allowed.
+
+## Univer Pro Sheet
+
+Univer Pro is a plug-and-play solution designed to meet a range of complex business needs. It adopts the interfaces, components, and event mechanisms provided by the open-source version of Univer and carefully encapsulates them.
+
+While Univer Pro is designed to address specific business scenarios, it may not cover all of your business needs. We recommend that you conduct a detailed assessment of your specific business needs before exploring the possibilities of Univer Pro. If necessary, you can also use the powerful features provided by the open-source version of Univer to customize and extend the specific features you need.
+
+Univer Pro currently provides the following features:
+
+- 👨‍💻 Collaborative editing and browsing
+- 🛜 Data connectors
+- 🎚️ Live Share for collaborative browsing
+- 📤 Import / Export
+
+To learn more about our commercial edition or request a trial, please visit [here](/pro/guides/sheet/introduction).
