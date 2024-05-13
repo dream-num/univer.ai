@@ -1,4 +1,7 @@
 {
   "introduction": "Introduction to Univer Pro Sheet",
-  "deployment": "Deploying Univer Pro Sheet"
+  "getting-started": "Getting Started",
+  "deployment": "Deploying Univer Pro Sheet",
+  "facade": "Facade API",
+  "architecture": "Architecture"
 }

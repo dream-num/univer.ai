@@ -1,0 +1,41 @@
+import { Cards, Card, Tabs } from 'nextra/components'
+
+# Quickstart
+
+If you're eager to dive into Univer Pro, you've found the perfect starting point!
+
+## Try It Online
+
+Experience Univer Pro online without any installations. Simply click the link below to get started immediately.
+
+For additional online demos, please visit [here](/pro/examples).
+
+## Creating from a Template
+
+Most of Univer Pro's functionalities depend on the server-side, so the first step is to deploy the server. We recommend deploying quickly using Docker with the following steps:
+
+```bash
+git clone -b v0.1.10 https://github.com/dream-num/helm-charts --depth=1
+cd helm-charts/docker-compose && ./run.sh
+```
+
+Once the server is up, you can create a new Univer Pro front-end application from a template using the commands below.
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm dlx degit dream-num/univer-pro-sheet-start-kit [your-app-name]
+    cd [your-app-name] && pnpm install # pnpm version >= 8
+    pnpm dev
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npx degit dream-num/univer-pro-sheet-start-kit [your-app-name]
+    cd [your-app-name] && npm install # npm version >= 7
+    npm run dev
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+You've now successfully set up your first Univer Pro project! Visit [http://localhost:5173/](http://localhost:5173/) to explore some basic features of Univer Pro.

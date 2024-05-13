@@ -1,0 +1,42 @@
+# Using Pro Facade API
+
+The Univer Pro Facade API allows you to seamlessly access the enhanced features of Univer Pro with ease and speed. It is fully built upon the Univer Facade API, ensuring that upgrading from Univer to Univer Pro requires minimal changes to your existing code.
+
+### Prerequisite Knowledge
+
+Before you begin, it's important that you are already familiar with Univer's [Facade API](/guides/sheet/facade/facade). If you haven't explored this yet, we highly recommend that you do so to better grasp the concepts discussed in this tutorial.
+
+Univer Pro's Facade API includes advanced features not available in the standard version, such as collaborative editing and document management.
+
+## Installation
+
+First, you need to install the Univer Pro Facade API. Here are the steps to do so:
+
+Use your package manager to install:
+
+```bash
+# Using npm
+npm install @univerjs-pro/facade
+
+# Using pnpm
+pnpm add @univerjs-pro/facade
+```
+
+## Usage
+
+The API from @univerjs/facade acts as a wrapper around the `Univer` instance. Therefore, you must first create a `Univer` instance, then use `FUniver` to wrap this instance:
+
+```typescript title="main.ts"
+import { FUniver } from "@univerjs-pro/facade";
+
+const univerAPI = FUniver.newAPI(univer);
+```
+
+You can then access both Univer and Univer Pro features by invoking methods on `univerAPI`.
+
+To upgrade from Univer to Univer Pro, you simply need to switch the package name in your import statement:
+
+```diff
+- import { FUniver } from "@univerjs/facade";
++ import { FUniver } from "@univerjs-pro/facade";
+```
