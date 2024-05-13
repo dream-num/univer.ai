@@ -1,6 +1,4 @@
 {
-  "architecture": "Univer Architecture",
-  "formula": "Architecture of Formula Engine",
-  "rendering": "Architecture of Rendering Engine",
-  "web-worker": "Architecture of Web Worker"
+  "univer-plugins": "Using Univer Plugins",
+  "release": "Other Releases"
 }
