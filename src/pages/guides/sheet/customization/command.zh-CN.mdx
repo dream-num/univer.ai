@@ -14,7 +14,7 @@ import { Callout } from 'nextra/components'
 第一步，创建一个实现 `ICommand` 接口的对象：
 
 ```typescript
-import { CommandType, ICommand } from '@univer/core'
+import { CommandType, ICommand } from '@univerjs/core'
 
 export interface IYourCommandInterface {
   // Your command's param's interface.
@@ -40,7 +40,7 @@ export const YourCommand: ICommand = {
 第二步，将 Command 注册到命令服务上：
 
 ```typescript
-import { Disposable, ICommandService } from '@univer/core'
+import { Disposable, ICommandService } from '@univerjs/core'
 
 export class YourController extends Disposable {
   constructor(
@@ -58,7 +58,7 @@ export class YourController extends Disposable {
 Univer 提供了 undo redo 的能力，如果你的命令需要接入，需要在命令的 `handler` 回调函数中调用 `IUndoRedoService` 的对应方法：
 
 ```typescript
-import { IUndoRedoService } from '@univer/core'
+import { IUndoRedoService } from '@univerjs/core'
 
 export const YourCommand: ICommand = {
   name: 'your-command',
@@ -95,12 +95,15 @@ Univer 中的复制粘贴操作都是通过插件化的方式添加的，这意�
 #### 创建和添加 Hook
 
 ```tsx
-import { Disposable, ISheetClipboardService } from '@univer/core'
+import { Disposable } from '@univerjs/core'
+import { ISheetClipboardService, ISheetClipboardHook } from '@univerjs/sheet'
 
 export class YourController extends Disposable {
   constructor(
         @ISheetClipboardService private readonly _sheetClipboardService: ISheetClipboardService
   ) {
+    super()
+    
     const yourHook: ISheetClipboardHook = {
       id: 'your-hook-id',
       onBeforeCopy: () => {
@@ -271,12 +274,15 @@ Univer 中的下拉填充也是通过插件化的方式添加的，类似复制�
 #### 创建和添加 Hook
 
 ```tsx
-import { Disposable, IAutoFillService } from '@univer/core'
+import { Disposable } from '@univerjs/core'
+import { IAutoFillService, ISheetAutoFillHook } from '@univerjs/sheet'
 
 export class YourController extends Disposable {
   constructor(
         @IAutoFillService private readonly _autoFillService: IAutoFillService,
   ) {
+    super()
+
     const yourHook: ISheetAutoFillHook = {
       id: 'your-hook-id',
       priority: 1,

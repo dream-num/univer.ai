@@ -13,7 +13,7 @@ To create a new command, two steps are required:
 First step is to define an object that implements `ICommand` interface:
 
 ```typescript
-import { CommandType, ICommand } from '@univer/core'
+import { CommandType, ICommand } from '@univerjs/core'
 
 export interface IYourCommandInterface {
   // Your command's param's interface.
@@ -39,7 +39,7 @@ Commands may receive parameters, which must be grouped into an object. The inter
 The second step is to register this command to the `ICommandService`:
 
 ```typescript
-import { Disposable, ICommandService } from '@univer/core'
+import { Disposable, ICommandService } from '@univerjs/core'
 
 export class YourController extends Disposable {
   constructor(
@@ -57,7 +57,7 @@ After declaring the required attributes, the command can be executed using the `
 Univer offers undo-redo functionality for commands that require it. To utilize this feature, call the appropriate methods of the `IUndoRedoService` within the `handler` callback function of your command:
 
 ```typescript
-import { IUndoRedoService } from '@univer/core'
+import { IUndoRedoService } from '@univerjs/core'
 
 export const YourCommand: ICommand = {
   name: 'your-command',
@@ -96,12 +96,15 @@ During the copy-paste process, Univer will call the hook functions of `ISheetCli
 #### Create and Add a Hook
 
 ```tsx
-import { Disposable, ISheetClipboardService } from '@univer/core'
+import { Disposable } from '@univerjs/core'
+import { ISheetClipboardService, ISheetClipboardHook } from '@univerjs/sheets-ui';
 
 export class YourController extends Disposable {
   constructor(
         @ISheetClipboardService private readonly _sheetClipboardService: ISheetClipboardService
   ) {
+    super()
+
     const yourHook: ISheetClipboardHook = {
       id: 'your-hook-id',
       onBeforeCopy: () => {
@@ -272,12 +275,15 @@ In Univer, the drop-down filling is also implemented through hooks, similar to c
 #### Create and Add a Hook
 
 ```tsx
-import { Disposable, IAutoFillService } from '@univer/core'
-
+import { Disposable } from '@univerjs/core'
+import { IAutoFillService, ISheetAutoFillHook } from '@univerjs/sheets-ui'
+ 
 export class YourController extends Disposable {
   constructor(
         @IAutoFillService private readonly _autoFillService: IAutoFillService,
   ) {
+    super()
+    
     const yourHook: ISheetAutoFillHook = {
       id: 'your-hook-id',
       priority: 1,
