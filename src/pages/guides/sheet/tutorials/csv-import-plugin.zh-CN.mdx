@@ -39,9 +39,7 @@ import { Callout } from 'nextra/components'
 
 ### 1. 创建插件
 
-Univer 并不限制你创建插件的方式，为了达到更高的工程化标准，推荐通过[命令行工具创建](/guides/concepts-and-architecture/write-a-plugin/#创建项目)。
-
-本文为了演示方便，我们直接手动编写的方式创建插件。你可以跟随本文一起动手实践，我们将基于 [Vite 初始 Demo](https://github.com/awesome-univer/sheets-vite-demo) 源码开发，进入 [Playground](/playground/?title=Vite) 一起开始。
+你可以跟随本文一起动手实践，我们将基于 [Vite 初始 Demo](https://github.com/awesome-univer/sheets-vite-demo) 源码开发，进入 [Playground](/playground/?title=Vite) 一起开始。
 
 我们在 `src/plugins` 目录下创建 `ImportCSVButton.ts` 文件，代码如下：
 
@@ -54,11 +52,13 @@ import { Inject, Injector } from '@wendellhu/redi'
  * A simple Plugin example, show how to write a plugin.
  */
 class ImportCSVButtonPlugin extends Plugin {
+  static override pluginName = 'import-csv-plugin';
+
   constructor(
     // inject injector, required
     @Inject(Injector) override readonly _injector: Injector
   ) {
-    super('import-csv-plugin') // plugin id
+    super()
   }
 
   /** Plugin onStarting lifecycle */
@@ -72,7 +72,7 @@ export default ImportCSVButtonPlugin
 
 插件需要继承 `Plugin` 类，该类提供了插件的基础功能，如插件的生命周期、插件的依赖注入等。
 
-插件ID 通过 `super` 父类构造方法传入，该 ID 用于标识插件，必须是唯一的。
+插件名称通过 `override` 来定义，该名称用于标识插件，在实例中必须是唯一的。
 
 我们在插件的构造函数中，通过装饰器 `@Inject` 注入了 `Injector` 对象，该对象可以用于获取 Univer 的其他对象。
 

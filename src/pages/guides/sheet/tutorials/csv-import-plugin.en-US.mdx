@@ -39,9 +39,7 @@ The plugin needs to complete the following functions:
 
 ### 1. Create a plugin
 
-Univer does not limit the way you create plugins. To achieve a higher engineering standard, it is recommended to create it through the [command line tool](/guides/concepts-and-architecture/write-a-plugin/#create-a-project).
-
-For the convenience of demonstration, we directly create the plugin manually in this article. You can follow this article to practice together. We will develop based on the [Vite initial Demo](https://github.com/awesome-univer/sheets-vite-demo) source code and enter the [Playground](/playground/?title=Vite) to start together.
+You can follow this article to practice together. We will develop based on the [Vite initial Demo](https://github.com/awesome-univer/sheets-vite-demo) source code and enter the [Playground](/playground/?title=Vite) to start together.
 
 We create the `ImportCSVButton.ts` file in the `src/plugins` directory, the code is as follows:
 
@@ -54,11 +52,13 @@ import { Inject, Injector } from '@wendellhu/redi'
  * A simple Plugin example, show how to write a plugin.
  */
 class ImportCSVButtonPlugin extends Plugin {
+  static override pluginName = 'import-csv-plugin';
+
   constructor(
     // inject injector, required
     @Inject(Injector) override readonly _injector: Injector
   ) {
-    super('import-csv-plugin') // plugin id
+    super()
   }
 
   /** Plugin onStarting lifecycle */
@@ -72,7 +72,7 @@ export default ImportCSVButtonPlugin
 
 The plugin needs to inherit the `Plugin` class, which provides the basic functions of the plugin, such as the lifecycle of the plugin, the dependency injection of the plugin, etc.
 
-The plugin ID is passed into the parent class constructor method through `super`, which is used to identify the plugin and must be unique.
+To define a plugin name, you use the `override` keyword. This name serves as an identifier for the plugin and should be unique within an instance.
 
 The plugin's constructor function injects the `Injector` object through the `@Inject` decorator, which can be used to obtain other objects of Univer.
 
