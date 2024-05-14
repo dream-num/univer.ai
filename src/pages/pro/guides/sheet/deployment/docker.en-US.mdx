@@ -28,19 +28,20 @@ Compatible with Linux, Mac, and Windows/WSL environments.
 cd helm-charts/docker-compose
 ```
 
-3. Launch the backend services.
+3. Optional: To set up a Pro License, place your [Pro License](/pro/license) file in the `docker-compose/configs` directory.
+
+4. Launch the backend services.
 
 ```bash
 bash run.sh
 ```
 
-4. Service Verification
+5. Service Verification
 
 Confirm that the document service has successfully started.
 
 ```bash
-docker run --net=univer-prod --rm --name univer-collaboration-lite \
-  -p 3010:3010 univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/univer-collaboration-lite:latest
+docker run --net=univer-prod --rm --name univer-collaboration-lite -p 3010:3010 univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/univer-collaboration-lite:latest
 ```
 
 Access http://localhost:3010 in your web browser to create a new blank document, which will then redirect you to the document link (Internet Explorer is not supported).
