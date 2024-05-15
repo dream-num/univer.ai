@@ -85,7 +85,7 @@ new Univer({
 
 为了让 TypeScript 能够识别 `univer:locales` 的引入，你需要在项目中添加一个 `src/vite-env.d.ts` 文件。
 
-```diff title="src/vite-env.d.ts"
+```diff
 /// <reference types="vite/client" />
 + /// <reference types="@univerjs/vite-plugin/types" />
 ```
@@ -162,7 +162,7 @@ new Univer({
 
 为了让 TypeScript 能够识别 `univer:locales` 的引入，你需要在项目中添加一个 `tsconfig.json` 文件。
 
-```diff title="tsconfig.json"
+```diff
 {
   "compilerOptions": {
 +    "types": ["@univerjs/esbuild-plugin/types"]
@@ -242,7 +242,7 @@ new Univer({
 
 为了让 TypeScript 能够识别 `univer:locales` 的引入，你需要在项目中添加一个 `src/webpack-env.d.ts` 文件。
 
-```diff title="src/webpack-env.d.ts"
+```diff
 + /// <reference types="@univerjs/webpack-plugin/types" />
 ```
 

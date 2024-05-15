@@ -241,7 +241,7 @@ univerAPI.executeCommand('univer.command.redo')
 Facade 提供了一个便捷的 API `createSocket` 来创建 Websocket，传入一个 URL 即可。
 然后可以监听 open、message、close、error 事件，以及主动发送消息 send 方法和主动关闭 close 方法。
 
-```typescript title="main.ts"
+```typescript
 // URL 换成你自己 Websocket 服务的地址
 const ws = univerAPI.createSocket("ws://47.100.177.253:8449/ws");
 

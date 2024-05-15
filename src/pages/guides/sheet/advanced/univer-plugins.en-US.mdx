@@ -85,7 +85,7 @@ new Univer({
 
 In order for TypeScript to recognize the `univer:locales` import, you should add a reference to the `src/vite-env.d.ts` file in your project.
 
-```diff title="src/vite-env.d.ts"
+```diff
 /// <reference types="vite/client" />
 + /// <reference types="@univerjs/vite-plugin/types" />
 ```
@@ -162,7 +162,7 @@ new Univer({
 
 In order for TypeScript to recognize the `univer:locales` import, you should add a reference to the `tsconfig.json` file in your project.
 
-```diff title="tsconfig.json"
+```diff
 {
   "compilerOptions": {
 +    "types": ["@univerjs/esbuild-plugin/types"]
@@ -242,7 +242,7 @@ new Univer({
 
 In order for TypeScript to recognize the `univer:locales` import, you should add a reference to the `src/webpack-env.d.ts` file in your project.
 
-```diff title="src/webpack-env.d.ts"
+```diff
 + /// <reference types="@univerjs/webpack-plugin/types" />
 ```
 
