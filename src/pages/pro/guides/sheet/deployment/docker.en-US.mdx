@@ -66,13 +66,19 @@ Default ports for Univer services are listed below:
 | univer-minio | 9000 | Acts as the S3 storage server |
 | univer-client | 3010 | Provides the frontend interface |
 
-## Configuring S3 for Docker Compose
+## Troubleshooting
 
-To ensure the 'Save As' feature works properly on your local network, update the `S3_ENDPOINT_PUBLIC` in your `.env` file to match your machine's IP address.
+### Having trouble starting on a Windows OS?
 
-```bash
-# Original: S3_ENDPOINT_PUBLIC=http://univer-minio:9000
-# Update to: S3_ENDPOINT_PUBLIC=http://192.168.50.172:19000
+The `run.sh` script operates in a `bash` environment. To get it up and running, you'll need to use either Git Bash/MinGW or a WSL environment.
+
+### Can't use the save-as-table function?
+
+You'll need to tweak the `.env` file. Set `S3_ENDPOINT_PUBLIC` to your local network IP to get the `save as` function to work properly.
+
+```diff
+- S3_ENDPOINT_PUBLIC=http://univer-minio:9000
++ S3_ENDPOINT_PUBLIC=http://Your Local Network IP:19000
 ```
 
-If you're still having issues, feel free to <a class="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]" href="mailto:developer@univer.ai?subject=[Univer Pro]">contact us</a> for assistance.
+If you're still running into issues, feel free to [reach out to us](/pro/guides/sheet/introduction#-contact us) for assistance.
