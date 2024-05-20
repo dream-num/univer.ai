@@ -73,6 +73,31 @@ import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
 
 然后创建一个 Univer 实例，并注册这些插件：
 
+```typescript
+const univer = new Univer({
+  theme: defaultTheme,
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+});
+
+univer.registerPlugin(UniverDocsPlugin);
+univer.registerPlugin(UniverDocsUIPlugin, {
+  container: 'univerdoc',
+  layout: {
+    docContainerConfig: {
+      innerLeft: false,
+    },
+  },
+});
+
+univer.createUnit(UniverInstanceType.UNIVER_DOC, {});
+```
+
 export const code = `const univer = new Univer({
   theme: defaultTheme,
 });
@@ -82,7 +107,6 @@ univer.registerPlugin(UniverFormulaEnginePlugin);
 
 univer.registerPlugin(UniverUIPlugin, {
   container: 'app',
-  header: true,
 });
 
 univer.registerPlugin(UniverDocsPlugin);
