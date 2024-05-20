@@ -178,8 +178,39 @@ For detailed field descriptions, please refer to [Configure Cell Data](/guides/c
 
 ### Cell PointerMove
 
+The `onCellPointerMove` event is fired when a pointer changes coordinates.
 ```ts
 univerAPI.getSheetHooks().onCellPointerMove((cell) => {
+  // Get the cell currently pointed to by the mouse
+  console.log(cell);
+})
+```
+
+### Cell PointerOver
+
+The `onCellPointerOver` event is fired when a pointer is moved into a cell's hit test boundaries.
+```ts
+univerAPI.getSheetHooks().onCellPointerOver((cell) => {
+  // Get the cell currently pointed to by the mouse
+  console.log(cell);
+})
+```
+
+### Cell DragOver
+
+The `onCellDragOver` event is fired when an element or text selection is being dragged into a cell's hit test boundaries.
+```ts
+univerAPI.getSheetHooks().onCellDragOver((cell) => {
+  // Get the cell currently pointed to by the mouse
+  console.log(cell);
+})
+```
+
+### Cell Drop
+
+The `onCellDrop` event is fired when an element or text selection is being dropped on the cell.
+```ts
+univerAPI.getSheetHooks().onCellDrop((cell) => {
   // Get the cell currently pointed to by the mouse
   console.log(cell);
 })
