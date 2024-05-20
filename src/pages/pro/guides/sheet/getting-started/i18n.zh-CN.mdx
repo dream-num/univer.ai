@@ -1,0 +1,45 @@
+import { Callout } from 'nextra/components'
+
+# 国际化
+
+Univer Pro 国际化也完全基于 Univer 的国际化机制，使用 Univer Pro 的国际化也非常简单，你只需要补充引入 Univer Pro 插件提供的语言包即可。
+
+Univer Pro 部分涉及 UI 的官方插件中包含了简体中文和英语两种语言，你可以根据需要引入对应的语言包。
+
+<Callout type="info" emoji="ℹ️">
+  如果你对 Univer 的国际化机制还不了解，可以参考 [国际化](/guides/sheet/getting-started/i18n) 章节。
+</Callout>
+
+### 引入语言包
+
+```diff
+import { LocaleType, Tools } from '@univerjs/core';
+import { enUS as UniverDesignEnUS } from '@univerjs/design';
+import { enUS as UniverDocsUIEnUS } from '@univerjs/docs-ui';
+import { enUS as UniverSheetsEnUS } from '@univerjs/sheets';
+import { enUS as UniverSheetsUIEnUS } from '@univerjs/sheets-ui';
+import { enUS as UniverUIEnUS } from '@univerjs/ui';
++ import { enUS as CollaborationClientEnUS } from '@univerjs-pro/collaboration-client';
++ import { enUS as UniverSheetsDataConnectorEnUS } from '@univerjs-pro/sheets-data-connector';
++ import { enUS as SheetsPrintEnUS } from '@univerjs-pro/sheets-print';
++ import { enUS as UniverSheetsExchangeClientEnUS } from '@univerjs-pro/sheets-exchange-client';
+
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: Tools.deepMerge(
+      UniverSheetsEnUS,
+      UniverDocsUIEnUS,
+      UniverSheetsUIEnUS,
+      UniverUIEnUS,
+      UniverDesignEnUS,
++     CollaborationClientEnUS,
++     UniverSheetsDataConnectorEnUS,
++     SheetsPrintEnUS,
++     UniverSheetsExchangeClientEnUS,
+    ),
+  },
+});
+```

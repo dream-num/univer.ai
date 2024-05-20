@@ -8,14 +8,20 @@ If you're eager to dive into Univer Pro, you've found the perfect starting point
 
 Experience Univer Pro online without any installations. Simply click the link below to get started immediately.
 
-For additional online demos, please visit [here](/pro/examples).
+<Cards>
+  <Card
+    icon="📊"
+    title={<span className="">Univer Pro Sheet</span>}
+    href="/pro/examples"
+  />
+</Cards>
 
 ## Creating from a Template
 
 Most of Univer Pro's functionalities depend on the server-side, so the first step is to deploy the server. We recommend deploying quickly using Docker with the following steps:
 
 ```bash
-git clone -b v0.1.10 https://github.com/dream-num/helm-charts --depth=1
+git clone -b v0.1.11 https://github.com/dream-num/helm-charts --depth=1
 cd helm-charts/docker-compose && ./run.sh
 ```
 

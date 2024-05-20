@@ -8,14 +8,20 @@ import { Cards, Card, Tabs } from 'nextra/components'
 
 你可以在线体验 Univer Pro ，无需安装任何东西。只需点击下面的链接，即可立即开始体验 Univer Pro。
 
-在线 DEMO 请访问[这里](/pro/examples)。
+<Cards>
+  <Card
+    icon="📊"
+    title={<span className="">Univer Pro Sheet</span>}
+    href="/pro/examples"
+  />
+</Cards>
 
 ## 从模板创建
 
 Univer Pro 的大部分功能都依赖服务端，如果你想进行自有部署体验或定制化开发，我们推荐用 Docker 快速部署服务端，具体步骤如下：
 
 ```bash
-git clone -b v0.1.10 https://github.com/dream-num/helm-charts --depth=1
+git clone -b v0.1.11 https://github.com/dream-num/helm-charts --depth=1
 cd helm-charts/docker-compose && ./run.sh
 ```
 
