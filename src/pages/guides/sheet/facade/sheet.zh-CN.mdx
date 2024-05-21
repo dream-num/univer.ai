@@ -178,8 +178,39 @@ univerAPI.executeCommand('sheet.command.active-sheet', { unitId: workbookId, sub
 
 ### 单元格 PointerMove
 
+`onCellPointerMove` 事件在鼠标更改坐标时触发
 ```ts
 univerAPI.getSheetHooks().onCellPointerMove((cell) => {
+  // 拿到当前鼠标指向的单元格
+  console.log(cell);
+})
+```
+
+### 单元格 PointerOver
+
+`onCellPointerOver` 事件在鼠标移动到单元格的边界时触发
+```ts
+univerAPI.getSheetHooks().onCellPointerOver((cell) => {
+  // 拿到当前鼠标指向的单元格
+  console.log(cell);
+})
+```
+
+### 单元格 DragOver
+
+`onCellDragOver` 事件在拖动元素或文本到单元格的边界时触发
+```ts
+univerAPI.getSheetHooks().onCellDragOver((cell) => {
+  // 拿到当前鼠标指向的单元格
+  console.log(cell);
+})
+```
+
+### 单元格 Drop
+
+`onCellDrop` 事件在拖动元素或文本到单元格上释放时触发
+```ts
+univerAPI.getSheetHooks().onCellDrop((cell) => {
   // 拿到当前鼠标指向的单元格
   console.log(cell);
 })
