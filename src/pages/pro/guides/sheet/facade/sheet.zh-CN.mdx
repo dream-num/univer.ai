@@ -1,0 +1,54 @@
+# Univer Pro Sheet API
+
+## 导入 XLSX
+
+### 导入 XLSX 得到 Unit Id
+
+在协同环境下，每个表格都有一个 `UnitId`，使用 API `importXLSXToUnitId` 传入 `file` 参数，返回 `UnitId`，可以用这个 `UnitId` 来访问表格。
+`file` 参数是一个 `File` 对象，或者远程文件的 `URL`。
+
+```javascript
+univerAPI.importXLSXToUnitId(file).then((id)=>{
+    console.log(id)
+})
+```
+
+### 导入 XLSX 得到 Workbook Data
+
+如果不在协同环境，单独使用导入 XLSX 能力，使用 API `importXLSXToSnapshot` 返回 [IWorkbookData](/api/core/interfaces/IWorkbookData.html) 格式的表格数据。
+
+```javascript
+univerAPI.importXLSXToSnapshot(file).then((data)=>{
+    console.log(data)
+})
+```
+
+## 导出 XLSX
+
+### 通过 Unit Id 导出 XLSX
+
+使用 API `exportXLSXByUnitId` 传入 `UnitId` 参数, 返回一个 `File` 对象。
+
+```javascript
+univerAPI.exportXLSXByUnitId(UnitId).then((file)=>{
+    console.log(file)
+})
+```
+
+### 通过 Workbook Data 导出 XLSX
+
+使用 API `exportXLSXBySnapshot` 传入 `IWorkbookData` 格式的表格数据, 返回一个 `File` 对象。
+
+> 如何[获取工作簿数据](/guides/sheet/facade/sheet#获取工作簿数据)
+
+```javascript
+univerAPI.exportXLSXBySnapshot(snapshot).then((file)=>{
+    console.log(file)
+})
+```
+
+## 参考
+
+更多 API 请查看：
+
+- [Pro Facade API](/pro/guides/sheet/facade/facade)

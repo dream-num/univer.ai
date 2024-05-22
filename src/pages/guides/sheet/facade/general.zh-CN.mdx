@@ -292,7 +292,7 @@ univerAPI.onCommandExecuted((command, options) => {
 
 如下案例所示，使用 `registerFunction` 将一个 `CUSTOMSUM` 公式所需要的算法、名称、描述一次性注册到公式插件，执行之后就可以使用公式了。在任一空白单元格输入 `=CUSTOMSUM` 可以看到提示。
 
-```js
+```javascript
 univerAPI.registerFunction({
   calculate: [
     [function (...variants) {
@@ -311,7 +311,7 @@ univerAPI.registerFunction({
 
 如果需要卸载所注册的公式，可以调用 `dispose` 方法。
 
-```js
+```javascript
 const functionDisposable = univerAPI.registerFunction({
    // calculate
 })
@@ -322,7 +322,7 @@ functionDisposable.dispose();
 
 如果想要提供更完善的国际化内容和描述，还可以配置 `locales` 和 `description` 字段。如下所示。
 
-```js
+```javascript
 const FUNCTION_NAMES_USER = {
   CUSTOMSUM: 'CUSTOMSUM'
 }

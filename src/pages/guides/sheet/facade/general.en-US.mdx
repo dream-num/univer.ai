@@ -293,7 +293,7 @@ Using  Facade API, you can quickly and easily register custom formulas in the cu
 
 As shown in the following case, use `registerFunction` to register the algorithm, name, and description required by a `CUSTOMSUM` formula into the formula plugin at one time. After execution, the formula can be used. Enter `=CUSTOMSUM` in any blank cell to see the prompt.
 
-```js
+```javascript
 univerAPI.registerFunction({
   calculate: [
     [function (...variants) {
@@ -312,7 +312,7 @@ univerAPI.registerFunction({
 
 If you need to unregister the formula, you can call the `dispose` method.
 
-```js
+```javascript
 const functionDisposable = univerAPI.registerFunction({
    // calculate
 })
@@ -323,7 +323,7 @@ functionDisposable.dispose();
 
 If you want to provide more complete international content and description, you can also configure the `locales` and `description` fields. As follows.
 
-```js
+```javascript
 const FUNCTION_NAMES_USER = {
   USTOMSUM: 'CUSTOMSUM'
 }
