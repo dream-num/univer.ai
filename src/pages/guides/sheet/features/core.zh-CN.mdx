@@ -97,3 +97,22 @@ univer.registerPlugin(UniverSheetsFormulaPlugin);
 
 univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});
 ```
+
+## 配置
+
+`@univerjs/ui` 提供了一些配置项，可用于基础布局的配置。
+
+```typescript
+univer.registerPlugin(UniverUIPlugin, {
+  container?: string | HTMLElement;
+
+  header?: boolean;
+  footer?: boolean;
+  contextMenu?: boolean;
+});
+```
+
+* `container` - 容器元素，可以是字符串或者 DOM 元素。
+* `header` - 是否显示头部。
+* `footer` - 是否显示底部。
+* `contextMenu` - 是否显示右键菜单。

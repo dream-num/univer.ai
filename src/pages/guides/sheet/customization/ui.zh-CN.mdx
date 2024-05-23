@@ -2,9 +2,9 @@ import { Callout } from 'nextra/components'
 
 # 扩展 UI
 
-## 如何在第三方插件中注册自定义菜单？
+## 新增菜单项
 
-如果你在编写一个 Univer 插件，可以很方便的使用依赖注入系统中的 `IMenuService` 来注册菜单项。
+在 Univer 中，无论是顶部的工具栏菜单还是右键菜单，都可以通过编写插件来实现扩展。下面将介绍如何使用依赖注入系统中的 `IMenuService` 来注册菜单项。
 
 ### 1. 插件环境
 
@@ -15,33 +15,33 @@ import { Callout } from 'nextra/components'
 // src/plugin/controllers/custom-menu.controller.ts
 @OnLifecycle(LifecycleStages.Steady, CustomMenuController)
 export class CustomMenuController extends Disposable {
-    constructor(
-        @Inject(Injector) private readonly _injector: Injector,
-        @ICommandService private readonly _commandService: ICommandService,
-        @IMenuService private readonly _menuService: IMenuService,
-        @Inject(ComponentManager) private readonly _componentManager: ComponentManager,
-    ) {
-        super();
+  constructor(
+    @Inject(Injector) private readonly _injector: Injector,
+    @ICommandService private readonly _commandService: ICommandService,
+    @IMenuService private readonly _menuService: IMenuService,
+    @Inject(ComponentManager) private readonly _componentManager: ComponentManager,
+  ) {
+    super();
 
-        this._initCommands();
-        this._registerComponents();
-        this._initMenus();
-    }
+    this._initCommands();
+    this._registerComponents();
+    this._initMenus();
+  }
 
-    /**
-     * register commands
-    */
-    private _initCommands(): void { }
+  /**
+   * register commands
+  */
+  private _initCommands(): void { }
 
-    /**
-     * register icon components
-    */
-    private _registerComponents(): void { }
+  /**
+   * register icon components
+  */
+  private _registerComponents(): void { }
 
-    /**
-     * register menu items
-    */
-    private _initMenus(): void { }
+  /**
+   * register menu items
+  */
+  private _initMenus(): void { }
 }
 ```
 
@@ -51,20 +51,20 @@ export class CustomMenuController extends Disposable {
 const SHEET_CUSTOM_MENU_PLUGIN = 'SHEET_CUSTOM_MENU_PLUGIN';
 
 export class UniverSheetsCustomMenuPlugin extends Plugin {
-    static override type = UniverInstanceType.UNIVER_SHEET;
-    static override pluginName = SHEET_CUSTOM_MENU_PLUGIN;
+  static override type = UniverInstanceType.UNIVER_SHEET;
+  static override pluginName = SHEET_CUSTOM_MENU_PLUGIN;
 
-    constructor(
-        @Inject(Injector) protected readonly _injector: Injector
-    ) {
-        super();
-    }
+  constructor(
+    @Inject(Injector) protected readonly _injector: Injector
+  ) {
+    super();
+  }
 
-    override onStarting(injector: Injector): void {
-        ([
-            [CustomMenuController],
-        ] as Dependency[]).forEach((d) => injector.add(d));
-    }
+  override onStarting(injector: Injector): void {
+    ([
+      [CustomMenuController],
+    ] as Dependency[]).forEach((d) => injector.add(d));
+  }
 }
 ```
 
@@ -74,12 +74,12 @@ export class UniverSheetsCustomMenuPlugin extends Plugin {
 ```ts
 // src/plugin/commands/operations/single-button.operation.ts
 export const SingleButtonOperation: ICommand = {
-    id: 'custom-menu.operation.single-button',
-    type: CommandType.OPERATION,
-    handler: async (accessor: IAccessor) => {
-        alert('Single button operation');
-        return true;
-    },
+  id: 'custom-menu.operation.single-button',
+  type: CommandType.OPERATION,
+  handler: async (accessor: IAccessor) => {
+    alert('Single button operation');
+    return true;
+  },
 };
 ```
 
@@ -87,11 +87,11 @@ export const SingleButtonOperation: ICommand = {
 ```ts
 // src/plugin/controllers/custom-menu.controller.ts
 private _initCommands(): void {
-    [
-        SingleButtonOperation
-    ].forEach((c) => {
-        this.disposeWithMe(this._commandService.registerCommand(c));
-    });
+  [
+    SingleButtonOperation
+  ].forEach((c) => {
+    this.disposeWithMe(this._commandService.registerCommand(c));
+  });
 }
 ```
 
@@ -103,11 +103,11 @@ private _initCommands(): void {
 ```ts
 // src/plugin/components/button-icon/ButtonIcon.tsx
 export function ButtonIcon() {
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2m.16 14a6.981 6.981 0 0 0-5.147 2.256A7.966 7.966 0 0 0 12 20a7.97 7.97 0 0 0 5.167-1.892A6.979 6.979 0 0 0 12.16 16M12 4a8 8 0 0 0-6.384 12.821A8.975 8.975 0 0 1 12.16 14a8.972 8.972 0 0 1 6.362 2.634A8 8 0 0 0 12 4m0 1a4 4 0 1 1 0 8a4 4 0 0 1 0-8m0 2a2 2 0 1 0 0 4a2 2 0 0 0 0-4" />
-        </svg>
-    );
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2m.16 14a6.981 6.981 0 0 0-5.147 2.256A7.966 7.966 0 0 0 12 20a7.97 7.97 0 0 0 5.167-1.892A6.979 6.979 0 0 0 12.16 16M12 4a8 8 0 0 0-6.384 12.821A8.975 8.975 0 0 1 12.16 14a8.972 8.972 0 0 1 6.362 2.634A8 8 0 0 0 12 4m0 1a4 4 0 1 1 0 8a4 4 0 0 1 0-8m0 2a2 2 0 1 0 0 4a2 2 0 0 0 0-4" />
+    </svg>
+  );
 };
 ```
 
@@ -115,7 +115,7 @@ export function ButtonIcon() {
 ```ts
 // src/plugin/controllers/custom-menu.controller.ts
 private _registerComponents(): void {
-    this.disposeWithMe(this._componentManager.register("ButtonIcon", ButtonIcon));
+  this.disposeWithMe(this._componentManager.register("ButtonIcon", ButtonIcon));
 }
 ```
 
@@ -125,19 +125,19 @@ private _registerComponents(): void {
 ```ts
 // src/plugin/locale/zh-CN.ts
 export default {
-    customMenu: {
-        button: '按钮',
-        singleButton: '单个按钮',
-    },
+  customMenu: {
+    button: '按钮',
+    singleButton: '单个按钮',
+  },
 };
 ```
 ```ts
 // src/plugin/locale/en-US.ts
 export default {
-    customMenu: {
-        button: 'Button',
-        singleButton: 'Single button',
-    },
+  customMenu: {
+    button: 'Button',
+    singleButton: 'Single button',
+  },
 };
 ```
 
@@ -145,20 +145,20 @@ export default {
 ```ts
 // src/plugin/plugin.ts
 export class UniverSheetsCustomMenuPlugin extends Plugin {
-    static override type = UniverInstanceType.UNIVER_SHEET;
-    static override pluginName = SHEET_CUSTOM_MENU_PLUGIN;
+  static override type = UniverInstanceType.UNIVER_SHEET;
+  static override pluginName = SHEET_CUSTOM_MENU_PLUGIN;
 
-    constructor(
-        @Inject(Injector) protected readonly _injector: Injector,
-        @Inject(LocaleService) private readonly _localeService: LocaleService
-    ) {
-        super();
+  constructor(
+    @Inject(Injector) protected readonly _injector: Injector,
+    @Inject(LocaleService) private readonly _localeService: LocaleService
+  ) {
+    super();
 
-        this._localeService.load({
-            zhCN,
-            enUS
-        });
-    }
+    this._localeService.load({
+      zhCN,
+      enUS
+    });
+  }
 }
 ```
 
@@ -167,20 +167,20 @@ export class UniverSheetsCustomMenuPlugin extends Plugin {
 整理菜单项所需要的数据，包括菜单项的 id、类型、图标、标题、位置等。
 ```ts
 export function CustomMenuItemSingleButtonFactory(): IMenuButtonItem<string> {
-    return {
-        // 绑定 Command id，单击该按钮将触发该命令
-        id: SingleButtonOperation.id,
-        // 菜单项的类型，在本例中，它是一个按钮
-        type: MenuItemType.BUTTON,
-        // 按钮的图标，需要在 ComponentManager 中注册
-        icon: 'ButtonIcon',
-        // 按钮的提示，优先匹配国际化，如果没有匹配到，将显示原始字符串
-        tooltip: 'customMenu.singleButton',
-        // 按钮的标题，优先匹配国际化，如果没有匹配到，将显示原始字符串
-        title: 'customMenu.button',
-        // 按钮位置，可以使用 MenuPosition 配置在工具栏或右键菜单，如果是表格，还可以使用 SheetMenuPosition 配置在行标题、列标题、工作表右键菜单
-        positions: [MenuPosition.TOOLBAR_START, MenuPosition.CONTEXT_MENU],
-    };
+  return {
+    // 绑定 Command id，单击该按钮将触发该命令
+    id: SingleButtonOperation.id,
+    // 菜单项的类型，在本例中，它是一个按钮
+    type: MenuItemType.BUTTON,
+    // 按钮的图标，需要在 ComponentManager 中注册
+    icon: 'ButtonIcon',
+    // 按钮的提示，优先匹配国际化，如果没有匹配到，将显示原始字符串
+    tooltip: 'customMenu.singleButton',
+    // 按钮的标题，优先匹配国际化，如果没有匹配到，将显示原始字符串
+    title: 'customMenu.button',
+    // 按钮位置，可以使用 MenuPosition 配置在工具栏或右键菜单，如果是表格，还可以使用 SheetMenuPosition 配置在行标题、列标题、工作表右键菜单
+    positions: [MenuPosition.TOOLBAR_START, MenuPosition.CONTEXT_MENU],
+  };
 }
 ```
 
@@ -188,13 +188,13 @@ export function CustomMenuItemSingleButtonFactory(): IMenuButtonItem<string> {
 ```ts
 // src/plugin/controllers/custom-menu.controller.ts
 private _initMenus(): void {
-    (
-        [
-            CustomMenuItemSingleButtonFactory
-        ] as IMenuItemFactory[]
-    ).forEach((factory) => {
-        this.disposeWithMe(this._menuService.addMenuItem(this._injector.invoke(factory)));
-    });
+  (
+    [
+      CustomMenuItemSingleButtonFactory
+    ] as IMenuItemFactory[]
+  ).forEach((factory) => {
+    this.disposeWithMe(this._menuService.addMenuItem(this._injector.invoke(factory)));
+  });
 }
 ```
 
@@ -210,26 +210,41 @@ private _initMenus(): void {
 const CUSTOM_MENU_DROPDOWN_LIST_OPERATION_ID = 'custom-menu.operation.dropdown-list';
 
 export function CustomMenuItemDropdownListMainButtonFactory(): IMenuSelectorItem<string> {
-    return {
-        id: CUSTOM_MENU_DROPDOWN_LIST_OPERATION_ID,
-        type: MenuItemType.SUBITEMS,
-        icon: 'MainButtonIcon',
-        tooltip: 'customMenu.dropdownList',
-        title: 'customMenu.dropdown',
-        positions: [MenuPosition.TOOLBAR_START, MenuPosition.CONTEXT_MENU],
-    };
+  return {
+    id: CUSTOM_MENU_DROPDOWN_LIST_OPERATION_ID,
+    type: MenuItemType.SUBITEMS,
+    icon: 'MainButtonIcon',
+    tooltip: 'customMenu.dropdownList',
+    title: 'customMenu.dropdown',
+    positions: [MenuPosition.TOOLBAR_START, MenuPosition.CONTEXT_MENU],
+  };
 }
 
 export function CustomMenuItemDropdownListFirstItemFactory(): IMenuButtonItem<string> {
-    return {
-        id: DropdownListFirstItemOperation.id,
-        type: MenuItemType.BUTTON,
-        title: 'customMenu.itemOne',
-        icon: 'ItemIcon',
-        positions: [CUSTOM_MENU_DROPDOWN_LIST_OPERATION_ID],
-    };
+  return {
+    id: DropdownListFirstItemOperation.id,
+    type: MenuItemType.BUTTON,
+    title: 'customMenu.itemOne',
+    icon: 'ItemIcon',
+    positions: [CUSTOM_MENU_DROPDOWN_LIST_OPERATION_ID],
+  };
 }
-
 ```
 
 更多细节请参考 [自定义菜单 Playground](/playground?title=Custom+Menu)。
+
+## 定制菜单项（隐藏菜单项）
+
+在 Univer 中定制或隐藏菜单项是一种常见需求，我们为所有包含了菜单项的插件提供了配置项，你可以非常轻松地通过配置项来实现这一需求。
+
+例如，隐藏加粗的菜单项：
+
+```typescript
+univer.registerPlugin(UniverSheetsUIPlugin, {
+  menu: {
+    'sheet.command.set-range-bold': {
+      hidden: true
+    }
+  }
+});
+```

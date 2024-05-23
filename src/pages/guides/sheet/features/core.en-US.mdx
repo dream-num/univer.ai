@@ -97,3 +97,22 @@ univer.registerPlugin(UniverSheetsFormulaPlugin);
 
 univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});
 ```
+
+## Configuration
+
+`@univerjs/ui` provides some configuration options that can be used to configure the basic layout.
+
+```typescript
+univer.registerPlugin(UniverUIPlugin, {
+  container?: string | HTMLElement;
+
+  header?: boolean;
+  footer?: boolean;
+  contextMenu?: boolean;
+});
+```
+
+* `container` - Container element, can be a string or DOM element.
+* `header` - Whether to display the header.
+* `footer` - Whether to display the footer.
+* `contextMenu` - Whether to display the right-click menu.
