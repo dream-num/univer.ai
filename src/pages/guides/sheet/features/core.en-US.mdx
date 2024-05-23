@@ -1,0 +1,99 @@
+import { Tabs } from 'nextra/components'
+
+# Core Features
+
+Core packages implement the basic functions of the spreadsheet, including the core functions of Univer Sheet, such as creating workbooks, cell editing, and cell selection.
+
+## Installation
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Import
+
+```typescript
+import "@univerjs/design/lib/index.css";
+import "@univerjs/ui/lib/index.css";
+import "@univerjs/docs-ui/lib/index.css";
+import "@univerjs/sheets-ui/lib/index.css";
+import "@univerjs/sheets-formula/lib/index.css";
+
+import { Univer } from "@univerjs/core";
+import { defaultTheme } from "@univerjs/design";
+
+import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
+import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
+
+import { UniverUIPlugin } from "@univerjs/ui";
+
+import { UniverDocsPlugin } from "@univerjs/docs";
+import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
+
+import { UniverSheetsPlugin } from "@univerjs/sheets";
+import { UniverSheetsFormulaPlugin } from "@univerjs/sheets-formula";
+import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
+```
+
+## Internationalization
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core'
+import { zhCN as DesignEnUS } from '@univerjs/design';
+import { zhCN as DocsUIEnUS } from '@univerjs/docs-ui';
+import { zhCN as SheetsEnUS } from '@univerjs/sheets';
+import { zhCN as SheetsUIEnUS } from '@univerjs/sheets-ui';
+import { zhCN as UIEnUS } from '@univerjs/ui';
+
+// Above 0.1.13+
+// import DesignEnUS from '@univerjs/design/locale/en-US';
+// import DocsUIEnUS from '@univerjs/docs-ui/locale/en-US';
+// import SheetsEnUS from '@univerjs/sheets/locale/en-US';
+// import SheetsUIEnUS from '@univerjs/sheets-ui/locale/en-US';
+// import UIEnUS from '@univerjs/ui/locale/en-US';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: Tools.deepMerge(
+      DesignEnUS,
+      DocsUIEnUS,
+      SheetsEnUS,
+      SheetsUIEnUS,
+      UIEnUS
+    ),
+  },
+});
+```
+
+## Register
+
+```typescript
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+});
+
+univer.registerPlugin(UniverDocsPlugin, {
+  hasScroll: false,
+});
+univer.registerPlugin(UniverDocsUIPlugin);
+
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
+
+univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});
+```

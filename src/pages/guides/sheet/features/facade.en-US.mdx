@@ -1,0 +1,32 @@
+import { Tabs } from 'nextra/components'
+
+# Facade API
+
+Univer provides a Facade API to simplify the use of Univer.
+
+## Installation
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/facade
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/facade
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Import
+
+```typescript
+import { FUniver } from "@univerjs/facade";
+```
+
+## Register
+
+```typescript
+const univerAPI = FUniver.newAPI(univer);
+```

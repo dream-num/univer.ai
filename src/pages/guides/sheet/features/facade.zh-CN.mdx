@@ -1,0 +1,32 @@
+import { Tabs } from 'nextra/components'
+
+# Facade API
+
+Univer 提供了 Facade API，用于简化 Univer 的使用。
+
+## 安装
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/facade
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/facade
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## 引入
+
+```typescript
+import { FUniver } from "@univerjs/facade";
+```
+
+## 注册
+
+```typescript
+const univerAPI = FUniver.newAPI(univer);
+```

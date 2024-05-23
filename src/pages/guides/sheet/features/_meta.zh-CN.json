@@ -1,0 +1,11 @@
+{
+  "core": "核心功能",
+  "facade": "Facade API",
+  "numfmt": "数字格式",
+  "find-replace": "查找 & 替换",
+  "data-validation": "数据验证",
+  "conditional-formatting": "条件格式",
+  "thread-comment": "评论 / 批注",
+  "uniscript": "Uniscript",
+  "zen-editor": "禅编辑器"
+}

@@ -1,0 +1,11 @@
+{
+  "core": "Core",
+  "facade": "Facade API",
+  "numfmt": "Number Format",
+  "find-replace": "Find & Replace",
+  "data-validation": "Data Validation",
+  "conditional-formatting": "Conditional Formatting",
+  "thread-comment": "Thread Comment",
+  "uniscript": "Uniscript",
+  "zen-editor": "Zen Editor"
+}
