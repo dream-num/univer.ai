@@ -15,6 +15,7 @@ Univer 为每一个插件都提供了 UMD 包。基于插件化的设计，这�
 ```html
 <head>
   <script src="https://unpkg.com/@univerjs/umd/lib/univer.full.umd.js"></script>
+  <script src="https://unpkg.com/@univerjs/umd/lib/locale/zh-CN.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/@univerjs/umd/lib/univer.css">
 </head>
 <body>
@@ -34,6 +35,10 @@ Univer 为每一个插件都提供了 UMD 包。基于插件化的设计，这�
 
     var univer = new UniverCore.Univer({
       theme: UniverDesign.defaultTheme,
+      locale: UniverCore.LocaleType.ZH_CN,
+      locales: {
+        [UniverCore.LocaleType.ZH_CN]: UniverUMD['zh-CN'],
+      },
     });
 
     univer.registerPlugin(UniverEngineRender.UniverRenderEnginePlugin);

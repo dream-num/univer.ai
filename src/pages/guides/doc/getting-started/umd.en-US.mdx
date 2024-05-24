@@ -15,6 +15,7 @@ You can include the UMD bundle in your HTML file using the following script tag:
 ```html
 <head>
   <script src="https://unpkg.com/@univerjs/umd/lib/univer.full.umd.js"></script>
+  <script src="https://unpkg.com/@univerjs/umd/lib/locale/en-US.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/@univerjs/umd/lib/univer.css">
 </head>
 <body>
@@ -34,6 +35,10 @@ You can include the UMD bundle in your HTML file using the following script tag:
 
     var univer = new UniverCore.Univer({
       theme: UniverDesign.defaultTheme,
+      locale: UniverCore.LocaleType.EN_US,
+      locales: {
+        [UniverCore.LocaleType.EN_US]: UniverUMD['en-US'],
+      },
     });
 
     univer.registerPlugin(UniverEngineRender.UniverRenderEnginePlugin);
