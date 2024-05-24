@@ -484,7 +484,4 @@ We chose the OT algorithm instead of CRDT as a solution for the following reason
 
 That being said, since Univer's collaborative editing works as a plugin and is not tightly bound to OT, we are also interested in seeing the community explore CRDT-based spreadsheet collaboration using Univer as a playground.
 
-<span style="color: #666; font-size: 14px;">
-  Author: [Wenzhao Hu](https://github.com/wzhudev), Univer R&D Leader and
-  Architect
-</span>
+<p style="color: #666; font-size: 14px;">作者：<a href="https://github.com/wzhudev">Wenzhao Hu</a>，Tech Leader of Univer</p>

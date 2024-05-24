@@ -496,7 +496,4 @@ Univer 的[架构](https://univer.ai/guides/architecture/architecture/)全面引
 
 话虽如此，由于 Univer 的协同编辑是以插件的形式工作的，并不和 OT 强绑定，我们也乐于见到社区将 Univer 作为 playground 探索基于 CRDT 的电子表格协同。
 
-<span style="color: #666; font-size: 14px;">
-  作者：<a href="https://github.com/wzhudev">Wenzhao Hu</a>，Univer 研发 leader
-  和架构师
-</span>
+<p style="color: #666; font-size: 14px;">作者：<a href="https://github.com/wzhudev">Wenzhao Hu</a>，Univer 技术 Leader</p>
