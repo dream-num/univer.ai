@@ -2,44 +2,45 @@ import { Callout } from 'nextra/components'
 
 # 国际化
 
-Univer Pro 国际化也完全基于 Univer 的国际化机制，使用 Univer Pro 的国际化也非常简单，你只需要补充引入 Univer Pro 插件提供的语言包即可。
+0.1.13 版本后，Univer 不再内置任何语言包，所有语言包均由插件提供。如果你发现手动引入插件的语言包过于繁琐，我们还提供了一个构建工具插件，用于自动引入插件所需的语言包。请参考 [使用 Univer 插件](/guides/sheet/advanced/univer-plugins) 获取更多信息。
 
-Univer Pro 部分涉及 UI 的官方插件中包含了简体中文和英语两种语言，你可以根据需要引入对应的语言包。
-
-<Callout type="info" emoji="ℹ️">
-  如果你对 Univer 的国际化机制还不了解，可以参考 [国际化](/guides/sheet/getting-started/i18n) 章节。
-</Callout>
+如需手动添加语言包，你可以参考以下示例，根据需要引入对应的语言包并组装成对象传入 `Univer` 实例：
 
 ### 引入语言包
 
 ```diff
 import { LocaleType, Tools } from '@univerjs/core';
-import { enUS as UniverDesignEnUS } from '@univerjs/design';
-import { enUS as UniverDocsUIEnUS } from '@univerjs/docs-ui';
-import { enUS as UniverSheetsEnUS } from '@univerjs/sheets';
-import { enUS as UniverSheetsUIEnUS } from '@univerjs/sheets-ui';
-import { enUS as UniverUIEnUS } from '@univerjs/ui';
-+ import { enUS as CollaborationClientEnUS } from '@univerjs-pro/collaboration-client';
-+ import { enUS as UniverSheetsDataConnectorEnUS } from '@univerjs-pro/sheets-data-connector';
-+ import { enUS as SheetsPrintEnUS } from '@univerjs-pro/sheets-print';
-+ import { enUS as UniverSheetsExchangeClientEnUS } from '@univerjs-pro/sheets-exchange-client';
-
+import DesignZhCN from '@univerjs/design/locale/zh-CN';
+import UIZhCN from '@univerjs/ui/locale/zh-CN';
+import DocsUIZhCN from '@univerjs/docs-ui/locale/zh-CN';
+import SheetszhCN from '@univerjs/sheets/locale/zh-CN';
+import SheetsUIzhCN from '@univerjs/sheets-ui/locale/zh-CN';
++ import { enUS as CollaborationClientzhCN } from '@univerjs-pro/collaboration-client/locale/zh-CN';
++ import { enUS as UniverSheetsDataConnectorzhCN } from '@univerjs-pro/sheets-data-connector/locale/zh-CN';
++ import { enUS as SheetsPrintzhCN } from '@univerjs-pro/sheets-print/locale/zh-CN';
++ import { enUS as UniverSheetsExchangeClientzhCN } from '@univerjs-pro/sheets-exchange-client/locale/zh-CN';
 
 const univer = new Univer({
   theme: defaultTheme,
-  locale: LocaleType.EN_US,
+  locale: LocaleType.ZH_CN,
   locales: {
-    [LocaleType.EN_US]: Tools.deepMerge(
-      UniverSheetsEnUS,
-      UniverDocsUIEnUS,
-      UniverSheetsUIEnUS,
-      UniverUIEnUS,
-      UniverDesignEnUS,
-+     CollaborationClientEnUS,
-+     UniverSheetsDataConnectorEnUS,
-+     SheetsPrintEnUS,
-+     UniverSheetsExchangeClientEnUS,
+    [LocaleType.ZH_CN]: Tools.deepMerge(
+      SheetszhCN,
+      DocsUIzhCN,
+      SheetsUIzhCN,
+      UIzhCN,
+      DesignzhCN,
++     CollaborationClientzhCN,
++     SheetsDataConnectorzhCN,
++     SheetsPrintzhCN,
++     SheetsExchangeClientzhCN,
     ),
   },
 });
 ```
+
+Univer 目前支持以下语言：
+
+- zh-CN：简体中文
+- en-US：英文
+- ru-RU：俄文

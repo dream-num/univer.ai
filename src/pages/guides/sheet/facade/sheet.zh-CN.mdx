@@ -19,6 +19,10 @@ Univer 表格相关概念会尽可能与 Excel 保持一致。
 
 export const code = `const univer = new Univer({
   theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: zhCN,
+  },
 });
 
 univer.registerPlugin(UniverRenderEnginePlugin);
@@ -105,6 +109,10 @@ const sheet1 = Object.values(snapshot.sheets).find((sheet) => {
 
 export const code2 = `const univer = new Univer({
   theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: zhCN,
+  },
 });
 
 univer.registerPlugin(UniverRenderEnginePlugin);
@@ -126,10 +134,10 @@ univer.registerPlugin(UniverSheetsFormulaPlugin);
 univer.createUnit(UniverInstanceType.UNIVER_SHEET, {})
 
 const univerAPI = FUniver.newAPI(univer);
-const activeWorkbook = univerAPI.getActiveWorkbook();
+//const activeWorkbook = univerAPI.getActiveWorkbook();
 
 // Create a new sheet that named 'Sheet2' with 10 rows and 10 columns
-const sheet = activeWorkbook.create('Sheet2', 10, 10)`
+//const sheet = activeWorkbook.create('Sheet2', 10, 10)`
 
 <ReactLive code={code2}  />
 
@@ -169,7 +177,7 @@ univerAPI.executeCommand('sheet.command.active-sheet', { unitId: workbookId, sub
 详细的字段说明请参考 [单元格信息](/guides/sheet/configuration/cell-data/)。
 
 <Callout type="info" emoji="ℹ️">
-  对单元格的操作可以看作对行高 1 、列宽 1 的范围进行操作，操作范围请阅读 [范围-range](#范围-range)。
+  对单元格的操作可以看作对行高 1 、列宽 1 的范围进行操作，操作范围请阅读 [范围-range](/guides/sheet/facade/sheet#范围-range)。
 </Callout>
 
 <Callout type="info" emoji="ℹ️">
@@ -220,18 +228,19 @@ univerAPI.getSheetHooks().onCellDrop((cell) => {
 
 ```ts
 univerAPI.onCommandExecuted((command) => {
-    if(command.id === 'sheet.operation.set-cell-edit-visible' && command.params.visible){
-        console.log('Cell edit visible')
-    }
+  if(command.id === 'sheet.operation.set-cell-edit-visible' && command.params.visible){
+    console.log('Cell edit visible')
+  }
 })
 ```
 
 ### 单元格退出编辑
+
 ```ts
 univerAPI.onCommandExecuted((command) => {
-    if(command.id === 'sheet.operation.set-cell-edit-visible' && !command.params.visible){
-        console.log('Cell edit invisible')
-    }
+  if(command.id === 'sheet.operation.set-cell-edit-visible' && !command.params.visible){
+    console.log('Cell edit invisible')
+  }
 })
 ```
 

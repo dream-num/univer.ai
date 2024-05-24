@@ -2,44 +2,45 @@ import { Callout } from 'nextra/components'
 
 # Internationalization
 
-Univer Pro's internationalization is built upon Univer's i18n system. You can easily use Univer Pro's i18n by simply adding the language packs provided by the Univer Pro plugin.
+From version 0.1.13, Univer no longer includes any language packs, all language packs are provided by plugins. If you find it too cumbersome to manually import the language packs required by the plugin, we also provide a build tool plugin that automatically imports the language packs required by the plugin. Please refer to [Using Univer Plugins](/guides/doc/advanced/univer-plugins) for more information.
 
-Some of Univer Pro's official plugins, especially those involving UI elements, include both Simplified Chinese and English language packs. You can choose the language pack that suits your needs.
-
-<Callout type="info" emoji="ℹ️">
-  If you're unfamiliar with Univer's i18n system, you can check out the [Internationalization](/guides/sheet/getting-started/i18n) section for a detailed explanation.
-</Callout>
+If you need to manually add language packs, you can refer to the following example, import the corresponding language pack as needed and assemble it into an object to pass it to the `Univer` instance:
 
 ### Add Language Packs
 
 ```diff
 import { LocaleType, Tools } from '@univerjs/core';
-import { enUS as UniverDesignEnUS } from '@univerjs/design';
-import { enUS as UniverDocsUIEnUS } from '@univerjs/docs-ui';
-import { enUS as UniverSheetsEnUS } from '@univerjs/sheets';
-import { enUS as UniverSheetsUIEnUS } from '@univerjs/sheets-ui';
-import { enUS as UniverUIEnUS } from '@univerjs/ui';
-+ import { enUS as CollaborationClientEnUS } from '@univerjs-pro/collaboration-client';
-+ import { enUS as UniverSheetsDataConnectorEnUS } from '@univerjs-pro/sheets-data-connector';
-+ import { enUS as SheetsPrintEnUS } from '@univerjs-pro/sheets-print';
-+ import { enUS as UniverSheetsExchangeClientEnUS } from '@univerjs-pro/sheets-exchange-client';
-
+import DesignZhCN from '@univerjs/design/locale/en-US';
+import UIZhCN from '@univerjs/ui/locale/en-US';
+import DocsUIZhCN from '@univerjs/docs-ui/locale/en-US';
+import SheetsEnUS from '@univerjs/sheets/locale/en-US';
+import SheetsUIEnUS from '@univerjs/sheets-ui/locale/en-US';
++ import CollaborationClientEnUS from '@univerjs-pro/collaboration-client/locale/en-US';
++ import SheetsDataConnectorEnUS from '@univerjs-pro/sheets-data-connector/locale/en-US';
++ import SheetsPrintEnUS from '@univerjs-pro/sheets-print/locale/en-US';
++ import SheetsExchangeClientEnUS from '@univerjs-pro/sheets-exchange-client/locale/en-US';
 
 const univer = new Univer({
   theme: defaultTheme,
   locale: LocaleType.EN_US,
   locales: {
     [LocaleType.EN_US]: Tools.deepMerge(
-      UniverSheetsEnUS,
-      UniverDocsUIEnUS,
-      UniverSheetsUIEnUS,
-      UniverUIEnUS,
-      UniverDesignEnUS,
+      SheetsEnUS,
+      DocsUIEnUS,
+      SheetsUIEnUS,
+      UIEnUS,
+      DesignEnUS,
 +     CollaborationClientEnUS,
-+     UniverSheetsDataConnectorEnUS,
++     SheetsDataConnectorEnUS,
 +     SheetsPrintEnUS,
-+     UniverSheetsExchangeClientEnUS,
++     SheetsExchangeClientEnUS,
     ),
   },
 });
 ```
+
+Univer currently supports the following languages:
+
+- zh-CN: Simplified Chinese
+- en-US: English
+- ru-RU: Russian

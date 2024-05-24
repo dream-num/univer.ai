@@ -41,13 +41,16 @@ univerAPI.onBeforeCommandExecute((command)=>{
 
 export const code = `const univer = new Univer({
   theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: zhCN,
+  },
 });
 
 univer.registerPlugin(UniverRenderEnginePlugin);
 univer.registerPlugin(UniverFormulaEnginePlugin);
 univer.registerPlugin(UniverUIPlugin, {
   container: 'app',
-  header: false,
   footer: false,
 });
 
@@ -69,7 +72,7 @@ univerAPI.onCommandExecuted((command) => {
   console.log(command);
 });`
 
-<ReactLive code={code}  />
+<ReactLive code={code} />
 
 在命令执行之后，我们也可以向 `FUniver.onCommandExecuted` API 传入一个回调函数来注册自定义的后处理监听器。
 
@@ -113,13 +116,16 @@ setTimeout(()=>{
 
 export const code2 = `const univer = new Univer({
   theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: zhCN,
+  },
 });
 
 univer.registerPlugin(UniverRenderEnginePlugin);
 univer.registerPlugin(UniverFormulaEnginePlugin);
 univer.registerPlugin(UniverUIPlugin, {
   container: 'app',
-  header: false,
   footer: false,
 });
 
@@ -141,7 +147,7 @@ univerAPI.executeCommand('sheet.command.set-range-values', {
   range: { startRow: 0, startColumn: 0, endRow: 0, endColumn: 0 }
 });`
 
-<ReactLive code={code2}  />
+<ReactLive code={code2} />
 
 <Callout type="info" emoji="ℹ️">
   命令由各个插件提供，更多用途的命令请参考各个插件的 API 文档。
@@ -159,13 +165,16 @@ univerAPI.executeCommand('sheet.command.set-range-values', {
 
 export const code3 = `const univer = new Univer({
   theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: zhCN,
+  },
 });
 
 univer.registerPlugin(UniverRenderEnginePlugin);
 univer.registerPlugin(UniverFormulaEnginePlugin);
 univer.registerPlugin(UniverUIPlugin, {
   container: 'app',
-  header: false,
   footer: false,
 });
 
@@ -213,7 +222,7 @@ univerAPI.onBeforeCommandExecute((command) => {
   throw new AbortCommandError();
 })`
 
-<ReactLive code={code3}  />
+<ReactLive code={code3} />
 
 ## 撤销和重做
 

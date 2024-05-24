@@ -105,6 +105,10 @@ univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});
 
 export const code = `const univer = new Univer({
   theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: zhCN,
+  },
 });
 
 univer.registerPlugin(UniverRenderEnginePlugin);

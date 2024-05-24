@@ -2,29 +2,31 @@ import { Callout } from 'nextra/components'
 
 # 国际化
 
-Univer 部分涉及 UI 的官方插件中包含了简体中文和英语两种语言，内部默认使用的是简体中文。
+0.1.13 版本后，Univer 不再内置任何语言包，所有语言包均由插件提供。如果你发现手动引入插件的语言包过于繁琐，我们还提供了一个构建工具插件，用于自动引入插件所需的语言包。请参考 [使用 Univer 插件](/guides/doc/advanced/univer-plugins) 获取更多信息。
 
-<Callout type="info" emoji="ℹ️">
-  **哪些插件包含了国际化语言包？请参考 [插件](/zh-cn/api) 文档中标有 ![i18n](https://img.shields.io/badge/zh--CN%20%7C%20en--US-cornflowerblue?label=i18n) 的插件。**
-</Callout>
-
-如需更改语言，你需要参照以下示例按需引入对应的语言包，并组装成一个对象传入 `Univer` 实例中：
+如需手动添加语言包，你可以参考以下示例，根据需要引入对应的语言包并组装成对象传入 `Univer` 实例：
 
 ```typescript
 import { LocaleType, Tools } from '@univerjs/core';
-import { enUS as UniverDesignEnUS } from '@univerjs/design';
-import { enUS as UniverDocsUIEnUS } from '@univerjs/docs-ui';
-import { enUS as UniverUIEnUS } from '@univerjs/ui';
+import DesignZhCN from '@univerjs/design/locale/zh-CN';
+import DocsUIZhCN from '@univerjs/docs-ui/locale/zh-CN';
+import UIZhCN from '@univerjs/ui/locale/zh-CN';
 
 const univer = new Univer({
   theme: defaultTheme,
-  locale: LocaleType.EN_US,
+  locale: LocaleType.ZH_CN,
   locales: {
-    [LocaleType.EN_US]: Tools.deepMerge(
-      UniverDocsUIEnUS,
-      UniverUIEnUS,
-      UniverDesignEnUS,
+    [LocaleType.ZH_CN]: Tools.deepMerge(
+      DesignZhCN,
+      DocsUIZhCN,
+      UIZhCN,
     ),
   },
 });
 ```
+
+Univer 目前支持以下语言：
+
+- zh-CN：简体中文
+- en-US：英文
+- ru-RU：俄文

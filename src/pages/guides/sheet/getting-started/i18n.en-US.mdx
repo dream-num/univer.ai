@@ -2,33 +2,35 @@ import { Callout } from 'nextra/components'
 
 # Internationalization
 
-Some official plugins of Univer involving UI contain two languages: Simplified Chinese and English. The default language is Simplified Chinese.
+From version 0.1.13, Univer no longer includes any language packs, all language packs are provided by plugins. If you find it too cumbersome to manually import the language packs required by the plugin, we also provide a build tool plugin that automatically imports the language packs required by the plugin. Please refer to [Using Univer Plugins](/guides/sheet/advanced/univer-plugins) for more information.
 
-<Callout type="info" emoji="ℹ️">
-  **Which plugins contain internationalization language packs? Please refer to the [Plugins](/api) document with the ![i18n](https://img.shields.io/badge/zh--CN%20%7C%20en--US-cornflowerblue?label=i18n) badge.**
-</Callout>
-
-For changing the language, you need to refer to the following example to import the corresponding language pack as needed and assemble it into an object to pass it into the `Univer` instance:
+If you need to manually add language packs, you can refer to the following example, import the corresponding language pack as needed and assemble it into an object to pass it to the `Univer` instance:
 
 ```typescript
 import { LocaleType, Tools } from '@univerjs/core';
-import { enUS as UniverDesignEnUS } from '@univerjs/design';
-import { enUS as UniverDocsUIEnUS } from '@univerjs/docs-ui';
-import { enUS as UniverSheetsEnUS } from '@univerjs/sheets';
-import { enUS as UniverSheetsUIEnUS } from '@univerjs/sheets-ui';
-import { enUS as UniverUIEnUS } from '@univerjs/ui';
+import DesignZhCN from '@univerjs/design/locale/en-US';
+import UIZhCN from '@univerjs/ui/locale/en-US';
+import DocsUIZhCN from '@univerjs/docs-ui/locale/en-US';
+import SheetsEnUS from '@univerjs/sheets/locale/en-US';
+import SheetsUIEnUS from '@univerjs/sheets-ui/locale/en-US';
 
 const univer = new Univer({
   theme: defaultTheme,
   locale: LocaleType.EN_US,
   locales: {
     [LocaleType.EN_US]: Tools.deepMerge(
-      UniverSheetsEnUS,
-      UniverDocsUIEnUS,
-      UniverSheetsUIEnUS,
-      UniverUIEnUS,
-      UniverDesignEnUS,
+      SheetsEnUS,
+      DocsUIEnUS,
+      SheetsUIEnUS,
+      UIEnUS,
+      DesignEnUS,
     ),
   },
 });
 ```
+
+Univer currently supports the following languages:
+
+- zh-CN: Simplified Chinese
+- en-US: English
+- ru-RU: Russian

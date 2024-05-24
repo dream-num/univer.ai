@@ -76,6 +76,10 @@ Then create a Univer instance and register these plugins:
 ```typescript
 const univer = new Univer({
   theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: enUS,
+  },
 });
 
 univer.registerPlugin(UniverRenderEnginePlugin);
@@ -83,6 +87,7 @@ univer.registerPlugin(UniverFormulaEnginePlugin);
 
 univer.registerPlugin(UniverUIPlugin, {
   container: 'app',
+  footer: false,
 });
 
 univer.registerPlugin(UniverDocsPlugin);
@@ -100,6 +105,10 @@ univer.createUnit(UniverInstanceType.UNIVER_DOC, {});
 
 export const code = `const univer = new Univer({
   theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: enUS,
+  },
 });
 
 univer.registerPlugin(UniverRenderEnginePlugin);
@@ -107,6 +116,7 @@ univer.registerPlugin(UniverFormulaEnginePlugin);
 
 univer.registerPlugin(UniverUIPlugin, {
   container: 'app',
+  footer: false,
 });
 
 univer.registerPlugin(UniverDocsPlugin);

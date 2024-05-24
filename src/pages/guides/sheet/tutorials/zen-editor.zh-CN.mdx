@@ -28,10 +28,18 @@ import ReactLive from '@/official-site/components/ReactLive'
 
 ```typescript
 import { UniverSheetsZenEditorPlugin } from '@univerjs/sheets-zen-editor';
+import SheetsZenEditorZhCN from '@univerjs/sheets-zen-editor/locale/zh-CN';
 import '@univerjs/sheets-zen-editor/lib/index.css';
 
 const univer = new Univer({
   theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: Tools.deepMerge(
+      // ...,
+      SheetsZenEditorZhCN
+    ),
+  },
 });
 
 univer.registerPlugin(UniverSheetsZenEditorPlugin);
@@ -43,6 +51,10 @@ univer.registerPlugin(UniverSheetsZenEditorPlugin);
 
 export const code = `const univer = new Univer({
   theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: zhCN,
+  },
 });
 
 univer.registerPlugin(UniverRenderEnginePlugin);

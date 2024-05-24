@@ -43,14 +43,16 @@ The following example listens for commands in a Univer form using `FUniver.onCom
 
 export const code = `const univer = new Univer({
   theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: enUS,
+  },
 });
 
 univer.registerPlugin(UniverRenderEnginePlugin);
 univer.registerPlugin(UniverFormulaEnginePlugin);
 univer.registerPlugin(UniverUIPlugin, {
   container: 'app',
-  header: false,
-  footer: false,
 });
 
 univer.registerPlugin(UniverDocsPlugin, {
@@ -71,7 +73,7 @@ univerAPI.onCommandExecuted((command) => {
   console.log(command);
 });`
 
-<ReactLive code={code}  />
+<ReactLive code={code} />
 
 After the command is executed, we can also pass a callback function to the `FUniver.onCommandExecuted` API to register a custom post-processing listener.
 
@@ -115,14 +117,16 @@ The following example demonstrates how to use `FUniver.executeCommand` to change
 
 export const code2 = `const univer = new Univer({
   theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: enUS,
+  },
 });
 
 univer.registerPlugin(UniverRenderEnginePlugin);
 univer.registerPlugin(UniverFormulaEnginePlugin);
 univer.registerPlugin(UniverUIPlugin, {
   container: 'app',
-  header: false,
-  footer: false,
 });
 
 univer.registerPlugin(UniverDocsPlugin, {
@@ -143,7 +147,7 @@ univerAPI.executeCommand('sheet.command.set-range-values', {
   range: { startRow: 0, startColumn: 0, endRow: 0, endColumn: 0 }
 });`
 
-<ReactLive code={code2}  />
+<ReactLive code={code2} />
 
 <Callout type="info" emoji="ℹ️">
   Commands are provided by each plugin, please refer to the API documentation of each plugin for more useful commands.
@@ -161,14 +165,16 @@ The following example demonstrates how to prevent the user from editing by block
 
 export const code3 = `const univer = new Univer({
   theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: enUS,
+  },
 });
 
 univer.registerPlugin(UniverRenderEnginePlugin);
 univer.registerPlugin(UniverFormulaEnginePlugin);
 univer.registerPlugin(UniverUIPlugin, {
   container: 'app',
-  header: false,
-  footer: false,
 });
 
 univer.registerPlugin(UniverDocsPlugin, {
@@ -215,7 +221,7 @@ univerAPI.onBeforeCommandExecute((command) => {
   throw new AbortCommandError();
 })`
 
-<ReactLive code={code3}  />
+<ReactLive code={code3} />
 
 ## undo/redo
 

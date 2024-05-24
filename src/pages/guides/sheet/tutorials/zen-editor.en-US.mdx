@@ -29,24 +29,18 @@ Simply import the plugin in your main file and register it to the Univer instanc
 And don't forget to import the language pack.
 
 ```typescript
-import {
-  UniverSheetsZenEditorPlugin,
-  enUS as UniverSheetsZenEditorEnUS
-} from '@univerjs/sheets-zen-editor';
+import { UniverSheetsZenEditorPlugin } from '@univerjs/sheets-zen-editor';
+import SheetsZenEditorEnUS from '@univerjs/sheets-zen-editor/locale/en-US';
 import '@univerjs/sheets-zen-editor/lib/index.css';
 
 const univer = new Univer({
   theme: defaultTheme,
   locale: LocaleType.EN_US,
   locales: {
-    [LocaleType.EN_US]: {
-      ...UniverSheetsEnUS,
-      ...UniverDocsUIEnUS,
-      ...UniverSheetsUIEnUS,
-      ...UniverUIEnUS,
-      ...UniverDesignEnUS,
-      ...UniverSheetsZenEditorEnUS,
-    },
+    [LocaleType.EN_US]: Tools.deepMerge(
+      // ...,
+      SheetsZenEditorEnUS
+    ),
   },
 });
 
@@ -61,14 +55,7 @@ export const code = `const univer = new Univer({
   theme: defaultTheme,
   locale: LocaleType.EN_US,
   locales: {
-    [LocaleType.EN_US]: {
-      ...UniverSheetsEnUS,
-      ...UniverDocsUIEnUS,
-      ...UniverSheetsUIEnUS,
-      ...UniverUIEnUS,
-      ...UniverDesignEnUS,
-      ...UniverSheetsZenEditorEnUS,
-    },
+    [LocaleType.EN_US]: enUS,
   },
 });
 

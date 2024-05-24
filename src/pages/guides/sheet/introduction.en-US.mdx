@@ -68,8 +68,11 @@ export const features = [{
 #### Showcases
 
 export const code = `const univer = new Univer({
-  locale: LocaleType.en_US,
   theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: enUS,
+  },
 });
 
 univer.registerPlugin(UniverRenderEnginePlugin);
