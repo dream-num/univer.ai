@@ -11,19 +11,19 @@ import { LocaleType, Tools } from '@univerjs/core';
 import DesignZhCN from '@univerjs/design/locale/zh-CN';
 import UIZhCN from '@univerjs/ui/locale/zh-CN';
 import DocsUIZhCN from '@univerjs/docs-ui/locale/zh-CN';
-import SheetsEnUS from '@univerjs/sheets/locale/zh-CN';
-import SheetsUIEnUS from '@univerjs/sheets-ui/locale/zh-CN';
+import SheetsZhCN from '@univerjs/sheets/locale/zh-CN';
+import SheetsUIZhCN from '@univerjs/sheets-ui/locale/zh-CN';
 
 const univer = new Univer({
   theme: defaultTheme,
   locale: LocaleType.ZH_CN,
   locales: {
     [LocaleType.ZH_CN]: Tools.deepMerge(
-      SheetsEnUS,
-      DocsUIEnUS,
-      SheetsUIEnUS,
-      UIEnUS,
-      DesignEnUS,
+      SheetsZhCN,
+      DocsUIZhCN,
+      SheetsUIZhCN,
+      UIZhCN,
+      DesignZhCN,
     ),
   },
 });

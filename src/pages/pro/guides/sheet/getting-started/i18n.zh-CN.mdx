@@ -13,27 +13,27 @@ import { LocaleType, Tools } from '@univerjs/core';
 import DesignZhCN from '@univerjs/design/locale/zh-CN';
 import UIZhCN from '@univerjs/ui/locale/zh-CN';
 import DocsUIZhCN from '@univerjs/docs-ui/locale/zh-CN';
-import SheetszhCN from '@univerjs/sheets/locale/zh-CN';
-import SheetsUIzhCN from '@univerjs/sheets-ui/locale/zh-CN';
-+ import { enUS as CollaborationClientzhCN } from '@univerjs-pro/collaboration-client/locale/zh-CN';
-+ import { enUS as UniverSheetsDataConnectorzhCN } from '@univerjs-pro/sheets-data-connector/locale/zh-CN';
-+ import { enUS as SheetsPrintzhCN } from '@univerjs-pro/sheets-print/locale/zh-CN';
-+ import { enUS as UniverSheetsExchangeClientzhCN } from '@univerjs-pro/sheets-exchange-client/locale/zh-CN';
+import SheetsZhCN from '@univerjs/sheets/locale/zh-CN';
+import SheetsUIZhCN from '@univerjs/sheets-ui/locale/zh-CN';
++ import CollaborationClientZhCN from '@univerjs-pro/collaboration-client/locale/zh-CN';
++ import SheetsDataConnectorZhCN from '@univerjs-pro/sheets-data-connector/locale/zh-CN';
++ import SheetsPrintZhCN from '@univerjs-pro/sheets-print/locale/zh-CN';
++ import SheetsExchangeClientZhCN from '@univerjs-pro/sheets-exchange-client/locale/zh-CN';
 
 const univer = new Univer({
   theme: defaultTheme,
   locale: LocaleType.ZH_CN,
   locales: {
     [LocaleType.ZH_CN]: Tools.deepMerge(
-      SheetszhCN,
-      DocsUIzhCN,
-      SheetsUIzhCN,
-      UIzhCN,
-      DesignzhCN,
-+     CollaborationClientzhCN,
-+     SheetsDataConnectorzhCN,
-+     SheetsPrintzhCN,
-+     SheetsExchangeClientzhCN,
+      SheetsZhCN,
+      DocsUIZhCN,
+      SheetsUIZhCN,
+      UIZhCN,
+      DesignZhCN,
++     CollaborationClientZhCN,
++     SheetsDataConnectorZhCN,
++     SheetsPrintZhCN,
++     SheetsExchangeClientZhCN,
     ),
   },
 });
@@ -42,5 +42,5 @@ const univer = new Univer({
 Univer 目前支持以下语言：
 
 - zh-CN：简体中文
-- en-US：英文
+- zh-CN：英文
 - ru-RU：俄文
