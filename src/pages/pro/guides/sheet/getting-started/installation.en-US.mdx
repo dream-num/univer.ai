@@ -20,12 +20,12 @@ You can install Univer Pro plugins using the following command:
 <Tabs items={['pnpm', 'npm']}>
   <Tabs.Tab label="pnpm">
     ```shell
-    pnpm add @univerjs-pro/collaboration @univerjs-pro/collaboration-client @univerjs-pro/print @univerjs-pro/sheets-print @univerjs-pro/live-share @univerjs-pro/sheets-exchange-client @univerjs-pro/sheets-data-connector
+    pnpm add @univerjs-pro/collaboration @univerjs-pro/collaboration-client @univerjs-pro/print @univerjs-pro/sheets-print @univerjs-pro/live-share @univerjs-pro/sheets-exchange-client
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
     ```shell
-    npm install @univerjs-pro/collaboration @univerjs-pro/collaboration-client @univerjs-pro/print @univerjs-pro/sheets-print @univerjs-pro/live-share @univerjs-pro/sheets-exchange-client @univerjs-pro/sheets-data-connector
+    npm install @univerjs-pro/collaboration @univerjs-pro/collaboration-client @univerjs-pro/print @univerjs-pro/sheets-print @univerjs-pro/live-share @univerjs-pro/sheets-exchange-client
     ```
   </Tabs.Tab>
 </Tabs>
@@ -47,7 +47,7 @@ For a more convenient development experience in subsequent development, we also 
 
 For more information on `@univerjs-pro/facade`, please refer to the [Pro Facade](/pro/guides/sheet/facade/facade) section.
 
-## 使用
+## How to Use
 
 <Callout type="info" emoji="ℹ️">
   The order in which you import style files is important. Make sure you import the `@univerjs/*` CSS styles before importing the style files for other `@univerjs-pro` plugins.
@@ -63,8 +63,8 @@ import "@univerjs/sheets-ui/lib/index.css";
 import "@univerjs/sheets-formula/lib/index.css";
 + import '@univerjs-pro/collaboration-client/lib/index.css'
 + import '@univerjs-pro/live-share/lib/index.css'
-+ import '@univerjs-pro/sheets-data-connector/lib/index.css'
 + import '@univerjs-pro/sheets-print/lib/index.css'
++ import '@univerjs-pro/sheets-exchange-client/lib/index.css'
 
 import { Univer } from "@univerjs/core";
 import { defaultTheme } from "@univerjs/design";
@@ -84,7 +84,6 @@ import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
 + import { CollaborationPlugin } from '@univerjs-pro/collaboration';
 + import { CollaborationClientPlugin } from '@univerjs-pro/collaboration-client';
 + import { LiveSharePlugin } from '@univerjs-pro/live-share';
-+ import { UniverSheetsDataConnectorPlugin } from '@univerjs-pro/sheets-data-connector';
 + import { UniverSheetsConditionalFormattingUIPlugin } from '@univerjs/sheets-conditional-formatting-ui';
 + import { SheetsPrintPlugin } from '@univerjs-pro/sheets-print';
 + import { UniverSheetsExchangeClientPlugin } from '@univerjs-pro/sheets-exchange-client';
@@ -95,6 +94,8 @@ and register these Pro plugins:
 ```diff
 const univer = new Univer({
   theme: defaultTheme,
+  locale: LocaleType.zh_CN,
+  locales,
 });
 
 univer.registerPlugin(UniverRenderEnginePlugin);
@@ -119,8 +120,7 @@ univer.registerPlugin(UniverSheetsFormulaPlugin);
 + univer.registerPlugin(CollaborationPlugin);
 + univer.registerPlugin(CollaborationClientPlugin);
 + univer.registerPlugin(LiveSharePlugin);
-+ // data connector
-+ univer.registerPlugin(UniverSheetsDataConnectorPlugin);
+
 + // print
 + univer.registerPlugin(SheetsPrintPlugin);
 + // exchange
