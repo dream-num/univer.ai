@@ -1,0 +1,68 @@
+import { Tabs } from 'nextra/components'
+
+# Import/Export
+
+We provide the ability to import and export Excel files through the server interface. Install this plugin to quickly access the import and export capabilities in Univer.
+
+> Currently supported format is `.xlsx`
+
+## Installation
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs-pro/sheets-exchange-client
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs-pro/sheets-exchange-client
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Import
+
+```typescript
+import '@univerjs-pro/sheets-exchange-client/lib/index.css';
+
+import { UniverSheetsExchangeClientPlugin } from '@univerjs-pro/sheets-exchange-client';
+```
+
+## Internationalization
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core'
+import SheetsExchangeClientEnUS from '@univerjs-pro/sheets-exchange-client/locale/en-US';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: Tools.deepMerge(
+      // Other plugins' internationalization
+      SheetsExchangeClientEnUS
+    ),
+  },
+});
+```
+
+## Register
+
+```typescript
+univer.registerPlugin(UniverSheetsExchangeClientPlugin);
+```
+
+## Configuration
+
+If the import/export interface has not changed, you do not need to configure it. If there are changes, you can configure the interface address as follows:
+
+```typescript
+const injector = univer.__getInjector();
+const configService = injector.get(IConfigService);
+configService.setConfig(EXCHANGE_UPLOAD_FILE_SERVER_URL_KEY, `http://localhost:3010/universer-api/stream/file/upload`);
+configService.setConfig(EXCHANGE_IMPORT_SERVER_URL_KEY, `http://localhost:3010/universer-api/exchange/{type}/import`);
+configService.setConfig(EXCHANGE_EXPORT_SERVER_URL_KEY, `http://localhost:3010/universer-api/exchange/{type}/export`);
+configService.setConfig(EXCHANGE_GET_TASK_SERVER_URL_KEY, `http://localhost:3010/universer-api/exchange/task/{taskID}`);
+configService.setConfig(EXCHANGE_SIGN_URL_SERVER_URL_KEY, `http://localhost:3010/universer-api/file/{fileID}/sign-url`);
+```
