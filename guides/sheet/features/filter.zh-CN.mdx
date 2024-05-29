@@ -1,0 +1,53 @@
+import { Tabs } from 'nextra/components'
+
+# 筛选
+
+筛选插件提供了对单元格的筛选功能。
+
+## 安装
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/sheets-filter @univerjs/sheets-filter-ui
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/sheets-filter @univerjs/sheets-filter-ui
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## 引入
+
+```typescript
+import '@univerjs/sheets-filter-ui/lib/index.css';
+
+import { UniverSheetsFilterPlugin } from '@univerjs/sheets-filter';
+import { UniverSheetsFilterUIPlugin } from '@univerjs/sheets-filter-ui';
+```
+
+## 国际化
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core'
+import SheetsFilterUIZhCN from '@univerjs/sheets-filter-ui/locale/zh-CN';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: Tools.deepMerge(
+      SheetsFilterUIZhCN
+    ),
+  },
+});
+```
+
+## 注册
+
+```typescript
+univer.registerPlugin(UniverSheetsFilterPlugin);
+univer.registerPlugin(UniverSheetsFilterUIPlugin);
+```

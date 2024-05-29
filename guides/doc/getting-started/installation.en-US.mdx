@@ -1,0 +1,139 @@
+import { Callout, Tabs } from 'nextra/components'
+import ReactLive from '@/official-site/components/ReactLive'
+
+# Installation & Usage
+
+We recommend using build tools such as [Vite](https://vitejs.dev/), [esbuild](https://esbuild.github.io/), or [Webpack 5](https://webpack.js.org/) that have good support for ES Modules to build Univer applications. If you are using other build tools like Webpack 4, you may require some additional configurations. For more information, please refer to [Read More](/guides/quickstart#read-more) and the [Troubleshooting](/guides/troubleshooting).
+
+## Installation
+
+To facilitate the deployment of Univer's frontend, a variety of npm packages are utilized. You may install the requisite packages based on your specific requirements.
+
+The following example will guide you through which plugins are necessary and how to install them:
+
+<Callout type="info" emoji="ℹ️">
+  - If you are using npm, make sure you are using npm@7 or higher. This is because npm@3 ~ npm@6 will not correctly install `peerDependencies`[^1].
+  - If you are using pnpm, make sure you are using pnpm@8 or higher. If you are using pnpm@6 ~ pnpm@7, you can try configuring `auto-install-peers=true` [^2] to resolve dependency installation issues.
+</Callout>
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/ui
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/ui
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+If you want to get a more convenient development experience in the future, we also recommend you to install `@univerjs/facade`:
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/facade
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/facade
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+For more information about `@univerjs/facade`, please refer to the [Facade](/guides/sheet/facade/facade) section.
+
+## Usage
+
+<Callout type="info" emoji="ℹ️">
+  The order of importing the style files is important. Make sure you import the CSS styles of `@univerjs/design` and `@univerjs/ui` before importing the CSS styles of other plugins.
+</Callout>
+
+You need to import Univer's css files and some necessary plugins in your project:
+
+```typescript
+import "@univerjs/design/lib/index.css";
+import "@univerjs/ui/lib/index.css";
+import "@univerjs/docs-ui/lib/index.css";
+
+import { Univer } from "@univerjs/core";
+import { defaultTheme } from "@univerjs/design";
+
+import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
+import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
+
+import { UniverUIPlugin } from "@univerjs/ui";
+
+import { UniverDocsPlugin } from "@univerjs/docs";
+import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
+```
+
+Then create a Univer instance and register these plugins:
+
+```typescript
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: enUS,
+  },
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  footer: false,
+});
+
+univer.registerPlugin(UniverDocsPlugin);
+univer.registerPlugin(UniverDocsUIPlugin, {
+  container: 'univerdoc',
+  layout: {
+    docContainerConfig: {
+      innerLeft: false,
+    },
+  },
+});
+
+univer.createUnit(UniverInstanceType.UNIVER_DOC, {});
+```
+
+export const code = `const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: enUS,
+  },
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  footer: false,
+});
+
+univer.registerPlugin(UniverDocsPlugin);
+univer.registerPlugin(UniverDocsUIPlugin, {
+  container: 'univerdoc',
+  layout: {
+    docContainerConfig: {
+      innerLeft: false,
+    },
+  },
+});
+
+univer.createUnit(UniverInstanceType.UNIVER_DOC, {});`
+
+<ReactLive code={code} />
+
+---
+
+[^1]: https://blog.npmjs.org/post/110924823920/npm-weekly-5
+[^2]: https://pnpm.io/npmrc#auto-install-peers
