@@ -55,7 +55,7 @@ const saveData = activeWorkbook.getSnapshot();
 
 <Callout type="info" emoji="ℹ️">
   ```ts
-  const workbook = univer.createUniverSheet({});
+  const workbook = univer.createUnit(UniverInstanceType.UNIVER_SHEET, {})
   const saveData = workbook.save();
   ```
 </Callout>
