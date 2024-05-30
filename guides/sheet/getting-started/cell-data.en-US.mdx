@@ -2,7 +2,7 @@
 
 ## Cell Position
 
-The cell data in Univer Sheet is stored in the [cellData](/api/core/interfaces/IWorksheetData.html#cellData) field of [IWorksheetData](/api/core/interfaces/IWorksheetData.html), cellData is a two-dimensional Map structure, with the first and second indexes representing the row number and column number respectively, and each cell is an [ICellData](/api/core/interfaces/ICellData.html) object, which contains all the cell information such as cell value, style, type, etc.
+The cell data in Univer Sheet is stored in the [cellData](/typedoc/@univerjs/core/interfaces/IWorksheetData#cellData) field of [IWorksheetData](/typedoc/@univerjs/core/interfaces/IWorksheetData), cellData is a two-dimensional Map structure, with the first and second indexes representing the row number and column number respectively, and each cell is an [ICellData](/typedoc/@univerjs/core/interfaces/ICellData) object, which contains all the cell information such as cell value, style, type, etc.
 
 The structure of cellData is as follows
 
@@ -42,7 +42,7 @@ The complete cell information is as follows.
 | si | Formula id |
 | custom | Custom field |
 
-Check out the type information of each field of [ICellData](/api/core/interfaces/ICellData.html).
+Check out the type information of each field of [ICellData](/typedoc/@univerjs/core/interfaces/ICellData).
 
 ### Cell Original Value
 
@@ -66,7 +66,7 @@ Here we show two different cell values.
 
 `cellData.s` stores the style id or style object of the cell.
 
-If `s` is a string, it represents a style id. Univer Sheet supports reference optimization for styles. The repeated style objects are stored in the [styles](/api/core/interfaces/IWorkbookData.html#styles) field of IWorkbookData, which is a Map structure, each key is the style id, and the value is the style object.
+If `s` is a string, it represents a style id. Univer Sheet supports reference optimization for styles. The repeated style objects are stored in the [styles](/typedoc/@univerjs/core/interfaces/IWorkbookData#styles) field of IWorkbookData, which is a Map structure, each key is the style id, and the value is the style object.
 
 ```typescript
 // IWorkbookData
@@ -102,7 +102,7 @@ Then store the id in the cell style to achieve the purpose of style reuse.
 }
 ```
 
-If `s` is an object, it represents a complete cell style object [IStyleData](/api/core/interfaces/IStyleData.html).
+If `s` is an object, it represents a complete cell style object [IStyleData](/typedoc/@univerjs/core/interfaces/IStyleData).
 
 The complete style field is as follows.
 
@@ -126,7 +126,7 @@ The complete style field is as follows.
 | tb | Truncate overflow |
 | pd | Padding |
 
-You can check out the type information of each field of [IStyleData](/api/core/interfaces/IStyleData.html).
+You can check out the type information of each field of [IStyleData](/typedoc/@univerjs/core/interfaces/IStyleData).
 
 #### Font
 
@@ -379,7 +379,7 @@ You can check out the type information of each field of [IStyleData](/api/core/i
 
 ### Cell Type
 
-`cellData.t` is an enumeration [CellValueType](/api/core/enums/CellValueType.html), represents the type of the cell. `1` means string, `2` means number, `3` means boolean, `4` means force text. Univer will automatically recognize it if it is not set.
+`cellData.t` is an enumeration [CellValueType](/typedoc/@univerjs/core/enumerations/CellValueType), represents the type of the cell. `1` means string, `2` means number, `3` means boolean, `4` means force text. Univer will automatically recognize it if it is not set.
 
 If the cell is a boolean type, the value of `cellData.v` is stored as `0` or `1`, `0` means false, `1` means true.
 
@@ -407,7 +407,7 @@ If the cell is a boolean type, the value of `cellData.v` is stored as `0` or `1`
 
 ### Rich Text
 
-`cellData.p` is an object that represents rich text and is also a Univer Doc. Learn more about [IDocumentData](/api/core/interfaces/IDocumentData.html).
+`cellData.p` is an object that represents rich text and is also a Univer Doc. Learn more about [IDocumentData](/typedoc/@univerjs/core/interfaces/IDocumentData).
 
 ### Formula
 

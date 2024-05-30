@@ -105,7 +105,7 @@ Refresh the page, you can see that the `onStarting` log is output, indicating th
   The mounting order of plugins depends on the internal dependency relationship of the plugin. If plugin A depends on plugin B, then plugin B must be mounted to the Univer instance before plugin A.
 </Callout>
 
-Document：[Univer.registerPlugin](/api/core/classes/Univer.html#registerPlugin)
+Document：[Univer.registerPlugin](/typedoc/@univerjs/core/classes/Univer#registerplugin)
 
 ## Develop the plugin
 
@@ -222,8 +222,8 @@ Fresh the page, you can see that after clicking the button, the console outputs 
 
 Reference document：
 
-- [ICommandService.registerCommandHandler](/api/core/interfaces/ICommandService.html#registerCommandHandler)
-- [ICommand](/api/core/interfaces/ICommand.html)
+- [ICommandService.registerCommandHandler](/typedoc/@univerjs/core/interfaces/ICommandService#registerCommandHandler)
+- [ICommand](/typedoc/@univerjs/core/interfaces/ICommand)
 
 ### 3. Convert CSV to ICellData
 
@@ -249,7 +249,7 @@ function parseCSVToUniverData(csv: string[][]): ICellData[][] {
 // ...omit other code
 ```
 
-Reference document：[ICellData](/api/core/interfaces/ICellData.html)
+Reference document：[ICellData](/typedoc/@univerjs/core/interfaces/ICellData)
 
 ### 4. Set the data to the table
 
@@ -307,7 +307,7 @@ univer is still in its infancy, if you have any questions or suggestions, please
 ## Reference document
 
 - [Plugin Lifecycle](/guides/concepts-and-architecture/architecture/#plugin-life-cycle)
-- [Univer.registerPlugin](/api/core/classes/Univer.html#registerPlugin)
-- [ICellData](/api/core/interfaces/ICellData.html)
-- [ICommandService.registerCommandHandler](/api/core/interfaces/ICommandService.html#registerCommandHandler)
-- [ICommand](/api/core/interfaces/ICommand.html)
+- [Univer.registerPlugin](/typedoc/@univerjs/core/classes/Univer#registerplugin)
+- [ICellData](/typedoc/@univerjs/core/interfaces/ICellData)
+- [ICommandService.registerCommandHandler](/typedoc/@univerjs/core/interfaces/ICommandService#registerCommandHandler)
+- [ICommand](/typedoc/@univerjs/core/interfaces/ICommand)

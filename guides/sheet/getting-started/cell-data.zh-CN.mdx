@@ -2,7 +2,7 @@
 
 ## 单元格位置
 
-Univer Sheet 中的单元格数据存储在 [IWorksheetData](/api/core/interfaces/IWorksheetData.html) 的 [cellData](/api/core/interfaces/IWorksheetData.html#cellData) 字段中，cellData 是一个二维 Map 结构，一二级索引分别代表行号和列号，每一个单元格是一个 [ICellData](/api/core/interfaces/ICellData.html) 对象，包含了单元格值、样式、类型等所有单元格信息。
+Univer Sheet 中的单元格数据存储在 [IWorksheetData](/typedoc/@univerjs/core/interfaces/IWorksheetData) 的 [cellData](/typedoc/@univerjs/core/interfaces/IWorksheetData#cellData) 字段中，cellData 是一个二维 Map 结构，一二级索引分别代表行号和列号，每一个单元格是一个 [ICellData](/typedoc/@univerjs/core/interfaces/ICellData) 对象，包含了单元格值、样式、类型等所有单元格信息。
 
 cellData 的结构如下
 
@@ -42,7 +42,7 @@ cellData 的结构如下
 | si | 公式 ID |
 | custom | 自定义字段 |
 
-详细了解 [ICellData](/api/core/interfaces/ICellData.html) 每个字段的类型信息。
+详细了解 [ICellData](/typedoc/@univerjs/core/interfaces/ICellData) 每个字段的类型信息。
 
 ### 单元格原始值
 
@@ -66,7 +66,7 @@ cellData 的结构如下
 
 `cellData.s` 存储了单元格的样式 id 或者样式对象。
 
-如果 `s` 是一个字符串，表示样式 id。Univer Sheet 支持对样式做引用优化，将重复的样式对象存储在 IWorkbookData 的 [styles](/api/core/interfaces/IWorkbookData.html#styles) 字段中，是一个 Map 结构，每个 key 是样式 id，value 是样式对象。
+如果 `s` 是一个字符串，表示样式 id。Univer Sheet 支持对样式做引用优化，将重复的样式对象存储在 IWorkbookData 的 [styles](/typedoc/@univerjs/core/interfaces/IWorkbookData#styles) 字段中，是一个 Map 结构，每个 key 是样式 id，value 是样式对象。
 
 ```typescript
 // IWorkbookData
@@ -102,7 +102,7 @@ cellData 的结构如下
 }
 ```
 
-如果 `s` 是一个对象，则表示一个完整的单元格样式对象 [IStyleData](/api/core/interfaces/IStyleData.html)。
+如果 `s` 是一个对象，则表示一个完整的单元格样式对象 [IStyleData](/typedoc/@univerjs/core/interfaces/IStyleData)。
 
 完整的样式字段如下。
 
@@ -126,7 +126,7 @@ cellData 的结构如下
 | tb | 截断溢出 |
 | pd | 内边距 |
 
-详细了解 [IStyleData](/api/core/interfaces/IStyleData.html) 每个字段的类型信息。
+详细了解 [IStyleData](/typedoc/@univerjs/core/interfaces/IStyleData) 每个字段的类型信息。
 
 #### 字体
 
@@ -379,7 +379,7 @@ cellData 的结构如下
 
 ### 单元格类型
 
-`cellData.t` 是一个枚举 [CellValueType](/api/core/enums/CellValueType.html)，表示单元格的类型。`1` 表示字符串，`2` 表示数字，`3` 表示布尔值，`4` 表示强制文本，不设置时 Univer 会自动识别。
+`cellData.t` 是一个枚举 [CellValueType](/typedoc/@univerjs/core/enumerations/CellValueType)，表示单元格的类型。`1` 表示字符串，`2` 表示数字，`3` 表示布尔值，`4` 表示强制文本，不设置时 Univer 会自动识别。
 
 其中，如果单元格是布尔类型，则 `cellData.v` 的值存储为 `0` 或 `1`，`0` 表示 false，`1` 表示 true。
 
@@ -407,7 +407,7 @@ cellData 的结构如下
 
 ### 富文本
 
-`cellData.p` 是一个对象，表示富文本，同时也是一个 Univer Doc。详细了解 [IDocumentData](/api/core/interfaces/IDocumentData.html)。
+`cellData.p` 是一个对象，表示富文本，同时也是一个 Univer Doc。详细了解 [IDocumentData](/typedoc/@univerjs/core/interfaces/IDocumentData)。
 
 ### 公式
 
