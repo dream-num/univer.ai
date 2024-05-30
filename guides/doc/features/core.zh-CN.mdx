@@ -2,19 +2,19 @@ import { Tabs } from 'nextra/components'
 
 # 核心功能
 
-核心功能是实现电子表格的基础功能，包含了 Univer Sheet 的核心功能，如创建工作簿、单元格编辑、单元格选择等。
+核心功能是电子文档的基础功能，包括 Univer Doc 的核心功能，如浏览文档、编辑文档等。
 
 ## 安装
 
 <Tabs items={['pnpm', 'npm']}>
   <Tabs.Tab label="pnpm">
     ```shell
-    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/ui
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
     ```shell
-    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/ui
     ```
   </Tabs.Tab>
 </Tabs>
@@ -25,8 +25,6 @@ import { Tabs } from 'nextra/components'
 import "@univerjs/design/lib/index.css";
 import "@univerjs/ui/lib/index.css";
 import "@univerjs/docs-ui/lib/index.css";
-import "@univerjs/sheets-ui/lib/index.css";
-import "@univerjs/sheets-formula/lib/index.css";
 
 import { Univer } from "@univerjs/core";
 import { defaultTheme } from "@univerjs/design";
@@ -38,10 +36,6 @@ import { UniverUIPlugin } from "@univerjs/ui";
 
 import { UniverDocsPlugin } from "@univerjs/docs";
 import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
-
-import { UniverSheetsPlugin } from "@univerjs/sheets";
-import { UniverSheetsFormulaPlugin } from "@univerjs/sheets-formula";
-import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
 ```
 
 ## 国际化
@@ -50,8 +44,6 @@ import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
 import { LocaleType, Tools } from '@univerjs/core'
 import DesignZhCN from '@univerjs/design/locale/zh-CN';
 import DocsUIZhCN from '@univerjs/docs-ui/locale/zh-CN';
-import SheetsZhCN from '@univerjs/sheets/locale/zh-CN';
-import SheetsUIZhCN from '@univerjs/sheets-ui/locale/zh-CN';
 import UIZhCN from '@univerjs/ui/locale/zh-CN';
 
 const univer = new Univer({
@@ -61,8 +53,6 @@ const univer = new Univer({
     [LocaleType.ZH_CN]: Tools.deepMerge(
       DesignZhCN,
       DocsUIZhCN,
-      SheetsZhCN,
-      SheetsUIZhCN,
       UIZhCN
     ),
   },
@@ -77,18 +67,20 @@ univer.registerPlugin(UniverFormulaEnginePlugin);
 
 univer.registerPlugin(UniverUIPlugin, {
   container: 'app',
+  footer: false,
 });
 
-univer.registerPlugin(UniverDocsPlugin, {
-  hasScroll: false,
+univer.registerPlugin(UniverDocsPlugin);
+univer.registerPlugin(UniverDocsUIPlugin, {
+  container: 'univerdoc',
+  layout: {
+    docContainerConfig: {
+      innerLeft: false,
+    },
+  },
 });
-univer.registerPlugin(UniverDocsUIPlugin);
 
-univer.registerPlugin(UniverSheetsPlugin);
-univer.registerPlugin(UniverSheetsUIPlugin);
-univer.registerPlugin(UniverSheetsFormulaPlugin);
-
-univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});
+univer.createUnit(UniverInstanceType.UNIVER_DOC, {});
 ```
 
 ## 配置
