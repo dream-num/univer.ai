@@ -18,12 +18,6 @@ export interface IExchangeService {
   downloadJson: () => Promise<void>
 }
 
-declare global {
-  interface Window {
-    univer?: Univer
-  }
-}
-
 // eslint-disable-next-line ts/no-redeclare
 export const IExchangeService = createIdentifier<IExchangeService>('exchange-client.exchange-service')
 
