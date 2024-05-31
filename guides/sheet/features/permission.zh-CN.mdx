@@ -1,16 +1,29 @@
+import { Tabs } from 'nextra/components'
+
 # 权限管控
 
 `@univerjs/sheets-permission-ui` 是用来处理前端场景的权限拦截,当发现没有对应点位权限的时候,会终止代码执行并提示用户缺失权限
 
 ## 安装
 
-```shell
-pnpm add @univerjs/sheets-permission-ui
-```
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/sheets-permission-ui
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/sheets-permission-ui
+    ```
+  </Tabs.Tab>
+</Tabs>
 
 ## 引入
 
 ```typescript
+import '@univerjs/sheets-permission-ui/lib/index.css';
+
 import { UniverSheetsPermissionUIPlugin } from '@univerjs/sheets-permission-ui';
 ```
 
@@ -36,8 +49,11 @@ const univer = new Univer({
 ```typescript
 univer.registerPlugin(UniverSheetsPermissionUIPlugin);
 ```
+
 ## 如何使用
+
 这里以`WorkbookEditablePermission`举例，其他点位类似
+
 ```typescript
 import { WorkbookEditablePermission } from '@univerjs/sheets';
 import { IPermissionService } from '@univerjs/core';
@@ -58,19 +74,20 @@ class YourService {
 ```
 
 ## 第三方如何扩展权限点位
+
 ```typescript
 import { IPermissionService,IPermissionPoint } from '@univerjs/core';
 
 export class CustomPermissionPoint implements IPermissionPoint {
-    type = UnitObject.Unkonwn; // your type
-    subType = UnitAction.View; // your subType
-    status = PermissionStatus.INIT;
-    value = true; // 权限的初始值
-    id: string;
-    constructor(unitId: string, subUnitId: string,customId:string) {
-        // 这里自行拼凑一个 id,id 属性需要保证在整个 IPermissionService 中是唯一的凭证.
-        this.id = `${unitId}.${subUnitId}.${customId}`;
-    }
+  type = UnitObject.Unkonwn; // your type
+  subType = UnitAction.View; // your subType
+  status = PermissionStatus.INIT;
+  value = true; // 权限的初始值
+  id: string;
+  constructor(unitId: string, subUnitId: string,customId:string) {
+    // 这里自行拼凑一个 id,id 属性需要保证在整个 IPermissionService 中是唯一的凭证.
+    this.id = `${unitId}.${subUnitId}.${customId}`;
+  }
 }
 
 class YourService {
@@ -100,7 +117,9 @@ class ConsumeService {
   }
 }
 ```
+
 ## 第三方权限服务接入
+
 权限的判断逻辑通常是由一个外置服务来单独处理,这部分一般会带有一个通信流程,在纯前端 sdk 实现中,我们使用 [AuthzIoLocalService](https://github.com/dream-num/univer/blob/dev/packages/core/src/services/authz-io/authz-io-local.service.ts) 来承载这部分逻辑.
 
 在生产环境中,我们需要将这部分实现转由后端实现,前端需要基于[IAuthzIoService](https://github.com/dream-num/univer/blob/dev/packages/core/src/services/authz-io/type.ts)类型实现对应的请求函数，来进行运行时的替换。
@@ -127,62 +146,46 @@ const univer = new Univer({
 univer.registerPlugin(YourPlugin);
 ```
 
-
-
 ## 权限点位列表
 
 具体的点位代码,参阅 [code](https://github.com/dream-num/univer/tree/dev/packages/sheets/src/services/permission/permission-point)
 如果 `workbook` 的权限管控和 `worksheet`/`range` 有交叉,那么必须全部为 `true` 才能使用.
 
-### Workbook 工作簿
-#### WorkbookEditablePermission
-能否编辑
-#### WorkbookPrintPermission
-能否打印
-#### WorkbookCommentPermission
-能否评论
-#### WorkbookViewPermission
-能否查看
-####  WorkbookCopyPermission
-能否复制
-#### WorkbookExportPermission
-能否导出
-####  WorkbookManageCollaboratorPermission
-能否管理协作者
-### Worksheet 工作表
-#### WorksheetCopyPermission
-能否复制
-#### WorksheetDeleteColumnPermission
-能否删除列
-#### WorksheetDeleteRowPermission
-能否删除行
-#### WorksheetFilterPermission
-能否过滤
-#### WorksheetInsertColumnPermission
-能否插入列
-#### WorksheetInsertHyperlinkPermission
-能否使用超链接
-#### WorksheetInsertRowPermission
-能否插入行
-#### WorksheetPivotTablePermission
-能否使用透视表
-#### WorksheetSetCellStylePermission
-能否编辑单元格样式
-#### WorksheetSetCellValuePermission
-能否编辑单元格值
-#### WorksheetSetColumnStylePermission
-能否设置列样式
-#### WorksheetSetRowStylePermission
-能否设置行样式
-#### WorksheetSortPermission
-能否排序
-#### WorksheetViewPermission
-能否查看
-#### WorksheetEditPermission
-能否编辑
-### Range 区域保护
-#### RangeProtectionPermissionViewPoint
-能否查看保护区域的内容
-#### RangeProtectionPermissionEditPoint
-能否编辑保护区域
+## Workbook 工作簿
 
+| Permission | Description |
+| --- | --- |
+| WorkbookEditablePermission | 能否编辑 |
+| WorkbookPrintPermission | 能否打印 |
+| WorkbookCommentPermission | 能否评论 |
+| WorkbookViewPermission | 能否查看 |
+| WorkbookCopyPermission | 能否复制 |
+| WorkbookExportPermission | 能否导出 |
+| WorkbookManageCollaboratorPermission | 能否管理协作者 |
+
+## Worksheet 工作表
+
+| Permission | Description |
+| --- | --- |
+| WorksheetCopyPermission | 能否复制 |
+| WorksheetDeleteColumnPermission | 能否删除列 |
+| WorksheetDeleteRowPermission | 能否删除行 |
+| WorksheetFilterPermission | 能否过滤 |
+| WorksheetInsertColumnPermission | 能否插入列 |
+| WorksheetInsertHyperlinkPermission | 能否使用超链接 |
+| WorksheetInsertRowPermission | 能否插入行 |
+| WorksheetPivotTablePermission | 能否使用透视表 |
+| WorksheetSetCellStylePermission | 能否编辑单元格样式 |
+| WorksheetSetCellValuePermission | 能否编辑单元格值 |
+| WorksheetSetColumnStylePermission | 能否设置列样式 |
+| WorksheetSetRowStylePermission | 能否设置行样式 |
+| WorksheetSortPermission | 能否排序 |
+| WorksheetViewPermission | 能否查看 |
+| WorksheetEditPermission | 能否编辑 |
+
+## Range 区域保护
+
+| Permission | Description |
+| --- | --- |
+| RangeProtectionPermissionViewPoint | 能否查看保护区域的内容 |
+| RangeProtectionPermissionEditPoint | 能否编辑保护区域 |
