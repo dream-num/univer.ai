@@ -73,7 +73,7 @@ class YourService {
 }
 ```
 
-## 第三方如何扩展权限点位
+### 第三方如何扩展权限点位
 
 ```typescript
 import { IPermissionService,IPermissionPoint } from '@univerjs/core';
@@ -118,7 +118,7 @@ class ConsumeService {
 }
 ```
 
-## 第三方权限服务接入
+### 第三方权限服务接入
 
 权限的判断逻辑通常是由一个外置服务来单独处理,这部分一般会带有一个通信流程,在纯前端 sdk 实现中,我们使用 [AuthzIoLocalService](https://github.com/dream-num/univer/blob/dev/packages/core/src/services/authz-io/authz-io-local.service.ts) 来承载这部分逻辑.
 
@@ -152,7 +152,7 @@ univer.registerPlugin(YourPlugin);
 具体的点位代码,参阅 [code](https://github.com/dream-num/univer/tree/dev/packages/sheets/src/services/permission/permission-point)
 如果 `workbook` 的权限管控和 `worksheet`/`range` 有交叉,那么必须全部为 `true` 才能使用.
 
-## Workbook 工作簿
+### Workbook 工作簿
 
 | Permission | Description |
 | --- | --- |
@@ -164,7 +164,7 @@ univer.registerPlugin(YourPlugin);
 | WorkbookExportPermission | 能否导出 |
 | WorkbookManageCollaboratorPermission | 能否管理协作者 |
 
-## Worksheet 工作表
+### Worksheet 工作表
 
 | Permission | Description |
 | --- | --- |
@@ -184,7 +184,7 @@ univer.registerPlugin(YourPlugin);
 | WorksheetViewPermission | 能否查看 |
 | WorksheetEditPermission | 能否编辑 |
 
-## Range 区域保护
+### Range 区域保护
 
 | Permission | Description |
 | --- | --- |

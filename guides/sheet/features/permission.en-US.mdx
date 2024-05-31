@@ -73,7 +73,7 @@ class YourService {
 }
 ```
 
-## How to extend the permission point
+### How to extend the permission point
 
 ```typescript
 import { IPermissionService, IPermissionPoint } from '@univerjs/core';
@@ -118,7 +118,7 @@ class ConsumeService {
 }
 ```
 
-## Integration of Third-Party Authorization Service
+### Integration of Third-Party Authorization Service
 
 The logic for determining permissions is typically handled by an external service, which involves a communication process. In the frontend SDK implementation, we use the [AuthzIoLocalService](https://github.com/dream-num/univer/blob/dev/packages/core/src/services/authz-io/authz-io-local.service.ts) to handle this logic.
 
@@ -153,7 +153,7 @@ To access the specific code related to permission point at the given URL, you ca
 
 In the case where the permission control of the workbook intersects with the worksheet/range, all permissions must be set to true in order to use them.
 
-## Workbook Permissions
+### Workbook Permissions
 
 | Permission | Description |
 | --- | --- |
@@ -165,7 +165,7 @@ In the case where the permission control of the workbook intersects with the wor
 | WorkbookExportPermission | Whether or not exporting is allowed. |
 | WorkbookManageCollaboratorPermission | Whether or not managing collaborators is allowed. |
 
-## Worksheet Permissions
+### Worksheet Permissions
 
 | Permission | Description |
 | --- | --- |
@@ -185,7 +185,7 @@ In the case where the permission control of the workbook intersects with the wor
 | WorksheetViewPermission | Whether or not viewing is allowed. |
 | WorksheetEditPermission | Whether or not editing is allowed. |
 
-## Range Permissions
+### Range Permissions
 
 | Permission | Description |
 | --- | --- |

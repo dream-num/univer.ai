@@ -1,0 +1,51 @@
+import { Tabs } from 'nextra/components'
+
+# 打印
+
+`@univerjs-pro/sheets-print` 提供了高精度的打印功能，支持打印预览和打印设置。
+
+## 安装
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs-pro/sheets-print
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs-pro/sheets-print
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## 引入
+
+```typescript
+import '@univerjs-pro/sheets-print/lib/index.css';
+
+import { SheetsPrintPlugin } from '@univerjs-pro/sheets-print'
+```
+
+## 国际化
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core'
+import { SheetsPrintPluginZhCN } from '@univerjs-pro/sheets-print/locale/zh-CN';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: Tools.deepMerge(
+      SheetsPrintPluginZhCN
+    ),
+  },
+});
+```
+
+## 注册
+
+```typescript
+univer.registerPlugin(SheetsPrintPluginZhCN);
+```
