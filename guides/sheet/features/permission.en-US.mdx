@@ -59,16 +59,16 @@ import { WorkbookEditablePermission } from '@univerjs/sheets';
 import { IPermissionService } from '@univerjs/core';
 
 class YourService {
-  constructor(@IPermissionService private _permissionService:IPermissionService){
+  constructor(@IPermissionService private _permissionService: IPermissionService) {
 
   }
 
   setWorkbookNotEditable() {
-    this._permissionService.updatePermissionPoint(new WorkbookEditablePermission('unitId').id,false)
+    this._permissionService.updatePermissionPoint(new WorkbookEditablePermission('unitId').id, false);
   }
 
   setWorkbookEditable() {
-    this._permissionService.updatePermissionPoint(new WorkbookEditablePermission('unitId').id,true)
+    this._permissionService.updatePermissionPoint(new WorkbookEditablePermission('unitId').id, true);
   }
 }
 ```
@@ -84,36 +84,36 @@ export class CustomPermissionPoint implements IPermissionPoint {
   status = PermissionStatus.INIT;
   value = true; // Initial values
   id: string;
-  constructor(unitId: string, subUnitId: string,customId:string) {
+  constructor(unitId: string, subUnitId: string, customId: string) {
     // The id attribute needs to be guaranteed to be unique throughout `IPermissionService`.
     this.id = `${unitId}.${subUnitId}.${customId}`;
   }
 }
 
 class YourService {
-  constructor(@IPermissionService private _permissionService:IPermissionService) {
+  constructor(@IPermissionService private _permissionService: IPermissionService) {
     this._init()
   }
 
   _init() {
-    this._permissionService.addPermissionPoint(new CustomPermissionPoint('unitId','subUnitId','my-id'))
+    this._permissionService.addPermissionPoint(new CustomPermissionPoint('unitId','subUnitId','my-id'));
   }
 }
 
 // How to use it elsewhere
 class ConsumeService {
-  constructor(@IPermissionService private _permissionService:IPermissionService) {
+  constructor(@IPermissionService private _permissionService: IPermissionService) {
   }
 
   doSomething() {
-   const point = this._permissionService.getPermissionPoint(new CustomPermissionPoint('unitId','subUnitId','my-id').id)
-   console.log(point.value)
+   const point = this._permissionService.getPermissionPoint(new CustomPermissionPoint('unitId','subUnitId','my-id').id);
+   console.log(point.value);
   }
 
   bindEvent() {
     // This will get an RX object, allowing you to listen for changes to the current permissions and make a list of changes
-    const pount$ = this._permissionService.getPermissionPoint$(new CustomPermissionPoint('unitId','subUnitId','my-id').id)
-    console.log(pount$)
+    const pount$ = this._permissionService.getPermissionPoint$(new CustomPermissionPoint('unitId','subUnitId','my-id').id);
+    console.log(pount$);
   }
 }
 ```
@@ -134,7 +134,7 @@ class YourAuthzService implements IAuthzIoService { }
 
 export class YourPlugin extends Plugin {
   override onStarting(injector: Injector): void {
-    injector.add([IAuthzIoService, { useClass: YourAuthzService }],)
+    injector.add([IAuthzIoService, { useClass: YourAuthzService }]);
   }
 }
 

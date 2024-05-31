@@ -2,7 +2,7 @@ import { Tabs } from 'nextra/components'
 
 # 权限管控
 
-`@univerjs/sheets-permission-ui` 是用来处理前端场景的权限拦截,当发现没有对应点位权限的时候,会终止代码执行并提示用户缺失权限
+`@univerjs/sheets-permission-ui` 是用来处理前端场景的权限拦截，当发现没有对应点位权限的时候，会终止代码执行并提示用户缺失权限。
 
 ## 安装
 
@@ -59,16 +59,16 @@ import { WorkbookEditablePermission } from '@univerjs/sheets';
 import { IPermissionService } from '@univerjs/core';
 
 class YourService {
-  constructor(@IPermissionService private _permissionService:IPermissionService){
+  constructor(@IPermissionService private _permissionService: IPermissionService) {
 
   }
 
   setWorkbookNotEditable() {
-    this._permissionService.updatePermissionPoint(new WorkbookEditablePermission('unitId').id,false)
+    this._permissionService.updatePermissionPoint(new WorkbookEditablePermission('unitId').id, false);
   }
 
   setWorkbookEditable() {
-    this._permissionService.updatePermissionPoint(new WorkbookEditablePermission('unitId').id,true)
+    this._permissionService.updatePermissionPoint(new WorkbookEditablePermission('unitId').id, true);
   }
 }
 ```
@@ -84,36 +84,36 @@ export class CustomPermissionPoint implements IPermissionPoint {
   status = PermissionStatus.INIT;
   value = true; // 权限的初始值
   id: string;
-  constructor(unitId: string, subUnitId: string,customId:string) {
-    // 这里自行拼凑一个 id,id 属性需要保证在整个 IPermissionService 中是唯一的凭证.
+  constructor(unitId: string, subUnitId: string, customId: string) {
+    // 这里自行拼凑一个 id，id 属性需要保证在整个 IPermissionService 中是唯一的凭证。
     this.id = `${unitId}.${subUnitId}.${customId}`;
   }
 }
 
 class YourService {
-  constructor(@IPermissionService private _permissionService:IPermissionService){
+  constructor(@IPermissionService private _permissionService: IPermissionService) {
     this._init()
   }
 
-  _init(){
-    this._permissionService.addPermissionPoint(new CustomPermissionPoint('unitId','subUnitId','my-id'))
+  _init() {
+    this._permissionService.addPermissionPoint(new CustomPermissionPoint('unitId', 'subUnitId', 'my-id'));
   }
 }
 
 // 在其他地方如何使用
 class ConsumeService {
-  constructor(@IPermissionService private _permissionService:IPermissionService){
+  constructor(@IPermissionService private _permissionService: IPermissionService) {
   }
 
-  doSomething(){
-   const point = this._permissionService.getPermissionPoint(new CustomPermissionPoint('unitId','subUnitId','my-id').id)
-   console.log(point.value)
+  doSomething() {
+   const point = this._permissionService.getPermissionPoint(new CustomPermissionPoint('unitId', 'subUnitId', 'my-id').id);
+   console.log(point.value);
   }
 
-  bindEvent(){
+  bindEvent() {
     // 这将获得一个 Rx 对象,使得你能够监听当前权限的变化作出一些改变
-    const pount$ = this._permissionService.getPermissionPoint$(new CustomPermissionPoint('unitId','subUnitId','my-id').id)
-    console.log(pount$)
+    const pount$ = this._permissionService.getPermissionPoint$(new CustomPermissionPoint('unitId', 'subUnitId', 'my-id').id);
+    console.log(pount$);
   }
 }
 ```
@@ -125,6 +125,7 @@ class ConsumeService {
 在生产环境中,我们需要将这部分实现转由后端实现,前端需要基于[IAuthzIoService](https://github.com/dream-num/univer/blob/dev/packages/core/src/services/authz-io/type.ts)类型实现对应的请求函数，来进行运行时的替换。
 
 如何替换呢？
+
 ```typescript
 import { IAuthzIoService, Univer } from '@univerjs/core';
 import { Injector } from '@wendellhu/redi';
@@ -133,7 +134,7 @@ class YourAuthzService implements IAuthzIoService { }
 
 export class YourPlugin extends Plugin {
   override onStarting(injector: Injector): void {
-    injector.add([IAuthzIoService, { useClass: YouAuthzService }],)
+    injector.add([IAuthzIoService, { useClass: YouAuthzService }]);
   }
 }
 
