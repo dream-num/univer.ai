@@ -244,6 +244,16 @@ univerAPI.onCommandExecuted((command) => {
 })
 ```
 
+### Subscribe to the cell's click event
+
+```ts
+const activeWorkbook = univerAPI.getActiveWorkbook();
+activeWorkbook.onCellClick((selection) => {
+  // selection is a FRange object. You can use FRange to get information such as whether the range is merged and the cell coordinates.
+  console.log(selection);
+});
+```
+
 ## Range
 
 A range refers to a rectangular area in a worksheet, which is determined by the starting row number, starting column number, length, and width, or ending row number, ending column number.
@@ -386,6 +396,27 @@ range
   .setFontFamily(null)
   .setFontSize(null)
   .setFontColor(null);
+```
+
+### Whether the range is merged
+
+```ts
+const range = activeSheet.getRange(0, 0, 2, 2);
+const isMerged = range.isMerged();
+```
+
+### Get the coordinates of the range
+
+```ts
+const range = activeSheet.getRange(0, 0, 2, 2);
+const rect = range.getCellRect(); // width、heigh、left、right、top、bottom、x、y
+```
+
+### Get the merge information and coordinates of the range at the same time
+
+```ts
+const range = activeSheet.getRange(0, 0, 2, 2);
+const cell = range.getCell();
 ```
 
 ## Selection
