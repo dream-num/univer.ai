@@ -31,13 +31,15 @@ import { UniverSheetsFindReplacePlugin } from '@univerjs/sheets-find-replace';
 ```typescript
 import { LocaleType, Tools } from '@univerjs/core'
 import FindReplaceEnUS from '@univerjs/find-replace/locale/en-US';
+import SheetsFindReplaceEnUS from '@univerjs/sheets-find-replace/locale/en-US';
 
 const univer = new Univer({
   theme: defaultTheme,
   locale: LocaleType.EN_US,
   locales: {
     [LocaleType.EN_US]: Tools.deepMerge(
-      FindReplaceEnUS
+      FindReplaceEnUS,
+      SheetsFindReplaceEnUS
     ),
   },
 });

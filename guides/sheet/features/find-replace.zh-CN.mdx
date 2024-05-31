@@ -31,13 +31,15 @@ import { UniverSheetsFindReplacePlugin } from '@univerjs/sheets-find-replace';
 ```typescript
 import { LocaleType, Tools } from '@univerjs/core'
 import FindReplaceZhCN from '@univerjs/find-replace/locale/zh-CN';
+import SheetsFindReplaceZhCN from '@univerjs/sheets-find-replace/locale/zh-CN';
 
 const univer = new Univer({
   theme: defaultTheme,
   locale: LocaleType.ZH_CN,
   locales: {
     [LocaleType.ZH_CN]: Tools.deepMerge(
-      FindReplaceZhCN
+      FindReplaceZhCN,
+      SheetsFindReplaceZhCN
     ),
   },
 });

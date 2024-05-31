@@ -1,0 +1,58 @@
+import { Tabs } from 'nextra/components'
+
+# 浮动图片
+
+插入浮动图片，支持拖拽调整大小和位置。
+
+## 安装
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/drawing @univerjs/drawing-ui @univerjs/sheets-drawing-ui
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/drawing @univerjs/drawing-ui @univerjs/sheets-drawing-ui
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## 引入
+
+```typescript
+import '@univerjs/drawing-ui/lib/index.css';
+import '@univerjs/sheets-drawing-ui/lib/index.css';
+
+import { UniverDrawingPlugin } from '@univerjs/drawing';
+import { UniverDrawingUIPlugin } from '@univerjs/drawing-ui';
+import { UniverSheetsDrawingUIPlugin } from '@univerjs/sheets-drawing-ui';
+```
+
+## 国际化
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core'
+import DrawingUIZhCN from '@univerjs/drawing-ui/locale/zh-CN';
+import SheetsDrawingUIZhCN from '@univerjs/sheets-drawing-ui/locale/zh-CN';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: Tools.deepMerge(
+      DrawingUIZhCN,
+      SheetsDrawingUIZhCN
+    ),
+  },
+});
+```
+
+## 注册
+
+```typescript
+univer.registerPlugin(UniverDrawingPlugin);
+univer.registerPlugin(UniverDrawingUIPlugin);
+univer.registerPlugin(UniverSheetsDrawingUIPlugin);
+```
