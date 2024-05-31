@@ -244,16 +244,6 @@ univerAPI.onCommandExecuted((command) => {
 })
 ```
 
-### 单元格点击事件
-
-```ts
-const activeWorkbook = univerAPI.getActiveWorkbook();
-activeWorkbook.onCellClick((selection) => {
-  // selection 是FRange对象，你可以通过FRange获取范围是否合并以及单元格坐标等信息
-  console.log(selection);
-});
-```
-
 ## 范围 Range
 
 范围指工作表中的一块矩形区域，有起始行号、起始列号、长宽或者结束行号、结束列号来确定。
