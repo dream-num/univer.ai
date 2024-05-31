@@ -243,6 +243,15 @@ univerAPI.onCommandExecuted((command) => {
   }
 })
 ```
+### 单元格点击事件
+
+```ts
+const activeWorkbook = univerAPI.getActiveWorkbook();
+activeWorkbook.onCellClick((selection) => {
+  // selection 是FRange对象，你可以通过FRange获取范围是否合并以及单元格坐标等信息
+  console.log(selection);
+});
+```
 
 ## 范围 Range
 
@@ -386,6 +395,27 @@ range
   .setFontFamily(null)
   .setFontSize(null)
   .setFontColor(null);
+```
+
+### 是否合并
+
+```ts
+const range = activeSheet.getRange(0, 0, 2, 2);
+const isMerged = range.isMerged();
+```
+
+### 获取坐标
+
+```ts
+const range = activeSheet.getRange(0, 0, 2, 2);
+const rect = range.getCellRect(); // width、heigh、left、right、top、bottom、x、y
+```
+
+### 同时获取范围的合并信息和坐标
+
+```ts
+const range = activeSheet.getRange(0, 0, 2, 2);
+const cell = range.getCell();
 ```
 
 ## 选区 Selection
