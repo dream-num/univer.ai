@@ -123,7 +123,7 @@ export default function App(props: IProps) {
     // set current user for comment
     const injector = univer.__getInjector()
     const userManagerService = injector.get(UserManagerService)
-    userManagerService.setCurrentUser(mockUser)
+    userManagerService.currentUser = mockUser
 
     univer.registerPlugin(GithubPlugin, {
       link: '/examples/sheets'
