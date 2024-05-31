@@ -27,6 +27,7 @@ import { LiveSharePlugin } from '@univerjs-pro/live-share'
 import { SheetsPrintPlugin } from '@univerjs-pro/sheets-print'
 import { useEffect, useRef } from 'react'
 import { enUS, zhCN } from 'univer:locales'
+import { GithubPlugin } from '../../../plugins/github-plugin'
 
 interface IProps {
   locale: string
@@ -122,6 +123,10 @@ export default function App(props: IProps) {
       })
 
       univer.registerPlugin(SheetsPrintPlugin)
+
+      univer.registerPlugin(GithubPlugin, {
+        link: '/pro/examples/sheets-collaboration',
+      })
     }
 
     const url = new URL(window.location.href)

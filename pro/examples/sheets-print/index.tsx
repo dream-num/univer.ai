@@ -15,6 +15,7 @@ import { SheetsPrintPlugin } from '@univerjs-pro/sheets-print'
 import { useEffect, useRef } from 'react'
 import { enUS, zhCN } from 'univer:locales'
 import { workbookData } from './data'
+import { GithubPlugin } from '../../../plugins/github-plugin'
 
 interface IProps {
   locale: string
@@ -62,6 +63,10 @@ export default function App(props: IProps) {
 
     // create univer sheet instance
     univer.createUnit(UniverInstanceType.UNIVER_SHEET, workbookData)
+
+    univer.registerPlugin(GithubPlugin, {
+      link: '/pro/examples/sheets-print'
+    })
   }, [])
 
   return (

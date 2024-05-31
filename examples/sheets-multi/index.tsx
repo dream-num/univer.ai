@@ -20,6 +20,7 @@ import { Mosaic, MosaicWindow } from 'react-mosaic-component'
 import 'react-mosaic-component/react-mosaic-component.css'
 import { enUS, zhCN } from 'univer:locales'
 import { ALL_FEATURES_WORKBOOK_DATA } from './data'
+import { GithubPlugin } from '../../plugins/github-plugin'
 
 interface IProps {
   locale: string
@@ -66,6 +67,10 @@ export default function App(props: IProps) {
 
     // create univer sheet instance
     univer.createUnit(UniverInstanceType.UNIVER_SHEET, Tools.deepClone(ALL_FEATURES_WORKBOOK_DATA))
+
+    univer.registerPlugin(GithubPlugin, {
+      link: '/examples/sheets-multi'
+    })
 
     univers.push(univer)
   }

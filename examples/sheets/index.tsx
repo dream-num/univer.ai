@@ -24,6 +24,7 @@ import { UniverSheetsThreadCommentPlugin } from '@univerjs/sheets-thread-comment
 import { UniverSheetsFilterPlugin } from '@univerjs/sheets-filter'
 
 import { UniverSheetsFilterUIPlugin } from '@univerjs/sheets-filter-ui'
+import { GithubPlugin } from '../../plugins/github-plugin'
 import { ALL_FEATURES_WORKBOOK_DATA } from './data'
 
 interface IProps {
@@ -123,6 +124,10 @@ export default function App(props: IProps) {
     const injector = univer.__getInjector()
     const userManagerService = injector.get(UserManagerService)
     userManagerService.setCurrentUser(mockUser)
+
+    univer.registerPlugin(GithubPlugin, {
+      link: '/examples/sheets'
+    })
   }, [])
 
   return (

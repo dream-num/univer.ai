@@ -1,3 +1,5 @@
+import { FileTree } from 'nextra/components'
+
 # Contribution Guides
 
 First, please read our [Code of Conduct](https://github.com/dream-num/univer/blob/dev/CODE_OF_CONDUCT.md) to ensure that you can abide by our guidelines.
@@ -39,7 +41,7 @@ Some useful commands you may need:
 pnpm install
 
 # Start the development server
-pnpm dev:demo
+pnpm dev
 
 # Run tests
 pnpm test
@@ -49,21 +51,25 @@ pnpm test
 
 The source code structure of Univer is as follows:
 
-```bash
-|- common/
-|- models/
-|- services/
-|- commands/
-  |- commands/
-  |- mutations/
-  |- operations/
-|- controllers/
-|- views/
-  |- components/
-  |- parts/
-|- plugin.ts
-|- index.ts
-```
+<FileTree>
+  <FileTree.Folder name="univer-plugin" defaultOpen>
+    <FileTree.Folder name="common" />
+    <FileTree.Folder name="models" />
+    <FileTree.Folder name="services" />
+    <FileTree.Folder name="commands" defaultOpen>
+      <FileTree.Folder name="commands" />
+      <FileTree.Folder name="mutations" />
+      <FileTree.Folder name="operations" />
+    </FileTree.Folder>
+    <FileTree.Folder name="controllers" />
+    <FileTree.Folder name="views" defaultOpen>
+      <FileTree.Folder name="components" />
+      <FileTree.Folder name="parts" />
+    </FileTree.Folder>
+    <FileTree.File name="plugin.ts" />
+    <FileTree.File name="index.ts" />
+  </FileTree.Folder>
+</FileTree>
 
 Regarding module imports, we adhere to the following rules:
 
@@ -88,7 +94,7 @@ To ensure code quality and consistency, please follow these guidelines:
 
 Before merging a Pull Request, please ensure that the following requirements are met:
 
-- All tests must pass, and ESLint and Prettier errors should be resolved.
+- All tests must pass, and ESLint errors should be resolved.
 - Test coverage should not decrease.
 
 We provide preview deployments for Pull Requests. You can view the preview deployment by clicking on the preview link in the "View Deployment" section.

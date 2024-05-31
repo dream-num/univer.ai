@@ -193,7 +193,7 @@ private _initMenus(): void {
       CustomMenuItemSingleButtonFactory
     ] as IMenuItemFactory[]
   ).forEach((factory) => {
-    this.disposeWithMe(this._menuService.addMenuItem(this._injector.invoke(factory)));
+    this.disposeWithMe(this._menuService.addMenuItem(this._injector.invoke(factory), {}));
   });
 }
 ```

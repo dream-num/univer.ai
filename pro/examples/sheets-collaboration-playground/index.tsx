@@ -33,6 +33,7 @@ import { enUS, zhCN } from 'univer:locales'
 import type { IManualCollaborationSocketService } from './services/collaboration-session/manual-collaboration-session.service'
 import { ManualCollaborationSocketService } from './services/collaboration-session/manual-collaboration-session.service'
 import { CollaborationControlPanel } from './components/CollabControlPanel'
+import { GithubPlugin } from '../../../plugins/github-plugin'
 
 interface IProps {
   locale: string
@@ -104,6 +105,10 @@ export default function App(props: IProps) {
       enableSingleActiveInstanceLock: false,
       socketService: ManualCollaborationSocketService, // register custom socket service
     } as ICollaborationClientPluginConfig)
+
+    univer.registerPlugin(GithubPlugin, {
+      link: '/pro/examples/sheets-collaboration-playground',
+    })
 
     instances.push(univer)
   }

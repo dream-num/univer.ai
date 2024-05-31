@@ -1,3 +1,5 @@
+import { FileTree } from 'nextra/components'
+
 # 贡献指南
 
 首先请阅读我们的 [Code of Conduct](https://github.com/dream-num/univer/blob/dev/CODE_OF_CONDUCT.md)，确保你能遵守我们的行为准则。
@@ -39,7 +41,7 @@ Univer 的开发环境依赖 Node.js 和 pnpm，请确保你的 Node.js 版本�
 pnpm install
 
 # 启动开发服务
-pnpm dev:demo
+pnpm dev
 
 # 启动测试
 pnpm test
@@ -49,21 +51,25 @@ pnpm test
 
 Univer 的源码结构如下：
 
-```bash
-|- common/
-|- models/
-|- services/
-|- commands/
-  |- commands/
-  |- mutations/
-  |- operations/
-|- controllers/
-|- views/
-  |- components/
-  |- parts/
-|- plugin.ts
-|- index.ts
-```
+<FileTree>
+  <FileTree.Folder name="univer-plugin" defaultOpen>
+    <FileTree.Folder name="common" />
+    <FileTree.Folder name="models" />
+    <FileTree.Folder name="services" />
+    <FileTree.Folder name="commands" defaultOpen>
+      <FileTree.Folder name="commands" />
+      <FileTree.Folder name="mutations" />
+      <FileTree.Folder name="operations" />
+    </FileTree.Folder>
+    <FileTree.Folder name="controllers" />
+    <FileTree.Folder name="views" defaultOpen>
+      <FileTree.Folder name="components" />
+      <FileTree.Folder name="parts" />
+    </FileTree.Folder>
+    <FileTree.File name="plugin.ts" />
+    <FileTree.File name="index.ts" />
+  </FileTree.Folder>
+</FileTree>
 
 对于模块导入，我们遵循以下规则：
 
@@ -88,7 +94,7 @@ Univer 的源码结构如下：
 
 在合并 Pull Request 之前，请确保满足以下要求：
 
-- 所有测试都必须通过，修复 ESLint 和 Prettier 的错误。
+- 所有测试都必须通过，修复 ESLint 的错误。
 - 测试覆盖率不能降低。
 
 我们提供为 Pull Request 提供预览部署。你可以通过点击“View Deployment”部分的预览链接查看预览部署。

@@ -21,6 +21,7 @@ import { useEffect, useRef } from 'react'
 import { enUS, zhCN } from 'univer:locales'
 import { UniverUniscriptPlugin } from '@univerjs/uniscript'
 import { UNISCRIT_WORKBOOK_DATA_DEMO } from './data'
+import { GithubPlugin } from '../../plugins/github-plugin'
 
 interface IProps {
   locale: string
@@ -86,6 +87,10 @@ export default function App(props: IProps) {
 
     // create univer sheet instance
     univer.createUnit(UniverInstanceType.UNIVER_SHEET, UNISCRIT_WORKBOOK_DATA_DEMO)
+
+    univer.registerPlugin(GithubPlugin, {
+      link: '/examples/sheets-uniscript'
+    })
   }, [])
 
   return (

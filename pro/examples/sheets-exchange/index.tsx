@@ -26,6 +26,7 @@ import { IThreadCommentMentionDataService } from '@univerjs/thread-comment-ui'
 import { UniverSheetsThreadCommentPlugin } from '@univerjs/sheets-thread-comment'
 import { workbookData } from './data'
 import { ExchangeClientPlugin } from './plugins/exchange-client'
+import { GithubPlugin } from '../../../plugins/github-plugin'
 
 interface IProps {
   locale: string
@@ -135,6 +136,10 @@ export default function App(props: IProps) {
 
       const userManagerService = injector.get(UserManagerService)
       userManagerService.setCurrentUser(mockUser)
+
+      univer.registerPlugin(GithubPlugin, {
+        link: '/pro/examples/sheets-exchange'
+      })
     }
   }, [])
 

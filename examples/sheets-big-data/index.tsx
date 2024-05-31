@@ -18,6 +18,7 @@ import { UniverUIPlugin } from '@univerjs/ui'
 import { useEffect, useRef } from 'react'
 import { enUS, zhCN } from 'univer:locales'
 import { generateWorkbookData } from './data'
+import { GithubPlugin } from '../../plugins/github-plugin'
 
 interface IProps {
   locale: string
@@ -71,6 +72,10 @@ export default function App(props: IProps) {
 
     // create univer sheet instance
     univer.createUnit(UniverInstanceType.UNIVER_SHEET, generateWorkbookData(1000000, 10))
+
+    univer.registerPlugin(GithubPlugin, {
+      link: '/examples/sheets-big-data'
+    })
   }, [])
 
   return (

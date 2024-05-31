@@ -18,6 +18,7 @@ import {
 import type { ICollaborationClientPluginConfig } from '@univerjs-pro/collaboration-client'
 import { useEffect, useRef } from 'react'
 import { enUS, zhCN } from 'univer:locales'
+import { GithubPlugin } from '../../../plugins/github-plugin'
 
 interface IProps {
   locale: string
@@ -83,6 +84,10 @@ export default function App(props: IProps) {
         enableSingleActiveInstanceLock: true,
         collaborationUniverTypes: [UniverInstanceType.UNIVER_DOC],
       } as ICollaborationClientPluginConfig)
+
+      univer.registerPlugin(GithubPlugin, {
+        link: '/pro/examples/docs-collaboration',
+      })
     }
 
     const url = new URL(window.location.href)

@@ -10,6 +10,7 @@ import { UniverUIPlugin } from '@univerjs/ui'
 import { useEffect, useRef } from 'react'
 import { enUS, zhCN } from 'univer:locales'
 import { DEFAULT_SLIDE_DATA } from './data'
+import { GithubPlugin } from '../../plugins/github-plugin'
 
 interface IProps {
   locale: string
@@ -40,6 +41,10 @@ export default function App(props: IProps) {
     univer.registerPlugin(UniverSlidesUIPlugin)
 
     univer.createUnit(UniverInstanceType.UNIVER_SLIDE, DEFAULT_SLIDE_DATA)
+
+    univer.registerPlugin(GithubPlugin, {
+      link: '/examples/slides'
+    })
   }, [])
 
   return (

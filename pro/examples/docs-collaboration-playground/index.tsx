@@ -29,7 +29,7 @@ import { combineLatest } from 'rxjs'
 import type { IManualCollaborationSocketService } from '../sheets-collaboration-playground/services/collaboration-session/manual-collaboration-session.service'
 import { ManualCollaborationSocketService } from '../sheets-collaboration-playground/services/collaboration-session/manual-collaboration-session.service'
 import { CollaborationControlPanel } from '../sheets-collaboration-playground/components/CollabControlPanel'
-// import { enUS, zhCN } from 'univer:locales'
+import { GithubPlugin } from '../../../plugins/github-plugin'
 
 interface IProps {
   locale: string
@@ -94,6 +94,10 @@ export default function App(props: IProps) {
       collaborationUniverTypes: [UniverInstanceType.UNIVER_DOC],
       socketService: ManualCollaborationSocketService, // register custom socket service
     } as ICollaborationClientPluginConfig)
+
+    univer.registerPlugin(GithubPlugin, {
+      link: '/pro/examples/docs-collaboration-playground',
+    })
 
     instances.push(univer)
   }
