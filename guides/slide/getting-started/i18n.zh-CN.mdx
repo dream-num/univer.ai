@@ -1,0 +1,32 @@
+import { Callout } from 'nextra/components'
+
+# 国际化
+
+0.1.13 版本后，Univer 不再内置任何语言包，所有语言包均由插件提供。如果你发现手动引入插件的语言包过于繁琐，我们还提供了一个构建工具插件，用于自动引入插件所需的语言包。请参考 [使用 Univer 插件](/guides/doc/advanced/univer-plugins) 获取更多信息。
+
+如需手动添加语言包，你可以参考以下示例，根据需要引入对应的语言包并组装成对象传入 `Univer` 实例：
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core';
+import DesignZhCN from '@univerjs/design/locale/zh-CN';
+import SlidesUIZhCN from '@univerjs/slides-ui/locale/zh-CN';
+import UIZhCN from '@univerjs/ui/locale/zh-CN';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: Tools.deepMerge(
+      DesignZhCN,
+      SlidesUIZhCN,
+      UIZhCN,
+    ),
+  },
+});
+```
+
+Univer 目前支持以下语言：
+
+- zh-CN：简体中文
+- en-US：英文
+- ru-RU：俄文
