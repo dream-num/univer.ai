@@ -1,54 +1,6 @@
-import { Tabs } from 'nextra/components'
-
 # Permission
 
-`@univerjs/sheets-permission-ui` is used to handle permission interception in front-end scenarios. When it detects that there is no corresponding permission for a certain action, it will terminate the code execution and prompt the user about the missing permission.
-
-## Installation
-
-<Tabs items={['pnpm', 'npm']}>
-  <Tabs.Tab label="pnpm">
-    ```shell
-    pnpm add @univerjs/sheets-permission-ui
-    ```
-  </Tabs.Tab>
-  <Tabs.Tab label="npm">
-    ```shell
-    npm install @univerjs/sheets-permission-ui
-    ```
-  </Tabs.Tab>
-</Tabs>
-
-## Import
-
-```typescript
-import '@univerjs/sheets-permission-ui/lib/index.css';
-
-import { UniverSheetsPermissionUIPlugin } from '@univerjs/sheets-permission-ui';
-```
-
-## Internationalization
-
-```typescript
-import { LocaleType, Tools } from '@univerjs/core'
-import SheetsPermissionEnUS from '@univerjs/sheets-permission-ui/locale/en-US';
-
-const univer = new Univer({
-  theme: defaultTheme,
-  locale: LocaleType.EN_US,
-  locales: {
-    [LocaleType.EN_US]: Tools.deepMerge(
-      SheetsPermissionEnUS
-    ),
-  },
-});
-```
-
-## Register
-
-```typescript
-univer.registerPlugin(UniverSheetsPermissionUIPlugin);
-```
+Handle permission interception in front-end scenarios. When it detects that there is no corresponding permission for a certain action, it will terminate the code execution and prompt the user about the missing permission.
 
 ## How to use
 
