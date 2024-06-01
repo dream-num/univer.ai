@@ -388,6 +388,27 @@ range
   .setFontColor(null);
 ```
 
+### Whether the range is merged
+
+```ts
+const range = activeSheet.getRange(0, 0, 2, 2);
+const isMerged = range.isMerged();
+```
+
+### Get the coordinates of the range
+
+```ts
+const range = activeSheet.getRange(0, 0, 2, 2);
+const rect = range.getCellRect(); // width、heigh、left、right、top、bottom、x、y
+```
+
+### Get the merge information and coordinates of the range at the same time
+
+```ts
+const range = activeSheet.getRange(0, 0, 2, 2);
+const cell = range.getCell();
+```
+
 ## Selection
 
 Univer Sheets support multiple constituencies, so a constituency is an array of ranges, and you can manipulate the constituency data through the range API.
