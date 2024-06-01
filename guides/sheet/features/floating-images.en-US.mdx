@@ -9,12 +9,12 @@ Insert floating images, support drag to adjust size and position.
 <Tabs items={['pnpm', 'npm']}>
   <Tabs.Tab label="pnpm">
     ```shell
-    pnpm add @univerjs/drawing @univerjs/drawing-ui @univerjs/sheets-drawing-ui
+    pnpm add @univerjs/drawing @univerjs/sheets-drawing @univerjs/drawing-ui @univerjs/sheets-drawing-ui
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
     ```shell
-    npm install @univerjs/drawing @univerjs/drawing-ui @univerjs/sheets-drawing-ui
+    npm install @univerjs/drawing @univerjs/sheets-drawing @univerjs/drawing-ui @univerjs/sheets-drawing-ui
     ```
   </Tabs.Tab>
 </Tabs>
@@ -27,6 +27,7 @@ import '@univerjs/sheets-drawing-ui/lib/index.css';
 
 import { UniverDrawingPlugin } from '@univerjs/drawing';
 import { UniverDrawingUIPlugin } from '@univerjs/drawing-ui';
+import { UniverSheetsDrawingPlugin } from '@univerjs/sheets-drawing';
 import { UniverSheetsDrawingUIPlugin } from '@univerjs/sheets-drawing-ui';
 ```
 ## Internationalization
@@ -53,5 +54,6 @@ const univer = new Univer({
 ```typescript
 univer.registerPlugin(UniverDrawingPlugin);
 univer.registerPlugin(UniverDrawingUIPlugin);
+univer.registerPlugin(UniverSheetsDrawingPlugin);
 univer.registerPlugin(UniverSheetsDrawingUIPlugin);
 ```
