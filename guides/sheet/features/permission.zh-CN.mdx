@@ -1,54 +1,6 @@
-import { Tabs } from 'nextra/components'
-
 # 权限管控
 
-`@univerjs/sheets-permission-ui` 是用来处理前端场景的权限拦截，当发现没有对应点位权限的时候，会终止代码执行并提示用户缺失权限。
-
-## 安装
-
-<Tabs items={['pnpm', 'npm']}>
-  <Tabs.Tab label="pnpm">
-    ```shell
-    pnpm add @univerjs/sheets-permission-ui
-    ```
-  </Tabs.Tab>
-  <Tabs.Tab label="npm">
-    ```shell
-    npm install @univerjs/sheets-permission-ui
-    ```
-  </Tabs.Tab>
-</Tabs>
-
-## 引入
-
-```typescript
-import '@univerjs/sheets-permission-ui/lib/index.css';
-
-import { UniverSheetsPermissionUIPlugin } from '@univerjs/sheets-permission-ui';
-```
-
-## 国际化
-
-```typescript
-import { LocaleType, Tools } from '@univerjs/core'
-import SheetsPermissionZhCN from '@univerjs/sheets-permission-ui/locale/zh-CN';
-
-const univer = new Univer({
-  theme: defaultTheme,
-  locale: LocaleType.ZH_CN,
-  locales: {
-    [LocaleType.ZH_CN]: Tools.deepMerge(
-      SheetsPermissionZhCN
-    ),
-  },
-});
-```
-
-## 注册
-
-```typescript
-univer.registerPlugin(UniverSheetsPermissionUIPlugin);
-```
+是用来处理前端场景的权限拦截，当发现没有对应点位权限的时候，会终止代码执行并提示用户缺失权限。
 
 ## 如何使用
 
@@ -150,6 +102,7 @@ univer.registerPlugin(YourPlugin);
 ## 权限点位列表
 
 具体的点位代码,参阅 [code](https://github.com/dream-num/univer/tree/dev/packages/sheets/src/services/permission/permission-point)
+
 如果 `workbook` 的权限管控和 `worksheet`/`range` 有交叉,那么必须全部为 `true` 才能使用.
 
 ### Workbook 工作簿
