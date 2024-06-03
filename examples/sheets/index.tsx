@@ -22,6 +22,10 @@ import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validati
 import { IThreadCommentMentionDataService } from '@univerjs/thread-comment-ui'
 import { UniverSheetsThreadCommentPlugin } from '@univerjs/sheets-thread-comment'
 import { UniverSheetsFilterPlugin } from '@univerjs/sheets-filter'
+import { UniverDrawingPlugin } from '@univerjs/drawing';
+import { UniverDrawingUIPlugin } from '@univerjs/drawing-ui';
+import { UniverSheetsDrawingPlugin } from '@univerjs/sheets-drawing';
+import { UniverSheetsDrawingUIPlugin } from '@univerjs/sheets-drawing-ui';
 
 import { UniverSheetsFilterUIPlugin } from '@univerjs/sheets-filter-ui'
 import { GithubPlugin } from '../../plugins/github-plugin'
@@ -82,6 +86,12 @@ export default function App(props: IProps) {
     // filter
     univer.registerPlugin(UniverSheetsFilterPlugin)
     univer.registerPlugin(UniverSheetsFilterUIPlugin)
+
+    // drawing
+    univer.registerPlugin(UniverDrawingPlugin);
+    univer.registerPlugin(UniverDrawingUIPlugin);
+    univer.registerPlugin(UniverSheetsDrawingPlugin);
+    univer.registerPlugin(UniverSheetsDrawingUIPlugin);
 
     // comment
     const mockUser = {
