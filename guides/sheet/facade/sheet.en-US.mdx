@@ -420,7 +420,7 @@ We also provide APIs to get the current selection, set the selection, and listen
 ```ts
 const activeSheet = univerAPI.getActiveWorkbook().getActiveSheet();
 const selection = activeSheet.getSelection();
-const range = selection.getRange();
+const range = selection.getActiveRange();
 ```
 
 ### Set Selection

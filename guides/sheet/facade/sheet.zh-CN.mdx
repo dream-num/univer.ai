@@ -420,7 +420,7 @@ Univer 表格支持多选区，所以选区是一个范围数组，可以通过�
 ```ts
 const activeSheet = univerAPI.getActiveWorkbook().getActiveSheet();
 const selection = activeSheet.getSelection();
-const range = selection.getRange();
+const range = selection.getActiveRange();
 ```
 
 ### 设置选区
