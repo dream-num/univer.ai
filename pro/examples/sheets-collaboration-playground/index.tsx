@@ -8,11 +8,11 @@ import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
 import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
 import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
 import { UniverUIPlugin } from '@univerjs/ui'
-import { CollaborationPlugin } from '@univerjs-pro/collaboration'
+import { UniverCollaborationPlugin } from '@univerjs-pro/collaboration'
 import {
   COLLAB_SUBMIT_CHANGESET_URL_KEY,
   COLLAB_WEB_SOCKET_URL_KEY,
-  CollaborationClientPlugin,
+  UniverCollaborationClientPlugin,
   ICollaborationSocketService,
   SEND_CHANGESET_TIMEOUT_KEY,
   SNAPSHOT_SERVER_URL_KEY,
@@ -99,8 +99,8 @@ export default function App(props: IProps) {
     univer.registerPlugin(UniverSheetsZenEditorPlugin)
 
     // collaboration plugins
-    univer.registerPlugin(CollaborationPlugin)
-    univer.registerPlugin(CollaborationClientPlugin, {
+    univer.registerPlugin(UniverCollaborationPlugin)
+    univer.registerPlugin(UniverCollaborationClientPlugin, {
       enableOfflineEditing: false,
       enableSingleActiveInstanceLock: false,
       socketService: ManualCollaborationSocketService, // register custom socket service

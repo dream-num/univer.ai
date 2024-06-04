@@ -21,7 +21,7 @@ import { UniverDataValidationPlugin } from '@univerjs/data-validation'
 import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validation'
 import { UniverSheetsFilterPlugin } from '@univerjs/sheets-filter'
 import { UniverSheetsFilterUIPlugin } from '@univerjs/sheets-filter-ui'
-import { SheetsPrintPlugin } from '@univerjs-pro/sheets-print'
+import { UniverSheetsPrintPlugin } from '@univerjs-pro/sheets-print'
 import { IThreadCommentMentionDataService } from '@univerjs/thread-comment-ui'
 import { UniverSheetsThreadCommentPlugin } from '@univerjs/sheets-thread-comment'
 import { workbookData } from './data'
@@ -99,7 +99,7 @@ export default function App(props: IProps) {
       univer.registerPlugin(UniverSheetsFilterUIPlugin)
 
       // print
-      univer.registerPlugin(SheetsPrintPlugin)
+      univer.registerPlugin(UniverSheetsPrintPlugin)
 
       // comment
       const mockUser = {

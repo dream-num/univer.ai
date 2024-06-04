@@ -7,11 +7,11 @@ import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
 import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
 import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
 import { UniverUIPlugin } from '@univerjs/ui'
-import { CollaborationPlugin } from '@univerjs-pro/collaboration'
+import { UniverCollaborationPlugin } from '@univerjs-pro/collaboration'
 import {
   COLLAB_SUBMIT_CHANGESET_URL_KEY,
   COLLAB_WEB_SOCKET_URL_KEY,
-  CollaborationClientPlugin,
+  UniverCollaborationClientPlugin,
   SEND_CHANGESET_TIMEOUT_KEY,
   SNAPSHOT_SERVER_URL_KEY,
 } from '@univerjs-pro/collaboration-client'
@@ -78,8 +78,8 @@ export default function App(props: IProps) {
       univer.registerPlugin(UniverFormulaEnginePlugin)
 
       // collaboration plugins
-      univer.registerPlugin(CollaborationPlugin)
-      univer.registerPlugin(CollaborationClientPlugin, {
+      univer.registerPlugin(UniverCollaborationPlugin)
+      univer.registerPlugin(UniverCollaborationClientPlugin, {
         enableOfflineEditing: true,
         enableSingleActiveInstanceLock: true,
         collaborationUniverTypes: [UniverInstanceType.UNIVER_DOC],

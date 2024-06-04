@@ -11,7 +11,7 @@ import { UniverSheetsFormulaPlugin } from '@univerjs/sheets-formula'
 import { UniverSheetsNumfmtPlugin } from '@univerjs/sheets-numfmt'
 import { UniverSheetsUIPlugin } from '@univerjs/sheets-ui'
 import { UniverUIPlugin } from '@univerjs/ui'
-import { SheetsPrintPlugin } from '@univerjs-pro/sheets-print'
+import { UniverSheetsPrintPlugin } from '@univerjs-pro/sheets-print'
 import { useEffect, useRef } from 'react'
 import { enUS, zhCN } from 'univer:locales'
 import { workbookData } from './data'
@@ -59,7 +59,7 @@ export default function App(props: IProps) {
     // } as IUniverRPCMainThreadConfig);
     univer.registerPlugin(UniverSheetsUIPlugin)
     univer.registerPlugin(UniverSheetsFormulaPlugin)
-    univer.registerPlugin(SheetsPrintPlugin)
+    univer.registerPlugin(UniverSheetsPrintPlugin)
 
     // create univer sheet instance
     univer.createUnit(UniverInstanceType.UNIVER_SHEET, workbookData)

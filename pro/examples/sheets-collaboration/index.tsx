@@ -13,18 +13,18 @@ import { UniverSheetsUIPlugin } from '@univerjs/sheets-ui'
 import { UniverSheetsZenEditorPlugin } from '@univerjs/sheets-zen-editor'
 import { UniverUIPlugin } from '@univerjs/ui'
 import { UniverUniscriptPlugin } from '@univerjs/uniscript'
-import { CollaborationPlugin } from '@univerjs-pro/collaboration'
+import { UniverCollaborationPlugin } from '@univerjs-pro/collaboration'
 import type { ICollaborationClientPluginConfig } from '@univerjs-pro/collaboration-client'
 import {
   COLLAB_SUBMIT_CHANGESET_URL_KEY,
   COLLAB_WEB_SOCKET_URL_KEY,
-  CollaborationClientPlugin,
+  UniverCollaborationClientPlugin,
   LOGIN_URL_KEY,
   SEND_CHANGESET_TIMEOUT_KEY,
   SNAPSHOT_SERVER_URL_KEY,
 } from '@univerjs-pro/collaboration-client'
-import { LiveSharePlugin } from '@univerjs-pro/live-share'
-import { SheetsPrintPlugin } from '@univerjs-pro/sheets-print'
+import { UniverLiveSharePlugin } from '@univerjs-pro/live-share'
+import { UniverSheetsPrintPlugin } from '@univerjs-pro/sheets-print'
 import { useEffect, useRef } from 'react'
 import { enUS, zhCN } from 'univer:locales'
 import { GithubPlugin } from '../../../plugins/github-plugin'
@@ -103,13 +103,13 @@ export default function App(props: IProps) {
       // } as IUniverRPCMainThreadConfig);
 
       // collaboration plugins
-      univer.registerPlugin(CollaborationPlugin)
-      univer.registerPlugin(CollaborationClientPlugin, {
+      univer.registerPlugin(UniverCollaborationPlugin)
+      univer.registerPlugin(UniverCollaborationClientPlugin, {
         enableOfflineEditing: true,
         enableSingleActiveInstanceLock: true,
         enableAuthServer: true,
       } as ICollaborationClientPluginConfig)
-      univer.registerPlugin(LiveSharePlugin)
+      univer.registerPlugin(UniverLiveSharePlugin)
 
       // uniscript
       univer.registerPlugin(UniverUniscriptPlugin, {
@@ -122,7 +122,7 @@ export default function App(props: IProps) {
         },
       })
 
-      univer.registerPlugin(SheetsPrintPlugin)
+      univer.registerPlugin(UniverSheetsPrintPlugin)
 
       univer.registerPlugin(GithubPlugin, {
         link: '/pro/examples/sheets-collaboration',
