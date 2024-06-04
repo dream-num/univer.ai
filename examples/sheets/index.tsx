@@ -26,6 +26,7 @@ import { UniverDrawingPlugin } from '@univerjs/drawing';
 import { UniverDrawingUIPlugin } from '@univerjs/drawing-ui';
 import { UniverSheetsDrawingPlugin } from '@univerjs/sheets-drawing';
 import { UniverSheetsDrawingUIPlugin } from '@univerjs/sheets-drawing-ui';
+import { UniverSheetsHyperLinkUIPlugin } from '@univerjs/sheets-hyper-link-ui';
 
 import { UniverSheetsFilterUIPlugin } from '@univerjs/sheets-filter-ui'
 import { GithubPlugin } from '../../plugins/github-plugin'
@@ -92,6 +93,9 @@ export default function App(props: IProps) {
     univer.registerPlugin(UniverDrawingUIPlugin);
     univer.registerPlugin(UniverSheetsDrawingPlugin);
     univer.registerPlugin(UniverSheetsDrawingUIPlugin);
+
+    // hyper link
+    univer.registerPlugin(UniverSheetsHyperLinkUIPlugin);
 
     // comment
     const mockUser = {
