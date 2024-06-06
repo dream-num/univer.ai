@@ -18,11 +18,13 @@ Univer 的渲染引擎参考了 KonvaJs / FabricJs 以及 BabylonJs，基于 Can
 
 ![rendererArchitecture](./rendering/renderer-architecture.png)
 
-## Engine
+## 渲染引擎
+
+### Engine
 
 管理 canvas 实例（例如修改 canvas 画布的宽高），提供 API 驱动 scene 进行逐帧绘制，封装事件机制提供给下层使用。
 
-## Scene
+### Scene
 
 Scene 是所有渲染对象存在的空间，它的面积可能超过当前 Viewport (Engine) 的大小。
 
@@ -66,7 +68,7 @@ scene.onPointerMoveObserver.add((moveEvt: IPointerEvent | IMouseEvent) => {
 });
 ```
 
-## Viewport
+### Viewport
 
 为了支持电子表格中冻结的场景，参考了 BabylonJs 的 Camera 概念，可以设置 Viewport 的位置和宽高来指定渲染 Scene 的哪个部分。
 
@@ -91,7 +93,7 @@ new ScrollBar(viewMain);
 
 Viewport 也会在渲染时会把自己所在的视口信息向需要渲染的 Object 传递，可以避免渲染视口之外的 Object。
 
-## Layer
+### Layer
 
 Layer 参考了 Konva 的设计，但开发者不需要手动创建 Layer，渲染引擎会通过 Scene 的方法自动创建 Layer。可以选择是否开启 Layer 层的缓存，在元素比较多的情况下会带来性能提升，但浏览器对 canvas 有总面积的限制，所以 Univer 需要用户指定打开哪些层的缓存。
 
@@ -123,7 +125,7 @@ class Scene {
 
 Object 会挂到 Layer 上，并且 Layer 会有一个离屏 canvas 作为缓存，当层非脏时，会直接复制缓存内容到画布上。
 
-## Object
+### Object
 
 所有需要绘制的对象都需要继承 `BaseObject`：
 
