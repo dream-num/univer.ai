@@ -52,7 +52,7 @@ Univer 以插件的形式提供了一系列功能，除了一些产品所必需�
   样式文件的引入顺序很重要，确保你在依次引入 `@univerjs/design`、`@univerjs/ui` 的 CSS 样式后再引入其他插件的样式文件。
 </Callout>
 
-你需要在项目中引入 Univer 的样式文件，以及一些必要的插件：
+你需要在项目中引入 Univer 的样式文件、语言包，以及一些必要的插件：
 
 ```typescript
 import "@univerjs/design/lib/index.css";
@@ -61,7 +61,7 @@ import "@univerjs/docs-ui/lib/index.css";
 import "@univerjs/sheets-ui/lib/index.css";
 import "@univerjs/sheets-formula/lib/index.css";
 
-import { Univer } from "@univerjs/core";
+import { LocaleType, Tools, Univer } from "@univerjs/core";
 import { defaultTheme } from "@univerjs/design";
 
 import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
@@ -75,6 +75,12 @@ import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
 import { UniverSheetsPlugin } from "@univerjs/sheets";
 import { UniverSheetsFormulaPlugin } from "@univerjs/sheets-formula";
 import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
+
+import DesignZhCN from '@univerjs/design/locale/zh-CN';
+import UIZhCN from '@univerjs/ui/locale/zh-CN';
+import DocsUIZhCN from '@univerjs/docs-ui/locale/zh-CN';
+import SheetsZhCN from '@univerjs/sheets/locale/zh-CN';
+import SheetsUIZhCN from '@univerjs/sheets-ui/locale/zh-CN';
 ```
 
 然后创建一个 Univer 实例，并注册这些插件：
@@ -82,6 +88,16 @@ import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
 ```typescript
 const univer = new Univer({
   theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: Tools.deepMerge(
+      SheetsZhCN,
+      DocsUIZhCN,
+      SheetsUIZhCN,
+      UIZhCN,
+      DesignZhCN,
+    ),
+  },
 });
 
 univer.registerPlugin(UniverRenderEnginePlugin);

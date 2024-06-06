@@ -52,14 +52,14 @@ For more information about `@univerjs/facade`, please refer to the [Facade](/gui
   The order of importing the style files is important. Make sure you import the CSS styles of `@univerjs/design` and `@univerjs/ui` before importing the CSS styles of other plugins.
 </Callout>
 
-You need to import Univer's css files and some necessary plugins in your project:
+You need to import Univer's css files, locales, and some necessary plugins in your project:
 
 ```typescript
 import "@univerjs/design/lib/index.css";
 import "@univerjs/ui/lib/index.css";
 import "@univerjs/docs-ui/lib/index.css";
 
-import { Univer } from "@univerjs/core";
+import { LocaleType, Tools, Univer } from "@univerjs/core";
 import { defaultTheme } from "@univerjs/design";
 
 import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
@@ -69,6 +69,10 @@ import { UniverUIPlugin } from "@univerjs/ui";
 
 import { UniverDocsPlugin } from "@univerjs/docs";
 import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
+
+import DesignEnUS from '@univerjs/design/locale/en-US';
+import DocsUIEnUS from '@univerjs/docs-ui/locale/en-US';
+import UIEnUS from '@univerjs/ui/locale/en-US';
 ```
 
 Then create a Univer instance and register these plugins:
@@ -78,7 +82,11 @@ const univer = new Univer({
   theme: defaultTheme,
   locale: LocaleType.EN_US,
   locales: {
-    [LocaleType.EN_US]: enUS,
+    [LocaleType.EN_US]: Tools.deepMerge(
+      DesignEnUS,
+      DocsUIEnUS,
+      UIEnUS,
+    ),
   },
 });
 
