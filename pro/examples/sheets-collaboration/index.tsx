@@ -1,6 +1,6 @@
 'use client'
 
-import { IConfigService, LocaleType, Univer } from '@univerjs/core'
+import { IAuthzIoService, IConfigService, LocaleType, Univer } from '@univerjs/core'
 import { defaultTheme } from '@univerjs/design'
 import { UniverDocsPlugin } from '@univerjs/docs'
 import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
@@ -49,6 +49,7 @@ export default function App(props: IProps) {
     function main() {
       const univer = new Univer({
         theme: defaultTheme,
+        override: [[IAuthzIoService, null]],
         locale: locale.replace('-', '') as LocaleType,
         locales: {
           [LocaleType.EN_US]: enUS,
@@ -107,7 +108,7 @@ export default function App(props: IProps) {
       univer.registerPlugin(UniverCollaborationClientPlugin, {
         enableOfflineEditing: true,
         enableSingleActiveInstanceLock: true,
-        enableAuthServer: true,
+        enableAuthServer: false,  // don't use default auth logic
       } as ICollaborationClientPluginConfig)
       univer.registerPlugin(UniverLiveSharePlugin)
 
