@@ -193,6 +193,31 @@ import { Callout } from 'nextra/components'
     export const functionUser = [[Customsum, FUNCTION_NAMES_USER.CUSTOMSUM]];
     ```
 
+    公式算法还可以用 `isAsync` 标记为返回异步结果，返回的 `AsyncObject` 中传入一个 `Promise`，`Promise.resolve` 可以接受 `BaseValueObject` 或者 `ArrayValueObject`。
+    
+    ```ts
+    /**
+     * Get data asynchronously and assign it to a single formula value
+    */
+    export class CustomAsyncObject extends BaseFunction {
+      override calculate(value: BaseValueObject) {
+          return new AsyncObject(asyncObjectFunction(value));
+      }
+
+      override isAsync(): boolean {
+          return true;
+      }
+    }
+
+    async function asyncObjectFunction(value: BaseValueObject) {
+      return new Promise((resolve: (value: BaseValueObject) => void) => {
+          setTimeout(() => {
+              resolve(StringValueObject.create(`Async Info: ${value.getValue()}`));
+          }, 1000);
+      });
+    }
+    ```
+
 7. 注册公式算法
 
     在 `UniverFormulaEnginePlugin` 传入你定义的公式算法对象。

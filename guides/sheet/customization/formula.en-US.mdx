@@ -192,6 +192,31 @@ You can create a new `custom-function.ts` file to specifically place custom form
     export const functionUser = [[Customsum, FUNCTION_NAMES_USER.CUSTOMSUM]];
     ```
 
+    Formula algorithms can also be marked with `isAsync` to return asynchronous results. A `Promise` is passed into the returned `AsyncObject`, and `Promise.resolve` can accept `BaseValueObject` or `ArrayValueObject`.
+
+    ```ts
+    /**
+     * Get data asynchronously and assign it to a single formula value
+    */
+    export class CustomAsyncObject extends BaseFunction {
+      override calculate(value: BaseValueObject) {
+          return new AsyncObject(asyncObjectFunction(value));
+      }
+
+      override isAsync(): boolean {
+          return true;
+      }
+    }
+
+    async function asyncObjectFunction(value: BaseValueObject) {
+      return new Promise((resolve: (value: BaseValueObject) => void) => {
+          setTimeout(() => {
+              resolve(StringValueObject.create(`Async Info: ${value.getValue()}`));
+          }, 1000);
+      });
+    }
+    ```
+
 7. Registration formula algorithm
 
     Pass in the formula algorithm object you defined in `UniverFormulaEnginePlugin`.
