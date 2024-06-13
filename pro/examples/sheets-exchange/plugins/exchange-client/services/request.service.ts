@@ -1,6 +1,6 @@
 import { IConfigService, IUniverInstanceService, LocaleService } from '@univerjs/core'
 import { MessageType } from '@univerjs/design'
-import type { IPostRequestParams, IRequestParams } from '@univerjs/network'
+import type { HTTPResponse, IPostRequestParams, IRequestParams } from '@univerjs/network'
 import { HTTPService } from '@univerjs/network'
 import { ErrorCode } from '@univerjs/protocol'
 import type { IError, UniverType } from '@univerjs/protocol'
@@ -134,11 +134,11 @@ export const IRequestService = createIdentifier<IRequestService>('exchange-clien
 export class RequestService implements IRequestService, IDisposable {
   private _modal: Modal
   constructor(
-        @IConfigService private readonly _configService: IConfigService,
-        @Inject(HTTPService) private readonly _httpService: HTTPService,
-        @Inject(IUniverInstanceService) private _univerInstanceService: IUniverInstanceService,
-        @IMessageService private readonly _messageService: IMessageService,
-        @Inject(LocaleService) private readonly _localeService: LocaleService,
+    @IConfigService private readonly _configService: IConfigService,
+    @Inject(HTTPService) private readonly _httpService: HTTPService,
+    @Inject(IUniverInstanceService) private _univerInstanceService: IUniverInstanceService,
+    @IMessageService private readonly _messageService: IMessageService,
+    @Inject(LocaleService) private readonly _localeService: LocaleService,
   ) {
     this._modal = new Modal()
   }
@@ -212,7 +212,7 @@ export class RequestService implements IRequestService, IDisposable {
         },
       }
 
-      const response = await this._httpService.post<IImportResponse>(url, options)
+      const response = await this._httpService.post<IImportResponse>(url, options) as HTTPResponse<IImportResponse>
       const data = response.body
 
       if (data.error && data.error.code === ErrorCode.OK) {
@@ -241,7 +241,7 @@ export class RequestService implements IRequestService, IDisposable {
         },
       }
 
-      const response = await this._httpService.post<IImportResponse>(url, options)
+      const response = await this._httpService.post<IImportResponse>(url, options) as HTTPResponse<IImportResponse>
       const data = response.body
 
       if (data.error && data.error.code === ErrorCode.OK) {
@@ -263,7 +263,7 @@ export class RequestService implements IRequestService, IDisposable {
         const url = replaceTaskID(this._getTaskURL(), `${taskID}`)
 
         const poll = async () => {
-          const response = await this._httpService.get<IGetTaskResponse>(url)
+          const response = await this._httpService.get<IGetTaskResponse>(url) as HTTPResponse<IGetTaskResponse>
           const data = response.body
 
           if (data.error && data.error.code === ErrorCode.OK) {
@@ -303,7 +303,7 @@ export class RequestService implements IRequestService, IDisposable {
   async signUrl(fileID: string) {
     try {
       const url = replaceFileID(this._getSignURL(), `${fileID}`)
-      const response = await this._httpService.get<ISignUrlResponse>(url)
+      const response = await this._httpService.get<ISignUrlResponse>(url) as HTTPResponse<ISignUrlResponse>
       const data = response.body
 
       if (data.error && data.error.code === ErrorCode.OK) {
@@ -323,7 +323,7 @@ export class RequestService implements IRequestService, IDisposable {
       const options: IRequestParams = {
         responseType: 'blob',
       }
-      const response = await this._httpService.get<string>(url, options)
+      const response = await this._httpService.get<string>(url, options) as HTTPResponse<string>
       const data = response.body
 
       if (typeof data === 'string') {
