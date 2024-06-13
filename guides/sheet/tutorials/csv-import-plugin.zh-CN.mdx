@@ -80,7 +80,7 @@ export default ImportCSVButtonPlugin
 
 我们在插件的 `onStarting` 生命周期中，输出了一段日志，该生命周期会在插件挂载到 Univer 实例时执行，我们在该生命周期中初始化插件的内部模块。
 
-关于插件的生命周期的更多信息，可以查看 [插件生命周期](/guides/architecture/architecture/#插件生命周期) 了解更多。
+关于插件的生命周期的更多信息，可以查看 [插件生命周期](/guides/sheet/architecture/univer#%E6%8F%92%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F) 了解更多。
 
 ### 2. 挂载插件到 Univer 实例
 
@@ -260,7 +260,7 @@ function parseCSVToUniverData(csv: string[][]): ICellData[][] {
 
   另外，我们刚刚定义的菜单按钮点击事件，也可以被其它插件或者用户通过命令触发。
 
-  如果你想了解更多关于命令的内容，可以查看 [命令系统](/guides/architecture/architecture/#命令系统) 了解更多。
+  如果你想了解更多关于命令的内容，可以查看 [命令系统](/guides/sheet/architecture/univer#命令系统) 了解更多。
 </Callout>
 
 可以使用 `this.commandService.executeCommand` 访问 `ICommandService` 的实例对象，但为了代码的解耦，保持 Command 的独立性，这里我们还可以通过 `IAccessor.get` 来获取 `ICommandService` 的实例对象。
@@ -300,7 +300,7 @@ import { SetRangeValuesCommand } from "@univerjs/sheets";
 
 本插件展示了如何通过 Univer 插件系统来扩展 Univer 的 UI 和功能，希望本文可以帮助你快速上手 Univer 插件开发。
 
-随着插件的规模增加，推荐进一步了解[模块分层](/guides/architecture/architecture/#模块分层)的最佳实践。
+随着插件的规模增加，推荐进一步了解[模块分层](guides/sheet/architecture/univer#模块分层)的最佳实践。
 
 Univer 生态还处于起步阶段，如果你有任何问题或者建议，欢迎提交 PR 或者 Issue。
 

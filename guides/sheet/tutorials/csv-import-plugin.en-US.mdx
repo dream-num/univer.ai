@@ -80,7 +80,7 @@ If we need to use other objects of Univer, we can use the `@Inject` decorator to
 
 We output a log in the `onStarting` lifecycle of the plugin, which will be executed when the plugin is mounted to the Univer instance. We initialize the internal module of the plugin in this lifecycle.
 
-For more information about the lifecycle of the plugin, you can check [Plugin Lifecycle](/guides/architecture/architecture/#plugin-lifecycle) for more information.
+For more information about the lifecycle of the plugin, you can check [Plugin Lifecycle](/guides/sheet/architecture/univer#plugin-life-cycle) for more information.
 
 ### 2. Mount the plugin to the Univer instance
 
@@ -260,7 +260,7 @@ The vast majority of operations in Univer are registered with commands, providin
 
 In addition, the menu button click event we just defined can also be triggered by other plugins or users through commands.
 
-If you want to learn more about commands, you can check [Command System](/guides/architecture/architecture/#command-system) for more information.
+If you want to learn more about commands, you can check [Command System](/guides/sheet/architecture/univer#command-system) for more information.
 </Callout>
 
 We can use `this.commandService.executeCommand` to access the instance object of `ICommandService`, but for the decoupling of the code and the independence of the Command, we can also use `IAccessor.get` to obtain the instance object of `ICommandService`.
@@ -300,9 +300,9 @@ The complete code of the plugin can be found in[ImportCSVButton.ts](https://gith
 
 This plugin demonstrates how to extend the UI and functionality of Univer through the Univer plugin system. I hope this article can help you quickly get started with Univer plugin development.
 
-As the scale of plugins increases, it is recommended to further understand the [Plugin Lifecycle](/guides/architecture/architecture/#plugin-lifecycle) to better understand the plugin system of Univer.
+As the scale of plugins increases, it is recommended to further understand the [Hierarchical Structure](guides/sheet/architecture/univer#hierarchical-structure) to better understand the plugin system of Univer.
 
-univer is still in its infancy, if you have any questions or suggestions, please feel free to submit PR or Issue.
+Univer is still in its infancy, if you have any questions or suggestions, please feel free to submit PR or Issue.
 
 ## Reference document
 
