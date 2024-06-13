@@ -135,7 +135,7 @@ export default function App(props: IProps) {
       })
 
       const userManagerService = injector.get(UserManagerService)
-      userManagerService.currentUser = mockUser
+      userManagerService.setCurrentUser(mockUser)
 
       univer.registerPlugin(GithubPlugin, {
         link: '/pro/examples/sheets-exchange'
