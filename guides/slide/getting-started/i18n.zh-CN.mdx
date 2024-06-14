@@ -30,3 +30,20 @@ Univer 目前支持以下语言：
 - zh-CN：简体中文
 - en-US：英文
 - ru-RU：俄文
+
+需要注意的是，由于 Webpack 4 并不支持 package.json 的 `exports` 字段，因此你可能会需要修改引入语言包的路径。
+
+```diff
+- import DesignZhCN from '@univerjs/design/locale/zh-CN';
++ import DesignZhCN from '@univerjs/design/lib/locale/zh-CN.json'
+```
+
+如果你使用了 TypeScript，也需要确认是否在 tsconfig.json 中配置了 `resolveJsonModule` 选项。
+
+```diff
+{
+  "compilerOptions": {
++    "resolveJsonModule": true
+  }
+}
+```
