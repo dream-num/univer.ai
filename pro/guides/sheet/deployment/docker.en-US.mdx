@@ -14,29 +14,14 @@ Ensure you have [Docker version 23 or higher](https://docs.docker.com/engine/ins
 
 Our architecture is built on PostgreSQL and RabbitMQ.
 
-## How to Deploy
+## Quick start
 
 Compatible with Linux, Mac, and Windows/WSL environments.
 
-1. Download the appropriate [release](https://github.com/dream-num/helm-charts/releases),
-
-   Or use this link to download the setup: [Docker Compose Zip](https://release-univer.oss-cn-shenzhen.aliyuncs.com/release-demo/docker-compose.zip).
-
-2. Navigate to the `docker-compose` directory after extracting the files.
-
-```bash
-cd helm-charts/docker-compose
+After download [license.zip](https://www.univer.ai/pro/license), under same folder run
 ```
-
-3. Optional: To set up a Pro License, place your [Pro License](/pro/license) file in the `docker-compose/configs` directory.
-
-4. Launch the backend services.
-
-```bash
-bash run.sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/dream-num/helm-charts/main/install.sh)"
 ```
-
-5. Service Verification
 
 Confirm that the document service has successfully started.
 
