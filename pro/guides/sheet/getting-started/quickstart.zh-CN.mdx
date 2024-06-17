@@ -20,9 +20,9 @@ import { Cards, Card, Tabs } from 'nextra/components'
 
 Univer Pro 的大部分功能都依赖服务端，如果你想进行自有部署体验或定制化开发，我们推荐用 Docker 快速部署服务端，具体步骤如下：
 
-```bash
-git clone -b v0.1.12 https://github.com/dream-num/helm-charts --depth=1
-cd helm-charts/docker-compose && ./run.sh
+下载 [license.zip](https://univer.ai/pro/license) 后，在同个目录下执行
+```shell
+sh -c "$(curl -fsSL https://release-univer.oss-cn-shenzhen.aliyuncs.com/release-demo/install.sh)"
 ```
 
 服务端部署后，可以使用以下命令从模板创建一个新的 Univer Pro 前端应用。
