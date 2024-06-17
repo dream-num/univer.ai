@@ -1,6 +1,6 @@
 'use client'
 
-import { IConfigService, LifecycleService, LifecycleStages, LocaleType, Univer } from '@univerjs/core'
+import { IAuthzIoService, IConfigService, IUndoRedoService, LifecycleService, LifecycleStages, LocaleType, Univer } from '@univerjs/core'
 import { defaultTheme } from '@univerjs/design'
 import { UniverDocsPlugin } from '@univerjs/docs'
 import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
@@ -59,6 +59,13 @@ export default function App(props: IProps) {
         [LocaleType.EN_US]: enUS,
         [LocaleType.ZH_CN]: zhCN,
       },
+      // When enabling the collaboration plugin, set the built-in implementation to `null`.
+      // This avoids double injection issues since the plugin injects its own implementation.
+      // Failure to do so will result in conflicts and errors.
+      override: [
+        [IAuthzIoService, null],
+        [IUndoRedoService, null],
+      ],
     })
 
     const injector = univer.__getInjector()

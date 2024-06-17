@@ -37,7 +37,6 @@ export default function App(props: IProps) {
     })
 
     // core plugins
-    univer.registerPlugin(UniverFormulaEnginePlugin)
     univer.registerPlugin(UniverRenderEnginePlugin)
     univer.registerPlugin(UniverUIPlugin, {
       container: univerRef.current!,
@@ -50,14 +49,6 @@ export default function App(props: IProps) {
     // sheet feature plugins
     univer.registerPlugin(UniverSheetsNumfmtPlugin)
     univer.registerPlugin(UniverFormulaEnginePlugin)
-    // univer.registerPlugin(UniverFormulaEnginePlugin, {
-    //   notExecuteFormula: true,
-    // });
-    univer.registerPlugin(UniverSheetsFormulaPlugin)
-    // univer.registerPlugin(UniverRPCMainThreadPlugin, {
-    //   workerURL: './worker.js',
-    // } as IUniverRPCMainThreadConfig);
-    univer.registerPlugin(UniverSheetsUIPlugin)
     univer.registerPlugin(UniverSheetsFormulaPlugin)
     univer.registerPlugin(UniverSheetsPrintPlugin)
 

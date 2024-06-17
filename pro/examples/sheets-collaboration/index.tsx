@@ -1,6 +1,6 @@
 'use client'
 
-import { IAuthzIoService, IConfigService, LocaleType, Univer } from '@univerjs/core'
+import { IAuthzIoService, IConfigService, IUndoRedoService, LocaleType, Univer } from '@univerjs/core'
 import { defaultTheme } from '@univerjs/design'
 import { UniverDocsPlugin } from '@univerjs/docs'
 import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
@@ -33,7 +33,7 @@ interface IProps {
   locale: string
 }
 
-export default function App(props: IProps) {
+export default function App (props: IProps) {
   const { locale } = props
 
   const univerRef = useRef(null)
@@ -46,15 +46,21 @@ export default function App(props: IProps) {
     const httpProtocol = isSecure ? 'https' : 'http'
     const wsProtocol = isSecure ? 'wss' : 'ws'
 
-    function main() {
+    function main () {
       const univer = new Univer({
         theme: defaultTheme,
-        override: [[IAuthzIoService, null]],
         locale: locale.replace('-', '') as LocaleType,
         locales: {
           [LocaleType.EN_US]: enUS,
           [LocaleType.ZH_CN]: zhCN,
         },
+        // When enabling the collaboration plugin, set the built-in implementation to `null`.
+        // This avoids double injection issues since the plugin injects its own implementation.
+        // Failure to do so will result in conflicts and errors.
+        override: [
+          [IAuthzIoService, null],
+          [IUndoRedoService, null],
+        ],
       })
 
       const configService = univer.__getInjector().get(IConfigService)
@@ -114,7 +120,7 @@ export default function App(props: IProps) {
 
       // uniscript
       univer.registerPlugin(UniverUniscriptPlugin, {
-        getWorkerUrl(moduleID: string, label: string) {
+        getWorkerUrl (moduleID: string, label: string) {
           if (label === 'typescript' || label === 'javascript') {
             return './vs/language/typescript/ts.worker.js'
           }
