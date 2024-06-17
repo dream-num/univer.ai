@@ -20,9 +20,9 @@ Experience Univer Pro online without any installations. Simply click the link be
 
 Most of Univer Pro's functionalities depend on the server-side, so the first step is to deploy the server. We recommend deploying quickly using Docker with the following steps:
 
-```bash
-git clone -b v0.1.12 https://github.com/dream-num/helm-charts --depth=1
-cd helm-charts/docker-compose && ./run.sh
+After download [license.zip](https://univer.ai/pro/license), under same folder run
+```shell
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/dream-num/helm-charts/main/install.sh)"
 ```
 
 Once the server is up, you can create a new Univer Pro front-end application from a template using the commands below.
