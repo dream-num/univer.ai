@@ -58,6 +58,7 @@ univer.registerPlugin(UniverSheetsExchangeClientPlugin);
 If the import/export interface has not changed, you do not need to configure it. If there are changes, you can configure the interface address as follows:
 
 ```typescript
+import { IConfigService } from '@univerjs/core'
 import { EXCHANGE_UPLOAD_FILE_SERVER_URL_KEY, EXCHANGE_IMPORT_SERVER_URL_KEY, EXCHANGE_EXPORT_SERVER_URL_KEY, EXCHANGE_GET_TASK_SERVER_URL_KEY, EXCHANGE_SIGN_URL_SERVER_URL_KEY } from '@univerjs-pro/sheets-exchange-client';
 
 const injector = univer.__getInjector();

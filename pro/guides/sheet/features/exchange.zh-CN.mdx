@@ -59,6 +59,7 @@ univer.registerPlugin(UniverSheetsExchangeClientPlugin);
 如果导入导出的接口没有变动，可以不用配置，如果有变动，可以通过以下方式配置接口地址：
 
 ```typescript
+import { IConfigService } from '@univerjs/core'
 import { EXCHANGE_UPLOAD_FILE_SERVER_URL_KEY, EXCHANGE_IMPORT_SERVER_URL_KEY, EXCHANGE_EXPORT_SERVER_URL_KEY, EXCHANGE_GET_TASK_SERVER_URL_KEY, EXCHANGE_SIGN_URL_SERVER_URL_KEY } from '@univerjs-pro/sheets-exchange-client';
 
 const injector = univer.__getInjector();
