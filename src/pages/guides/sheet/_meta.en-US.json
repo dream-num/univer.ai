@@ -1,0 +1,38 @@
+{
+  "sheet": {
+    "title": "📊 Univer Sheet",
+    "href": "/guides/sheet/introduction"
+  },
+  "doc": {
+    "title": "📝 Univer Doc",
+    "href": "/guides/doc/introduction"
+  },
+  "slide": {
+    "title": "📽️ Univer Slide",
+    "href": "/guides/slide/introduction"
+  },
+  "examples": {
+    "title": "🎮 Examples ↗",
+    "href": "/examples",
+    "newWindow": true
+  },
+  "playground": {
+    "title": "🎢 Playground ↗",
+    "href": "/playground",
+    "newWindow": true
+  },
+  "---": {
+    "type": "separator"
+  },
+  "introduction": "Introduction to Univer Sheet",
+  "roadmap": "Roadmap",
+  "getting-started": "Getting Started",
+  "features": "Features",
+  "facade": "Facade API",
+  "advanced": "Advanced Usage",
+  "tutorials": "Tutorials",
+  "architecture": "Architecture",
+  "customization": "Customizing Univer",
+  "troubleshooting": "Troubleshooting",
+  "contributing": "Contribution Guides"
+}

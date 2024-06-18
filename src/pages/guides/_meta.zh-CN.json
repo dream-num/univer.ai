@@ -1,0 +1,14 @@
+{
+  "sheet": {
+    "type": "page",
+    "title": "Univer Sheet"
+  },
+  "doc": {
+    "type": "page",
+    "title": "Univer Doc"
+  },
+  "slide": {
+    "type": "page",
+    "title": "Univer Slide"
+  }
+}

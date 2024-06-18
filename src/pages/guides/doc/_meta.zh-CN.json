@@ -1,0 +1,36 @@
+{
+  "sheet": {
+    "title": "📊 Univer Sheet",
+    "href": "/guides/sheet/introduction"
+  },
+  "doc": {
+    "title": "📝 Univer Doc",
+    "href": "/guides/doc/introduction"
+  },
+  "slide": {
+    "title": "📽️ Univer Slide",
+    "href": "/guides/slide/introduction"
+  },
+  "examples": {
+    "title": "🎮 Examples ↗",
+    "href": "/examples",
+    "newWindow": true
+  },
+  "playground": {
+    "title": "🎢 Playground ↗",
+    "href": "/playground",
+    "newWindow": true
+  },
+  "---": {
+    "type": "separator"
+  },
+  "introduction": "Univer Doc 简介",
+  "roadmap": "路线图",
+  "getting-started": "开始使用",
+  "features": "功能",
+  "facade": "Facade API",
+  "advanced": "进阶使用",
+  "architecture": "架构",
+  "troubleshooting": "常见问题",
+  "contributing": "贡献指南"
+}

@@ -1,0 +1,15 @@
+{
+  "core": "核心功能",
+  "facade": "Facade API",
+  "numfmt": "数字格式",
+  "hyperlink": "超链接文本",
+  "floating-images": "浮动图片",
+  "find-replace": "查找 & 替换",
+  "filter": "筛选",
+  "data-validation": "数据验证",
+  "conditional-formatting": "条件格式",
+  "permission": "权限管控",
+  "thread-comment": "评论 / 批注",
+  "uniscript": "Uniscript",
+  "zen-editor": "禅编辑器"
+}

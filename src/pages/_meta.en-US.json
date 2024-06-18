@@ -1,0 +1,41 @@
+{
+  "guides": {
+    "type": "menu",
+    "title": "Univer",
+    "items": {
+      "sheet": {
+        "title": "📊 Univer Sheet",
+        "href": "/guides/sheet/introduction"
+      },
+      "doc": {
+        "title": "📝 Univer Doc",
+        "href": "/guides/doc/introduction"
+      },
+      "slide": {
+        "title": "📽️ Univer Slide",
+        "href": "/guides/slide/introduction"
+      }
+    }
+  },
+  "pro": {
+    "type": "menu",
+    "title": "🌟 Univer Pro",
+    "items": {
+      "sheet": {
+        "title": "📊 Univer Sheet Pro",
+        "href": "/pro/guides/sheet/introduction"
+      }
+    }
+  },
+  "typedoc": {
+    "type": "page",
+    "title": "API Reference",
+    "href": "/typedoc/@univerjs/README",
+    "route": "#"
+  },
+  "blog": {
+    "type": "page",
+    "title": "Blog",
+    "href": "/blog/post/this-is-univer"
+  }
+}

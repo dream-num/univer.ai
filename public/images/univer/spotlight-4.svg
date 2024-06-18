@@ -1,0 +1,59 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Frame" clip-path="url(#clip0_1528_2010)">
+<path id="Vector" d="M31.667 6.66699H8.33366C7.41318 6.66699 6.66699 7.41318 6.66699 8.33366V31.667C6.66699 32.5875 7.41318 33.3337 8.33366 33.3337H31.667C32.5875 33.3337 33.3337 32.5875 33.3337 31.667V8.33366C33.3337 7.41318 32.5875 6.66699 31.667 6.66699Z" fill="#2B4DFF" stroke="#2C41FF" stroke-width="3.33333" stroke-linejoin="round"/>
+<path id="Vector_2" d="M25 15H15V25H25V15Z" fill="white" stroke="white" stroke-width="3.33333" stroke-linejoin="round"/>
+<g id="Vector_3">
+<path d="M12.4248 1.66699V6.66699V1.66699Z" fill="#2B4DFF"/>
+<path d="M12.4248 1.66699V6.66699" stroke="#2C41FF" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Vector_4">
+<path d="M12.4248 33.333V38.333V33.333Z" fill="#2B4DFF"/>
+<path d="M12.4248 33.333V38.333" stroke="#2C41FF" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Vector_5">
+<path d="M20 1.66699V6.66699V1.66699Z" fill="#2B4DFF"/>
+<path d="M20 1.66699V6.66699" stroke="#2C41FF" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Vector_6">
+<path d="M20 33.333V38.333V33.333Z" fill="#2B4DFF"/>
+<path d="M20 33.333V38.333" stroke="#2C41FF" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Vector_7">
+<path d="M27.5752 1.66699V6.66699V1.66699Z" fill="#2B4DFF"/>
+<path d="M27.5752 1.66699V6.66699" stroke="#2C41FF" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Vector_8">
+<path d="M27.5752 33.333V38.333V33.333Z" fill="#2B4DFF"/>
+<path d="M27.5752 33.333V38.333" stroke="#2C41FF" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Vector_9">
+<path d="M1.66699 12.4248H6.66699H1.66699Z" fill="#2B4DFF"/>
+<path d="M1.66699 12.4248H6.66699" stroke="#2C41FF" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Vector_10">
+<path d="M33.333 12.4248H38.333H33.333Z" fill="#2B4DFF"/>
+<path d="M33.333 12.4248H38.333" stroke="#2C41FF" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Vector_11">
+<path d="M1.66699 20H6.66699H1.66699Z" fill="#2B4DFF"/>
+<path d="M1.66699 20H6.66699" stroke="#2C41FF" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Vector_12">
+<path d="M33.333 20H38.333H33.333Z" fill="#2B4DFF"/>
+<path d="M33.333 20H38.333" stroke="#2C41FF" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Vector_13">
+<path d="M1.66699 27.5752H6.66699H1.66699Z" fill="#2B4DFF"/>
+<path d="M1.66699 27.5752H6.66699" stroke="#2C41FF" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Vector_14">
+<path d="M33.333 27.5752H38.333H33.333Z" fill="#2B4DFF"/>
+<path d="M33.333 27.5752H38.333" stroke="#2C41FF" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_1528_2010">
+<rect width="40" height="40" fill="white"/>
+</clipPath>
+</defs>
+</svg>

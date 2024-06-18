@@ -1,0 +1,15 @@
+{
+  "core": "Core",
+  "facade": "Facade API",
+  "numfmt": "Number Format",
+  "hyperlink": "Hyperlink",
+  "floating-images": "Floating Images",
+  "find-replace": "Find & Replace",
+  "filter": "Filter",
+  "data-validation": "Data Validation",
+  "conditional-formatting": "Conditional Formatting",
+  "permission": "Permission",
+  "thread-comment": "Thread Comment",
+  "uniscript": "Uniscript",
+  "zen-editor": "Zen Editor"
+}

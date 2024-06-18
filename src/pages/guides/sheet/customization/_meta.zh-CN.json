@@ -1,0 +1,8 @@
+{
+  "canvas": "扩展 Canvas",
+  "ui": "扩展 UI",
+  "command": "扩展命令",
+  "formula": "自定义公式",
+  "model": "插件自定义模型",
+  "theme": "自定义主题"
+}

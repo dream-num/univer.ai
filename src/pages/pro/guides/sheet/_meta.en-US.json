@@ -1,0 +1,20 @@
+{
+  "sheet": {
+    "title": "📊 Univer Pro Sheet",
+    "href": "/pro/guides/sheet/introduction"
+  },
+  "examples": {
+    "title": "🎮 Examples ↗",
+    "href": "/pro/examples",
+    "newWindow": true
+  },
+  "---": {
+    "type": "separator"
+  },
+  "introduction": "Introduction to Univer Pro Sheet",
+  "getting-started": "Getting Started",
+  "features": "Features",
+  "deployment": "Deploying Univer Pro Sheet",
+  "facade": "Pro Facade API",
+  "architecture": "Architecture"
+}

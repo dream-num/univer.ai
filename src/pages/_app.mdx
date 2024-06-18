@@ -1,0 +1,69 @@
+import { Theme } from '@radix-ui/themes'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import Navbar from '@/official-site/components/Navbar'
+import Footer from '@/official-site/components/Footer'
+import { useProduct } from '@/official-site/hooks/useProducts'
+import { poppins } from '@/official-site/utils/fonts'
+import './globals.css'
+import './rc-color-picker.css'
+import './rc-slider.css'
+import '@radix-ui/themes/styles.css'
+
+export default function App(props) {
+  const { Component, pageProps } = props
+
+  // Inject Auth License services
+  const { pathname } = useRouter()
+  const product = useProduct()
+
+  useEffect(() => {
+    window.dataLayer = window.dataLayer || []
+    function gtag() {
+      dataLayer.push(arguments)
+    }
+
+    gtag('js', new Date())
+    gtag('config', 'G-RCVZZ25ZP4')
+  }, [])
+
+  /**
+   * Documentation pages should render with the Nextra layout.
+   * Other pages should render with the default layout.
+   *
+   * The `matcher` should be consistent with the src/middleware.ts.
+   */
+  const isDocs = ['/typedoc', '/guides', '/pro/guides', '/blog/post'].some(m => pathname.startsWith(m))
+  const isPlayground = ['/playground', '/examples/', '/pro/examples/'].some(m => pathname.startsWith(m))
+
+  // remove dark mode class from nextra to avoid conflicts
+  useEffect(() => {
+    if (!isDocs) {
+      document.documentElement.classList.remove('dark')
+      document.documentElement.style.colorScheme = null
+    }
+  }, [pathname])
+
+  const isProd = process.env.NODE_ENV === 'production'
+
+  return (
+    <>
+      {isDocs
+        ? (
+          <Component {...pageProps} />
+          )
+        : (
+          <Theme>
+            <div className={poppins.className}>
+              <Navbar {...product} />
+              <Component {...pageProps} />
+              {!isPlayground && <Footer />}
+            </div>
+          </Theme>
+          )}
+
+      {/* Global site tag (gtag.js) - Google Analytics */}
+      {isProd && <script async src="https://www.googletagmanager.com/gtag/js?id=G-RCVZZ25ZP4"></script>}
+    </>
+  )
+}

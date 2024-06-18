@@ -1,0 +1,1 @@
+export { GithubPlugin } from './plugin'
