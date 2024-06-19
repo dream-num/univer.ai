@@ -48,14 +48,14 @@ jobs:
       - name: Login to Aliyun Container Registry (ACR)
         uses: aliyun/acr-login@v1
         with:
-          login-server: univer-acr-registry.cn-shenzhen.cr.aliyuncs.com
+          login-server: '${{ secrets.REGISTRY_CR }}'
           region-id: cn-shenzhen
           username: '${{ secrets.REGISTRY_USERNAME }}'
           password: '${{ secrets.REGISTRY_PASSWORD }}'
 
       - name: check check_image
         run: |
-          echo "IMAGE_EXIST=$(make check_image)" >> $GITHUB_ENV
+          echo "IMAGE_EXIST=$(make check_image CR=${{ secrets.REGISTRY_CR }})" >> $GITHUB_ENV
 
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
@@ -81,7 +81,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
         with:
-          image: univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/devops/binfmt:qemu-v7.0.0
+          image: ${{ secrets.REGISTRY_CR }}/devops/binfmt:qemu-v7.0.0
         if: env.IMAGE_EXIST != 'true'
 
       - name: Set up Docker Buildx
@@ -89,15 +89,15 @@ jobs:
         id: buildx
         with:
           driver-opts: |
-            image=univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/devops/buildkit:buildx-stable-1
+            image=${{ secrets.REGISTRY_CR }}/devops/buildkit:buildx-stable-1
         if: env.IMAGE_EXIST != 'true'
 
       - name: Build and Push Docker Image
         run: |
           IMAGE_TAG=$(echo "${{ github.sha }}" | cut -c 1-7)
-          make push_image PUSH_TAG=$IMAGE_TAG BUILDER=${{ steps.buildx.outputs.name }}
+
+          make push_image PUSH_TAG=$IMAGE_TAG BUILDER=${{ steps.buildx.outputs.name }} CR=${{ secrets.REGISTRY_CR }}
         if: env.IMAGE_EXIST != 'true'
-        continue-on-error: true
 
   deploy:
     if: inputs.image-tag == ''
