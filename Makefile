@@ -34,5 +34,4 @@ endif
 .PHONY: check_image
 # Check if the image exists
 check_image:
-	@echo $(CR)
 	@echo $(image_exists)
