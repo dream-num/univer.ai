@@ -145,6 +145,14 @@ const demo: { title: string, items: IEmbedProps[] }[] = [
           openFile: 'README.md',
         },
       },
+      {
+        title: 'sheet permission',
+        type: 'StackBlitz',
+        repoPath: 'awesome-univer/sheets-permission-demo',
+        openOptions: {
+          openFile: 'README.md',
+        },
+      },
     ],
   },
 ]
