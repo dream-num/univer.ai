@@ -588,7 +588,7 @@ To implement a formula, you need to add formula description, internationalizatio
     - Some Chinese translations in the Office function documentation are machine-translated and may be unclear. Modify as needed. For example, `单元格参考` (Cell Reference) should be translated as `单元格引用`. Numeric type parameters are uniformly translated as: `数值`.
     - Do not end `abstract` with a period (used in the search list when users input cells), but end `description` and `detail` with a period (used in descriptions).
     - Capitalize the first letter of English sentences.
-    - Ensure that all existing internationalization files are filled. Currently, there are only Chinese, English, and Japanese translations (languages can be switched at the bottom of the Excel introduction page).
+    - Ensure that all existing internationalization files are filled. Currently, there are Chinese, English, Japanese, and Russian translations (languages can be switched at the bottom of the Excel introduction page).
 
 3. Formula Descriptions
 
@@ -695,6 +695,7 @@ To implement a formula, you need to add formula description, internationalizatio
      - `needsExpandParams`: Whether the function needs to expand parameters, mainly handles situations where the `LOOKUP` function needs to handle vectors of different sizes
      - `needsReferenceObject`: Whether the function needs to pass in a reference object. After setting, `BaseReferenceObject` will not be converted into `ArrayValueObject` but will be passed directly into the formula algorithm, such as the `OFFSET` function
 - Formula calculation errors will return fixed types of errors, such as `#NAME?`, `#VALUE!`, which need to be aligned with Excel, because there are functions `ISERR`, `ISNA`, etc. that determine the error type. If the type is not specified correctly, the result will be It may be different.
+- Functions that support reference objects, such as OFFSET, INDIRECT, and ADDRESS, need to be marked with `isAddress` to determine whether the associated range needs to be obtained from the reference object. Refer to the implementation of the `OFFSET` function.
 
 ### Basic Tools
 

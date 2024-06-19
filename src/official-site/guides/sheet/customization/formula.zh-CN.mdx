@@ -194,7 +194,7 @@ import { Callout } from 'nextra/components'
     ```
 
     公式算法还可以用 `isAsync` 标记为返回异步结果，返回的 `AsyncObject` 中传入一个 `Promise`，`Promise.resolve` 可以接受 `BaseValueObject` 或者 `ArrayValueObject`。
-    
+
     ```ts
     /**
      * Get data asynchronously and assign it to a single formula value
@@ -591,7 +591,7 @@ comment 标记下 `@自己 : I can solve it`，示例 [\[Feature\] Math Formula 
         - 数字类型的参数统一翻译为：数值
     - `abstract` 结尾不要加句号（用在用户输入单元格时的搜索列表中，但是部分国家的语言有加句号的习惯，比如日本语，参照 Excel 的简介信息即可），`description` 和 `detail` 结尾加句号（用在描述中）
     - 英文句子的首字母大写
-    - 注意所有的现有的国际化文件都需要填写，目前只有中英日（Excel 介绍页底部可以切换语言）
+    - 注意所有的现有的国际化文件都需要填写，目前有中英日俄（Excel 介绍页底部可以切换语言）
 
 3. 公式描述
 
@@ -698,6 +698,7 @@ comment 标记下 `@自己 : I can solve it`，示例 [\[Feature\] Math Formula 
     - `needsExpandParams`: 函数是否需要扩展参数，主要处理类似 `LOOKUP` 函数需要处理不同大小向量的情况
     - `needsReferenceObject`：函数是否需要传入引用对象，设置之后 `BaseReferenceObject` 不会转化为 `ArrayValueObject` 而是直接传入公式算法，比如 `OFFSET` 函数
 - 公式计算错误会返回固定类型的错误，比如 `#NAME?`、`#VALUE!`，需要对齐 Excel，因为有判断报错类型的函数 `ISERR`、`ISNA`等，类型指定不对，结果就可能不一样。
+- 类似 OFFSET、INDIRECT、ADDRESS 这种支持引用对象的函数，需要标记 `isAddress`，用来判断是否需要从引用对象中获取关联的范围，参考 `OFFSET` 函数的实现。
 
 ### 基础工具
 
