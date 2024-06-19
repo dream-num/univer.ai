@@ -1,0 +1,131 @@
+name: 📤 Deploy Staging
+
+on:
+  push:
+    branches:
+      - dev
+  workflow_dispatch:
+    inputs:
+      image-tag:
+        description: The image tag to deploy (optional, if not provided, the image will be built first)
+        type: string
+        default: ''
+        required: false
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{github.event}}
+  cancel-in-progress: true
+
+jobs:
+  ci-test:
+    if: inputs.image-tag == ''
+    uses: ./.github/workflows/ci-test.yml
+    secrets: inherit
+
+  build:
+    if: inputs.image-tag == ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    needs: ci-test
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.GH_TOKEN }}
+
+      - uses: actions/cache@v4
+        with:
+          # See here for caching with `yarn` https://github.com/actions/cache/blob/main/examples.md#node---yarn or you can leverage caching with actions/setup-node https://github.com/actions/setup-node
+          path: |
+            ${{ github.workspace }}/.next/cache
+          # Generate a new cache whenever packages or source files change.
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+          # If source files changed but packages didn't, rebuild from a prior cache.
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
+
+      - name: Set IMAGE_TAG environment variable
+        run: echo "IMAGE_TAG=$(echo ${{ github.sha }} | cut -c 1-7)" >> $GITHUB_ENV
+
+      # Deploy to dev.univer.plus
+      - name: Login to Aliyun Container Registry (ACR)
+        uses: aliyun/acr-login@v1
+        with:
+          login-server: univer-acr-registry.cn-shenzhen.cr.aliyuncs.com
+          region-id: cn-shenzhen
+          username: '${{ secrets.REGISTRY_USERNAME }}'
+          password: '${{ secrets.REGISTRY_PASSWORD }}'
+
+      - name: check check_image
+        run: |
+          echo "IMAGE_EXIST=$(make check_image)" >> $GITHUB_ENV
+
+      - name: Setup Node.js
+        uses: ./.github/actions/setup-node
+        with:
+          npmtoken: ${{ secrets.VERDACCIO_TOKEN }}
+        if: env.IMAGE_EXIST != 'true'
+
+      # - name: Cache Next.js
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: |
+      #       ${{ github.workspace }}/.next/cache
+      #     key: ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
+
+      - name: Build
+        run: |
+          pnpm build:submodules
+          pnpm lint:types
+          pnpm build
+        if: env.IMAGE_EXIST != 'true'
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          image: univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/devops/binfmt:qemu-v7.0.0
+        if: env.IMAGE_EXIST != 'true'
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        id: buildx
+        with:
+          driver-opts: |
+            image=univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/devops/buildkit:buildx-stable-1
+        if: env.IMAGE_EXIST != 'true'
+
+      - name: Build and Push Docker Image
+        run: |
+          IMAGE_TAG=$(echo "${{ github.sha }}" | cut -c 1-7)
+          make push_image PUSH_TAG=$IMAGE_TAG BUILDER=${{ steps.buildx.outputs.name }}
+        if: env.IMAGE_EXIST != 'true'
+        continue-on-error: true
+
+  deploy:
+    if: inputs.image-tag == ''
+    runs-on: ubuntu-latest
+    needs: build
+    timeout-minutes: 10
+    steps:
+      - name: Set IMAGE_TAG environment variable
+        run: echo "IMAGE_TAG=$(echo ${{ github.sha }} | cut -c 1-7)" >> $GITHUB_ENV
+
+      - uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          repository: dream-num/helm-chart-private
+          event-type: dispatch
+          client-payload: '{"service":"univer-site","tag":"${{ env.IMAGE_TAG }}"}'
+
+  deploy-trigger:
+    if: inputs.image-tag != ''
+    runs-on: arc-runner-set
+    steps:
+      - uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          repository: dream-num/helm-chart-private
+          event-type: dispatch
+          client-payload: '{"service":"univer-site","tag":"${{ inputs.image-tag }}"}'
