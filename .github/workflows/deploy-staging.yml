@@ -77,7 +77,6 @@ jobs:
 
       - name: Build
         run: |
-          pnpm build:submodules
           pnpm lint:types
           pnpm build
         if: env.IMAGE_EXIST != 'true'
