@@ -25,6 +25,11 @@ export default function Page() {
       preview: '/images/univer/examples/sheets-big-data.gif',
       desc: 'Large data volume Univer Sheets, a table containing 10,000,000 cell data.',
       link: '/examples/sheets-big-data',
+    }, {
+      title: 'Sheets VChart',
+      preview: '/images/univer/examples/sheets-vchart.gif',
+      desc: 'Data visualization capabilities with popular chart library.',
+      link: '/examples/sheets-vchart',
     }],
   }, {
     title: 'Univer Doc',
