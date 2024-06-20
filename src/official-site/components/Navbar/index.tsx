@@ -102,7 +102,7 @@ export default function Navbar(props: IProps) {
   }, {
     title: 'Univer Workspace',
     type: 'link',
-    href: '/workspace',
+    href: 'https://space.univer.ai',
   }, {
     title: t('ecosystem.title'),
     type: 'dropdown',

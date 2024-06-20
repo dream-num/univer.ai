@@ -398,7 +398,7 @@ export default function Page() {
                     after:scale-x-0 after:bg-[linear-gradient(90deg,#5357ED_0%,#40B9FF_104.41%)]
                     after:transition after:duration-300 after:content-[''] after:hover:scale-x-100
                   `}
-                  href="/workspace"
+                  href="https://space.univer.ai"
                 >
                   Univer Workspace
                 </Link>
