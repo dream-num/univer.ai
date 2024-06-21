@@ -139,6 +139,12 @@ export default function App(props: IProps) {
     // create univer sheet instance
     univer.createUnit(UniverInstanceType.UNIVER_SHEET, {})
 
+    // create chart
+    const univerAPI = FUniver.newAPI(univer)
+    univerAPI.getHooks().onRendered(() => {
+      createVChart(univerAPI)
+    })
+
     // set current user for comment
     const injector = univer.__getInjector()
     const userManagerService = injector.get(UserManagerService)
@@ -146,11 +152,6 @@ export default function App(props: IProps) {
 
     univer.registerPlugin(GithubPlugin, {
       link: '/examples/sheets-vchart',
-    })
-
-    const univerAPI = FUniver.newAPI(univer)
-    univerAPI.getHooks().onRendered(() => {
-      createVChart(univerAPI)
     })
   }, [])
 
