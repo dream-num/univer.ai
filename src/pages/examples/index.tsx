@@ -30,6 +30,7 @@ export default function Page() {
       preview: '/images/univer/examples/sheets-vchart.gif',
       desc: 'Data visualization capabilities with popular chart library.',
       link: '/examples/sheets-vchart',
+      isCommunity: true,
     }],
   }, {
     title: 'Univer Doc',
@@ -162,6 +163,18 @@ export default function Page() {
                     </div>
 
                     <h3 className="mb-3 text-xl font-semibold">{item.title}</h3>
+
+                    {item.isCommunity && (
+                      <div className={`
+                        inline-flex h-7 w-48 items-center justify-center gap-2.5 rounded-3xl
+                        bg-indigo-600/10 px-2 py-1.5
+                      `}
+                      >
+                        <div className="text-xs font-medium leading-none text-indigo-600">
+                          Community Contribution 👨‍💻
+                        </div>
+                      </div>
+                    )}
 
                     <p className="mb-2">
                       {item.desc}
