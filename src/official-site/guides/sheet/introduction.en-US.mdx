@@ -1,6 +1,6 @@
 import { Callout } from 'nextra/components'
 import FeatureBox from '@/official-site/components/FeatureBox'
-import ReactLive from '@/official-site/components/ReactLive'
+import Sandbox from '@/official-site/components/Sandbox'
 
 # Introduction to Univer Sheet
 
@@ -67,7 +67,21 @@ export const features = [{
 
 #### Showcases
 
-export const code = `const univer = new Univer({
+export const entryFile = `import { LocaleType, Univer, UniverInstanceType } from '@univerjs/core';
+import { defaultTheme } from '@univerjs/design';
+import { UniverDocsPlugin } from '@univerjs/docs';
+import { UniverDocsUIPlugin } from '@univerjs/docs-ui';
+import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula';
+import { UniverRenderEnginePlugin } from '@univerjs/engine-render';
+import { UniverSheetsPlugin } from '@univerjs/sheets';
+import { UniverSheetsFormulaPlugin } from '@univerjs/sheets-formula';
+import { UniverSheetsUIPlugin } from '@univerjs/sheets-ui';
+import { UniverUIPlugin } from '@univerjs/ui';
+import { enUS } from './locales';
+
+import './style.css';
+
+const univer = new Univer({
   theme: defaultTheme,
   locale: LocaleType.EN_US,
   locales: {
@@ -79,6 +93,7 @@ univer.registerPlugin(UniverRenderEnginePlugin);
 univer.registerPlugin(UniverFormulaEnginePlugin);
 univer.registerPlugin(UniverUIPlugin, {
   container: 'app',
+  disableAutoFocus: true,
 });
 
 univer.registerPlugin(UniverDocsPlugin, {
@@ -90,9 +105,10 @@ univer.registerPlugin(UniverSheetsPlugin);
 univer.registerPlugin(UniverSheetsUIPlugin);
 univer.registerPlugin(UniverSheetsFormulaPlugin);
 
-univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});`
+univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});
+`
 
-<ReactLive code={code} />
+<Sandbox entryFile={entryFile} />
 
 #### Editing Operations
 
