@@ -1,0 +1,26 @@
+name: 🚧 Feature branch delete
+
+on:
+  delete:
+
+jobs:
+  uninstall:
+    name: Uninstall
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: ${{ github.event.ref_type == 'branch' && startsWith(github.event.ref, 'feat/') }}
+
+    steps:
+      - name: Set FEATURE environment variable
+        run: ref="${{ github.event.ref }}" && echo "FEATURE=$(echo ${ref#feat/})" >> $GITHUB_ENV
+
+      - uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          repository: dream-num/helm-chart-private
+          event-type: dispatch-delete-feature
+          client-payload: >
+            {
+              "service": "univer-site",
+              "feature": "${{ env.FEATURE }}"
+            }
