@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import { IncreaseSingle } from '@univerjs/icons'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { GitHubButton } from '../../official-site/components/GitHubPlus/GitHub'
 import { clsx } from '@/lib/utils'
 import Hero from '@/official-site/components/Hero'
@@ -17,6 +18,9 @@ import { VideoPlayer } from '@/official-site/clipsheet/components/VideoPlayer'
 
 export default function Page() {
   const [collapsedIds, setCollapsedIds] = useState<number[]>([])
+
+  const router = useRouter()
+  const { asPath } = router
 
   const enUs = {
     'hero.ai-driven': 'AI-Driven',
@@ -48,8 +52,30 @@ export default function Page() {
   })
 
   const intailValue = 'left'
-  const [heroVideoFlag, setHeroVideoFlag] = useState(intailValue)
-  const [videoListFlag, setVideosFlag] = useState(intailValue)
+  const [heroVideoFlag, setHeroVideoFlag] = useState<'left' | 'right'>(intailValue)
+  const [videoListFlag, setVideosFlag] = useState<'left' | 'right'>(intailValue)
+
+  useEffect(() => {
+    // 检测 URL 哈希部分的变化
+    const handleHashChange = () => {
+      const hash = window.location.hash
+      if (hash === '#gpt') {
+        setHeroVideoFlag('right')
+        setVideosFlag('right')
+      }
+    }
+
+    // 初次加载时检查哈希部分
+    handleHashChange()
+
+    // 监听哈希变化事件
+    window.addEventListener('hashchange', handleHashChange)
+
+    // 清理事件监听器
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange)
+    }
+  }, [asPath])
 
   const previewVidio = heroVideoFlag === 'left' ? 'https://www.youtube.com/embed/MxDMCKNx8P4?si=aBiGTAGDNBWabFle' : 'https://www.youtube-nocookie.com/embed/n0i3rvEmfVg?si=htcqrq6OWRjMt1yl'
   const defaultVideo = videoListFlag === 'left' ? 'https://www.youtube.com/embed/MxDMCKNx8P4?si=aBiGTAGDNBWabFle' : 'https://www.youtube-nocookie.com/embed/n0i3rvEmfVg?si=htcqrq6OWRjMt1yl'
@@ -206,6 +232,7 @@ export default function Page() {
               leftLabel="Chrome Extension"
               rightLabel="ChatGPT"
               intailValue={intailValue}
+              value={heroVideoFlag}
               onChange={value => setHeroVideoFlag(value)}
             />
           </div>
@@ -261,6 +288,7 @@ export default function Page() {
                 leftLabel="Chrome Extension"
                 rightLabel="ChatGPT"
                 intailValue={intailValue}
+                value={videoListFlag}
                 onChange={value => setVideosFlag(value)}
               />
             </div>
