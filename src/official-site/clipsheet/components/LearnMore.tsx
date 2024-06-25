@@ -7,8 +7,10 @@ export function LearnMore({ href, className }: { href: string, className?: strin
     <Link
       className={
     clsx(`
-      inline-flex items-center gap-[8px] fill-[#2B4DFF] text-center font-['Poppins'] text-lg
-      font-normal leading-7 text-[#2B4DFF]
+      inline-flex items-center gap-[8px] fill-[#2B4DFF] text-center text-lg font-normal leading-7
+      text-[#2B4DFF]
+
+      hover:underline
     `, className)
   }
       href={href}

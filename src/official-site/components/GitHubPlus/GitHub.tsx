@@ -89,7 +89,7 @@ export function GitHubButton() {
       <GitHubButtonBase
         color={['#3b42fd', '#2fa1c8', '#28c5a8']}
       >
-        Power by Univer GitHub
+        Power by Univer sheet
         <img className="h-[20px] w-[20px]" src={guideSingle.src} />
         <span className="text-[24px]">
           <GithubSingle24 />

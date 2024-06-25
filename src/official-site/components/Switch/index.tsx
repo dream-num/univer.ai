@@ -22,46 +22,70 @@ function Switch({ intailValue, leftIcon, rightIcon, leftLabel, rightLabel, isDis
 
   return (
     <div className={`
-      inline-flex gap-[4px] rounded-[32px] p-[4px] font-['Poppins'] text-sm font-normal capitalize
-      leading-none text-neutral-800
+      inline-flex gap-[4px] rounded-[32px] p-[4px] text-sm font-normal capitalize leading-none
+      text-neutral-800
 
-      xl:text-base xl:text-slate-900
+      xl:text-[16px] xl:text-slate-900
 
       ${isDisabled
-? `cursor-not-allowed opacity-50`
-: `cursor-pointer`}
+        ? `cursor-not-allowed opacity-50`
+        : `cursor-pointer`}
 
       bg-blue-600 bg-opacity-5
     `}
     >
       <div
         className={`
-          flex items-center rounded-[32px] px-[20px] py-[10px] transition-all duration-300
+          flex items-center rounded-[32px] px-[16px] py-[8px] transition-all duration-300
 
           hover:bg-[#fcfdff]
 
+          xl:px-[20px] xl:py-[10px]
+
           ${selected === 'left'
-? `bg-white shadow-md`
-: ''}
+            ? `bg-white shadow-md`
+            : ''}
         `}
         onClick={() => handleToggle('left')}
       >
-        {leftIcon && <img src={leftIcon} alt="left icon" className="mr-2 h-[20px] w-[20px]" />}
+        {leftIcon && (
+          <img
+            src={leftIcon}
+            alt="left icon"
+            className={`
+              mr-2 h-[16px] w-[16px]
+
+              xl:h-[20px] xl:w-[20px]
+            `}
+          />
+        )}
         <span className={isDisabled ? 'text-gray-400' : ''}>{leftLabel}</span>
       </div>
       <div
         className={`
-          flex items-center rounded-[32px] px-[20px] py-[10px] transition-all duration-300
+          flex items-center rounded-[32px] px-[16px] py-[8px] transition-all duration-300
 
           hover:bg-[#fcfdff]
 
+          xl:px-[20px] xl:py-[10px]
+
           ${selected === 'right'
-? `bg-white shadow-md`
-: ''}
+            ? `bg-white shadow-md`
+            : ''}
         `}
         onClick={() => handleToggle('right')}
       >
-        {rightIcon && <img src={rightIcon} alt="right icon" className="mr-2 h-[20px] w-[20px]" />}
+        {rightIcon && (
+          <img
+            src={rightIcon}
+            alt="right icon"
+            className={`
+              mr-2 h-[16px] w-[16px]
+
+              xl:h-[20px] xl:w-[20px]
+            `}
+          />
+        )}
         <span className={isDisabled ? 'text-gray-400' : ''}>{rightLabel}</span>
       </div>
     </div>

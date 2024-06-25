@@ -6,6 +6,7 @@ import { useTranslation } from '@/official-site/utils/i18n'
 import enUS from '@/official-site/clipsheet/tutorials/completion/completion.en-US.mdx'
 // eslint-disable-next-line import/no-duplicates
 import zhCN from '@/official-site/clipsheet/tutorials/completion/completion.en-US.mdx'
+import { VideoPlayer } from '@/official-site/clipsheet/components/VideoPlayer'
 
 export default function Page() {
   const { locale } = useRouter()
@@ -69,7 +70,7 @@ export default function Page() {
     },
   })
 
-  const previewVidio = 'https://www.youtube.com/embed/kpV0MvQuFZA?si=7PtEF9HCOp3zPkmM'
+  const previewVidio = 'https://www.youtube.com/embed/MxDMCKNx8P4?si=aBiGTAGDNBWabFle'
 
   return (
     <>
@@ -79,6 +80,14 @@ export default function Page() {
 
       <style jsx>
         {`
+      a.link {
+        color: #2B4DFF !important;
+        fill: #2B4DFF !important;
+    
+        &:hover {
+          text-decoration-line: underline !important;
+        }
+      }
       .content{
         ol > li {
           margin-left:1em;
@@ -111,8 +120,7 @@ export default function Page() {
 
             <h1
               className={`
-                text-center font-['Poppins'] text-5xl font-bold italic leading-[60px] tracking-wide
-                text-slate-900
+                text-center text-5xl font-bold italic leading-[60px] tracking-wide text-slate-900
 
                 xl:mt-0 xl:h-[112px] xl:text-[56px] xl:leading-[56px]
               `}
@@ -126,13 +134,12 @@ export default function Page() {
                 {t('hero.title')}
               </span>
               <br />
-              <span className="font-['Poppins'] font-semibold tracking-wide text-slate-900">
+              <span className="font-semibold tracking-wide text-slate-900">
                 {t('hero.subtitle')}
               </span>
             </h1>
             <div className={`
-              mt-[20px] max-w-[534px] text-center font-['Poppins'] text-lg font-normal leading-7
-              text-slate-900
+              mt-[20px] max-w-[534px] text-center text-lg font-normal leading-7 text-slate-900
             `}
             >
               {t('hero.desc')}
@@ -164,33 +171,7 @@ export default function Page() {
             xl:w-[832px]
           `}
           >
-            <div className={`
-              absolute left-0 top-0 h-full w-full rounded-2xl bg-gradient-to-r
-              from-[rgba(83,87,237,0.22)] to-[rgba(64,185,255,0.22)] blur-[50px]
-            `}
-            />
-            <div className={`
-              absolute left-0 top-0 h-full w-full rounded-2xl border border-white
-              backdrop-blur-[2px]
-            `}
-            />
-
-            <iframe
-              sandbox="allow-scripts allow-same-origin allow-presentation"
-              className={`
-                relative block h-[193px] w-full rounded-3xl
-
-                xl:h-[468px] xl:w-[832px]
-              `}
-              src={
-                previewVidio
-              }
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            >
-            </iframe>
+            <VideoPlayer videoClassName="rounded-3xl" src={previewVidio} />
           </div>
 
           <div className={`
@@ -221,17 +202,14 @@ export default function Page() {
           `}
           >
             <div className={`
-              text-center font-['Poppins'] text-[28px] font-semibold leading-9 text-slate-900
+              text-center text-[28px] font-semibold leading-9 text-slate-900
 
               xl:text-5xl xl:leading-[52px]
             `}
             >
               Can't find what you're looking for?
             </div>
-            <div className={`
-              text-center font-['Poppins'] text-lg font-normal leading-7 text-slate-900
-            `}
-            >
+            <div className="text-center text-lg font-normal leading-7 text-slate-900">
               You can submit feedback to us for support.
             </div>
             <div className={`
@@ -241,7 +219,7 @@ export default function Page() {
             `}
             >
               <div className={`
-                font-['Poppins'] text-base font-semibold capitalize leading-10 text-slate-50
+                text-base font-semibold capitalize leading-10 text-slate-50
               `}
               >
                 Contact us
