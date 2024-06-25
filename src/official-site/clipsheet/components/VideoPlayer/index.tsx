@@ -1,9 +1,47 @@
 import clsx from 'clsx'
+import YouTubePlayer from 'youtube-player'
+import { useEffect, useRef, useState } from 'react'
 
-export function VideoPlayer({ src, className, title, videoClassName }: { src: string, className?: string, title?: string, videoClassName?: string }) {
+export function VideoPlayer({ src, className, title, videoClassName, enableMask }: { src?: string, className?: string, title?: string, videoClassName?: string, enableMask?: boolean }) {
+  const el = useRef<HTMLIFrameElement>(null)
+
+  const [isPlaying, setIsPlaying] = useState(false)
+
+  useEffect(() => {
+    if (!typeof window) return
+    if (!el.current) return
+    if (!enableMask) return
+
+    // subscribe to iframe message events
+    const player = YouTubePlayer(el.current)
+
+    player.on('stateChange', (e) => {
+      // palying
+      if (e.data === 1) {
+        setIsPlaying(true)
+        // paused
+      } else if (e.data === 2) {
+        setIsPlaying(false)
+      }
+    })
+  }, [el, enableMask])
+
   return (
     <div className={clsx('relative w-full pt-[56.25%]', className)}>
+      {enableMask && (
+        <div
+          className={`
+            pointer-events-none absolute left-0 top-0 z-[1] h-full w-full rounded-[20px] bg-black
+            opacity-40
+          `}
+          style={{
+            display: isPlaying ? 'none' : 'block',
+          }}
+        >
+        </div>
+      )}
       <iframe
+        ref={el}
         sandbox="allow-scripts allow-same-origin allow-presentation"
         className={clsx(`absolute left-0 top-0 block h-full w-full border-0`, videoClassName)}
         src={src}

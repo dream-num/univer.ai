@@ -8,16 +8,16 @@ export interface IVideo {
 export function VideoList({ videos }: { videos: IVideo[] }) {
   return (
     <div className={`
-      relative mx-auto mb-12
+      relative mx-auto
 
       xl:mb-[100px] xl:max-w-[1200px] xl:px-8
     `}
     >
       <div
         className={`
-          grid gap-8
+          grid gap-[32px]
 
-          xl:grid-cols-3
+          xl:grid-cols-3 xl:gap-[56px]
         `}
       >
         {videos.map((video, index) => (
@@ -31,7 +31,7 @@ export function VideoList({ videos }: { videos: IVideo[] }) {
               xl:w-[344px]
             `}
             >
-              <VideoPlayer videoClassName="rounded-2xl" src={video.videoSrc} title={video.videoSrc} />
+              <VideoPlayer enableMask={true} videoClassName="rounded-2xl" src={video.videoSrc} title={video.videoSrc} />
             </div>
             <h3 className={`
               text-center text-lg font-medium capitalize leading-7 text-slate-900
