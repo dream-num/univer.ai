@@ -22,7 +22,7 @@ function Switch({ intailValue, leftIcon, rightIcon, leftLabel, rightLabel, isDis
 
   return (
     <div className={`
-      inline-flex rounded-[32px] p-[4px] font-['Poppins'] text-sm font-normal capitalize
+      inline-flex gap-[4px] rounded-[32px] p-[4px] font-['Poppins'] text-sm font-normal capitalize
       leading-none text-neutral-800
 
       xl:text-base xl:text-slate-900
