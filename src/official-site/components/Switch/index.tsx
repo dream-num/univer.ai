@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-function Switch({ intailValue, leftIcon, rightIcon, leftLabel, rightLabel, isDisabled, onChange }: {
+function Switch({ intailValue, value, leftIcon, rightIcon, leftLabel, rightLabel, isDisabled, onChange }: {
 
   intailValue?: 'left' | 'right'
+  value?: 'left' | 'right'
   leftIcon: string
   rightIcon: string
   leftLabel: string
@@ -12,6 +13,12 @@ function Switch({ intailValue, leftIcon, rightIcon, leftLabel, rightLabel, isDis
 
 }) {
   const [selected, setSelected] = useState(intailValue || 'left')
+
+  useEffect(() => {
+    if (value) {
+      setSelected(value)
+    }
+  }, [value])
 
   const handleToggle = (option: 'left' | 'right') => {
     if (!isDisabled) {
