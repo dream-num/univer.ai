@@ -77,8 +77,8 @@ export default function Page() {
     }
   }, [asPath])
 
-  const previewVidio = heroVideoFlag === 'left' ? 'https://www.youtube.com/embed/MxDMCKNx8P4?si=aBiGTAGDNBWabFle' : 'https://www.youtube-nocookie.com/embed/n0i3rvEmfVg?si=htcqrq6OWRjMt1yl'
-  const defaultVideo = videoListFlag === 'left' ? 'https://www.youtube.com/embed/MxDMCKNx8P4?si=aBiGTAGDNBWabFle' : 'https://www.youtube-nocookie.com/embed/n0i3rvEmfVg?si=htcqrq6OWRjMt1yl'
+  const previewVidio = heroVideoFlag === 'left' ? 'https://www.youtube.com/embed/MxDMCKNx8P4?enablejsapi=1&si=aBiGTAGDNBWabFle' : 'https://www.youtube-nocookie.com/embed/n0i3rvEmfVg?si=htcqrq6OWRjMt1yl'
+  const defaultVideo = videoListFlag === 'left' ? 'https://www.youtube.com/embed/MxDMCKNx8P4?enablejsapi=1&si=aBiGTAGDNBWabFle' : 'https://www.youtube-nocookie.com/embed/n0i3rvEmfVg?si=htcqrq6OWRjMt1yl'
 
   const videos: IVideo[] = [{
     videoSrc: defaultVideo,
