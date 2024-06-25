@@ -25,6 +25,7 @@
     "@rc-component/color-picker": "^1.5.3",
     "@react-spring/web": "^9.7.3",
     "@stackblitz/sdk": "^1.10.0",
+    "@types/youtube-player": "^5.5.11",
     "@univerjs-pro/ai-auto-complete": "0.1.16",
     "@univerjs-pro/collaboration": "0.1.16",
     "@univerjs-pro/collaboration-client": "0.1.16",
@@ -88,7 +89,8 @@
     "react-live": "^4.1.7",
     "react-mosaic-component": "^6.1.0",
     "rxjs": "^7.8.1",
-    "tailwind-merge": "^2.3.0"
+    "tailwind-merge": "^2.3.0",
+    "youtube-player": "^5.6.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.21.1",
