@@ -370,8 +370,9 @@ export default function Page() {
               You can submit feedback to us for support.
             </div>
             <div className={`
-              inline-flex items-center justify-center gap-2 rounded-[32px] bg-gradient-to-br
-              from-blue-700 via-sky-500 to-teal-500 px-6
+              inline-flex items-center justify-center gap-2 rounded-[32px]
+              bg-[linear-gradient(121deg,#0048FF_18.89%,#0C81ED_39.58%,#029DCE_59.87%,#00BBB0_74.37%,#00C5A8_81.94%)]
+              px-6
             `}
             >
               <div className={`
