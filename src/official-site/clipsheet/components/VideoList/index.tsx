@@ -1,12 +1,14 @@
+import { VideoPlayer } from '../VideoPlayer'
+
 export interface IVideo {
-  title: string
+  title: string | JSX.Element
   videoSrc: string
 }
 
 export function VideoList({ videos }: { videos: IVideo[] }) {
   return (
     <div className={`
-      relative mx-auto mb-12 px-4
+      relative mx-auto mb-12
 
       xl:mb-[100px] xl:max-w-[1200px] xl:px-8
     `}
@@ -23,22 +25,16 @@ export function VideoList({ videos }: { videos: IVideo[] }) {
             key={index + video.videoSrc}
             className="inline-flex flex-col items-start justify-start gap-2"
           >
-            <iframe
-              className={`
-                relative h-[193px] w-full rounded-2xl border-0
+            <div className={`
+              relative w-full
 
-                xl:w-[344px]
-              `}
-              src={video.videoSrc || 'about:blank'}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
+              xl:w-[344px]
+            `}
             >
-            </iframe>
-
+              <VideoPlayer videoClassName="rounded-2xl" src={video.videoSrc} title={video.videoSrc} />
+            </div>
             <h3 className={`
-              text-center font-['Poppins'] text-lg font-medium capitalize leading-7 text-slate-900
+              text-center text-lg font-medium capitalize leading-7 text-slate-900
             `}
             >
               {video.title}
