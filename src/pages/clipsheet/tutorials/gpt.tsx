@@ -1,26 +1,26 @@
 import Head from 'next/head'
-import { IncreaseSingle } from '@univerjs/icons'
-import { useCallback, useState } from 'react'
-import { GitHubButton } from '../../official-site/components/GitHubPlus/GitHub'
-import { clsx } from '@/lib/utils'
-import Hero from '@/official-site/components/Hero'
-import Title from '@/official-site/components/Title'
+import { useRouter } from 'next/router'
 import { useTranslation } from '@/official-site/utils/i18n'
-import Switch from '@/official-site/components/Switch'
 
-import google from '@/official-site/images/google.svg'
-import chatgpt from '@/official-site/images/chatgpt.svg'
 import type { IVideo } from '@/official-site/components/VideoList'
 import { VideoList } from '@/official-site/components/VideoList'
 
+// eslint-disable-next-line import/no-duplicates
+import enUS from '@/official-site/clipsheet/tutorials/gpt/gpt.en-US.mdx'
+// eslint-disable-next-line import/no-duplicates
+import zhCN from '@/official-site/clipsheet/tutorials/gpt/gpt.en-US.mdx'
+import { LearnMore } from '@/official-site/clipsheet/components/LearnMore'
+
 export default function Page() {
-  const [collapsedIds, setCollapsedIds] = useState<number[]>([])
+  const { locale } = useRouter()
+
+  const Content = locale === 'zh-CN' ? zhCN : enUS
 
   const t = useTranslation({
     'en-US': {
-      'hero.ai-driven': 'AI-Driven',
-      'hero.web-to-sheet': 'Spreadsheet',
-      'hero.next-generation': 'of the Next Generation',
+      'hero.title': 'Univer ClipSheet-',
+      'hero.subtitle': 'GPT Plugin',
+      'hero.desc': 'Extract public web data and generate spreadsheets.',
       'spotlights.title': 'Spotlights',
       'spotlights.title-1': 'Highly extensible command system',
       'spotlights.desc-1': 'All actions on Univer are executed through the command system, which makes operations on Univer traceable and recordable. Advanced features such as collaborative editing, real-time sharing, and scripting are supported on top of command system.',
@@ -45,9 +45,9 @@ export default function Page() {
       'footer.and': '&',
     },
     'zh-CN': {
-      'hero.ai-driven': 'AI 驱动',
-      'hero.web-to-sheet': 'Spreadsheet',
-      'hero.next-generation': '重新定义生产力',
+      'hero.title': 'AI 驱动',
+      'hero.subtitle': 'Spreadsheet',
+      'hero.desc': '重新定义生产力',
       'spotlights.title': '技术解密',
       'spotlights.title-1': '强大的命令系统',
       'spotlights.desc-1': '用户在 Univer 上的操作都通过命令系统执行，一切对 Univer 的操作都可记录，可追踪。基于命令系统可实现协同编辑、协同光标、实时分享、脚本生成等高级功能。',
@@ -73,12 +73,8 @@ export default function Page() {
     },
   })
 
-  const intailValue = 'left'
-  const [heroVideoFlag, setHeroVideoFlag] = useState(intailValue)
-  const [videoListFlag, setVideosFlag] = useState(intailValue)
-
-  const previewVidio = heroVideoFlag === 'left' ? 'https://www.youtube.com/embed/kpV0MvQuFZA?si=7PtEF9HCOp3zPkmM' : 'https://www.youtube-nocookie.com/embed/n0i3rvEmfVg?si=htcqrq6OWRjMt1yl'
-  const defaultVideo = videoListFlag === 'left' ? 'https://www.youtube.com/embed/kpV0MvQuFZA?si=7PtEF9HCOp3zPkmM' : 'https://www.youtube-nocookie.com/embed/n0i3rvEmfVg?si=htcqrq6OWRjMt1yl'
+  const previewVidio = 'https://www.youtube.com/embed/kpV0MvQuFZA?si=7PtEF9HCOp3zPkmM'
+  const defaultVideo = 'https://www.youtube.com/embed/kpV0MvQuFZA?si=7PtEF9HCOp3zPkmM'
 
   const videos: IVideo[] = [{
     videoSrc: defaultVideo,
@@ -98,54 +94,7 @@ export default function Page() {
   }, {
     videoSrc: defaultVideo,
     title: t('spotlights.title-4'),
-  }, {
-    videoSrc: defaultVideo,
-    title: t('spotlights.title-4'),
-  }, {
-    videoSrc: defaultVideo,
-    title: t('spotlights.title-4'),
-  }, {
-    videoSrc: defaultVideo,
-    title: t('spotlights.title-4'),
-  }, {
-    videoSrc: defaultVideo,
-    title: t('spotlights.title-4'),
-  }, {
-    videoSrc: defaultVideo,
-    title: t('spotlights.title-4'),
-  }, {
-    videoSrc: defaultVideo,
-    title: t('spotlights.title-4'),
   }]
-
-  const faq = [{
-    title: t('faq.title-1'),
-    desc: t('faq.desc-1'),
-  }, {
-    title: t('faq.title-2'),
-    desc: t('faq.desc-2'),
-  }, {
-    title: t('faq.title-3'),
-    desc: t('faq.desc-3'),
-  }, {
-    title: t('faq.title-4'),
-    desc: t('faq.desc-4'),
-  }, {
-    title: t('faq.title-5'),
-    desc: t('faq.desc-5'),
-  }]
-
-  const handleToggleCollapse = useCallback((id: number) => {
-    return () => {
-      setCollapsedIds((prev) => {
-        if (prev.includes(id)) {
-          return prev.filter(_id => _id !== id)
-        } else {
-          return [...prev, id]
-        }
-      })
-    }
-  }, [])
 
   return (
     <>
@@ -153,64 +102,79 @@ export default function Page() {
         <title>Univer</title>
       </Head>
 
-      <main className="bg-[linear-gradient(180deg,#FFF_0.5%,#F6F9FF_100%)]">
-        <Hero
-          className="pb-[80px]"
+      <style jsx>
+        {`
+      .content{
+        ol > li {
+          margin-left:1em;
+          list-style-type: decimal;
+          font-family: Poppins;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 28px; 
+          margin-bottom: 16px; 
+          margin-top: 52px;
+        }
+      }
+      `}
+      </style>
+
+      <main className="bg-[#fff]">
+        <div
+          className="flex px-[16px] pb-[80px]"
         >
+          <div className="relative mx-auto max-w[1200px]">
+            <div className={`
+              mt-[60px]
 
-          <div className={`
-            mt-[60px]
-
-            xl:mt-[72px]
-          `}
-          >
-
-          </div>
-          <div className="flex justify-center gap-6">
-            {/* Call of actions: GitHub link. Links to Documentation. OnlineExamples. */}
-            <GitHubButton />
-          </div>
-
-          <div className={`
-            mb-[20px]
-
-            xl:mb-[28px]
-          `}
-          >
-
-          </div>
-
-          <h1
-            className={`
-              text-center font-['Poppins'] text-5xl/tight font-bold italic leading-[68px]
-              text-slate-900
-
-              xl:mt-0 xl:text-6xl
+              xl:mt-[72px]
             `}
-          >
-            {t('hero.ai-driven')}
+            >
 
-            <br></br>
-            <span
+            </div>
+
+            <h1
               className={`
-                inline-block h-[68px]
-                bg-[linear-gradient(121deg,#0048FF_18.89%,#0C81ED_39.58%,#029DCE_59.87%,#00BBB0_74.37%,#00C5A8_81.94%)]
-                bg-clip-text px-4 text-transparent
+                text-center font-['Poppins'] text-5xl font-bold italic leading-[60px] tracking-wide
+                text-slate-900
+
+                xl:mt-0 xl:text-[56px] xl:leading-[56px]
               `}
             >
-              {t('hero.web-to-sheet')}
-            </span>
-          </h1>
+              <span className="font-['Poppins'] font-semibold tracking-wide text-slate-900">
+                {' '}
+                {t('hero.title')}
+              </span>
+              <span
+                className={`
+                  whitespace-nowrap
+                  bg-[linear-gradient(121deg,#0048FF_18.89%,#0C81ED_39.58%,#029DCE_59.87%,#00BBB0_74.37%,#00C5A8_81.94%)]
+                  bg-clip-text text-transparent
+                `}
+              >
+                {t('hero.subtitle')}
+              </span>
+            </h1>
 
-          <div className={`
-            mt-[36px]
+            <div className={`
+              mt-[20px] text-center font-['Poppins'] text-lg font-normal leading-7 text-slate-900
+            `}
+            >
+              {t('hero.desc')}
+            </div>
 
-            xl:mt-[60px]
-          `}
-          >
+            <div className={`
+              mt-[36px]
+
+              xl:mt-[60px]
+            `}
+            >
+            </div>
+
           </div>
 
-        </Hero>
+        </div>
 
         {/* Preview */}
         <section
@@ -223,7 +187,7 @@ export default function Page() {
           <div className={`
             relative mx-auto
 
-            xl:w-[936px]
+            xl:w-[832px]
           `}
           >
             <div className={`
@@ -238,15 +202,15 @@ export default function Page() {
             />
 
             <iframe
-
               sandbox="allow-scripts allow-same-origin allow-presentation"
-
               className={`
                 relative block h-[193px] w-full rounded-3xl
 
-                xl:h-[540px] xl:w-[960px]
+                xl:h-[468px] xl:w-[832px]
               `}
-              src={previewVidio}
+              src={
+                previewVidio
+              }
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
@@ -254,19 +218,9 @@ export default function Page() {
             >
             </iframe>
           </div>
-          <div className="mt-[48px]"></div>
-          <div className="flex justify-center">
-            <Switch
-              leftIcon={google.src}
-              rightIcon={chatgpt.src}
-              leftLabel="Chrome Extension"
-              rightLabel="ChatGPT"
-              intailValue={intailValue}
-              onChange={value => setHeroVideoFlag(value)}
-            />
-          </div>
+
           <div className={`
-            mb-[48px]
+            mb-[64px]
 
             xl:mb-[100px]
           `}
@@ -274,9 +228,22 @@ export default function Page() {
           </div>
         </section>
 
+        <div className={`
+          content mx-auto px-[16px]
+
+          xl:w-[832px]
+        `}
+        >
+          <Content />
+        </div>
+
         {/* Simple Cases */}
         <section
-          className="mb-12 bg-[#f5f9fe] px-4"
+          className={`
+            mb-12 mt-[48px] bg-[#f5f9fe] px-4
+
+            xl:mt-[100px]
+          `}
         >
           <div className={`
             pb-[28px]
@@ -286,22 +253,15 @@ export default function Page() {
           >
           </div>
 
-          <div className={`
-            relative mx-auto
+          <div className="relative">
+            <div className={`
+              mx-auto flex flex-col items-center gap-9
 
-            xl:w-[936px]
-          `}
-          >
-            <div className="inline-flex w-full flex-col items-center justify-start gap-9">
-              <div className={`
-                font-['Poppins'] text-[28px] font-semibold leading-[52px] text-slate-900
-
-                xl:text-5xl
-              `}
-              >
-                Simple Cases
-              </div>
-
+              xl:w-[1136px] xl:flex-row xl:justify-between
+            `}
+            >
+              <div className="font-['Poppins'] text-[28px] font-semibold leading-9 text-slate-900">Simple Cases</div>
+              <LearnMore href="/clipsheet#gpt" />
             </div>
             <div className={`
               mt-[20px]
@@ -310,85 +270,118 @@ export default function Page() {
             `}
             >
             </div>
-            <div className="flex justify-center">
-              <Switch
-                leftIcon={google.src}
-                rightIcon={chatgpt.src}
-                leftLabel="Chrome Extension"
-                rightLabel="ChatGPT"
-                intailValue={intailValue}
-                onChange={value => setVideosFlag(value)}
-              />
-            </div>
 
           </div>
 
           <div className={`
             mb-[32px]
 
-            xl:mb-[64px]
+            xl:mb-[60px]
           `}
           >
           </div>
 
           <VideoList videos={videos} />
+          <div className={`
+            pb-[32px]
 
+            xl:pb-[88px]
+          `}
+          >
+
+          </div>
         </section>
 
         {/* FAQ */}
         <section
-          className={`
-            relative mx-auto mb-[60px] px-4
-
-            xl:mb-[100px] xl:max-w-[1200px] xl:px-8
-          `}
+          className="mb-12 px-4"
         >
-          <Title type="univer" label="FAQ">
-            {/* {t('faq.title')} */}
-          </Title>
+          <div className="mx-auto flex flex-col items-center justify-start gap-8">
+            <div className="flex h-[104px] flex-col items-center justify-center gap-6 self-stretch">
+              <div className={`
+                text-center font-['Poppins'] text-[28px] font-semibold leading-[52px] text-slate-900
 
+                xl:text-5xl
+              `}
+              >
+                Extended Reading
+              </div>
+              <div className={`
+                flex flex-col items-center justify-center gap-4
+
+                xl:flex-row
+              `}
+              >
+                <div className={`
+                  text-center font-['Poppins'] text-lg font-normal leading-7 text-slate-900
+                `}
+                >
+                  How to Batch Collect Data from Existing Hyperlinks in a Spreadsheet.
+                </div>
+                <LearnMore href="/clipsheet/tutorials/completion" />
+              </div>
+            </div>
+            <iframe
+              sandbox="allow-scripts allow-same-origin allow-presentation"
+              className={`
+                relative block h-[193px] w-full rounded-3xl
+
+                xl:h-[468px] xl:w-[832px]
+              `}
+              src={
+                previewVidio
+              }
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          </div>
           <div className={`
-            mx-auto grid gap-6 pb-[32px]
+            pb-[48px]
 
-            xl:w-[770px] xl:pb-[100px]
+            xl:pb-[100px]
           `}
           >
-            {faq.map((item, index) => (
-              <div
-                key={item.title}
-                className={`
-                  rounded-2xl bg-white p-6 shadow-[0px_4px_12px_0px_rgba(128,152,165,0.16)]
-                `}
-              >
-                <h3 className="flex items-center justify-between gap-4 py-2 text-xl font-medium">
-                  {item.title}
-
-                  <a
-                    className={clsx(`
-                      cursor-pointer text-[#2B4DFF] transition-all duration-300 ease-in-out
-                    `, {
-                      'rotate-45': collapsedIds.includes(index),
-                    })}
-                    onClick={handleToggleCollapse(index)}
-                  >
-                    <IncreaseSingle />
-                  </a>
-                </h3>
-                <p
-                  className={clsx(`
-                    max-h-0 overflow-hidden leading-7 transition-[max-height] duration-500
-                    ease-in-out
-                  `, {
-                    'max-h-screen': collapsedIds.includes(index),
-                  })}
-                >
-                  {item.desc}
-                </p>
-              </div>
-            ))}
           </div>
         </section>
+        <section
+          className="mb-12 bg-[#f6faff] px-4"
+        >
+          <div className={`
+            mx-auto flex flex-col items-center justify-start gap-6 py-[28px]
 
+            xl:py-[88px]
+          `}
+          >
+            <div className={`
+              text-center font-['Poppins'] text-[28px] font-semibold leading-9 text-slate-900
+
+              xl:text-5xl xl:leading-[52px]
+            `}
+            >
+              Can't find what you're looking for?
+            </div>
+            <div className={`
+              text-center font-['Poppins'] text-lg font-normal leading-7 text-slate-900
+            `}
+            >
+              You can submit feedback to us for support.
+            </div>
+            <div className={`
+              inline-flex items-center justify-center gap-2 rounded-[32px] bg-gradient-to-br
+              from-blue-700 via-sky-500 to-teal-500 px-6
+            `}
+            >
+              <div className={`
+                font-['Poppins'] text-base font-semibold capitalize leading-10 text-slate-50
+              `}
+              >
+                Contact us
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
     </>
   )
