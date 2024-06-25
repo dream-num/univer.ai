@@ -27,14 +27,14 @@ export default function Page() {
     'faq.desc-1': (
       <span>
         Community group:
-        <Link href="https://discord.gg/FaHvP4DwyX">discord</Link>
+        <Link className="text-[#2B4DFF] hover:underline" href="https://discord.gg/FaHvP4DwyX">discord</Link>
       </span>
     ) as unknown as string,
     'faq.title-2': 'I used Univer ClipSheet to extract table data with hyperlinks, but I want to further extract data from these hyperlinks. How can I do that?',
     'faq.desc-2': (
       <span>
         You can use the data completion feature in Univer Sheet to achieve bulk extraction of detailed information.
-        <Link href="/clipsheet/tutorials/completion">Read more details.</Link>
+        <Link className="text-[#2B4DFF] hover:underline" href="/clipsheet/tutorials/completion">Read more details.</Link>
       </span>
     ) as unknown as string,
     'faq.title-3': 'Do I need a ChatGPT/OpenAI account or API key to use Univer ClipSheet?',
@@ -123,19 +123,8 @@ export default function Page() {
       <Head>
         <title>Univer</title>
       </Head>
-      <style jsx>
-        {`.main{
-          a {
-            color: #2B4DFF !important;
-            fill: #2B4DFF !important;
 
-            &:hover {
-              text-decoration-line: underline !important;
-            }
-          }
-        }`}
-      </style>
-      <main className="main bg-[linear-gradient(180deg,#FFF_0.5%,#F6F9FF_100%)]">
+      <main className="bg-[linear-gradient(180deg,#FFF_0.5%,#F6F9FF_100%)]">
         <Hero
           className="pb-[80px]"
         >

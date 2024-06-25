@@ -105,14 +105,6 @@ export default function Page() {
 
       <style jsx>
         {`
-      a.link {
-        color: #2B4DFF !important;
-        fill: #2B4DFF !important;
-    
-        &:hover {
-          text-decoration-line: underline !important;
-        }
-      }
       .content{
         ol > li {
           margin-left:1em;
