@@ -27,30 +27,41 @@ export function VideoPlayer({ src, className, title, videoClassName, enableMask 
   }, [el, enableMask])
 
   return (
-    <div className={clsx('relative w-full pt-[56.25%]', className)}>
-      {enableMask && (
-        <div
-          className={`
-            pointer-events-none absolute left-0 top-0 z-[1] h-full w-full rounded-[20px] bg-black
-            opacity-40
-          `}
-          style={{
-            display: isPlaying ? 'none' : 'block',
-          }}
+    <>
+      <style jsx>
+        {`
+      .player-box:hover{
+        .mask{
+          display: none !important;
+        }
+      }
+    `}
+      </style>
+      <div className={clsx('player-box relative w-full pt-[56.25%]', className)}>
+        {enableMask && (
+          <div
+            className={`
+              mask pointer-events-none absolute left-0 top-0 z-[1] h-full w-full rounded-[20px]
+              bg-black opacity-40
+            `}
+            style={{
+              display: isPlaying ? 'none' : 'block',
+            }}
+          >
+          </div>
+        )}
+        <iframe
+          ref={el}
+          sandbox="allow-scripts allow-same-origin allow-presentation"
+          className={clsx(`absolute left-0 top-0 block h-full w-full border-0`, videoClassName)}
+          src={src}
+          title={title || 'Univer Video Player'}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
         >
-        </div>
-      )}
-      <iframe
-        ref={el}
-        sandbox="allow-scripts allow-same-origin allow-presentation"
-        className={clsx(`absolute left-0 top-0 block h-full w-full border-0`, videoClassName)}
-        src={src}
-        title={title || 'Univer Video Player'}
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerPolicy="strict-origin-when-cross-origin"
-        allowFullScreen
-      >
-      </iframe>
-    </div>
+        </iframe>
+      </div>
+    </>
   )
 }
