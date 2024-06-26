@@ -7,6 +7,7 @@ import enUS from '@/official-site/clipsheet/tutorials/completion/completion.en-U
 // eslint-disable-next-line import/no-duplicates
 import zhCN from '@/official-site/clipsheet/tutorials/completion/completion.en-US.mdx'
 import { VideoPlayer } from '@/official-site/clipsheet/components/VideoPlayer'
+import { ContactUs } from '@/official-site/clipsheet/components/ContactUs'
 
 export default function Page() {
   const { locale } = useRouter()
@@ -84,7 +85,6 @@ export default function Page() {
         ol > li {
           margin-left:1em;
           list-style-type: decimal;
-          font-family: Poppins;
           font-size: 16px;
           font-style: normal;
           font-weight: 400;
@@ -98,7 +98,7 @@ export default function Page() {
 
       <main className="bg-[#fff]">
         <div
-          className="flex px-[16px] pb-[80px]"
+          className="flex px-[16px]"
         >
           <div className="relative mx-auto max-w[1200px]">
             <div className={`
@@ -137,12 +137,7 @@ export default function Page() {
               {t('hero.desc')}
             </div>
 
-            <div className={`
-              mt-[36px]
-
-              xl:mt-[60px]
-            `}
-            >
+            <div className="mt-[32px]">
             </div>
 
           </div>
@@ -151,11 +146,7 @@ export default function Page() {
 
         {/* Preview */}
         <section
-          className={`
-            mt-[-36px] px-4
-
-            xl:mt-[-60px]
-          `}
+          className="px-4"
         >
           <div className={`
             relative mx-auto
@@ -176,49 +167,21 @@ export default function Page() {
         </section>
 
         <div className={`
-          content mx-auto px-[16px]
+          content mx-auto px-[16px] pb-[48px]
 
           xl:w-[832px] xl:pb-[100px]
         `}
         >
           <Content />
         </div>
+        <ContactUs />
+        <div className={`
+          mb-[48px]
 
-        <section
-          className="mb-12 bg-[#f6faff] px-4"
+          xl:mb-[100px]
+        `}
         >
-          <div className={`
-            mx-auto flex flex-col items-center justify-start gap-6 py-[28px]
-
-            xl:py-[88px]
-          `}
-          >
-            <div className={`
-              text-center text-[28px] font-semibold leading-9 text-slate-900
-
-              xl:text-5xl xl:leading-[52px]
-            `}
-            >
-              Can't find what you're looking for?
-            </div>
-            <div className="text-center text-lg font-normal leading-7 text-slate-900">
-              You can submit feedback to us for support.
-            </div>
-            <div className={`
-              inline-flex items-center justify-center gap-2 rounded-[32px]
-              bg-[linear-gradient(121deg,#0048FF_18.89%,#0C81ED_39.58%,#029DCE_59.87%,#00BBB0_74.37%,#00C5A8_81.94%)]
-              px-6
-            `}
-            >
-              <div className={`
-                text-base font-semibold capitalize leading-10 text-slate-50
-              `}
-              >
-                Contact us
-              </div>
-            </div>
-          </div>
-        </section>
+        </div>
       </main>
     </>
   )
