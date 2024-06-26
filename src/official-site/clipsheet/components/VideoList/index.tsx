@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { VideoPlayer } from '../VideoPlayer'
 
 export interface IVideo {
@@ -5,13 +6,13 @@ export interface IVideo {
   videoSrc: string
 }
 
-export function VideoList({ videos }: { videos: IVideo[] }) {
+export function VideoList({ videos, className }: { videos: IVideo[], className?: string }) {
   return (
-    <div className={`
+    <div className={clsx(`
       relative mx-auto
 
-      xl:mb-[100px] xl:max-w-[1200px] xl:px-8
-    `}
+      xl:max-w-[1200px]
+    `, className)}
     >
       <div
         className={`

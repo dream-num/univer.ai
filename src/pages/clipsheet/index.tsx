@@ -247,7 +247,7 @@ export default function Page() {
 
         {/* Simple Cases */}
         <section
-          className="mb-12 bg-[#f5f9fe] px-4"
+          className="bg-[#f5f9fe] px-4"
         >
           <div className={`
             pb-[28px]
@@ -303,7 +303,7 @@ export default function Page() {
           >
           </div>
 
-          <VideoList videos={videos} />
+          <VideoList videos={videos} className="xl:pb-[100px]" />
 
         </section>
 
