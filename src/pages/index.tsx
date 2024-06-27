@@ -2,11 +2,11 @@ import Link from 'next/link'
 import Head from 'next/head'
 import { IncreaseSingle } from '@univerjs/icons'
 import { useCallback, useState } from 'react'
-import { GitHubButton } from '../official-site/components/GitHub/GitHub'
+import { GitHubButton } from '@/components/GitHub'
 import { clsx } from '@/lib/utils'
-import Hero from '@/official-site/components/Hero'
-import Title from '@/official-site/components/Title'
-import { useTranslation } from '@/official-site/utils/i18n'
+import Hero from '@/components/Hero'
+import Title from '@/components/Title'
+import { useTranslation } from '@/lib/i18n'
 
 export default function Page() {
   const [collapsedIds, setCollapsedIds] = useState<number[]>([])

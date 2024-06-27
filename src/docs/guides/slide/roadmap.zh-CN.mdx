@@ -1,0 +1,28 @@
+import { Callout } from 'nextra/components'
+import Roadmap from '@/components/Roadmap'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# 路线图
+
+<BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC, UniverTypes.SLIDE]} value={UniverTypes.SLIDE} />
+
+<Callout emoji="🚨" type="error">
+  Univer Slide 目前处于早期开发阶段，我们正在努力将其尽快带给你。
+</Callout>
+
+你可以通过 Feature Request 向我们提交需求，请参考[贡献指南](/guides/slide/contributing)，我们会结合社区的反馈调整开发计划。
+
+export const data = [
+  {
+    start: '2024/09',
+    end: '2025/03',
+    name: '核心功能',
+  },
+  {
+    start: '2025/03',
+    end: '2025/12',
+    name: '其他功能',
+  }
+]
+
+<Roadmap data={data} />

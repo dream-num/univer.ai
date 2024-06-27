@@ -1,0 +1,110 @@
+import { Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import BusinessPlanNotice from '@/components/BusinessPlanNotice'
+import ServerNotice from '@/components/ServerNotice'
+
+# 协同编辑
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+<BusinessPlanNotice />
+
+<ServerNotice />
+
+Univer 提供了协同编辑功能，支持多人同时编辑同一个工作簿。
+
+## 安装
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs-pro/collaboration @univerjs-pro/collaboration-client
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs-pro/collaboration @univerjs-pro/collaboration-client
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## 引入
+
+```typescript
+import '@univerjs-pro/collaboration-client/lib/index.css';
+
+import { UniverCollaborationPlugin } from '@univerjs-pro/collaboration';
+import { UniverCollaborationClientPlugin } from '@univerjs-pro/collaboration-client';
+```
+
+## 国际化
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core';
+import CollaborationClientZhCN from '@univerjs-pro/collaboration-client/locale/zh-CN';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: Tools.deepMerge(
+      CollaborationClientZhCN
+    ),
+  },
+});
+```
+
+## 注册
+
+```typescript
+univer.registerPlugin(UniverCollaborationPlugin);
+univer.registerPlugin(UniverCollaborationClientPlugin);
+```
+
+## 自动加载数据
+
+`@univerjs-pro/collaboration-client` 插件内部提供了根据 URL 参数 `unit` 和 `type` 自动加载对应的数据的功能，这可以简化一些场景下的数据加载逻辑。
+
+如果你想使用该特性，你需要适当地修改一下原有的加载数据逻辑，并将 `unit` 和 `type` 参数添加到 URL 中，如下所示：
+
+```diff
+import { UniverInstanceType } from '@univerjs/core';
+
+- univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});
+ 
++ const url = new URL(window.location.href);
++ const unit = url.searchParams.get('unit');
+
++ if (unit) {
++   // 如果 URL 中包含 unit 参数，则自动加载数据
++ } else {
++   // 创建一个新的表格
++   fetch(`/universer-api/snapshot/${UniverInstanceType.UNIVER_SHEET}/unit/-/create`, {
++     method: 'POST',
++     headers: {
++       'Content-Type': 'application/json',
++     },
++     body: JSON.stringify({
++       type: UniverInstanceType.UNIVER_SHEET, // instance type
++       name: 'New Sheet By Univer', // sheet name
++       creator: 'user',  // creator name
++     }),
++   }).then((response) => {
++     if (!response.ok) {
++       throw new Error('create unit failed');
++     }
++
++     return response.json();
++   }).then((data) => {
++     if (!data.unitID) {
++       throw new Error('create unit failed');
++     }
++
++     url.searchParams.set('unit', data.unitID);
++     url.searchParams.set('type', String(UniverInstanceType.UNIVER_SHEET));
++     window.location.href = url.toString();
++   }).catch((error) => {
++     console.error(error);
++   })
++ }
+```

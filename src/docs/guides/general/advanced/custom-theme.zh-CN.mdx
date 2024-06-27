@@ -1,0 +1,63 @@
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# 自定义主题
+
+<BadgeGroup values={[UniverTypes.GENERAL]} value={UniverTypes.GENERAL} />
+
+## 使用内置主题
+
+Univer 内置了两套主题，分别是 `defaultTheme` 和 `greenTheme`，他们在 `@univerjs/design` 包中，你可以根据自己的需求选择其中一个主题。
+
+```typescript
+import { defaultTheme } from "@univerjs/design";
+// import { greenTheme } from "@univerjs/design";
+
+const univer = new Univer({
+  theme: defaultTheme,
+  // theme: greenTheme,
+});
+```
+
+## 自定义主题
+
+Univer 的主题是基于 css 变量实现的，你完全可以通过覆盖这些变量来自定义主题。
+
+请参考[这里](https://github.com/dream-num/univer/blob/dev/packages/design/src/themes/default.module.less)来了解默认主题的变量是如何定义的。
+
+```css
+.univer-theme {
+  --primary-color: #1890ff;
+  --primary-color-hover: #40a9ff;
+}
+```
+
+```typescript
+import { defaultTheme } from "@univerjs/design";
+// 在这里导入你自定义的主题
+import './custom-theme.css';
+
+const univer = new Univer({
+  theme: defaultTheme,
+});
+```
+
+如果你的构建工具支持 css modules 的一些特殊语法，你可以使用 `:export` 来导出变量，这样你就可以在 js 中使用这些变量了。
+
+```css
+:export {
+  --primary-color: #1890ff;
+  --primary-color-hover: #40a9ff;
+}
+```
+
+```typescript
+import { defaultTheme } from "@univerjs/design";
+import customTheme from './custom-theme.css';
+
+const univer = new Univer({
+  theme: {
+    ...defaultTheme,
+    ...customTheme,
+  }
+});
+```

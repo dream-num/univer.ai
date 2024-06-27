@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 
 const Univer = dynamic(
-  () => import('@/official-site/examples/docs-big-data').then(module => module.default) as any,
+  () => import('@/examples/docs-big-data').then(module => module.default) as any,
   { ssr: false },
 ) as any
 

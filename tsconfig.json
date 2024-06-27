@@ -16,9 +16,6 @@
     "paths": {
       "@/*": [
         "./src/*"
-      ],
-      "univer.ai/*": [
-        "./submodules/univer.ai/*"
       ]
     },
     "resolveJsonModule": true,

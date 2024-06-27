@@ -1,0 +1,56 @@
+import { Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# 查找 & 替换
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+## 安装
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/find-replace @univerjs/sheets-find-replace
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/find-replace @univerjs/sheets-find-replace
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## 引入
+
+```typescript
+import '@univerjs/find-replace/lib/index.css';
+
+import { UniverFindReplacePlugin } from '@univerjs/find-replace';
+import { UniverSheetsFindReplacePlugin } from '@univerjs/sheets-find-replace';
+```
+
+## 国际化
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core';
+import FindReplaceZhCN from '@univerjs/find-replace/locale/zh-CN';
+import SheetsFindReplaceZhCN from '@univerjs/sheets-find-replace/locale/zh-CN';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: Tools.deepMerge(
+      FindReplaceZhCN,
+      SheetsFindReplaceZhCN
+    ),
+  },
+});
+```
+
+## 注册
+
+```typescript
+univer.registerPlugin(UniverFindReplacePlugin);
+univer.registerPlugin(UniverSheetsFindReplacePlugin);
+```

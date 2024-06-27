@@ -1,0 +1,253 @@
+import { Callout } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# Extending UI
+
+<BadgeGroup values={[UniverTypes.GENERAL]} value={UniverTypes.GENERAL} />
+
+## How To Register Custom Menu in Third-Party Plugin?
+
+If you are writing a Univer plugin, you can easily use `IMenuService` in the dependency injection system to register menu items.
+
+### 1. Plugin Environment
+
+Make sure you understand the [plugin mechanism](/guides/sheet/architecture/univer) and have created a new plug-in via [@univerjs/create-cli](https://www.npmjs.com/package/@univerjs/create-cli).
+
+First, construct a `controller` class to register menu item commands, menu item icons, and menu item configurations.
+```ts
+// src/plugin/controllers/custom-menu.controller.ts
+@OnLifecycle(LifecycleStages.Steady, CustomMenuController)
+export class CustomMenuController extends Disposable {
+  constructor(
+    @Inject(Injector) private readonly _injector: Injector,
+    @ICommandService private readonly _commandService: ICommandService,
+    @IMenuService private readonly _menuService: IMenuService,
+    @Inject(ComponentManager) private readonly _componentManager: ComponentManager,
+  ) {
+    super();
+
+    this._initCommands();
+    this._registerComponents();
+    this._initMenus();
+  }
+
+  /**
+   * register commands
+  */
+  private _initCommands(): void { }
+
+  /**
+   * register icon components
+  */
+  private _registerComponents(): void { }
+
+  /**
+   * register menu items
+  */
+  private _initMenus(): void { }
+}
+```
+
+Register this `controller` to the plugin
+```ts
+// src/plugin/plugin.ts
+const SHEET_CUSTOM_MENU_PLUGIN = 'SHEET_CUSTOM_MENU_PLUGIN';
+
+export class UniverSheetsCustomMenuPlugin extends Plugin {
+  static override type = UniverInstanceType.UNIVER_SHEET;
+  static override pluginName = SHEET_CUSTOM_MENU_PLUGIN;
+
+  constructor(
+    @Inject(Injector) protected readonly _injector: Injector
+  ) {
+    super();
+  }
+
+  override onStarting(injector: Injector): void {
+    ([
+      [CustomMenuController],
+    ] as Dependency[]).forEach((d) => injector.add(d));
+  }
+}
+```
+
+### 2. Menu Item Command
+
+Before registering a menu, you need to construct a `Command`, which will be executed when the menu is clicked.
+```ts
+// src/plugin/commands/operations/single-button.operation.ts
+export const SingleButtonOperation: ICommand = {
+  id: 'custom-menu.operation.single-button',
+  type: CommandType.OPERATION,
+  handler: async (accessor: IAccessor) => {
+    alert('Single button operation');
+    return true;
+  },
+};
+```
+
+Register this `Command` to `ICommandService`
+```ts
+// src/plugin/controllers/custom-menu.controller.ts
+private _initCommands(): void {
+  [
+    SingleButtonOperation
+  ].forEach((c) => {
+    this.disposeWithMe(this._commandService.registerCommand(c));
+  });
+}
+```
+
+### 3. Menu Item Icon
+
+If your menu item requires an icon, you also need to register the icon in advance.
+
+First construct an icon tsx component
+```ts
+// src/plugin/components/button-icon/ButtonIcon.tsx
+export function ButtonIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2m.16 14a6.981 6.981 0 0 0-5.147 2.256A7.966 7.966 0 0 0 12 20a7.97 7.97 0 0 0 5.167-1.892A6.979 6.979 0 0 0 12.16 16M12 4a8 8 0 0 0-6.384 12.821A8.975 8.975 0 0 1 12.16 14a8.972 8.972 0 0 1 6.362 2.634A8 8 0 0 0 12 4m0 1a4 4 0 1 1 0 8a4 4 0 0 1 0-8m0 2a2 2 0 1 0 0 4a2 2 0 0 0 0-4" />
+    </svg>
+  );
+};
+```
+
+Register this icon to `ComponentManager`
+```ts
+// src/plugin/controllers/custom-menu.controller.ts
+private _registerComponents(): void {
+  this.disposeWithMe(this._componentManager.register("ButtonIcon", ButtonIcon));
+}
+```
+
+### 4. Menu Item Internationalization
+
+If your menu items need to be internationalized, you need to add internationalization resources in advance.
+```ts
+// src/plugin/locale/zh-CN.ts
+export default {
+  customMenu: {
+    button: '按钮',
+    singleButton: '单个按钮',
+  },
+};
+```
+```ts
+// src/plugin/locale/en-US.ts
+export default {
+  customMenu: {
+    button: 'Button',
+    singleButton: 'Single button',
+  },
+};
+```
+
+Register this internationalized resource to `ILocaleService`
+```ts
+// src/plugin/plugin.ts
+export class UniverSheetsCustomMenuPlugin extends Plugin {
+  static override type = UniverInstanceType.UNIVER_SHEET;
+  static override pluginName = SHEET_CUSTOM_MENU_PLUGIN;
+
+  constructor(
+    @Inject(Injector) protected readonly _injector: Injector,
+    @Inject(LocaleService) private readonly _localeService: LocaleService
+  ) {
+    super();
+
+    this._localeService.load({
+      zhCN,
+      enUS
+    });
+  }
+}
+```
+
+### 5. Menu Item Configuration
+
+Organize the data needed for menu items, including the menu item's id, type, icon, title, positions, etc.
+```ts
+export function CustomMenuItemSingleButtonFactory(): IMenuButtonItem<string> {
+  return {
+    // Bind the command id, clicking the button will trigger this command
+    id: SingleButtonOperation.id,
+    // The type of the menu item, in this case, it is a button
+    type: MenuItemType.BUTTON,
+    // The icon of the button, which needs to be registered in ComponentManager
+    icon: 'ButtonIcon',
+    // The tooltip of the button. Prioritize matching internationalization. If no match is found, the original string will be displayed
+    tooltip: 'customMenu.singleButton',
+    // The title of the button. Prioritize matching internationalization. If no match is found, the original string will be displayed
+    title: 'customMenu.button',
+    // The button position can be configured in the toolbar or context menu using MenuPosition. If it is a sheet, you can also use SheetMenuPosition to configure the row header, column header, or sheet bar context menu
+    positions: [MenuPosition.TOOLBAR_START, MenuPosition.CONTEXT_MENU],
+  };
+}
+```
+
+Register this menu item with `IMenuService`
+```ts
+// src/plugin/controllers/custom-menu.controller.ts
+private _initMenus(): void {
+  (
+    [
+      CustomMenuItemSingleButtonFactory
+    ] as IMenuItemFactory[]
+  ).forEach((factory) => {
+    this.disposeWithMe(this._menuService.addMenuItem(this._injector.invoke(factory), {}));
+  });
+}
+```
+
+### 6. Dropdown List
+
+In addition to adding a single button menu item, you can also add a dropdown menu item. The specific implementation is similar, except for the difference in constructing the menu item configuration:
+- Replace menu item configuration return type `IMenuButtonItem<string>` with `IMenuSelectorItem<string>`
+- Replace menu item type `MenuItemType.BUTTON` with `MenuItemType.SUBITEMS`
+- The main button of the dropdown list needs to customize an id, which is used as the unique identifier of the dropdown list and is used to associate the sub-menu items of the dropdown list. The `positions` of the sub-menu items need to be filled in with the id of the main button.
+
+```ts
+// src/plugin/controllers/menu/dropdown-list.menu.ts
+const CUSTOM_MENU_DROPDOWN_LIST_OPERATION_ID = 'custom-menu.operation.dropdown-list';
+
+export function CustomMenuItemDropdownListMainButtonFactory(): IMenuSelectorItem<string> {
+  return {
+    id: CUSTOM_MENU_DROPDOWN_LIST_OPERATION_ID,
+    type: MenuItemType.SUBITEMS,
+    icon: 'MainButtonIcon',
+    tooltip: 'customMenu.dropdownList',
+    title: 'customMenu.dropdown',
+    positions: [MenuPosition.TOOLBAR_START, MenuPosition.CONTEXT_MENU],
+  };
+}
+
+export function CustomMenuItemDropdownListFirstItemFactory(): IMenuButtonItem<string> {
+  return {
+    id: DropdownListFirstItemOperation.id,
+    type: MenuItemType.BUTTON,
+    title: 'customMenu.itemOne',
+    icon: 'ItemIcon',
+    positions: [CUSTOM_MENU_DROPDOWN_LIST_OPERATION_ID],
+  };
+}
+```
+
+Please refer to [Custom Menu Playground](/playground?title=Custom+Menu) for more details.
+
+## Customizing Menu Items (Hiding Menu Items)
+
+Customizing or hiding menu items in Univer is a common requirement. We provide configuration options for all plugins that contain menu items, so you can easily achieve this requirement through configuration.
+
+For example, hiding the bold menu item:
+
+```typescript
+univer.registerPlugin(UniverSheetsUIPlugin, {
+  menu: {
+    'sheet.command.set-range-bold': {
+      hidden: true,
+    },
+  },
+});
+```

@@ -1,0 +1,123 @@
+import { Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# 核心功能
+
+<BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC]} value={UniverTypes.DOC} />
+
+核心功能是电子文档的基础功能，包括 Univer Doc 的核心功能，如浏览文档、编辑文档等。
+
+## 安装
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/ui
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/ui
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## 引入
+
+```typescript
+import "@univerjs/design/lib/index.css";
+import "@univerjs/ui/lib/index.css";
+import "@univerjs/docs-ui/lib/index.css";
+
+import { Univer } from "@univerjs/core";
+import { defaultTheme } from "@univerjs/design";
+
+import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
+import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
+
+import { UniverUIPlugin } from "@univerjs/ui";
+
+import { UniverDocsPlugin } from "@univerjs/docs";
+import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
+```
+
+## 国际化
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core';
+import DesignZhCN from '@univerjs/design/locale/zh-CN';
+import DocsUIZhCN from '@univerjs/docs-ui/locale/zh-CN';
+import UIZhCN from '@univerjs/ui/locale/zh-CN';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: Tools.deepMerge(
+      DesignZhCN,
+      DocsUIZhCN,
+      UIZhCN
+    ),
+  },
+});
+```
+
+## 注册
+
+```typescript
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  footer: false,
+});
+
+univer.registerPlugin(UniverDocsPlugin);
+univer.registerPlugin(UniverDocsUIPlugin, {
+  container: 'univerdoc',
+  layout: {
+    docContainerConfig: {
+      innerLeft: false,
+    },
+  },
+});
+
+univer.createUnit(UniverInstanceType.UNIVER_DOC, {});
+```
+
+## 配置
+
+### `@univerjs/core`
+
+`@univerjs/core` 在初始化时提供了一些配置项，可用于配置主题、国际化等。
+
+```typescript
+new Univer({
+  theme: IStyleSheet;
+  locale: LocaleType;
+  locales: ILocales;
+  logLevel?: LogLevel;
+});
+```
+
+完整的配置项参考 [IUniverData](/typedoc/@univerjs/core/interfaces/IUniverData)。
+
+### `@univerjs/ui`
+
+`@univerjs/ui` 提供了一些配置项，可用于基础布局的配置。
+
+```typescript
+univer.registerPlugin(UniverUIPlugin, {
+  container?: string | HTMLElement;
+
+  header?: boolean;
+  footer?: boolean;
+  contextMenu?: boolean;
+});
+```
+
+* `container` - 容器元素，可以是字符串或者 DOM 元素。
+* `header` - 是否显示头部。
+* `footer` - 是否显示底部。
+* `contextMenu` - 是否显示右键菜单。

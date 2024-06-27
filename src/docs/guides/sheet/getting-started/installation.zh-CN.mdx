@@ -1,0 +1,308 @@
+import { Callout, Tabs } from 'nextra/components'
+import ReactLive from '@/components/ReactLive'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# 安装和引入
+
+<BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC, UniverTypes.SLIDE]} value={UniverTypes.SHEET} />
+
+## 使用包管理器
+
+如果你对现代前端开发有所了解，那么使用包管理工具来构建包含 Univer 的应用将会是一个不错的选择。
+
+我们推荐使用 [Vite](https://vitejs.dev/)、[esbuild](https://esbuild.github.io/) 或 [Webpack 5](https://webpack.js.org/) 等对 ES Module 支持较好的构建工具来构建 Univer 应用。如果你使用了其它构建工具（例如 Webpack 4），可能会需要一些额外的配置，请阅读 [常见问题](/guides/sheet/troubleshooting) 获取更多信息。
+
+### 安装
+
+Univer 以插件的形式提供了一系列功能，除了一些产品所必需的核心插件外，你还可以根据需要选择性地引入其它插件。
+
+<Callout>
+  - 如果你正在使用 npm，请确保使用的版本为 npm@7 及以上。这是因为 npm@3 ~ npm@6 并不会正确地安装 `peerDependencies`[^1]。
+  - 如果你正在使用 pnpm，请确保使用的版本为 pnpm@8 及以上。如果你正在使用 pnpm@6 ~ pnpm@7，可以尝试配置 `auto-install-peers=true` [^2]来解决依赖安装问题。
+  - 已知问题：yarn@1 无法正确安装 `peerDependencies`，我们并未测试最新版本的 yarn，如果你正在使用更高版本的 yarn，欢迎在 [GitHub Issues](https://github.com/dream-num/univer/issues) 向我们反馈兼容情况。
+</Callout>
+
+以下示例将会带你了解哪些插件是必需的，以及如何安装它们：
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+如果你想在后续的开发中获得更加便捷的开发体验，我们还推荐你安装 `@univerjs/facade`：
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/facade
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/facade
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+有关 `@univerjs/facade` 的更多信息，请参考 [Facade](/guides/sheet/facade/facade) 章节。
+
+### 使用
+
+<Callout>
+  样式文件的引入顺序很重要，确保你在依次引入 `@univerjs/design`、`@univerjs/ui` 的 CSS 样式后再引入其他插件的样式文件。
+</Callout>
+
+你需要在项目中引入 Univer 的样式文件、语言包，以及一些必要的插件：
+
+```typescript
+import "@univerjs/design/lib/index.css";
+import "@univerjs/ui/lib/index.css";
+import "@univerjs/docs-ui/lib/index.css";
+import "@univerjs/sheets-ui/lib/index.css";
+import "@univerjs/sheets-formula/lib/index.css";
+
+import { LocaleType, Tools, Univer, UniverInstanceType } from "@univerjs/core";
+import { defaultTheme } from "@univerjs/design";
+
+import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
+import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
+
+import { UniverUIPlugin } from "@univerjs/ui";
+
+import { UniverDocsPlugin } from "@univerjs/docs";
+import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
+
+import { UniverSheetsPlugin } from "@univerjs/sheets";
+import { UniverSheetsFormulaPlugin } from "@univerjs/sheets-formula";
+import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
+
+import DesignZhCN from '@univerjs/design/locale/zh-CN';
+import UIZhCN from '@univerjs/ui/locale/zh-CN';
+import DocsUIZhCN from '@univerjs/docs-ui/locale/zh-CN';
+import SheetsZhCN from '@univerjs/sheets/locale/zh-CN';
+import SheetsUIZhCN from '@univerjs/sheets-ui/locale/zh-CN';
+```
+
+<Callout type="info" emoji="ℹ️">
+  大量插件的语言包和样式加载可能会使开发变得繁琐且难以维护。我们提供了 Univer Plugins 来帮助你更加方便地引入插件，详情请参考 [简化引入](/guides/sheet/getting-started/univer-plugins) 章节。
+</Callout>
+
+然后创建一个 Univer 实例，并注册这些插件：
+
+```typescript
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: Tools.deepMerge(
+      SheetsZhCN,
+      DocsUIZhCN,
+      SheetsUIZhCN,
+      UIZhCN,
+      DesignZhCN,
+    ),
+  },
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+});
+
+univer.registerPlugin(UniverDocsPlugin, {
+  hasScroll: false,
+});
+univer.registerPlugin(UniverDocsUIPlugin);
+
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
+
+univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});
+```
+
+export const code = `const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: zhCN,
+  },
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+});
+
+univer.registerPlugin(UniverDocsPlugin, {
+  hasScroll: false,
+});
+univer.registerPlugin(UniverDocsUIPlugin);
+
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
+
+univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});`
+
+<ReactLive code={code} />
+
+## 通过 CDN 引入
+
+如果你不想使用包管理工具，你也可以通过 CDN 引入 Univer 的样式文件、语言包和插件。Univer 为每一个插件都提供了单独的 UMD 构建。当然，琐碎的 UMD 包会使得开发者拥有非常灵活的选择权，但也同样会让开发者面临一些新的挑战：
+
+- 我要如何确定一个包的前置依赖？
+- 我要如何确定正确的引入顺序？
+- 我要如何确定一个功能究竟是由哪些包提供的？
+
+如果对 Univer 的插件化机制没有一个非常清晰的了解的话，通常来说这些问题的背后就意味着无数种排列组合尝试的过程。
+
+因此，Univer 也提供了一个包含了所有插件的 UMD 构建，你可以在 HTML 文件中引入这个 UMD 构建，然后通过 `window` 对象来访问各个插件。
+
+### 示例
+
+当前主流的 CDN 服务商（例如 jsDelivr、unpkg）都支持 Univer 的 UMD 构建，你可以在 HTML 文件中引入这些资源：
+
+```html
+<head>
+  <script src="https://unpkg.com/@univerjs/umd/lib/univer.full.umd.js"></script>
+  <script src="https://unpkg.com/@univerjs/umd/lib/locale/zh-CN.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/@univerjs/umd/lib/univer.css">
+</head>
+<body>
+  <div id="app"></div>
+ 
+  <script>
+    var {
+      UniverCore,
+      UniverDesign,
+      UniverEngineRender,
+      UniverEngineFormula,
+      UniverDocs,
+      UniverDocsUi,
+      UniverUi,
+      UniverSheets,
+      UniverSheetsUi,
+      UniverSheetsNumfmt,
+      UniverSheetsFormula,
+      UniverFacade,
+    } = window
+ 
+    var univer = new UniverCore.Univer({
+      theme: UniverDesign.defaultTheme,
+      locale: UniverCore.LocaleType.ZH_CN,
+      locales: {
+        [UniverCore.LocaleType.ZH_CN]: UniverUMD['zh-CN'],
+      },
+    });
+ 
+    univer.registerPlugin(UniverEngineRender.UniverRenderEnginePlugin);
+    univer.registerPlugin(UniverEngineFormula.UniverFormulaEnginePlugin);
+ 
+    univer.registerPlugin(UniverUi.UniverUIPlugin, {
+      container: "app",
+    });
+ 
+    univer.registerPlugin(UniverDocs.UniverDocsPlugin, {
+      hasScroll: false,
+    });
+    univer.registerPlugin(UniverDocsUi.UniverDocsUIPlugin);
+ 
+    univer.registerPlugin(UniverSheets.UniverSheetsPlugin);
+    univer.registerPlugin(UniverSheetsUi.UniverSheetsUIPlugin);
+    univer.registerPlugin(UniverSheetsNumfmt.UniverSheetsNumfmtPlugin);
+    univer.registerPlugin(UniverSheetsFormula.UniverSheetsFormulaPlugin);
+ 
+    univer.createUnit(UniverCore.UniverInstanceType.UNIVER_SHEET, {})
+ 
+    const univerAPI = UniverFacade.FUniver.newAPI(univer)
+  </script>
+</body>
+```
+
+从上面的代码可以看出，通过 CDN 引入 Univer 的方式和使用包管理工具引入的方式基本一致，只是每个插件都有属于自己的命名空间。通常这些命名空间的命名规则为大写驼峰的 `Univer<PluginName>`。
+
+### 精简版本
+
+如果你的项目中已经使用了 React、ReactDOM 和 RxJS，你可以选择 UMD 包的精简版本，该版本不包含这些依赖项。
+
+```diff
++ <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
++ <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
++ <script src="https://unpkg.com/rxjs/dist/bundles/rxjs.umd.min.js"></script>
+ 
+- <script src="https://unpkg.com/@univerjs/umd/lib/univer.full.umd.js"></script>
++ <script src="https://unpkg.com/@univerjs/umd/lib/univer.slim.umd.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@univerjs/umd/lib/univer.css">
+```
+
+### 指定版本
+
+unpkg 和 jsDeliver 都支持指定特定版本的资源。以 unpkg 为例，如果你想使用 0.1.16 版本的 Univer，仅需在 URL 中加上 `@<version>` 来指定版本即可：
+
+```diff
+- https://unpkg.com/@univerjs/umd/lib/univer.full.umd.js
++ https://unpkg.com/@univerjs/umd@0.1.16/lib/univer.full.umd.js
+```
+
+## 入门示例：加载数据、修改数据和存储数据
+
+在上一小节的代码中，你已经创建了一个 Univer 实例并创建了一个空的电子表格，不过大部分情况下你可能需要的是在 Univer 当中加载已有数据。这一小节将会介绍如何向 Univer 加载数据、修改数据以及如何从 Univer 中存储数据。
+
+### 加载数据
+
+通过调用 `Univer` 的 `createUniverSheet` 方法，可以创建一个新的 `Workbook` 实例。方法的第一个参数是一个对象，包含了 `Workbook` 的数据，应该符合 `IWorkbookData` 接口。
+
+```typescript
+import { IWorkbookData, UniverInstanceType } from "@univerjs/core";
+
+const data: IWorkbookData = {};
+const workbook = univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});
+```
+
+你可以在[这里](/typedoc/@univerjs/core/interfaces/IWorkbookData)了解 `IWorkbookData` 所支持的全部字段。
+
+### 修改数据
+
+`@univerjs/facade` 提供的 API 是对 `Univer` 实例的封装，因此你需要在创建了 `Univer` 实例之后，再用 `FUniver` 包裹这个实例：
+
+```typescript
+import { FUniver } from "@univerjs/facade";
+
+const univerAPI = FUniver.newAPI(univer);
+```
+
+然后你就可以通过调用 `univerAPI` 的方法来使用 Univer 了，例如获取当前激活的 sheet，并在指定的范围更新值：
+
+```typescript
+const activeSheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+// A1 设置数字 1
+const range1 = activeSheet.getRange(0, 0, 1, 1);
+range1.setValue(1);
+```
+
+### 存储数据
+
+通过调用当前 `Workbook` 的 `getSnapshot` 方法，可以得到 `IWorkbookData` 对象，包含了表格内部的数据。
+
+```typescript
+const savedData = univerAPI.getActiveWorkbook().getSnapshot();
+```
+
+---
+
+[^1]: https://blog.npmjs.org/post/110924823920/npm-weekly-5
+[^2]: https://pnpm.io/npmrc#auto-install-peers

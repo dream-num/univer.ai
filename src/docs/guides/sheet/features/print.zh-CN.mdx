@@ -1,0 +1,60 @@
+import { Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import BusinessPlanNotice from '@/components/BusinessPlanNotice'
+import ServerNotice from '@/components/ServerNotice'
+
+# 打印
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+<BusinessPlanNotice />
+
+<ServerNotice />
+
+Univer 提供了高精度的打印功能，支持打印预览、打印设置，以及导出为 PDF。
+
+## 安装
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs-pro/sheets-print
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs-pro/sheets-print
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## 引入
+
+```typescript
+import '@univerjs-pro/sheets-print/lib/index.css';
+
+import { UniverSheetsPrintPlugin } from '@univerjs-pro/sheets-print'
+```
+
+## 国际化
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core';
+import SheetsPrintPluginZhCN from '@univerjs-pro/sheets-print/locale/zh-CN';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: Tools.deepMerge(
+      SheetsPrintPluginZhCN
+    ),
+  },
+});
+```
+
+## 注册
+
+```typescript
+univer.registerPlugin(UniverSheetsPrintPlugin);
+```

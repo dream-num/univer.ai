@@ -1,0 +1,81 @@
+import { Callout } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# 国际化
+
+<BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC, UniverTypes.SLIDE]} value={UniverTypes.SHEET} />
+
+## 使用预设语言包
+
+0.1.13 版本后，Univer 不再内置任何语言包，所有语言包均由插件提供。如果你发现手动引入插件的语言包过于繁琐，我们还提供了一个构建工具插件，用于自动引入插件所需的语言包。请参考 [使用 Univer 插件](/guides/sheet/advanced/univer-plugins) 获取更多信息。
+
+如需手动添加语言包，你可以参考以下示例，根据需要引入对应的语言包并组装成对象传入 `Univer` 实例：
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core';
+import DesignZhCN from '@univerjs/design/locale/zh-CN';
+import UIZhCN from '@univerjs/ui/locale/zh-CN';
+import DocsUIZhCN from '@univerjs/docs-ui/locale/zh-CN';
+import SheetsZhCN from '@univerjs/sheets/locale/zh-CN';
+import SheetsUIZhCN from '@univerjs/sheets-ui/locale/zh-CN';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: Tools.deepMerge(
+      SheetsZhCN,
+      DocsUIZhCN,
+      SheetsUIZhCN,
+      UIZhCN,
+      DesignZhCN,
+    ),
+  },
+});
+```
+
+Univer 目前内置了以下预设语言包：
+
+- `zh-CN`：简体中文
+- `en-US`：英文
+- `ru-RU`：俄文
+
+需要注意的是，由于 Webpack 4 并不支持 package.json 的 `exports` 字段，因此你可能会需要修改引入语言包的路径。
+
+```diff
+- import DesignZhCN from '@univerjs/design/locale/zh-CN';
++ import DesignZhCN from '@univerjs/design/lib/locale/zh-CN.json'
+```
+
+如果你使用了 TypeScript，也需要确认是否在 tsconfig.json 中配置了 `resolveJsonModule` 选项。
+
+```diff
+{
+  "compilerOptions": {
++    "resolveJsonModule": true
+  }
+}
+```
+
+## 使用自定义语言包
+
+Univer 也支持自定义语言包，你可以根据需要自行组装语言包对象并传入 `Univer` 实例。可供参考的预设语言包一般存放在 `<rootDir>/packages/<PLUGIN_NAME>/locale` 目录下。
+
+```typescript
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: 'es-ES',
+  locales: {
+    'es-ES': {
+      shortcut: {
+        undo: 'Deshacer',
+        redo: 'Rehacer',
+      }
+    },
+  },
+});
+```
+
+## 贡献语言包
+
+Univer OSS 是一个充满包容性的开源项目，我们欢迎来自五湖四海的开发者为 Univer 添加或者改进语言包。如果你有兴趣为 Univer 贡献语言包，请参考 [贡献指南](/guides/sheet/contributing)。

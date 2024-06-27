@@ -1,0 +1,43 @@
+import { Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import BusinessPlanNotice from '@/components/BusinessPlanNotice'
+import ServerNotice from '@/components/ServerNotice'
+
+# Live Share
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+<BusinessPlanNotice />
+
+<ServerNotice />
+
+Live Share is a real-time presentation feature provided by Univer based on collaborative editing, so before using Live Share, **you need to install the [Collaboration](/guides/sheet/features/collaboration) plugin first**.
+
+## Installation
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs-pro/live-share
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs-pro/live-share
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Import
+
+```typescript
+import '@univerjs-pro/live-share/lib/index.css';
+
+import { UniverLiveSharePlugin } from '@univerjs-pro/live-share';
+```
+
+## Register
+
+```typescript
+univer.registerPlugin(UniverLiveSharePlugin);
+```

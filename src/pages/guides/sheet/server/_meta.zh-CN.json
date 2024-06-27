@@ -1,0 +1,5 @@
+{
+  "overview": "服务概述",
+  "docker": "部署到 Docker",
+  "kubernetes": "部署到 Kubernetes"
+}

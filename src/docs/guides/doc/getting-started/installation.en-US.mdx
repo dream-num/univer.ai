@@ -1,0 +1,253 @@
+import { Callout, Tabs } from 'nextra/components'
+import ReactLive from '@/components/ReactLive'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# Installation & Usage
+
+<BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC, UniverTypes.SLIDE]} value={UniverTypes.DOC} />
+
+## Using Package Managers
+
+If you are familiar with modern frontend development, using package managers to build applications containing Univer will be a good choice.
+
+We recommend using build tools such as [Vite](https://vitejs.dev/), [esbuild](https://esbuild.github.io/), or [Webpack 5](https://webpack.js.org/) that have good support for ES Modules to build Univer applications. If you are using other build tools like Webpack 4, you may require some additional configurations. For more information, please refer to [Read More](/guides/quickstart#read-more) and the [Troubleshooting](/guides/sheet/troubleshooting).
+
+### Installation
+
+To facilitate the deployment of Univer's frontend, a variety of npm packages are utilized. You may install the requisite packages based on your specific requirements.
+
+The following example will guide you through which plugins are necessary and how to install them:
+
+<Callout>
+  - If you are using npm, make sure you are using npm@7 or higher. This is because npm@3 ~ npm@6 will not correctly install `peerDependencies`[^1].
+  - If you are using pnpm, make sure you are using pnpm@8 or higher. If you are using pnpm@6 ~ pnpm@7, you can try configuring `auto-install-peers=true` [^2] to resolve dependency installation issues.
+  - Known issue: yarn@1 cannot correctly install `peerDependencies`. We have not tested the latest version of yarn. If you are using a newer version of yarn, please feel free to provide feedback on compatibility in [GitHub Issues](
+</Callout>
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/ui
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/ui
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+If you want to get a more convenient development experience in the future, we also recommend you to install `@univerjs/facade`:
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/facade
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/facade
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+For more information about `@univerjs/facade`, please refer to the [Facade](/guides/doc/facade/facade) section.
+
+### Usage
+
+<Callout>
+  The order of importing the style files is important. Make sure you import the CSS styles of `@univerjs/design` and `@univerjs/ui` before importing the CSS styles of other plugins.
+</Callout>
+
+You need to import Univer's css files, locales, and some necessary plugins in your project:
+
+```typescript
+import "@univerjs/design/lib/index.css";
+import "@univerjs/ui/lib/index.css";
+import "@univerjs/docs-ui/lib/index.css";
+
+import { LocaleType, Tools, Univer } from "@univerjs/core";
+import { defaultTheme } from "@univerjs/design";
+
+import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
+import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
+
+import { UniverUIPlugin } from "@univerjs/ui";
+
+import { UniverDocsPlugin } from "@univerjs/docs";
+import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
+
+import DesignEnUS from '@univerjs/design/locale/en-US';
+import DocsUIEnUS from '@univerjs/docs-ui/locale/en-US';
+import UIEnUS from '@univerjs/ui/locale/en-US';
+```
+
+<Callout type="info" emoji="ℹ️">
+  Import a variety of locales and css files for plugins may make development cumbersome and difficult to maintain. We provide Univer Plugins to help you import plugins more conveniently. For more information, please refer to the [Simplified Import](/guides/sheet/getting-started/univer-plugins) section.
+</Callout>
+
+Then create a Univer instance and register these plugins:
+
+```typescript
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: Tools.deepMerge(
+      DesignEnUS,
+      DocsUIEnUS,
+      UIEnUS,
+    ),
+  },
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  footer: false,
+});
+
+univer.registerPlugin(UniverDocsPlugin);
+univer.registerPlugin(UniverDocsUIPlugin, {
+  container: 'univerdoc',
+  layout: {
+    docContainerConfig: {
+      innerLeft: false,
+    },
+  },
+});
+
+univer.createUnit(UniverInstanceType.UNIVER_DOC, {});
+```
+
+export const code = `const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: enUS,
+  },
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  footer: false,
+});
+
+univer.registerPlugin(UniverDocsPlugin);
+univer.registerPlugin(UniverDocsUIPlugin, {
+  container: 'univerdoc',
+  layout: {
+    docContainerConfig: {
+      innerLeft: false,
+    },
+  },
+});
+
+univer.createUnit(UniverInstanceType.UNIVER_DOC, {});`
+
+<ReactLive code={code} />
+
+## Using CDN
+
+If you don't want to use package managers, you can also import Univer's style files, language packs, and plugins via CDN. Univer provides a separate UMD build for each plugin. Of course, the trivial UMD packages give developers a lot of flexibility, but they also pose some new challenges:
+
+- How do I determine the pre-dependencies of a package?
+- How do I determine the correct import order?
+- How do I determine which packages provide a feature?
+
+If you don't have a clear understanding of Univer's plugin mechanism, these questions usually mean countless trial-and-error attempts.
+
+Therefore, Univer also provides a UMD build that includes all plugins. You can include this UMD build in your HTML file and access each plugin through the `window` object.
+
+### Example
+
+Current mainstream CDN service providers (such as jsDelivr and unpkg) support Univer's UMD build, and you can include these resources in your HTML file:
+
+```html
+<head>
+  <script src="https://unpkg.com/@univerjs/umd/lib/univer.full.umd.js"></script>
+  <script src="https://unpkg.com/@univerjs/umd/lib/locale/en-US.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/@univerjs/umd/lib/univer.css">
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    var {
+      UniverCore,
+      UniverDesign,
+      UniverEngineRender,
+      UniverEngineFormula,
+      UniverDocs,
+      UniverDocsUi,
+      UniverUi,
+      UniverFacade,
+    } = window
+
+    var univer = new UniverCore.Univer({
+      theme: UniverDesign.defaultTheme,
+      locale: UniverCore.LocaleType.EN_US,
+      locales: {
+        [UniverCore.LocaleType.EN_US]: UniverUMD['en-US'],
+      },
+    });
+
+    univer.registerPlugin(UniverEngineRender.UniverRenderEnginePlugin);
+    univer.registerPlugin(UniverEngineFormula.UniverFormulaEnginePlugin);
+
+    univer.registerPlugin(UniverUi.UniverUIPlugin, {
+      container: "app",
+    });
+
+    univer.registerPlugin(UniverDocs.UniverDocsPlugin);
+    univer.registerPlugin(UniverDocsUi.UniverDocsUIPlugin, {
+      container: 'univerdoc',
+      layout: {
+        docContainerConfig: {
+          innerLeft: false,
+        },
+      },
+    });
+
+    univer.createUnit(UniverCore.UniverInstanceType.UNIVER_DOC, {})
+
+    const univerAPI = UniverFacade.FUniver.newAPI(univer)
+  </script>
+</body>
+```
+
+From the above code, it can be seen that the way to import Univer via CDN is basically the same as using package managers, except that each plugin has its own namespace. Typically, the naming convention for these namespaces is the uppercase camel case `Univer<PluginName>`.
+
+### Slim Version
+
+If you are already using React, ReactDOM, and RxJS in your project, you can opt for the slim version of the UMD bundle, which excludes these dependencies.
+
+```diff
++ <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
++ <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
++ <script src="https://unpkg.com/rxjs/dist/bundles/rxjs.umd.min.js"></script>
+ 
+- <script src="https://unpkg.com/@univerjs/umd/lib/univer.full.umd.js"></script>
++ <script src="https://unpkg.com/@univerjs/umd/lib/univer.slim.umd.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@univerjs/umd/lib/univer.css">
+```
+
+### Specifying Versions
+
+Both unpkg and jsDeliver support specifying specific versions of resources. For example, if you want to use version 0.1.16 of Univer, you only need to add `@<version>` to the URL to specify the version:
+
+```diff
+- https://unpkg.com/@univerjs/umd/lib/univer.full.umd.js
++ https://unpkg.com/@univerjs/umd@0.1.16/lib/univer.full.umd.js
+```
+
+---
+
+[^1]: https://blog.npmjs.org/post/110924823920/npm-weekly-5
+[^2]: https://pnpm.io/npmrc#auto-install-peers

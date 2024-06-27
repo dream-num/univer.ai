@@ -19,6 +19,7 @@ export default antfu({
     'style/quote-props': ['error', 'as-needed'],
     'style/brace-style': ['warn', '1tbs', { allowSingleLine: true }],
     'ts/ban-ts-comment': 'off',
+    'react-refresh/only-export-components': 'off',
 
     // This rule is from the univer repo.
     'ts/naming-convention': [

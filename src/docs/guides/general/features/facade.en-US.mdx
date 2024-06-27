@@ -1,0 +1,37 @@
+import { Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# Facade API
+
+<BadgeGroup values={[UniverTypes.GENERAL]} value={UniverTypes.GENERAL} />
+
+Univer provides a Facade API to simplify the use of Univer.
+
+For more information about `@univerjs/facade`, please refer to the [Facade](/guides/sheet/facade/facade) section.
+
+## Installation
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/facade
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/facade
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Import
+
+```typescript
+import { FUniver } from "@univerjs/facade";
+```
+
+## Register
+
+```typescript
+const univerAPI = FUniver.newAPI(univer);
+```

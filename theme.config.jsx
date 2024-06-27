@@ -1,23 +1,10 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import pkg from './package.json'
+import Logo from '@/components/Logo'
 
 export default {
-  logo: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { pathname } = useRouter()
-    const isPro = pathname.startsWith('/pro')
-
-    return (
-      <span className="inline-flex items-center gap-2">
-        <img src="/images/univer.svg" alt="Univer" className="size-8" />
-        <span className="text-xl">
-          Univer
-          {isPro ? ' Pro' : ''}
-        </span>
-      </span>
-    )
-  },
+  logo: Logo,
   project: {
     link: 'https://github.com/dream-num/univer',
   },
@@ -72,7 +59,6 @@ export default {
       )
     },
   },
-  primaryHue: 200,
   sidebar: {
     toggleButton: true,
     titleComponent({ title }) {
@@ -147,25 +133,45 @@ export default {
       const uri = filePath.replace('src/pages', '')
 
       const generalDocs = [
+        '/guides/sheet/introduction',
+        '/guides/doc/introduction',
+        '/guides/slide/introduction',
+
+        '/guides/sheet/getting-started/univer-plugins',
+        '/guides/doc/getting-started/univer-plugins',
+        '/guides/slide/getting-started/univer-plugins',
+
         '/guides/sheet/advanced',
         '/guides/doc/advanced',
         '/guides/slide/advanced',
+
         '/guides/sheet/architecture',
         '/guides/doc/architecture',
         '/guides/slide/architecture',
+
         '/guides/sheet/facade/facade',
         '/guides/doc/facade/facade',
         '/guides/slide/facade/facade',
+
         '/guides/sheet/features/facade',
         '/guides/doc/features/facade',
-        // '/guides/slide/features/facade',
+        '/guides/slide/features/facade',
+
+        '/guides/sheet/server',
+        '/guides/doc/server',
+        '/guides/slide/server',
+
+        '/guides/sheet/tutorials/find-the-command-id',
+        '/guides/doc/tutorials/find-the-command-id',
+        '/guides/slide/tutorials/find-the-command-id',
+
         '/guides/sheet/contributing',
         '/guides/doc/contributing',
         '/guides/slide/contributing',
       ]
       const isGeneralDoc = generalDocs.some(doc => uri.startsWith(doc))
 
-      const href = `https://github.com/dream-num/univer.ai/tree/main${isGeneralDoc ? uri.replace(/(sheet|doc|slide)/, 'general') : uri}`
+      const href = `https://github.com/dream-num/univer.ai/tree/main/src/docs${isGeneralDoc ? uri.replace(/(sheet|doc|slide)/, 'general') : uri}`
 
       return (
         <Link className={className} href={href} target="_blank" rel="noopener noreferrer">

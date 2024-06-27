@@ -3,8 +3,8 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
 import { clsx } from '@/lib/utils'
-import { ColorPicker } from '@/official-site/components/ColorPicker'
-import { Slider } from '@/official-site/components/Slider'
+import { ColorPicker } from '@/components/ColorPicker'
+import { Slider } from '@/components/Slider'
 
 interface IIconBoxProps {
   iconKey: string

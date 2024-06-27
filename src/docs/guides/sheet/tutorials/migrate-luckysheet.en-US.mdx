@@ -1,0 +1,45 @@
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# Migrate From Luckysheet to Univer
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+Compared with Luckysheet, our newly designed Univer has made great improvements in terms of architecture, data structure and API, so Luckysheet can no longer be migrated 1:1 to Univer.
+
+However, basic data types or APIs can be found in Univer. In view of this, if you still want to migrate Luckysheet data to Univer, you can do some targeted adaptation work according to your needs.
+
+Here is a migration guide for everyone.
+
+## Analysis
+
+### Configuration
+
+The core work of the conversion is to adapt the workbook configuration, worksheet configuration and cell information. You can refer to the Univer interface and Luckysheet data structure.
+
+| | Univer | Luckysheet |
+|-------|----------------|------------|
+| Workbook configuration | [IWorkbookData](/typedoc/@univerjs/core/interfaces/IWorkbookData) | [Overall Configuration](https://dream-num.github.io/LuckysheetDocs/guide/config.html) |
+| Worksheet configuration | [IWorksheetData](/typedoc/@univerjs/core/interfaces/IWorksheetData) | [Sheet Configuration](https://dream-num.github.io/LuckysheetDocs/guide/sheet.html) |
+| Cell | [ICellData](/typedoc/@univerjs/core/interfaces/ICellData) | [Cell Attributes](https://dream-num.github.io/LuckysheetDocs/guide/cell.html) |
+
+### Plugin
+
+Luckysheet is initialized through a JSON configuration, while Univer is split, the enhanced functions are implemented with plugins, so some functions need to be dispersed into plugin configurations, such as
+
+| | Univer | Luckysheet |
+|-------|----------------|------------|
+| Conditional formatting | [@univerjs/sheets-conditional-formatting](/typedoc/@univerjs/sheets-conditional-formatting/README) | [luckysheet_conditionformat_save](https://dream-num.github.io/LuckysheetDocs/guide/sheet.html#luckysheet-conditionformat-save) |
+| Data validation | [@univerjs/sheets-data-validation](/typedoc/@univerjs/sheets-data-validation/README) | [dataverification](https://dream-num.github.io/LuckysheetDocs/zh/guide/sheet.html#dataverification) |
+
+### API
+
+For the API part, Luckysheet API is uniformly mounted on `window.luckysheet`, there are two ways to use Univer API
+
+- Call the encapsulated [Facade API](/guides/sheet/facade/facade)
+- Use Univer's dependency injection system to inject the plugin's service capabilities into the current Class. Refer to our [Plugin Tutorial](/guides/sheet/tutorials/csv-import-plugin/) to easily access the Univer dependency injection system
+
+## Summary
+
+For some commonly used basic data, you can refer to [Migrate Luckysheet Demo](/playground?title=Migrate%20Luckysheet) and customize it according to project requirements.
+
+If Univer's existing functions do not meet your needs, you can also develop your own plugin for adaptation.

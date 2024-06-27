@@ -1,0 +1,85 @@
+import { Callout, Steps, Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# Using Facade API
+
+<BadgeGroup values={[UniverTypes.GENERAL]} value={UniverTypes.GENERAL} />
+
+The plugin capabilities of Univer are very powerful, allowing you to extend almost every aspect of Univer. However, in most cases, the overly flexible extension capabilities can make developers feel overwhelmed. Therefore, we provide `@univerjs/facade`, a simpler and easier-to-use panel API (Facade API) for Univer users.
+
+`@univerjs/facade` is suitable for everyone, especially for those who are familiar with Luckysheet's old users, or just want to use Univer's functions simply without intending to deeply extend users. With `@univerjs/facade`, you can quickly get started and easily implement various common CRUD functions.
+
+This document will detail how to use the API provided by `@univerjs/facade` to help you fully unleash the potential of Univer. If you want to see all the Facade APIs, please refer to the [API documentation](/typedoc/@univerjs/facade/README) of `@univerjs/facade`. By learning and using these APIs, you will be able to develop powerful office applications more efficiently and conveniently.
+
+<Callout type="info" emoji="ℹ️">
+  In fact, [Uniscript](/typedoc/@univerjs/uniscript/README) also uses `@univerjs/facade`, so you can directly use the API provided by `@univerjs/facade` in the Uniscript panel created by `@univerjs/uniscript`.
+</Callout>
+
+## Installation
+
+Install via your favorite package manager:
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/facade
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/facade
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+The API provided by `@univerjs/facade` is a wrapper around the `Univer` instance. Therefore, after creating a `Univer` instance, you need to wrap it with `FUniver`:
+
+```typescript
+import { FUniver } from "@univerjs/facade";
+
+const univerAPI = FUniver.newAPI(univer);
+```
+
+You can then use the Univer functionality by calling methods on the `univerAPI` object. For example, get the currently activated Workbook:
+
+```typescript
+univerAPI.getActiveWorkbook();
+```
+
+You can refer to the [Facade API documentation](/typedoc/@univerjs/facade/README) for a more detailed description of what you can achieve with Facade. In the following sections, we will demonstrate some common usage scenarios.
+
+## Use with the Univer server
+
+If the functionality you are using includes parts that interact with the server, you need to replace the `@univerjs/facade` package with `@univerjs-pro/facade` to call the APIs related to these functions.
+
+The use of `@univerjs-pro/facade` is exactly the same as `@univerjs/facade`, just replace `@univerjs/facade` with `@univerjs-pro/facade`:
+
+<Steps>
+  ### Installation
+
+  <Tabs items={['pnpm', 'npm']}>
+    <Tabs.Tab label="pnpm">
+      ```shell
+      pnpm remove @univerjs/facade
+      pnpm add @univerjs-pro/facade
+      ```
+    </Tabs.Tab>
+    <Tabs.Tab label="npm">
+      ```shell
+      npm remove @univerjs/facade
+      npm install @univerjs-pro/facade
+      ```
+    </Tabs.Tab>
+  </Tabs>
+ 
+  ### Replace
+ 
+  ```diff
+  - import { FUniver } from "@univerjs/facade";
+  + import { FUniver } from "@univerjs-pro/facade";
+ 
+  const univerAPI = FUniver.newAPI(univer);
+  ```
+</Steps>
