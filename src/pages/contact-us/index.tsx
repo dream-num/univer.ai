@@ -1,8 +1,125 @@
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import Select, { SelectItem } from '@/official-site/Select'
 import DiscordSvg from '@/official-site/clipsheet/components/icons/DiscordSvg'
 import GithubSvg from '@/official-site/clipsheet/components/icons/GithubSvg'
+import { useToast } from '@/official-site/components/Toast'
+import { useLoadingState } from '@/official-site/hooks/useLoadingState'
+import { IssueType, issueTypeOptions } from '@/official-site/config/issueTypes'
 
 export default function ContactUs() {
+  const router = useRouter()
+  const { asPath } = router
+
+  const { showToast, toastElement } = useToast()
+
+  const { loading, withLoading } = useLoadingState()
+
+  const [form, setForm] = useState({
+    product: IssueType['chrome-extension'] as IssueType,
+    content: '',
+    email: '',
+  })
+
+  type IFormData = typeof form
+
+  const [errors, setErrors] = useState({
+    product: '',
+    content: '',
+    email: '',
+  } as Record<keyof IFormData, string>)
+
+  useEffect(() => {
+    // 检测 URL 哈希部分的变化
+    const handleHashChange = () => {
+      const hash = window.location.hash
+
+      issueTypeOptions.forEach((item) => {
+        if (hash === `#${item.value}`) {
+          setForm(form => ({
+            ...form,
+            product: item.value,
+          }))
+        }
+      })
+    }
+
+    // 初次加载时检查哈希部分
+    handleHashChange()
+
+    // 监听哈希变化事件
+    window.addEventListener('hashchange', handleHashChange)
+
+    // 清理事件监听器
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange)
+    }
+  }, [asPath])
+
+  const setField = (field: keyof IFormData, value: string) => {
+    setForm({
+      ...form,
+      [field]: value,
+    })
+  }
+
+  const resetForm = () => {
+    setField('content', '')
+  }
+
+  const setError = (field: keyof IFormData, error: string) => {
+    setErrors({
+      ...errors,
+      [field]: error,
+    })
+  }
+
+  const resetError = (field: keyof IFormData) => {
+    setError(field, '')
+  }
+
+  const submit = async () => {
+    if (!form.content) {
+      setError('content', 'Please fill in the content.')
+      return
+    }
+    if (!form.email) {
+      setError('email', 'Please fill in the email.')
+      return
+    }
+    if (!/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(form.email)) {
+      setError('email', 'Please fill in the correct email format.')
+      return
+    }
+    const host = window.location.host
+    const isSecure = window.location.protocol === 'https:'
+    const httpProtocol = isSecure ? 'https' : 'http'
+
+    try {
+      await withLoading(
+        fetch(`${httpProtocol}://${host}/universer-api/survey`, {
+          method: 'POST',
+          body: JSON.stringify(form),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }).then(res => res.json()),
+      )
+
+      resetForm()
+      showToast('Submitted successfully! We will give you feedback in time.', {
+        duration: 6000,
+      })
+    } catch (e) {
+      console.error(e)
+      showToast('Submission failed, please try again later.', {
+        type: 'error',
+        duration: 6000,
+      })
+    }
+  }
+
   return (
     <div className={`
       relative mx-auto px-[16px] pb-[100px] pt-[60px]
@@ -18,26 +135,33 @@ export default function ContactUs() {
                 }
       `}
       </style>
+      {toastElement}
 
       <div className={`
-        flex flex-col items-start justify-start gap-[100px]
+        flex flex-col items-start justify-start gap-[32px]
 
-        xl:flex-row
+        xl:flex-row xl:gap-[100px]
       `}
       >
-        <div className="inline-flex flex-col items-start justify-start gap-[68px]">
+        <div className={`
+          inline-flex flex-col items-start justify-start gap-[32px]
+
+          xl:gap-[68px]
+        `}
+        >
           <div className="flex flex-col items-start justify-start gap-4">
             <div className={`
-              text-center text-italic text-5xl font-semibold leading-[52px] tracking-wide
-              text-slate-900 font-italic
+              text-[28px] font-semibold italic leading-[52px] tracking-wide text-slate-900
+
+              xl:text-5xl
             `}
             >
               Contact Us
             </div>
             <div className={`
-              text-base font-normal leading-7 text-zinc-600
+              text-16px font-normal leading-7 text-[#474D57]
 
-              xl:w-[344px]
+              xl:w-[344px] xl:text-base
             `}
             >
               Do you have any suggestions or need help? Please contact us, we value your feedback and are happy to serve you.
@@ -45,7 +169,7 @@ export default function ContactUs() {
           </div>
           <div className="flex flex-col items-start justify-start gap-1">
             <div className="text-xl font-medium leading-loose text-slate-900">Email</div>
-            <div className="text-base font-normal leading-7 text-zinc-600">
+            <div className="text-base font-normal leading-7 text-[#474D57]">
               {/* <Link className="text-[#2B4DFF] hover:underline" href="mailto:developer@univer.ai">developer@univer.ai</Link> */}
               developer@univer.ai
             </div>
@@ -53,90 +177,129 @@ export default function ContactUs() {
           <div className="flex flex-col items-start justify-start gap-3">
             <div className="text-xl font-medium leading-loose text-slate-900">Social account</div>
             <div className="inline-flex items-start justify-start gap-4">
-
-              <div className="relative h-6 w-6 cursor-pointer">
+              <Link
+                href="https://discord.gg/FaHvP4DwyX"
+                className="relative h-6 w-6 cursor-pointer"
+              >
                 <DiscordSvg />
-              </div>
-              <div className="relative h-6 w-6 cursor-pointer">
+              </Link>
+              <Link
+                href="https://github.com/dream-num/univer/discussions"
+                className="relative h-6 w-6 cursor-pointer"
+              >
                 <GithubSvg />
-              </div>
+              </Link>
             </div>
           </div>
         </div>
-        <div className="flex w-full flex-col items-start justify-start gap-4">
+        <form className="flex w-full flex-col items-start justify-start gap-[16px]">
           <div className={`
-            flex w-full flex-col items-start justify-start gap-4 rounded-2xl bg-white px-6 pb-6 pt-5
-            shadow shadow-[0px_4px_12px_0px_rgba(128,152,165,0.16)]
+            flex w-full flex-col items-start justify-start gap-[16px] rounded-[16px] bg-white
+            px-[24px] pb-[24px] pt-[20px] shadow shadow-[0px_4px_12px_0px_rgba(128,152,165,0.16)]
           `}
           >
             <div className="flex w-full flex-col items-start justify-start gap-1">
-              <div className="flex h-[52px] flex-col items-start justify-start self-stretch">
-                <div className="text-lg font-medium leading-7 text-slate-900">Issue Type</div>
+              <div className="flex flex-col items-start justify-start self-stretch">
+                <div className="text-[18px] font-medium leading-7 text-slate-900">Issue Type</div>
 
                 <div className="self-stretch text-base font-normal leading-normal text-gray-400">Please select the general category of the issue.</div>
               </div>
-              <Select defaultValue="extension" placeholder="Please select the general category of the issue.">
-                <SelectItem value="extension">Chrome extension</SelectItem>
-                <SelectItem value="gpt">GPT extension</SelectItem>
-                <SelectItem value="completion">Data completion</SelectItem>
+              <Select value={form.product} onValueChange={val => setField('product', val)}>
+                {issueTypeOptions.map(item => (
+                  <SelectItem key={item.value} value={item.value}>{item.label}</SelectItem>
+                ))}
               </Select>
             </div>
             <div className="flex w-full flex-col items-start justify-start gap-1">
-              <div className="flex h-[52px] flex-col items-start justify-start self-stretch">
-                <div className="text-lg font-medium leading-7 text-slate-900">Detailed information</div>
+              <div className="flex flex-col items-start justify-start self-stretch">
+                <div className="text-[18px] font-medium leading-7 text-slate-900">Detailed information</div>
                 <div className="self-stretch text-base font-normal leading-normal text-gray-400">Please describe your problem.</div>
               </div>
               <div className={`
-                inline-flex w-full items-center justify-start rounded-lg border border-zinc-200
+                inline-flex w-full items-center justify-start rounded-lg border border[#DEE1E5]
                 bg-white px-3 py-2
 
                 xl:w-[520px]
               `}
               >
                 <textarea
-                  placeholder="Please describe your problem"
+                  defaultValue={form.content}
+                  value={form.content}
+                  maxLength={1000}
                   className={`
                     h-36 shrink grow basis-0 text-base font-normal leading-normal outline-none
                   `}
+                  onInput={(e) => {
+                    setField('content', (e.target as HTMLTextAreaElement).value)
+                    resetError('content')
+                  }}
                 >
                 </textarea>
               </div>
+              {errors.content && (
+                <div className="mt-[4px] text-[13px] font-normal leading-none text-rose-500">
+                  {errors.content}
+                </div>
+              )}
             </div>
             <div className="flex w-full flex-col items-start justify-start gap-1">
-              <div className="flex h-[52px] flex-col items-start justify-start self-stretch">
-                <div className="text-lg font-medium leading-7 text-slate-900">Email</div>
+              <div className="flex flex-col items-start justify-start self-stretch">
+                <div className="text-[18px] font-medium leading-7 text-slate-900">Email</div>
                 <div className="self-stretch text-base font-normal leading-normal text-gray-400">Enter your email to receive issue updates.</div>
               </div>
               <div className={`
-                inline-flex w-full items-center justify-start rounded-lg border border-zinc-200
+                inline-flex w-full items-center justify-start rounded-lg border border[#DEE1E5]
                 bg-white px-3 py-2
 
                 xl:w-[520px]
               `}
               >
                 <input
-                  placeholder="Enter your email to receive issue updates"
+                  defaultValue={form.email}
+                  value={form.email}
+                  maxLength={100}
                   type="email"
                   className="h-6 shrink grow basis-0 text-base font-normal leading-normal"
+                  onInput={(e) => {
+                    setField('email', (e.target as HTMLInputElement).value)
+                    resetError('email')
+                  }}
                 />
               </div>
+              {errors.email && (
+                <div className="mt-[4px] text-[13px] font-normal leading-none text-rose-500">
+                  {errors.email}
+                </div>
+              )}
             </div>
           </div>
-          <button className={`
-            inline-flex items-center justify-center gap-2 self-stretch rounded-[32px]
-            bg-[linear-gradient(121deg,#0048FF_18.89%,#0C81ED_39.58%,#029DCE_59.87%,#00BBB0_74.37%,#00C5A8_81.94%)]
-            px-6
+          <button
+            type="submit"
+            onClick={submit}
+            disabled={loading}
+            data-disabled={loading ? 'true' : undefined}
+            className={`
+              inline-flex items-center justify-center gap-2 self-stretch rounded-[32px]
+              bg-[linear-gradient(121deg,#0048FF_18.89%,#0C81ED_39.58%,#029DCE_59.87%,#00BBB0_74.37%,#00C5A8_81.94%)]
+              px-6
 
-            active:bg-[#0249ff] active:bg-none
+              active:bg-[#0249ff] active:bg-none
 
-            data-[disabled]:cursor-not-allowed data-[disabled]:opacity-30
+              data-[disabled]:cursor-not-allowed data-[disabled]:opacity-30
+              data-[disabled]:hover:bg-[linear-gradient(121deg,#0048FF_18.89%,#0C81ED_39.58%,#029DCE_59.87%,#00BBB0_74.37%,#00C5A8_81.94%)]
 
-            hover:bg-[#0148ff] hover:bg-none
-          `}
+              hover:bg-[#0148ff] hover:bg-none
+            `}
           >
+            {loading && (
+              <svg className="-ml-1 mr-3 h-5 w-5 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            )}
             <span className="text-base font-semibold capitalize leading-10 text-slate-50">submit</span>
           </button>
-        </div>
+        </form>
       </div>
 
     </div>

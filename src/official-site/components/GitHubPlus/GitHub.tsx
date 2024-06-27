@@ -4,24 +4,23 @@ import clsx from 'clsx'
 import guideSingle from '@/official-site/images/guide-single.svg'
 
 type TColorProp = `#${string}` | `#${string}`[]
-interface ShineBorderProps {
+interface IShineBorderProps {
+  /** defines the radius of the border. */
   borderRadius?: number
+  /** defines the width of the border. */
   borderWidth?: number
+  /** defines the animation duration to be applied on the shining border */
   duration?: number
+  /** a string or string array to define border color. */
   color?: TColorProp
+  /** defines the class name to be applied to the component */
   className?: string
+  /** contains react node elements. */
   children: React.ReactNode
 }
 
 /**
- * @name Shine Border
  * @description It is an animated background border effect component with easy to use and configurable props.
- * @param borderRadius defines the radius of the border.
- * @param borderWidth defines the width of the border.
- * @param duration defines the animation duration to be applied on the shining border
- * @param color a string or string array to define border color.
- * @param className defines the class name to be applied to the component
- * @param children contains react node elements.
  */
 export function GitHubButtonBase({
   borderRadius = 32,
@@ -30,7 +29,7 @@ export function GitHubButtonBase({
   color = '#fff',
   className,
   children,
-}: ShineBorderProps) {
+}: IShineBorderProps) {
   return (
     <div
       style={

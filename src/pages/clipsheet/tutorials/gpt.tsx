@@ -12,6 +12,7 @@ import { VideoPlayer } from '@/official-site/clipsheet/components/VideoPlayer'
 import { ContactUs } from '@/official-site/clipsheet/components/ContactUs'
 import { ExtendedReading } from '@/official-site/clipsheet/components/ExtendedReading'
 import { SimpleCases } from '@/official-site/clipsheet/components/SimpleCases'
+import { IssueType } from '@/official-site/config/issueTypes'
 
 export default function Page() {
   const { locale } = useRouter()
@@ -204,7 +205,7 @@ export default function Page() {
 
         <SimpleCases videos={videos} />
         <ExtendedReading previewVidio={previewVidio} />
-        <ContactUs />
+        <ContactUs type={IssueType['gpt-extension']} />
         <div className={`
           mb-[48px]
 

@@ -52,6 +52,7 @@ export function VideoPlayer({ src, className, title, videoClassName, enableMask 
         )}
         <iframe
           ref={el}
+          // eslint-disable-next-line react-dom/no-unsafe-iframe-sandbox
           sandbox="allow-scripts allow-same-origin allow-presentation"
           className={clsx(`absolute left-0 top-0 block h-full w-full border-0`, videoClassName)}
           src={src}

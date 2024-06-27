@@ -20,7 +20,18 @@ const nextConfig = {
     defaultLocale: 'en-US',
     localeDetection: false,
   },
-
+  rewrites: () => {
+    // eslint-disable-next-line node/prefer-global/process
+    if (process.env.UNIVEERSER_ENDPOINT) {
+      return [
+        {
+          source: '/universer-api/:path*',
+          // eslint-disable-next-line node/prefer-global/process
+          destination: `${process.env.UNIVEERSER_ENDPOINT}/universer-api/:path*`,
+        },
+      ]
+    }
+  },
   webpack: (config, { isServer }) => {
     config.plugins.push(new UniverPlugin())
     config.module.rules.push({
