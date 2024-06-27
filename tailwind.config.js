@@ -23,31 +23,29 @@ module.exports = {
     'justify-center',
   ],
   theme: {
-    fontFamily: {
-      pingFang: 'PingFang SC',
-    },
     extend: {
-      colors: {
-        'black5': 'rgba(30, 34, 43, 0.05)',
-        'hyacinth-blue-500': '#274FEE',
-        'active-nav': 'rgba(39, 79, 238, 0.08)',
-        'clear-btn-hover': 'rgba(254, 75, 75, 0.08)',
-        'item-hover': 'rgba(30, 34, 43, 0.06)',
-        'separate': 'rgba(229, 229, 229, 0.70)',
-        'btn-major-hover': '#3A60F7',
-        'btn-minor-hover': 'rgba(39, 79, 238, 0.08)',
-      },
-      keyframes: {
-        spin360: {
-          '0%': { transform: 'rotate(0deg)' },
-          '100%': { transform: 'rotate(360deg)' },
-        },
-      },
       animation: {
-        spin360: 'spin360 2s linear infinite',
+        'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
       },
-      boxShadow: {
-        dialog: '0px 4px 16px 0px rgba(30, 34, 43, 0.08)',
+
+      keyframes: {
+        'shine-pulse': {
+          '0%': {
+            'background-position': '0% 0%',
+          },
+          '50%': {
+            'background-position': '100% 100%',
+          },
+          'to': {
+            'background-position': '0% 0%',
+          },
+
+        },
+        'border-beam': {
+          '100%': {
+            'offset-distance': '100%',
+          },
+        },
       },
     },
   },
