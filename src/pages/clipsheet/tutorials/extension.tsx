@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { ContactUs } from '../../../official-site/clipsheet/components/ContactUs'
-import { useTranslation } from '@/official-site/utils/i18n'
+import { useTranslation } from '@/lib/i18n'
 
 import type { IVideo } from '@/official-site/clipsheet/components/VideoList'
 

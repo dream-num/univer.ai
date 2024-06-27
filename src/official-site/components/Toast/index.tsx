@@ -36,8 +36,8 @@ export function useToast() {
               top: `${80 + index * 60}px`,
             }}
             className={`
-              fixed left-1/2 -translate-x-1/2 translate-y-0 transform opacity-100 transition-all
-              duration-500 ease-in-out
+              fixed left-1/2 -translate-x-1/2 translate-y-0 transform opacity-100
+              shadow-[0px_4px_24px_0px_rgba(15,23,42,0.08)] transition-all duration-500 ease-in-out
             `}
           >
             <div className={`

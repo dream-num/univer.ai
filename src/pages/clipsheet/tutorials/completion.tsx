@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useTranslation } from '@/official-site/utils/i18n'
+import { useTranslation } from '@/lib/i18n'
 
 // eslint-disable-next-line import/no-duplicates
 import enUS from '@/official-site/clipsheet/tutorials/completion/completion.en-US.mdx'
