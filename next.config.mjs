@@ -31,6 +31,8 @@ const nextConfig = {
         },
       ]
     }
+
+    return []
   },
   webpack: (config, { isServer }) => {
     config.plugins.push(new UniverPlugin())
