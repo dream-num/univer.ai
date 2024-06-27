@@ -1,4 +1,9 @@
 {
-  "univer-plugins": "使用 Univer Plugins",
+  "custom-canvas": "扩展 Canvas",
+  "custom-ui": "扩展 UI",
+  "custom-command": "扩展命令",
+  "custom-formula": "自定义公式",
+  "custom-model": "插件自定义模型",
+  "custom-theme": "自定义主题",
   "release": "其他发布版本"
 }

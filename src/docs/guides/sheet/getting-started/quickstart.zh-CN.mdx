@@ -1,0 +1,90 @@
+import { Cards, Card, Steps, Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# 快速开始
+
+<BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC]} value={UniverTypes.SHEET} />
+
+如果你想尽快开始体验 Univer，那么你来对地方了！这个页面将带你在几分钟内从零搭建一个可以运行的 Univer 应用。
+
+## 在线体验
+
+你可以在线体验 Univer，无需安装任何东西。只需点击下面的链接，即可立即开始使用 Univer。
+
+<Cards>
+  <Card
+    icon="📊"
+    title={<span className="">Univer Sheet</span>}
+    href="https://stackblitz.com/~/github.com/awesome-univer/sheets-vite-demo"
+  />
+</Cards>
+
+## 从模板创建
+
+如果你想在本地搭建 Univer 应用，可以使用以下命令从模板创建一个新的 Univer 应用。
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm dlx degit dream-num/univer-sheet-start-kit [your-app-name]
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npx degit dream-num/univer-sheet-start-kit [your-app-name]
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+至此，你已经成功创建了属于你的第一个 Univer 项目，并且体验了 Univer 的一些功能。
+
+## 集成服务端的模板
+
+当然，你有可能不满足于此，想要打印、导入导出、协同编辑等更多功能，这些功能需要更多的配置以及服务端的支持。不过不用担心，Univer 也为你提供了快速体验这些功能的方式，不妨照着下面的步骤来试试：
+
+请确保你已经安装了 [Node.js](https://nodejs.org/) 和 [Git](https://git-scm.com/)。
+
+<Steps>
+  ### 安装并运行服务端
+
+  下载 [license.zip](https://univer.ai/pro/license) 后，在同个目录下执行
+
+  ```shell
+  sh -c "$(curl -fsSL https://release-univer.oss-cn-shenzhen.aliyuncs.com/release-demo/install.sh)"
+  ```
+
+  ### 安装并运行前端
+
+  <Tabs items={['pnpm', 'npm']}>
+    <Tabs.Tab label="pnpm">
+      ```shell
+      pnpm dlx degit dream-num/univer-pro-sheet-start-kit [your-app-name]
+      cd [your-app-name] && pnpm install # pnpm version >= 8
+      pnpm dev
+      ```
+    </Tabs.Tab>
+    <Tabs.Tab label="npm">
+      ```shell
+      npx degit dream-num/univer-pro-sheet-start-kit [your-app-name]
+      cd [your-app-name] && npm install # npm version >= 7
+      npm run dev
+      ```
+    </Tabs.Tab>
+  </Tabs>
+</Steps>
+
+🎉 恭喜你，你又成功创建了一个包含了服务端的 Univer 项目，你可以访问 [http://localhost:5173/](http://localhost:5173/) 体验这些进阶的功能。
+
+你也可以在 [dream-num/univer-pro-sheet-start-kit](https://github.com/dream-num/univer-pro-sheet-start-kit) 找到该模板的源代码。
+
+## 下一步
+
+恭喜你！你已经迈出了第一步，开始了解 Univer。接下来，你可以继续深入学习 Univer，这里有一些建议：
+
+- **🔰 安装和引入**：如果你想学习如何从头开始手动创建一个 Univer 项目，请查看[安装和引入](/guides/sheet/getting-started/installation)章节。它将一步步引导你完成整个过程。
+- **🏗️ 进阶使用**：如果你想进一步提升你的 Univer 技能，可以查看[进阶使用](/guides/sheet/advanced/custom-canvas)章节。它涵盖了更多高级主题和技巧。
+- **📚 教程**：如果你想了解一些实际的例子和真实的用例，可以查看[教程](/guides/sheet/tutorials/csv-import-plugin)章节，里面有一些实用的教程，可以帮助你学习如何使用 Univer 构建各种应用和功能。
+- **🧱 概念与架构**：如果你想深入了解 Univer 的内部工作原理，可以查看 [架构](/guides/sheet/architecture/univer) 章节，它提供了 Univer 的架构、核心概念和设计原则的全面概述。
+- **🎢 在线演示**： 别忘了探索[在线演示](/playground)页面，在那里你可以尝试各种 Univer 演示，看到这个库的实际运行。
+
+无论你选择哪条道路，Univer 都会在你的每一步旅程中支持你。祝你开发愉快！

@@ -1,0 +1,4 @@
+{
+  "docker": "部署到 Docker",
+  "kubernetes": "部署到 Kubernetes"
+}

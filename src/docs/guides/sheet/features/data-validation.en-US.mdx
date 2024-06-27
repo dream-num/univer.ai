@@ -1,0 +1,54 @@
+import { Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# Data Validation
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+## Installation
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/data-validation @univerjs/sheets-data-validation
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/data-validation @univerjs/sheets-data-validation
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Import
+
+```typescript
+import '@univerjs/sheets-data-validation/lib/index.css';
+
+import { UniverDataValidationPlugin } from '@univerjs/data-validation';
+import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validation';
+```
+
+## Internationalization
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core';
+import SheetsDataValidationEnUS from '@univerjs/sheets-data-validation/locale/en-US';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: Tools.deepMerge(
+      SheetsDataValidationEnUS
+    ),
+  },
+});
+```
+
+## Register
+
+```typescript
+univer.registerPlugin(UniverDataValidationPlugin);
+univer.registerPlugin(UniverSheetsDataValidationPlugin);
+```

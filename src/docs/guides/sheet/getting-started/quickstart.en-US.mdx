@@ -1,0 +1,90 @@
+import { Cards, Card, Steps, Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# Quickstart
+
+<BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC]} value={UniverTypes.SHEET} />
+
+If you want to get started with Univer as quickly as possible, you've come to the right place! This page will guide you through building a working Univer app in just a few minutes.
+
+## Play Online
+
+You can play with Univer online without installing anything. Just click the link below and start using Univer right away.
+
+<Cards>
+  <Card
+    icon="📊"
+    title={<span className="">Univer Sheet</span>}
+    href="https://stackblitz.com/~/github.com/awesome-univer/sheets-vite-demo"
+  />
+</Cards>
+
+## Starter Kit
+
+If you prefer to start with a local development environment, you can use the following starter kits to create a new Univer app in just a few seconds.
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm dlx degit dream-num/univer-sheet-start-kit [your-app-name]
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npx degit dream-num/univer-sheet-start-kit [your-app-name]
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+Great job on your first steps with Univer! You've successfully created your first project and gotten a taste of what Univer can do.
+
+## Integrated Server Template
+
+Of course, you may want more than just the basics. If you're looking to add features like printing, importing/exporting, and collaborative editing, you'll need additional configuration and server support. But don't worry, Univer has you covered! Follow the steps below to quickly experience these advanced features.
+
+Please make sure you have [Node.js](https://nodejs.org/) and [Git](https://git-scm.com/) installed on your machine.
+
+<Steps>
+  ### Install and Run the Server
+
+  Download [license.zip](https://univer.ai/pro/license) and run the following command in the same directory:
+
+  ```shell
+  sh -c "$(curl -fsSL https://release-univer.oss-cn-shenzhen.aliyuncs.com/release-demo/install.sh)"
+  ```
+
+  ### Install and Run the Frontend
+
+  <Tabs items={['pnpm', 'npm']}>
+    <Tabs.Tab label="pnpm">
+      ```shell
+      pnpm dlx degit dream-num/univer-pro-sheet-start-kit [your-app-name]
+      cd [your-app-name] && pnpm install # pnpm version >= 8
+      pnpm dev
+      ```
+    </Tabs.Tab>
+    <Tabs.Tab label="npm">
+      ```shell
+      npx degit dream-num/univer-pro-sheet-start-kit [your-app-name]
+      cd [your-app-name] && npm install # npm version >= 7
+      npm run dev
+      ```
+    </Tabs.Tab>
+  </Tabs>
+</Steps>
+
+🎉 Congratulations! You've successfully created another Univer project with a server. You can now visit [http://localhost:5173/](http://localhost:5173/) to experience these advanced features.
+
+You can also find the source code for this template at [dream-num/univer-pro-sheet-start-kit](https://github.com/dream-num/univer-pro-sheet-start-kit).
+
+## Next Steps
+
+Congratulations on making it this far! You're well on your way to mastering Univer. Here are some next steps to help you continue your journey:
+
+- **🔰 Installation & Usage**: If you want to learn how to manually set up a Univer project from scratch, check out the [Installation & Usage](/guides/sheet/getting-started/installation) chapter. It will guide you through the process step by step.
+- **🏗️ Advanced Usage**: Ready to take your Univer skills to the next level? The [Advanced Usage](/guides/sheet/advanced/custom-canvas) chapter covers more advanced topics and techniques for working with Univer.
+- **📚 Tutorials**: Looking for practical examples and real-world use cases? Head over to the [Tutorials](/guides/sheet/tutorials/csv-import-plugin) chapter, where you'll find a collection of hands-on tutorials that demonstrate how to build various applications and features with Univer.
+- **🧱 Concepts & Architecture**: Want to dive deep into the inner workings of Univer? The [Architecture](/guides/sheet/architecture/univer) chapter provides a comprehensive overview of Univer's architecture, core concepts, and design principles.
+- **🎢 Playground**: Don't forget to explore the [Playground page](/playground), where you can experiment with various Univer demos and see the library in action.
+
+No matter which path you choose, Univer is here to support you every step of the way. Happy coding!

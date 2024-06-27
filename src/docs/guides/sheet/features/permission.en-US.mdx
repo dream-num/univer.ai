@@ -1,0 +1,149 @@
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# Permission
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+Handle permission interception in front-end scenarios. When it detects that there is no corresponding permission for a certain action, it will terminate the code execution and prompt the user about the missing permission.
+
+## How to use
+
+For example:
+
+```typescript
+import { WorkbookEditablePermission } from '@univerjs/sheets';
+import { IPermissionService } from '@univerjs/core';
+
+class YourService {
+  constructor(@IPermissionService private _permissionService: IPermissionService) {
+
+  }
+
+  setWorkbookNotEditable() {
+    this._permissionService.updatePermissionPoint(new WorkbookEditablePermission('unitId').id, false);
+  }
+
+  setWorkbookEditable() {
+    this._permissionService.updatePermissionPoint(new WorkbookEditablePermission('unitId').id, true);
+  }
+}
+```
+
+### How to extend the permission point
+
+```typescript
+import { IPermissionService, IPermissionPoint } from '@univerjs/core';
+
+export class CustomPermissionPoint implements IPermissionPoint {
+  type = UnitObject.Unkonwn; // your type
+  subType = UnitAction.View; // your subType
+  status = PermissionStatus.INIT;
+  value = true; // Initial values
+  id: string;
+  constructor(unitId: string, subUnitId: string, customId: string) {
+    // The id attribute needs to be guaranteed to be unique throughout `IPermissionService`.
+    this.id = `${unitId}.${subUnitId}.${customId}`;
+  }
+}
+
+class YourService {
+  constructor(@IPermissionService private _permissionService: IPermissionService) {
+    this._init()
+  }
+
+  _init() {
+    this._permissionService.addPermissionPoint(new CustomPermissionPoint('unitId','subUnitId','my-id'));
+  }
+}
+
+// How to use it elsewhere
+class ConsumeService {
+  constructor(@IPermissionService private _permissionService: IPermissionService) {
+  }
+
+  doSomething() {
+   const point = this._permissionService.getPermissionPoint(new CustomPermissionPoint('unitId','subUnitId','my-id').id);
+   console.log(point.value);
+  }
+
+  bindEvent() {
+    // This will get an RX object, allowing you to listen for changes to the current permissions and make a list of changes
+    const pount$ = this._permissionService.getPermissionPoint$(new CustomPermissionPoint('unitId','subUnitId','my-id').id);
+    console.log(pount$);
+  }
+}
+```
+
+### Integration of Third-Party Authorization Service
+
+The logic for determining permissions is typically handled by an external service, which involves a communication process. In the frontend SDK implementation, we use the [AuthzIoLocalService](https://github.com/dream-num/univer/blob/dev/packages/core/src/services/authz-io/authz-io-local.service.ts) to handle this logic.
+
+In a production environment, we need to replace this implementation with a backend service. The frontend needs to implement the corresponding request functions based on the [IAuthzIoService](https://github.com/dream-num/univer/blob/dev/packages/core/src/services/authz-io/type.ts) interface for runtime replacement.
+
+Here's how you can replace it:
+
+```typescript
+import { IAuthzIoService, Univer } from '@univerjs/core';
+import { Injector } from '@wendellhu/redi';
+
+class YourAuthzService implements IAuthzIoService { }
+
+export class YourPlugin extends Plugin {
+  override onStarting(injector: Injector): void {
+    injector.add([IAuthzIoService, { useClass: YourAuthzService }]);
+  }
+}
+
+// By setting the override option to [[IAuthzIoService, null]], you can instruct Univer not to register the built-in IAuthzIoService.
+// This way, Univer will use the service provided by YourAuthzService as the implementation of the authorization service.
+const univer = new Univer({
+  override: [[IAuthzIoService, null]],
+});
+
+univer.registerPlugin(YourPlugin);
+```
+
+## List of permission point bits
+
+To access the specific code related to permission point at the given URL, you can refer to the [code](https://github.com/dream-num/univer/tree/dev/packages/sheets/src/services/permission/permission-point).
+
+In the case where the permission control of the workbook intersects with the worksheet/range, all permissions must be set to true in order to use them.
+
+### Workbook Permissions
+
+| Permission | Description |
+| --- | --- |
+| WorkbookEditablePermission | Whether or not editing is allowed. |
+| WorkbookPrintPermission | Whether or not printing is allowed. |
+| WorkbookCommentPermission | Whether or not commenting is allowed. |
+| WorkbookViewPermission | Whether or not viewing is allowed. |
+| WorkbookCopyPermission | Whether or not copying is allowed. |
+| WorkbookExportPermission | Whether or not exporting is allowed. |
+| WorkbookManageCollaboratorPermission | Whether or not managing collaborators is allowed. |
+
+### Worksheet Permissions
+
+| Permission | Description |
+| --- | --- |
+| WorksheetCopyPermission | Whether or not copying is allowed. |
+| WorksheetDeleteColumnPermission | Whether or not delete columns is allowed. |
+| WorksheetDeleteRowPermission | Whether or not delete row is allowed. |
+| WorksheetFilterPermission | Whether or not sort is allowed. |
+| WorksheetInsertColumnPermission | Whether or not insert columns is allowed. |
+| WorksheetInsertHyperlinkPermission | Whether or not use hyperlinks is allowed. |
+| WorksheetInsertRowPermission | Whether or not insert row is allowed. |
+| WorksheetPivotTablePermission | Whether or not use pivot tables is allowed. |
+| WorksheetSetCellStylePermission | Whether or not set cell style is allowed. |
+| WorksheetSetCellValuePermission | Whether or not set cell value is allowed. |
+| WorksheetSetColumnStylePermission | Whether or not set column style is allowed. |
+| WorksheetSetRowStylePermission | Whether or not set row style is allowed. |
+| WorksheetSortPermission | Whether or not use sort is allowed. |
+| WorksheetViewPermission | Whether or not viewing is allowed. |
+| WorksheetEditPermission | Whether or not editing is allowed. |
+
+### Range Permissions
+
+| Permission | Description |
+| --- | --- |
+| RangeProtectionPermissionViewPoint | Whether or not view the contents of a protected area. |
+| RangeProtectionPermissionEditPoint | Whether or not edit the contents of a protected area. |

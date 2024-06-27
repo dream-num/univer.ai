@@ -1,0 +1,52 @@
+import { Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# Uniscript
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+## Installation
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/uniscript
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/uniscript
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Import
+
+```typescript
+import '@univerjs/uniscript/lib/index.css';
+
+import { UniverUniscriptPlugin } from '@univerjs/uniscript';
+```
+
+## Internationalization
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core';
+import UniscriptEnUS from '@univerjs/uniscript/locale/en-US';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: Tools.deepMerge(
+      UniscriptEnUS
+    ),
+  },
+});
+```
+
+## Register
+
+```typescript
+univer.registerPlugin(UniverUniscriptPlugin);
+```

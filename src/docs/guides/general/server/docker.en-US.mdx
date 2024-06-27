@@ -1,0 +1,71 @@
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# Deploying with Docker
+
+<BadgeGroup values={[UniverTypes.GENERAL]} value={UniverTypes.GENERAL} />
+
+Get up and running quickly with our Docker deployment solution for the Univer service, using Docker Compose for a hassle-free setup.
+
+## System Requirements
+
+1. CPU: Single core
+2. RAM: 2GB
+3. Storage: 10GB
+
+Ensure you have [Docker version 23 or higher](https://docs.docker.com/engine/install/).
+
+## Technical Stack
+
+Our architecture is built on PostgreSQL and RabbitMQ.
+
+## Quick start
+
+Compatible with Linux, Mac, and Windows/WSL environments.
+
+After download [license.zip](https://www.univer.ai/pro/license), under same folder run
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/dream-num/helm-charts/main/install.sh)"
+```
+
+Confirm that the document service has successfully started.
+
+```bash
+docker run --net=univer-prod --rm --name univer-collaboration-lite -p 3010:3010 univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/univer-collaboration-lite:latest
+```
+
+Access http://localhost:3010 in your web browser to create a new blank document, which will then redirect you to the document link (Internet Explorer is not supported).
+
+![Example Image](./docker/img1.png)
+
+Also, verify the successful startup of the collaboration service.
+
+For a comprehensive test, try accessing it in various browsers or in private browsing mode to experience the full collaborative capabilities.
+
+![Example Image](./docker/img2.png)
+
+## Port Check
+
+Ensure that the specified ports are not in use; if they are, terminate the conflicting processes before attempting to start again.
+
+Default ports for Univer services are listed below:
+
+| service Name | Port Number |  	Function |
+| --- | --- | --- |
+| universer | 8000 | Serves API over HTTP |
+| univer-minio | 9000 | Acts as the S3 storage server |
+| univer-client | 3010 | Provides the frontend interface |
+
+## Troubleshooting
+
+### Having trouble starting on a Windows OS?
+
+The `run.sh` script operates in a `bash` environment. To get it up and running, you'll need to use either Git Bash/MinGW or a WSL environment.
+
+### Can't use the save-as-table function?
+
+You'll need to tweak the `.env` file. Set `S3_ENDPOINT_PUBLIC` to your local network IP to get the `save as` function to work properly.
+
+```diff
+- S3_ENDPOINT_PUBLIC=http://univer-minio:9000
++ S3_ENDPOINT_PUBLIC=http://<Your Local Network IP>:19000
+```

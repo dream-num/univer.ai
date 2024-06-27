@@ -1,0 +1,43 @@
+import { Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import BusinessPlanNotice from '@/components/BusinessPlanNotice'
+import ServerNotice from '@/components/ServerNotice'
+
+# Live Share
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+<BusinessPlanNotice />
+
+<ServerNotice />
+
+Live Share 是 Univer 基于协同编辑提供的实时演示功能，**因此在使用 Live Share 之前，需要先安装[协同编辑](/guides/sheet/features/collaboration)插件**。
+
+## 安装
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs-pro/live-share
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs-pro/live-share
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## 引入
+
+```typescript
+import '@univerjs-pro/live-share/lib/index.css';
+
+import { UniverLiveSharePlugin } from '@univerjs-pro/live-share';
+```
+
+## 注册
+
+```typescript
+univer.registerPlugin(UniverLiveSharePlugin);
+```

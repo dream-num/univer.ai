@@ -1,0 +1,80 @@
+import { Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import BusinessPlanNotice from '@/components/BusinessPlanNotice'
+import ServerNotice from '@/components/ServerNotice'
+
+# 导入 & 导出
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+<BusinessPlanNotice />
+
+<ServerNotice />
+
+我们通过服务端接口提供导入导出 Excel 文件的能力，安装此插件，能在 Univer 中快速接入导入导出能力。
+
+目前仅支持 `.xlsx` 格式。
+
+## 安装
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs-pro/sheets-exchange-client
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs-pro/sheets-exchange-client
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+
+## 引入
+
+```typescript
+import '@univerjs-pro/sheets-exchange-client/lib/index.css';
+
+import { UniverSheetsExchangeClientPlugin } from '@univerjs-pro/sheets-exchange-client';
+```
+
+## 国际化
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core';
+import SheetsExchangeClientZhCN from '@univerjs-pro/sheets-exchange-client/locale/zh-CN';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: Tools.deepMerge(
+      SheetsExchangeClientZhCN
+    ),
+  },
+});
+```
+
+## 注册
+
+```typescript
+univer.registerPlugin(UniverSheetsExchangeClientPlugin);
+```
+
+## 配置
+
+如果导入导出的接口没有变动，可以不用配置，如果有变动，可以通过以下方式配置接口地址：
+
+```typescript
+import { IConfigService } from '@univerjs/core'
+import { EXCHANGE_UPLOAD_FILE_SERVER_URL_KEY, EXCHANGE_IMPORT_SERVER_URL_KEY, EXCHANGE_EXPORT_SERVER_URL_KEY, EXCHANGE_GET_TASK_SERVER_URL_KEY, EXCHANGE_SIGN_URL_SERVER_URL_KEY } from '@univerjs-pro/sheets-exchange-client';
+
+const injector = univer.__getInjector();
+const configService = injector.get(IConfigService);
+configService.setConfig(EXCHANGE_UPLOAD_FILE_SERVER_URL_KEY, `http://localhost:3010/universer-api/stream/file/upload`);
+configService.setConfig(EXCHANGE_IMPORT_SERVER_URL_KEY, `http://localhost:3010/universer-api/exchange/{type}/import`);
+configService.setConfig(EXCHANGE_EXPORT_SERVER_URL_KEY, `http://localhost:3010/universer-api/exchange/{type}/export`);
+configService.setConfig(EXCHANGE_GET_TASK_SERVER_URL_KEY, `http://localhost:3010/universer-api/exchange/task/{taskID}`);
+configService.setConfig(EXCHANGE_SIGN_URL_SERVER_URL_KEY, `http://localhost:3010/universer-api/file/{fileID}/sign-url`);
+```

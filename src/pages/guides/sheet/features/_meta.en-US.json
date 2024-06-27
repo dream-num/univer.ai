@@ -11,6 +11,10 @@
   "conditional-formatting": "Conditional Formatting",
   "permission": "Permission",
   "thread-comment": "Thread Comment",
+  "print": "Print",
+  "import-export": "Import & Export",
+  "collaboration": "Collaborative Editing",
+  "live-share": "Live Share",
   "uniscript": "Uniscript",
   "zen-editor": "Zen Editor"
 }

@@ -1,0 +1,77 @@
+import { Callout } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# Internationalization
+
+<BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC, UniverTypes.SLIDE]} value={UniverTypes.DOC} />
+
+## Using Preset Locales
+
+From version 0.1.13, Univer no longer includes any locales, all locales are provided by plugins. If you find it too cumbersome to manually import the locales required by the plugin, we also provide a build tool plugin that automatically imports the locales required by the plugin. Please refer to [Using Univer Plugins](/guides/sheet/advanced/univer-plugins) for more information.
+
+If you need to manually add locales, you can refer to the following example, import the corresponding locale as needed and assemble it into an object to pass it to the `Univer` instance:
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core';
+import DesignEnUS from '@univerjs/design/locale/en-US';
+import DocsUIEnUS from '@univerjs/docs-ui/locale/en-US';
+import UIEnUS from '@univerjs/ui/locale/en-US';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: Tools.deepMerge(
+      DesignEnUS,
+      DocsUIEnUS,
+      UIEnUS,
+    ),
+  },
+});
+```
+
+Univer currently includes the following preset locales:
+
+- `zh-CN`: Simplified Chinese
+- `en-US`: English
+- `ru-RU`: Russian
+
+You need to pay attention to the fact that since Webpack 4 does not support the `exports` field of package.json, you may need to modify the path to import the locale.
+
+```diff
+- import DesignZhCN from '@univerjs/design/locale/zh-CN';
++ import DesignZhCN from '@univerjs/design/lib/locale/zh-CN.json'
+```
+
+If you are using TypeScript, you also need to confirm whether the `resolveJsonModule` option is configured in tsconfig.json.
+
+```diff
+{
+  "compilerOptions": {
++    "resolveJsonModule": true
+  }
+}
+```
+
+## Using Custom Locales
+
+Univer also supports custom locales, you can assemble the locale object according to your needs and pass it to the `Univer` instance. The preset locales for reference are generally stored in the `<rootDir>/packages/<PLUGIN_NAME>/locale` directory.
+
+```typescript
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: 'es-ES',
+  locales: {
+    'es-ES': {
+      shortcut: {
+        undo: 'Deshacer',
+        redo: 'Rehacer',
+      }
+    },
+  },
+});
+```
+
+## Contributing Locales
+
+Univer OSS is an open source project full of inclusiveness, and we welcome developers from all over the world to add or improve locales for Univer. If you are interested in contributing locales to Univer, please refer to the [Contribution Guide](/guides/doc/contributing).

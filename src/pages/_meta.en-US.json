@@ -17,21 +17,20 @@
       }
     }
   },
-  "pro": {
-    "type": "menu",
-    "title": "🌟 Univer Pro",
-    "items": {
-      "sheet": {
-        "title": "📊 Univer Sheet Pro",
-        "href": "/pro/guides/sheet/introduction"
-      }
-    }
+  "examples": {
+    "type": "page",
+    "title": "Examples",
+    "route": "/examples"
   },
-  "typedoc": {
+  "playground": {
+    "type": "page",
+    "title": "Playground",
+    "route": "/playground"
+  },
+  "api": {
     "type": "page",
     "title": "API Reference",
-    "href": "/typedoc/@univerjs/README",
-    "route": "#"
+    "route": "/typedoc/@univerjs/README"
   },
   "blog": {
     "type": "page",

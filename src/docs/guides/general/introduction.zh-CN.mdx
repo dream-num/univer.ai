@@ -1,0 +1,172 @@
+import FeatureBox from '@/components/FeatureBox'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# Univer 简介
+
+<BadgeGroup values={[UniverTypes.GENERAL]} value={UniverTypes.GENERAL} />
+
+Univer 提供了一个全面的企业级文档与数据协同的解决方案，支持[**电子表格**](/guides/sheet/introduction)、[**文本文档**](/guides/doc/introduction)和[**演示幻灯片**](/guides/slide/introduction)三大核心文档类型。通过灵活的 API 和插件机制，开发者可以在 Univer 的基础上进行个性化功能的定制和扩展，以适应不同用户在不同场景下的特定需求。
+
+export const features = [{
+  title: '🚀 高性能',
+  description: '基于 Canvas 的渲染引擎和公式引擎，支持 Web Worker，保证了高性能的同时，也能够支持大规模的数据处理。'
+}, {
+  title: '🧩 插件化',
+  description: 'Univer 的核心功能和能力都是通过插件的方式提供的，开发者可以自由组合所需功能或扩展自定义插件。'
+}, {
+  title: '🪄 可定制',
+  description: '通过导入自定义主题、图标、组件库等方式，开发者可以定制化 Univer 的外观和交互。'
+}, {
+  title: '🌍 国际化',
+  description: '支持多语言，开发者可以自由切换语言，也可以自定义语言包。'
+}, {
+  title: '📖 开源',
+  description: 'Univer OSS 的核心代码在 Apache-2.0 协议下开源，任何组织和个人都可以免费使用其源代码和 npm 包。'
+}, {
+  title: '🌿 生态',
+  description: '丰富的生态，借助命令行工具、构建工具插件、示例库等等，方便开发者快速上手。'
+}, {
+  title: '💬 社区支持',
+  description: '提供 Discord 社区和 GitHub Discussions，方便开发者交流和寻求帮助。'
+}, {
+  title: '📈 持续更新',
+  description: 'Univer 团队会持续更新和维护 Univer，保证其稳定性和可靠性。'
+}, {
+  title: '💼 商业版',
+  description: '为有特定需求的企业提供商业版，包括但不限于多人协同编辑和协同浏览、数据连接器、协同浏览（Live Share）等功能。'
+}]
+
+## 核心特性
+
+<FeatureBox features={features} />
+
+## 功能
+
+### 🛠 通用功能
+
+#### 编辑操作
+
+- 撤销 / 重做
+- 复制 / 粘贴
+
+#### 浏览
+
+- 基于 Canvas，支持多种文档类型的高性能渲染引擎
+- 滚动、缩放
+
+#### UI
+
+- 可配置的工作区，包括标题栏、工具栏、侧边栏、状态栏、右键菜单等
+- 跨操作系统的快捷键支持
+- 快捷键面板
+
+### 📊 电子表格功能支持
+
+#### 编辑操作
+
+- 新建、删除、移动子表
+- 单元格样式：加粗、斜体、下划线、删除线、字体、字号、字体颜色、背景颜色、边框样式、对齐方式、文字旋转
+- 合并单元格：合并和取消合并单元格，按照不同的方向合并单元格
+- 行列操作：插入、删除与移动行列，修改行高列宽
+- 复制粘贴：仅粘贴值、仅粘贴样式、仅粘贴公式、仅粘贴列宽、仅粘贴边框样式
+- 清除内容：仅清除内容、仅清除样式、清除全部
+- 单元格编辑：单元格编辑器，单元格内富文本
+- 插入和删除单元格
+- 下拉填充
+- 格式刷
+- 评论
+- 插入浮动图片
+- 插入图表
+
+#### 浏览
+
+- 冻结行列
+- 统计栏
+  - 求和、最大值、最小值、平均值、计数
+
+#### 数据与计算
+
+- 公式
+  - Fx 栏（公式编辑器）
+  - 公式高亮
+  - 内置多种公式
+  - 基于 Web Worker 的公式计算（可选）
+- 数字格式
+  - 常规、会计、货币、日期、千分位符
+- 数据验证
+- 条件格式
+- 排序
+- 筛选
+
+#### 自动化
+
+- Uniscript 脚本 (alpha)
+
+#### 其他功能
+
+- 禅编辑模式（可选）
+- 打印
+- 协同编辑
+- Live Share
+- 导入 & 导出
+
+### 📝 文本文档功能支持
+
+#### 编辑操作
+
+- 文本样式：加粗、斜体、下划线、删除线、字体、字号、字体颜色
+- 协同编辑
+
+### 📽️ 演示文稿功能支持
+
+- 编辑幻灯片
+
+## Univer OSS 与商业订阅服务
+
+Univer 开源了大部分核心功能，并提供相应的 npm 包，任何组织和个人都可以免费商用这些功能，我们称之为 Univer OSS（Open Source Software）。
+
+此外，针对企业和组织的高级功能（如协同编辑、实时共享、导入与导出、打印等），我们也提供了相应的 npm 包和后端服务。这些功能是闭源的，但同样可以免费商用。
+
+对于有更高需求的企业，Univer 提供商业订阅服务。商业订阅不仅提供更为开放的功能，还能为有特殊需求的用户提供专业支持。
+
+## 兼容环境
+
+Univer 的编译目标是 Chrome 70，但这并不意味着 Univer 能够完全支持所有浏览器。我们会尽力确保 Univer 在以下浏览器中能够正常运行：
+
+| [<img className="mx-auto" src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)IE / Edge | [<img className="mx-auto" src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)Firefox | [<img className="mx-auto" src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)Chrome | [<img className="mx-auto" src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)Safari | [<img className="mx-auto" src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/electron/electron_48x48.png" alt="Electron" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)Electron |
+| --------- | --------- | --------- | --------- | --------- |
+| Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions
+
+如果遇到无法兼容的情况，请先借助对应的 polyfill 来解决，如果仍然无法解决，请[提交 issue](https://github.com/dream-num/univer/issues/new/choose)。
+
+## TypeScript
+
+Univer 是使用 TypeScript 编写的，因此我们提供了完整的类型定义文件，以便开发者在使用 Univer 时能够获得更好的开发体验。
+
+## 加入社区
+
+如果你已经迫不及待地想要体验 Univer，请参考[快速开始](/guides/sheet/getting-started/quickstart)。
+
+或者加入我们的开发者社区，和我们一起讨论：
+
+- [Discord 社区](https://discord.gg/XPGnMBmpd6)
+- [GitHub Discussions](https://github.com/dream-num/univer/discussions)
+- 扫描下方二维码，加入 Univer 中文社群
+
+![Univer 中文社群](./introduction/qrcode.png)
+
+你也可以在以下平台关注我们的动态：
+
+- [官网](https://univer.ai)
+- [GitHub](https://github.com/dream-num/univer)
+- [知乎专栏](https://www.zhihu.com/org/meng-shu-ke-ji)
+
+## 如何贡献
+
+我们欢迎任何形式的贡献，包括但不限于[提交 issue](https://github.com/dream-num/univer/issues/new/choose)、提交 PR、参与讨论等。请在参与 Univer 的开发之前阅读[贡献指南](https://github.com/dream-num/univer/blob/dev/CONTRIBUTING.md)。
+
+## 开源协议
+
+[Univer OSS 的核心代码](https://github.com/dream-num/univer)在 Apache-2.0 协议下开源，任何组织和个人都可以免费使用其源代码和 npm 包。
+
+[本文档](https://github.com/dream-num/univer.ai)在 CC-BY-NC-SA 4.0 协议下开源，任何组织和个人都可以免费使用，但不允许用于商业目的。

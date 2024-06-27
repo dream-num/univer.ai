@@ -1,6 +1,7 @@
 {
+  "quickstart": "Quick Start",
   "installation": "Installation & Usage",
   "i18n": "Internationalization",
-  "cell-data": "Configure Cell Data",
-  "umd": "Using UMD"
+  "univer-plugins": "Simplify Import",
+  "cell-data": "Configure Cell Data"
 }

@@ -1,0 +1,38 @@
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# Troubleshooting
+
+<BadgeGroup values={[UniverTypes.GENERAL]} value={UniverTypes.GENERAL} />
+
+## Installation Related
+
+### Why am I getting an error when importing Univer in my webpack 4 project?
+
+- Webpack 4 may not recognize the `exports` field in `packages.json` correctly. Please refer to [webpack/webpack#9509](https://github.com/webpack/webpack/issues/9509) for more details. You need to locate the correct path and import it manually. Some third-party dependencies may require setting up aliases using `resolve.alias` in the configuration.
+- In some webpack 4 scaffolds, the default babel configuration may not handle dependencies under node_modules. You may need to manually modify the webpack rules and add `@univerjs/*` to the `include` configuration of babel-loader.
+
+We have provided an [online demo](/playground?title=Webpack%204) based on webpack 4 that might help you resolve this issue.
+
+### Why do some plugins report errors when registering while using `<script>` to introduce the Univer UMD package?
+
+- Please make sure you have introduced the prerequisite dependencies used by the plugins in order.
+- You can find the prerequisite dependencies required for the plugin to run in the `peerDependencies` field of the plugin's documentation page or the `packages.json` of the plugin source code.
+
+### Why do I get an error outputting that `Could not resolve dependencies` when I use npm or yarn to install?
+
+This may be because the version of the node package manager you are using is too low. yarn@1 and npm@6 will not automatically install peerDependencies in packages.json. For more details, see  [package-json#peerdependencies](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#peerdependencies).
+
+- You can manually install the missing peer dependencies.
+- For npm users, you can upgrade your node version to 16 or above, or upgrade your npm version to 7 or above. Be aware that the upgrade behavior may affect your existing projects.
+
+## Usage Related
+
+### Why can't I use the right-click context menu paste in Firefox?
+
+Firefox does not yet support `clipboard.readText()`, as mentioned in the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/readText). In this case, Univer can only retrieve clipboard content from native paste events, which means it can only support paste through keyboard shortcuts.
+
+### Why can't I copy and paste?
+
+In browsers such as Chrome and Safari that support `clipboard.readText()`, Univer will attempt to directly access the clipboard content. Please make sure that the user performing the operation has granted Univer browser clipboard permissions.
+
+![Authorize Clipboard](./troubleshooting/clipboard-en.png)

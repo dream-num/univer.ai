@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Head from 'next/head'
-import { GitHubButton } from '../../official-site/components/GitHub/GitHub'
+import { GitHubButton } from '@/components/GitHub'
 
 export default function Page() {
   const examples = [{
@@ -31,6 +31,26 @@ export default function Page() {
       desc: 'Data visualization capabilities with popular chart library.',
       link: '/examples/sheets-vchart',
       isCommunity: true,
+    }, {
+      title: 'Sheets Collaboration',
+      preview: '/images/univer-pro/examples/sheets-collaboration.gif',
+      desc: 'Create and share spreadsheets with our Sheets feature.',
+      link: '/pro/examples/sheets-collaboration',
+    }, {
+      title: 'Sheets Collaboration Playground',
+      preview: '/images/univer-pro/examples/sheets-collaboration-playground.gif',
+      desc: 'An interesting playground to demonstrate the process of Sheets Collaboration.',
+      link: '/pro/examples/sheets-collaboration-playground',
+    }, {
+      title: 'Sheets Import/Export',
+      preview: '/images/univer-pro/examples/sheets-exchange.gif',
+      desc: 'Powerful import and export service, supports xlsx files.',
+      link: '/pro/examples/sheets-exchange',
+    }, {
+      title: 'Sheets Print',
+      preview: '/images/univer-pro/examples/sheets-print.gif',
+      desc: 'Experience high-definition printing capabilities.',
+      link: '/pro/examples/sheets-print',
     }],
   }, {
     title: 'Univer Doc',
@@ -54,6 +74,16 @@ export default function Page() {
       preview: '/images/univer/examples/docs-big-data.gif',
       desc: 'Large data volume Univer Docs, a document containing 1,000,000 characters.',
       link: '/examples/docs-big-data',
+    }, {
+      title: 'Docs Collaboration',
+      preview: '/images/univer-pro/examples/docs-collaboration.gif',
+      desc: 'Create and share documents with our Docs feature.',
+      link: '/pro/examples/docs-collaboration',
+    }, {
+      title: 'Docs Collaboration Playground',
+      preview: '/images/univer-pro/examples/docs-collaboration-playground.gif',
+      desc: 'An interesting playground to demonstrate the process of Docs Collaboration.',
+      link: '/pro/examples/docs-collaboration-playground',
     }],
   }, {
     title: 'Univer Slide',

@@ -1,5 +1,5 @@
 {
   "facade": "使用 Facade API",
-  "general": "通用 API",
-  "sheet": "Univer Sheet API"
+  "general-api": "通用 API",
+  "sheet-api": "Univer Sheet API"
 }

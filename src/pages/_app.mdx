@@ -1,10 +1,9 @@
 import { Theme } from '@radix-ui/themes'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import Navbar from '@/official-site/components/Navbar'
-import Footer from '@/official-site/components/Footer'
-import { useProduct } from '@/official-site/hooks/useProducts'
-import { poppins } from '@/official-site/utils/fonts'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
+import { poppins } from '@/lib/fonts'
 import './globals.css'
 import './rc-color-picker.css'
 import './rc-slider.css'
@@ -15,7 +14,6 @@ export default function App(props) {
 
   // Inject Auth License services
   const { pathname } = useRouter()
-  const product = useProduct()
 
   useEffect(() => {
     window.dataLayer = window.dataLayer || []
@@ -41,6 +39,17 @@ export default function App(props) {
     if (!isDocs) {
       document.documentElement.classList.remove('dark')
       document.documentElement.style.colorScheme = null
+    } else {
+      if (pathname.includes('/sheet/')) {
+        document.documentElement.style.setProperty('--nextra-primary-hue', '128deg')
+        document.documentElement.style.setProperty('--nextra-primary-saturation', '43%')
+      } else if (pathname.includes('/doc/')) {
+        document.documentElement.style.setProperty('--nextra-primary-hue', '214deg')
+        document.documentElement.style.setProperty('--nextra-primary-saturation', '80%')
+      } else if (pathname.includes('/slide/')) {
+        document.documentElement.style.setProperty('--nextra-primary-hue', '0deg')
+        document.documentElement.style.setProperty('--nextra-primary-saturation', '78%')
+      }
     }
   }, [pathname])
 
@@ -48,19 +57,19 @@ export default function App(props) {
 
   return (
     <>
-      {isDocs
-        ? (
-          <Component {...pageProps} />
-          )
-        : (
-          <Theme>
+      <Theme>
+        {isDocs
+          ? (
+            <Component {...pageProps} />
+            )
+          : (
             <div className={poppins.className}>
-              <Navbar {...product} />
+              <Navbar />
               <Component {...pageProps} />
               {!isPlayground && <Footer />}
             </div>
-          </Theme>
-          )}
+            )}
+      </Theme>
 
       {/* Global site tag (gtag.js) - Google Analytics */}
       {isProd && <script async src="https://www.googletagmanager.com/gtag/js?id=G-RCVZZ25ZP4"></script>}
