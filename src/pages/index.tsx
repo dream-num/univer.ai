@@ -297,7 +297,6 @@ export default function Page() {
             <PricingTable />
           </div>
         </section>
-
       </main>
     </>
   )

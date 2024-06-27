@@ -210,7 +210,7 @@ export default function Page() {
                       {item.desc}
                     </p>
 
-                    <Link className="text-sm text-[#0019FE]" href={item.link}>
+                    <Link className="text-sm text-[#0019FE]" href={item.link} locale={false}>
                       View Example →
                     </Link>
                   </div>

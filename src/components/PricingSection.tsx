@@ -125,6 +125,7 @@ export default function PricingSection(props: IProps) {
               bg-[linear-gradient(121deg,#0048FF_18.89%,#0C81ED_39.58%,#029DCE_59.87%,#00BBB0_74.37%,#00C5A8_81.94%)]
               text-center font-medium leading-10 text-white
             `}
+            locale={false}
             href="/pro/license"
           >
             {t('business.btn')}
