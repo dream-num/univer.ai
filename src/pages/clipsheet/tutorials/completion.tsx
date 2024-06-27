@@ -8,6 +8,7 @@ import enUS from '@/official-site/clipsheet/tutorials/completion/completion.en-U
 import zhCN from '@/official-site/clipsheet/tutorials/completion/completion.en-US.mdx'
 import { VideoPlayer } from '@/official-site/clipsheet/components/VideoPlayer'
 import { ContactUs } from '@/official-site/clipsheet/components/ContactUs'
+import { IssueType } from '@/official-site/config/issueTypes'
 
 export default function Page() {
   const { locale } = useRouter()
@@ -174,7 +175,7 @@ export default function Page() {
         >
           <Content />
         </div>
-        <ContactUs />
+        <ContactUs type={IssueType['ai-completion']} />
         <div className={`
           mb-[48px]
 

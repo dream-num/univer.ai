@@ -327,7 +327,7 @@ export default function Page() {
           >
             {faq.map((item, index) => (
               <div
-                key={`title${index}`}
+                key={item.title}
                 className={`
                   rounded-2xl bg-white p-6 shadow-[0px_4px_12px_0px_rgba(128,152,165,0.16)]
                 `}
