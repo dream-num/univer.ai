@@ -30,7 +30,7 @@ export default function Roadmap(props: IProps) {
         container: chartRef.current!,
         autoFit: true,
         theme: resolvedTheme === 'dark' ? 'dark' : 'light',
-        height: data.length * 64 + 128,
+        height: data.length * 42 + 128,
       })
 
       chart.coordinate({ transform: [{ type: 'transpose' }] })
@@ -44,7 +44,7 @@ export default function Roadmap(props: IProps) {
         })))
         .encode('x', 'name')
         .encode('y', ['end', 'start'])
-        .encode('size', 40)
+        .encode('size', 32)
         .encode('color', (d: typeof data[number]) => d.name)
         .axis('x', false)
         .axis('y', {
@@ -59,7 +59,7 @@ export default function Roadmap(props: IProps) {
           backgroundRadius: 20,
         })
         .style('radius', 20)
-        .style('height', 26)
+        .style('height', 18)
         .tooltip({
           items: [{
             field: 'start',

@@ -210,7 +210,7 @@ export default function Page() {
                       {item.desc}
                     </p>
 
-                    <Link className="text-sm text-[#0019FE]" href={item.link} locale={false}>
+                    <Link className="text-sm text-[#0019FE]" href={item.link} locale={item.link.startsWith('/pro') ? false : undefined}>
                       View Example →
                     </Link>
                   </div>
