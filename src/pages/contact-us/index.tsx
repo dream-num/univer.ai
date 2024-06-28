@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import Select, { SelectItem } from '@/official-site/Select'
-import DiscordSvg from '@/official-site/clipsheet/components/icons/DiscordSvg'
-import GithubSvg from '@/official-site/clipsheet/components/icons/GithubSvg'
-import { useToast } from '@/official-site/components/Toast'
+import { DiscordSingle40, GithubSingle40, Loading } from '@univerjs/icons'
+import Select, { SelectItem } from '@/components/Select'
+import { useToast } from '@/components/Toast'
 import { useLoadingState } from '@/official-site/hooks/useLoadingState'
 import { IssueType, issueTypeOptions } from '@/official-site/config/issueTypes'
 
@@ -31,7 +30,6 @@ export default function ContactUs() {
   } as Record<keyof IFormData, string>)
 
   useEffect(() => {
-    // 检测 URL 哈希部分的变化
     const handleHashChange = () => {
       const hash = window.location.hash
 
@@ -45,13 +43,10 @@ export default function ContactUs() {
       })
     }
 
-    // 初次加载时检查哈希部分
     handleHashChange()
 
-    // 监听哈希变化事件
     window.addEventListener('hashchange', handleHashChange)
 
-    // 清理事件监听器
     return () => {
       window.removeEventListener('hashchange', handleHashChange)
     }
@@ -80,6 +75,8 @@ export default function ContactUs() {
   }
 
   const submit = async () => {
+    if (loading) return
+
     if (!form.content) {
       setError('content', 'Please fill in the content.')
       return
@@ -181,18 +178,24 @@ export default function ContactUs() {
                 href="https://discord.gg/FaHvP4DwyX"
                 className="relative h-6 w-6 cursor-pointer"
               >
-                <DiscordSvg />
+                <DiscordSingle40 className="h-[24px] w-[24px] text-[#5765f2]" />
               </Link>
               <Link
                 href="https://github.com/dream-num/univer/discussions"
                 className="relative h-6 w-6 cursor-pointer"
               >
-                <GithubSvg />
+                <GithubSingle40 className="h-[24px] w-[24px] text-[[#0f172a]" />
               </Link>
             </div>
           </div>
         </div>
-        <form className="flex w-full flex-col items-start justify-start gap-[16px]">
+        <form
+          className="flex w-full flex-col items-start justify-start gap-[16px]"
+          onSubmit={(e) => {
+            e.preventDefault()
+            submit()
+          }}
+        >
           <div className={`
             flex w-full flex-col items-start justify-start gap-[16px] rounded-[16px] bg-white
             px-[24px] pb-[24px] pt-[20px] shadow shadow-[0px_4px_12px_0px_rgba(128,152,165,0.16)]
@@ -223,7 +226,6 @@ export default function ContactUs() {
               `}
               >
                 <textarea
-                  defaultValue={form.content}
                   value={form.content}
                   maxLength={1000}
                   className={`
@@ -255,7 +257,6 @@ export default function ContactUs() {
               `}
               >
                 <input
-                  defaultValue={form.email}
                   value={form.email}
                   maxLength={100}
                   type="email"
@@ -275,9 +276,6 @@ export default function ContactUs() {
           </div>
           <button
             type="submit"
-            onClick={submit}
-            disabled={loading}
-            data-disabled={loading ? 'true' : undefined}
             className={`
               inline-flex items-center justify-center gap-2 self-stretch rounded-[32px]
               bg-[linear-gradient(121deg,#0048FF_18.89%,#0C81ED_39.58%,#029DCE_59.87%,#00BBB0_74.37%,#00C5A8_81.94%)]
@@ -291,12 +289,7 @@ export default function ContactUs() {
               hover:bg-[#0148ff] hover:bg-none
             `}
           >
-            {loading && (
-              <svg className="-ml-1 mr-3 h-5 w-5 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-            )}
+            {loading && (<Loading className="h-[16px] w-[16px] animate-spin" />)}
             <span className="text-base font-semibold capitalize leading-10 text-slate-50">submit</span>
           </button>
         </form>

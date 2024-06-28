@@ -1,20 +1,20 @@
 import Head from 'next/head'
-import { IncreaseSingle } from '@univerjs/icons'
+import { GithubSingle40, IncreaseSingle, NextSingle } from '@univerjs/icons'
 import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { GitHubButton } from '../../official-site/components/GitHubPlus/GitHub'
 import { clsx } from '@/lib/utils'
 import Hero from '@/components/Hero'
 import Title from '@/components/Title'
 import { useTranslation } from '@/lib/i18n'
-import Switch from '@/official-site/components/Switch'
+import Switch from '@/components/Switch'
 
 import google from '@/official-site/images/google.svg'
 import chatgpt from '@/official-site/images/chatgpt.svg'
 import type { IVideo } from '@/official-site/clipsheet/components/VideoList'
 import { VideoList } from '@/official-site/clipsheet/components/VideoList'
 import { VideoPlayer } from '@/official-site/clipsheet/components/VideoPlayer'
+import ShineBorder from '@/components/ShineBorder'
 
 export default function Page() {
   const [collapsedIds, setCollapsedIds] = useState<number[]>([])
@@ -56,7 +56,6 @@ export default function Page() {
   const [videoListFlag, setVideosFlag] = useState<'left' | 'right'>(intailValue)
 
   useEffect(() => {
-    // 检测 URL 哈希部分的变化
     const handleHashChange = () => {
       const hash = window.location.hash
       if (hash === '#gpt') {
@@ -65,20 +64,17 @@ export default function Page() {
       }
     }
 
-    // 初次加载时检查哈希部分
     handleHashChange()
 
-    // 监听哈希变化事件
     window.addEventListener('hashchange', handleHashChange)
 
-    // 清理事件监听器
     return () => {
       window.removeEventListener('hashchange', handleHashChange)
     }
   }, [asPath])
 
-  const previewVidio = heroVideoFlag === 'left' ? 'https://www.youtube.com/embed/MxDMCKNx8P4?enablejsapi=1&si=aBiGTAGDNBWabFle' : 'https://www.youtube-nocookie.com/embed/n0i3rvEmfVg?si=htcqrq6OWRjMt1yl'
-  const defaultVideo = videoListFlag === 'left' ? 'https://www.youtube.com/embed/MxDMCKNx8P4?enablejsapi=1&si=aBiGTAGDNBWabFle' : 'https://www.youtube-nocookie.com/embed/n0i3rvEmfVg?si=htcqrq6OWRjMt1yl'
+  const previewVidio = heroVideoFlag === 'left' ? 'https://www.youtube.com/embed/MxDMCKNx8P4?enablejsapi=1&si=aBiGTAGDNBWabFle' : 'https://www.youtube-nocookie.com/embed/n0i3rvEmfVg?enablejsapi=1&si=htcqrq6OWRjMt1yl'
+  const defaultVideo = videoListFlag === 'left' ? 'https://www.youtube.com/embed/MxDMCKNx8P4?enablejsapi=1&si=aBiGTAGDNBWabFle' : 'https://www.youtube-nocookie.com/embed/n0i3rvEmfVg?enablejsapi=1&si=htcqrq6OWRjMt1yl'
 
   const videos: IVideo[] = [{
     videoSrc: defaultVideo,
@@ -164,8 +160,20 @@ export default function Page() {
 
           </div>
           <div className="flex justify-center gap-6">
-            {/* Call of actions: GitHub link. Links to Documentation. OnlineExamples. */}
-            <GitHubButton />
+            <Link href="https://github.com/dream-num/univer" target="_blank" rel="noopener noreferrer">
+              <ShineBorder
+                className="mx-auto mb-7 px-4 py-1.5"
+                color={['#0048FF', '#0C81ED', '#029DCE', '#00BBB0', '#00C5A8']}
+                borderRadius={999}
+                animate
+              >
+                <span className="inline-flex items-center gap-1 text-base font-medium">
+                  Powered by Univer OSS
+                  <NextSingle className="h-5 w-5" />
+                  <GithubSingle40 className="h-6 w-6" />
+                </span>
+              </ShineBorder>
+            </Link>
           </div>
 
           <div className={`
