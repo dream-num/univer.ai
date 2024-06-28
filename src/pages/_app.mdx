@@ -49,6 +49,9 @@ export default function App(props) {
       } else if (pathname.includes('/slide/')) {
         document.documentElement.style.setProperty('--nextra-primary-hue', '0deg')
         document.documentElement.style.setProperty('--nextra-primary-saturation', '78%')
+      } else {
+        document.documentElement.style.setProperty('--nextra-primary-hue', '180deg')
+        document.documentElement.style.setProperty('--nextra-primary-saturation', '50%')
       }
     }
   }, [pathname])
