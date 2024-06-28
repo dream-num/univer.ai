@@ -1,5 +1,5 @@
 const locales = {
-  'univer.description': 'The ultimate open source office suite.',
+  'univer.description': 'The ultimate office suite.',
   'univer.guides.title': 'Guides',
   'univer.guides.desc': 'Get started with Univer.',
   'univer.examples.title': 'Examples',

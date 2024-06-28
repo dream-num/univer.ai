@@ -1,7 +1,7 @@
 import type enUS from './en-US'
 
 const locales: typeof enUS = {
-  'univer.description': '你的最佳开源办公套件',
+  'univer.description': '你的最佳办公套件',
   'univer.guides.title': '指南',
   'univer.guides.desc': '开始使用 Univer',
   'univer.examples.title': '在线示例',
