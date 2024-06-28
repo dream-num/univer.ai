@@ -1,3 +1,5 @@
+'use client'
+
 import type { Chart } from '@antv/g2'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
@@ -20,28 +22,20 @@ export default function Roadmap(props: IProps) {
   const { resolvedTheme } = useTheme()
 
   const chartRef = useRef(null)
-  const [chart, setChart] = useState<Chart | null>(null)
+  const [chartInstance, setChartInstance] = useState<Chart | null>(null)
 
   useEffect(() => {
-    if (chart) {
-      chart.destroy()
-      setChart(null)
-    }
-
     import('@antv/g2').then(({ Chart }) => {
       const chart = new Chart({
         container: chartRef.current!,
         autoFit: true,
-        theme: resolvedTheme,
+        theme: resolvedTheme === 'dark' ? 'dark' : 'light',
         height: data.length * 64 + 128,
       })
-
-      setChart(chart)
 
       chart.coordinate({ transform: [{ type: 'transpose' }] })
 
       chart
-        .title('Roadmap')
         .interval()
         .data(data.map(item => ({
           name: item.name,
@@ -77,10 +71,19 @@ export default function Roadmap(props: IProps) {
         })
 
       chart.render()
+
+      setChartInstance(chart)
     })
+  }, [])
+
+  useEffect(() => {
+    if (chartInstance) {
+      chartInstance.theme({ type: resolvedTheme === 'dark' ? 'dark' : 'light' })
+      chartInstance.render()
+    }
   }, [resolvedTheme])
 
   return (
-    <div ref={chartRef} />
+    <div className="mt-6" ref={chartRef} />
   )
 }
