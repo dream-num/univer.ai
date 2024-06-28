@@ -146,7 +146,7 @@ const demo: { title: string, items: IEmbedProps[] }[] = [
         },
       },
       {
-        title: 'sheet permission',
+        title: 'Permission Control',
         type: 'StackBlitz',
         repoPath: 'awesome-univer/sheets-permission-demo',
         openOptions: {
