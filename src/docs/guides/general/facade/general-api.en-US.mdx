@@ -130,12 +130,12 @@ Please refer to the following documentation to extend the Univer UI :
 - [Extending Canvas](/guides/customization/canvas/)
 - [Custom Theme](/guides/customization/theme)
 
-## Websocket
+## WebSocket
 
-Facade provides a convenient API `createSocket` for creating a Websocket, simply by passing in a URL. You can then listen to open, message, close, and error events, and actively send messages with the send method and actively close with the close method.
+Facade provides a convenient API `createSocket` for creating a WebSocket, simply by passing in a URL. You can then listen to open, message, close, and error events, and actively send messages with the send method and actively close with the close method.
 
 ```typescript
-// Replace the URL with the address of your own Websocket service
+// Replace the URL with the address of your own WebSocket service
 const ws = univerAPI.createSocket('ws://47.100.177.253:8449/ws')
 
 ws.open$.subscribe(() => {

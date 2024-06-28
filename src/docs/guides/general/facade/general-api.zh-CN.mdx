@@ -130,13 +130,13 @@ univerAPI.executeCommand('univer.command.redo')
 - [扩展 Canvas](/guides/customization/canvas/)
 - [自定义主题](/guides/customization/theme/)
 
-## Websocket
+## WebSocket
 
-Facade 提供了一个便捷的 API `createSocket` 来创建 Websocket，传入一个 URL 即可。
+Facade 提供了一个便捷的 API `createSocket` 来创建 WebSocket，传入一个 URL 即可。
 然后可以监听 open、message、close、error 事件，以及主动发送消息 send 方法和主动关闭 close 方法。
 
 ```typescript
-// URL 换成你自己 Websocket 服务的地址
+// URL 换成你自己 WebSocket 服务的地址
 const ws = univerAPI.createSocket("ws://47.100.177.253:8449/ws");
 
 ws.open$.subscribe(() => {
