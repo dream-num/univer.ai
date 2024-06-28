@@ -44,6 +44,9 @@ importers:
       '@stackblitz/sdk':
         specifier: ^1.10.0
         version: 1.10.0
+      '@types/youtube-player':
+        specifier: ^5.5.11
+        version: 5.5.11
       '@univerjs-pro/ai-auto-complete':
         specifier: 0.1.16
         version: 0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/design@0.1.16(clsx@2.1.1)(dayjs@1.11.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/rpc@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/engine-render@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/network@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/sheets-hyper-link@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/engine-formula@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/rpc@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/sheets@0.1.16(@grpc/grpc-js@1.10.9)(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/engine-formula@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/rpc@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/rpc@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/sheets-ui@0.1.16(@grpc/grpc-js@1.10.9)(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/design@0.1.16(clsx@2.1.1)(dayjs@1.11.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/docs-ui@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/design@0.1.16(clsx@2.1.1)(dayjs@1.11.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/docs@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/engine-render@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/engine-render@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/ui@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/design@0.1.16(clsx@2.1.1)(dayjs@1.11.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/rpc@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/engine-render@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.2))(@wendellhu/redi@0.15.5)(react@18.3.1)(rxjs@7.8.1))(@univerjs/docs@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/engine-render@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/engine-formula@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/rpc@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/engine-numfmt@0.1.16)(@univerjs/engine-render@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/sheets@0.1.16(@grpc/grpc-js@1.10.9)(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/engine-formula@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/rpc@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/rpc@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/ui@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/design@0.1.16(clsx@2.1.1)(dayjs@1.11.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/rpc@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/engine-render@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.2))(@wendellhu/redi@0.15.5)(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1))(@univerjs/sheets@0.1.16(@grpc/grpc-js@1.10.9)(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/engine-formula@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/rpc@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/rpc@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/ui@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/design@0.1.16(clsx@2.1.1)(dayjs@1.11.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/rpc@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@univerjs/engine-render@0.1.16(@univerjs/core@0.1.16(@grpc/grpc-js@1.10.9)(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(rxjs@7.8.1))(@wendellhu/redi@0.15.5)(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.2))(@wendellhu/redi@0.15.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)
@@ -236,6 +239,9 @@ importers:
       tailwind-merge:
         specifier: ^2.3.0
         version: 2.3.0
+      youtube-player:
+        specifier: ^5.6.0
+        version: 5.6.0
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^2.21.1
@@ -1814,6 +1820,9 @@ packages:
 
   '@types/unist@3.0.2':
     resolution: {integrity: sha512-dqId9J8K/vGi5Zr7oo212BGii5m3q5Hxlkwy3WpYuKPklmBEvsbMYYyLxAQpSffdLl/gdW0XUpKWFvYmyoWCoQ==}
+
+  '@types/youtube-player@5.5.11':
+    resolution: {integrity: sha512-pM41CDBqJqBmTeJWnF7NOGz82IQoYOhqzMYXv5vKCXBqGiYSLldxMtpCk6KAEtADTy49S45AriYaCaZyeUX38Q==}
 
   '@typescript-eslint/eslint-plugin@7.13.1':
     resolution: {integrity: sha512-kZqi+WZQaZfPKnsflLJQCz6Ze9FFSMfXrrIOcyargekQxG37ES7DJNpJUE9Q/X5n3yTIP/WPutVNzgknQ7biLg==}
@@ -4367,6 +4376,9 @@ packages:
     resolution: {integrity: sha512-sy0dq+JPS+RAFiFk2K8Nbub7khNmeeoFALNUJ4Wzk34wZKAzaOhEXqGWs4RA5aui0RaM6Hgn7VEKhCj0mlKNLA==}
     engines: {node: '>=18.0.0'}
 
+  load-script@1.0.0:
+    resolution: {integrity: sha512-kPEjMFtZvwL9TaZo0uZ2ml+Ye9HUMmPwbYRJ324qF9tqMejwykJ5ggTyvzmrbBeapCAbk98BSbTeovHEEP1uCA==}
+
   loader-runner@4.3.0:
     resolution: {integrity: sha512-3R/1M+yS3j5ou80Me59j7F9IMs4PXs3VqRrm0TU3AbKPxlmpoY1TNscJV/oGJXo8qCatFGTfDbY6W6ipGOYXfg==}
     engines: {node: '>=6.11.5'}
@@ -5672,6 +5684,9 @@ packages:
   simplify-geometry@0.0.2:
     resolution: {integrity: sha512-ZEyrplkqgCqDlL7V8GbbYgTLlcnNF+MWWUdy8s8ZeJru50bnI71rDew/I+HG36QS2mPOYAq1ZjwNXxHJ8XOVBw==}
 
+  sister@3.0.2:
+    resolution: {integrity: sha512-p19rtTs+NksBRKW9qn0UhZ8/TUI9BPw9lmtHny+Y3TinWlOa9jWh9xB0AtPSdmOy49NJJJSSe0Ey4C7h0TrcYA==}
+
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
 
@@ -6354,6 +6369,9 @@ packages:
   yocto-queue@1.0.0:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
+
+  youtube-player@5.6.0:
+    resolution: {integrity: sha512-x95fBbxV7eZ1ZsFtMLMcSGX0Jb/GPPj69RsooyEDVa9bzvvNZ4d5VjnBVBYoY85008VefkLvtaV+b+l38R/LMQ==}
 
   zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
@@ -8094,6 +8112,8 @@ snapshots:
   '@types/unist@2.0.10': {}
 
   '@types/unist@3.0.2': {}
+
+  '@types/youtube-player@5.5.11': {}
 
   '@typescript-eslint/eslint-plugin@7.13.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.5.2))(eslint@9.5.0)(typescript@5.5.2)':
     dependencies:
@@ -11162,6 +11182,8 @@ snapshots:
       rfdc: 1.4.1
       wrap-ansi: 9.0.0
 
+  load-script@1.0.0: {}
+
   loader-runner@4.3.0: {}
 
   loader-utils@2.0.4:
@@ -12953,6 +12975,8 @@ snapshots:
 
   simplify-geometry@0.0.2: {}
 
+  sister@3.0.2: {}
+
   sisteransi@1.0.5: {}
 
   slash@3.0.0: {}
@@ -13722,6 +13746,14 @@ snapshots:
   yocto-queue@0.1.0: {}
 
   yocto-queue@1.0.0: {}
+
+  youtube-player@5.6.0:
+    dependencies:
+      debug: 4.3.5
+      load-script: 1.0.0
+      sister: 3.0.2
+    transitivePeerDependencies:
+      - supports-color
 
   zod@3.23.8: {}
 
