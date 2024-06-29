@@ -21,7 +21,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 ### 为什么我使用 npm 或者 yarn 安装，运行时报错找不到依赖？
 
-这可能是因为你使用的 node 包管理工具版本较低导致， yarn@1 和 npm@6 不会自动安装 `packages.json` 中的 `peerDependencies`，详见 [package-json#peerdependencies](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#peerdependencies)。
+这可能是因为你使用的 node 包管理工具版本较低导致， yarn 和 npm@6 不会自动安装 `packages.json` 中的 `peerDependencies`，详见 [package-json#peerdependencies](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#peerdependencies)。
 
 - 你可以自行安装缺失的附属依赖项。
 - 对于 npm 用户，可将 node 版本更新至 16 以上，亦或者将 npm 版本升级至 7 及以上，并留意升级行为可能对你已有项目的影响。
@@ -43,3 +43,23 @@ Firefox 尚不支持 `clipboard.readText()`，详见 [MDN](https://developer.moz
 在 Chrome 和 Safari 等支持 `clipboard.readText()` 的浏览器中，Univer 会直接尝试获取剪贴板内容，请确保操作的用户授予了 Univer 浏览器的剪贴板权限。
 
 ![Authorize Clipboard](./troubleshooting/clipboard.png)
+
+## 故障排查
+
+### Error: Locale not initialized
+
+```
+Error: Locale not initialized
+```
+
+出现该错误的原因是因为你在使用 Univer 时没有初始化语言环境。你需要通过以下方式来初始化语言环境：
+
+```typescript {3-6}
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+      [LocaleType.ZH_CN]: zhCN,
+  },
+});
+```
