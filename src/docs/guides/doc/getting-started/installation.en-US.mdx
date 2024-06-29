@@ -21,7 +21,7 @@ The following example will guide you through which plugins are necessary and how
 <Callout>
   - If you are using npm, make sure you are using npm@7 or higher. This is because npm@3 ~ npm@6 will not correctly install `peerDependencies`[^1].
   - If you are using pnpm, make sure you are using pnpm@8 or higher. If you are using pnpm@6 ~ pnpm@7, you can try configuring `auto-install-peers=true` [^2] to resolve dependency installation issues.
-  - Known issue: yarn@1 cannot correctly install `peerDependencies`. We have not tested the latest version of yarn. If you are using a newer version of yarn, please feel free to provide feedback on compatibility in [GitHub Issues](
+  - Known issue: yarn does not support automatic installation of `peerDependencies`[^3], and there seems to be no reliable solution. Please manually install the missing dependencies according to the console prompts.
 </Callout>
 
 <Tabs items={['pnpm', 'npm']}>
@@ -251,3 +251,4 @@ Both unpkg and jsDeliver support specifying specific versions of resources. For 
 
 [^1]: https://blog.npmjs.org/post/110924823920/npm-weekly-5
 [^2]: https://pnpm.io/npmrc#auto-install-peers
+[^3]: https://github.com/yarnpkg/yarn/issues/1503
