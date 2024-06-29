@@ -60,10 +60,10 @@ function IconBox(props: IIconBoxProps) {
         >
           {copying
             ? (
-              <span className="flex items-center gap-1">
-                <SuccessSingle className="text-[#409F11]" />
-                Copied
-              </span>
+                <span className="flex items-center gap-1">
+                  <SuccessSingle className="text-[#409F11]" />
+                  Copied
+                </span>
               )
             : 'Copy'}
         </a>
