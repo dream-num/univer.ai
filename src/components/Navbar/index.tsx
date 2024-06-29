@@ -226,9 +226,9 @@ export default function Navbar() {
                   {nav.type !== 'dropdown'
                     ? (<Link className="font-semibold" href={nav.href} onClick={() => setCollapsed(!collapsed)}>{nav.title}</Link>)
                     : (
-                      <a className="font-semibold">
-                        {nav.title}
-                      </a>
+                        <a className="font-semibold">
+                          {nav.title}
+                        </a>
                       )}
 
                   {nav.type !== 'link' && (
