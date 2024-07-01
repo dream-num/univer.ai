@@ -22,7 +22,7 @@ PostgreSQL + RabbitMQ
 
 系统环境：Linux、Mac、Windows(WSL/Git Bash)
 
-下载 [license.zip](https://www.univer.ai/pro/license) 后，在同个目录下执行
+到[这里](https://www.univer.ai/pro/license)下载license.zip后，执行
 ```
 sh -c "$(curl -fsSL https://release-univer.oss-cn-shenzhen.aliyuncs.com/release-demo/install.sh)"
 ```
@@ -61,6 +61,29 @@ Univer 服务默认端口如下：
 编辑 `.env` 文件，将 `S3_ENDPOINT_PUBLIC` 配置为你的局域网 IP，才能使`另存为`功能正常。
 
 ```diff
-- S3_ENDPOINT_PUBLIC=http://univer-minio:9000
+- S3_ENDPOINT_PUBLIC=http://univer-minio:19000
 + S3_ENDPOINT_PUBLIC=http://<你的局域网IP>:19000
+```
+
+### 拉取 docker hub 镜像失败？
+
+编辑 `docker-compose.yaml`文件，替换对应的镜像地址：
+```diff
+- image: nginx:alpine-slim
++ image: univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/nginx:alpine-slim
+
+- image: postgres:${POSTGRES_VERSION}
++ image: univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/postgres:${POSTGRES_VERSION}
+
+- image: rabbitmq:${RABBITMQ_VERSION}
++ image: univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/rabbitmq:${RABBITMQ_VERSION}
+
+- image: bitnami/redis:${REDIS_VERSION}
++ image: univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/redis:${REDIS_VERSION}
+
+- image: temporalio/auto-setup:${TEMPORAL_VERSION}
++ image: univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/temporal:${TEMPORAL_VERSION}
+
+- image: bitnami/minio:${MINIO_VERSION}
++ image: univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/minio:${MINIO_VERSION}
 ```
