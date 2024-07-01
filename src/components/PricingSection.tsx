@@ -20,6 +20,7 @@ export default function PricingSection(props: IProps) {
       'free.features.1': 'Free to use in production environment.',
       'free.features.2': 'Upgrade to the business edition with one click.',
       'free.btn': 'Start Using',
+      'free.btn.link': '/guides/sheet/getting-started/quickstart#integrated-server-template',
       'business.title': 'Business',
       'business.desc': 'Suitable for medium and large enterprises that need stable services.',
       'business.price': 'Apply for a 30-day free trial with one click',
@@ -34,6 +35,7 @@ export default function PricingSection(props: IProps) {
       'free.features.1': '免费在生产环境中使用。',
       'free.features.2': '一键升级到商业版。',
       'free.btn': '开始使用',
+      'free.btn.link': '/guides/sheet/getting-started/quickstart#集成服务端的模板',
       'business.title': '商业版',
       'business.desc': '适合需要稳定服务的中大型企业。',
       'business.price': '一键申请 30 天免费试用',
@@ -85,7 +87,7 @@ export default function PricingSection(props: IProps) {
           className={`
             h-10 w-full rounded-full bg-[#474D57] text-center font-medium leading-10 text-white
           `}
-          href="/guides/sheet/server/overview"
+          href={t('free.btn.link')}
         >
           {t('free.btn')}
         </Link>

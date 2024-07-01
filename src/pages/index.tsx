@@ -2,7 +2,6 @@ import Link from 'next/link'
 import Head from 'next/head'
 import { GithubSingle40, IncreaseSingle, NextSingle } from '@univerjs/icons'
 import { useCallback, useState } from 'react'
-import { GitHubButton } from '@/components/GitHub'
 import { clsx } from '@/lib/utils'
 import Hero from '@/components/Hero'
 import Title from '@/components/Title'
@@ -38,7 +37,7 @@ export default function Page() {
       'faq.desc-4': 'Univer supports various modern desktop browsers and plans to support mobile devices.',
       'faq.title-5': 'Does Univer provide customer support and technical maintenance? How should users seek help if they encounter problems?',
       'faq.desc-5': 'Univer provides online documentation and community support, and users can submit issues or pull requests on GitHub. Enterprise users who subscribe to the business version can receive official technical support.',
-      'plan.title': 'Start experiencing Univer',
+      'plan.title': 'Start Experiencing Univer',
       'plan.desc': 'The free edition requires no development license and can be deployed to your production environment.',
       'plan.trial': 'The business version is free for 30 days.',
     },
@@ -180,8 +179,16 @@ export default function Page() {
           </h1>
 
           <div className="flex justify-center gap-6">
-            {/* Call of actions: GitHub link. Links to Documentation. OnlineExamples. */}
-            <GitHubButton />
+            <a
+              className={`
+                flex h-10 items-center rounded-full
+                bg-[linear-gradient(121deg,#0048FF_18.89%,#0C81ED_39.58%,#029DCE_59.87%,#00BBB0_74.37%,#00C5A8_81.94%)]
+                px-6 font-semibold text-white
+              `}
+              href="#pricing"
+            >
+              Start Experiencing
+            </a>
             <Link
               className={`
                 flex h-10 items-center rounded-full bg-slate-500 px-6 font-semibold text-white
@@ -381,11 +388,15 @@ export default function Page() {
               `}
             >
               <h2
+                id="pricing"
                 className={`
                   mb-6 text-center text-[28px] font-semibold
 
                   md:text-5xl
                 `}
+                style={{
+                  scrollMarginTop: '92px',
+                }}
               >
                 {t('plan.title')}
               </h2>
