@@ -6,6 +6,7 @@ import { clsx } from '@/lib/utils'
 
 interface ISandboxProps {
   entryFile: string
+  files?: Record<string, string>
 }
 
 const viteConfigTs = `import { defineConfig } from 'vite'
@@ -29,7 +30,7 @@ const styleCss = `html, body {
 const localesTs = `export { enUS, zhCN } from 'univer:locales'`
 
 export default function Sandbox(props: ISandboxProps) {
-  const { entryFile } = props
+  const { entryFile, files } = props
 
   const { resolvedTheme } = useTheme()
 
@@ -53,8 +54,10 @@ export default function Sandbox(props: ISandboxProps) {
             '@univerjs/engine-render': 'latest',
             '@univerjs/engine-numfmt': 'latest',
             '@univerjs/facade': 'latest',
+            '@univerjs/network': 'latest',
             '@univerjs/sheets': 'latest',
             '@univerjs/sheets-formula': 'latest',
+            '@univerjs/sheets-numfmt': 'latest',
             '@univerjs/sheets-ui': 'latest',
             '@univerjs/sheets-zen-editor': 'latest',
             '@univerjs/ui': 'latest',
@@ -77,6 +80,7 @@ export default function Sandbox(props: ISandboxProps) {
           'style.css': styleCss,
           'locales.ts': localesTs,
           'index.js': entryFile,
+          ...files,
         }}
         theme={resolvedTheme === 'dark' ? 'dark' : 'light'}
         template="vite"

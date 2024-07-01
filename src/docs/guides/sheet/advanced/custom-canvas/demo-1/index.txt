@@ -1,0 +1,54 @@
+import { LocaleType, Univer, UniverInstanceType } from '@univerjs/core'
+import { defaultTheme } from '@univerjs/design'
+import { UniverDocsPlugin } from '@univerjs/docs'
+import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
+import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
+import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
+import { FUniver } from '@univerjs/facade'
+import { UniverSheetsPlugin } from '@univerjs/sheets'
+import { UniverSheetsFormulaPlugin } from '@univerjs/sheets-formula'
+import { UniverSheetsNumfmtPlugin } from '@univerjs/sheets-numfmt'
+import { UniverSheetsUIPlugin } from '@univerjs/sheets-ui'
+import { UniverUIPlugin } from '@univerjs/ui'
+
+import { enUS } from './locales'
+import { RowHeaderCustomExtension } from './row-header-extension'
+import { ColumnHeaderCustomExtension } from './column-header-extension'
+import { MainCustomExtension } from './main-extension'
+
+import './style.css'
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: enUS,
+  },
+})
+
+univer.registerPlugin(UniverDocsPlugin, {
+  hasScroll: false,
+})
+univer.registerPlugin(UniverDocsUIPlugin)
+univer.registerPlugin(UniverRenderEnginePlugin)
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  disableAutoFocus: true,
+})
+univer.registerPlugin(UniverSheetsPlugin)
+univer.registerPlugin(UniverSheetsUIPlugin)
+
+univer.registerPlugin(UniverSheetsNumfmtPlugin)
+univer.registerPlugin(UniverFormulaEnginePlugin)
+univer.registerPlugin(UniverSheetsFormulaPlugin)
+
+const unitId = 'workbook'
+univer.createUnit(UniverInstanceType.UNIVER_SHEET, { id: unitId })
+
+const univerAPI = FUniver.newAPI(univer)
+
+univerAPI.getHooks().onRendered(() => {
+  univerAPI.registerSheetRowHeaderExtension(unitId, new RowHeaderCustomExtension())
+  univerAPI.registerSheetColumnHeaderExtension(unitId, new ColumnHeaderCustomExtension())
+  univerAPI.registerSheetMainExtension(unitId, new MainCustomExtension())
+})

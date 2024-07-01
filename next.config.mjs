@@ -23,6 +23,10 @@ const nextConfig = {
 
   webpack: (config, { isServer }) => {
     config.plugins.push(new UniverPlugin())
+    config.module.rules.push({
+      test: /\.txt$/i,
+      use: 'raw-loader',
+    })
 
     if (!isServer) {
       // https://github.com/vercel/next.js/issues/31692

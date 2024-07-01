@@ -1,17 +1,29 @@
 import { Callout } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
+import entryFile from './custom-canvas/demo-1/index.txt'
+import mainExtensionTs from './custom-canvas/demo-1/main-extension.txt'
+import columnHeaderExtensionTs from './custom-canvas/demo-1/column-header-extension.txt'
+import rowHeaderExtensionTs from './custom-canvas/demo-1/row-header-extension.txt'
+
 # Extending Canvas
 
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
 
-## How to Customize Rendering Extensions?
+<Sandbox
+  entryFile={entryFile}
+  files={{
+    'main-extension.ts': mainExtensionTs,
+    'column-header-extension.ts': columnHeaderExtensionTs,
+    'row-header-extension.ts': rowHeaderExtensionTs,
+  }}
+/>
 
 The rendering of some Univer elements, such as borders and backgrounds, is accomplished using an extension mechanism. Facade has built-in common extension registration API:
 
-- Middle content area: registerSheetMainExtension
-- Row header: registerSheetRowHeaderExtension
-- Column header: registerSheetColumnHeaderExtension
+- Middle content area: `registerSheetMainExtension`
+- Row header: `registerSheetRowHeaderExtension`
+- Column header: `registerSheetColumnHeaderExtension`
 
 By inheriting `SheetExtension` and providing a unique key, zIndex, and drawing logic, a sheet rendering extension can be implemented as follows:
 
@@ -36,10 +48,12 @@ SheetRowHeaderExtensionRegistry.add(new RowHeaderCustomExtension())
   The zIndex for row and column header extensions must be greater than 10, and for middle content area extensions, it must be greater than 50, otherwise, they will be overridden.
 </Callout>
 
-Then register to the specified unitId
+Then register to the specified unitId:
 
 ```ts
 univerAPI.registerSheetRowHeaderExtension(unitId, new RowHeaderCustomExtension())
 ```
 
-For reference, here is an online example of extending row and column headers: [Render Extension](/playground?title=Render%20Extension)
+Note that `UniverRenderingContext` is essentially [CanvasRenderingContext2D](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D), and you can draw according to your needs (e.g., clear the original row and column headers).
+
+Online example reference: [Render Extension](/playground?title=Render%20Extension)`;
