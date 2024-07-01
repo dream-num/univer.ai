@@ -87,3 +87,41 @@ Univer 服务默认端口如下：
 - image: bitnami/minio:${MINIO_VERSION}
 + image: univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/minio:${MINIO_VERSION}
 ```
+
+### 怎么排查服务启动报错？
+
+你可以用 `docker compose logs` 命令查看服务日志，例如：
+
+```shell
+# 查看 universer 最近20分钟内的日志
+docker compose logs -f universer --since 20m
+```
+
+如果你需要帮助，请尽管联系我们。
+
+### 如何重启、停止、卸载服务？
+
+```shell
+# 重启
+bash run.sh
+
+# 停止
+docker compose stop
+
+# 卸载
+docker compose down
+
+# 卸载并删除数据
+docker compose down --volumes
+```
+
+### 怎样修改服务端口？
+
+可以更新 `.env` 文件，然后执行 `bash run.sh` 重启。
+
+```
+# host ports
+HOST_NGINX_PORT=8000
+HOST_MINIO_PORT=19000
+HOST_GRAFANA_PORT=13000
+```
