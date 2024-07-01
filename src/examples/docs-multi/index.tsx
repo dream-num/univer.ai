@@ -48,7 +48,7 @@ export default function App(props: IProps) {
     univer.createUnit(UniverInstanceType.UNIVER_DOC, Tools.deepClone(ALL_FEATURES_DOCUMENT_DATA))
 
     univer.registerPlugin(GithubPlugin, {
-      link: '/examples/docs-multi',
+      link: '/src/examples/docs-multi',
     })
 
     univers.push(univer)

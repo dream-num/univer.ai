@@ -45,7 +45,7 @@ export default function App(props: IProps) {
     univer.createUnit(UniverInstanceType.UNIVER_DOC, DOCS_BIG_DATA)
 
     univer.registerPlugin(GithubPlugin, {
-      link: '/examples/docs-big-data',
+      link: '/src/examples/docs-big-data',
     })
   }, [])
 

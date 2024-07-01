@@ -238,16 +238,20 @@ Please refer to [Custom Menu Playground](/playground?title=Custom+Menu) for more
 
 ## Customizing Menu Items (Hiding Menu Items)
 
-Customizing or hiding menu items in Univer is a common requirement. We provide configuration options for all plugins that contain menu items, so you can easily achieve this requirement through configuration.
+Customizing or hiding menu items in Univer is a common requirement. We provide configuration options for all plugins that contain menu items. As long as you know the command ID of the menu item, you can easily achieve this requirement through configuration options.
 
 For example, hiding the bold menu item:
 
 ```typescript
+import { UniverSheetsUIPlugin, SetRangeBoldCommand } from '@univerjs/sheets-ui';
+
 univer.registerPlugin(UniverSheetsUIPlugin, {
   menu: {
-    'sheet.command.set-range-bold': {
+    [SetRangeBoldCommand.id]: {
       hidden: true,
     },
   },
 });
 ```
+
+To learn how to find the command ID, please refer to the tutorial [How To Find The Command ID](/guides/sheet/tutorials/find-the-command-id).

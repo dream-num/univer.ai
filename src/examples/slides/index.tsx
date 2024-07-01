@@ -43,7 +43,7 @@ export default function App(props: IProps) {
     univer.createUnit(UniverInstanceType.UNIVER_SLIDE, DEFAULT_SLIDE_DATA)
 
     univer.registerPlugin(GithubPlugin, {
-      link: '/examples/slides',
+      link: '/src/examples/slides',
     })
   }, [])
 

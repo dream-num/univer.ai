@@ -1,11 +1,12 @@
 import { Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import VersionBadge from '@/components/VersionBadge'
 
 # Core Features
 
 <BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC]} value={UniverTypes.SHEET} />
 
-Core packages implement the basic functions of the spreadsheet, including the core functions of Univer Sheet, such as creating workbooks, cell editing, and cell selection.
+Core packages implement the basic functions of the spreadsheet, including the core functions of Univer Sheet, such as creating workbooks, cell editing, cell selection, and formulas.
 
 ## Installation
 
@@ -129,5 +130,6 @@ univer.registerPlugin(UniverUIPlugin, {
 
 * `container` - Container element, can be a string or DOM element.
 * `header` - Whether to display the header.
+* `toolbar` - Whether to display the header toolbar.  <VersionBadge version="0.1.18+" />
 * `footer` - Whether to display the footer.
 * `contextMenu` - Whether to display the right-click menu.

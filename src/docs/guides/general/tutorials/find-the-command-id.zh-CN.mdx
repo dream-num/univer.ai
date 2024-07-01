@@ -1,10 +1,23 @@
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import VersionBadge from '@/components/VersionBadge'
 
 # 如何查找命令 ID
 
 <BadgeGroup values={[UniverTypes.GENERAL]} value={UniverTypes.GENERAL} />
 
 开发者在进行扩展或者开发插件时，经常需要查找某个命令的 ID。而 Univer 繁多的插件生态中包含了大量的命令，如何快速找到某个命令的 ID 呢？
+
+## 从插件中引入 <VersionBadge version="0.1.18+" />
+
+Univer 导出了所有的命令，你可以在 [API Reference](/typedoc/@univerjs/README) 中找到目标命令，并从对应的包中导入，即可获取到命令的 ID。
+
+列如，你想要查找设置选区下划线的命令 ID，首先可以在 [API Reference - Variable: SetRangeUnderlineCommand](/typedoc/@univerjs/sheets-ui/variables/SetRangeUnderlineCommand) 中找到。然后就可以这样导入并获取命令 ID：
+
+```typescript
+import { SetRangeUnderlineCommand } from '@univerjs/sheets-ui';
+
+console.log(SetRangeUnderlineCommand.id);
+```
 
 ## 开启日志
 
@@ -38,8 +51,6 @@ const univer = new Univer({
 
 <iframe 
   className="w-full h-[772px] mt-6"
-  frameborder="0"
-  scrolling="no"
   allow="clipboard-write"
   src="https://emgithub.com/iframe.html?target=https%3A%2F%2Fgithub.com%2Fdream-num%2Funiver%2Fblob%2Fdev%2Fpackages%2Fsheets%2Fsrc%2Fcommands%2Fcommands%2Fset-tab-color.command.ts%23L29-61&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"
 />

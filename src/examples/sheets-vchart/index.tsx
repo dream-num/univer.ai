@@ -151,7 +151,7 @@ export default function App(props: IProps) {
     userManagerService.setCurrentUser(mockUser)
 
     univer.registerPlugin(GithubPlugin, {
-      link: '/examples/sheets-vchart',
+      link: '/src/examples/sheets-vchart',
     })
   }, [])
 

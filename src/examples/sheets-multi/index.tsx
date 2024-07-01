@@ -69,7 +69,7 @@ export default function App(props: IProps) {
     univer.createUnit(UniverInstanceType.UNIVER_SHEET, Tools.deepClone(ALL_FEATURES_WORKBOOK_DATA))
 
     univer.registerPlugin(GithubPlugin, {
-      link: '/examples/sheets-multi',
+      link: '/src/examples/sheets-multi',
     })
 
     univers.push(univer)

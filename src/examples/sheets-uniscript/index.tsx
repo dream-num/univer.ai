@@ -89,7 +89,7 @@ export default function App(props: IProps) {
     univer.createUnit(UniverInstanceType.UNIVER_SHEET, UNISCRIT_WORKBOOK_DATA_DEMO)
 
     univer.registerPlugin(GithubPlugin, {
-      link: '/examples/sheets-uniscript',
+      link: '/src/examples/sheets-uniscript',
     })
   }, [])
 

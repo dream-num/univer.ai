@@ -1,11 +1,24 @@
 
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import VersionBadge from '@/components/VersionBadge'
 
 ## How to find the command ID
 
 <BadgeGroup values={[UniverTypes.GENERAL]} value={UniverTypes.GENERAL} />
 
 Developers often need to find the ID of a command when extending or developing a plugin. With the large number of commands in the Univer ecosystem, how can you quickly find the ID of a command?
+
+## Import from the plugin <VersionBadge version="0.1.18+" />
+
+Univer exports all commands, and you can find the target command in the [API Reference](/typedoc/@univerjs/README) and import it from the corresponding package to get the command ID.
+
+For example, if you want to find the ID of the command to set the underline of a range, you can first find it in the [API Reference - Variable: SetRangeUnderlineCommand](/typedoc/@univerjs/sheets-ui/variables/SetRangeUnderlineCommand). Then you can import it and get the command ID like this:
+
+```typescript
+import { SetRangeUnderlineCommand } from '@univerjs/sheets-ui';
+
+console.log(SetRangeUnderlineCommand.id);
+```
 
 ## Enable logging
 
@@ -39,8 +52,6 @@ For example, the command to modify the background color of a Worksheet tab can b
 
 <iframe 
   className="w-full h-[772px] mt-6"
-  frameborder="0"
-  scrolling="no"
   allow="clipboard-write"
   src="https://emgithub.com/iframe.html?target=https%3A%2F%2Fgithub.com%2Fdream-num%2Funiver%2Fblob%2Fdev%2Fpackages%2Fsheets%2Fsrc%2Fcommands%2Fcommands%2Fset-tab-color.command.ts%23L29-61&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"
 />

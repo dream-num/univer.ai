@@ -1,11 +1,12 @@
 import { Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import VersionBadge from '@/components/VersionBadge'
 
 # 核心功能
 
 <BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC]} value={UniverTypes.SHEET} />
 
-核心功能是实现电子表格的基础功能，包含了 Univer Sheet 的核心功能，如创建工作簿、单元格编辑、单元格选择等。
+核心功能是实现电子表格的基础功能，包含了 Univer Sheet 的核心功能，如创建工作簿、单元格编辑、单元格选择、公式等。
 
 ## 安装
 
@@ -129,5 +130,6 @@ univer.registerPlugin(UniverUIPlugin, {
 
 * `container` - 容器元素，可以是字符串或者 DOM 元素。
 * `header` - 是否显示头部。
+* `toolbar` - 是否显示头部工具栏。 <VersionBadge version="0.1.18+" />
 * `footer` - 是否显示底部。
 * `contextMenu` - 是否显示右键菜单。

@@ -74,7 +74,7 @@ export default function App(props: IProps) {
     univer.createUnit(UniverInstanceType.UNIVER_SHEET, generateWorkbookData(1000000, 10))
 
     univer.registerPlugin(GithubPlugin, {
-      link: '/examples/sheets-big-data',
+      link: '/src/examples/sheets-big-data',
     })
   }, [])
 

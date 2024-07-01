@@ -140,7 +140,7 @@ export default function App(props: IProps) {
     userManagerService.setCurrentUser(mockUser)
 
     univer.registerPlugin(GithubPlugin, {
-      link: '/examples/sheets',
+      link: '/src/examples/sheets',
     })
   }, [])
 

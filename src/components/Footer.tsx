@@ -11,7 +11,7 @@ export default function Footer() {
       guides: 'Guides',
       examples: 'Examples',
       community: 'Community',
-      github: 'GitHub',
+      github: 'GitHub Discussions',
       discord: 'Discord',
       legal: 'Legal',
       'privacy-policy': 'Privacy Policy',
@@ -26,7 +26,7 @@ export default function Footer() {
       guides: '指南',
       examples: '示例',
       community: '社区',
-      github: 'GitHub',
+      github: 'GitHub Discussions',
       discord: 'Discord',
       legal: '法律与安全',
       'privacy-policy': '隐私政策',
@@ -51,6 +51,15 @@ export default function Footer() {
     }, {
       title: t('examples'),
       href: '/examples',
+    }],
+  }, {
+    title: t('community'),
+    items: [{
+      title: t('discord'),
+      href: 'https://discord.gg/XPGnMBmpd6',
+    }, {
+      title: t('github'),
+      href: 'https://github.com/dream-num/univer/discussions',
     }],
   }, {
     title: t('legal'),

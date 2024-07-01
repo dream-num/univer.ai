@@ -56,7 +56,7 @@ export default function App(props: IProps) {
     univer.createUnit(UniverInstanceType.UNIVER_DOC, ALL_FEATURES_DOCUMENT_DATA)
 
     univer.registerPlugin(GithubPlugin, {
-      link: '/examples/docs-uniscript',
+      link: '/src/examples/docs-uniscript',
     })
   }, [])
 
