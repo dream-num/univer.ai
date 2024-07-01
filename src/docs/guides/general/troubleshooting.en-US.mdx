@@ -40,6 +40,45 @@ In browsers such as Chrome and Safari that support `clipboard.readText()`, Unive
 
 <Image src={clipboardImg} alt="Authorize Clipboard" width={500} />
 
+### 📊 How to get the data in the cell editor in real time?
+
+The cell editor of Univer Sheet is essentially the editor of Univer Doc, so you can use the Facade API to get the snapshot data in the currently active Univer Doc editor.
+
+```typescript
+univerAPI.onCommandExecuted((command) => {
+  const { id } = command;
+  if (id === 'doc.command.insert-text' || id === 'doc.command.delete-text') {
+    const doc = univerAPI.getActiveDocument();
+    if (doc) {
+      const snapshot = doc.getSnapshot();
+      console.log(snapshot.body?.dataStream);
+    }
+  }
+});
+```
+
+Reference: https://github.com/dream-num/univer/discussions/2261
+
+### 📊 When the cell editor is focused and an external button is clicked to trigger an event, the snapshot obtained does not contain the data of the focused cell.
+
+The data of the cell will be synchronized to the snapshot when it loses focus, so you should defocus the cell before obtaining the snapshot data.
+
+```typescript
+import { DeviceInputEventType } from '@univerjs/engine-render';
+import { FUniver } from '@univerjs/facade';
+
+const univerAPI = FUniver.newAPI(univer);
+
+$btn.addEventListener('click', () => {
+  univerAPI.executeCommand('sheet.operation.set-cell-edit-visible', {
+    visible: false,
+    _eventType: DeviceInputEventType.PointerUp,
+  });
+});
+```
+
+Reference: https://github.com/dream-num/univer/issues/1314
+
 ## Development Related
 
 ### Why are the menu items not displayed in the correct language?

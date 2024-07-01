@@ -55,6 +55,45 @@ Firefox 尚不支持 `clipboard.readText()`，详见 [MDN](https://developer.moz
 
 <Image src={missingLocaleImg} alt="Missing Locale" width={300} />
 
+### 📊 如何实时获取单元格编辑器内的数据？
+
+Univer Sheet 的单元格编辑器本质上就是 Univer Doc 的编辑器，因此你可以通过 Facade API 获取当前激活的 Univer Doc 编辑器内的 snapshot 数据。
+
+```typescript
+univerAPI.onCommandExecuted((command) => {
+  const { id } = command;
+  if (id === 'doc.command.insert-text' || id === 'doc.command.delete-text') {
+    const doc = univerAPI.getActiveDocument();
+    if (doc) {
+      const snapshot = doc.getSnapshot();
+      console.log(snapshot.body?.dataStream);
+    }
+  }
+});
+```
+
+参考：https://github.com/dream-num/univer/discussions/2261
+
+### 📊 单元格编辑器聚焦时点击外部按钮触发事件，获取的 snapshot 中未包含该聚焦单元格的数据
+
+单元格的数据会在失焦时同步到 snapshot 中，因此你应当在获取 snapshot 数据前先对单元格进行失焦操作。
+
+```typescript
+import { DeviceInputEventType } from '@univerjs/engine-render';
+import { FUniver } from '@univerjs/facade';
+
+const univerAPI = FUniver.newAPI(univer);
+
+$btn.addEventListener('click', () => {
+  univerAPI.executeCommand('sheet.operation.set-cell-edit-visible', {
+    visible: false,
+    _eventType: DeviceInputEventType.PointerUp,
+  });
+});
+```
+
+参考：https://github.com/dream-num/univer/issues/1314
+
 ## 故障排查
 
 ### Error: [ThemeService]: current theme is not set!
