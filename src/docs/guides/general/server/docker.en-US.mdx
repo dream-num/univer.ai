@@ -65,3 +65,39 @@ You'll need to tweak the `.env` file. Set `S3_ENDPOINT_PUBLIC` to your local net
 - S3_ENDPOINT_PUBLIC=http://univer-minio:9000
 + S3_ENDPOINT_PUBLIC=http://<Your Local Network IP>:19000
 ```
+
+### How to find error when server start failed ?
+
+You can use `docker compose logs` to see server logs, for example:
+```shell
+# see universer latest 20 minute logs
+docker compose logs -f universer --since 20m
+```
+
+If you need assistance, feel free to contact us.
+
+### How to restart, stop, uninstall server ?
+```shell
+# restart server
+bash run.sh
+
+# stop server
+docker compose stop
+
+# uninstall
+docker compose down
+
+# uninstall and clean data
+docker compose down --volumes
+```
+
+### How to change host port the server used ?
+
+You can update the `.env` file, then run `bash run.sh`
+
+```
+# host ports
+HOST_NGINX_PORT=8000
+HOST_MINIO_PORT=19000
+HOST_GRAFANA_PORT=13000
+```
