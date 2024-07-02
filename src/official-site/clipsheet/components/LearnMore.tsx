@@ -6,13 +6,13 @@ export function LearnMore({ href, className }: { href: string, className?: strin
   return (
     <Link
       className={
-    clsx(`
-      inline-flex items-center gap-[8px] fill-[#2B4DFF] text-center text-lg font-normal leading-7
-      text-[#2B4DFF]
+        clsx(`
+          inline-flex items-center gap-[8px] fill-[#2B4DFF] text-center text-lg font-normal
+          leading-7 text-[#2B4DFF]
 
-      hover:underline
-    `, className)
-  }
+          hover:underline
+        `, className)
+      }
       href={href}
     >
       Learn more

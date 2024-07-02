@@ -4,8 +4,8 @@ function Switch({ intailValue, value, leftIcon, rightIcon, leftLabel, rightLabel
 
   intailValue?: 'left' | 'right'
   value?: 'left' | 'right'
-  leftIcon: string
-  rightIcon: string
+  leftIcon: JSX.Element
+  rightIcon: JSX.Element
   leftLabel: string
   rightLabel: string
   isDisabled?: boolean
@@ -55,17 +55,15 @@ function Switch({ intailValue, value, leftIcon, rightIcon, leftLabel, rightLabel
         `}
         onClick={() => handleToggle('left')}
       >
-        {leftIcon && (
-          <img
-            src={leftIcon}
-            alt="left icon"
-            className={`
-              mr-2 h-[16px] w-[16px]
+        <span
+          className={`
+            mr-2 text-[16px]
 
-              xl:h-[20px] xl:w-[20px]
-            `}
-          />
-        )}
+            xl:text-[20px]
+          `}
+        >
+          {leftIcon}
+        </span>
         <span className={isDisabled ? 'text-gray-400' : ''}>{leftLabel}</span>
       </div>
       <div
@@ -82,17 +80,15 @@ function Switch({ intailValue, value, leftIcon, rightIcon, leftLabel, rightLabel
         `}
         onClick={() => handleToggle('right')}
       >
-        {rightIcon && (
-          <img
-            src={rightIcon}
-            alt="right icon"
-            className={`
-              mr-2 h-[16px] w-[16px]
+        <span
+          className={`
+            mr-2 text-[16px]
 
-              xl:h-[20px] xl:w-[20px]
-            `}
-          />
-        )}
+            xl:text-[20px]
+          `}
+        >
+          {rightIcon}
+        </span>
         <span className={isDisabled ? 'text-gray-400' : ''}>{rightLabel}</span>
       </div>
     </div>

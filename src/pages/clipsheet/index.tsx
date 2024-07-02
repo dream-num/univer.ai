@@ -9,8 +9,8 @@ import Title from '@/components/Title'
 import { useTranslation } from '@/lib/i18n'
 import Switch from '@/components/Switch'
 
-import google from '@/official-site/images/google.svg'
-import chatgpt from '@/official-site/images/chatgpt.svg'
+import { GoogleSvg } from '@/official-site/clipsheet/components/icons/GoogleSvg'
+import { ChatgptSvg } from '@/official-site/clipsheet/components/icons/ChatgptSvg'
 import type { IVideo } from '@/official-site/clipsheet/components/VideoList'
 import { VideoList } from '@/official-site/clipsheet/components/VideoList'
 import { VideoPlayer } from '@/official-site/clipsheet/components/VideoPlayer'
@@ -235,8 +235,8 @@ export default function Page() {
           <div className="mt-[48px]"></div>
           <div className="flex justify-center">
             <Switch
-              leftIcon={google.src}
-              rightIcon={chatgpt.src}
+              leftIcon={<GoogleSvg />}
+              rightIcon={<ChatgptSvg />}
               leftLabel="Chrome Extension"
               rightLabel="ChatGPT"
               intailValue={intailValue}
@@ -291,8 +291,8 @@ export default function Page() {
             </div>
             <div className="flex justify-center">
               <Switch
-                leftIcon={google.src}
-                rightIcon={chatgpt.src}
+                leftIcon={<GoogleSvg />}
+                rightIcon={<ChatgptSvg />}
                 leftLabel="Chrome Extension"
                 rightLabel="ChatGPT"
                 intailValue={intailValue}
