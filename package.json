@@ -47,7 +47,7 @@
     "@univerjs/engine-render": "0.1.17",
     "@univerjs/facade": "0.1.17",
     "@univerjs/find-replace": "0.1.17",
-    "@univerjs/icons": "^0.1.57",
+    "@univerjs/icons": "^0.1.58",
     "@univerjs/network": "0.1.17",
     "@univerjs/protocol": "0.1.37",
     "@univerjs/rpc": "0.1.17",
@@ -93,7 +93,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.21.2",
-    "@eslint-react/eslint-plugin": "^1.5.19",
+    "@eslint-react/eslint-plugin": "^1.5.20",
     "@types/node": "^20.14.9",
     "@types/pako": "^2.0.3",
     "@types/react": "^18.3.3",
@@ -111,7 +111,7 @@
     "sharp": "^0.33.4",
     "simple-git-hooks": "^2.11.1",
     "tailwindcss": "^3.4.4",
-    "typescript": "^5.5.2"
+    "typescript": "^5.5.3"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

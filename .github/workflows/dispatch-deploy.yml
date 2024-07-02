@@ -1,0 +1,33 @@
+name: 📤 Dispatch Deploy
+
+on:
+  repository_dispatch:
+    types:
+      - deploy
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Setup Node.js
+        uses: ./.github/actions/setup-node
+
+      - name: Update @univerjs/icons
+        run: pnpm up @univerjs/icons -r
+
+      - name: 📝 Commit and push changes
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add -A
+          git commit -m "chore(deps): update @univerjs/icons" || exit 0
+          git push
