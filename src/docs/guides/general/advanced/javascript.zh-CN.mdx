@@ -17,12 +17,12 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 ## 参数装饰器
 
-`@wendellhu/redi` 提供了 `setDependency` 方法，用于在 JavaScript 中显示地声明依赖。例如：
+`@wendellhu/redi` 提供了 `setDependencies` 方法，用于在 JavaScript 中显示地声明依赖。例如：
 
 ```diff
 import { Plugin, ICommandService, UniverInstanceType } from '@univerjs/core'
 - import { Inject, Injector } from '@wendellhu/redi'
-+ import { Injector, setDependency } from '@wendellhu/redi'
++ import { Injector, setDependencies } from '@wendellhu/redi'
 
 export class MyPlugin extends Plugin {
   static override type = UniverInstanceType.UNIVER_UNKNOWN
@@ -43,7 +43,7 @@ export class MyPlugin extends Plugin {
   }
 }
 
-+ setDependency(MyPlugin, [Injector, ICommandService])
++ setDependencies(MyPlugin, [Injector, ICommandService])
 ```
 
 参考：https://redi.wendell.fun/zh-CN/docs/javascript

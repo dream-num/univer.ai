@@ -17,12 +17,12 @@ In the Univer documentation, the most common decorators are parameter decorators
 
 ## Parameter Decorators
 
-`@wendellhu/redi` provides the `setDependency` method to explicitly declare dependencies in JavaScript. For example:
+`@wendellhu/redi` provides the `setDependencies` method to explicitly declare dependencies in JavaScript. For example:
 
 ```diff
 import { Plugin, ICommandService, UniverInstanceType } from '@univerjs/core'
 - import { Inject, Injector } from '@wendellhu/redi'
-+ import { Injector, setDependency } from '@wendellhu/redi'
++ import { Injector, setDependencies } from '@wendellhu/redi'
 
 export class MyPlugin extends Plugin {
   static override type = UniverInstanceType.UNIVER_UNKNOWN
@@ -43,7 +43,7 @@ export class MyPlugin extends Plugin {
   }
 }
 
-+ setDependency(MyPlugin, [Injector, ICommandService])
++ setDependencies(MyPlugin, [Injector, ICommandService])
 ```
 
 Reference: https://redi.wendell.fun/docs/javascript
