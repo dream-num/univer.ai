@@ -5,10 +5,60 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 <BadgeGroup values={[UniverTypes.GENERAL]} value={UniverTypes.GENERAL} />
 
-{/* To facilitate development, Univer uses a large number of [TypeScript decorators](https://www.typescriptlang.org/docs/handbook/decorators.html) to declare dependency injection relationships.
-
-Therefore, we certainly recommend that you use TypeScript first. However, if you are not familiar with TypeScript or are constrained by other reasons, you can also use JavaScript to extend Univer. Of course, this is not an easy task, as you may need to understand the internal mechanism of Univer and how to use JavaScript to implement decorators in TypeScript. */}
-
 <Callout>
-  This section is not yet complete, please stay tuned.
+  If you find that the decorators are not working properly in some projects that integrate TypeScript support (usually because the implementation of the babel-related decorator plugin is inconsistent with TypeScript), you can also consider using this method to replace the decorators.
 </Callout>
+
+To facilitate development, Univer uses a large number of [TypeScript decorators](https://www.typescriptlang.org/docs/handbook/decorators.html) to declare dependency injection relationships.
+
+Therefore, we certainly recommend that you use TypeScript first. However, if you are not familiar with TypeScript or are constrained by other reasons, you can also use JavaScript to extend Univer. Of course, this is not an easy task, as you may need to understand the internal mechanism of Univer and how to use JavaScript to implement decorators in TypeScript.
+
+In the Univer documentation, the most common decorators are parameter decorators provided by [`@wendellhu/redi`](https://redi.wendell.fun) and class decorators provided by `@univerjs/core`. Here we will introduce how to replace these two decorators in JavaScript.
+
+## Parameter Decorators
+
+`@wendellhu/redi` provides the `setDependency` method to explicitly declare dependencies in JavaScript. For example:
+
+```diff
+import { Plugin, ICommandService, UniverInstanceType } from '@univerjs/core'
+- import { Inject, Injector } from '@wendellhu/redi'
++ import { Injector, setDependency } from '@wendellhu/redi'
+
+export class MyPlugin extends Plugin {
+  static override type = UniverInstanceType.UNIVER_UNKNOWN
+  static override pluginName = 'MY_PLUGIN_NAME'
+
+-  constructor(@Inject(Injector) protected readonly _injector: Injector, @ICommandService private readonly _commandService: ICommandService) {
++  constructor(_injector, _commandService) {
+    super()
+
++   this._injector = _injector
++   this._commandService = _commandService
+  }
+
+-  override onStarting(injector: Injector): void {
++  override onStarting(injector) {
+-    ([[ConfigService]] as Dependency[]).forEach(d => injector.add(d))
++    [[ConfigService]].forEach(d => injector.add(d))
+  }
+}
+
++ setDependency(MyPlugin, [Injector, ICommandService])
+```
+
+Reference: https://redi.wendell.fun/docs/javascript
+
+## Class Decorator `OnLifecycle`
+
+The `OnLifecycle` class decorator is used to declare lifecycles. `@univerjs/core` provides the `runOnLifecycle` method to explicitly declare lifecycles in JavaScript. For example:
+
+```diff
+- import { Disposable, LifecycleStages, OnLifecycle } from '@univerjs/core'
++ import { Disposable, LifecycleStages, runOnLifecycle } from '@univerjs/core'
+
+- @OnLifecycle(LifecycleStages.Steady, MYController)
+export class MYController extends Disposable {
+}
+
++ runOnLifecycle(LifecycleStages.Steady, MYController)
+```
