@@ -94,7 +94,9 @@ $btn.addEventListener('click', () => {
 
 参考：https://github.com/dream-num/univer/issues/1314
 
-### 使用 React 但是碰到了一些问题
+## 集成相关
+
+### 使用 React
 
 首先请确保你的 React 版本在 16.9 以上，因为 Univer 的 UI 层依赖 React，并且使用了 React Hooks。
 
@@ -104,6 +106,18 @@ $btn.addEventListener('click', () => {
 - <React.StrictMode>
   <App />
 - </React.StrictMode>
+```
+
+### 使用 Angular
+
+使用 Angular CLI 默认创建的项目模板引入 Univer 前需要确保是否在 `tsconfig.json` 中配置了 `"skipLibCheck": true`：
+
+```diff
+{
+  "compilerOptions": {
++    "skipLibCheck": true
+  }
+}
 ```
 
 ## 故障排查

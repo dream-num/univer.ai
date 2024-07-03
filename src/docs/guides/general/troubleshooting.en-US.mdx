@@ -87,7 +87,9 @@ This is because you have missed the corresponding locales. You need to pass the 
 
 <Image src={missingLocaleImg} alt="Missing Locale" width={300} />
 
-### I'm using React but I'm running into some issues
+## Integration Related
+
+### Using React
 
 First, make sure your React version is 16.9 or higher, as Univer's UI layer depends on React and uses React Hooks.
 
@@ -97,6 +99,18 @@ In addition, there is a known issue with the DI library `@wendellhu/redi` that U
 - <React.StrictMode>
   <App />
 - </React.StrictMode>
+```
+
+### Using Angular
+
+When using Angular CLI to create a project template, you need to ensure that `"skipLibCheck": true` is configured in `tsconfig.json` before importing Univer:
+
+```diff
+{
+  "compilerOptions": {
++    "skipLibCheck": true
+  }
+}
 ```
 
 ## Errors
