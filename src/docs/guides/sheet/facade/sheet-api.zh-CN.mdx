@@ -457,6 +457,8 @@ activeWorkbook.onSelectionChange((selection) => {
 
 ### 导入 XLSX
 
+导入需要使用[服务端版本 Facade API](/zh-CN/guides/sheet/facade/facade#与服务端配合使用)。
+
 #### 导入 XLSX 并获取 `unitId`
 
 在协同环境下，每个工作簿都有一个唯一的 `unitId`。使用 API `importXLSXToUnitId` 传入 `file` 参数会返回 `unitId`，可以通过该 `unitId` 来访问工作簿。 `file` 参数可以是一个 File 对象，或者远程文件的 URL。
@@ -478,6 +480,8 @@ univerAPI.importXLSXToSnapshot(file).then((data)=>{
 ```
 
 ### 导出 XLSX
+
+导出需要使用[服务端版本 Facade API](/zh-CN/guides/sheet/facade/facade#与服务端配合使用)。
 
 ### 通过 `unitId` 导出 XLSX
 

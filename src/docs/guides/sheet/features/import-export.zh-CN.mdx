@@ -78,3 +78,36 @@ configService.setConfig(EXCHANGE_EXPORT_SERVER_URL_KEY, `http://localhost:3010/u
 configService.setConfig(EXCHANGE_GET_TASK_SERVER_URL_KEY, `http://localhost:3010/universer-api/exchange/task/{taskID}`);
 configService.setConfig(EXCHANGE_SIGN_URL_SERVER_URL_KEY, `http://localhost:3010/universer-api/file/{fileID}/sign-url`);
 ```
+
+## 定制化使用
+
+如果你不满足插件默认提供的功能，你还可以调用 [Facade API](/guides/sheet/facade/facade#与服务端配合使用) 来实现自定义的导入和导出的流程，请阅读 [与服务端交互的功能](/zh-CN/guides/sheet/facade/sheet-api#与服务端交互的功能)。
+
+## 常见问题
+
+### 如何打开或编辑一个 Excel 文件的 URL 地址？
+
+这里提供一种实现思路供参考，先通过浏览器 API 将 URL 下载转换得到一个 File 对象，然后调用 [Facade API](/guides/sheet/facade/facade#与服务端配合使用) 的 `importXLSXToUnitId` 或者 `importXLSXToSnapshot` 方法导入，参考代码如下：
+
+```typescript
+const url = 'https://example.com/filename.xlsx'; // 你的 Excel 文件 URL
+
+// 从 URL 获取文件并转换为 File 对象的函数
+async function fetchExcelFile(url) {
+  try {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    return new File([blob], 'filename.xlsx', { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  } catch (error) {
+    console.error('Failed to fetch the file:', error);
+  }
+}
+
+// 从 URL 获取文件并导入为快照
+fetchExcelFile(url).then(file => {
+  if (file) {
+    const snapshot = univerAPI.importXLSXToSnapshot(file);
+    console.log('Snapshot created:', snapshot);
+  }
+});
+```

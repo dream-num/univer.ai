@@ -457,6 +457,8 @@ activeWorkbook.onSelectionChange((selection) => {
 
 ### Import XLSX
 
+For importing, you need to use the [Server Version of the Facade API](/guides/sheet/facade/facade#use-with-the-univer-server).
+
 #### Import XLSX and Get `unitId`
 
 In a collaborative environment, each workbook has a unique `unitId`. Use the API `importXLSXToUnitId` to pass in the `file` parameter and return `unitId`, which can be used to access the workbook. The `file` parameter can be a File object or a URL to a remote file.
@@ -478,6 +480,8 @@ univerAPI.importXLSXToSnapshot(file).then((data)=>{
 ```
 
 ### Export XLSX
+
+For exporting, you need to use the [Server Version of the Facade API](/guides/sheet/facade/facade#use-with-the-univer-server).
 
 #### Export XLSX via `unitId`
 
