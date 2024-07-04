@@ -113,7 +113,7 @@ fetchExcelFile(url).then(async file => {
     univerAPI.importXLSXToUnitId(file).then(unitId => {
       console.log('Unit ID created:', unitId);
 
-      // 配合协同编辑自动加载数据一同使用 https://univer.ai/guides/sheet/features/collaboration#automatically-load-data
+      // Utilize automatic data loading in conjunction with collaborative editing. https://univer.ai/guides/sheet/features/collaboration#automatically-load-data
       const url = new URL(window.location.href);
       const unit = url.searchParams.get('unit');
       url.searchParams.set('unit', unitID);
