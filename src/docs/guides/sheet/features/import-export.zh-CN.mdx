@@ -104,10 +104,25 @@ async function fetchExcelFile(url) {
 }
 
 // 从 URL 获取文件并导入为快照
-fetchExcelFile(url).then(file => {
+fetchExcelFile(url).then(async file => {
   if (file) {
-    const snapshot = univerAPI.importXLSXToSnapshot(file);
-    console.log('Snapshot created:', snapshot);
+    // 以下代码需要根据实际情况修改
+    univerAPI.importXLSXToSnapshot(file).then(snapshot => {
+      console.log('Snapshot created:', snapshot); // 了解更多: https://univer.ai/guides/sheet/getting-started/cell-data
+    });
+
+    univerAPI.importXLSXToUnitId(file).then(unitId => {
+      console.log('Unit ID created:', unitId);
+
+      // 配合协同编辑自动加载数据一同使用 https://univer.ai/zh-CN/guides/sheet/features/collaboration#自动加载数据
+      const url = new URL(window.location.href);
+      const unit = url.searchParams.get('unit');
+      url.searchParams.set('unit', unitID);
+      url.searchParams.set('type', "2"); // 2 的意思是 String(UniverInstanceType.UNIVER_SHEET)
+      console.log('Unit URL:', url.toString());
+    });
   }
 });
 ```
+
+注: Facade API `univerAPI.importXLSXToSnapshot` 会调用  `@univerjs-pro/sheets-exchange-client` 提供的功能，使用前确保项目已经安装好了`@univerjs-pro/sheets-exchange-client`。
