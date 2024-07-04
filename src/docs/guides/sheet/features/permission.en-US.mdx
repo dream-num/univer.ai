@@ -9,12 +9,17 @@ Handle permission interception in front-end scenarios. When it detects that ther
 ## How to use
 
 For example:
+
 1. Driven by Command Mode
+
 Execute the corresponding permission settings through the command mode. Please refer to the [Permission Setting Demo](/playground?title=Permission%20Control) for the code implementation of the worksheet permission settings.
+
 If you want to set area protection, just modify the driven command and the corresponding parameters. For specific content, please refer to the [code](https://github.com/dream-num/univer/blob/6e2ef32809fbb56397dd6c4d7d7fbd0ed7698e39/packages/sheets/src/commands/commands/add-range-protection.command.ts)
 
 2. Calling via facadeAPI
+
 On the facade instance, we expose an API that can adjust the workbook editing permissions. You can set the workbook's editing permissions by calling this API.
+
 ```typescript
 import { FUniver } from "@univerjs/facade";
 
@@ -29,7 +34,7 @@ Essentially, it controls the permission switch by setting the value of the permi
 
 3. Extended Use
 
-Here is an example of `WorkbookEditablePermission`. You can add permission verification in your own plugin, and other points are similar.
+Here is an example of `WorkbookEditablePermission`. You can add permission verification in** **your own plugin, and other points are similar.
 
 ```typescript
 import { WorkbookEditablePermission } from '@univerjs/sheets';
@@ -49,6 +54,8 @@ class YourService {
   }
 }
 ```
+
+You can also extend and modify other permission points to achieve permission control for different functions. For a specific list of points, please refer to the bottom of the article.
 
 ### How to extend the permission point
 
