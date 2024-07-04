@@ -103,10 +103,25 @@ async function fetchExcelFile(url) {
 }
 
 // Fetch the file and import it as a snapshot
-fetchExcelFile(url).then(file => {
+fetchExcelFile(url).then(async file => {
   if (file) {
-    const snapshot = univerAPI.importXLSXToSnapshot(file);
-    console.log('Snapshot created:', snapshot);
+    // Modify the following code according to the actual situation
+    univerAPI.importXLSXToSnapshot(file).then(snapshot => {
+      console.log('Snapshot created:', snapshot); // see more: https://univer.ai/guides/sheet/getting-started/cell-data
+    });
+
+    univerAPI.importXLSXToUnitId(file).then(unitId => {
+      console.log('Unit ID created:', unitId);
+
+      // Utilize automatic data loading in conjunction with collaborative editing. https://univer.ai/guides/sheet/features/collaboration#automatically-load-data
+      const url = new URL(window.location.href);
+      const unit = url.searchParams.get('unit');
+      url.searchParams.set('unit', unitID);
+      url.searchParams.set('type', "2"); // The meaning of "2" is String(UniverInstanceType.UNIVER_SHEET)
+      console.log('Unit URL:', url.toString());
+    });
   }
 });
 ```
+
+Note: The Facade API `univerAPI.importXLSXToSnapshot` utilizes the functionality provided by `@univerjs-pro/sheets-exchange-client`. Ensure that `@univerjs-pro/sheets-exchange-client` is installed in the project before use.

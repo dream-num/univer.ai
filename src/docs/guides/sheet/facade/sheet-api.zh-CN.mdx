@@ -457,7 +457,7 @@ activeWorkbook.onSelectionChange((selection) => {
 
 ### 导入 XLSX
 
-导入需要使用[服务端版本 Facade API](/zh-CN/guides/sheet/facade/facade#与服务端配合使用)。
+导入 API 需要使用[服务端版本 Facade API](/zh-CN/guides/sheet/facade/facade#与服务端配合使用) 调用 [导入导出插件](/zh-CN/guides/sheet/features/import-export) 提供的功能，使用前确保已经引入对应的依赖。
 
 #### 导入 XLSX 并获取 `unitId`
 
@@ -481,7 +481,7 @@ univerAPI.importXLSXToSnapshot(file).then((data)=>{
 
 ### 导出 XLSX
 
-导出需要使用[服务端版本 Facade API](/zh-CN/guides/sheet/facade/facade#与服务端配合使用)。
+导出 API 需要使用[服务端版本 Facade API](/zh-CN/guides/sheet/facade/facade#与服务端配合使用) 调用 [导入导出插件](/zh-CN/guides/sheet/features/import-export) 提供的功能，使用前确保已经引入对应的依赖。
 
 ### 通过 `unitId` 导出 XLSX
 
