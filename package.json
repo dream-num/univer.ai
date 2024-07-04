@@ -3,6 +3,7 @@
   "type": "module",
   "version": "0.1.17",
   "private": false,
+  "packageManager": "pnpm@9.4.0",
   "scripts": {
     "prepare": "simple-git-hooks",
     "dev": "next dev",
@@ -14,7 +15,7 @@
   },
   "dependencies": {
     "@antv/g2": "^5.2.0",
-    "@codesandbox/sandpack-react": "^2.14.4",
+    "@codesandbox/sandpack-react": "^2.14.5",
     "@radix-ui/react-checkbox": "^1.1.1",
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-dropdown-menu": "^2.1.1",
@@ -25,7 +26,7 @@
     "@radix-ui/themes": "^3.1.1",
     "@rc-component/color-picker": "^1.5.3",
     "@react-spring/web": "^9.7.3",
-    "@stackblitz/sdk": "^1.10.0",
+    "@stackblitz/sdk": "^1.11.0",
     "@univerjs-pro/ai-auto-complete": "0.1.17",
     "@univerjs-pro/collaboration": "0.1.17",
     "@univerjs-pro/collaboration-client": "0.1.17",
@@ -93,7 +94,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.21.2",
-    "@eslint-react/eslint-plugin": "^1.5.20",
+    "@eslint-react/eslint-plugin": "^1.5.21",
     "@types/node": "^20.14.9",
     "@types/pako": "^2.0.3",
     "@types/react": "^18.3.3",
