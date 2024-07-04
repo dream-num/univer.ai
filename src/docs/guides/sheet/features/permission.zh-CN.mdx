@@ -8,7 +8,31 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 ## 如何使用
 
-这里以`WorkbookEditablePermission`举例，其他点位类似
+1. 通过命令模式驱动
+
+通过驱动command来执行对应的权限设置，请参考 [权限设置demo](/playground?title=Permission%20Control) 中关于工作表权限设置的代码实现。
+
+如果你想设置区域保护，只需修改驱动的command以及对应的参数，具体内容请参考 [code](https://github.com/dream-num/univer/blob/6e2ef32809fbb56397dd6c4d7d7fbd0ed7698e39/packages/sheets/src/commands/commands/add-range-protection.command.ts)
+
+2. 通过facadeAPI来调用，在facade实例上，我们暴露了一个可调节工作簿编辑权限的API，你可以通过调用这个API来设置工作簿的编辑权限。
+
+```typescript
+import { FUniver } from "@univerjs/facade";
+
+const univerAPI = FUniver.newAPI(univer);
+```
+
+然后你就可以通过调用 `univerAPI` 的方法来使用 Univer 了，例如设置整体工作簿不可编辑：
+
+```typescript
+univerAPI.setWorkbookEditable(false);
+```
+
+本质是通过设置权限点位的值来控制权限的开关，权限点位对应的command在执行前会去读取该点位的值，假如权限值为false，则会终止command的执行。
+
+3. 拓展使用
+
+这里以`WorkbookEditablePermission`举例，在自己的插件中增加权限校验，其他点位类似
 
 ```typescript
 import { WorkbookEditablePermission } from '@univerjs/sheets';
@@ -29,7 +53,9 @@ class YourService {
 }
 ```
 
-### 第三方如何扩展权限点位
+你也可以拓展修改别得权限点位来实现对不同功能的权限控制，具体点位列表请参考文章底部。
+
+### 第三方插件如何扩展权限点位
 
 ```typescript
 import { IPermissionService,IPermissionPoint } from '@univerjs/core';
@@ -80,7 +106,7 @@ class ConsumeService {
 
 在生产环境中,我们需要将这部分实现转由后端实现,前端需要基于[IAuthzIoService](https://github.com/dream-num/univer/blob/dev/packages/core/src/services/authz-io/type.ts)类型实现对应的请求函数，来进行运行时的替换。
 
-如何替换呢？
+下面是一个简单的示例：
 
 ```typescript
 import { IAuthzIoService, Univer } from '@univerjs/core';
