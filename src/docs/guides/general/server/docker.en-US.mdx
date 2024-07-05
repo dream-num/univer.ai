@@ -65,7 +65,7 @@ You'll need to tweak the `.env` file. Set `S3_ENDPOINT_PUBLIC` to your local net
 + S3_ENDPOINT_PUBLIC=http://<Your Local Network IP>:19000
 ```
 
-### How to find error when server start failed ?
+### How to find error when server start failed?
 
 You can use `docker compose logs` to see server logs, for example:
 ```shell
@@ -75,7 +75,8 @@ docker compose logs -f universer --since 20m
 
 If you need assistance, feel free to contact us.
 
-### How to restart, stop, uninstall server ?
+### How to restart, stop, uninstall server?
+
 ```shell
 # restart server
 bash run.sh
@@ -90,7 +91,7 @@ docker compose down
 docker compose down --volumes
 ```
 
-### How to change host port the server used ?
+### How to change host port the server used?
 
 You can update the `.env` file, then run `bash run.sh`
 

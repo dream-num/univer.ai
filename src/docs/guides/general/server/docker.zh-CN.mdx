@@ -12,7 +12,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 2. 内存: 2G
 3. 磁盘: 10G
 
-需要[docker >= 23 版本](https://docs.docker.com/engine/install/)。
+需要 [docker >= 23 版本](https://docs.docker.com/engine/install/)。
 
 ## 技术架构
 
@@ -20,7 +20,7 @@ PostgreSQL + RabbitMQ
 
 ## 快速部署
 
-系统环境：Linux、Mac、Windows(WSL/Git Bash)
+系统环境：Linux、Mac、Windows/WSL
 
 ```
 bash -c "$(curl -fsSL https://release-univer.oss-cn-shenzhen.aliyuncs.com/release-demo/install.sh)"
@@ -66,7 +66,7 @@ Univer 服务默认端口如下：
 
 ### 拉取 docker hub 镜像失败？
 
-编辑 `docker-compose.yaml`文件，替换对应的镜像地址：
+编辑 `docker-compose.yaml` 文件，替换对应的镜像地址：
 ```diff
 - image: nginx:alpine-slim
 + image: univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/nginx:alpine-slim

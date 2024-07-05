@@ -1,3 +1,4 @@
+import { Steps } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 # Deploying to Kubernetes
@@ -25,37 +26,39 @@ helm version
 
 ## Deployment Steps
 
-Step 1: Kubernetes Cluster Setup
+<Steps>
+    ### Kubernetes Cluster Setup
 
-Make sure you have an active Kubernetes cluster. For cloud providers like Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes Service (EKS), adhere to their specific instructions for cluster creation.
+    Make sure you have an active Kubernetes cluster. For cloud providers like Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes Service (EKS), adhere to their specific instructions for cluster creation.
 
-Step 2: Deploying Univer services
+    ### Deploying Univer services
 
-1. Use Helm to deploy Univer services:
+    1. Use Helm to deploy Univer services:
 
-```bash
-helm install univer --create-namespace \
-    --set global.istioNamespace=univer \
-    oci://univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/helm-charts/univer-stack
+    ```bash
+    helm install univer --create-namespace \
+        --set global.istioNamespace=univer \
+        oci://univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/helm-charts/univer-stack
 
-kubectl rollout restart deployment/collaboration-server -n univer
-kubectl rollout restart deployment/universer -n univer
-```
+    kubectl rollout restart deployment/collaboration-server -n univer
+    kubectl rollout restart deployment/universer -n univer
+    ```
 
-2. To check if your deployment is up and running:
+    2. To check if your deployment is up and running:
 
-```bash
-kubectl get pods
-```
+    ```bash
+    kubectl get pods
+    ```
 
-Step 3: Deployment Verification
+    ### Deployment Verification
 
-```bash
-# For quick testing, you might edit your local hosts file to map the domain.
-# Default domain: univer.example.com
+    ```bash
+    # For quick testing, you might edit your local hosts file to map the domain.
+    # Default domain: univer.example.com
 
-Visit: http://univer.example.com
-```
+    Visit: http://univer.example.com
+    ```
+</Steps>
 
 ## Troubleshooting
 
