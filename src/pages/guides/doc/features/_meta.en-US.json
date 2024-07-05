@@ -1,5 +1,6 @@
 {
   "core": "Core",
   "facade": "Facade API",
-  "floating-images": "Floating Images"
+  "floating-images": "Floating Images",
+  "thread-comment": "Thread Comment"
 }
