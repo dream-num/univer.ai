@@ -48,7 +48,7 @@
     "@univerjs/engine-render": "0.1.17",
     "@univerjs/facade": "0.1.17",
     "@univerjs/find-replace": "0.1.17",
-    "@univerjs/icons": "^0.1.58",
+    "@univerjs/icons": "^0.1.59",
     "@univerjs/network": "0.1.17",
     "@univerjs/protocol": "0.1.37",
     "@univerjs/rpc": "0.1.17",
