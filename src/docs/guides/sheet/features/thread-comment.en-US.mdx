@@ -12,12 +12,12 @@ The Comment / Annotation plugin provides the ability to comment or annotate cell
 <Tabs items={['pnpm', 'npm']}>
   <Tabs.Tab label="pnpm">
     ```shell
-    pnpm add @univerjs/sheets-thread-comment @univerjs/thread-comment-ui
+    pnpm add @univerjs/sheets-thread-comment-base @univerjs/sheets-thread-comment @univerjs/thread-comment @univerjs/thread-comment-ui
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
     ```shell
-    npm install @univerjs/sheets-thread-comment @univerjs/thread-comment-ui
+    npm install @univerjs/sheets-thread-comment-base @univerjs/sheets-thread-comment @univerjs/thread-comment @univerjs/thread-comment-ui
     ```
   </Tabs.Tab>
 </Tabs>
@@ -27,7 +27,9 @@ The Comment / Annotation plugin provides the ability to comment or annotate cell
 ```typescript
 import '@univerjs/thread-comment-ui/lib/index.css';
 
-import { IThreadCommentMentionDataService } from '@univerjs/thread-comment-ui';
+import { IThreadCommentMentionDataService, UniverThreadCommentUIPlugin } from '@univerjs/thread-comment-ui';
+import { UniverThreadCommentPlugin } from '@univerjs/thread-comment';
+import { UniverSheetsThreadCommentBasePlugin } from '@univerjs/sheets-thread-comment-base';
 import { UniverSheetsThreadCommentPlugin } from '@univerjs/sheets-thread-comment';
 ```
 
@@ -35,7 +37,7 @@ import { UniverSheetsThreadCommentPlugin } from '@univerjs/sheets-thread-comment
 
 ```typescript
 import { LocaleType, Tools } from '@univerjs/core';
-ThreadCommentUIEnUS from '@univerjs/thread-comment-ui/locale/en-US';
+import ThreadCommentUIEnUS from '@univerjs/thread-comment-ui/locale/en-US';
 import SheetsThreadCommentEnUS from '@univerjs/sheets-thread-comment/locale/en-US';
 
 const univer = new Univer({
@@ -80,9 +82,12 @@ class CustomMentionDataService implements IThreadCommentMentionDataService {
       },
     ];
   }
-  }
+}
 
-univer.registerPlugin(UniverSheetsThreadCommentPlugin, {
-  overrides: [[IThreadCommentMentionDataService, { useClass: CustomMentionDataService }]],
+univer.registerPlugin(UniverThreadCommentPlugin);
+univer.registerPlugin(UniverThreadCommentUIPlugin, {
+    overrides: [[IThreadCommentMentionDataService, { useClass: CustomMentionDataService }]],
 });
+univer.registerPlugin(UniverSheetsThreadCommentBasePlugin);
+univer.registerPlugin(UniverSheetsThreadCommentPlugin);
 ```

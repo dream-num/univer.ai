@@ -9,6 +9,7 @@ import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
 import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
 import { UniverFindReplacePlugin } from '@univerjs/find-replace'
 import { UniverSheetsPlugin } from '@univerjs/sheets'
+import { UniverSheetsConditionalFormattingPlugin } from '@univerjs/sheets-conditional-formatting'
 import { UniverSheetsConditionalFormattingUIPlugin } from '@univerjs/sheets-conditional-formatting-ui'
 import { UniverSheetsFindReplacePlugin } from '@univerjs/sheets-find-replace'
 import { UniverSheetsFormulaPlugin } from '@univerjs/sheets-formula'
@@ -82,6 +83,7 @@ export default function App(props: IProps) {
     univer.registerPlugin(UniverSheetsFindReplacePlugin)
 
     // sheet condition formatting
+    univer.registerPlugin(UniverSheetsConditionalFormattingPlugin)
     univer.registerPlugin(UniverSheetsConditionalFormattingUIPlugin)
 
     // filter

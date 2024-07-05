@@ -12,12 +12,12 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 <Tabs items={['pnpm', 'npm']}>
   <Tabs.Tab label="pnpm">
     ```shell
-    pnpm add @univerjs/sheets-thread-comment @univerjs/thread-comment-ui
+    pnpm add @univerjs/sheets-thread-comment-base @univerjs/sheets-thread-comment @univerjs/thread-comment @univerjs/thread-comment-ui
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
     ```shell
-    npm install @univerjs/sheets-thread-comment @univerjs/thread-comment-ui
+    npm install @univerjs/sheets-thread-comment-base @univerjs/sheets-thread-comment @univerjs/thread-comment @univerjs/thread-comment-ui
     ```
   </Tabs.Tab>
 </Tabs>
@@ -27,8 +27,10 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 ```typescript
 import '@univerjs/thread-comment-ui/lib/index.css';
 
-import { zhCN as ThreadCommentUIEnUS } from '@univerjs/thread-comment-ui';
-import { zhCN as SheetsThreadCommentEnUS } from '@univerjs/sheets-thread-comment';
+import { IThreadCommentMentionDataService, UniverThreadCommentUIPlugin } from '@univerjs/thread-comment-ui';
+import { UniverThreadCommentPlugin } from '@univerjs/thread-comment';
+import { UniverSheetsThreadCommentBasePlugin } from '@univerjs/sheets-thread-comment-base';
+import { UniverSheetsThreadCommentPlugin } from '@univerjs/sheets-thread-comment';
 ```
 
 ## 国际化
@@ -80,9 +82,12 @@ class CustomMentionDataService implements IThreadCommentMentionDataService {
       },
     ];
   }
-  }
+}
 
-univer.registerPlugin(UniverSheetsThreadCommentPlugin, {
-  overrides: [[IThreadCommentMentionDataService, { useClass: CustomMentionDataService }]],
+univer.registerPlugin(UniverThreadCommentPlugin);
+univer.registerPlugin(UniverThreadCommentUIPlugin, {
+    overrides: [[IThreadCommentMentionDataService, { useClass: CustomMentionDataService }]],
 });
+univer.registerPlugin(UniverSheetsThreadCommentBasePlugin);
+univer.registerPlugin(UniverSheetsThreadCommentPlugin);
 ```
