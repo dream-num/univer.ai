@@ -36,14 +36,14 @@ import { UniverDocsThreadCommentUIPlugin } from '@univerjs/docs-thread-comment-u
 
 ```typescript
 import { LocaleType, Tools } from '@univerjs/core';
-import ThreadCommentUIZhCN from '@univerjs/thread-comment-ui/locale/zh-CN';
+import ThreadCommentUIEnUS from '@univerjs/thread-comment-ui/locale/en-US';
 
 const univer = new Univer({
   theme: defaultTheme,
-  locale: LocaleType.ZH_CN,
+  locale: LocaleType.EN_US,
   locales: {
-    [LocaleType.ZH_CN]: Tools.deepMerge(
-      ThreadCommentUIZhCN,
+    [LocaleType.EN_US]: Tools.deepMerge(
+      ThreadCommentUIEnUS,
     ),
   },
 });

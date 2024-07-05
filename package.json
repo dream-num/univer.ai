@@ -1,7 +1,7 @@
 {
   "name": "univer.ai",
   "type": "module",
-  "version": "0.1.17",
+  "version": "0.2.0",
   "private": false,
   "packageManager": "pnpm@9.4.0",
   "scripts": {
@@ -24,7 +24,7 @@
     "@radix-ui/react-switch": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.1",
     "@radix-ui/themes": "^3.1.1",
-    "@rc-component/color-picker": "^1.5.3",
+    "@rc-component/color-picker": "^1.6.0",
     "@react-spring/web": "^9.7.3",
     "@stackblitz/sdk": "^1.11.0",
     "@univerjs-pro/ai-auto-complete": "0.1.17",
