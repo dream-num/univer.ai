@@ -1,5 +1,7 @@
 {
   "core": "Core",
   "facade": "Facade API",
-  "floating-images": "Floating Images"
+  "hyperlink": "Hyperlink",
+  "floating-images": "Floating Images",
+  "thread-comment": "Thread Comment"
 }

@@ -12,12 +12,12 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 <Tabs items={['pnpm', 'npm']}>
   <Tabs.Tab label="pnpm">
     ```shell
-    pnpm add @univerjs/sheets-conditional-formatting-ui
+    pnpm add @univerjs/sheets-conditional-formatting @univerjs/sheets-conditional-formatting-ui
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
     ```shell
-    npm install @univerjs/sheets-conditional-formatting-ui
+    npm install @univerjs/sheets-conditional-formatting @univerjs/sheets-conditional-formatting-ui
     ```
   </Tabs.Tab>
 </Tabs>
@@ -27,6 +27,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 ```typescript
 import '@univerjs/sheets-conditional-formatting-ui/lib/index.css';
 
+import { UniverSheetsConditionalFormattingPlugin } from '@univerjs/sheets-conditional-formatting';
 import { UniverSheetsConditionalFormattingUIPlugin } from '@univerjs/sheets-conditional-formatting-ui';
 ```
 
@@ -50,5 +51,6 @@ const univer = new Univer({
 ## 注册
 
 ```typescript
+univer.registerPlugin(UniverSheetsConditionalFormattingPlugin);
 univer.registerPlugin(UniverSheetsConditionalFormattingUIPlugin);
 ```

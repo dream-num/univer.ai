@@ -3,7 +3,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 # HyperLink
 
-<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+<BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC]} value={UniverTypes.SHEET} />
 
 Insert hyperlinks, support click to jump to specified link, cell, or worksheet.
 
@@ -12,12 +12,12 @@ Insert hyperlinks, support click to jump to specified link, cell, or worksheet.
 <Tabs items={['pnpm', 'npm']}>
   <Tabs.Tab label="pnpm">
     ```shell
-    pnpm add @univerjs/sheets-hyper-link-ui
+    pnpm add @univerjs/sheets-hyper-link @univerjs/sheets-hyper-link-ui
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
     ```shell
-    npm install @univerjs/sheets-hyper-link-ui
+    npm install @univerjs/sheets-hyper-link @univerjs/sheets-hyper-link-ui
     ```
   </Tabs.Tab>
 </Tabs>
@@ -27,6 +27,7 @@ Insert hyperlinks, support click to jump to specified link, cell, or worksheet.
 ```typescript
 import '@univerjs/sheets-hyper-link-ui/lib/index.css';
 
+import { UniverSheetsHyperLinkPlugin } from '@univerjs/sheets-hyper-link';
 import { UniverSheetsHyperLinkUIPlugin } from '@univerjs/sheets-hyper-link-ui';
 ```
 
@@ -50,5 +51,6 @@ const univer = new Univer({
 ## Register
 
 ```typescript
+univer.registerPlugin(UniverSheetsHyperLinkPlugin);
 univer.registerPlugin(UniverSheetsHyperLinkUIPlugin);
 ```

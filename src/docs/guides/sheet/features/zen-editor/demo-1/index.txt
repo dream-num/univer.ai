@@ -13,14 +13,9 @@ import { UniverSheetsPlugin } from '@univerjs/sheets'
 import { UniverSheetsUIPlugin } from '@univerjs/sheets-ui'
 import { UniverSheetsNumfmtPlugin } from '@univerjs/sheets-numfmt'
 import { UniverSheetsFormulaPlugin } from '@univerjs/sheets-formula'
-
-import { FUniver } from '@univerjs/facade'
+import { UniverSheetsZenEditorPlugin } from '@univerjs/sheets-zen-editor'
 
 import { enUS } from './locales'
-
-import { MainCustomExtension } from './main-extension'
-import { RowHeaderCustomExtension } from './row-header-extension'
-import { ColumnHeaderCustomExtension } from './column-header-extension'
 
 import './style.css'
 
@@ -49,14 +44,6 @@ univer.registerPlugin(UniverSheetsPlugin)
 univer.registerPlugin(UniverSheetsUIPlugin)
 univer.registerPlugin(UniverSheetsNumfmtPlugin)
 univer.registerPlugin(UniverSheetsFormulaPlugin)
+univer.registerPlugin(UniverSheetsZenEditorPlugin)
 
-const unitId = 'workbook'
-univer.createUnit(UniverInstanceType.UNIVER_SHEET, { id: unitId })
-
-const univerAPI = FUniver.newAPI(univer)
-
-univerAPI.getHooks().onRendered(() => {
-  univerAPI.registerSheetRowHeaderExtension(unitId, new RowHeaderCustomExtension())
-  univerAPI.registerSheetColumnHeaderExtension(unitId, new ColumnHeaderCustomExtension())
-  univerAPI.registerSheetMainExtension(unitId, new MainCustomExtension())
-})
+univer.createUnit(UniverInstanceType.UNIVER_SHEET, {})

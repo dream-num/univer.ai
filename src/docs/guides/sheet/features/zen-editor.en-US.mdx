@@ -1,9 +1,14 @@
 import { Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import Sandbox from '@/components/Sandbox'
+
+import entryFile from './zen-editor/demo-1/index.txt'
 
 # Zen Editor
 
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+<Sandbox entryFile={entryFile} />
 
 The Zen Editor plugin provides an immersive cell editing experience. Through Zen Editor, you can easily edit text, images, links, and other content in cells in the form of a document editor.
 

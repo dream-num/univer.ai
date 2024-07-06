@@ -1,0 +1,56 @@
+import { Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# 超链接
+
+<BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC]} value={UniverTypes.DOC} />
+
+支持在文档中插入超链接。
+
+## 安装
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/docs-hyper-link @univerjs/docs-hyper-link-ui
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/docs-hyper-link @univerjs/docs-hyper-link-ui
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## 引入
+
+```typescript
+import '@univerjs/docs-hyper-link-ui/lib/index.css';
+
+import { UniverDocsHyperLinkPlugin } from '@univerjs/docs-hyper-link';
+import { UniverDocsHyperLinkUIPlugin } from '@univerjs/docs-hyper-link-ui';
+```
+
+## 国际化
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core';
+import DocsHyperLinkUIZhCN from '@univerjs/docs-hyper-link-ui/locale/zh-CN';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: Tools.deepMerge(
+      DocsHyperLinkUIZhCN
+    ),
+  },
+});
+```
+
+## 注册
+
+```typescript
+univer.registerPlugin(UniverDocsHyperLinkPlugin);
+univer.registerPlugin(UniverSheetsHyperLinkUIPlugin);
+```

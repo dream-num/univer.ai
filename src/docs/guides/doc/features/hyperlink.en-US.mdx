@@ -1,0 +1,57 @@
+import { Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+{/* # 超链接 */}
+# HyperLink
+
+<BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC]} value={UniverTypes.DOC} />
+
+Insert hyperlinks in the document.
+
+## Installation
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/docs-hyper-link @univerjs/docs-hyper-link-ui
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/docs-hyper-link @univerjs/docs-hyper-link-ui
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Import
+
+```typescript
+import '@univerjs/docs-hyper-link-ui/lib/index.css';
+
+import { UniverDocsHyperLinkPlugin } from '@univerjs/docs-hyper-link';
+import { UniverDocsHyperLinkUIPlugin } from '@univerjs/docs-hyper-link-ui';
+```
+
+## Internationalization
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core';
+import DocsHyperLinkUIEnUS from '@univerjs/docs-hyper-link-ui/locale/en-US';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: Tools.deepMerge(
+      DocsHyperLinkUIEnUS
+    ),
+  },
+});
+```
+
+## Register
+
+```typescript
+univer.registerPlugin(UniverDocsHyperLinkPlugin);
+univer.registerPlugin(UniverSheetsHyperLinkUIPlugin);
+```
