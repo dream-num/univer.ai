@@ -64,6 +64,7 @@ const mockUser = {
 };
 
 class CustomMentionDataService implements IThreadCommentMentionDataService {
+  dataSource: Nullable<IThreadCommentMentionDataSource>
   trigger: string = '@';
 
   async getMentions(search: string) {

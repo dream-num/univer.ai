@@ -1,5 +1,6 @@
 'use client'
 
+import type { Nullable } from '@univerjs/core'
 import { LocaleType, Univer, UniverInstanceType, UserManagerService } from '@univerjs/core'
 import { UniverDataValidationPlugin } from '@univerjs/data-validation'
 import { defaultTheme } from '@univerjs/design'
@@ -20,6 +21,7 @@ import { UniverUIPlugin } from '@univerjs/ui'
 import { useEffect, useRef } from 'react'
 import { enUS, zhCN } from 'univer:locales'
 import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validation'
+import type { IThreadCommentMentionDataSource } from '@univerjs/thread-comment-ui'
 import { IThreadCommentMentionDataService } from '@univerjs/thread-comment-ui'
 import { UniverSheetsThreadCommentPlugin } from '@univerjs/sheets-thread-comment'
 import { UniverSheetsFilterPlugin } from '@univerjs/sheets-filter'
@@ -109,6 +111,7 @@ export default function App(props: IProps) {
     }
 
     class CustomMentionDataService implements IThreadCommentMentionDataService {
+      dataSource: Nullable<IThreadCommentMentionDataSource>
       trigger: string = '@'
 
       async getMentions() {
