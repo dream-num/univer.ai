@@ -4,7 +4,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
 
-是用来处理前端场景的权限拦截，当发现没有对应点位权限的时候，会终止代码执行并提示用户缺失权限。
+是用来处理前端场景的权限拦截，当发现没有对应操作权限的时候，会终止代码执行并提示用户缺失权限。
 
 ## 如何使用
 
@@ -32,9 +32,9 @@ commandService.executeCommand(AddWorksheetProtectionMutation.id, {
 });
 ```
 
-这个demo是给工作表添加保护，`permissionId` 是存储权限的随机生成的唯一Id 需要你自己生成，`unitType` 是工作表的类型，你可以使用仓库中的UnitObject枚举来替换上面的魔法数，`unitId` 是工作簿的id，`subUnitId` 是工作表的id。   
+这个 demo 是给工作表添加保护，`permissionId` 需要自己生成的唯一 Id 用来存储权限，`unitType` 是工作表的类型，你可以使用仓库中的 UnitObject 枚举来替换上面的魔法数，`unitId` 是工作簿的id，`subUnitId` 是工作表的 id。   
 
-删除已经存在的权限你可以使用 `DeleteWorksheetProtectionMutation`, 参数是 `unitId` 和 `subUnitId`。
+删除已经存在的工作表权限可以使用 `DeleteWorksheetProtectionMutation`, 参数是 `unitId` 和 `subUnitId`。
 
 ```typescript
 DeleteWorksheetProtectionMutationParams {
@@ -68,9 +68,9 @@ commandService.executeCommand(AddRangeProtectionMutation.id, {
 });
 ```
 
-这个demo是选区添加保护，这里面的参数和上面的一样，只是多了一个 `ranges` 参数，这个参数是你选中的区域。   
+这个 demo 是给自定义选区添加权限保护，这里面的参数和上面的一样，只是多了一个 `ranges` 参数，这个参数是你选中的区域。   
 
-删除已经存在的自定义区域保护可以使用 `DeleteRangeProtectionMutation`，参数是 `unitId` 和 `subUnitId` 以及想批量删除的ruleIds。
+删除已经存在的自定义区域保护可以使用 `DeleteRangeProtectionMutation`，参数是 `unitId` 和 `subUnitId` 以及想批量删除的 `ruleIds`。
 
 ```typescript
 DeleteRangeProtectionMutationParams {

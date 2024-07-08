@@ -38,7 +38,7 @@ commandService.executeCommand(AddWorksheetProtectionMutation.id, {
 });
 ```
 
-This demo is to add protection to the worksheet. `permissionId` is a randomly generated unique ID for storing permissions. You need to generate it yourself. `unitType` is the type of the worksheet. You can use the UnitObject enumeration in the warehouse to replace the magic number above. `unitId` is the id of the workbook, and `subUnitId` is the id of the worksheet.
+This demo is to add protection to the worksheet. `permissionId` is a randomly generated unique ID for storing permissions. You need to generate it yourself. `unitType` is the type of the worksheet. You can use the `UnitObject` enumeration in the warehouse to replace the magic number above. `unitId` is the id of the workbook, and `subUnitId` is the id of the worksheet.
 
 To delete, you can use `DeleteWorksheetProtectionMutation`, the parameters are `unitId` and `subUnitId`.
 
@@ -76,7 +76,7 @@ commandService.executeCommand(AddRangeProtectionMutation.id, {
 
 This demo adds protection to a selected area. The parameters here are the same as above, except that there is an additional `ranges` parameter, which is the area you selected.
 
-To delete, you can use `DeleteRangeProtectionMutation`, the parameters are `unitId` and `subUnitId` and the ruleIds you want to delete in batches.
+To delete, you can use `DeleteRangeProtectionMutation`, the parameters are `unitId` and `subUnitId` and the `ruleIds` you want to delete in batches.
 
 ```typescript
 DeleteRangeProtectionMutationParams {
@@ -88,7 +88,7 @@ DeleteRangeProtectionMutationParams {
 
 ### workbook permission
 
-Currently, the overall permissions of a workbook are not set through mutations, but are modified directly through the API. Therefore, we provide a FacadeAPI. On the facade instance, we expose an API that can adjust the edit permissions of a workbook. You can set the edit permissions of a workbook by calling this API.
+Currently, the overall permissions of a workbook are not set through `mutation`. Instead, the permissions are modified directly through the API. Therefore, we provide a [Facade API](/guides/sheet/facade/facade). You can set the edit permissions of a workbook by calling this API.
 
 ```typescript
 import { FUniver } from "@univerjs/facade";
@@ -105,6 +105,7 @@ univerAPI.setWorkbookEditable(false);
 The essence is to control the switch of permissions by setting the value of the permission point. The command corresponding to the permission point will read the value of the point before execution. If the permission value is false, the execution of the command will be terminated.
 
 ## Extended usage
+
 Here we take `WorkbookEditablePermission` as an example and add permission verification in your own plug-in. Other points are similar.
 
 ```typescript
