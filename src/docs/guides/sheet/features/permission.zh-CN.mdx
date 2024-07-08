@@ -4,13 +4,29 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
 
-是用来处理前端场景的权限拦截，当发现没有对应操作权限的时候，会终止代码执行并提示用户缺失权限。
+是用来处理前端场景的权限拦截，当发现没有对应操作权限的时候，会终止代码执行并提示用户缺失权限。例如你可以在一片选区内设置区域保护，就可以设置其他协作者在该保护范围内是否可以使用编辑、阅读、复制、筛选等等。
 
 ## 如何使用
 
-通过驱动 command 来执行对应的权限设置  
+### 工作簿权限
+
+目前工作簿的整体权限不通过 `mutation` 设置，是直接通过 API 来修改权限点位，我们提供了 [Facade API](/guides/sheet/facade/facade)，你可以通过调用这个 API 来设置工作簿的编辑权限。
+
+```typescript
+import { FUniver } from "@univerjs/facade";
+
+const univerAPI = FUniver.newAPI(univer);
+```
+
+然后你就可以通过调用 `univerAPI` 的方法来使用 Univer 了，设置整体工作簿不可编辑：
+
+```typescript
+univerAPI.setWorkbookEditable(false);
+```
 
 ### 工作表权限代码示例
+
+工作表和选区相关的权限设置通过命令模式来执行
 
 ```typescript
 const commandService = accessor.get(ICommandService);
@@ -80,21 +96,6 @@ DeleteRangeProtectionMutationParams {
 }
 ```
 
-### 工作簿权限
-
-目前工作簿的整体权限不通过 `mutation` 设置，是直接通过 API 来修改权限点位，所以我们提供了 [Facade API](/guides/sheet/facade/facade)，你可以通过调用这个 API 来设置工作簿的编辑权限。
-
-```typescript
-import { FUniver } from "@univerjs/facade";
-
-const univerAPI = FUniver.newAPI(univer);
-```
-
-然后你就可以通过调用 `univerAPI` 的方法来使用 Univer 了，设置整体工作簿不可编辑：
-
-```typescript
-univerAPI.setWorkbookEditable(false);
-```
 
 本质是通过设置权限点位的值来控制权限的开关，权限点位对应的command在执行前会去读取该点位的值，假如权限值为false，则会终止command的执行。
 

@@ -4,19 +4,31 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
 
-Handle permission interception in front-end scenarios. When it detects that there is no corresponding permission for a certain action, it will terminate the code execution and prompt the user about the missing permission.
+It is used to handle the permission interception of the front-end scenario. When it is found that there is no corresponding operation permission, the code execution will be terminated and the user will be prompted for the missing permission. For example, you can set area protection in a selection area, and then set whether other collaborators can use editing, reading, copying, filtering, etc. within the protection range.
 
 ## How to use
 
-For example:
+### workbook permission
 
-Driven by Command Mode
+Currently, the overall permissions of a workbook are not set through `mutation`. Instead, the permissions are modified directly through the API. Therefore, we provide a [Facade API](/guides/sheet/facade/facade). You can set the edit permissions of a workbook by calling this API.
 
-Execute the corresponding permission settings through the command mode. Please refer to the [Permission Setting Demo](/playground?title=Permission%20Control) for the code implementation of the worksheet permission settings.
+```typescript
+import { FUniver } from "@univerjs/facade";
 
-If you want to set area protection, just modify the driven command and the corresponding parameters. For specific content, please refer to the [code](https://github.com/dream-num/univer/blob/6e2ef32809fbb56397dd6c4d7d7fbd0ed7698e39/packages/sheets/src/commands/commands/add-range-protection.command.ts)
+const univerAPI = FUniver.newAPI(univer);
+```
+
+Then you can use Univer by calling the `univerAPI` method and set the entire workbook to be uneditable:
+
+```typescript
+univerAPI.setWorkbookEditable(false);
+```
+
+The essence is to control the switch of permissions by setting the value of the permission point. The command corresponding to the permission point will read the value of the point before execution. If the permission value is false, the execution of the command will be terminated.
 
 ### Worksheet permission code example
+
+The permissions for worksheets and selections are set in command mode.
 
 ```typescript
 const commandService = accessor.get(ICommandService);
@@ -85,24 +97,6 @@ DeleteRangeProtectionMutationParams {
   ruleIds: string[];
 }
 ```
-
-### workbook permission
-
-Currently, the overall permissions of a workbook are not set through `mutation`. Instead, the permissions are modified directly through the API. Therefore, we provide a [Facade API](/guides/sheet/facade/facade). You can set the edit permissions of a workbook by calling this API.
-
-```typescript
-import { FUniver } from "@univerjs/facade";
-
-const univerAPI = FUniver.newAPI(univer);
-```
-
-Then you can use Univer by calling the `univerAPI` method and set the entire workbook to be uneditable:
-
-```typescript
-univerAPI.setWorkbookEditable(false);
-```
-
-The essence is to control the switch of permissions by setting the value of the permission point. The command corresponding to the permission point will read the value of the point before execution. If the permission value is false, the execution of the command will be terminated.
 
 ## Extended usage
 
