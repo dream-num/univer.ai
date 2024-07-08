@@ -8,17 +8,83 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 ## 如何使用
 1. 通过命令模式驱动
-通过驱动command来执行对应的权限设置，请参考 [权限设置demo](/playground?title=Permission%20Control) 中关于工作表权限设置的代码实现。
-如果你想设置区域保护，只需修改驱动的command以及对应的参数，具体内容请参考 [code](https://github.com/dream-num/univer/blob/6e2ef32809fbb56397dd6c4d7d7fbd0ed7698e39/packages/sheets/src/commands/commands/add-range-protection.command.ts)
+通过驱动command来执行对应的权限设置  
 
-2. 通过facadeAPI来调用，在facade实例上，我们暴露了一个可调节工作簿编辑权限的API，你可以通过调用这个API来设置工作簿的编辑权限。
+- 工作表权限代码示例：
+```typescript
+const commandService = accessor.get(ICommandService);
+const target = getSheetCommandTarget(univerInstanceService);
+if (!target) {
+  return;
+}
+const { unitId, subUnitId } = target;
+commandService.executeCommand(AddWorksheetProtectionMutation.id, {
+  unitId,
+  subUnitId,
+  rule: {
+    permissionId: "2sxcza1",
+    name: "sheet",
+    unitType: 2,
+    unitId,
+    subUnitId,
+  },
+});
+```
+
+这个demo是给工作表添加保护，`permissionId`是存储权限的随机生成的唯一Id 需要你自己生成，,`unitType`是工作表的类型，你可以使用仓库中的UnitObject枚举来替换上面的魔法数，`unitId`是工作簿的id，`subUnitId`是工作表的id。   
+
+删除你可以使用 `DeleteWorksheetProtectionMutation`, 参数是`unitId`和`subUnitId`
+```typescript
+DeleteWorksheetProtectionMutationParams {
+  unitId: string;
+  subUnitId: string;
+}
+```
+
+- 自定义选区权限代码示例：
+```typescript
+const commandService = accessor.get(ICommandService);
+const selectionManagerService = accessor.get(selectionManagerService);
+const target = getSheetCommandTarget(univerInstanceService);
+if (!target) {
+  return;
+}
+const { unitId, subUnitId } = target;
+const ranges = selectionManagerService..getSelections().map(selection => selection.range);
+commandService.executeCommand(AddRangeProtectionMutation.id, {
+  unitId,
+  subUnitId,
+  rules: [{
+    permissionId: "3xtfxG1",
+    name: "sheet1",
+    unitType: 3,
+    unitId,
+    subUnitId,
+    ranges,
+  }],
+});
+```
+这个demo是选区添加保护，这里面的参数和上面的一样，只是多了一个`ranges`参数，这个参数是你选中的区域。   
+
+
+删除你可以使用`DeleteRangeProtectionMutation`，参数是`unitId`和`subUnitId`以及想批量删除的ruleIds。
+```typescript
+DeleteRangeProtectionMutationParams {
+  unitId: string;
+  subUnitId: string;
+  ruleIds: string[]
+}
+```
+
+- 工作簿权限 
+目前工作簿的整体权限不通过mutation设置，是直接通过api来修改权限点位，所以我们提供了FacadeAPI，在facade实例上，我们暴露了一个可调节工作簿编辑权限的API，你可以通过调用这个API来设置工作簿的编辑权限。
 ```typescript
 import { FUniver } from "@univerjs/facade";
 
 const univerAPI = FUniver.newAPI(univer);
 ```
 
-然后你就可以通过调用 `univerAPI` 的方法来使用 Univer 了，例如设置整体工作簿不可编辑：
+然后你就可以通过调用 `univerAPI` 的方法来使用 Univer 了，设置整体工作簿不可编辑：
 
 ```typescript
 univerAPI.setWorkbookEditable(false);
@@ -26,7 +92,7 @@ univerAPI.setWorkbookEditable(false);
 
 本质是通过设置权限点位的值来控制权限的开关，权限点位对应的command在执行前会去读取该点位的值，假如权限值为false，则会终止command的执行。
 
-3. 拓展使用
+2. 拓展使用
 这里以`WorkbookEditablePermission`举例，在自己的插件中增加权限校验，其他点位类似
 
 ```typescript
