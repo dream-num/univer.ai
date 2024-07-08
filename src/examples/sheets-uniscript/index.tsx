@@ -19,8 +19,8 @@ import { UniverSheetsZenEditorPlugin } from '@univerjs/sheets-zen-editor'
 import { UniverUIPlugin } from '@univerjs/ui'
 import { useEffect, useRef } from 'react'
 import { enUS, zhCN } from 'univer:locales'
-import { UniverUniscriptPlugin } from '@univerjs/uniscript'
-import { UNISCRIT_WORKBOOK_DATA_DEMO } from './data'
+import { UniverUniscriptPlugin } from '../plugins/uniscript/src'
+import { UNISCRIT_WORKBOOK_DATA_DEMO, exampleData } from './data'
 import { GithubPlugin } from '@/examples/plugins/github-plugin'
 
 interface IProps {
@@ -83,6 +83,7 @@ export default function App(props: IProps) {
 
         return './vs/editor/editor.worker.js'
       },
+      example: exampleData,
     })
 
     // create univer sheet instance
