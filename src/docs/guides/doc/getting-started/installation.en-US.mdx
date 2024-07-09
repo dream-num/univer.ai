@@ -16,23 +16,23 @@ We recommend using build tools such as [Vite](https://vitejs.dev/), [esbuild](ht
 
 To facilitate the deployment of Univer's frontend, a variety of npm packages are utilized. You may install the requisite packages based on your specific requirements.
 
-The following example will guide you through which plugins are necessary and how to install them:
-
 <Callout>
   - If you are using npm, make sure you are using npm@7 or higher. This is because npm@3 ~ npm@6 will not correctly install `peerDependencies`[^1].
   - If you are using pnpm, make sure you are using pnpm@8 or higher. If you are using pnpm@6 ~ pnpm@7, you can try configuring `auto-install-peers=true` [^2] to resolve dependency installation issues.
   - Known issue: yarn does not support automatic installation of `peerDependencies`[^3], and there seems to be no reliable solution. Please manually install the missing dependencies according to the console prompts.
 </Callout>
 
+The following example will guide you through which plugins are necessary and how to install them:
+
 <Tabs items={['pnpm', 'npm']}>
   <Tabs.Tab label="pnpm">
     ```shell
-    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/ui
+    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-numfmt @univerjs/engine-render @univerjs/ui
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
     ```shell
-    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/ui
+    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-numfmt @univerjs/engine-render @univerjs/ui
     ```
   </Tabs.Tab>
 </Tabs>
@@ -53,6 +53,16 @@ If you want to get a more convenient development experience in the future, we al
 </Tabs>
 
 For more information about `@univerjs/facade`, please refer to the [Facade](/guides/doc/facade/facade) section.
+
+### Update
+
+Since Univer uses a monorepo to manage its codebase, each release will update the version number of all official plugins. Therefore, when updating Univer, you should update all plugins at the same time to ensure that their version numbers are consistent.
+
+If you are using pnpm, you can use the following command to update all plugins:
+
+```shell
+pnpm update "@univerjs/*"@latest
+```
 
 ### Usage
 

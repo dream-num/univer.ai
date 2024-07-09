@@ -54,6 +54,16 @@ Univer 以插件的形式提供了一系列功能，除了一些产品所必需�
 
 有关 `@univerjs/facade` 的更多信息，请参考 [Facade](/guides/slides/facade/facade) 章节。
 
+### 更新
+
+由于 Univer 使用了 monorepo 的方式进行管理，每次发布都会更新所有官方插件的版本号。因此在更新 Univer 时，你应当同时更新所有的插件，保证它们的版本号一致。
+
+如果你使用的是 pnpm，你可以使用以下命令来更新所有的插件：
+
+```shell
+pnpm update "@univerjs/*"@latest
+```
+
 ### 使用
 
 <Callout>

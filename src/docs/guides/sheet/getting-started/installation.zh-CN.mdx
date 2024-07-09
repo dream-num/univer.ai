@@ -27,12 +27,12 @@ Univer 以插件的形式提供了一系列功能，除了一些产品所必需�
 <Tabs items={['pnpm', 'npm']}>
   <Tabs.Tab label="pnpm">
     ```shell
-    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-numfmt @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui @univerjs/rpc
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
     ```shell
-    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-numfmt @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui @univerjs/rpc
     ```
   </Tabs.Tab>
 </Tabs>
@@ -53,6 +53,16 @@ Univer 以插件的形式提供了一系列功能，除了一些产品所必需�
 </Tabs>
 
 有关 `@univerjs/facade` 的更多信息，请参考 [Facade](/guides/sheet/facade/facade) 章节。
+
+### 更新
+
+由于 Univer 使用了 monorepo 的方式进行管理，每次发布都会更新所有官方插件的版本号。因此在更新 Univer 时，你应当同时更新所有的插件，保证它们的版本号一致。
+
+如果你使用的是 pnpm，你可以使用以下命令来更新所有的插件：
+
+```shell
+pnpm update "@univerjs/*"@latest
+```
 
 ### 使用
 
