@@ -276,6 +276,10 @@ You can learn more about all the fields supported by `IWorkbookData` [here](/typ
 
 ### Modifying Data
 
+<Callout type="error" emoji="🚨">
+  Univer operates and updates states and data based on a [command system](/guides/sheet/architecture/univer#command-system), so you **must** use commands or the corresponding Facade API to update data properly, rather than directly modifying data. Any operation that directly modifies data in the hope of updating the view is not allowed.
+</Callout>
+
 `@univerjs/facade` provides a set of APIs for modifying data in Univer. You can use these APIs to modify the data in the `Workbook` instance.
 
 ```typescript
@@ -284,7 +288,6 @@ import { FUniver } from "@univerjs/facade";
 const univerAPI = FUniver.newAPI(univer);
 ```
 
-{/* 然后你就可以通过调用 `univerAPI` 的方法来使用 Univer 了，例如获取当前激活的 sheet，并在指定的范围更新值： */}
 Then you can use the methods of `univerAPI` to use Univer, such as getting the currently active sheet and updating values in the specified range:
 
 ```typescript

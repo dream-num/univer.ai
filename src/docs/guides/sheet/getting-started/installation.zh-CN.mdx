@@ -276,6 +276,10 @@ const workbook = univer.createUnit(UniverInstanceType.UNIVER_SHEET, data);
 
 ### 修改数据
 
+<Callout type="error" emoji="🚨">
+  Univer 基于[命令系统](/guides/sheet/architecture/univer#%E5%91%BD%E4%BB%A4%E7%B3%BB%E7%BB%9F)对状态和数据进行操作和更新，因此你**必须**合理地使用命令或者相应的 Facade API 来更新数据，而不是直接修改数据。任何直接对数据进行修改以期望更新视图的操作都是不被允许的。
+</Callout>
+
 `@univerjs/facade` 提供的 API 是对 `Univer` 实例的封装，因此你需要在创建了 `Univer` 实例之后，再用 `FUniver` 包裹这个实例：
 
 ```typescript
