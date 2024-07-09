@@ -276,8 +276,8 @@ const value = range.getValue();
 
 ```typescript
 const range = activeSheet.getRange(0, 0, 2, 2);
-range.forEach((cell, row, column) => {
-  console.log(cell.getValue());
+range.forEach(( row, column, cell) => {
+  console.log( row, column, cell);
 });
 ```
 
