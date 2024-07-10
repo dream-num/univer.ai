@@ -40,11 +40,7 @@ export default function ShineBorder({
         } as React.CSSProperties
       }
       className={clsx(
-        `
-          relative w-fit place-items-center rounded-[--border-radius] bg-white text-black
-
-          dark:bg-black dark:text-white
-        `,
+        `relative w-fit place-items-center rounded-[--border-radius] bg-white text-black`,
         className,
       )}
     >
