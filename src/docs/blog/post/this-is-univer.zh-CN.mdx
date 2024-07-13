@@ -81,7 +81,7 @@ class SheetPlugin {
 
 MVC 在整个 GUI 编程领域已经有了 50 多年的历史了，但是 MVC 却一直没有一个明确的定义。如上图，就是两种比较典型的 MVC 变种，在 [MVC with ASP.NET](http://asp.net/) 中，控制器负责管理视图和模型，当控制器改变模型层中数据后，通过一些订阅机制，视图层直接读取模型层中数据，更新视图。在 **MVC with Rails** 中，视图层不直接和模型层交互，通过控制器做了一层代理，视图层需要通过控制器从模型层取数据进行渲染。这样有个好处就是视图层和模型层完全的解耦，控制流会更清晰
 
-打开 univer 工程代码，我们可以发现大量以 `controller` 、 `view` 和 `model`后缀命名的文件，大致也能看出其采用了传统的 MVC 架构模式。Univer 中 MVC 架构更类似于 MVC with Rails, 因为视图层不直接读取 Model 层数据，也不订阅模型层的改变（下面会提到，是订阅了 Mutations），而是做了一层数据缓存（类似 ViewModel），SheetSkeleton 类
+打开 univer 工程代码，我们可以发现大量以 `controller` 、 `view` 和 `model`后缀命名的文件，大致也能看出其采用了传统的 MVC 架构模式。Univer 中 MVC 架构更类似于 MVC with Rails，因为视图层不直接读取 Model 层数据，也不订阅模型层的改变（下面会提到，是订阅了 Mutations），而是做了一层数据缓存（类似 ViewModel），SheetSkeleton 类
 
 在最开始看工程代码时，一些疑虑一直萦绕在脑海：
 

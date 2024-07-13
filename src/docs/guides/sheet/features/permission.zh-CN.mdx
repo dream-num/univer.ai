@@ -50,7 +50,7 @@ commandService.executeCommand(AddWorksheetProtectionMutation.id, {
 
 这个 demo 是给工作表添加保护，`permissionId` 需要自己生成的唯一 Id 用来存储权限，`unitType` 是工作表的类型，你可以使用仓库中的 UnitObject 枚举来替换上面的魔法数，`unitId` 是工作簿的id，`subUnitId` 是工作表的 id。   
 
-删除已经存在的工作表权限可以使用 `DeleteWorksheetProtectionMutation`, 参数是 `unitId` 和 `subUnitId`。
+删除已经存在的工作表权限可以使用 `DeleteWorksheetProtectionMutation`，参数是 `unitId` 和 `subUnitId`。
 
 ```typescript
 DeleteWorksheetProtectionMutationParams {
@@ -127,7 +127,7 @@ class YourService {
 ### 第三方插件如何扩展权限点位
 
 ```typescript
-import { IPermissionService,IPermissionPoint } from '@univerjs/core';
+import { IPermissionService, IPermissionPoint } from '@univerjs/core';
 
 export class CustomPermissionPoint implements IPermissionPoint {
   type = UnitObject.Unkonwn; // your type
@@ -162,7 +162,7 @@ class ConsumeService {
   }
 
   bindEvent() {
-    // 这将获得一个 Rx 对象,使得你能够监听当前权限的变化作出一些改变
+    // 这将获得一个 Rx 对象，使得你能够监听当前权限的变化作出一些改变
     const pount$ = this._permissionService.getPermissionPoint$(new CustomPermissionPoint('unitId', 'subUnitId', 'my-id').id);
     console.log(pount$);
   }
@@ -171,9 +171,9 @@ class ConsumeService {
 
 ### 第三方权限服务接入
 
-权限的判断逻辑通常是由一个外置服务来单独处理,这部分一般会带有一个通信流程,在纯前端 sdk 实现中,我们使用 [AuthzIoLocalService](https://github.com/dream-num/univer/blob/dev/packages/core/src/services/authz-io/authz-io-local.service.ts) 来承载这部分逻辑.
+权限的判断逻辑通常是由一个外置服务来单独处理，这部分一般会带有一个通信流程，在纯前端 sdk 实现中，我们使用 [AuthzIoLocalService](https://github.com/dream-num/univer/blob/dev/packages/core/src/services/authz-io/authz-io-local.service.ts) 来承载这部分逻辑。
 
-在生产环境中,我们需要将这部分实现转由后端实现,前端需要基于[IAuthzIoService](https://github.com/dream-num/univer/blob/dev/packages/core/src/services/authz-io/type.ts)类型实现对应的请求函数，来进行运行时的替换。
+在生产环境中，我们需要将这部分实现转由后端实现，前端需要基于 [IAuthzIoService](https://github.com/dream-num/univer/blob/dev/packages/core/src/services/authz-io/type.ts) 类型实现对应的请求函数，来进行运行时的替换。
 
 下面是一个简单的示例：
 
@@ -189,7 +189,7 @@ export class YourPlugin extends Plugin {
   }
 }
 
-// 通过将 override 选项设置为[[IAuthzIoService, null]]，可以告诉 Univer 不要注册内置的 IAuthzIoService。
+// 通过将 override 选项设置为 [[IAuthzIoService, null]]，可以告诉 Univer 不要注册内置的 IAuthzIoService。
 // 这样，Univer 将使用你在 YourAuthzService 中提供的服务作为权限服务的实现。
 const univer = new Univer({
   override: [[IAuthzIoService, null]],
@@ -200,9 +200,9 @@ univer.registerPlugin(YourPlugin);
 
 ## 权限点位列表
 
-具体的点位代码,参阅 [code](https://github.com/dream-num/univer/tree/dev/packages/sheets/src/services/permission/permission-point)
+具体的点位代码，请参阅[这里](https://github.com/dream-num/univer/tree/dev/packages/sheets/src/services/permission/permission-point)。
 
-如果 `workbook` 的权限控制和 `worksheet`/`range` 有交叉,那么必须全部为 `true` 才能使用.
+如果 `workbook` 的权限控制和 `worksheet` / `range` 有交叉，那么必须全部为 `true` 才能使用。
 
 ### Workbook 工作簿
 
