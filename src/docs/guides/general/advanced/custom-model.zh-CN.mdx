@@ -4,11 +4,11 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 <BadgeGroup values={[UniverTypes.GENERAL]} value={UniverTypes.GENERAL} />
 
-Univer 允许用户将自定义插件中的数据跟随 `snapshot` 一起落盘/加载.
+Univer 允许用户将自定义插件中的数据跟随 `snapshot` 一起落盘或加载。
 
 ## 创建一个 CustomerService
 
-在 `@univerjs/core` 中存在一个 `ResourceManagerService` 实例,你可以在自己新建的 plugin 中注册对应的 `hook` ,将数据绑定到 `snapshot` 上.
+在 `@univerjs/core` 中存在一个 `ResourceManagerService` 实例，你可以在自己新建的 plugin 中注册对应的 `hook`，将数据绑定到 `snapshot` 上。
 
 ```typescript
 import { IResourceManagerService, OnLifecycle, LifecycleStages } from '@univerjs/core';
@@ -16,58 +16,64 @@ import { Inject } from '@wendellhu/redi';
 import { UniverType } from '@univerjs/protocol';
 
 const YOUR_PLUGIN_NAME = 'YOUR_PLUGIN_NAME';
+
 interface IResource { testResource: string }
+
 @OnLifecycle(LifecycleStages.Starting, CustomerService)
 class CustomerService {
-    private _model:IResource = { testResource: '' };
-    constructor(@Inject(IResourceManagerService) private _resourceManagerService: IResourceManagerService
-    ) {
-        this._resourceManagerService.registerPluginResource<IResource>({
-            toJson: (unitID) => this._toJson(unitID),
-            parseJson: (json) => this._parseJson(json),
-            pluginName: 'SHEET_CustomerService_PLUGIN',
-            businesses: [UniverType.UNIVER_SHEET, UniverType.UNIVER_DOC, UniverType.UNIVER_SLIDE],
-            onLoad: (_unitId, resource) => {
-                this._model = resource;
-            },
-            onUnLoad: (_unitId) => {
-                this._model = { testResource: '' };
-            },
-        });
-    }
+  private _model:IResource = { testResource: '' };
 
-    _toJson(_unitID: string) {
-        const model = this._model;
-        return JSON.stringify(model);
-    }
+  constructor(
+    @Inject(IResourceManagerService) private _resourceManagerService: IResourceManagerService
+  ) {
+    this._resourceManagerService.registerPluginResource<IResource>({
+      toJson: (unitID) => this._toJson(unitID),
+      parseJson: (json) => this._parseJson(json),
+      pluginName: 'SHEET_CustomerService_PLUGIN',
+      businesses: [UniverType.UNIVER_SHEET, UniverType.UNIVER_DOC, UniverType.UNIVER_SLIDE],
+      onLoad: (_unitId, resource) => {
+        this._model = resource;
+      },
+      onUnLoad: (_unitId) => {
+        this._model = { testResource: '' };
+      },
+    });
+  }
 
-    _parseJson(json: string) {
-        return JSON.parse(json);
-    }
+  _toJson(_unitID: string) {
+    const model = this._model;
+    return JSON.stringify(model);
+  }
+
+  _parseJson(json: string) {
+    return JSON.parse(json);
+  }
 }
 ```
-1. `IResource` 的类型可以自己随意定义,支持任何类型.
-2. `toJson/parseJson` 是一对针对 IResource 的序列化函数,通常使用 JSON 函数,这里你也可以可以加入压缩/混淆的特定逻辑。
-3. `toJson` 的函数参数为什么会有 `unitID`? 这是因为 一个 `Univer` 实例可能会包含多个 `unit` 实例(比如 `Sheet`/`Doc` 以及后续的 `Slider` ),`onLoad`/`onUnLoad` 同理。
-4. `businesses` 这个选项,是当什么业务加载的时候，才需要加载 `resources`,如果你是一个 `Sheet` 模块的数据,在 `Doc` 加载的时候，就没必要加载了。
+
+1. `IResource` 的类型可以自己随意定义，支持任何类型。
+2. `toJson/parseJson` 是一对针对 IResource 的序列化函数，通常使用 JSON 函数，这里你也可以可以加入压缩/混淆的特定逻辑。
+3. `toJson` 的函数参数为什么会有 `unitID`? 这是因为 一个 `Univer` 实例可能会包含多个 `unit` 实例（例如 `Sheet`/`Doc` 以及后续的 `Slider`），`onLoad`/`onUnLoad` 同理。
+4. `businesses` 这个选项，是当什么业务加载的时候，才需要加载 `resources`，如果你是一个 `Sheet` 模块的数据，在 `Doc` 加载的时候，就没必要加载了。
 
 ## 注入 CustomerPlugin
-当你的数据已经接入 `ResourceManagerService` 后,将你的 `CustomerService` 在你自己的 `CustomerPlugin` 中注入
+
+当你的数据已经接入 `ResourceManagerService` 后，将你的 `CustomerService` 在你自己的 `CustomerPlugin` 中注入
+
 ```typescript
 import {  Plugin } from '@univerjs/core';
 import { Inject, Injector } from '@wendellhu/redi';
 
-
 export class UniverSheetsNumfmtPlugin extends Plugin {
-    constructor(
-        @Inject(Injector) override readonly _injector: Injector
-    ) {
-        super();
-    }
+  constructor(
+    @Inject(Injector) override readonly _injector: Injector
+  ) {
+    super();
+  }
 
-    override onStarting(): void {
-        this._injector.add([CustomerService]);
-    }
+  override onStarting(): void {
+    this._injector.add([CustomerService]);
+  }
 }
 ```
 
@@ -77,9 +83,12 @@ const univer = new Univer();
 univer.registerPlugin(UniverSheetsNumfmtPlugin);
 // 执行其他的初始化逻辑
 ```
+
 ## 如何获得包含`Resources`资源的快照
-在 `@univerjs/core` 中存在一个 `ResourceLoaderService` 实例,你可以通过该 `Service` 的 `saveWorkbook` 或者 `saveDoc` 的最新快照信息 `Snapshot`,后续再通过 `univer.createUnit` 来回显数据.
-其中 `Resource` 信息存储在 `snapshot.resources` 上,可根据对应的 `pluginName` 去获取。
+
+在 `@univerjs/core` 中存在一个 `ResourceLoaderService` 实例，你可以通过该 `Service` 的 `saveWorkbook` 或者 `saveDoc` 的最新快照信息 `Snapshot`，后续再通过 `univer.createUnit` 来回显数据。
+其中 `Resource` 信息存储在 `snapshot.resources` 上，可根据对应的 `pluginName` 去获取。
+
 ```typescript
 import { IResourceLoaderService, IUniverInstanceService, LifecycleStages, OnLifecycle } from '@univerjs/core';
 import { Inject } from '@wendellhu/redi';
@@ -87,13 +96,13 @@ import { UniverType } from '@univerjs/protocol';
 
 @OnLifecycle(LifecycleStages.Starting, CustomerService)
 class CustomerService {
-    constructor(
-        @Inject(IResourceLoaderService) private _resourceLoaderService: IResourceLoaderService,
-        @Inject(IUniverInstanceService) private _univerInstanceService: IUniverInstanceService
+  constructor(
+    @Inject(IResourceLoaderService) private _resourceLoaderService: IResourceLoaderService,
+    @Inject(IUniverInstanceService) private _univerInstanceService: IUniverInstanceService
 
-    ) {
-        const workbook = this._univerInstanceService.getCurrentUnitForType(UniverType.UNIVER_SHEET)!
-        const snapshot = this._resourceLoaderService.saveWorkbook(workbook);
-    }
+  ) {
+    const workbook = this._univerInstanceService.getCurrentUnitForType(UniverType.UNIVER_SHEET)!
+    const snapshot = this._resourceLoaderService.saveWorkbook(workbook);
+  }
 }
 ```
