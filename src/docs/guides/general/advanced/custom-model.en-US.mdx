@@ -4,145 +4,107 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 <BadgeGroup values={[UniverTypes.GENERAL]} value={UniverTypes.GENERAL} />
 
-Univer allows users to customize the models that plug-ins need to store on a document snapshot
+Univer allows users to persist/load data from custom plugins along with the `snapshot`.
 
-![image](./custom-model/resource.jpg)
+## Create a CustomerService
 
-Register a hook with the the `ResourceManagerService` service in package `@univerjs/core` to persist the data
+In `@univerjs/core`, there is an instance of `ResourceManagerService`. You can register the corresponding `hooks` in your `custom plugin` and bind the data to `snapshot`.
 
 ```typescript
-import { IResourceManagerService } from '@univerjs/core'
-import { Inject } from '@wendellhu/redi'
+import { IResourceManagerService, OnLifecycle, LifecycleStages } from '@univerjs/core';
+import { Inject } from '@wendellhu/redi';
+import { UniverType } from '@univerjs/protocol';
 
-const YOUR_PLUGIN_NAME = 'YOUR_PLUGIN_NAME'
-interface Resource { testResource: string }
+const YOUR_PLUGIN_NAME = 'YOUR_PLUGIN_NAME';
+
+interface IResource { testResource: string }
+
+@OnLifecycle(LifecycleStages.Starting, CustomerService)
+class CustomerService {
+  private _model:IResource = { testResource: '' };
+
+  constructor(
+    @Inject(IResourceManagerService) private _resourceManagerService: IResourceManagerService
+  ) {
+    this._resourceManagerService.registerPluginResource<IResource>({
+      toJson: (unitID) => this._toJson(unitID),
+      parseJson: (json) => this._parseJson(json),
+      pluginName: 'SHEET_CustomerService_PLUGIN',
+      businesses: [UniverType.UNIVER_SHEET, UniverType.UNIVER_DOC, UniverType.UNIVER_SLIDE],
+      onLoad: (_unitId, resource) => {
+        this._model = resource;
+      },
+      onUnLoad: (_unitId) => {
+        this._model = { testResource: '' };
+      },
+    });
+  }
+
+  _toJson(_unitID: string) {
+    const model = this._model;
+    return JSON.stringify(model);
+  }
+
+  _parseJson(json: string) {
+    return JSON.parse(json);
+  }
+}
+```
+
+1. The type of `IResource` can be defined freely and supports any type.
+2. `toJson/parseJson` are a pair of serialization functions for `IResource`, typically using JSON functions. You can also add specific logic for compression/obfuscation here.
+3. Why does `toJson` function have the parameter unitID? This is because an instance of `Univer` may contain multiple instances of unit (such as `Sheet`/`Doc` and subsequent `Slider`). The same applies to `onLoad`/`onUnLoad`.
+4. The `businesses` option is used to determine when to load this resources based on the business being loaded. For example, if you are loading data for a `Sheet` module, there is no need to load it when `Doc` is being loaded
+
+## Inject CustomerPlugin
+
+When your data has been connected to `ResourceManagerService`, inject your `CustomerService` into your own `CustomerPlugin`.
+
+```typescript
+import {  Plugin } from '@univerjs/core';
+import { Inject, Injector } from '@wendellhu/redi';
+
+
+export class UniverSheetsNumfmtPlugin extends Plugin {
+  constructor(
+    @Inject(Injector) override readonly _injector: Injector
+  ) {
+    super();
+  }
+
+  override onStarting(): void {
+    this._injector.add([CustomerService]);
+  }
+}
+```
+
+## Register the plugin in Univer
+
+```typescript
+const univer = new Univer();
+univer.registerPlugin(UniverSheetsNumfmtPlugin);
+// Performs additional initialization logic
+```
+
+## How to obtain a snapshot containing the `Resources`?
+
+There is a `ResourceLoaderService` instance in `@univerjs/core`, which you can use to save the latest `snapshot` information of a workbook or document using `saveWorkbook` or `saveDoc`. You can then use `univer.createUnit` to retrieve and display the data later.
+The information of `Resource` is stored on `snapshot.resources` and can be obtained based on the corresponding `pluginName`.
+
+```typescript
+import { IResourceLoaderService, IUniverInstanceService, LifecycleStages, OnLifecycle } from '@univerjs/core';
+import { Inject } from '@wendellhu/redi';
+import { UniverType } from '@univerjs/protocol';
+
+@OnLifecycle(LifecycleStages.Starting, CustomerService)
 class CustomerService {
   constructor(
-    @Inject(IResourceManagerService)
-    _resourceManagerService: IResourceManagerService
+    @Inject(IResourceLoaderService) private _resourceLoaderService: IResourceLoaderService,
+    @Inject(IUniverInstanceService) private _univerInstanceService: IUniverInstanceService
+
   ) {
-    this._resourceManagerService.registerPluginResource<Resource>(
-      unitID,
-      YOUR_PLUGIN_NAME,
-      {
-        toJson: unitID => this._toJson(unitID),
-        parseJson: json => this._parseJson(json),
-        onChange: (unitId: string, resource: Resource) => {
-          this.model = resource
-        },
-      }
-    )
-  }
-
-  _toJson(unitID: string) {
-    // Convert the data you need to store to a JSON string store.
-    const model = this.getModel(unitID)
-    return JSON.stringify(model)
-  }
-
-  parseJson(json: string) {
-    // Deserializes JSON string data into objects.
-    return JSON.parse(json)
+    const workbook = this._univerInstanceService.getCurrentUnitForType(UniverType.UNIVER_SHEET)!
+    const snapshot = this._resourceLoaderService.saveWorkbook(workbook);
   }
 }
 ```
-
-After your data is connected to 'Resourcemanagerservice' , it will be processed according to the persistence method you choose. There are two different snapshot schemes depending on how you land.
-
-## Localized snapshot schemes
-
-After the above registration logic takes effect, we need to perform the initialization/deactivation steps. We can simulate the following service implementation.
-
-```typescript
-import type { ISnapshotPersistenceService, Workbook } from '@univerjs/core'
-import {
-  Disposable,
-  IResourceManagerService,
-  IUniverInstanceService,
-} from '@univerjs/core'
-import { Inject } from '@wendellhu/redi'
-
-export class LocalSnapshotService
-  extends Disposable
-  implements ISnapshotPersistenceService {
-  constructor(
-    @Inject(IResourceManagerService)
-    private _resourceManagerService: IResourceManagerService,
-    @Inject(IUniverInstanceService)
-    private _univerInstanceService: IUniverInstanceService
-  ) {
-    super()
-    this._initWorkBook()
-  }
-
-  private _initWorkBook() {
-    this._univerInstanceService.sheetAdded$.subscribe(workbook =>
-      this._initWorkbookFromSnapshot(workbook)
-    )
-    const workbooks = this._univerInstanceService.getAllUniverSheetsInstance()
-    workbooks.forEach((workbook) => {
-      this._initWorkbookFromSnapshot(workbook)
-    })
-  }
-
-  private _initWorkbookFromSnapshot(workbook: Workbook) {
-    const unitId = workbook.getUnitId()
-    const snapshot = workbook.getSnapshot()
-    const resources = this._resourceManagerService.getAllResource(unitId)
-    resources.forEach((resource) => {
-      const resourceSnapshot = (snapshot.resources || []).find(
-        item => item.name === resource.resourceName
-      )
-      if (resourceSnapshot) {
-        const model = resource.hook.parseJson(resourceSnapshot.data)
-        resource.hook.onChange(unitId, model)
-      }
-    })
-  }
-
-  saveWorkbook(workbook: Workbook) {
-    const snapshot = { ...workbook.getSnapshot() }
-    const unitId = workbook.getUnitId()
-    const resourceHooks = this._resourceManagerService.getAllResource(
-      workbook.getUnitId()
-    )
-    const resources = resourceHooks.map((resourceHook) => {
-      const data = resourceHook.hook.toJson(unitId)
-      return {
-        name: resourceHook.resourceName,
-        data,
-      }
-    })
-    snapshot.resources = resources
-    return snapshot
-  }
-}
-```
-
-pecific implementation can be referenced [How to save a plug-in snapshot locally](https://github.com/dream-num/univer/blob/dev/examples/src/plugins/local-save/services/local-snapshot.service.ts)
-
-### Gets a snapshot of the current resource
-
-If you already have a well-preserved snapshot that needs to be initialized, this will be done in `_initWorkbookFromSnapshot`, through the registered 'hook' .Call onchange to notify the custom plug-in to perform its own initialization logic.
-
-### Save to snapshot
-
-Get `LocalSnapshotService` instance from DI, call `LocalSnapshotService.saveWorkbook` to get a snapshot
-
-## Remote Snapshot Scheme
-
-Specific documents and other collaborative programs after the release of synchronization.
-
-## Model referencing
-
-Duplicate strings are mapped using a short code to reduce memory/bandwidth overhead.
-
-### Referencing at runtime
-
-Runtime referencing, primarily to reduce memory overhead at runtime.
-
-Specific implementation can refer to [How data formats are referenced](https://github.com/dream-num/univer/blob/dev/packages/sheets/src/services/numfmt/numfmt.service.ts)
-
-### Referencing at transport time
-
-Specific documents and other collaborative programs after the release of synchronization.

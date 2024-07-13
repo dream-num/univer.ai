@@ -21,11 +21,11 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 ![formula engine architecture](./formula/formula-engine-architecture.png)
 
-1. `Model`, 存储公式初始数据，例如所在位置，公式字符串等
-2. `Engine`, 负责公式字符串的词法分析和语法分析，分析公式之间的依赖关系等等
-3. `Service`, 提供公式计算环境，提供注册函数的能力，并提供自定义名称、超级表、公式调度等服务
-4. `Command` 和 `Controller`, 负责控制公式模块协调运作
-5. `Function`, 实现函数
+1. `Model`，存储公式初始数据，例如所在位置，公式字符串等
+2. `Engine`，负责公式字符串的词法分析和语法分析，分析公式之间的依赖关系等等
+3. `Service`，提供公式计算环境，提供注册函数的能力，并提供自定义名称、超级表、公式调度等服务
+4. `Command` 和 `Controller`，负责控制公式模块协调运作
+5. `Function`，实现函数
 
 {/* 参考 excel 做了公式引用化，维护数组公式的临时范围和值。 */}
 
@@ -58,7 +58,7 @@ Engine 架构如下图所示：
 
 ### Lexer
 
-负责对公式字符串进行词法分析。匹配引擎定义好的 token，根据规则生成节点，并将这些节点构建为 `LexerNode` tree。比如 `A1`,`B10`, `SUM` 等都会被识别为 `LexerNode`。节点类型的识别则会由 Parser 负责。例如
+负责对公式字符串进行词法分析。匹配引擎定义好的 token，根据规则生成节点，并将这些节点构建为 `LexerNode` tree。比如 `A1`、`B10`、`SUM` 等都会被识别为 `LexerNode`。节点类型的识别则会由 Parser 负责。例如
 
 ```txt
 =(sum(sum(A1:B10), E10, 100) + 5) * 6 - 1
@@ -87,10 +87,10 @@ Parser 的职责主要是对 Lexer 生成的 `LexerNode` 树进行以下转换�
 1. 将节点中的 `SUM` 等函数名转换为 `FunctionNode` 公式节点，`E10` 等引用转换为 `ReferenceNode` 引用节点，`+` 等运算符转换为 `OperatorNode` 操作符节点
 2. 其他类型的 node 还包括：
     1. `LambdaNode` lambda 函数专用，将 lambda 函数进行入参，以及包装为 lambda-value-object
-    2. `UnionNode`, 把 `A1:B10` 合并为 RangeReference
-    3. `PrefixNode`, 将 `-` 识别为负数，以及旧版本的兼容 `@`
-    4. `SuffixNode`, 识别 % 为百分比，# 为动态数组公式的范围简写
-    5. `ValueNode`, 识别文本、数字、逻辑三个基础类型的值
+    2. `UnionNode`，把 `A1:B10` 合并为 RangeReference
+    3. `PrefixNode`，将 `-` 识别为负数，以及旧版本的兼容 `@`
+    4. `SuffixNode`，识别 % 为百分比，# 为动态数组公式的范围简写
+    5. `ValueNode`，识别文本、数字、逻辑三个基础类型的值
 3. 将 let 转换为 lambda 执行
 4. 为 lambda 注入参数
 
@@ -119,7 +119,7 @@ BaseValueObject 是公式引擎计算非常重要的操作类型，它有下列�
 
 #### ErrorValueObject
 
-代表错误，类似 Excel 的 #VALUE!, #NAME!, #REF! 等，函数内可以直接返回 `ErrorValueObject` 代表公式计算错误。
+代表错误，类似 Excel 的 #VALUE!、#NAME!、#REF! 等，函数内可以直接返回 `ErrorValueObject` 代表公式计算错误。
 
 #### PrimitiveValueObject
 
@@ -143,7 +143,7 @@ new NumberValueObject(100).isEqual(new NumberValueObject(100)); // return Boolea
 
 ![arrayObjectCalculate](./formula/array-object-calculate.png)
 
-其自身也支持如：sum, average, min, max, std, var, power 等计算，并且针对 vlookup, xlookup, match 等函数实现了如 Numpy 的 [slice](https://www.w3schools.com/python/numpy/numpy_array_slicing.asp) 和 [filter](https://www.w3schools.com/python/numpy/numpy_array_filter.asp) 能力：
+其自身也支持如：sum、average、min、max、std、var、power 等计算，并且针对 vlookup、xlookup、match 等函数实现了如 Numpy 的 [slice](https://www.w3schools.com/python/numpy/numpy_array_slicing.asp) 和 [filter](https://www.w3schools.com/python/numpy/numpy_array_filter.asp) 能力：
 
 ```typescript
 export class Vlookup extends BaseFunction {
@@ -180,7 +180,7 @@ export class Vlookup extends BaseFunction {
 
 ![engineDependency](./formula/engine-dependency.png)
 
-如上图所示，A1 单元格的内容变更后，会对 A2, A3, A4, A5 单元格的公式进行标脏，标脏后的公式进行依赖关系分析，最终的输出顺序为：A2 -> A3 -> A5 -> A4
+如上图所示，A1 单元格的内容变更后，会对 A2、A3、A4、A5 单元格的公式进行标脏，标脏后的公式进行依赖关系分析，最终的输出顺序为：A2 -> A3 -> A5 -> A4
 
 如果遇到 [INDIRECT / OFFSET](https://support.microsoft.com/en-us/office/indirect-function-474b3a3a-8a26-4f44-b491-92b6306fa261) 等类似的引用函数，则 Dependency 模块会调用 Lexer 和 Parser 执行预计算，提前算出这类函数的引用范围，再以此进行依赖关系的计算。
 

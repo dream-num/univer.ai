@@ -665,7 +665,7 @@ comment 标记下 `@自己 : I can solve it`，示例 [\[Feature\] Math Formula 
 
     注意：
 
-    - 补充 `sheetData`, 根据公式计算的需要构建好 `cellData`, 确定 `rowCount`、`columnCount`
+    - 补充 `sheetData`，根据公式计算的需要构建好 `cellData`，确定 `rowCount`、`columnCount`
     - 手动初始化公式 `new Sumif(FUNCTION_NAMES_MATH.SUMIF)`
     - 每个测试中手动构建好公式入参，最后 `calculate` 执行即可
     - 单个公式的测试一般用于当前单个公式的算法，如果需要测试多个公式的嵌套，可以手动嵌套，或者到 `/packages/engine-formula/src/functions/__tests__` 目录下执行嵌套的复杂公式

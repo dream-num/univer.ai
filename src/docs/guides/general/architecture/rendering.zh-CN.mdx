@@ -53,7 +53,7 @@ const SpreadsheetLeftTopPlaceholder = new Rect(SHEET_VIEW_KEY.LEFT_TOP, {
   strokeWidth: 1,
 });
 
-scene.addObjects([spreadsheet, spreadsheetRowHeader, spreadsheetColumnHeader, SpreadsheetLeftTopPlaceholder],
+scene.addObjects([spreadsheet, spreadsheetRowHeader, spreadsheetColumnHeader, SpreadsheetLeftTopPlaceholder])
 ```
 
 可以对 Scene 直接添加事件，就像在 DOM 中为 document 添加一个全局事件一样。
@@ -131,7 +131,7 @@ Object 会挂到 Layer 上，并且 Layer 会有一个离屏 canvas 作为缓存
 
 ### Shape
 
-Shape 实现基本的形状，比如 Circle, Rect, Path, Polygon，并且画法都用静态函数实现，方便被其他 object 使用。
+Shape 实现基本的形状，比如 Circle、Rect、Path、Polygon，并且画法都用静态函数实现，方便被其他 object 使用。
 
 基本形状里封装了绘制原语，例如一个 Rect 形状的类实现如下：
 
