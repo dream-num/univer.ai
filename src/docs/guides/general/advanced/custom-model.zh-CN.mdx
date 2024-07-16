@@ -40,12 +40,12 @@ class CustomerService {
     });
   }
 
-  _toJson(_unitID: string) {
+  private _toJson(_unitID: string) {
     const model = this._model;
     return JSON.stringify(model);
   }
 
-  _parseJson(json: string) {
+  private _parseJson(json: string) {
     return JSON.parse(json);
   }
 }
@@ -64,7 +64,7 @@ class CustomerService {
 import {  Plugin } from '@univerjs/core';
 import { Inject, Injector } from '@wendellhu/redi';
 
-export class UniverSheetsNumfmtPlugin extends Plugin {
+export class UniverSheetsPlugin extends Plugin {
   constructor(
     @Inject(Injector) override readonly _injector: Injector
   ) {
@@ -80,13 +80,13 @@ export class UniverSheetsNumfmtPlugin extends Plugin {
 ## 将插件注册进 Univer
 ```typescript
 const univer = new Univer();
-univer.registerPlugin(UniverSheetsNumfmtPlugin);
+univer.registerPlugin(UniverSheetsPlugin);
 // 执行其他的初始化逻辑
 ```
 
 ## 如何获得包含`Resources`资源的快照
 
-在 `@univerjs/core` 中存在一个 `ResourceLoaderService` 实例，你可以通过该 `Service` 的 `saveWorkbook` 或者 `saveDoc` 的最新快照信息 `Snapshot`，后续再通过 `univer.createUnit` 来回显数据。
+在 `@univerjs/core` 中存在一个 `ResourceLoaderService` 实例，你可以通过该 `Service` 的 `saveWorkbook` 或者 `saveDoc` 获得最新快照信息 `Snapshot`，后续再通过 `univer.createUnit` 来回显数据。
 其中 `Resource` 信息存储在 `snapshot.resources` 上，可根据对应的 `pluginName` 去获取。
 
 ```typescript

@@ -40,12 +40,12 @@ class CustomerService {
     });
   }
 
-  _toJson(_unitID: string) {
+  private _toJson(_unitID: string) {
     const model = this._model;
     return JSON.stringify(model);
   }
 
-  _parseJson(json: string) {
+  private _parseJson(json: string) {
     return JSON.parse(json);
   }
 }
@@ -65,7 +65,7 @@ import {  Plugin } from '@univerjs/core';
 import { Inject, Injector } from '@wendellhu/redi';
 
 
-export class UniverSheetsNumfmtPlugin extends Plugin {
+export class UniverSheetsPlugin extends Plugin {
   constructor(
     @Inject(Injector) override readonly _injector: Injector
   ) {
@@ -82,7 +82,7 @@ export class UniverSheetsNumfmtPlugin extends Plugin {
 
 ```typescript
 const univer = new Univer();
-univer.registerPlugin(UniverSheetsNumfmtPlugin);
+univer.registerPlugin(UniverSheetsPlugin);
 // Performs additional initialization logic
 ```
 
