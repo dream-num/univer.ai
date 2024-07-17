@@ -21,7 +21,7 @@ const univerAPI = FUniver.newAPI(univer);
 Then you can use Univer by calling the `univerAPI` method and set the entire workbook to be uneditable:
 
 ```typescript
-univerAPI.setWorkbookEditable(false);
+univerAPI.getActiveWorkbook().setEditable(false);
 ```
 
 The essence is to control the switch of permissions by setting the value of the permission point. The command corresponding to the permission point will read the value of the point before execution. If the permission value is false, the execution of the command will be terminated.
