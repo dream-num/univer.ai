@@ -21,7 +21,7 @@ const univerAPI = FUniver.newAPI(univer);
 然后你就可以通过调用 `univerAPI` 的方法来使用 Univer 了，设置整体工作簿不可编辑：
 
 ```typescript
-univerAPI.setEditable(false);
+univerAPI.getActiveWorkbook().setEditable(false);
 ```
 
 ### 工作表权限代码示例
