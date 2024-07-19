@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import type { ISlidePage } from '@univerjs/core'
 import { BasicShapes, PageElementType, PageType } from '@univerjs/core'
 
 import { PAGE3_RICHTEXT_1 } from '../rich-text/page3-richtext1'
@@ -334,4 +335,4 @@ export const DEFAULT_THIRD_PAGE = {
     },
     detailContent3: PAGE3_RICHTEXT_3,
   },
-}
+} satisfies ISlidePage
