@@ -160,7 +160,7 @@ export default function Page() {
 
           <h1
             className={`
-              mb-7 mt-[60px] text-center text-5xl/tight font-bold italic
+              mb-7 mt-[60px] text-center text-5xl/tight font-bold
 
               xl:mt-0 xl:text-6xl/tight
             `}

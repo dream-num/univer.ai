@@ -205,7 +205,7 @@ export default function Page() {
               xl:text-6xl
             `}
           >
-            <span className="mr-4 italic">Univer Examples</span>
+            <span className="mr-4">Univer Examples</span>
             🎮
           </h1>
 
