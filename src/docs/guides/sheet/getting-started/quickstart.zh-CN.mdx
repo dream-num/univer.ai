@@ -87,10 +87,11 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
           Univer UMD With Collaboration, Live Share, Print, Exchange
         </title>
         <script src="https://unpkg.com/@univerjs/umd/lib/univer.full.umd.js"></script>
-        <script src="https://unpkg.com/@univerjs/umd/lib/locale/zh-CN.js"></script>
+        <script src="https://unpkg.com/@univerjs/umd/lib/locale/en-US.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/@univerjs/umd/lib/univer.css">
 
         <script src="https://unpkg.com/lodash/lodash.js"></script>
+        <script> window.lodash = _ </script>
 
         <script src="https://unpkg.com/@univerjs-pro/collaboration/lib/umd/index.js"></script>
         <script src="https://unpkg.com/@univerjs-pro/collaboration-client/lib/umd/index.js"></script>
@@ -194,7 +195,8 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
               UniverSheetsNumfmt,
               UniverCollaboration,
               UniverCollaborationClient,
-              UniverSheetsThreadComment
+              UniverSheetsThreadComment,
+              UniverSheetsFormula: { UniverSheetsFormulaPlugin },
             } = window
 
             var univer = new UniverCore.Univer({
@@ -211,17 +213,18 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
                 [UniverCore.IUndoRedoService, null]
               ]
             });
+            univer.registerPlugin(UniverDocs.UniverDocsPlugin, {
+              hasScroll: false,
+            });
 
             univer.registerPlugin(UniverEngineRender.UniverRenderEnginePlugin);
             univer.registerPlugin(UniverEngineFormula.UniverFormulaEnginePlugin);
+            univer.registerPlugin(UniverSheetsFormulaPlugin);
 
             univer.registerPlugin(UniverUi.UniverUIPlugin, {
               container: "app",
             });
 
-            univer.registerPlugin(UniverDocs.UniverDocsPlugin, {
-              hasScroll: false,
-            });
             univer.registerPlugin(UniverDocsUi.UniverDocsUIPlugin);
 
             univer.registerPlugin(UniverSheets.UniverSheetsPlugin);
