@@ -49,6 +49,34 @@ Univer 服务默认端口如下：
 | univer-client | 3010 | frontend |
 
 
+## 离线部署 <a id="offline-deployment"></a>
+
+如果你恰好需要在无互联网环境下部署，我们也提供了离线安装包，条件允许我们建议你在有网络环境使用一键安装脚本进行部署，这样便于后续升级。
+
+1. [点击链接下载离线安装包](/releases/univer-server/download)，将安装包解压到服务器。
+
+```bash
+tar -xvf 安装包.tar.gz # 解压命令，将文件名替换为实际文件名
+```
+
+2. 进入解压目录，执行 `bash install.sh` 启动服务
+
+3. 卸载
+
+```bash
+bash uninstall.sh       # 卸载，保留数据下次使用
+bash uninstall.sh clean # 卸载，删除数据
+```
+
+4. 验证服务是否可用
+
+方式1: 启动内置的演示程序，访问 `http://localhost:3010` 即可查看效果。
+```bash
+docker run --net=univer-prod --rm --name univer-collaboration-lite -p 3010:3010 univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/univer-collaboration-lite:latest
+```
+
+方式2: 自行建立前端工程，[了解更多](/guides/sheet/getting-started/quickstart#install-and-run-the-frontend)。
+
 ## 常见问题
 
 ### windows 系统下启动失败？
@@ -63,6 +91,9 @@ Univer 服务默认端口如下：
 - S3_ENDPOINT_PUBLIC=http://univer-minio:19000
 + S3_ENDPOINT_PUBLIC=http://<你的局域网IP>:19000
 ```
+
+
+
 
 ### 拉取 docker hub 镜像失败？
 
