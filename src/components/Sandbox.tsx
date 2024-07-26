@@ -69,7 +69,6 @@ export default function Sandbox(props: ISandboxProps) {
             react: 'latest',
             'react-dom': 'latest',
             rxjs: 'latest',
-            '@wendellhu/redi': 'latest',
           },
           devDependencies: {
             '@univerjs/vite-plugin': 'latest',

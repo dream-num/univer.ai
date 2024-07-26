@@ -1,7 +1,6 @@
-import { ConfigService, Disposable, ICommandService, LifecycleStages, OnLifecycle } from '@univerjs/core'
+import { ConfigService, Disposable, ICommandService, Inject, Injector, LifecycleStages, OnLifecycle } from '@univerjs/core'
 import type { IMenuItemFactory } from '@univerjs/ui'
 import { ComponentManager, IMenuService } from '@univerjs/ui'
-import { Inject, Injector } from '@wendellhu/redi'
 import { GithubSingle24 } from '@univerjs/icons'
 import { GithubButtonOperation } from '../commands/operations/github-button.operation'
 import { GithubButtonFactory } from './menu'

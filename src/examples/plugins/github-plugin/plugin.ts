@@ -1,6 +1,5 @@
-import { ConfigService, Plugin, UniverInstanceType } from '@univerjs/core'
-import type { Dependency } from '@wendellhu/redi'
-import { Inject, Injector } from '@wendellhu/redi'
+import type { Dependency } from '@univerjs/core'
+import { ConfigService, Inject, Injector, Plugin, UniverInstanceType } from '@univerjs/core'
 import type { IConfigData } from './controllers/github-menu.controller'
 import { GithubMenuController } from './controllers/github-menu.controller'
 

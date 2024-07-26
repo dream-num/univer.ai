@@ -1,7 +1,6 @@
 'use client'
 
-import { LocaleService } from '@univerjs/core'
-import { useDependency } from '@wendellhu/redi/react-bindings'
+import { LocaleService, useDependency } from '@univerjs/core'
 
 import { ToggleButton } from '../toggle-button/ToggleButton'
 

@@ -1,6 +1,5 @@
-import { ICommandService } from '@univerjs/core'
+import { ICommandService, useDependency } from '@univerjs/core'
 import { Button } from '@univerjs/design'
-import { useDependency } from '@wendellhu/redi/react-bindings'
 import React, { } from 'react'
 import { ToggleScriptPanelOperation } from '../../commands/operations/panel.operation'
 

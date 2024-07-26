@@ -177,8 +177,7 @@ In a production environment, we need to replace this implementation with a backe
 Here's how you can replace it:
 
 ```typescript
-import { IAuthzIoService, Univer } from '@univerjs/core';
-import { Injector } from '@wendellhu/redi';
+import { IAuthzIoService, Injector, Univer } from '@univerjs/core';
 
 class YourAuthzService implements IAuthzIoService { }
 

@@ -51,7 +51,7 @@ Except for `PluginType.Univer`, plugins of other types will only start loading a
 
 Plugins can be divided into multiple modules (divided in a manner similar to that in the "Hierarchical Structure" section below). These modules can be integrated with Univer's dependency injection system, allowing Univer to automatically parse the dependency relationships between these modules and instantiate them, significantly reducing the complexity of managing dependencies in a complex system. Currently, all official Univer plugins have integrated the dependency injection system.
 
-The dependency injection tool used by Univer is [redi](https://redi.wendell.fun). You can refer to redi's documentation to understand the basic concepts of dependency injection and how to use it.
+The dependency injection tool used by Univer is [redi](https://redi.wendell.fun), which is built into `@univerjs/core`. You can refer to redi's documentation to understand the basic concepts of dependency injection and how to use it.
 
 ### Public and Private Modules of a Plugin
 

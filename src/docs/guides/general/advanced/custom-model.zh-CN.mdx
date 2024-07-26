@@ -11,8 +11,7 @@ Univer 允许用户将自定义插件中的数据跟随 `snapshot` 一起落盘�
 在 `@univerjs/core` 中存在一个 `ResourceManagerService` 实例，你可以在自己新建的 plugin 中注册对应的 `hook`，将数据绑定到 `snapshot` 上。
 
 ```typescript
-import { IResourceManagerService, OnLifecycle, LifecycleStages } from '@univerjs/core';
-import { Inject } from '@wendellhu/redi';
+import { IResourceManagerService, Inject, OnLifecycle, LifecycleStages } from '@univerjs/core';
 import { UniverType } from '@univerjs/protocol';
 
 const YOUR_PLUGIN_NAME = 'YOUR_PLUGIN_NAME';
@@ -61,8 +60,7 @@ class CustomerService {
 当你的数据已经接入 `ResourceManagerService` 后，将你的 `CustomerService` 在你自己的 `CustomerPlugin` 中注入
 
 ```typescript
-import {  Plugin } from '@univerjs/core';
-import { Inject, Injector } from '@wendellhu/redi';
+import { Plugin, Inject, Injector } from '@univerjs/core';
 
 export class UniverSheetsPlugin extends Plugin {
   constructor(
@@ -91,8 +89,7 @@ univer.registerPlugin(UniverSheetsPlugin);
 其中 `Resource` 信息存储在 `snapshot.resources` 上，可根据对应的 `pluginName` 去获取。
 
 ```typescript
-import { IResourceLoaderService, IUniverInstanceService, LifecycleStages, OnLifecycle } from '@univerjs/core';
-import { Inject } from '@wendellhu/redi';
+import { IResourceLoaderService, IUniverInstanceService, Inject, LifecycleStages, OnLifecycle } from '@univerjs/core';
 import { UniverType } from '@univerjs/protocol';
 
 @OnLifecycle(LifecycleStages.Starting, CustomerService)

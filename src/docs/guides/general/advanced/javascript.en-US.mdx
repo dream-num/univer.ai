@@ -13,16 +13,15 @@ To facilitate development, Univer uses a large number of [TypeScript decorators]
 
 Therefore, we certainly recommend that you use TypeScript first. However, if you are not familiar with TypeScript or are constrained by other reasons, you can also use JavaScript to extend Univer. Of course, this is not an easy task, as you may need to understand the internal mechanism of Univer and how to use JavaScript to implement decorators in TypeScript.
 
-In the Univer documentation, the most common decorators are parameter decorators provided by [`@wendellhu/redi`](https://redi.wendell.fun) and class decorators provided by `@univerjs/core`. Here we will introduce how to replace these two decorators in JavaScript.
+In Univer's documentation, the most common decorators are the parameter decorators provided by `@univerjs/core` and the `OnLifecycle` class decorators. Here we will introduce how to replace these two decorators in JavaScript.
 
 ## Parameter Decorators
 
-`@wendellhu/redi` provides the `setDependencies` method to explicitly declare dependencies in JavaScript. For example:
+`@univerjs/core` provides the `setDependencies` method to explicitly declare dependencies in JavaScript. For example:
 
 ```diff
-import { Plugin, ICommandService, UniverInstanceType } from '@univerjs/core'
-- import { Inject, Injector } from '@wendellhu/redi'
-+ import { Injector, setDependencies } from '@wendellhu/redi'
+- import { Plugin, ICommandService, UniverInstanceType } from '@univerjs/core'
++ import { Plugin, ICommandService, UniverInstanceType, Injector, setDependencies } from '@univerjs/core'
 
 export class MyPlugin extends Plugin {
   static override type = UniverInstanceType.UNIVER_UNKNOWN

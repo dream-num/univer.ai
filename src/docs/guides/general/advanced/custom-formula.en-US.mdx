@@ -19,7 +19,7 @@ You can create a new `custom-function.ts` file to specifically place custom form
 
     We collect multiple custom formulas in an enumeration.
 
-    ```ts
+    ```typescript
     /**
      * function name
      */
@@ -32,7 +32,7 @@ You can create a new `custom-function.ts` file to specifically place custom form
 
     Define the international content you need. For detailed field descriptions, please refer to the [How to add formulas in Formula Engine](/guides/sheet/advanced/custom-formula/#how-to-add-formulas-in-formula-engine) section. Similarly, multiple formulas are distinguished by using the formula name as the `key` value.
 
-    ```ts
+    ```typescript
     /**
      *i18n
      */
@@ -91,7 +91,7 @@ You can create a new `custom-function.ts` file to specifically place custom form
 
     Expand the internationalization content you defined in the original internationalization object.
 
-    ```ts
+    ```typescript
     export const locales = {
       [LocaleType.EN_US]: {
         ...UniverSheetsEnUS,
@@ -111,7 +111,7 @@ You can create a new `custom-function.ts` file to specifically place custom form
 
     The description of the formula mainly configures internationalized fields, which are used for formula search prompts, details panels, etc.
 
-    ```ts
+    ```typescript
     import type { IFunctionInfo } from '@univerjs/engine-formula';
     import { FunctionType } from '@univerjs/engine-formula';
 
@@ -149,7 +149,7 @@ You can create a new `custom-function.ts` file to specifically place custom form
 
     Pass in the description object you defined when registering the formula plugin.
 
-    ```ts
+    ```typescript
     // universal
     univer.registerPlugin(UniverSheetsFormulaPlugin, {
       description: FUNCTION_LIST_USER,
@@ -160,7 +160,7 @@ You can create a new `custom-function.ts` file to specifically place custom form
 
     Write specific formula calculation logic, map algorithms and formula names.
 
-    ```ts
+    ```typescript
     import type { ArrayValueObject, BaseValueObject, IFunctionInfo } from '@univerjs/engine-formula';
     import { BaseFunction, FunctionType, NumberValueObject } from '@univerjs/engine-formula';
 
@@ -197,7 +197,7 @@ You can create a new `custom-function.ts` file to specifically place custom form
 
     Formula algorithms can also be marked with `isAsync` to return asynchronous results. A `Promise` is passed into the returned `AsyncObject`, and `Promise.resolve` can accept `BaseValueObject` or `ArrayValueObject`.
 
-    ```ts
+    ```typescript
     /**
      * Get data asynchronously and assign it to a single formula value
     */
@@ -224,7 +224,7 @@ You can create a new `custom-function.ts` file to specifically place custom form
 
     Pass in the formula algorithm object you defined in `UniverFormulaEnginePlugin`.
 
-    ```ts
+    ```typescript
     univer.registerPlugin(UniverFormulaEnginePlugin, {
       function: functionUser,
     });
@@ -248,7 +248,7 @@ First, create a new plugin, and then you can start adding custom formulas.
 
 1. Create a new `custom-function.ts` file in the `common` file and write all the basic modules required for the formula.
 
-    ```ts
+    ```typescript
     import type { ArrayValueObject, BaseValueObject, IFunctionInfo } from '@univerjs/engine-formula';
     import { BaseFunction, FunctionType, NumberValueObject } from '@univerjs/engine-formula';
 
@@ -374,9 +374,8 @@ First, create a new plugin, and then you can start adding custom formulas.
 
 2. Create a new `custom-description.controller.ts` under the `controllers` folder to register formula internationalization content and description.
 
-    ```ts
-    import { Disposable, LifecycleStages, LocaleService, OnLifecycle } from '@univerjs/core';
-    import { Inject } from '@wendellhu/redi';
+    ```typescript
+    import { Disposable, LifecycleStages, Inject, LocaleService, OnLifecycle } from '@univerjs/core';
 
     import { FUNCTION_LIST_USER, functionEnUS, functionZhCN } from '../common/custom-function';
     import { IDescriptionService } from '../services/description.service';
@@ -412,11 +411,11 @@ First, create a new plugin, and then you can start adding custom formulas.
 
 3. Create a new `custom-function.controller.ts` under the `controllers` folder to register formula algorithms.
 
-    ```ts
+    ```typescript
+    import { type Ctor } from '@univerjs/core';
     import { Disposable, LifecycleStages, OnLifecycle } from '@univerjs/core';
     import type { BaseFunction, IFunctionNames } from '@univerjs/engine-formula';
     import { IFunctionService } from '@univerjs/engine-formula';
-    import { type Ctor } from '@wendellhu/redi';
 
     import { functionUser } from '../common/custom-function';
 
@@ -447,7 +446,7 @@ First, create a new plugin, and then you can start adding custom formulas.
 
 4. In the plugin entry file `plugin.ts`, register `custom-description.controller.ts` and `custom-function.controller.ts` into the DI system.
 
-    ```ts
+    ```typescript
     initialize(): void {
       // ... other logic
 
@@ -469,10 +468,9 @@ In addition to registering through the `UniverFormulaEnginePlugin` configuration
 
 First of all, there is no need to register `CustomFunctionController` in `plugin.ts`. Create a new `custom-function-plugin.ts` in the same directory, specifically for registering `CustomFunctionController`.
 
-```ts
-import { Plugin, PluginType } from '@univerjs/core';
-import type { Dependency } from '@wendellhu/redi';
-import { Inject, Injector } from '@wendellhu/redi';
+```typescript
+import type { Dependency } from '@univerjs/core';
+import { Plugin, PluginType, Inject, Injector } from '@univerjs/core';
 
 import { FORMULA_UI_PLUGIN_NAME } from './common/plugin-name';
 import { CustomFunctionController } from './controllers/custom-function.controller';
@@ -498,13 +496,13 @@ export class UniverSheetsCustomFunctionPlugin extends Plugin {
 
 Then export it in `index.ts`
 
-```ts
+```typescript
 export { UniverSheetsCustomFunctionPlugin } from './custom-function-plugin';
 ```
 
 Register plugin
 
-```ts
+```typescript
 import { UniverSheetsCustomFunctionPlugin } from '@univerjs/sheets-formula';
 
 // ...initialize other plugins
@@ -601,7 +599,7 @@ To implement a formula, you need to add formula description, internationalizatio
 
     Here is an example of `SUMIF`
 
-    ```ts
+    ```typescript
     {
       functionName: FUNCTION_NAMES_MATH.SUMIF,
       aliasFunctionName: 'formula.functionList.SUMIF.aliasFunctionName',
