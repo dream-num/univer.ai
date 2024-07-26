@@ -19,7 +19,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
     我们把多个自定义公式搜集在一个枚举中。
 
-    ```ts
+    ```typescript
     /**
      * function name
      */
@@ -32,7 +32,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
     定义你所需要的国际化内容，详细的字段说明请参考 [如何在 Formula Engine 中添加公式](/guides/sheet/advanced/custom-formula/#如何在-formula-engine-中添加公式) 的部分。同样的，多个公式就用公式名称作为 `key` 值区分。
 
-    ```ts
+    ```typescript
     /**
      * i18n
      */
@@ -91,7 +91,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
     在原有的国际化对象中扩展你定义的国际化内容。
 
-    ```ts
+    ```typescript
     export const locales = {
       [LocaleType.EN_US]: {
         ...UniverSheetsEnUS,
@@ -111,7 +111,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
     公式的描述中主要是配置国际化字段，用于公式搜索提示、详情面板等。
 
-    ```ts
+    ```typescript
     import type { IFunctionInfo } from '@univerjs/engine-formula';
     import { FunctionType } from '@univerjs/engine-formula';
 
@@ -149,7 +149,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
     注册公式插件时传入你定义的描述对象。
 
-    ```ts
+    ```typescript
     // univer
     univer.registerPlugin(UniverSheetsFormulaPlugin, {
       description: FUNCTION_LIST_USER,
@@ -160,7 +160,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
     编写具体的公式计算逻辑，并将算法和公式名称映射起来。
 
-    ```ts
+    ```typescript
     import type { ArrayValueObject, BaseValueObject, IFunctionInfo } from '@univerjs/engine-formula';
     import { BaseFunction, FunctionType, NumberValueObject } from '@univerjs/engine-formula';
 
@@ -198,7 +198,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
     公式算法还可以用 `isAsync` 标记为返回异步结果，返回的 `AsyncObject` 中传入一个 `Promise`，`Promise.resolve` 可以接受 `BaseValueObject` 或者 `ArrayValueObject`。
 
-    ```ts
+    ```typescript
     /**
      * Get data asynchronously and assign it to a single formula value
     */
@@ -225,7 +225,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
     在 `UniverFormulaEnginePlugin` 传入你定义的公式算法对象。
 
-    ```ts
+    ```typescript
     univer.registerPlugin(UniverFormulaEnginePlugin, {
       function: functionUser,
     });
@@ -249,7 +249,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 1. `common` 文件内新建 `custom-function.ts` 文件，将公式所需要的基础模块全部写好。
 
-    ```ts
+    ```typescript
     import type { ArrayValueObject, BaseValueObject, IFunctionInfo } from '@univerjs/engine-formula';
     import { BaseFunction, FunctionType, NumberValueObject } from '@univerjs/engine-formula';
 
@@ -375,9 +375,8 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 2. `controllers` 文件夹下新建 `custom-description.controller.ts` 用于注册公式国际化内容和描述。
 
-    ```ts
-    import { Disposable, LifecycleStages, LocaleService, OnLifecycle } from '@univerjs/core';
-    import { Inject } from '@wendellhu/redi';
+    ```typescript
+    import { Disposable, LifecycleStages, Inject, LocaleService, OnLifecycle } from '@univerjs/core';
 
     import { FUNCTION_LIST_USER, functionEnUS, functionZhCN } from '../common/custom-function';
     import { IDescriptionService } from '../services/description.service';
@@ -413,11 +412,11 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 3. `controllers` 文件夹下新建 `custom-function.controller.ts` 用于注册公式算法。
 
-    ```ts
+    ```typescript
+    import { type Ctor } from '@univerjs/core';
     import { Disposable, LifecycleStages, OnLifecycle } from '@univerjs/core';
     import type { BaseFunction, IFunctionNames } from '@univerjs/engine-formula';
     import { IFunctionService } from '@univerjs/engine-formula';
-    import { type Ctor } from '@wendellhu/redi';
 
     import { functionUser } from '../common/custom-function';
 
@@ -448,7 +447,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 4. 在插件入口文件 `plugin.ts` 中，将 `custom-description.controller.ts` 和 `custom-function.controller.ts` 注册到 DI 系统中。
 
-    ```ts
+    ```typescript
     initialize(): void {
       // ... 其它逻辑
 
@@ -470,10 +469,9 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 首先 `plugin.ts` 中就不需要注册 `CustomFunctionController` 了，同级目录新建一个 `custom-function-plugin.ts`，专门用于注册 `CustomFunctionController`。
 
-```ts
-import { Plugin, PluginType } from '@univerjs/core';
-import type { Dependency } from '@wendellhu/redi';
-import { Inject, Injector } from '@wendellhu/redi';
+```typescript
+import type { Dependency } from '@univerjs/core';
+import { Plugin, PluginType, Inject, Injector } from '@univerjs/core';
 
 import { FORMULA_UI_PLUGIN_NAME } from './common/plugin-name';
 import { CustomFunctionController } from './controllers/custom-function.controller';
@@ -499,13 +497,13 @@ export class UniverSheetsCustomFunctionPlugin extends Plugin {
 
 然后在 `index.ts` 中导出
 
-```ts
+```typescript
 export { UniverSheetsCustomFunctionPlugin } from './custom-function-plugin';
 ```
 
 注册插件
 
-```ts
+```typescript
 import { UniverSheetsCustomFunctionPlugin } from '@univerjs/sheets-formula';
 
 // ... 初始化其他插件
@@ -604,7 +602,7 @@ comment 标记下 `@自己 : I can solve it`，示例 [\[Feature\] Math Formula 
 
     以下是 `SUMIF` 的示例
 
-    ```ts
+    ```typescript
     {
       functionName: FUNCTION_NAMES_MATH.SUMIF,
       aliasFunctionName: 'formula.functionList.SUMIF.aliasFunctionName',

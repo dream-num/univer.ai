@@ -93,7 +93,8 @@ This is because you have missed the corresponding locales. You need to pass the 
 
 First, make sure your React version is 16.9 or higher, as Univer's UI layer depends on React and uses React Hooks.
 
-In addition, there is a known issue with the DI library `@wendellhu/redi` that Univer depends on, which does not currently support React's StrictMode. You can resolve this issue by removing StrictMode.
+{/* 此外，受限于 Univer DI 机制，暂时不支持 React 的 StrictMode，通过移除 StrictMode 可以解决这个问题。 */}
+In addition, there is currently no support for React's StrictMode due to the Univer DI mechanism. You can resolve this issue by removing StrictMode.
 
 ```diff
 - <React.StrictMode>

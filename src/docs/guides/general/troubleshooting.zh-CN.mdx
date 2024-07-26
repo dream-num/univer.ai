@@ -100,7 +100,7 @@ $btn.addEventListener('click', () => {
 
 首先请确保你的 React 版本在 16.9 以上，因为 Univer 的 UI 层依赖 React，并且使用了 React Hooks。
 
-此外，Univer 依赖的 DI 库 `@wendellhu/redi` 存在一个已知问题，即暂时不支持 React 的 StrictMode，通过移除 StrictMode 可以解决这个问题。
+此外，受限于 Univer DI 机制，暂时不支持 React 的 StrictMode，通过移除 StrictMode 可以解决这个问题。
 
 ```diff
 - <React.StrictMode>

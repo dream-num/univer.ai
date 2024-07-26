@@ -1,6 +1,5 @@
-import type { ICommand } from '@univerjs/core'
+import type { IAccessor, ICommand } from '@univerjs/core'
 import { CommandType, ConfigService } from '@univerjs/core'
-import type { IAccessor } from '@wendellhu/redi'
 import type { IConfigData } from '../../controllers/github-menu.controller'
 import { CONFIG_KEY } from '../../controllers/github-menu.controller'
 

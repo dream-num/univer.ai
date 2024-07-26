@@ -11,8 +11,7 @@ Univer allows users to persist/load data from custom plugins along with the `sna
 In `@univerjs/core`, there is an instance of `ResourceManagerService`. You can register the corresponding `hooks` in your `custom plugin` and bind the data to `snapshot`.
 
 ```typescript
-import { IResourceManagerService, OnLifecycle, LifecycleStages } from '@univerjs/core';
-import { Inject } from '@wendellhu/redi';
+import { IResourceManagerService, Inject, OnLifecycle, LifecycleStages } from '@univerjs/core';
 import { UniverType } from '@univerjs/protocol';
 
 const YOUR_PLUGIN_NAME = 'YOUR_PLUGIN_NAME';
@@ -61,9 +60,7 @@ class CustomerService {
 When your data has been connected to `ResourceManagerService`, inject your `CustomerService` into your own `CustomerPlugin`.
 
 ```typescript
-import {  Plugin } from '@univerjs/core';
-import { Inject, Injector } from '@wendellhu/redi';
-
+import { Plugin, Inject, Injector } from '@univerjs/core';
 
 export class UniverSheetsPlugin extends Plugin {
   constructor(
@@ -92,8 +89,7 @@ There is a `ResourceLoaderService` instance in `@univerjs/core`, which you can u
 The information of `Resource` is stored on `snapshot.resources` and can be obtained based on the corresponding `pluginName`.
 
 ```typescript
-import { IResourceLoaderService, IUniverInstanceService, LifecycleStages, OnLifecycle } from '@univerjs/core';
-import { Inject } from '@wendellhu/redi';
+import { IResourceLoaderService, IUniverInstanceService, Inject, LifecycleStages, OnLifecycle } from '@univerjs/core';
 import { UniverType } from '@univerjs/protocol';
 
 @OnLifecycle(LifecycleStages.Starting, CustomerService)

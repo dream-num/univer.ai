@@ -13,16 +13,15 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 因此我们当然推荐你首先使用 TypeScript，但如果你不熟悉 TypeScript 或者受制于其他原因，你也可以使用 JavaScript 来扩展 Univer。当然，这并不是一件容易的事情，因为你可能需要了解 Univer 的内部机制以及如何使用 JavaScript 来实现 TypeScript 中的装饰器。
 
-在 Univer 的文档中，最常见到的装饰器分别是由 [`@wendellhu/redi`](https://redi.wendell.fun) 提供的参数装饰器（Parameter Decorators）和由 `@univerjs/core` 提供的 `OnLifecycle` 类装饰器（Class Decorators）。这里将介绍如何在 JavaScript 中替代这两种装饰器。
+在 Univer 的文档中，最常见到的装饰器分别是由 `@univerjs/core` 提供的参数装饰器（Parameter Decorators）和 `OnLifecycle` 类装饰器（Class Decorators）。这里将介绍如何在 JavaScript 中替代这两种装饰器。
 
 ## 参数装饰器
 
-`@wendellhu/redi` 提供了 `setDependencies` 方法，用于在 JavaScript 中显示地声明依赖。例如：
+`@univerjs/core` 提供了 `setDependencies` 方法，用于在 JavaScript 中显示地声明依赖。例如：
 
 ```diff
-import { Plugin, ICommandService, UniverInstanceType } from '@univerjs/core'
-- import { Inject, Injector } from '@wendellhu/redi'
-+ import { Injector, setDependencies } from '@wendellhu/redi'
+- import { Plugin, ICommandService, UniverInstanceType } from '@univerjs/core'
++ import { Plugin, ICommandService, UniverInstanceType, Injector, setDependencies } from '@univerjs/core'
 
 export class MyPlugin extends Plugin {
   static override type = UniverInstanceType.UNIVER_UNKNOWN
