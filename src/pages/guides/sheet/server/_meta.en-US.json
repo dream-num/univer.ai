@@ -2,5 +2,6 @@
   "overview": "Overview",
   "docker": "Deploying to Docker",
   "kubernetes": "Deploying to Kubernetes",
-  "usip": "Univer Server Integration Protocol"
+  "usip": "Univer Server Integration Protocol",
+  "api": "Univer Server API"
 }
