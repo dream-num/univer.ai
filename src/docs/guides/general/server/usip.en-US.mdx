@@ -6,8 +6,8 @@ USIP: Univer Server Integration Protocol
 
 Glossary
 
-- USIP Client: The end that initiates USIP requests, generally Univer Server
-- USIP Server: The end that implements USIP and provides services, generally a Third-party Server
+- USIP Client: The end that initiates USIP requests, generally is our Univer Server
+- USIP Server: The end that implements USIP and provides services, generally is Third-party Server
 
 USIP refers to the protocol that must be followed when integrating a third-party system with Univer Server, specifically requiring implementation of a series of USIP-defined interfaces.
 
@@ -21,7 +21,7 @@ In this way, while ensuring that data remains within the third-party client syst
 ## Prerequisites
 
 1. The integrating party needs to maintain the relationship between users and documents on their own. Univer Server acts as the client to obtain user permissions under documents through an interface.
-2. Implementation: Upon successfully creating a document by calling Univer Server, it returns a `unitID` document ID. The integrating party needs to store this ID to manage their own document management operations effectively.
+2. Implementation: Upon successfully creating a document by calling Univer Server, it returns a `unitID` as document ID. The integrating party needs to store this ID to manage their own document management operations effectively.
 
 ## Required Interfaces
 
