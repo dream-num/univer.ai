@@ -1,0 +1,139 @@
+# Introduction to USIP
+
+USIP: Univer Server Integration Protocol
+
+Glossary
+
+- USIP Client: The end that initiates USIP requests, generally Univer Server
+- USIP Server: The end that implements USIP and provides services, generally a Third-party Server
+
+USIP refers to the protocol that must be followed when integrating a third-party system with Univer Server, specifically requiring implementation of a series of USIP-defined interfaces.
+
+Based on these protocols, Univer Server can access third-party systems to obtain the results required by clients.
+
+In this way, while ensuring that data remains within the third-party client system, Univer Server can successfully integrate into the client's system.
+
+![relationship](./usip/AzQSbQDVuoKkRZxrRPqcHtF0nsh.png)
+![api call flowchart](./usip/NdzmbFpnio4mQexalKBcw7Hwnmf.png)
+
+# Prerequisites
+
+1. The integrating party needs to maintain the relationship between users and documents on their own. Univer Server acts as the client to obtain user permissions under documents through an interface.
+2. Implementation: Upon successfully creating a document by calling Univer Server, it returns a `unitID` document ID. The integrating party needs to store this ID to manage their own document management operations effectively.
+
+# **Required Interfaces**
+
+1. Credential verify: Verify user identity legality (AuthN)
+
+- The Univer Server interface verifies user identity by forwarding all request HTTP headers to the USIP server's credential verify interface for authentication.
+- If the credential verify interface validates successfully, it needs to return `User` structured data, including the user's unique identifier `userID`, which will be used in subsequent Univer Server operations.
+
+```shell
+curl -X GET \
+    -H "authorization: xx" \
+    -H "cookie: xx" \
+    -H "YOUR-CUSTOM-HEADER: xx" \
+    "http://localhost:8080/credential"
+    
+# response
+{
+    "user": {
+        "userID": "xxx",
+        "name": "xxx",
+        "avatar": "xxx",
+    }
+}
+```
+
+2. Bulk User Info Retrieval
+
+- The Bulk User Info Retrieval interface accepts a `userIDs` string array parameter where each element represents a user identifier `userID`.
+- The interface returns an array of `User` objects.
+
+```shell
+curl -X GET "http://localhost:8080/userinfo?userIDs=1&userIDs=2"
+
+# response
+{
+    "users": [
+        {"userID": "1", "name":"xxx", "avatar":"https://xxxx"},
+        {"userID": "2", "name":"xxx", "avatar":"https://xxxx"},
+    ]
+}
+```
+
+3. Permission role: Retrieving Specific User Permissions for Specific Documents (AuthZ)
+
+- The USIP server is responsible for managing user permissions on documents. Currently, Univer Server has predefined several roles:
+
+| Role   | Description       |
+| ------ | ----------------- |
+| owner  | Manages the document |
+| editor | Can edit the document |
+| reader | Can view the document |
+
+- The Permission role interface accepts a `unitID` parameter identifying the document ID and a `userID` parameter identifying the user.
+
+```shell
+curl -X GET "http://localhost:8080/role?unitID=xxx&userID=xxx"
+
+# response
+{
+    "userID": "xxx",
+    "role": "owner"
+}
+```
+
+4. Get Collaborator List: Retrieve the list of collaborators for a document
+
+- The Get Collaborator List interface should accept a `unitIDs` string array parameter, allowing retrieval of collaborator lists for multiple documents simultaneously.
+
+```shell
+curl -X GET "http://localhost:8080/collaborators?unitIDs=AA&unitIDs=xx"
+
+# response
+{
+    "collobrators": [
+        {
+            "unitID":"AA",
+            "subjects":[
+                {
+                    "subject": {
+                        "id": "1",
+                        "name": "xx",
+                        "avatar": "xxx",
+                        "type": "user"
+                     },
+                    "role":"owner"
+                },
+                {
+                    "subject": {
+                        "id": "2",
+                        "name": "xx",
+                        "avatar": "xxx",
+                        "type": "user"
+                     },
+                    "role":"editor"
+                },
+            ]
+        },
+    ]
+}
+```
+
+# Univer Server Service Configuration
+
+To enable USIP functionality, configure the above interface addresses in the `.env` file located in the docker-compose directory, and then restart the service.
+
+```shell
+# usip about
+USIP_ENBALED=true
+USIP_URI_CREDENTIAL=http://localhost:8080/credential
+USIP_URI_USERINFO=http://localhost:8080/userinfo
+USIP_URI_ROLE=http://localhost:8080/role
+USIP_URI_COLLABORATORS=http://localhost:8080/collaborators
+```
+
+# Code Example
+
+You can view the [usip-example](https://github.com/dream-num/usip-example) for reference.

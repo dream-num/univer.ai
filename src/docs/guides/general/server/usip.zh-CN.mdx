@@ -1,0 +1,139 @@
+# USIP 介绍
+
+USIP: Univer Server Integration Protocol，
+
+术语表
+
+- USIP Client: 发起 USIP 请求的一端，一般是 Univer Server
+- USIP Server: 实现了 USIP 并提供服务的一端，一般是 Third-party Server
+
+USIP 指的是第三方系统集成 Univer Server 时所要遵循的协议，具体来说，即需要实现 USIP 约定的一系列接口。
+
+Univer Server 基于这一系列协议可以访问第三方系统，以获得客户所需要的结果。
+
+这样一来，在保证数据依然保留在第三方客户系统内部的同时，Univer Server 也可以成功集成进客户系统。
+
+![relationship](./usip/AzQSbQDVuoKkRZxrRPqcHtF0nsh.png)
+![api call flowchart](./usip/NdzmbFpnio4mQexalKBcw7Hwnmf.png)
+
+# 前提
+
+1. 集成方需要自己维护 用户 - 文档 之间的关系，univer server 作为客户端通过接口获取文档下的用户权限
+2. 实现：调用 univer server 创建文档成功后，会返回一个 `unitID` 文档 id，集成方需要对其进行存储，以实现自己的文件管理业务
+
+# **需要实现的接口**
+
+1. Credential verify: 验证用户身份合法性 (AuthN)
+
+- Univer server 接口会验证用户身份，当被调用时会将请求的 http header 都转发到 USIP server 的 credential verify 接口进行身份验证
+- credential verify 接口如果校验成功，需要返回 `User` 结构数据，后续 Univer server 业务会使用到用户唯一标识符 `userID`
+
+```shell
+curl -X GET \
+    -H "authorization: xx" \
+    -H "cookie: xx" \
+    -H "YOUR-CUSTOM-HEADER: xx" \
+    "http://localhost:8080/credential"
+    
+# response
+{
+    "user": {
+        "userID": "xxx",
+        "name": "xxx",
+        "avatar": "xxx",
+    }
+}
+```
+
+2. UserInfo 批量获取
+
+- UserInfo 批量获取接口需要接收一个 `userIDs` 字符串数组参数，数组元素是用户标识符 `userID`
+- 接口返回值是一个 `User` 数组
+
+```shell
+curl -X GET "http://localhost:8080/userinfo?userIDs=1&userIDs=2"
+
+# response
+{
+    "users": [
+        {"userID": "1", "name":"xxx", "avatar":"https://xxxx"},
+        {"userID": "2", "name":"xxx", "avatar":"https://xxxx"},
+    ]
+}
+```
+
+3. Permission role： 获取特定用户对特定文档的权限 (AuthZ)
+
+- USIP server 需要自己维护用户对文档的管理权限，目前 Univer server 预定义了几个角色：
+
+| 角色   | 说明         |
+| ------ | ------------ |
+| owner  | 文件的管理者 |
+| editor | 可编辑者     |
+| reader | 可查看者     |
+
+- Permission role 接口接收一个 `unitID` 参数标识文档 id 和一个 `userID` 参数标识用户
+
+```shell
+curl -X GET "http://localhost:8080/role?unitID=xxx&userID=xxx"
+
+# response
+{
+    "userID": "xxx",
+    "role": "owner"
+}
+```
+
+4. Get Collaborator List: 获取文档的协作者列表
+
+- Get Collaborator List 需要接收一个 `unitIDs` 字符串数组，表示可以同时获取多个文档的协作者
+
+```shell
+curl -X GET "http://localhost:8080/collaborators?unitIDs=AA&unitIDs=xx"
+
+# response
+{
+    "collobrators": [
+        {
+            "unitID":"AA",
+            "subjects":[
+                {
+                    "subject": {
+                        "id": "1",
+                        "name": "xx",
+                        "avatar": "xxx",
+                        "type": "user"
+                     },
+                    "role":"owner"
+                },
+                {
+                    "subject": {
+                        "id": "2",
+                        "name": "xx",
+                        "avatar": "xxx",
+                        "type": "user"
+                     },
+                    "role":"editor"
+                },
+            ]
+        },
+    ]
+}
+```
+
+# Univer server 服务配置
+
+需要将上述接口地址配置到 docker-compose 目录下的 `.env` 文件，开启 USIP 功能，重启服务
+
+```shell
+# usip about
+USIP_ENBALED=true
+USIP_URI_CREDENTIAL=http://localhost:8080/credential
+USIP_URI_USERINFO=http://localhost:8080/userinfo
+USIP_URI_ROLE=http://localhost:8080/role
+USIP_URI_COLLABORATORS=http://localhost:8080/collaborators
+```
+
+# 代码例子
+
+可查看 [usip-example](https://github.com/dream-num/usip-example)
