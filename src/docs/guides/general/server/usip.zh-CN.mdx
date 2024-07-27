@@ -1,3 +1,7 @@
+import Image from '@/components/Image'
+import relationshipImg from './usip/usip-relationship.png'
+import flowchartImg from './usip/usip-flowchart.png'
+
 # Univer Server 集成协议
 
 ## USIP 介绍
@@ -15,8 +19,9 @@ Univer Server 基于这一系列协议可以访问第三方系统，以获得客
 
 这样一来，在保证数据依然保留在第三方客户系统内部的同时，Univer Server 也可以成功集成进客户系统。
 
-![relationship](./usip/usip-relationship.png)
-![api call flowchart](./usip/usip-flowchart.png)
+<Image src={relationshipImg} alt="relationship" width={500} />
+
+<Image src={flowchartImg} alt="api call flowchart" width={500} />
 
 ## 前提
 
