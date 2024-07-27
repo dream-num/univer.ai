@@ -23,9 +23,9 @@ Univer Server 基于这一系列协议可以访问第三方系统，以获得客
 1. 集成方需要自己维护 用户 - 文档 之间的关系，univer server 作为客户端通过接口获取文档下的用户权限
 2. 实现：调用 univer server 创建文档成功后，会返回一个 `unitID` 文档 id，集成方需要对其进行存储，以实现自己的文件管理业务
 
-## **需要实现的接口**
+## 需要实现的接口
 
-1. Credential verify: 验证用户身份合法性 (AuthN)
+1. Credential verify：验证用户身份合法性 (AuthN)
 
 - Univer server 接口会验证用户身份，当被调用时会将请求的 http header 都转发到 USIP server 的 credential verify 接口进行身份验证
 - credential verify 接口如果校验成功，需要返回 `User` 结构数据，后续 Univer server 业务会使用到用户唯一标识符 `userID`
@@ -64,7 +64,7 @@ curl -X GET "http://localhost:8080/userinfo?userIDs=1&userIDs=2"
 }
 ```
 
-3. Permission role： 获取特定用户对特定文档的权限 (AuthZ)
+3. Permission role：获取特定用户对特定文档的权限 (AuthZ)
 
 - USIP server 需要自己维护用户对文档的管理权限，目前 Univer server 预定义了几个角色：
 
@@ -86,7 +86,7 @@ curl -X GET "http://localhost:8080/role?unitID=xxx&userID=xxx"
 }
 ```
 
-4. Get Collaborator List: 获取文档的协作者列表
+4. Get Collaborator List：获取文档的协作者列表
 
 - Get Collaborator List 需要接收一个 `unitIDs` 字符串数组，表示可以同时获取多个文档的协作者
 
