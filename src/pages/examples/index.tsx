@@ -103,12 +103,12 @@ export default function Page() {
       desc: t('examples.sheet-big-data.desc'),
       link: '/examples/sheets-big-data',
     }, {
-    //   title: t('examples.sheet-vchart.title'),
-    //   preview: '/images/univer/examples/sheets-vchart.gif',
-    //   desc: t('examples.sheet-vchart.desc'),
-    //   link: '/examples/sheets-vchart',
-    //   tags: [t('tags.community')],
-    // }, {
+      title: t('examples.sheet-vchart.title'),
+      preview: '/images/univer/examples/sheets-vchart.gif',
+      desc: t('examples.sheet-vchart.desc'),
+      link: '/examples/sheets-vchart',
+      tags: [t('tags.community')],
+    }, {
       title: t('examples.sheet-collaboration.title'),
       preview: '/images/univer-pro/examples/sheets-collaboration.gif',
       desc: t('examples.sheet-collaboration.desc'),

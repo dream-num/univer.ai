@@ -189,8 +189,8 @@ importers:
         specifier: 0.2.5
         version: 0.2.5(tgqkf7he74urc5bmrs4x6atmli)
       '@visactor/univer-vchart-plugin':
-        specifier: ^1.0.4
-        version: 1.0.4(odwomhcz7f2czavcecsf43jpg4)
+        specifier: ^2.0.0
+        version: 2.0.0(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/sheets-drawing-ui@0.2.5(bz5d4rfsf4tsohbrolr6pitp5u))(@univerjs/ui@0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.5(clsx@2.1.1)(dayjs@1.11.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -662,72 +662,84 @@ packages:
     engines: {glibc: '>=2.26', npm: '>=9.6.5', pnpm: '>=7.1.0', yarn: '>=3.2.0'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@img/sharp-libvips-linux-arm@1.0.2':
     resolution: {integrity: sha512-iLWCvrKgeFoglQxdEwzu1eQV04o8YeYGFXtfWU26Zr2wWT3q3MTzC+QTCO3ZQfWd3doKHT4Pm2kRmLbupT+sZw==}
     engines: {glibc: '>=2.28', npm: '>=9.6.5', pnpm: '>=7.1.0', yarn: '>=3.2.0'}
     cpu: [arm]
     os: [linux]
+    libc: [glibc]
 
   '@img/sharp-libvips-linux-s390x@1.0.2':
     resolution: {integrity: sha512-cmhQ1J4qVhfmS6szYW7RT+gLJq9dH2i4maq+qyXayUSn9/3iY2ZeWpbAgSpSVbV2E1JUL2Gg7pwnYQ1h8rQIog==}
     engines: {glibc: '>=2.28', npm: '>=9.6.5', pnpm: '>=7.1.0', yarn: '>=3.2.0'}
     cpu: [s390x]
     os: [linux]
+    libc: [glibc]
 
   '@img/sharp-libvips-linux-x64@1.0.2':
     resolution: {integrity: sha512-E441q4Qdb+7yuyiADVi5J+44x8ctlrqn8XgkDTwr4qPJzWkaHwD489iZ4nGDgcuya4iMN3ULV6NwbhRZJ9Z7SQ==}
     engines: {glibc: '>=2.26', npm: '>=9.6.5', pnpm: '>=7.1.0', yarn: '>=3.2.0'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@img/sharp-libvips-linuxmusl-arm64@1.0.2':
     resolution: {integrity: sha512-3CAkndNpYUrlDqkCM5qhksfE+qSIREVpyoeHIU6jd48SJZViAmznoQQLAv4hVXF7xyUB9zf+G++e2v1ABjCbEQ==}
     engines: {musl: '>=1.2.2', npm: '>=9.6.5', pnpm: '>=7.1.0', yarn: '>=3.2.0'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@img/sharp-libvips-linuxmusl-x64@1.0.2':
     resolution: {integrity: sha512-VI94Q6khIHqHWNOh6LLdm9s2Ry4zdjWJwH56WoiJU7NTeDwyApdZZ8c+SADC8OH98KWNQXnE01UdJ9CSfZvwZw==}
     engines: {musl: '>=1.2.2', npm: '>=9.6.5', pnpm: '>=7.1.0', yarn: '>=3.2.0'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@img/sharp-linux-arm64@0.33.4':
     resolution: {integrity: sha512-2800clwVg1ZQtxwSoTlHvtm9ObgAax7V6MTAB/hDT945Tfyy3hVkmiHpeLPCKYqYR1Gcmv1uDZ3a4OFwkdBL7Q==}
     engines: {glibc: '>=2.26', node: ^18.17.0 || ^20.3.0 || >=21.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0', yarn: '>=3.2.0'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@img/sharp-linux-arm@0.33.4':
     resolution: {integrity: sha512-RUgBD1c0+gCYZGCCe6mMdTiOFS0Zc/XrN0fYd6hISIKcDUbAW5NtSQW9g/powkrXYm6Vzwd6y+fqmExDuCdHNQ==}
     engines: {glibc: '>=2.28', node: ^18.17.0 || ^20.3.0 || >=21.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0', yarn: '>=3.2.0'}
     cpu: [arm]
     os: [linux]
+    libc: [glibc]
 
   '@img/sharp-linux-s390x@0.33.4':
     resolution: {integrity: sha512-h3RAL3siQoyzSoH36tUeS0PDmb5wINKGYzcLB5C6DIiAn2F3udeFAum+gj8IbA/82+8RGCTn7XW8WTFnqag4tQ==}
     engines: {glibc: '>=2.31', node: ^18.17.0 || ^20.3.0 || >=21.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0', yarn: '>=3.2.0'}
     cpu: [s390x]
     os: [linux]
+    libc: [glibc]
 
   '@img/sharp-linux-x64@0.33.4':
     resolution: {integrity: sha512-GoR++s0XW9DGVi8SUGQ/U4AeIzLdNjHka6jidVwapQ/JebGVQIpi52OdyxCNVRE++n1FCLzjDovJNozif7w/Aw==}
     engines: {glibc: '>=2.26', node: ^18.17.0 || ^20.3.0 || >=21.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0', yarn: '>=3.2.0'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@img/sharp-linuxmusl-arm64@0.33.4':
     resolution: {integrity: sha512-nhr1yC3BlVrKDTl6cO12gTpXMl4ITBUZieehFvMntlCXFzH2bvKG76tBL2Y/OqhupZt81pR7R+Q5YhJxW0rGgQ==}
     engines: {musl: '>=1.2.2', node: ^18.17.0 || ^20.3.0 || >=21.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0', yarn: '>=3.2.0'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@img/sharp-linuxmusl-x64@0.33.4':
     resolution: {integrity: sha512-uCPTku0zwqDmZEOi4ILyGdmW76tH7dm8kKlOIV1XC5cLyJ71ENAAqarOHQh0RLfpIpbV5KOpXzdU6XkJtS0daw==}
     engines: {musl: '>=1.2.2', node: ^18.17.0 || ^20.3.0 || >=21.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0', yarn: '>=3.2.0'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@img/sharp-wasm32@0.33.4':
     resolution: {integrity: sha512-Bmmauh4sXUsUqkleQahpdNXKvo+wa1V9KhT2pDA4VJGKwnKMJXiSTGphn0gnJrlooda0QxCtXc6RX1XAU6hMnQ==}
@@ -850,24 +862,28 @@ packages:
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@napi-rs/simple-git-linux-arm64-musl@0.1.16':
     resolution: {integrity: sha512-I57Ph0F0Yn2KW93ep+V1EzKhACqX0x49vvSiapqIsdDA2PifdEWLc1LJarBolmK7NKoPqKmf6lAKKO9lhiZzkg==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@napi-rs/simple-git-linux-x64-gnu@0.1.16':
     resolution: {integrity: sha512-AZYYFY2V7hlcQASPEOWyOa3e1skzTct9QPzz0LiDM3f/hCFY/wBaU2M6NC5iG3d2Kr38heuyFS/+JqxLm5WaKA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@napi-rs/simple-git-linux-x64-musl@0.1.16':
     resolution: {integrity: sha512-9TyMcYSBJwjT8jwjY9m24BZbu7ozyWTjsmYBYNtK3B0Um1Ov6jthSNneLVvouQ6x+k3Ow+00TiFh6bvmT00r8g==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@napi-rs/simple-git-win32-arm64-msvc@0.1.16':
     resolution: {integrity: sha512-uslJ1WuAHCYJWui6xjsyT47SjX6KOHDtClmNO8hqKz1pmDSNY7AjyUY8HxvD1lK9bDnWwc4JYhikS9cxCqHybw==}
@@ -905,24 +921,28 @@ packages:
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@next/swc-linux-arm64-musl@14.2.5':
     resolution: {integrity: sha512-NpDB9NUR2t0hXzJJwQSGu1IAOYybsfeB+LxpGsXrRIb7QOrYmidJz3shzY8cM6+rO4Aojuef0N/PEaX18pi9OA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@next/swc-linux-x64-gnu@14.2.5':
     resolution: {integrity: sha512-8XFikMSxWleYNryWIjiCX+gU201YS+erTUidKdyOVYi5qUQo/gRxv/3N1oZFCgqpesN6FPeqGM72Zve+nReVXQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@next/swc-linux-x64-musl@14.2.5':
     resolution: {integrity: sha512-6QLwi7RaYiQDcRDSU/os40r5o06b5ue7Jsk5JgdRBGGp8l37RZEh9JsLSM8QF0YDsgcosSeHjglgqi25+m04IQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@next/swc-win32-arm64-msvc@14.2.5':
     resolution: {integrity: sha512-1GpG2VhbspO+aYoMOQPQiqc/tG3LzmsdBH0LhnDS3JrtDx2QmzXe0B6mSZZiN3Bq7IOMXxv1nlsjzoS1+9mzZw==}
@@ -1726,24 +1746,28 @@ packages:
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@resvg/resvg-js-linux-arm64-musl@2.4.1':
     resolution: {integrity: sha512-6mT0+JBCsermKMdi/O2mMk3m7SqOjwi9TKAwSngRZ/nQoL3Z0Z5zV+572ztgbWr0GODB422uD8e9R9zzz38dRQ==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@resvg/resvg-js-linux-x64-gnu@2.4.1':
     resolution: {integrity: sha512-60KnrscLj6VGhkYOJEmmzPlqqfcw1keDh6U+vMcNDjPhV3B5vRSkpP/D/a8sfokyeh4VEacPSYkWGezvzS2/mg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@resvg/resvg-js-linux-x64-musl@2.4.1':
     resolution: {integrity: sha512-0AMyZSICC1D7ge115cOZQW8Pcad6PjWuZkBFF3FJuSxC6Dgok0MQnLTs2MfMdKBlAcwO9dXsf3bv9tJZj8pATA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@resvg/resvg-js-win32-arm64-msvc@2.4.1':
     resolution: {integrity: sha512-76XDFOFSa3d0QotmcNyChh2xHwk+JTFiEQBVxMlHpHMeq7hNrQJ1IpE1zcHSQvrckvkdfLboKRrlGB86B10Qjw==}
@@ -2386,23 +2410,6 @@ packages:
       react: ^16.9.0 || ^17.0.0 || ^18.0.0
       rxjs: '>=7.0.0'
 
-  '@univerjs/sheets-drawing-ui@0.1.17':
-    resolution: {integrity: sha512-bIDKL0N1qdeCtQQmQwDfI8OuBlY7JxsckwSGReP6XkzRNlCt88UcAYFr+ME7Fi6hGm8zZ3ri0Qa+sgzvJ8Rx+w==}
-    peerDependencies:
-      '@univerjs/core': 0.1.17
-      '@univerjs/design': 0.1.17
-      '@univerjs/drawing': 0.1.17
-      '@univerjs/drawing-ui': 0.1.17
-      '@univerjs/engine-render': 0.1.17
-      '@univerjs/sheets': 0.1.17
-      '@univerjs/sheets-drawing': 0.1.17
-      '@univerjs/sheets-ui': 0.1.17
-      '@univerjs/ui': 0.1.17
-      '@wendellhu/redi': 0.15.4
-      clsx: '>=2.0.0'
-      react: ^16.9.0 || ^17.0.0 || ^18.0.0
-      rxjs: '>=7.0.0'
-
   '@univerjs/sheets-drawing-ui@0.2.5':
     resolution: {integrity: sha512-YDqD9tlI2/LgiIm3V/7DqOcHivN+z/pn041DLDJl4sHJqLc+DCXm4cc3GdNZfY2CfDpaEdSaaTNWZOc0BEgWKQ==}
     peerDependencies:
@@ -2643,71 +2650,71 @@ packages:
     peerDependencies:
       webpack: ^4.0.0 || ^5.0.0
 
-  '@visactor/react-vchart@1.11.8':
-    resolution: {integrity: sha512-XUx1FiMFfq0YKqmVApPWPxtZne72ML5hjOya7BXyWASiTydudlXJl30RBz6Ayj6XtvAnhMmDVb1AJhAJIfNmdQ==}
+  '@visactor/react-vchart@1.11.10':
+    resolution: {integrity: sha512-WdDomPl807hr/B8c79x8a3gB7kboeVAi2rilKZZW0j/ge2SK7iivUPEBAg1swsVXS6e0lRmTK1MaskiAKe+ybg==}
     peerDependencies:
       react: '>=16.0.0'
       react-dom: '>=16.0.0'
 
-  '@visactor/univer-vchart-plugin@1.0.4':
-    resolution: {integrity: sha512-mSLYiZWXusTZ03zcvO+uBxar7YUgWVuoK2R0M62eWQqdJYzMTNfxjGbDWRm35hZ32o4GZQYSPlu6M5uxSEuyYg==}
+  '@visactor/univer-vchart-plugin@2.0.0':
+    resolution: {integrity: sha512-JJtmIlPfmOtvrvcZILdRqmLGvE7y8IiB4zmA3nrwpd6UHovv+SSXkoqvTSFVBCoPMy8IdBw9FdLtptqQy13tIQ==}
     peerDependencies:
-      '@univerjs/core': ^0.1.15
-      '@univerjs/ui': ^0.1.15
-      '@wendellhu/redi': ^0.15.2
+      '@univerjs/core': ^0.2.5
+      '@univerjs/sheets-drawing-ui': ^0.2.5
+      '@univerjs/ui': ^0.2.5
       react: ^18.2.0
       react-dom: ^18.2.0
 
-  '@visactor/vchart@1.11.8':
-    resolution: {integrity: sha512-suto2McNZxYJo5GOWT+/SPg5ThizNRnpZK/LTkpdatWn8j6Q3fyREMQ38tUxg2chID6NKeQQQERK6en433ktvw==}
+  '@visactor/vchart@1.11.10':
+    resolution: {integrity: sha512-hXq3kuMSZ9fc1uCBBm4bC1Tod/ejj1iZhde9CE8SlNlJYOTUlftyTTEeTBgsWtsC7qeaBz5G6c/vp7bYaT8xVA==}
 
-  '@visactor/vdataset@0.18.10':
-    resolution: {integrity: sha512-gMscOx38Ncj9Fnk90Zb8QiGK1h/jH9b4kTNoEKlMVQxZ516F+mi3FT3AF7GaNhe5jZS83cOSXtBWxWzVBXlqVg==}
+  '@visactor/vdataset@0.18.12':
+    resolution: {integrity: sha512-SEOWwdUywizCHwq0tPb+GxjvKVv7a+JLmgT78ldr+YQ5gdNLSaRKHiX5e26g1yjWi6Aq5VN574uMnq3u0WGTGA==}
 
-  '@visactor/vgrammar-coordinate@0.13.14':
-    resolution: {integrity: sha512-zffS67HCtbQCGHvt4jXvHbOa98AT3xlu6PqZTLeI8mEb6sYYB8XMncHD/ZfKx2YQC0paMpfwJv2aJeW0X6MrTg==}
+  '@visactor/vgrammar-coordinate@0.13.16':
+    resolution: {integrity: sha512-RazZJ5lhSGIMq5/ZhuGy1ZH5tmRaSPzHIdMXqekuHk1xwZFYgJ2ughyCNWY1UZZXDkW00sfLw7XJFpOCAbPAOA==}
 
-  '@visactor/vgrammar-core@0.13.14':
-    resolution: {integrity: sha512-gaxkP0IT78ndxm3tHXp7OzpfLi/LLNYBUpVpkOUL/JsqjLEIjd/EjxxOc2oSBp8OtOUAzdrR8rRo5Q+paXGwEw==}
+  '@visactor/vgrammar-core@0.13.16':
+    resolution: {integrity: sha512-C5HQ3fX4fIO24vw10ebel4Pn5RzOHT6h3YNWJ1aY62H0klogtBCuFaQ79nZpy8/wW01DCurTHSX7Xi36qnIYbA==}
 
-  '@visactor/vgrammar-hierarchy@0.13.14':
-    resolution: {integrity: sha512-NxXEYBZVR88QopuM8TXHn1PRTrhnQ+fp/HILC/TQnP+qKlcosRAG0zh5YME32gObE87/p4Q0omlaMSrWDrwc/A==}
+  '@visactor/vgrammar-hierarchy@0.13.16':
+    resolution: {integrity: sha512-/agUfaa1ULQx1y2TNOj9ED8VEvITLHD7BwsO9s9apD9rk8rapMYeKwZJuk59S8HMlZN0jISHCJF/JFxbwDTfPg==}
 
-  '@visactor/vgrammar-projection@0.13.14':
-    resolution: {integrity: sha512-f+KNKqwdBoxcl28IJ6DnfeOjVEkRbeKOKC9Z2Jm4Quqvu8B9o4hVLYa2D5grzPwAWPjImXfZ73xfgJ4vi5R/lA==}
+  '@visactor/vgrammar-projection@0.13.16':
+    resolution: {integrity: sha512-z2Thktu+iCY842S6oaRSnm6ao+LkP4R3SjTZgQ4JtleL4i1Xdj7UtsWKro10px3tfbzHoNyoXJ7rFqoQN08w6g==}
 
-  '@visactor/vgrammar-sankey@0.13.14':
-    resolution: {integrity: sha512-ZM8B1CBsOxTzFalA5dqF5AQzGUeSRPRTwj7VkqAfPeHEmHNzPtI7xFtguenMlTjVbG3BJxMYLKzjmvek04kvRw==}
+  '@visactor/vgrammar-sankey@0.13.16':
+    resolution: {integrity: sha512-PLubN1YiS9F2THkEq8VMz3POzixvUgtaGi8v69zQCf4F4FhVNtdxh4Hr0cmPlnvzkz1UQfuuwVNaN9TjEG4orA==}
 
-  '@visactor/vgrammar-util@0.13.14':
-    resolution: {integrity: sha512-16B0LEcV8shQno3sGfNGYJEJDwTz6pTwCl2y5O2SF/4TwnenXwXVfUa1aM0tgUcI44SIPmeH1J84u6i6ablyMQ==}
+  '@visactor/vgrammar-util@0.13.16':
+    resolution: {integrity: sha512-nWLrmcLOOqdoI1CLClldQEG5LpVTqZvhox+MMSvlsSRWfhIldLyDEzAN/m49VCRGr4hCdJ9hYEjyTuy+yheQ5A==}
 
-  '@visactor/vgrammar-venn@0.13.14':
-    resolution: {integrity: sha512-68+V3eDJa3SGKOEkmbEC39y1omFokvqDlGoT1eevy8y5iW4TGSuHvugqlcUKH5vq4P+sBLb2sXpIi+K0AwdZiA==}
+  '@visactor/vgrammar-venn@0.13.16':
+    resolution: {integrity: sha512-qqrEIzJuUT3QloYWCWPVCfzgUoaN6nSgY9CKMS+jv/favwebGDskZ3dN6t73OiOXp98MDC28myMX6s+w8U2Cpg==}
 
-  '@visactor/vgrammar-wordcloud-shape@0.13.14':
-    resolution: {integrity: sha512-ATbFgl7v4sGLEneHsEvwjR258ThruPyNHRIWp4aYVQXk5YJEvTUsy4qUx80DaLWFqUf9PDcxoz569SOOGTH9Zw==}
+  '@visactor/vgrammar-wordcloud-shape@0.13.16':
+    resolution: {integrity: sha512-YnMJvDoHn8n42CshHnWN+AZisAnxFtB602bnhPnwlHr99imk8HsCFmyls/3GDXX8DkNVkBX0RmkmLL3Wo0i5MQ==}
 
-  '@visactor/vgrammar-wordcloud@0.13.14':
-    resolution: {integrity: sha512-RGRqD77vncUU5WubV5Qz1/2cGhvhh44M9Ws8amyj+ro2hKdHf2QD8FwGVU2yDWqWWOe8Ca2KCOHeR7F8BKk08w==}
+  '@visactor/vgrammar-wordcloud@0.13.16':
+    resolution: {integrity: sha512-32sx8OwAuAy4q7umooDg0vEqhum8jhxWzdSkrNAcv7xccIj+vHz1aIvHdywscOoNomnm19kMiD+64mz8wE2c1w==}
 
-  '@visactor/vrender-components@0.19.17':
-    resolution: {integrity: sha512-FCWH6bkI89EfNtjPg6XHB8xisW1GJH9rNgkh4vfphfvagceHrorIagpxfqzRKQoIGiAJZFqEY2/9j4tZMPVyEA==}
+  '@visactor/vrender-components@0.19.19':
+    resolution: {integrity: sha512-LvmJjhmi3Rjc9ud6i9xT0HpnenmPcUDQygHHR38HRNhK/HI6Mt7pHUSjenoDA11SZhtcwnsJ1fQP7/UDYoerOw==}
 
-  '@visactor/vrender-core@0.19.17':
-    resolution: {integrity: sha512-3hifzM+I3zsEiUljHdo8h5YSdjLkFdhQSudQs58ChekqPg8+/6DpwFzuRXhI39x05VU0S3r9FA+zrcPpJ+cXJg==}
+  '@visactor/vrender-core@0.19.19':
+    resolution: {integrity: sha512-3toWqTGDP1GZTscHQN6xeZpWhS36TyzpFUYkEMt+xrpGGgZDSX0u1cjH1lRPhkd2Gbkh5NZFsrtdsBHoElGejQ==}
 
-  '@visactor/vrender-kits@0.19.17':
-    resolution: {integrity: sha512-T7x0twhi/vgNmSrBCsGxci2Fri7iLwkDeZQ+rZFM8W6d0CA3ioYhQXGCidJ3EN9HwJ2SMe4zsYKrPBZGxwgxtQ==}
+  '@visactor/vrender-kits@0.19.19':
+    resolution: {integrity: sha512-Xa0RXUp86SV6qDNcgpg17r8mFiF6AzNGv+wuDN2sQHCm9nIPVxfdodXWlglhy08AzDZRT/PmmFD1SwwNA5x/QA==}
 
-  '@visactor/vscale@0.18.10':
-    resolution: {integrity: sha512-Zw60wiCFxbRj/I2RXfcqNpAMBmlvXZPSB2JAuVh2iTWAUVlrHdvrmulSCfg2GUdbJx+0V9ThcpfqbFH8YXZCVA==}
+  '@visactor/vscale@0.18.12':
+    resolution: {integrity: sha512-yF8VsUmCFKvE4Xd2VPBzjMa+mJpuRA8PpWjm7Jhc+USYfHXEKgbLeS1qe1pWwEN4VISJOAIGTV3c9cdKMRtLHQ==}
 
-  '@visactor/vutils-extension@1.11.8':
-    resolution: {integrity: sha512-G2orAPsvNBW4VvRMz1ZaM5R72S2YKmQmpTM9hwJYeFvaqCjxuHgOxyxw3uusqHAmlKgvJGbYAtHSS1pJmsASkQ==}
+  '@visactor/vutils-extension@1.11.10':
+    resolution: {integrity: sha512-QBkJ5IhhFuI3VSV5iOF0oLQ26z0Iw75yfaaUi7wiy1rrpcD3Dmq/BUKTPqt5QOaUM+5vKwoXdGnhq+X/bqj/gA==}
 
-  '@visactor/vutils@0.18.10':
-    resolution: {integrity: sha512-xWT+TeMS2TixlNuKw0+I7Ka9/pxBTlvfnOTZuky6YS/HqTSNL3/ftThpsZgnQl+uEFuOLGyyCBNvwzh9HDdG5Q==}
+  '@visactor/vutils@0.18.12':
+    resolution: {integrity: sha512-yPidlYp0daHX2bjR6CM8cAm6w3vK4MJhIuDMB41zoeFOeT8eP3kh6eLEU96DDOGxrxKZ/vDdBFJfqlPxZ3q6lw==}
 
   '@vue/compiler-core@3.4.34':
     resolution: {integrity: sha512-Z0izUf32+wAnQewjHu+pQf1yw00EGOmevl1kE+ljjjMe7oEfpQ+BI3/JNK7yMB4IrUsqLDmPecUrpj3mCP+yJQ==}
@@ -9138,25 +9145,6 @@ snapshots:
       - '@grpc/grpc-js'
       - react-dom
 
-  '@univerjs/sheets-drawing-ui@0.1.17(odwomhcz7f2czavcecsf43jpg4)':
-    dependencies:
-      '@univerjs/core': 0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1)
-      '@univerjs/design': 0.2.5(clsx@2.1.1)(dayjs@1.11.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@univerjs/drawing': 0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)
-      '@univerjs/drawing-ui': 0.2.5(knywrdgjskmiv4ia7anoihhpoi)
-      '@univerjs/engine-render': 0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.67(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@univerjs/sheets': 0.2.5(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-numfmt@0.2.5)(@univerjs/rpc@0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/sheets-drawing': 0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/drawing@0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/sheets-ui': 0.2.5(no3wrlfbyj4a5ovfceq3omyvwe)
-      '@univerjs/ui': 0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.5(clsx@2.1.1)(dayjs@1.11.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4)
-      '@wendellhu/redi': 0.16.0
-      clsx: 2.1.1
-      react: 18.3.1
-      rxjs: 7.8.1
-    transitivePeerDependencies:
-      - react-dom
-
   '@univerjs/sheets-drawing-ui@0.2.5(bz5d4rfsf4tsohbrolr6pitp5u)':
     dependencies:
       '@univerjs/core': 0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1)
@@ -9425,61 +9413,50 @@ snapshots:
     dependencies:
       webpack: 5.93.0
 
-  '@visactor/react-vchart@1.11.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@visactor/react-vchart@1.11.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@visactor/vchart': 1.11.8
-      '@visactor/vgrammar-core': 0.13.14
-      '@visactor/vrender-core': 0.19.17
-      '@visactor/vrender-kits': 0.19.17
-      '@visactor/vutils': 0.18.10
+      '@visactor/vchart': 1.11.10
+      '@visactor/vgrammar-core': 0.13.16
+      '@visactor/vrender-core': 0.19.19
+      '@visactor/vrender-kits': 0.19.19
+      '@visactor/vutils': 0.18.12
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       react-is: 18.3.1
 
-  '@visactor/univer-vchart-plugin@1.0.4(odwomhcz7f2czavcecsf43jpg4)':
+  '@visactor/univer-vchart-plugin@2.0.0(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/sheets-drawing-ui@0.2.5(bz5d4rfsf4tsohbrolr6pitp5u))(@univerjs/ui@0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.5(clsx@2.1.1)(dayjs@1.11.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@univerjs/core': 0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1)
-      '@univerjs/sheets-drawing-ui': 0.1.17(odwomhcz7f2czavcecsf43jpg4)
+      '@univerjs/sheets-drawing-ui': 0.2.5(bz5d4rfsf4tsohbrolr6pitp5u)
       '@univerjs/ui': 0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.5(clsx@2.1.1)(dayjs@1.11.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.5(@univerjs/core@0.2.5(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4)
-      '@visactor/react-vchart': 1.11.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@wendellhu/redi': 0.16.0
+      '@visactor/react-vchart': 1.11.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-    transitivePeerDependencies:
-      - '@univerjs/design'
-      - '@univerjs/drawing'
-      - '@univerjs/drawing-ui'
-      - '@univerjs/engine-render'
-      - '@univerjs/sheets'
-      - '@univerjs/sheets-drawing'
-      - '@univerjs/sheets-ui'
-      - clsx
-      - rxjs
 
-  '@visactor/vchart@1.11.8':
+  '@visactor/vchart@1.11.10':
     dependencies:
-      '@visactor/vdataset': 0.18.10
-      '@visactor/vgrammar-core': 0.13.14
-      '@visactor/vgrammar-hierarchy': 0.13.14
-      '@visactor/vgrammar-projection': 0.13.14
-      '@visactor/vgrammar-sankey': 0.13.14
-      '@visactor/vgrammar-util': 0.13.14
-      '@visactor/vgrammar-venn': 0.13.14
-      '@visactor/vgrammar-wordcloud': 0.13.14
-      '@visactor/vgrammar-wordcloud-shape': 0.13.14
-      '@visactor/vrender-components': 0.19.17
-      '@visactor/vrender-core': 0.19.17
-      '@visactor/vrender-kits': 0.19.17
-      '@visactor/vscale': 0.18.10
-      '@visactor/vutils': 0.18.10
-      '@visactor/vutils-extension': 1.11.8
+      '@visactor/vdataset': 0.18.12
+      '@visactor/vgrammar-core': 0.13.16
+      '@visactor/vgrammar-hierarchy': 0.13.16
+      '@visactor/vgrammar-projection': 0.13.16
+      '@visactor/vgrammar-sankey': 0.13.16
+      '@visactor/vgrammar-util': 0.13.16
+      '@visactor/vgrammar-venn': 0.13.16
+      '@visactor/vgrammar-wordcloud': 0.13.16
+      '@visactor/vgrammar-wordcloud-shape': 0.13.16
+      '@visactor/vrender-components': 0.19.19
+      '@visactor/vrender-core': 0.19.19
+      '@visactor/vrender-kits': 0.19.19
+      '@visactor/vscale': 0.18.12
+      '@visactor/vutils': 0.18.12
+      '@visactor/vutils-extension': 1.11.10
 
-  '@visactor/vdataset@0.18.10':
+  '@visactor/vdataset@0.18.12':
     dependencies:
       '@turf/flatten': 6.5.0
       '@turf/helpers': 6.5.0
       '@turf/rewind': 6.5.0
-      '@visactor/vutils': 0.18.10
+      '@visactor/vutils': 0.18.12
       d3-dsv: 2.0.0
       d3-geo: 1.12.1
       d3-hexbin: 0.2.2
@@ -9494,103 +9471,103 @@ snapshots:
       simplify-geojson: 1.0.5
       topojson-client: 3.1.0
 
-  '@visactor/vgrammar-coordinate@0.13.14':
+  '@visactor/vgrammar-coordinate@0.13.16':
     dependencies:
-      '@visactor/vgrammar-util': 0.13.14
-      '@visactor/vutils': 0.18.10
+      '@visactor/vgrammar-util': 0.13.16
+      '@visactor/vutils': 0.18.12
 
-  '@visactor/vgrammar-core@0.13.14':
+  '@visactor/vgrammar-core@0.13.16':
     dependencies:
-      '@visactor/vdataset': 0.18.10
-      '@visactor/vgrammar-coordinate': 0.13.14
-      '@visactor/vgrammar-util': 0.13.14
-      '@visactor/vrender-components': 0.19.17
-      '@visactor/vrender-core': 0.19.17
-      '@visactor/vrender-kits': 0.19.17
-      '@visactor/vscale': 0.18.10
-      '@visactor/vutils': 0.18.10
+      '@visactor/vdataset': 0.18.12
+      '@visactor/vgrammar-coordinate': 0.13.16
+      '@visactor/vgrammar-util': 0.13.16
+      '@visactor/vrender-components': 0.19.19
+      '@visactor/vrender-core': 0.19.19
+      '@visactor/vrender-kits': 0.19.19
+      '@visactor/vscale': 0.18.12
+      '@visactor/vutils': 0.18.12
 
-  '@visactor/vgrammar-hierarchy@0.13.14':
+  '@visactor/vgrammar-hierarchy@0.13.16':
     dependencies:
-      '@visactor/vgrammar-core': 0.13.14
-      '@visactor/vgrammar-util': 0.13.14
-      '@visactor/vrender-core': 0.19.17
-      '@visactor/vrender-kits': 0.19.17
-      '@visactor/vutils': 0.18.10
+      '@visactor/vgrammar-core': 0.13.16
+      '@visactor/vgrammar-util': 0.13.16
+      '@visactor/vrender-core': 0.19.19
+      '@visactor/vrender-kits': 0.19.19
+      '@visactor/vutils': 0.18.12
 
-  '@visactor/vgrammar-projection@0.13.14':
+  '@visactor/vgrammar-projection@0.13.16':
     dependencies:
-      '@visactor/vgrammar-core': 0.13.14
-      '@visactor/vgrammar-util': 0.13.14
-      '@visactor/vutils': 0.18.10
+      '@visactor/vgrammar-core': 0.13.16
+      '@visactor/vgrammar-util': 0.13.16
+      '@visactor/vutils': 0.18.12
       d3-geo: 1.12.1
 
-  '@visactor/vgrammar-sankey@0.13.14':
+  '@visactor/vgrammar-sankey@0.13.16':
     dependencies:
-      '@visactor/vgrammar-core': 0.13.14
-      '@visactor/vgrammar-util': 0.13.14
-      '@visactor/vrender-core': 0.19.17
-      '@visactor/vrender-kits': 0.19.17
-      '@visactor/vutils': 0.18.10
+      '@visactor/vgrammar-core': 0.13.16
+      '@visactor/vgrammar-util': 0.13.16
+      '@visactor/vrender-core': 0.19.19
+      '@visactor/vrender-kits': 0.19.19
+      '@visactor/vutils': 0.18.12
 
-  '@visactor/vgrammar-util@0.13.14':
+  '@visactor/vgrammar-util@0.13.16':
     dependencies:
-      '@visactor/vutils': 0.18.10
+      '@visactor/vutils': 0.18.12
 
-  '@visactor/vgrammar-venn@0.13.14':
+  '@visactor/vgrammar-venn@0.13.16':
     dependencies:
-      '@visactor/vgrammar-core': 0.13.14
-      '@visactor/vgrammar-util': 0.13.14
-      '@visactor/vrender-core': 0.19.17
-      '@visactor/vrender-kits': 0.19.17
-      '@visactor/vutils': 0.18.10
+      '@visactor/vgrammar-core': 0.13.16
+      '@visactor/vgrammar-util': 0.13.16
+      '@visactor/vrender-core': 0.19.19
+      '@visactor/vrender-kits': 0.19.19
+      '@visactor/vutils': 0.18.12
 
-  '@visactor/vgrammar-wordcloud-shape@0.13.14':
+  '@visactor/vgrammar-wordcloud-shape@0.13.16':
     dependencies:
-      '@visactor/vgrammar-core': 0.13.14
-      '@visactor/vgrammar-util': 0.13.14
-      '@visactor/vrender-core': 0.19.17
-      '@visactor/vrender-kits': 0.19.17
-      '@visactor/vscale': 0.18.10
-      '@visactor/vutils': 0.18.10
+      '@visactor/vgrammar-core': 0.13.16
+      '@visactor/vgrammar-util': 0.13.16
+      '@visactor/vrender-core': 0.19.19
+      '@visactor/vrender-kits': 0.19.19
+      '@visactor/vscale': 0.18.12
+      '@visactor/vutils': 0.18.12
 
-  '@visactor/vgrammar-wordcloud@0.13.14':
+  '@visactor/vgrammar-wordcloud@0.13.16':
     dependencies:
-      '@visactor/vgrammar-core': 0.13.14
-      '@visactor/vgrammar-util': 0.13.14
-      '@visactor/vrender-core': 0.19.17
-      '@visactor/vrender-kits': 0.19.17
-      '@visactor/vutils': 0.18.10
+      '@visactor/vgrammar-core': 0.13.16
+      '@visactor/vgrammar-util': 0.13.16
+      '@visactor/vrender-core': 0.19.19
+      '@visactor/vrender-kits': 0.19.19
+      '@visactor/vutils': 0.18.12
 
-  '@visactor/vrender-components@0.19.17':
+  '@visactor/vrender-components@0.19.19':
     dependencies:
-      '@visactor/vrender-core': 0.19.17
-      '@visactor/vrender-kits': 0.19.17
-      '@visactor/vscale': 0.18.10
-      '@visactor/vutils': 0.18.10
+      '@visactor/vrender-core': 0.19.19
+      '@visactor/vrender-kits': 0.19.19
+      '@visactor/vscale': 0.18.12
+      '@visactor/vutils': 0.18.12
 
-  '@visactor/vrender-core@0.19.17':
+  '@visactor/vrender-core@0.19.19':
     dependencies:
-      '@visactor/vutils': 0.18.10
+      '@visactor/vutils': 0.18.12
       color-convert: 2.0.1
 
-  '@visactor/vrender-kits@0.19.17':
+  '@visactor/vrender-kits@0.19.19':
     dependencies:
       '@resvg/resvg-js': 2.4.1
-      '@visactor/vrender-core': 0.19.17
-      '@visactor/vutils': 0.18.10
+      '@visactor/vrender-core': 0.19.19
+      '@visactor/vutils': 0.18.12
       roughjs: 4.5.2
 
-  '@visactor/vscale@0.18.10':
+  '@visactor/vscale@0.18.12':
     dependencies:
-      '@visactor/vutils': 0.18.10
+      '@visactor/vutils': 0.18.12
 
-  '@visactor/vutils-extension@1.11.8':
+  '@visactor/vutils-extension@1.11.10':
     dependencies:
-      '@visactor/vdataset': 0.18.10
-      '@visactor/vutils': 0.18.10
+      '@visactor/vdataset': 0.18.12
+      '@visactor/vutils': 0.18.12
 
-  '@visactor/vutils@0.18.10':
+  '@visactor/vutils@0.18.12':
     dependencies:
       '@turf/helpers': 6.5.0
       '@turf/invariant': 6.5.0
