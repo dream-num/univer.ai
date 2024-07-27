@@ -1,0 +1,32 @@
+# Univer server API 定义
+
+## 创建文档
+`POST /universer-api/snapshot/{type}/unit/-/create`
+
+参数:
+
+| 字段    | 类型      | 描述                                     |
+| ------- | --------- | ---------------------------------------- |
+| type    | enum(int) | 1（doc）， 2（sheet）<br/> 路径和请求体参数 |
+| name    | string    | 文档名称                                 |
+| creator | string    | 创建者id                                 |
+
+
+返回值:
+
+| 字段          | 类型      | 描述      |
+| ------------- | --------- | --------- |
+| error.code    | enum(int) | 1（成功） |
+| error.message | string    | 失败信息  |
+| unitID        | string    | 文档id    |
+
+例子：
+```shell
+curl http://localhost:8000/universer-api/snapshot/{type}/unit/-/create \
+  -X POST \
+  -H 'Content-Type: application/json' \
+  --data-raw '{"type":2,"name":"New Sheet By Univer","creator":"userID"}'
+
+# response
+{"error":{"code":1, "message":"success"}, "unitID":"ETVf-B4lQqOSE_p09mcp9Q"}
+```
