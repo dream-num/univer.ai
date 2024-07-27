@@ -13,15 +13,15 @@ Based on these protocols, Univer Server can access third-party systems to obtain
 
 In this way, while ensuring that data remains within the third-party client system, Univer Server can successfully integrate into the client's system.
 
-![relationship](./usip/AzQSbQDVuoKkRZxrRPqcHtF0nsh.png)
-![api call flowchart](./usip/NdzmbFpnio4mQexalKBcw7Hwnmf.png)
+![relationship](./usip/usip-relationship.png)
+![api call flowchart](./usip/usip-flowchart.png)
 
-# Prerequisites
+## Prerequisites
 
 1. The integrating party needs to maintain the relationship between users and documents on their own. Univer Server acts as the client to obtain user permissions under documents through an interface.
 2. Implementation: Upon successfully creating a document by calling Univer Server, it returns a `unitID` document ID. The integrating party needs to store this ID to manage their own document management operations effectively.
 
-# **Required Interfaces**
+## **Required Interfaces**
 
 1. Credential verify: Verify user identity legality (AuthN)
 
@@ -121,7 +121,7 @@ curl -X GET "http://localhost:8080/collaborators?unitIDs=AA&unitIDs=xx"
 }
 ```
 
-# Univer Server Service Configuration
+## Univer Server Service Configuration
 
 To enable USIP functionality, configure the above interface addresses in the `.env` file located in the docker-compose directory, and then restart the service.
 
@@ -134,6 +134,6 @@ USIP_URI_ROLE=http://localhost:8080/role
 USIP_URI_COLLABORATORS=http://localhost:8080/collaborators
 ```
 
-# Code Example
+## Code Example
 
 You can view the [usip-example](https://github.com/dream-num/usip-example) for reference.
