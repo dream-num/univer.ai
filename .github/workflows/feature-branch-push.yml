@@ -70,7 +70,7 @@ jobs:
         run: |
           IMAGE_TAG=$(echo "${{ github.sha }}" | cut -c 1-7)
           make push_image PUSH_TAG=$IMAGE_TAG BUILDER=${{ steps.buildx.outputs.name }} CR=${{ secrets.REGISTRY_CR }}
-        continue-on-error: true
+        # continue-on-error: true
 
   deploy:
     if: ${{ startsWith(github.ref, 'refs/heads/feat/') }}
