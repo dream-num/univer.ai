@@ -1,3 +1,4 @@
+import { Callout, Steps } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 # Deploying with Docker
@@ -26,6 +27,10 @@ Compatible with Linux, Mac, and Windows/WSL environments.
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/dream-num/helm-charts/main/install.sh)"
 ```
 
+<Callout emoji="⚠️">
+  If you encounter any issues during installation or use, please refer to the [Troubleshooting](#troubleshooting).
+</Callout>
+
 Confirm that the document service has successfully started.
 
 Access http://localhost:3010 in your web browser to create a new blank document, which will then redirect you to the document link (Internet Explorer is not supported).
@@ -50,33 +55,40 @@ Default ports for Univer services are listed below:
 | univer-minio | 9000 | Acts as the S3 storage server |
 | univer-client | 3010 | Provides the frontend interface |
 
-## Offline Deployment <a id="offline-deployment"></a>
+## Offline Deployment
 
 If you need to deploy in an offline environment, we also provide an offline installation package. However, we recommend using the one-click installation script in a networked environment for easier updates.
 
-1. [Click here to download the offline installation package](https://univer.ai/releases/univer-server/download) and extract it on your server.
+<Steps>
+  ### Download the offline installation package
 
-```bash
-tar -xvf installation-package.tar.gz # Replace 'installation-package' with the actual file name
-```
+  [Click here to download the offline installation package](https://univer.ai/releases/univer-server/download) and extract it on your server.
 
-2. Navigate to the extracted directory and run `bash install.sh` to start the service.
+  ```bash
+  tar -xvf installation-package.tar.gz # Replace 'installation-package' with the actual file name
+  ```
 
-3. To uninstall:
+  ### Start the service
+ 
+  Navigate to the extracted directory and run `bash install.sh` to start the service.
+
+  ### Verify that the service is available.
+
+  **Method 1:** Start the built-in demo application and visit `http://localhost:3010` to see the results.
+
+  ```bash
+  docker run --net=univer-prod --rm --name univer-collaboration-lite -p 3010:3010 univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/univer-collaboration-lite:latest
+  ```
+
+  **Method 2:** Set up your own front-end project. [Learn more](/guides/sheet/getting-started/quickstart#install-and-run-the-frontend).
+</Steps>
+
+### How to uninstall
 
 ```bash
 bash uninstall.sh       # Uninstall while retaining data for future use
 bash uninstall.sh clean # Uninstall and delete data
 ```
-
-4. Verify that the service is available.
-
-Method 1: Start the built-in demo application and visit `http://localhost:3010` to see the results.
-```bash
-docker run --net=univer-prod --rm --name univer-collaboration-lite -p 3010:3010 univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/univer-collaboration-lite:latest
-```
-
-Method 2: Set up your own front-end project. [Learn more](/guides/sheet/getting-started/quickstart#install-and-run-the-frontend).
 
 ## Troubleshooting
 
@@ -96,12 +108,11 @@ You'll need to tweak the `.env` file. Set `S3_ENDPOINT_PUBLIC` to your local net
 ### How to find error when server start failed?
 
 You can use `docker compose logs` to see server logs, for example:
+
 ```shell
 # see universer latest 20 minute logs
 docker compose logs -f universer --since 20m
 ```
-
-If you need assistance, feel free to contact us.
 
 ### How to restart, stop, uninstall server?
 

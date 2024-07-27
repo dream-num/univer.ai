@@ -27,37 +27,37 @@ helm version
 ## 部署
 
 <Steps>
-    ### 准备 Kubernetes 集群
+  ### 准备 Kubernetes 集群
 
-    确保你有一个运行中的 Kubernetes 集群。如果你使用的是云服务提供商，如 Google Kubernetes Engine (GKE) 或 Amazon Elastic Kubernetes Service (EKS)，请按照他们的指南创建集群。
+  确保你有一个运行中的 Kubernetes 集群。如果你使用的是云服务提供商，如 Google Kubernetes Engine (GKE) 或 Amazon Elastic Kubernetes Service (EKS)，请按照他们的指南创建集群。
 
-    ### 部署 Univer 服务
+  ### 部署 Univer 服务
 
-    1. 使用 Helm 安装 Univer 服务：
+  1. 使用 Helm 安装 Univer 服务：
 
-    ```bash
-    helm install -n univer --create-namespace \
-        --set global.istioNamespace="univer" \
-        univer-stack oci://univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/helm-charts/univer-stack
+  ```bash
+  helm install -n univer --create-namespace \
+      --set global.istioNamespace="univer" \
+      univer-stack oci://univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/helm-charts/univer-stack
 
-    kubectl rollout restart -n univer deployment/collaboration-server
-    kubectl rollout restart -n univer deployment/universer
-    ```
+  kubectl rollout restart -n univer deployment/collaboration-server
+  kubectl rollout restart -n univer deployment/universer
+  ```
 
-    2. 检查部署状态：
+  2. 检查部署状态：
 
-    ```bash
-    kubectl get pods
-    ```
+  ```bash
+  kubectl get pods
+  ```
 
-    ### 验证部署
+  ### 验证部署
 
-    ```bash
-    # 可以简单修改本地 hosts 文件来解析域名。
-    # 默认域名: univer.example.com
+  ```bash
+  # 可以简单修改本地 hosts 文件来解析域名。
+  # 默认域名: univer.example.com
 
-    open: http://univer.example.com
-    ```
+  open: http://univer.example.com
+  ```
 </Steps>
 
 ## 常见问题

@@ -1,3 +1,4 @@
+import { Callout, Steps } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 # 部署到 Docker
@@ -26,6 +27,10 @@ PostgreSQL + RabbitMQ
 bash -c "$(curl -fsSL https://release-univer.oss-cn-shenzhen.aliyuncs.com/release-demo/install.sh)"
 ```
 
+<Callout emoji="⚠️">
+  如果在安装或使用过程中遇到问题，请查看[常见问题](#常见问题)。
+</Callout>
+
 打开浏览器输入 http://localhost:3010 后会自动创建空白文档并跳转到新文档链接（不支持IE浏览器）。
 
 ![例子](./docker/img1.png)
@@ -49,37 +54,43 @@ Univer 服务默认端口如下：
 | univer-client | 3010 | frontend |
 
 
-## 离线部署 <a id="offline-deployment"></a>
+## 离线部署
 
-如果你恰好需要在无互联网环境下部署，我们也提供了离线安装包，条件允许我们建议你在有网络环境使用一键安装脚本进行部署，这样便于后续升级。
+  如果你恰好需要在无互联网环境下部署，我们也提供了离线安装包，条件允许我们建议你在有网络环境使用一键安装脚本进行部署，这样便于后续升级。
 
-1. [点击链接下载离线安装包](https://univer.ai/releases/univer-server/download)，将安装包解压到服务器。
+<Steps>
+  ### 下载离线安装包
 
-```bash
-tar -xvf 安装包.tar.gz # 解压命令，将文件名替换为实际文件名
-```
+  [点击链接下载离线安装包](https://univer.ai/releases/univer-server/download)，将安装包解压到服务器。
 
-2. 进入解压目录，执行 `bash install.sh` 启动服务
+  ```bash
+  tar -xvf 安装包.tar.gz # 解压命令，将文件名替换为实际文件名
+  ```
 
-3. 卸载
+  ### 启动服务
+
+  进入解压目录，执行 `bash install.sh` 启动服务
+
+  ### 验证服务是否可用
+
+  **方式 1：**启动内置的演示程序，访问 `http://localhost:3010` 即可查看效果。
+  ```bash
+  docker run --net=univer-prod --rm --name univer-collaboration-lite -p 3010:3010 univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/univer-collaboration-lite:latest
+  ```
+
+  **方式 2：**自行建立前端工程，[了解更多](/guides/sheet/getting-started/quickstart#install-and-run-the-frontend)。
+</Steps>
+
+### 卸载
 
 ```bash
 bash uninstall.sh       # 卸载，保留数据下次使用
 bash uninstall.sh clean # 卸载，删除数据
 ```
 
-4. 验证服务是否可用
-
-方式1: 启动内置的演示程序，访问 `http://localhost:3010` 即可查看效果。
-```bash
-docker run --net=univer-prod --rm --name univer-collaboration-lite -p 3010:3010 univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/univer-collaboration-lite:latest
-```
-
-方式2: 自行建立前端工程，[了解更多](/guides/sheet/getting-started/quickstart#install-and-run-the-frontend)。
-
 ## 常见问题
 
-### windows 系统下启动失败？
+### Windows 系统下启动失败？
 
 运行脚本 `run.sh` 需要 `bash` 环境支持，请使用 Git Bash/MinGW 或 WSL 环境启动。
 
@@ -91,9 +102,6 @@ docker run --net=univer-prod --rm --name univer-collaboration-lite -p 3010:3010 
 - S3_ENDPOINT_PUBLIC=http://univer-minio:19000
 + S3_ENDPOINT_PUBLIC=http://<你的局域网IP>:19000
 ```
-
-
-
 
 ### 拉取 docker hub 镜像失败？
 
@@ -118,7 +126,7 @@ docker run --net=univer-prod --rm --name univer-collaboration-lite -p 3010:3010 
 + image: univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/minio:${MINIO_VERSION}
 ```
 
-### 怎么排查服务启动报错？
+### 如何排查服务启动报错？
 
 你可以用 `docker compose logs` 命令查看服务日志，例如：
 
@@ -126,8 +134,6 @@ docker run --net=univer-prod --rm --name univer-collaboration-lite -p 3010:3010 
 # 查看 universer 最近20分钟内的日志
 docker compose logs -f universer --since 20m
 ```
-
-如果你需要帮助，请尽管联系我们。
 
 ### 如何重启、停止、卸载服务？
 
