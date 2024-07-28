@@ -1,4 +1,5 @@
 {
+  "di": "依赖注入在 Univer 中的实践",
   "ot": "OT 算法以及 Univer 的协同编辑设计",
   "doc-typesetting-design": "Univer 文档排版设计初探",
   "univer-doc-architecture": "Univer 文档架构及模块设计",
