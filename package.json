@@ -27,7 +27,6 @@
     "@rc-component/color-picker": "^1.9.0",
     "@react-spring/web": "^9.7.4",
     "@stackblitz/sdk": "^1.11.0",
-    "@univerjs-pro/ai-auto-complete": "0.2.5",
     "@univerjs-pro/collaboration": "0.2.5",
     "@univerjs-pro/collaboration-client": "0.2.5",
     "@univerjs-pro/live-share": "0.2.5",
