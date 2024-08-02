@@ -20,12 +20,12 @@ import ServerNotice from '@/components/ServerNotice'
 <Tabs items={['pnpm', 'npm']}>
   <Tabs.Tab label="pnpm">
     ```shell
-    pnpm add @univerjs-pro/sheets-exchange-client
+    pnpm add @univerjs-pro/exchange-client @univerjs-pro/sheets-exchange-client
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
     ```shell
-    npm install @univerjs-pro/sheets-exchange-client
+    npm install @univerjs-pro/exchange-client @univerjs-pro/sheets-exchange-client
     ```
   </Tabs.Tab>
 </Tabs>
@@ -34,7 +34,7 @@ import ServerNotice from '@/components/ServerNotice'
 ## 引入
 
 ```typescript
-import '@univerjs-pro/sheets-exchange-client/lib/index.css';
+import '@univerjs-pro/exchange-client/lib/index.css';
 
 import { UniverSheetsExchangeClientPlugin } from '@univerjs-pro/sheets-exchange-client';
 ```
@@ -43,14 +43,14 @@ import { UniverSheetsExchangeClientPlugin } from '@univerjs-pro/sheets-exchange-
 
 ```typescript
 import { LocaleType, Tools } from '@univerjs/core';
-import SheetsExchangeClientZhCN from '@univerjs-pro/sheets-exchange-client/locale/zh-CN';
+import ExchangeClientZhCN from '@univerjs-pro/exchange-client/locale/zh-CN';
 
 const univer = new Univer({
   theme: defaultTheme,
   locale: LocaleType.ZH_CN,
   locales: {
     [LocaleType.ZH_CN]: Tools.deepMerge(
-      SheetsExchangeClientZhCN
+      ExchangeClientZhCN
     ),
   },
 });
@@ -68,7 +68,7 @@ univer.registerPlugin(UniverSheetsExchangeClientPlugin);
 
 ```typescript
 import { IConfigService } from '@univerjs/core'
-import { EXCHANGE_UPLOAD_FILE_SERVER_URL_KEY, EXCHANGE_IMPORT_SERVER_URL_KEY, EXCHANGE_EXPORT_SERVER_URL_KEY, EXCHANGE_GET_TASK_SERVER_URL_KEY, EXCHANGE_SIGN_URL_SERVER_URL_KEY } from '@univerjs-pro/sheets-exchange-client';
+import { EXCHANGE_UPLOAD_FILE_SERVER_URL_KEY, EXCHANGE_IMPORT_SERVER_URL_KEY, EXCHANGE_EXPORT_SERVER_URL_KEY, EXCHANGE_GET_TASK_SERVER_URL_KEY, EXCHANGE_SIGN_URL_SERVER_URL_KEY } from '@univerjs-pro/exchange-client';
 
 const injector = univer.__getInjector();
 const configService = injector.get(IConfigService);
@@ -125,4 +125,4 @@ fetchExcelFile(url).then(async file => {
 });
 ```
 
-注: Facade API `univerAPI.importXLSXToSnapshot` 会调用  `@univerjs-pro/sheets-exchange-client` 提供的功能，使用前确保项目已经安装好了`@univerjs-pro/sheets-exchange-client`。
+注: Facade API `univerAPI.importXLSXToSnapshot` 会调用  `@univerjs-pro/exchange-client` 提供的功能，使用前确保项目已经安装好了`@univerjs-pro/exchange-client`。

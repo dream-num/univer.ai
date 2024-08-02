@@ -104,8 +104,9 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
         <script src="https://unpkg.com/@univerjs-pro/sheets-print/lib/umd/index.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/sheets-print/lib/index.css">
 
+        <script src="https://unpkg.com/@univerjs-pro/exchange-client/lib/umd/index.js"></script>
         <script src="https://unpkg.com/@univerjs-pro/sheets-exchange-client/lib/umd/index.js"></script>
-        <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/sheets-exchange-client/lib/index.css">
+        <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/exchange-client/lib/index.css">
         <style>
           body {
             margin: 0;
@@ -138,7 +139,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
             Promise.all([
               fetch('https://unpkg.com/@univerjs-pro/collaboration-client/lib/locale/en-US.json').then(res => res.json()),
               fetch('https://unpkg.com/@univerjs-pro/sheets-print/lib/locale/en-US.json').then(res => res.json()),
-              fetch('https://unpkg.com/@univerjs-pro/sheets-exchange-client/lib/locale/en-US.json').then(res => res.json())
+              fetch('https://unpkg.com/@univerjs-pro/exchange-client/lib/locale/en-US.json').then(res => res.json())
             ]).then(([
               collaborationLocale,
               printLocale,
