@@ -20,12 +20,12 @@ Currently only `.xlsx` format is supported.
 <Tabs items={['pnpm', 'npm']}>
   <Tabs.Tab label="pnpm">
     ```shell
-    pnpm add @univerjs-pro/sheets-exchange-client
+    pnpm add @univerjs-pro/exchange-client @univerjs-pro/sheets-exchange-client
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
     ```shell
-    npm install @univerjs-pro/sheets-exchange-client
+    npm install @univerjs-pro/exchange-client @univerjs-pro/sheets-exchange-client
     ```
   </Tabs.Tab>
 </Tabs>
@@ -33,7 +33,7 @@ Currently only `.xlsx` format is supported.
 ## Import
 
 ```typescript
-import '@univerjs-pro/sheets-exchange-client/lib/index.css';
+import '@univerjs-pro/exchange-client/lib/index.css';
 
 import { UniverSheetsExchangeClientPlugin } from '@univerjs-pro/sheets-exchange-client';
 ```
@@ -42,14 +42,14 @@ import { UniverSheetsExchangeClientPlugin } from '@univerjs-pro/sheets-exchange-
 
 ```typescript
 import { LocaleType, Tools } from '@univerjs/core';
-import SheetsExchangeClientEnUS from '@univerjs-pro/sheets-exchange-client/locale/en-US';
+import ExchangeClientEnUS from '@univerjs-pro/exchange-client/locale/en-US';
 
 const univer = new Univer({
   theme: defaultTheme,
   locale: LocaleType.EN_US,
   locales: {
     [LocaleType.EN_US]: Tools.deepMerge(
-      SheetsExchangeClientEnUS
+      ExchangeClientEnUS
     ),
   },
 });
@@ -67,7 +67,7 @@ If the import/export interface has not changed, you do not need to configure it.
 
 ```typescript
 import { IConfigService } from '@univerjs/core'
-import { EXCHANGE_UPLOAD_FILE_SERVER_URL_KEY, EXCHANGE_IMPORT_SERVER_URL_KEY, EXCHANGE_EXPORT_SERVER_URL_KEY, EXCHANGE_GET_TASK_SERVER_URL_KEY, EXCHANGE_SIGN_URL_SERVER_URL_KEY } from '@univerjs-pro/sheets-exchange-client';
+import { EXCHANGE_UPLOAD_FILE_SERVER_URL_KEY, EXCHANGE_IMPORT_SERVER_URL_KEY, EXCHANGE_EXPORT_SERVER_URL_KEY, EXCHANGE_GET_TASK_SERVER_URL_KEY, EXCHANGE_SIGN_URL_SERVER_URL_KEY } from '@univerjs-pro/exchange-client';
 
 const injector = univer.__getInjector();
 const configService = injector.get(IConfigService);
@@ -124,4 +124,4 @@ fetchExcelFile(url).then(async file => {
 });
 ```
 
-Note: The Facade API `univerAPI.importXLSXToSnapshot` utilizes the functionality provided by `@univerjs-pro/sheets-exchange-client`. Ensure that `@univerjs-pro/sheets-exchange-client` is installed in the project before use.
+Note: The Facade API `univerAPI.importXLSXToSnapshot` utilizes the functionality provided by `@univerjs-pro/exchange-client`. Ensure that `@univerjs-pro/exchange-client` is installed in the project before use.
