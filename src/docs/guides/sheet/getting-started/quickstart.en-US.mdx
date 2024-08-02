@@ -106,8 +106,9 @@ Of course, you may want more than just the basics. If you're looking to add feat
         <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/sheets-print/lib/index.css">
 
         <script src="https://unpkg.com/@univerjs-pro/exchange-client/lib/umd/index.js"></script>
-        <script src="https://unpkg.com/@univerjs-pro/sheets-exchange-client/lib/umd/index.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/exchange-client/lib/index.css">
+        
+        <script src="https://unpkg.com/@univerjs-pro/sheets-exchange-client/lib/umd/index.js"></script>
         <style>
           body {
             margin: 0;
@@ -199,6 +200,8 @@ Of course, you may want more than just the basics. If you're looking to add feat
               UniverCollaborationClient,
               UniverSheetsThreadComment,
               UniverSheetsFormula: { UniverSheetsFormulaPlugin },
+              UniverExchangeClient,
+              UniverSheetsExchangeClient: { UniverSheetsExchangeClientPlugin },
             } = window
 
             var univer = new UniverCore.Univer({
@@ -289,7 +292,7 @@ Of course, you may want more than just the basics. If you're looking to add feat
             univer.registerPlugin(UniverSheetsPrint.UniverSheetsPrintPlugin)
 
             // config import & export endpoint
-            const { EXCHANGE_UPLOAD_FILE_SERVER_URL_KEY, EXCHANGE_IMPORT_SERVER_URL_KEY, EXCHANGE_EXPORT_SERVER_URL_KEY, EXCHANGE_GET_TASK_SERVER_URL_KEY, EXCHANGE_SIGN_URL_SERVER_URL_KEY } = UniverSheetsExchangeClient;
+            const { EXCHANGE_UPLOAD_FILE_SERVER_URL_KEY, EXCHANGE_IMPORT_SERVER_URL_KEY, EXCHANGE_EXPORT_SERVER_URL_KEY, EXCHANGE_GET_TASK_SERVER_URL_KEY, EXCHANGE_SIGN_URL_SERVER_URL_KEY } = UniverExchangeClient;
             configService.setConfig(EXCHANGE_UPLOAD_FILE_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/stream/file/upload`);
             configService.setConfig(EXCHANGE_IMPORT_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/exchange/{type}/import`);
             configService.setConfig(EXCHANGE_EXPORT_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/exchange/{type}/export`);
@@ -297,7 +300,7 @@ Of course, you may want more than just the basics. If you're looking to add feat
             configService.setConfig(EXCHANGE_SIGN_URL_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/file/{fileID}/sign-url`);
 
             // import & export
-            univer.registerPlugin(UniverSheetsExchangeClient.UniverSheetsExchangeClientPlugin)
+            univer.registerPlugin(UniverSheetsExchangeClientPlugin)
           }
         </script>
       </body>
