@@ -107,7 +107,7 @@ Of course, you may want more than just the basics. If you're looking to add feat
 
         <script src="https://unpkg.com/@univerjs-pro/exchange-client/lib/umd/index.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/exchange-client/lib/index.css">
-        
+
         <script src="https://unpkg.com/@univerjs-pro/sheets-exchange-client/lib/umd/index.js"></script>
         <style>
           body {
@@ -130,7 +130,7 @@ Of course, you may want more than just the basics. If you're looking to add feat
           // Hi, developer, this is a simple example to show how to use Univer UMD with collaboration, live share, print, exchange
           // If you want to use the collaboration, live share, print, exchange, you need to config the endpoint
           // The endpoint is the univer backend server that provides the collaboration, live share, print, exchange service
-          // You can deploy the universer server on your own server, see the deployment guide: https://univer.ai/zh-CN/pro/guides/sheet/deployment/docker
+          // You can deploy the universer server on your own server, see the deployment guide: https://univer.ai/guides/sheet/server/docker
 
           const universerEndpoint = 'localhost:8000';
 
@@ -138,6 +138,8 @@ Of course, you may want more than just the basics. If you're looking to add feat
           const url = new URL(window.location.href)
           const unit = url.searchParams.get('unit')
           if (unit) {
+
+            // load the locale
             Promise.all([
               fetch('https://unpkg.com/@univerjs-pro/collaboration-client/lib/locale/en-US.json').then(res => res.json()),
               fetch('https://unpkg.com/@univerjs-pro/sheets-print/lib/locale/en-US.json').then(res => res.json()),
@@ -273,13 +275,15 @@ Of course, you may want more than just the basics. If you're looking to add feat
             const configService = injector.get(UniverCore.IConfigService);
 
             // debug via reverse proxy
-            const { SNAPSHOT_SERVER_URL_KEY, COLLAB_SUBMIT_CHANGESET_URL_KEY, COLLAB_WEB_SOCKET_URL_KEY, AUTHZ_URL_KEY } = UniverCollaborationClient;
+            const { SNAPSHOT_SERVER_URL_KEY, COLLAB_SUBMIT_CHANGESET_URL_KEY, COLLAB_WEB_SOCKET_URL_KEY, AUTHZ_URL_KEY, SEND_CHANGESET_TIMEOUT_KEY } = UniverCollaborationClient;
 
             // config collaboration endpoint
             configService.setConfig(AUTHZ_URL_KEY, `http://${universerEndpoint}/universer-api/authz`);
             configService.setConfig(SNAPSHOT_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/snapshot`);
             configService.setConfig(COLLAB_SUBMIT_CHANGESET_URL_KEY, `http://${universerEndpoint}/universer-api/comb`);
             configService.setConfig(COLLAB_WEB_SOCKET_URL_KEY, `ws://${universerEndpoint}/universer-api/comb/connect`);
+            // Set `SEND_CHANGESET_TIMEOUT_KEY` to a smaller value will make collaborative changes sync faster to other users, but it will increase the server load.
+            configService.setConfig(SEND_CHANGESET_TIMEOUT_KEY, 200) // optional
 
             // collaboration
             univer.registerPlugin(UniverCollaboration.UniverCollaborationPlugin);

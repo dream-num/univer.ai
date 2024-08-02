@@ -126,17 +126,19 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
         <div id="app"></div>
 
         <script>
-          // Hi, developer, this is a simple example to show how to use Univer UMD with collaboration, live share, print, exchange
-          // If you want to use the collaboration, live share, print, exchange, you need to config the endpoint
-          // The endpoint is the univer backend server that provides the collaboration, live share, print, exchange service
-          // You can deploy the universer server on your own server, see the deployment guide: https://univer.ai/zh-CN/pro/guides/sheet/deployment/docker
+          // 你好，开发者，这是一个简单的示例，展示如何使用 Univer UMD 实现协作、实时共享、打印和导入导出功能
+          // 如果你想使用协作、实时共享、打印和交换功能，你需要配置 `universerEndpoint`
+          // `universerEndpoint` 是提供协作、实时共享、打印和交换服务的 Univer 后端服务器地址
+          // 你可以在自己的服务器上部署 Univer 服务器，详见部署指南：https://univer.ai/zh-CN/guides/sheet/server/docker
 
           const universerEndpoint = 'localhost:8000';
 
-          // check if the unit is already created
+          // 协同插件从 URL 中获取 unit 参数，如果没有 unit 参数，则创建一个新的 unit
           const url = new URL(window.location.href)
           const unit = url.searchParams.get('unit')
           if (unit) {
+
+            // 加载协作、打印、交换的国际化资源
             Promise.all([
               fetch('https://unpkg.com/@univerjs-pro/collaboration-client/lib/locale/en-US.json').then(res => res.json()),
               fetch('https://unpkg.com/@univerjs-pro/sheets-print/lib/locale/en-US.json').then(res => res.json()),
@@ -267,30 +269,30 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
               overrides: [[IThreadCommentMentionDataService, { useClass: CustomMentionDataService }]],
             });
 
-            //   pro
+            // 获取配置服务
             const injector = univer.__getInjector();
             const configService = injector.get(UniverCore.IConfigService);
 
-            // debug via reverse proxy
-            const { SNAPSHOT_SERVER_URL_KEY, COLLAB_SUBMIT_CHANGESET_URL_KEY, COLLAB_WEB_SOCKET_URL_KEY, AUTHZ_URL_KEY } = UniverCollaborationClient;
-
-            // config collaboration endpoint
+            // 配置协同、打印、交换的服务端地址
+            const { SNAPSHOT_SERVER_URL_KEY, COLLAB_SUBMIT_CHANGESET_URL_KEY, COLLAB_WEB_SOCKET_URL_KEY, AUTHZ_URL_KEY, SEND_CHANGESET_TIMEOUT_KEY } = UniverCollaborationClient;
             configService.setConfig(AUTHZ_URL_KEY, `http://${universerEndpoint}/universer-api/authz`);
             configService.setConfig(SNAPSHOT_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/snapshot`);
             configService.setConfig(COLLAB_SUBMIT_CHANGESET_URL_KEY, `http://${universerEndpoint}/universer-api/comb`);
             configService.setConfig(COLLAB_WEB_SOCKET_URL_KEY, `ws://${universerEndpoint}/universer-api/comb/connect`);
+            // 如果将 `SEND_CHANGESET_TIMEOUT_KEY` 设置更小，那么协作的变更会更快的同步到其他用户，但是可能会增加服务器的负载
+            configService.setConfig(SEND_CHANGESET_TIMEOUT_KEY, 200) // optional
 
-            // collaboration
+            // 注册协同插件
             univer.registerPlugin(UniverCollaboration.UniverCollaborationPlugin);
             univer.registerPlugin(UniverCollaborationClient.UniverCollaborationClientPlugin);
 
-            // live share
+            // 注册实时共享插件
             univer.registerPlugin(UniverLiveShare.UniverLiveSharePlugin)
 
-            // print
+            // 注册打印插件
             univer.registerPlugin(UniverSheetsPrint.UniverSheetsPrintPlugin)
 
-            // config import & export endpoint
+            // 配置导入导出的服务端地址
             const { EXCHANGE_UPLOAD_FILE_SERVER_URL_KEY, EXCHANGE_IMPORT_SERVER_URL_KEY, EXCHANGE_EXPORT_SERVER_URL_KEY, EXCHANGE_GET_TASK_SERVER_URL_KEY, EXCHANGE_SIGN_URL_SERVER_URL_KEY } = UniverExchangeClient;
             configService.setConfig(EXCHANGE_UPLOAD_FILE_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/stream/file/upload`);
             configService.setConfig(EXCHANGE_IMPORT_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/exchange/{type}/import`);
@@ -298,7 +300,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
             configService.setConfig(EXCHANGE_GET_TASK_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/exchange/task/{taskID}`);
             configService.setConfig(EXCHANGE_SIGN_URL_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/file/{fileID}/sign-url`);
 
-            // import & export
+            // 注册导入导出插件
             univer.registerPlugin(UniverSheetsExchangeClientPlugin)
           }
         </script>
