@@ -87,7 +87,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
           Univer UMD With Collaboration, Live Share, Print, Exchange
         </title>
         <script src="https://unpkg.com/@univerjs/umd/lib/univer.full.umd.js"></script>
-        <script src="https://unpkg.com/@univerjs/umd/lib/locale/en-US.js"></script>
+        <script src="https://unpkg.com/@univerjs/umd/lib/locale/zh-CN.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/@univerjs/umd/lib/univer.css">
 
         <script src="https://unpkg.com/lodash/lodash.js"></script>
@@ -140,9 +140,9 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
             // 加载协作、打印、交换的国际化资源
             Promise.all([
-              fetch('https://unpkg.com/@univerjs-pro/collaboration-client/lib/locale/en-US.json').then(res => res.json()),
-              fetch('https://unpkg.com/@univerjs-pro/sheets-print/lib/locale/en-US.json').then(res => res.json()),
-              fetch('https://unpkg.com/@univerjs-pro/exchange-client/lib/locale/en-US.json').then(res => res.json())
+              fetch('https://unpkg.com/@univerjs-pro/collaboration-client/lib/locale/zh-CN.json').then(res => res.json()),
+              fetch('https://unpkg.com/@univerjs-pro/sheets-print/lib/locale/zh-CN.json').then(res => res.json()),
+              fetch('https://unpkg.com/@univerjs-pro/exchange-client/lib/locale/zh-CN.json').then(res => res.json()),
             ]).then(([
               collaborationLocale,
               printLocale,
