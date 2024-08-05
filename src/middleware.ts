@@ -16,3 +16,13 @@ export default function middleware(req: NextRequest) {
 
   return NextResponse.next()
 }
+
+// Fix: Error handling upgrade request TypeError: Cannot read properties of undefined (reading 'bind'), https://github.com/vercel/next.js/issues/55802
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for the api starting with universer-api
+     */
+    '/((?!universer-api).*)',
+  ],
+}

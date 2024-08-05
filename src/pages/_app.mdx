@@ -8,6 +8,7 @@ import './globals.css'
 import './rc-color-picker.css'
 import './rc-slider.css'
 import '@radix-ui/themes/styles.css'
+import clsx from 'clsx'
 
 export default function App(props) {
   const { Component, pageProps } = props
@@ -66,7 +67,7 @@ export default function App(props) {
             <Component {...pageProps} />
             )
           : (
-            <div className={poppins.className}>
+            <div className={clsx(poppins.className, 'site-body')}>
               <Navbar />
               <Component {...pageProps} />
               {!isPlayground && <Footer />}
