@@ -15,6 +15,6 @@ export const issueTypeLabels: Record<IssueType, string> = {
 
 export const issueTypeOptions = [
   { value: IssueType['chrome-extension'], label: issueTypeLabels[IssueType['chrome-extension']] },
-  { value: IssueType['gpt-extension'], label: issueTypeLabels[IssueType['gpt-extension']] },
+  // { value: IssueType['gpt-extension'], label: issueTypeLabels[IssueType['gpt-extension']] },
   { value: IssueType['ai-completion'], label: issueTypeLabels[IssueType['ai-completion']] },
 ]

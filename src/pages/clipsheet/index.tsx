@@ -289,7 +289,7 @@ export default function Page() {
             `}
             >
             </div>
-            <div className="flex justify-center">
+            {/* <div className="flex justify-center">
               <Switch
                 leftIcon={<GoogleSvg />}
                 rightIcon={<ChatgptSvg />}
@@ -299,7 +299,7 @@ export default function Page() {
                 value={videoListFlag}
                 onChange={value => setVideosFlag(value)}
               />
-            </div>
+            </div> */}
 
           </div>
 
