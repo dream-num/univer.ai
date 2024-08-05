@@ -23,7 +23,9 @@ function Switch({ intailValue, value, leftIcon, rightIcon, leftLabel, rightLabel
   const handleToggle = (option: 'left' | 'right') => {
     if (!isDisabled) {
       setSelected(option)
-      onChange && onChange(option)
+      if (onChange) {
+        onChange(option)
+      }
     }
   }
 
