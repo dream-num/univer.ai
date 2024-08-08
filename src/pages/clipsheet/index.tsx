@@ -508,7 +508,7 @@ export default function Page() {
                     <div className="text-[#7A7A7A]">
                       <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
                         <span>Extraction rate</span>
-                        <span className="text-[#0FCC65]">30/Day</span>
+                        <span className="text-[#0FCC65]">Unlimited</span>
                       </div>
                       <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
                         <span>Server extraction history</span>
@@ -516,7 +516,7 @@ export default function Page() {
                       </div>
                       <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
                         <span>Tabs per extraction</span>
-                        <span className="text-[#0FCC65]">3</span>
+                        <span className="text-[#0FCC65]">Unlimited</span>
                       </div>
                       <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
                         <span>Targeted extraction</span>
@@ -548,7 +548,7 @@ export default function Page() {
                     <div className="text-[#7A7A7A]">
                       <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
                         <span>Rows limited per extraction</span>
-                        <span className="text-[#0FCC65]">100</span>
+                        <span className="text-[#0FCC65]">Unlimited</span>
                       </div>
                     </div>
                   </div>
