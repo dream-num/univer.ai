@@ -73,7 +73,18 @@ export default function Page() {
   return (
     <>
       <Head>
-        <title>Univer</title>
+        <title>Univer Clipsheet - AI-Driven One-Click Web Scraping Solution</title>
+        <meta name="description" content="Effortlessly organize public information from e-commerce sites, social media, news, finance, and more into spreadsheets with Univer Clipsheet. No coding required." />
+        <meta name="keywords" content="AI web scraping, data extraction, e-commerce data, social media scraping, news data, finance data, spreadsheet automation" />
+        <link rel="canonical" href="https://univer.ai/clipsheet" />
+        <meta property="og:title" content="Univer Clipsheet - AI-Driven One-Click Web Scraping Solution" />
+        <meta property="og:description" content="Effortlessly organize public information from various websites into spreadsheets." />
+        {/* <meta property="og:image" content="URL to your image" /> */}
+        <meta property="og:url" content="https://univer.ai/clipsheet" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Univer Clipsheet - AI-Driven One-Click Web Scraping Solution" />
+        <meta name="twitter:description" content="Organize web data into spreadsheets with a single click." />
+        {/* <meta name="twitter:image" content="URL to your image" /> */}
       </Head>
 
       <main className="bg-[linear-gradient(180deg,#FFF_0.5%,#F6F9FF_100%)]">
@@ -484,7 +495,7 @@ export default function Page() {
                       bg-[linear-gradient(121deg,#0048FF_18.89%,#0C81ED_39.58%,#029DCE_59.87%,#00BBB0_74.37%,#00C5A8_81.94%)]
                       text-white
                     `}
-                    href="/settings/plans"
+                    href="https://space.univer.plus/settings/plans"
                   >
                     <CrownSingle />
                     Subscribe Now
