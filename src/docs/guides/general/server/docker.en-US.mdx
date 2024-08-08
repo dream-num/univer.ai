@@ -1,5 +1,7 @@
 import { Callout, Steps } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import Image from '@/components/Image'
+import mysqlImg from './docker/mysql.png'
 
 # Deploying with Docker
 
@@ -140,3 +142,15 @@ HOST_NGINX_PORT=8000
 HOST_MINIO_PORT=19000
 HOST_GRAFANA_PORT=13000
 ```
+
+### How to change database to MySQL?
+
+1. Required MySQL >= 8.0
+
+2. Update `.env` file, set the MySQL config and delete PostgreSQL config.
+
+<Image src={mysqlImg} alt="mysql" width={500} />
+
+3. The `docker-compose.mysql.yaml` apply a MySQL component, if you want to use yourself database, you can delete the `univer-mysql` service in `docker-compose.mysql.yaml` file, and delete the dependencies in other service `depend_on` properties.
+
+4. Start/Restart the service: `bash run.sh`
