@@ -80,6 +80,10 @@ export default function Navbar() {
     type: 'link',
     href: 'https://space.univer.ai',
   }, {
+    title: t('clipSheet.title'),
+    type: 'link',
+    href: '/clipsheet',
+  }, {
     title: t('ecosystem.title'),
     type: 'dropdown',
     items: [{

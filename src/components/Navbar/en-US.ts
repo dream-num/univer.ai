@@ -7,6 +7,7 @@ const locales = {
   'univer.playground.title': 'Playground',
   'univer.playground.desc': 'Quickly experience Univer development.',
   'blog.title': 'Blog',
+  'clipSheet.title': 'ClipSheet',
   'ecosystem.title': 'Ecosystem',
   'ecosystem.icons.title': 'Univer Icons',
   'ecosystem.icons.desc': 'Icons for Univer.',

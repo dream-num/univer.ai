@@ -9,6 +9,7 @@ const locales: typeof enUS = {
   'univer.playground.title': 'Playground',
   'univer.playground.desc': '快速体验 Univer 的开发',
   'blog.title': '博客',
+  'clipSheet.title': 'ClipSheet',
   'ecosystem.title': '生态',
   'ecosystem.icons.title': '图标库',
   'ecosystem.icons.desc': '一款针对办公产品定制的图标库',
