@@ -495,7 +495,7 @@ export default function Page() {
                       bg-[linear-gradient(121deg,#0048FF_18.89%,#0C81ED_39.58%,#029DCE_59.87%,#00BBB0_74.37%,#00C5A8_81.94%)]
                       text-white
                     `}
-                    href="https://space.univer.plus/settings/plans"
+                    href="https://space.univer.ai/settings/plans"
                   >
                     <CrownSingle />
                     Subscribe Now
