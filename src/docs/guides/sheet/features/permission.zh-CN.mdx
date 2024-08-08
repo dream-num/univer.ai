@@ -1,8 +1,13 @@
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import Sandbox from '@/components/Sandbox'
+
+import entryFile from './permission/demo-1/index.txt'
 
 # 权限控制
 
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+<Sandbox entryFile={entryFile} />
 
 是用来处理前端场景的权限拦截，当发现没有对应操作权限的时候，会终止代码执行并提示用户缺失权限。例如你可以在一片选区内设置区域保护，就可以设置其他协作者在该保护范围内是否可以使用编辑、阅读、复制、筛选等等。
 

@@ -87,8 +87,8 @@ export default function Sandbox(props: ISandboxProps) {
         theme={resolvedTheme === 'dark' ? 'dark' : 'light'}
         template="vite"
       >
-        <SandpackLayout className="!grid">
-          <div className="relative">
+        <SandpackLayout className={clsx('flex flex-col')}>
+          <div className="relative max-w-full">
             <SandpackPreview style={{ height: '480px' }} />
 
             <div className="absolute bottom-0 left-0 flex h-[40px] w-[50%] items-center px-2">
@@ -109,7 +109,7 @@ export default function Sandbox(props: ISandboxProps) {
           </div>
 
           <div
-            className={clsx({
+            className={clsx('max-w-full', {
               hidden: !visible,
             })}
           >

@@ -1,0 +1,83 @@
+import { LocaleType, Univer, UniverInstanceType, IPermissionService, IUniverInstanceService } from '@univerjs/core'
+
+import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
+import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
+
+import { UniverUIPlugin } from '@univerjs/ui'
+import { defaultTheme } from '@univerjs/design'
+
+import { UniverDocsPlugin } from '@univerjs/docs'
+import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
+
+import { UniverSheetsPlugin, WorkbookEditablePermission } from '@univerjs/sheets'
+import { UniverSheetsUIPlugin } from '@univerjs/sheets-ui'
+import { UniverSheetsNumfmtPlugin } from '@univerjs/sheets-numfmt'
+import { UniverSheetsFormulaPlugin } from '@univerjs/sheets-formula'
+
+import { enUS } from './locales'
+
+import './style.css'
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: enUS,
+  },
+})
+
+univer.registerPlugin(UniverRenderEnginePlugin)
+univer.registerPlugin(UniverFormulaEnginePlugin)
+
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  disableAutoFocus: true,
+})
+
+univer.registerPlugin(UniverDocsPlugin, {
+  hasScroll: false,
+})
+univer.registerPlugin(UniverDocsUIPlugin)
+
+univer.registerPlugin(UniverSheetsPlugin)
+univer.registerPlugin(UniverSheetsUIPlugin)
+univer.registerPlugin(UniverSheetsNumfmtPlugin)
+univer.registerPlugin(UniverSheetsFormulaPlugin)
+
+univer.createUnit(UniverInstanceType.UNIVER_SHEET, {})
+
+const $a = document.createElement('a')
+$a.style = 'position: fixed; bottom: 100px; right: 24px; z-index: 9999; font-size: 14px; padding: 4px 8px; background-color: #1890ff; color: #fff; border-radius: 4px; cursor: pointer;'
+
+$a.textContent = 'Toggle Permission'
+
+$a.addEventListener('click', () => {
+  const injector = univer.__getInjector()
+
+  const permissionService = injector.get(IPermissionService)
+  const univerInstanceService = injector.get(IUniverInstanceService)
+
+  const workbook = univerInstanceService.getCurrentUnitForType(
+    UniverInstanceType.UNIVER_SHEET
+  )
+
+  if (!workbook) {
+    return
+  }
+
+  const unitId = workbook.getUnitId()
+  const workbookPermissionInstance = new WorkbookEditablePermission(unitId)
+  let permissionPoint = permissionService.getPermissionPoint(
+    workbookPermissionInstance.id
+  )
+  if (!permissionPoint) {
+    permissionService.addPermissionPoint(workbookPermissionInstance)
+    permissionPoint = workbookPermissionInstance
+  }
+  permissionService.updatePermissionPoint(
+    workbookPermissionInstance.id,
+    !permissionPoint.value
+  )
+})
+
+document.body.appendChild($a)
