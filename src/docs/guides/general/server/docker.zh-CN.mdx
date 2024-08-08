@@ -1,5 +1,7 @@
 import { Callout, Steps } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import Image from '@/components/Image'
+import mysqlImg from './docker/mysql.png'
 
 # 部署到 Docker
 
@@ -161,3 +163,15 @@ HOST_NGINX_PORT=8000
 HOST_MINIO_PORT=19000
 HOST_GRAFANA_PORT=13000
 ```
+
+### 怎样修改成使用 MySQL 数据库？
+
+1. MySQL 需要 >= 8.0 版本。
+
+2. 更新 `.env` 文件，设置 MySQL 相关配置并把 PostgreSQL 配置去掉。
+
+<Image src={mysqlImg} alt="mysql" width={500} />
+
+3.  `docker-compose.mysql.yaml` 文件提供了一个 MySQL 数据库组件，如果你想使用已有的数据库，可以将 `univer-mysql` 从 `docker-compose.mysql.yaml` 文件中删除，然后再把其他服务 `depend_on` 属性中的 `univer-mysql` 依赖去掉。
+
+4. 启动/重启服务：`bash run.sh`。
