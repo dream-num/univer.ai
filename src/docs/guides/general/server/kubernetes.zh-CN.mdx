@@ -12,7 +12,7 @@ Kubernetes 是一个开源的容器编排平台，用于自动化部署、扩展
 Univer 的后端服务在 Kubernetes 上的部署将涉及以下组件：
 
 - Kubernetes Cluster：你的应用程序将在这里运行。
-- helm：用于在 Kubernetes 上部署和管理应用程序的工具。
+- helm：用于在 Kubernetes 上部署和管理应用程序的工具。需要 helm 3 版本。
 - PostgreSQL + RabbitMQ
 
 ## 安装 Helm
@@ -63,3 +63,7 @@ helm version
 ## 常见问题
 
 服务未启动: 检查 Kubernetes 的 Pod 是否正常运行，查看日志以确定问题所在。
+
+### 下载不了 OCI 制品？
+
+`helm` 版本要求大于等于 3，如果版本低于 3.8，需要通过 `export HELM_EXPERIMENTAL_OCI=1` 设置环境变量来开启 OCI 特性，详情请查看 [helm 官方文档](https://helm.sh/zh/docs/topics/registries/)。

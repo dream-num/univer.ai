@@ -151,6 +151,6 @@ HOST_GRAFANA_PORT=13000
 
 <Image src={mysqlImg} alt="mysql" width={500} />
 
-3. The `docker-compose.mysql.yaml` apply a MySQL component, if you want to use yourself database, you can delete the `univer-mysql` service in `docker-compose.mysql.yaml` file, and delete the dependencies in other service `depend_on` properties.
+3. The `docker-compose.mysql.yaml` apply a MySQL component, if you want to use yourself database, you can delete the `univer-mysql` service in `docker-compose.mysql.yaml` file, and delete the dependencies in other service `depends_on` properties.
 
 4. Start/Restart the service: `bash run.sh`
