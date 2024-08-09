@@ -1,5 +1,5 @@
 import Image from '@/components/Image'
-import pivot from './pivot.png'
+import PivotImage from './introduction/pivot.png'
 
 # Introduction to Pivot Tables
 
@@ -20,11 +20,11 @@ Pivot tables typically include the following elements:
 
 In a pivot table, you can adjust the row labels, column labels, and values as needed to better analyze the data.
 
-<Image src={pivot} alt="Missing Locale" width={800} />
+<Image src={PivotImage} alt="Missing Locale" width={800} />
 
 ## Data Source
 
-In Univer Sheet, the data source for a pivot table can be a sheet or a data range. You can choose different data sources as needed to better analyze the data.
+In Univer Sheet, the data source for a pivot table can be a worksheet or a data range. You can choose different data sources as needed to better analyze the data.
 We use the first row of the data source as the default column labels, and the rest as the data source. Therefore, we require the data source to be as organized as possible, avoiding empty rows and columns.
 In the same column of data, we automatically recognize the data type to better support the pivot table's functionality. If the data types in a column are inconsistent, we default to setting the data type of that column to string.
 

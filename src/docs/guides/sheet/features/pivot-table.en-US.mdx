@@ -1,4 +1,4 @@
-import { Tabs } from 'nextra/components'
+import { Callout, Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 import Sandbox from '@/components/Sandbox'
 
@@ -10,16 +10,17 @@ import entryFile from './hyperlink/demo-1/index.txt'
 
 {/* <Sandbox entryFile={entryFile} /> */}
 
-
 Pivot table is a powerful sheet data analysis tool that can quickly summarize, organize and analyze large amounts of data, thereby helping users discover patterns and trends in the data.
 
-- @univerjs-pro/pivot-engine provides the most basic data calculation capabilities for pivot tables. The npm package does not rely on any third-party plug-ins for its work.
+- @univerjs-pro/pivot-engine provides the most basic data calculation capabilities for pivot tables. The plugin does not rely on any third-party plug-ins for its work.
 - @univerjs-pro/sheet-pivot assembles pivot-engine into universal sheet plugin to support table rendering, collaboration, formulas and other capabilities
 - @univerjs-pro/sheet-pivot-ui provides a basic drag-and-drop interface & filtering and other dialogs required for interaction
 
-## Feature ability  
+## Feature ability
 
+<Callout>
 Since PivotTable is a very complex and large-scale function, we currently provide a beta version and will continue to iterate in the future.
+</Callout>
 
 ### Currently supported functions
 - 11 subtotal methods supported like excel
@@ -66,16 +67,16 @@ import { UniverSheetsPivotTableUIPlugin } from '@univerjs-pro/sheets-pivot-ui';
 
 ```typescript
 import { LocaleType, Tools } from '@univerjs/core';
-import SheetsPivotTableZhCN from '@univerjs-pro/sheets-pivot/locale/zh-CN';
-import SheetsPivotTableUIZhCN from '@univerjs-pro/sheets-pivot-ui/locale/zh-CN';
+import SheetsPivotTableEnUS from '@univerjs-pro/sheets-pivot/locale/en-US';
+import SheetsPivotTableUIEnUS from '@univerjs-pro/sheets-pivot-ui/locale/en-US';
 
 const univer = new Univer({
   theme: defaultTheme,
-  locale: LocaleType.ZH_CN,
+  locale: LocaleType.EN_US,
   locales: {
-    [LocaleType.ZH_CN]: Tools.deepMerge(
-      SheetsPivotTableZhCN,
-      SheetsPivotTableUIZhCN
+    [LocaleType.EN_US]: Tools.deepMerge(
+      SheetsPivotTableEnUS,
+      SheetsPivotTableUIEnUS
     ),
   },
 });
