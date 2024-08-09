@@ -1,36 +1,28 @@
 import Head from 'next/head'
-import { GithubSingle40, IncreaseSingle, NextSingle } from '@univerjs/icons'
-import { useCallback, useEffect, useState } from 'react'
+import { CheckMarkSingle, CloseSingle, CrownSingle, GithubSingle40, IncreaseSingle, NextSingle } from '@univerjs/icons'
+import { useCallback, useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { clsx } from '@/lib/utils'
 import Hero from '@/components/Hero'
 import Title from '@/components/Title'
 import { useTranslation } from '@/lib/i18n'
-import Switch from '@/components/Switch'
 
-import { GoogleSvg } from '@/official-site/clipsheet/components/icons/GoogleSvg'
-import { ChatgptSvg } from '@/official-site/clipsheet/components/icons/ChatgptSvg'
-import type { IVideo } from '@/official-site/clipsheet/components/VideoList'
-import { VideoList } from '@/official-site/clipsheet/components/VideoList'
 import { VideoPlayer } from '@/official-site/clipsheet/components/VideoPlayer'
 import ShineBorder from '@/components/ShineBorder'
 
 export default function Page() {
+  const [paymentPlan, setPaymentPlan] = useState<'monthly' | 'yearly'>('yearly')
   const [collapsedIds, setCollapsedIds] = useState<number[]>([])
-
-  const router = useRouter()
-  const { asPath } = router
 
   const enUs = {
     'hero.ai-driven': 'AI-Driven',
-    'hero.web-to-sheet': 'Web to Spreadsheet',
-    'hero.next-generation': 'of the Next Generation',
-    'videos.title-1': 'AI-Driven Web to Spreadsheet',
+    'hero.web-to-sheet': 'One-Click Web Scraping Solution',
+    'videos.title-1': 'One-Click Web Scraping Solution',
     'faq.title-1': 'Where is the Univer community? How can I get help?',
     'faq.desc-1': (
       <span>
         Community group:
+        {' '}
         <Link className="text-[#2B4DFF] hover:underline" href="https://discord.gg/FaHvP4DwyX">discord</Link>
       </span>
     ) as unknown as string,
@@ -38,6 +30,7 @@ export default function Page() {
     'faq.desc-2': (
       <span>
         You can use the data completion feature in Univer Sheet to achieve bulk extraction of detailed information.
+        {' '}
         <Link className="text-[#2B4DFF] hover:underline" href="/clipsheet/tutorials/completion">Read more details.</Link>
       </span>
     ) as unknown as string,
@@ -50,69 +43,6 @@ export default function Page() {
     'en-US': enUs,
     'zh-CN': enUs,
   })
-
-  const intailValue = 'left'
-  const [heroVideoFlag, setHeroVideoFlag] = useState<'left' | 'right'>(intailValue)
-  const [videoListFlag, setVideosFlag] = useState<'left' | 'right'>(intailValue)
-
-  useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash
-      if (hash === '#gpt') {
-        setHeroVideoFlag('right')
-        setVideosFlag('right')
-      }
-    }
-
-    handleHashChange()
-
-    window.addEventListener('hashchange', handleHashChange)
-
-    return () => {
-      window.removeEventListener('hashchange', handleHashChange)
-    }
-  }, [asPath])
-
-  const previewVidio = heroVideoFlag === 'left' ? 'https://www.youtube.com/embed/MxDMCKNx8P4?enablejsapi=1&si=aBiGTAGDNBWabFle' : 'https://www.youtube-nocookie.com/embed/n0i3rvEmfVg?enablejsapi=1&si=htcqrq6OWRjMt1yl'
-  const defaultVideo = videoListFlag === 'left' ? 'https://www.youtube.com/embed/MxDMCKNx8P4?enablejsapi=1&si=aBiGTAGDNBWabFle' : 'https://www.youtube-nocookie.com/embed/n0i3rvEmfVg?enablejsapi=1&si=htcqrq6OWRjMt1yl'
-
-  const videos: IVideo[] = [{
-    videoSrc: defaultVideo,
-    title: t('videos.title-1'),
-  }, {
-    videoSrc: defaultVideo,
-    title: t('videos.title-1'),
-  }, {
-    videoSrc: defaultVideo,
-    title: t('videos.title-1'),
-  }, {
-    videoSrc: defaultVideo,
-    title: t('videos.title-1'),
-  }, {
-    videoSrc: defaultVideo,
-    title: t('videos.title-1'),
-  }, {
-    videoSrc: defaultVideo,
-    title: t('videos.title-1'),
-  }, {
-    videoSrc: defaultVideo,
-    title: t('videos.title-1'),
-  }, {
-    videoSrc: defaultVideo,
-    title: t('videos.title-1'),
-  }, {
-    videoSrc: defaultVideo,
-    title: t('videos.title-1'),
-  }, {
-    videoSrc: defaultVideo,
-    title: t('videos.title-1'),
-  }, {
-    videoSrc: defaultVideo,
-    title: t('videos.title-1'),
-  }, {
-    videoSrc: defaultVideo,
-    title: t('videos.title-1'),
-  }]
 
   const faq = [{
     title: t('faq.title-1'),
@@ -143,7 +73,18 @@ export default function Page() {
   return (
     <>
       <Head>
-        <title>Univer</title>
+        <title>Univer Clipsheet - AI-Driven One-Click Web Scraping Solution</title>
+        <meta name="description" content="Effortlessly organize public information from e-commerce sites, social media, news, finance, and more into spreadsheets with Univer Clipsheet. No coding required." />
+        <meta name="keywords" content="AI web scraping, data extraction, e-commerce data, social media scraping, news data, finance data, spreadsheet automation" />
+        <link rel="canonical" href="https://univer.ai/clipsheet" />
+        <meta property="og:title" content="Univer Clipsheet - AI-Driven One-Click Web Scraping Solution" />
+        <meta property="og:description" content="Effortlessly organize public information from various websites into spreadsheets." />
+        {/* <meta property="og:image" content="URL to your image" /> */}
+        <meta property="og:url" content="https://univer.ai/clipsheet" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Univer Clipsheet - AI-Driven One-Click Web Scraping Solution" />
+        <meta name="twitter:description" content="Organize web data into spreadsheets with a single click." />
+        {/* <meta name="twitter:image" content="URL to your image" /> */}
       </Head>
 
       <main className="bg-[linear-gradient(180deg,#FFF_0.5%,#F6F9FF_100%)]">
@@ -151,11 +92,12 @@ export default function Page() {
           className="pb-[80px]"
         >
 
-          <div className={`
-            mt-[60px]
+          <div
+            className={`
+              mt-[60px]
 
-            xl:mt-[72px]
-          `}
+              xl:mt-[72px]
+            `}
           >
 
           </div>
@@ -176,14 +118,13 @@ export default function Page() {
             </Link>
           </div>
 
-          <div className={`
-            mb-[20px]
+          <div
+            className={`
+              mb-[20px]
 
-            xl:mb-[28px]
-          `}
-          >
-
-          </div>
+              xl:mb-[28px]
+            `}
+          />
 
           <h1
             className={`
@@ -194,26 +135,25 @@ export default function Page() {
           >
             {t('hero.ai-driven')}
 
-            <br></br>
+            <br />
             <span
               className={`
                 inline-block
                 bg-[linear-gradient(121deg,#0048FF_18.89%,#0C81ED_39.58%,#029DCE_59.87%,#00BBB0_74.37%,#00C5A8_81.94%)]
-                bg-clip-text px-4 text-transparent
+                bg-clip-text px-4 py-2 text-transparent
               `}
             >
               {t('hero.web-to-sheet')}
             </span>
           </h1>
 
-          <div className={`
-            mt-[36px]
+          <div
+            className={`
+              mt-[36px]
 
-            xl:mt-[60px]
-          `}
-          >
-          </div>
-
+              xl:mt-[60px]
+            `}
+          />
         </Hero>
 
         {/* Preview */}
@@ -224,95 +164,428 @@ export default function Page() {
             xl:mt-[-60px]
           `}
         >
-          <div className={`
-            relative mx-auto
+          <div
+            className={`
+              relative mx-auto
 
-            xl:w-[960px]
-          `}
+              xl:w-[960px]
+            `}
           >
-            <VideoPlayer videoClassName="rounded-3xl" src={previewVidio} />
+            <VideoPlayer videoClassName="rounded-3xl" src="https://www.youtube.com/embed/E7-2S52dF0k?enablejsapi=1&si=aBiGTAGDNBWabFle" />
           </div>
-          <div className="mt-[48px]"></div>
-          <div className="flex justify-center">
-            <Switch
-              leftIcon={<GoogleSvg />}
-              rightIcon={<ChatgptSvg />}
-              leftLabel="Chrome Extension"
-              rightLabel="ChatGPT"
-              intailValue={intailValue}
-              value={heroVideoFlag}
-              onChange={value => setHeroVideoFlag(value)}
-            />
-          </div>
-          <div className={`
-            mb-[48px]
 
-            xl:mb-[100px]
-          `}
-          >
-          </div>
+          <div
+            className={`
+              mb-[48px]
+
+              xl:mb-[100px]
+            `}
+          />
         </section>
 
-        {/* Simple Cases */}
+        {/* Pricing */}
         <section
-          className="bg-[#f5f9fe] px-4"
+          className={`
+            px-4
+
+            xl:mx-auto xl:max-w-[1200px]
+          `}
         >
-          <div className={`
-            pb-[28px]
+          <h2 className="mb-6 self-stretch text-center text-[48px] font-semibold">Pricing</h2>
 
-            xl:pb-[88px]
-          `}
-          >
+          <div className="mb-10 flex justify-center">
+            <div className="inline-flex items-center">
+              <span className="mr-2 text-sm font-medium text-gray-900">
+                Monthly
+              </span>
+              <label className="inline-flex cursor-pointer items-center">
+                <input
+                  className="peer sr-only"
+                  type="checkbox"
+                  checked={paymentPlan === 'yearly'}
+                  onChange={() => setPaymentPlan(paymentPlan === 'yearly' ? 'monthly' : 'yearly')}
+                />
+                <div
+                  className={`
+                    peer relative h-4 w-7 rounded-full bg-gray-200
+
+                    after:absolute after:start-[2px] after:top-[2px] after:h-3 after:w-3
+                    after:rounded-full after:border after:border-gray-300 after:bg-white
+                    after:transition-all after:content-['']
+
+                    peer-checked:bg-blue-600 peer-checked:after:translate-x-full
+                    peer-checked:after:border-white
+
+                    peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300
+
+                    rtl:peer-checked:after:-translate-x-full
+                  `}
+                />
+                <span className="ml-2 text-sm font-medium text-gray-900">
+                  Yearly
+
+                  <span
+                    className={`
+                      ml-2
+                      bg-[linear-gradient(130deg,_#0048FF_42.85%,_#0C81ED_55.24%,_#029DCE_67.39%,_#00BBB0_76.08%,_#00C5A8_80.61%)]
+                      bg-clip-text text-center text-[16px] font-semibold text-transparent
+                    `}
+                  >
+                    Save 25%
+                  </span>
+                </span>
+              </label>
+            </div>
           </div>
 
-          <div className={`
-            relative mx-auto
+          <div
+            className={`
+              mb-[100px] grid grid-cols-1 justify-center gap-8
 
-            xl:w-[936px]
-          `}
-          >
-            <div className="inline-flex w-full flex-col items-center justify-start gap-9">
-              <div className={`
-                text-[28px] font-semibold leading-[52px] text-slate-900
-
-                xl:text-5xl
-              `}
-              >
-                Simple Cases
-              </div>
-
-            </div>
-            <div className={`
-              mt-[20px]
-
-              xl:mt-[36px]
+              xl:grid-cols-3
             `}
-            >
-            </div>
-            {/* <div className="flex justify-center">
-              <Switch
-                leftIcon={<GoogleSvg />}
-                rightIcon={<ChatgptSvg />}
-                leftLabel="Chrome Extension"
-                rightLabel="ChatGPT"
-                intailValue={intailValue}
-                value={videoListFlag}
-                onChange={value => setVideosFlag(value)}
-              />
-            </div> */}
-
-          </div>
-
-          <div className={`
-            mb-[32px]
-
-            xl:mb-[64px]
-          `}
           >
+            {/* Without registration */}
+            <section className="rounded-[24px] border bg-white p-6">
+              <header className="mb-7">
+                <label className="mb-7 block text-[16px] font-medium">Without registration</label>
+                <span className="text-center text-[40px] font-semibold leading-none tracking-[3px]">$0</span>
+                <small className="text-center text-base text-[#474D57]">Free</small>
+                <p className="mb-5 mt-3">Perfect plan for starters.</p>
+                <a
+                  className={`
+                    flex h-[40px] items-center justify-center rounded-3xl bg-[#474D57] text-white
+                  `}
+                  href="https://chromewebstore.google.com/detail/univer-clipsheet-ai-drive/mbcpbomfebacllmjjefeifejbbibbope"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Get Started
+                </a>
+              </header>
+
+              <div>
+                <div className="mb-5">
+                  <label className="text-sm font-medium text-[#1E222B]">Web Table Extraction</label>
+                  <div className="text-[#7A7A7A]">
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>Extraction rate</span>
+                      <span className="text-[#0FCC65]">10/Day</span>
+                    </div>
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>Server extraction history</span>
+                      <span><CloseSingle style={{ color: '#FE4B4B' }} /></span>
+                    </div>
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>Tabs per extraction</span>
+                      <span className="text-[#0FCC65]">1</span>
+                    </div>
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>Targeted extraction</span>
+                      <span><CloseSingle style={{ color: '#FE4B4B' }} /></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mb-5">
+                  <label className="text-sm font-medium text-[#1E222B]">Search</label>
+                  <div className="text-[#7A7A7A]">
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>Standard search rate</span>
+                      <span className="text-[#0FCC65]">Unlimited</span>
+                    </div>
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>Pro searchs rate</span>
+                      <span className="text-[#0FCC65]">5/4 Hour</span>
+                    </div>
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>Available AI models</span>
+                      <span className="text-[#0FCC65]">Standard AI</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mb-5">
+                  <label className="text-sm font-medium text-[#1E222B]">Drill-down Extraction</label>
+                  <div className="text-[#7A7A7A]">
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>Rows limited per extraction</span>
+                      <span className="text-[#0FCC65]">20</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mb-5">
+                  <label className="text-sm font-medium text-[#1E222B]">Workspace</label>
+                  <div className="text-[#7A7A7A]">
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>File management</span>
+                      <span><CloseSingle style={{ color: '#FE4B4B' }} /></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mb-5">
+                  <label className="text-sm font-medium text-[#1E222B]">File storage</label>
+                  <div className="text-[#7A7A7A]">
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>File retention time(Day)</span>
+                      <span className="text-[#0FCC65]">7</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium text-[#1E222B]">Univer Sheet Features</label>
+                  <div className="text-[#7A7A7A]">
+                    <div className="flex justify-between py-3 text-sm">
+                      <span>All features</span>
+                      <span><CloseSingle style={{ color: '#FE4B4B' }} /></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Free */}
+            <section className="rounded-[24px] border bg-white p-6">
+              <header className="mb-7">
+                <label className="mb-7 block text-[16px] font-medium">Free</label>
+                <span className="text-center text-[40px] font-semibold leading-none tracking-[3px]">$0</span>
+                <small className="text-center text-base text-[#474D57]">Free</small>
+                <p className="mb-5 mt-3">For user who want to do more.</p>
+                <a
+                  className={`
+                    flex h-[40px] items-center justify-center rounded-3xl bg-[#474D57] text-white
+                  `}
+                  href="https://chromewebstore.google.com/detail/univer-clipsheet-ai-drive/mbcpbomfebacllmjjefeifejbbibbope"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Get Started
+                </a>
+              </header>
+
+              <div>
+                <div className="mb-5">
+                  <label className="text-sm font-medium text-[#1E222B]">Web Table Extraction</label>
+                  <div className="text-[#7A7A7A]">
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>Extraction rate</span>
+                      <span className="text-[#0FCC65]">30/Day</span>
+                    </div>
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>Server extraction history</span>
+                      <span><CheckMarkSingle style={{ color: '#0FCC65' }} /></span>
+                    </div>
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>Tabs per extraction</span>
+                      <span className="text-[#0FCC65]">3</span>
+                    </div>
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>Targeted extraction</span>
+                      <span><CheckMarkSingle style={{ color: '#0FCC65' }} /></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mb-5">
+                  <label className="text-sm font-medium text-[#1E222B]">Search</label>
+                  <div className="text-[#7A7A7A]">
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>Standard search rate</span>
+                      <span className="text-[#0FCC65]">Unlimited</span>
+                    </div>
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>Pro searchs rate</span>
+                      <span className="text-[#0FCC65]">10/4 Hour</span>
+                    </div>
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>Available AI models</span>
+                      <span className="text-[#0FCC65]">Standard AI</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mb-5">
+                  <label className="text-sm font-medium text-[#1E222B]">Drill-down Extraction</label>
+                  <div className="text-[#7A7A7A]">
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>Rows limited per extraction</span>
+                      <span className="text-[#0FCC65]">100</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mb-5">
+                  <label className="text-sm font-medium text-[#1E222B]">Workspace</label>
+                  <div className="text-[#7A7A7A]">
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>File management</span>
+                      <span><CheckMarkSingle style={{ color: '#0FCC65' }} /></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mb-5">
+                  <label className="text-sm font-medium text-[#1E222B]">File storage</label>
+                  <div className="text-[#7A7A7A]">
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>File retention time(Day)</span>
+                      <span className="text-[#0FCC65]">Unlimited</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium text-[#1E222B]">Univer Sheet Features</label>
+                  <div className="text-[#7A7A7A]">
+                    <div className="flex justify-between py-3 text-sm">
+                      <span>All features</span>
+                      <span><CloseSingle style={{ color: '#FE4B4B' }} /></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Plus */}
+            <section
+              className={`
+                rounded-[24px] border
+                bg-[linear-gradient(121deg,#0048FF_18.89%,#0C81ED_39.58%,#029DCE_59.87%,#00BBB0_74.37%,#00C5A8_81.94%)]
+                p-[3px] shadow-[0_6px_48px_0_rgba(12,34,67,0.12)]
+              `}
+            >
+              <div className="rounded-[20px] bg-white p-6">
+                <header className="mb-7">
+                  <label className="mb-7 flex gap-[6px] text-[16px] font-medium">
+                    Plus
+                    {paymentPlan === 'monthly' && (
+                      <span
+                        className={`
+                          flex h-[24px] items-center justify-center gap-1 rounded-[6px] border
+                          bg-[rgba(39,_79,_238,_0.08)] p-0 px-2 text-xs text-[#274FEE]
+                        `}
+                      >
+                        <img src="/images/univer-workspace/hot-icon.svg" />
+                        Limited-Time Offer
+                      </span>
+                    )}
+                  </label>
+                  <span className="flex text-[40px] font-semibold leading-none">
+                    <span className="mr-[6px]">
+                      $
+                      {paymentPlan === 'yearly' ? '179' : '7.99'}
+                    </span>
+                    {paymentPlan === 'yearly'
+                      ? (
+                          <small className="self-end text-base font-normal text-[#474D57]">Per annum</small>
+                        )
+                      : (
+                          <small className="text-sm font-normal text-[#474D57]">
+                            $7.99 first month, $20 per month starting next month
+                          </small>
+                        )}
+                  </span>
+                  <p className="mb-5 mt-3">Best for professionals.</p>
+                  <a
+                    className={`
+                      flex h-[40px] items-center justify-center gap-2 rounded-3xl
+                      bg-[linear-gradient(121deg,#0048FF_18.89%,#0C81ED_39.58%,#029DCE_59.87%,#00BBB0_74.37%,#00C5A8_81.94%)]
+                      text-white
+                    `}
+                    href="https://space.univer.ai/settings/plans"
+                  >
+                    <CrownSingle />
+                    Subscribe Now
+                  </a>
+                </header>
+
+                <div>
+                  <div className="mb-5">
+                    <label className="text-sm font-medium text-[#1E222B]">Web Table Extraction</label>
+                    <div className="text-[#7A7A7A]">
+                      <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                        <span>Extraction rate</span>
+                        <span className="text-[#0FCC65]">Unlimited</span>
+                      </div>
+                      <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                        <span>Server extraction history</span>
+                        <span><CheckMarkSingle style={{ color: '#0FCC65' }} /></span>
+                      </div>
+                      <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                        <span>Tabs per extraction</span>
+                        <span className="text-[#0FCC65]">Unlimited</span>
+                      </div>
+                      <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                        <span>Targeted extraction</span>
+                        <span><CheckMarkSingle style={{ color: '#0FCC65' }} /></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mb-5">
+                    <label className="text-sm font-medium text-[#1E222B]">Search</label>
+                    <div className="text-[#7A7A7A]">
+                      <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                        <span>Standard search rate</span>
+                        <span className="text-[#0FCC65]">Unlimited</span>
+                      </div>
+                      <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                        <span>Pro searchs rate</span>
+                        <span className="text-[#0FCC65]">200/Day</span>
+                      </div>
+                      <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                        <span>Available AI models</span>
+                        <span className="text-right text-[#0FCC65]">Select your perfered AI models</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mb-5">
+                    <label className="text-sm font-medium text-[#1E222B]">Drill-down Extraction</label>
+                    <div className="text-[#7A7A7A]">
+                      <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                        <span>Rows limited per extraction</span>
+                        <span className="text-[#0FCC65]">Unlimited</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mb-5">
+                    <label className="text-sm font-medium text-[#1E222B]">Workspace</label>
+                    <div className="text-[#7A7A7A]">
+                      <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                        <span>File management</span>
+                        <span><CheckMarkSingle style={{ color: '#0FCC65' }} /></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mb-5">
+                    <label className="text-sm font-medium text-[#1E222B]">File storage</label>
+                    <div className="text-[#7A7A7A]">
+                      <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                        <span>File retention time(Day)</span>
+                        <span className="text-[#0FCC65]">Unlimited</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-medium text-[#1E222B]">Univer Sheet Features</label>
+                    <div className="text-[#7A7A7A]">
+                      <div className="flex justify-between py-3 text-sm">
+                        <span>All features</span>
+                        <span><CheckMarkSingle style={{ color: '#0FCC65' }} /></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
-
-          <VideoList videos={videos} className="xl:pb-[100px]" />
-
         </section>
 
         {/* FAQ */}
@@ -323,15 +596,14 @@ export default function Page() {
             xl:mb-[100px] xl:max-w-[1200px] xl:px-8
           `}
         >
-          <Title type="univer" label="FAQ">
-            {/* {t('faq.title')} */}
-          </Title>
+          <Title type="univer" label="FAQ" />
 
-          <div className={`
-            mx-auto grid gap-6 pb-[32px]
+          <div
+            className={`
+              mx-auto grid gap-6 pb-[32px]
 
-            xl:w-[770px] xl:pb-[100px]
-          `}
+              xl:w-[770px] xl:pb-[100px]
+            `}
           >
             {faq.map((item, index) => (
               <div
@@ -368,7 +640,6 @@ export default function Page() {
             ))}
           </div>
         </section>
-
       </main>
     </>
   )

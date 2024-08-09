@@ -1,9 +1,14 @@
 import { Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import Sandbox from '@/components/Sandbox'
+
+import entryFile from './hyperlink/demo-1/index.txt'
 
 # HyperLink
 
 <BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC]} value={UniverTypes.SHEET} />
+
+<Sandbox entryFile={entryFile} />
 
 Insert hyperlinks, support click to jump to specified link, cell, or worksheet.
 

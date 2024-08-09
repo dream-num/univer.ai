@@ -1,9 +1,14 @@
 import { Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import Sandbox from '@/components/Sandbox'
+
+import entryFile from './hyperlink/demo-1/index.txt'
 
 # 超链接
 
 <BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC]} value={UniverTypes.SHEET} />
+
+<Sandbox entryFile={entryFile} />
 
 插入超链接，支持点击跳转到指定链接、单元格、工作表。
 

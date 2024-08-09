@@ -1,8 +1,13 @@
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import Sandbox from '@/components/Sandbox'
+
+import entryFile from './permission/demo-1/index.txt'
 
 # Permission
 
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+<Sandbox entryFile={entryFile} />
 
 It is used to handle the permission interception of the front-end scenario. When it is found that there is no corresponding operation permission, the code execution will be terminated and the user will be prompted for the missing permission. For example, you can set area protection in a selection area, and then set whether other collaborators can use editing, reading, copying, filtering, etc. within the protection range.
 
