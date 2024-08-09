@@ -1,0 +1,89 @@
+import { Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import Sandbox from '@/components/Sandbox'
+
+import entryFile from './hyperlink/demo-1/index.txt'
+
+# Pivot Table
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+{/* <Sandbox entryFile={entryFile} /> */}
+
+
+Pivot table is a powerful sheet data analysis tool that can quickly summarize, organize and analyze large amounts of data, thereby helping users discover patterns and trends in the data.
+
+- @univerjs-pro/pivot-engine provides the most basic data calculation capabilities for pivot tables. The npm package does not rely on any third-party plug-ins for its work.
+- @univerjs-pro/sheet-pivot assembles pivot-engine into universal sheet plugin to support table rendering, collaboration, formulas and other capabilities
+- @univerjs-pro/sheet-pivot-ui provides a basic drag-and-drop interface & filtering and other dialogs required for interaction
+
+## Feature ability  
+
+Since PivotTable is a very complex and large-scale function, we currently provide a beta version and will continue to iterate in the future.
+
+### Currently supported functions
+- 11 subtotal methods supported like excel
+- Dimension label filtering and sorting (using localCompare method)
+- tabular layout
+- expand / collapse
+- Supports multiple value dimensions, and can customize the area (value position) and position (value index) of the multi-value dimension.
+- rename field & format filed
+- auto refresh when data source range change and dirty formula witch ref the pivot table area
+
+### Planning features
+
+- Group , the date group & element group & number group
+- Filter & sort, support the value filter and value sort
+- Show data as, support all kind of show data as type in excel
+- Calc field & calc item
+- Enhance the layout ability, support compact & outline layout, merge items and blank rows.
+
+## Installation
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs-pro/pivot-engine @univerjs/sheet-pivot @univerjs/sheet-pivot-ui
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs-pro/pivot-engine @univerjs/sheet-pivot @univerjs/sheet-pivot-ui
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Import
+
+```typescript
+import '@univerjs-pro/sheets-pivot-ui/lib/index.css';
+
+import { UniverSheetsPivotTablePlugin } from '@univerjs-pro/sheets-pivot';
+import { UniverSheetsPivotTableUIPlugin } from '@univerjs-pro/sheets-pivot-ui';
+```
+
+## Internationalization
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core';
+import SheetsPivotTableZhCN from '@univerjs-pro/sheets-pivot/locale/zh-CN';
+import SheetsPivotTableUIZhCN from '@univerjs-pro/sheets-pivot-ui/locale/zh-CN';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: Tools.deepMerge(
+      SheetsPivotTableZhCN,
+      SheetsPivotTableUIZhCN
+    ),
+  },
+});
+```
+
+## Register
+
+```typescript
+univer.registerPlugin(UniverSheetsPivotTablePlugin);
+univer.registerPlugin(UniverSheetsPivotTableUIPlugin);
+```

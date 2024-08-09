@@ -7,6 +7,7 @@
   "find-replace": "查找 & 替换",
   "filter": "筛选",
   "sort": "排序",
+  "pivot-table": "数据透视表",
   "data-validation": "数据验证",
   "conditional-formatting": "条件格式",
   "permission": "权限控制",
