@@ -86,6 +86,12 @@ importers:
       '@univerjs/docs-drawing-ui':
         specifier: 0.2.6
         version: 0.2.6(ogzl57cnwxzpajnomdw6yd2zzm)
+      '@univerjs/docs-hyper-link-ui':
+        specifier: 0.2.6
+        version: 0.2.6(cjqmvzchsbsfp7zz5nqsz33pmu)
+      '@univerjs/docs-thread-comment-ui':
+        specifier: 0.2.6
+        version: 0.2.6(gkabn7yionvnwfuv35ojt3sxca)
       '@univerjs/docs-ui':
         specifier: 0.2.6
         version: 0.2.6(52nldkxqcuued6o32d4akruisq)
@@ -2207,10 +2213,37 @@ packages:
       '@univerjs/drawing': 0.2.6
       rxjs: '>=7.0.0'
 
+  '@univerjs/docs-hyper-link-ui@0.2.6':
+    resolution: {integrity: sha512-zUevMpdnuDrmRIjiCQ/T5mzrCTeFFu6COdPU93qyySf5zuxuUmHkQif4hkKdsIMOMGamurCFUTigGpM4ZVNbKw==}
+    peerDependencies:
+      '@univerjs/core': 0.2.6
+      '@univerjs/design': 0.2.6
+      '@univerjs/docs': 0.2.6
+      '@univerjs/docs-hyper-link': 0.2.6
+      '@univerjs/docs-ui': 0.2.6
+      '@univerjs/engine-render': 0.2.6
+      '@univerjs/ui': 0.2.6
+      clsx: '>=2.0.0'
+      react: ^16.9.0 || ^17.0.0 || ^18.0.0
+      rxjs: '>=7.0.0'
+
   '@univerjs/docs-hyper-link@0.2.6':
     resolution: {integrity: sha512-dqxGJQB1g3jCM1Faak2qThWuns6YZpfzRZRHz5kUhW18ADzIhBsop22URqCwSmArRGR6QpNt095/IFgFYFe5bg==}
     peerDependencies:
       '@univerjs/core': 0.2.6
+      rxjs: '>=7.0.0'
+
+  '@univerjs/docs-thread-comment-ui@0.2.6':
+    resolution: {integrity: sha512-aJth+b+fdSDs5E3zsMpXi8JyBUq8R3j4Fo61l5GTuNEybjM/0edYmkIKmtIYSx6WQ0nH3ZzuhdAih5EOBy6HxA==}
+    peerDependencies:
+      '@univerjs/core': 0.2.6
+      '@univerjs/docs': 0.2.6
+      '@univerjs/docs-ui': 0.2.6
+      '@univerjs/engine-render': 0.2.6
+      '@univerjs/thread-comment': 0.2.6
+      '@univerjs/thread-comment-ui': 0.2.6
+      '@univerjs/ui': 0.2.6
+      react: ^16.9.0 || ^17.0.0 || ^18.0.0
       rxjs: '>=7.0.0'
 
   '@univerjs/docs-ui@0.2.6':
@@ -8917,10 +8950,41 @@ snapshots:
       '@univerjs/drawing': 0.2.6(@univerjs/core@0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)
       rxjs: 7.8.1
 
+  '@univerjs/docs-hyper-link-ui@0.2.6(cjqmvzchsbsfp7zz5nqsz33pmu)':
+    dependencies:
+      '@univerjs/core': 0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1)
+      '@univerjs/design': 0.2.6(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/docs': 0.2.6(@univerjs/core@0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-render@0.2.6(@univerjs/core@0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
+      '@univerjs/docs-hyper-link': 0.2.6(@univerjs/core@0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
+      '@univerjs/docs-ui': 0.2.6(52nldkxqcuued6o32d4akruisq)
+      '@univerjs/engine-render': 0.2.6(@univerjs/core@0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
+      '@univerjs/icons': 0.1.72(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/ui': 0.2.6(@univerjs/core@0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.6(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.6(@univerjs/core@0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.6(@univerjs/core@0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.6(@univerjs/core@0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4)
+      clsx: 2.1.1
+      react: 18.3.1
+      rxjs: 7.8.1
+    transitivePeerDependencies:
+      - react-dom
+
   '@univerjs/docs-hyper-link@0.2.6(@univerjs/core@0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)':
     dependencies:
       '@univerjs/core': 0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1)
       rxjs: 7.8.1
+
+  '@univerjs/docs-thread-comment-ui@0.2.6(gkabn7yionvnwfuv35ojt3sxca)':
+    dependencies:
+      '@univerjs/core': 0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1)
+      '@univerjs/docs': 0.2.6(@univerjs/core@0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-render@0.2.6(@univerjs/core@0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
+      '@univerjs/docs-ui': 0.2.6(52nldkxqcuued6o32d4akruisq)
+      '@univerjs/engine-render': 0.2.6(@univerjs/core@0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
+      '@univerjs/icons': 0.1.72(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/thread-comment': 0.2.6(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
+      '@univerjs/thread-comment-ui': 0.2.6(stabcjutbjlwlh4puu6ajyrl74)
+      '@univerjs/ui': 0.2.6(@univerjs/core@0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.6(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.6(@univerjs/core@0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.6(@univerjs/core@0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.6(@univerjs/core@0.2.6(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4)
+      react: 18.3.1
+      rxjs: 7.8.1
+    transitivePeerDependencies:
+      - react-dom
 
   '@univerjs/docs-ui@0.2.6(52nldkxqcuued6o32d4akruisq)':
     dependencies:
