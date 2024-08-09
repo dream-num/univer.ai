@@ -1,0 +1,90 @@
+import { Callout, Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import Sandbox from '@/components/Sandbox'
+
+import entryFile from './hyperlink/demo-1/index.txt'
+
+# 数据透视表
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+{/* <Sandbox entryFile={entryFile} /> */}
+
+数据透视表是一种强大的sheet数据分析工具,它能够快速汇总、组织和分析大量数据，从而帮助用户发现数据中的模式和趋势。
+
+- @univerjs-pro/pivot-engine 提供了数据透视表最基本的数据计算能力，该插件的工作不依赖任何第三方的插件
+- @univerjs-pro/sheet-pivot 将 pivot-engine 组装成 univer sheet plugin 以便支持表格的渲染，协同，公式等能力
+- @univerjs-pro/sheet-pivot-ui 提供一个最基本的拖拽操作界面 & 筛选以及其他交互所需要的 Dialog
+
+## 功能 
+
+<Callout>
+由于数据透视表是很复杂的大型功能，目前我们提供 beta 版本，后续会继续迭代完善。
+</Callout>
+
+### 现阶段支持功能
+- 11 种 Excel 支持的汇总方式
+- 维度标签筛选，排序（使用 localCompare 方式）
+- 表格视图
+- 展开合并
+- 支持多个值维度，同时可以定制多值维度所在区域（value position）和位置（value index）
+- 支持维度重命名，维度设置 format
+- 自动响应数据源变化，感知公式变化
+
+### 计划中的功能
+
+- 分组，支持日期分组，数字分组以及元素分组
+- 筛选排序，支持值筛选排序，支持条件格式
+- 值显示方式，支持完整的 11 种值显示方式
+- 计算字段& 计算项
+- 增强排版能力，支持紧促视图和大纲视图，合并项和空行等
+
+## 安装
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs-pro/pivot-engine @univerjs/sheet-pivot @univerjs/sheet-pivot-ui
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs-pro/pivot-engine @univerjs/sheet-pivot @univerjs/sheet-pivot-ui
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## 引入
+
+```typescript
+import '@univerjs-pro/sheets-pivot-ui/lib/index.css';
+
+import { UniverSheetsPivotTablePlugin } from '@univerjs-pro/sheets-pivot';
+import { UniverSheetsPivotTableUIPlugin } from '@univerjs-pro/sheets-pivot-ui';
+```
+
+## 国际化
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core';
+import SheetsPivotTableZhCN from '@univerjs-pro/sheets-pivot/locale/zh-CN';
+import SheetsPivotTableUIZhCN from '@univerjs-pro/sheets-pivot-ui/locale/zh-CN';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: Tools.deepMerge(
+      SheetsPivotTableZhCN,
+      SheetsPivotTableUIZhCN
+    ),
+  },
+});
+```
+
+## 注册
+
+```typescript
+univer.registerPlugin(UniverSheetsPivotTablePlugin);
+univer.registerPlugin(UniverSheetsPivotTableUIPlugin);
+```
