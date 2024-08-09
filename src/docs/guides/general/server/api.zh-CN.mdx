@@ -13,11 +13,11 @@ _**规则**_
 
 参数:
 
-| 字段    | 类型      | 描述                                        |
-| ------- | --------- | ------------------------------------------- |
-| type    | * enum(int) | 1（doc）， 2（sheet）<br/> 路径和请求体参数 |
-| name    | * string    | 文档名称                                    |
-| creator | * string    | 创建者id                                    |
+| 字段    | 类型                   | 描述                                        |
+| ------- | ---------------------- | ------------------------------------------- |
+| type    | enum(int)<sup> *</sup> | 1（doc）， 2（sheet）<br/> 路径和请求体参数 |
+| name    | string<sup> *</sup>    | 文档名称                                    |
+| creator | string<sup> *</sup>    | 创建者id                                    |
 
 
 返回值:
@@ -44,10 +44,10 @@ curl http://localhost:8000/universer-api/snapshot/{type}/unit/-/create \
 
 参数:
 
-| 字段       | 类型        | 描述                                        |
-| ---------- | ----------- | ------------------------------------------- |
-| type       | * enum(int) | 1（doc）， 2（sheet）<br/> 路径和请求体参数 |
-| nextCursor | string      | 分页的下一页游标                            |
+| 字段       | 类型                   | 描述                                        |
+| ---------- | ---------------------- | ------------------------------------------- |
+| type       | enum(int)<sup> *</sup> | 1（doc）， 2（sheet）<br/> 路径和请求体参数 |
+| nextCursor | string                 | 分页的下一页游标                            |
 
 返回值：
 
@@ -74,9 +74,9 @@ curl -X GET 'http://localhost:8000/universer-api/snapshot/1/units?nextCursor=100
 
 参数：
 
-| 字段    | 类型          | 描述         |
-| ------- | ------------- | ------------ |
-| unitIds | array[string] | 文档 id 数组 |
+| 字段    | 类型                       | 描述         |
+| ------- | -------------------------- | ------------ |
+| unitIds | array[string]<sup> *</sup> | 文档 id 数组 |
 
 返回值：
 
@@ -101,10 +101,10 @@ curl -X DELETE 'http://localhost:8000/universer-api/snapshot/-/units?unitIds=1&u
 
 参数：
 
-| 字段 | 类型        | 描述                         |
-| ---- | ----------- | ---------------------------- |
-| size | * int       | 文件大小（byte），query 参数 |
-| file | * Form.file | HTML form 上传文件           |
+| 字段 | 类型                   | 描述                         |
+| ---- | ---------------------- | ---------------------------- |
+| size | int<sup> *</sup>       | 文件大小（byte），query 参数 |
+| file | Form.file<sup> *</sup> | HTML form 上传文件           |
 
 返回值：
 
@@ -128,11 +128,11 @@ curl 'http://localhost:8000/universer-api/stream/file/upload?size=19261' \
 
 参数：
 
-| 字段       | 类型        | 描述                  |
-| ---------- | ----------- | --------------------- |
-| type       | * enum(int) | 1（doc）， 2（sheet） |
-| outputType | * enum(int) | 2（json）             |
-| fileID     | * string    | 上传的文件id          |
+| 字段       | 类型                   | 描述                  |
+| ---------- | ---------------------- | --------------------- |
+| type       | enum(int)<sup> *</sup> | 1（doc）， 2（sheet） |
+| outputType | enum(int)<sup> *</sup> | 2（json）             |
+| fileID     | string<sup> *</sup>    | 上传的文件id          |
 
 返回值：
 
@@ -159,10 +159,10 @@ curl 'http://localhost:8000/universer-api/exchange/2/import' \
 
 参数：
 
-| 字段   | 类型        | 描述                  |
-| ------ | ----------- | --------------------- |
-| type   | * enum(int) | 1（doc）， 2（sheet） |
-| unitID | * string    | 文档id                |
+| 字段   | 类型                   | 描述                  |
+| ------ | ---------------------- | --------------------- |
+| type   | enum(int)<sup> *</sup> | 1（doc）， 2（sheet） |
+| unitID | string<sup> *</sup>    | 文档id                |
 
 返回值：
 
@@ -189,9 +189,9 @@ curl 'http://localhost:8000/universer-api/exchange/2/export' \
 
 参数：
 
-| 字段   | 类型     | 描述        |
-| ------ | -------- | ----------- |
-| taskID | * string | 转换任务 id |
+| 字段   | 类型                | 描述        |
+| ------ | ------------------- | ----------- |
+| taskID | string<sup> *</sup> | 转换任务 id |
 
 返回值：
 
@@ -221,9 +221,9 @@ curl -X GET 'http://localhost:8000/universer-api/exchange/task/123'
 
 参数：
 
-| 字段   | 类型     | 描述                  |
-| ------ | -------- | --------------------- |
-| fileID | * string | 转换任务的结果文件 id |
+| 字段   | 类型                | 描述                  |
+| ------ | ------------------- | --------------------- |
+| fileID | string<sup> *</sup> | 转换任务的结果文件 id |
 
 返回值：
 

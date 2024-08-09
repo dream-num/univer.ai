@@ -11,11 +11,11 @@ _**rule**_
 
 parameters:
 
-| name    | type        | description                              |
-| ------- | ----------- | ---------------------------------------- |
-| type    | * enum(int) | 1(doc), 2(sheet) <br/> pathinfo and body |
-| name    | * string    | Unit name                       |
-| creator | * string    | The creator user id                      |
+| name    | type                    | description                              |
+| ------- | ----------------------- | ---------------------------------------- |
+| type    | enum(int)<sup> *</sup> | 1(doc), 2(sheet) <br/> pathinfo and body |
+| name    | string   <sup> *</sup> | Unit name                                |
+| creator | string   <sup> *</sup> | The creator user id                      |
 
 response:
 
@@ -41,10 +41,10 @@ curl http://localhost:8000/universer-api/snapshot/2/unit/-/create \
 
 parameters:
 
-| name       | type        | description                           |
-| ---------- | ----------- | ------------------------------------- |
-| type       | * enum(int) | 1(doc), 2(sheet) <br/> pathinfo param |
-| nextCursor | string      | The cursor for next page              |
+| name       | type                   | description                           |
+| ---------- | ---------------------- | ------------------------------------- |
+| type       | enum(int)<sup> *</sup> | 1(doc), 2(sheet) <br/> pathinfo param |
+| nextCursor | string                 | The cursor for next page              |
 
 response:
 
@@ -71,9 +71,9 @@ curl -X GET 'http://localhost:8000/universer-api/snapshot/1/units?nextCursor=100
 
 parameters:
 
-| name    | type          | description       |
-| ------- | ------------- | ----------------- |
-| unitIds | array[string] | Unit ids |
+| name    | type                       | description |
+| ------- | -------------------------- | ----------- |
+| unitIds | array[string]<sup> *</sup> | Unit ids    |
 
 response:
 
@@ -98,10 +98,10 @@ curl -X DELETE 'http://localhost:8000/universer-api/snapshot/-/units?unitIds=1&u
 
 parameters:
 
-| name | type        | description                       |
-| ---- | ----------- | --------------------------------- |
-| size | * int       | File size (byte), query parameter |
-| file | * Form.file | Use HTLM form to upload file      |
+| name | type                   | description                       |
+| ---- | ---------------------- | --------------------------------- |
+| size | int<sup> *</sup>       | File size (byte), query parameter |
+| file | Form.file<sup> *</sup> | Use HTLM form to upload file      |
 
 response:
 
@@ -125,11 +125,11 @@ curl 'http://localhost:8000/universer-api/stream/file/upload?size=19261' \
 
 parameters:
 
-| name       | type        | description        |
-| ---------- | ----------- | ------------------ |
-| type       | * enum(int) | 1(doc), 2(sheet)   |
-| outputType | * enum(int) | 2(json)            |
-| fileID     | * string    | The upload file id |
+| name       | type                   | description        |
+| ---------- | ---------------------- | ------------------ |
+| type       | enum(int)<sup> *</sup> | 1(doc), 2(sheet)   |
+| outputType | enum(int)<sup> *</sup> | 2(json)            |
+| fileID     | string<sup> *</sup> | The upload file id |
 
 response:
 
@@ -156,10 +156,10 @@ curl 'http://localhost:8000/universer-api/exchange/2/import' \
 
 parameters:
 
-| name   | type        | description          |
-| ------ | ----------- | -------------------- |
-| type   | * enum(int) | 1(doc), 2(sheet)     |
-| unitID | * string    | The Unit id |
+| name   | type                   | description      |
+| ------ | ---------------------- | ---------------- |
+| type   | enum(int)<sup> *</sup> | 1(doc), 2(sheet) |
+| unitID | string<sup> *</sup>    | The Unit id      |
 
 response:
 
@@ -186,9 +186,9 @@ curl 'http://localhost:8000/universer-api/exchange/2/export' \
 
 parameters:
 
-| name   | type     | description                  |
-| ------ | -------- | ---------------------------- |
-| taskID | * string | The import or export task id |
+| name   | type                | description                  |
+| ------ | ------------------- | ---------------------------- |
+| taskID | string<sup> *</sup> | The import or export task id |
 
 response:
 
@@ -218,9 +218,9 @@ curl -X GET 'http://localhost:8000/universer-api/exchange/task/123'
 
 parameters:
 
-| name   | type     | description                                        |
-| ------ | -------- | -------------------------------------------------- |
-| fileID | * string | The exchange result file id which need to download |
+| name   | type                | description                                        |
+| ------ | ------------------- | -------------------------------------------------- |
+| fileID | string<sup> *</sup> | The exchange result file id which need to download |
 
 response:
 
