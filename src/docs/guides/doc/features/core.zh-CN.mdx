@@ -6,7 +6,20 @@ import VersionBadge from '@/components/VersionBadge'
 
 <BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC]} value={UniverTypes.DOC} />
 
-核心功能是电子文档的基础功能，包括 Univer Doc 的核心功能，如浏览文档、编辑文档等。
+Core 包及 Doc 相关基础包提供 Univer Doc 所需的基本能力和核心功能，如 engine-render 提供了 Doc 文档的排版和渲染，engine-formula 提供了公式的计算能力，ui 提供了基础的 UI 组件，design 提供了基础的样式设计，而 doc 和 doc-ui 则实现了 Univer Doc 的大部分功能。
+
+## 特性
+
+目前 Univer Doc 的核心功能主要包括：
+
+- **文档渲染**：支持 Univer 文档的渲染和光标、选区的绘制。
+- **文档排版**：支持全文排版，包括段落设置，段前后间距、段落对齐、缩进和悬挂等，也包括段落中的排版能力，标点挤压、标点悬挂、字偶间距、西文断词等。
+- **公式计算**：支持 Univer 公式的添加和计算（开发中）。
+- **表格能力**：支持插入基本表格和表格的编辑，新增、删除行类操作，编辑单元格等。
+- **文档风格**：Univer Doc 不仅支持类似 word 的传统文档（包含分页、页眉页脚等），也支持类似 Notion 的现代文档风格，在现代文档风格中，不带分页，并且支持插入官方及第三方 block 插件（计划中）。
+- **页眉页脚**：支持插入页眉页脚和编辑页眉页脚内容，可以区分首页及奇偶页等，仅**传统文档**支持。
+- **列表功能**：支持有序、无序列表和任务列表的插入和编辑，支持列表的缩进和反缩进等。
+- **插件系统**：支持插件系统，可以自定义插件，如公式插件、图片插件、图表插件等， 这也是 Univer 核心架构能力之一。
 
 ## 安装
 
@@ -123,3 +136,17 @@ univer.registerPlugin(UniverUIPlugin, {
 * `toolbar` - 是否显示头部工具栏。 <VersionBadge version="0.2.0+" />
 * `footer` - 是否显示底部。
 * `contextMenu` - 是否显示右键菜单。
+
+## 注意事项
+
+- 页眉页脚仅**传统文档支持**，所以需要在 `documentFlavor` 设置为 `DocumentFlavor.TRADITIONAL`。如下
+
+```typescript
+const univerDocData = {
+  // ...
+  documentStyle: {
+    // ...
+    documentFlavor: DocumentFlavor.TRADITIONAL,
+  },
+}
+```
