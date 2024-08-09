@@ -6,7 +6,20 @@ import VersionBadge from '@/components/VersionBadge'
 
 <BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC]} value={UniverTypes.DOC} />
 
-Core packages implement the basic functions of the document, including the core functions of Univer Doc, such as browsing documents, editing documents, etc.
+The Core package and Doc-related Base packages provide the basic capabilities and core functions required by Univer Doc. For example, engine-render provides the typesetting and rendering of Doc documents, engine-formula provides the computing power of formulas, UI provides basic UI components, design provides basic style design, and doc and doc-ui implement most of the functions of Univer Doc.
+
+## Features
+
+At present, the core functions of Univer Doc mainly include:
+
+- Document Rendering: Supports rendering of Univer documents and drawing of cursors and selections.
+- **Document typesetting**: Support full-text typesetting, including paragraph setting, paragraph spacing, paragraph alignment, indentation and hanging etc., as well as the ability to typeset in paragraphs, punctuation extrusion, punctuation hanging, puppet spacing, Western word hyphenation, etc.
+- **Formula Calculation**: Supports the addition and calculation of Univer formulas (in development).
+- **Table capability**: Support inserting basic tables and editing tables, adding and deleting row operations, editing cells, etc.
+- **Document Flavor**: Univer Doc not only supports traditional documents like word (including pagination, headers, footers, etc.), but also supports modern document styles like Notion, in which there is no pagination, and supports the insertion of official and third-party block plug-ins (planned).
+- **Header and footer**: Support inserting header footer and editing header footer content, can distinguish between Home and odd and even pages, etc., only **Traditional Documents** support.
+- **List Function**: Support the insertion and editing of order, bullet lists and task lists, support the indentation and indentation of lists, etc.
+- **Plug-in system**: Support plug-in system, you can customize plug-ins, such as formula plug-ins, picture plug-ins, chart plug-ins, etc., which is also one of Univer's core architecture capabilities.
 
 ## Installation
 
@@ -125,3 +138,17 @@ univer.registerPlugin(UniverUIPlugin, {
 * `toolbar` - Whether to display the header toolbar. <VersionBadge version="0.2.0+" />
 * `footer` - Whether to display the footer.
 * `contextMenu` - Whether to display the right-click menu.
+
+## Notes
+
+- Header and footer are only supported for traditional documents, so you need to set `documentFlavor` to `DocumentFlavor.TRADITIONAL`. as follows:
+
+```typescript
+const univerDocData = {
+  // ...
+  documentStyle: {
+    // ...
+    documentFlavor: DocumentFlavor.TRADITIONAL,
+  },
+}
+```
