@@ -1,5 +1,5 @@
 'use client'
-
+import '@univerjs/thread-comment-ui/lib/index.css'
 import { LocaleType, Univer, UniverInstanceType, UserManagerService } from '@univerjs/core'
 import { defaultTheme } from '@univerjs/design'
 import { UniverDocsPlugin } from '@univerjs/docs'
@@ -54,6 +54,7 @@ export default function App(props: IProps) {
 
     // Thread Comment Plugin
     univer.registerPlugin(UniverDocsThreadCommentUIPlugin)
+    // univer.registerPlugin(UniverDocsMentionUIPlugin);
 
     // create univer sheet instance
     univer.createUnit(UniverInstanceType.UNIVER_DOC, ALL_FEATURES_DOCUMENT_DATA)
