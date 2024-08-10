@@ -1,0 +1,35 @@
+import Image from '@/components/Image'
+import importImg from './import-and-export/import.png'
+import exportImg from './import-and-export/export.png'
+
+# Import And Export
+
+## Import flowchart
+
+1. Upload file to object storage, get `fileID` in response.
+2. Call import api with `fileID` parameter, get `taskID` in response.
+3. Polling to get async exchange task result, get `status` in response:
+
+    - `pending`: need to continue polling againt.
+    - `done`: exchange success, can get `import.jsonID` in reponse.
+    - `failed`: exchange failed, can get `error.message` for infomation.
+
+4. Use `import.jsonID` to get exchange result by call get file api.
+
+<Image src={importImg} alt="import" width={350} />
+
+
+## Export flowchart
+
+1. Call export api with `unitID` parameter, get `taskID` in response.
+2. Polling to get async exchange task result, get `status` in response:
+    - `pending`: need to continue polling againt.
+    - `done`: exchange success, can get `export.fileID` in reponse.
+    - `failed`: exchange failed, can get `error.message` for infomation.
+3. Use `export.fileID` to get exchange result by call get file api.
+
+<Image src={exportImg} alt="export" width={350} />
+
+## Api
+
+see [Univer server API](/guides/sheet/server/api)

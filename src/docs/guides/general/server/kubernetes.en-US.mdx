@@ -12,7 +12,7 @@ Kubernetes is a powerful open-source platform for orchestrating containerized ap
 Deploying Univer backend services on Kubernetes involves several key components:
 
 - **Kubernetes Cluster**: The environment where your app resides.
-- **Helm**: The deployment and management tool for apps on Kubernetes.
+- **Helm**: The deployment and management tool for apps on Kubernetes. Require Helm 3.
 - **Database and Messaging**: PostgreSQL and RabbitMQ services.
 
 ## Installing Helm
@@ -65,3 +65,8 @@ helm version
 If your service isn't launching, verify the status of your Kubernetes Pods and consult the logs for clues.
 
 If you're still having issues, feel free to <a class="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]" href="mailto:developer@univer.ai?subject=[Univer Services]">contact us</a> for assistance.
+
+### Can not download oci ?
+
+The `helm` require version >= 3, if version is less than 3.8, it should set enviroment `export HELM_EXPERIMENTAL_OCI=1
+` to open OCI feature. See [helm document](https://helm.sh/docs/topics/registries/).

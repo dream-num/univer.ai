@@ -1,0 +1,33 @@
+import Image from '@/components/Image'
+import importImg from './import-and-export/import.png'
+import exportImg from './import-and-export/export.png'
+
+# 导入导出
+
+## 导入流程
+
+1. 上传文件到对象存储，获取 `fileID` 返回值。
+2. 用 `fileID` 参数调用导入接口，获取 `taskID` 返回值。
+3. 轮询获取转换结果，根据 `status` 返回值处理：
+    - `pending`：需要接着轮询。
+    - `done`：转换成功，得到 `import.jsonID` 返回值。
+    - `failed`：转换失败，根据 `error.message` 获取错误信息。
+4. 使用 `import.jsonID` 调获取文件接口下载转换结果。
+
+<Image src={importImg} alt="import" width={350} />
+
+
+## 导出流程
+
+1. 用 `unitID` 参数调用导出接口，获取 `taskID` 返回值。
+2. 轮询获取转换结果，根据 `status` 返回值处理：
+    - `pending`：需要接着轮询。
+    - `done`：转换成功，得到 `export.fileID` 返回值。
+    - `failed`： 转换失败，根据 `error.message` 获取错误信息。
+3. 使用 `export.fileID` 调获取文件接口下载转换结果。
+
+<Image src={exportImg} alt="export" width={350} />
+
+## Api
+
+查看 [Univer server API 定义](/guides/sheet/server/api)
