@@ -1,4 +1,4 @@
-import { Callout } from 'nextra/components'
+import { Callout, Steps } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 # Extending Commands
@@ -11,49 +11,51 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 ## Create a New Command
 
-To create a new command, two steps are required:
+Creating a new command is the most common way to extend Univer. By creating a new command, you can implement various business logic. The following are the steps to create a new command:
 
-First step is to define an object that implements `ICommand` interface:
+<Steps>
+  ### Create an Object Implementing the `ICommand` Interface
 
-```typescript
-import { CommandType, ICommand } from '@univerjs/core'
+  ```typescript
+  import { CommandType, ICommand } from '@univerjs/core'
 
-export interface IYourCommandInterface {
-  // Your command's param's interface.
-}
-
-export const YourCommand: ICommand = {
-  name: 'your-command',
-  type: CommandType.COMMAND,
-  handler: async (accessor: IAccessor, params?: IYourCommandInterface) => {
-    // Implement your business logic here.
+  export interface IYourCommandInterface {
+    // Your command's param's interface.
   }
-}
-```
 
-Commands require the declaration of the following attributes:
-
-1. `name`: The command's name, which must be unique. It is suggested to name commands in the format of `domain:type:meaning`, such as `sheet.command.copy` and `sheet.command.paste`.
-2. `type`: The command's type.
-3. `handler`: The command's execution logic, which accepts a single `IAccessor` object and the command parameters. The `IAccessor` object allows access to Univer's dependency injection system.
-
-Commands may receive parameters, which must be grouped into an object. The interface of the parameter is determined by your business logic. Of course, a command can also not receive any parameters, in which case the second parameter of handler is undefined.
-
-The second step is to register this command to the `ICommandService`:
-
-```typescript
-import { Disposable, ICommandService } from '@univerjs/core'
-
-export class YourController extends Disposable {
-  constructor(
-        @ICommandService private readonly _commandService: ICommandService
-  ) {
-    this.disposeWithMe(this._commandService.registerCommand(YourCommand))
+  export const YourCommand: ICommand = {
+    name: 'your-command',
+    type: CommandType.COMMAND,
+    handler: async (accessor: IAccessor, params?: IYourCommandInterface) => {
+      // Implement your business logic here.
+    }
   }
-}
-```
+  ```
 
-After declaring the required attributes, the command can be executed using the `ICommandService`. In real-world scenarios, it's common to trigger commands via the user interface (UI).
+  Commands require the declaration of the following attributes:
+
+  1. `name`: The command's name, which must be unique. It is suggested to name commands in the format of `domain:type:meaning`, such as `sheet.command.copy` and `sheet.command.paste`.
+  2. `type`: The command's type.
+  3. `handler`: The command's execution logic, which accepts a single `IAccessor` object and the command parameters. The `IAccessor` object allows access to Univer's dependency injection system.
+
+  Commands may receive parameters, which must be grouped into an object. The interface of the parameter is determined by your business logic. Of course, a command can also not receive any parameters, in which case the second parameter of handler is undefined.
+
+  ### Register the Command with the Command Service
+
+  ```typescript
+  import { Disposable, ICommandService } from '@univerjs/core'
+
+  export class YourController extends Disposable {
+    constructor(
+      @ICommandService private readonly _commandService: ICommandService
+    ) {
+      this.disposeWithMe(this._commandService.registerCommand(YourCommand))
+    }
+  }
+  ```
+
+  After declaring the required attributes, the command can be executed using the `ICommandService`. In real-world scenarios, it's common to trigger commands via the user interface (UI).
+</Steps>
 
 ### Undo / Redo
 
@@ -104,7 +106,7 @@ import { ISheetClipboardService, ISheetClipboardHook } from '@univerjs/sheets-ui
 
 export class YourController extends Disposable {
   constructor(
-        @ISheetClipboardService private readonly _sheetClipboardService: ISheetClipboardService
+    @ISheetClipboardService private readonly _sheetClipboardService: ISheetClipboardService
   ) {
     super()
 
@@ -283,7 +285,7 @@ import { IAutoFillService, ISheetAutoFillHook } from '@univerjs/sheets-ui'
  
 export class YourController extends Disposable {
   constructor(
-        @IAutoFillService private readonly _autoFillService: IAutoFillService,
+    @IAutoFillService private readonly _autoFillService: IAutoFillService,
   ) {
     super()
     

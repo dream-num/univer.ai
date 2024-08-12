@@ -1,14 +1,14 @@
 # Univer server API 定义
 
-
 _**规则**_
+
 1. 带有 `*` 符号的参数表示是必须的。
 2. 带有 `.` 符号的返回值表示是 json 对象的属性。
 3. `GET` 和 `DELETE` 的请求参数只能出现在路径和 query 里。
 4. `POST`， `PUT` 和 `PATCH` 请求一般需要 `content-type: application/json` 请求头。
 
-
 ## 创建文档
+
 `POST /universer-api/snapshot/{type}/unit/-/create`
 
 参数:
@@ -19,7 +19,6 @@ _**规则**_
 | name    | string<sup> *</sup>    | 文档名称                                    |
 | creator | string<sup> *</sup>    | 创建者id                                    |
 
-
 返回值:
 
 | 字段          | 类型      | 描述      |
@@ -28,8 +27,9 @@ _**规则**_
 | error.message | string    | 失败信息  |
 | unitID        | string    | 文档id    |
 
-例子：
-```shell
+例：
+
+```
 curl http://localhost:8000/universer-api/snapshot/{type}/unit/-/create \
   -X POST \
   -H 'Content-Type: application/json' \
@@ -40,6 +40,7 @@ curl http://localhost:8000/universer-api/snapshot/{type}/unit/-/create \
 ```
 
 ## 获取文档列表
+
 `GET /universer-api/snapshot/{type}/units`
 
 参数:
@@ -61,8 +62,9 @@ curl http://localhost:8000/universer-api/snapshot/{type}/unit/-/create \
 | .type         | enum(int)     | 1（doc）， 2（sheet）                    |
 | nextCursor    | string        | 分页的下一页游标，当为空时表示为最后一页 |
 
-例子：
-```shell
+例：
+
+```
 curl -X GET 'http://localhost:8000/universer-api/snapshot/1/units?nextCursor=100'
 
 # response
@@ -70,6 +72,7 @@ curl -X GET 'http://localhost:8000/universer-api/snapshot/1/units?nextCursor=100
 ```
 
 ## 删除文档
+
 `DELETE /universer-api/snapshot/-/units`
 
 参数：
@@ -85,8 +88,9 @@ curl -X GET 'http://localhost:8000/universer-api/snapshot/1/units?nextCursor=100
 | error.code    | enum(int) | 1（成功） |
 | error.message | string    | 失败信息  |
 
-例子：
-```shell
+例：
+
+```
 curl -X DELETE 'http://localhost:8000/universer-api/snapshot/-/units?unitIds=1&unitIds=2'
 
 # response
@@ -94,6 +98,7 @@ curl -X DELETE 'http://localhost:8000/universer-api/snapshot/-/units?unitIds=1&u
 ```
 
 ## 上传文件
+
 `POST /universer-api/stream/file/upload`
 
 1. 请求体是 HTML form 结构，所以请求头需要一个类似的： `content-type: multipart/form-data;boundary=---------------------------163876677831359887162093904846`。
@@ -112,8 +117,9 @@ curl -X DELETE 'http://localhost:8000/universer-api/snapshot/-/units?unitIds=1&u
 | ------ | ------ | ---------------------------------- |
 | FileId | string | 文件id，用于后面请求比如导入和导出 |
 
-例子：
-```shell
+例：
+
+```
 curl 'http://localhost:8000/universer-api/stream/file/upload?size=19261' \
   -X POST \
   -H 'Content-Type: multipart/form-data; boundary=---------------------------163876677831359887162093904846' \
@@ -124,6 +130,7 @@ curl 'http://localhost:8000/universer-api/stream/file/upload?size=19261' \
 ```
 
 ## 导入
+
 `POST /universer-api/exchange/{type}/import`
 
 参数：
@@ -142,8 +149,9 @@ curl 'http://localhost:8000/universer-api/stream/file/upload?size=19261' \
 | error.message | string    | 失败信息                                                      |
 | taskID        | string    | 转换任务 id，导入导出是异步的，使用该 id 轮询接口获取转换结果 |
 
-例子：
-```shell
+例：
+
+```
 curl 'http://localhost:8000/universer-api/exchange/2/import' \
   -X POST \
   -H 'Content-Type: application/json' \
@@ -155,6 +163,7 @@ curl 'http://localhost:8000/universer-api/exchange/2/import' \
 ```
 
 ## 导出
+
 `POST /universer-api/exchange/{type}/export`
 
 参数：
@@ -172,8 +181,9 @@ curl 'http://localhost:8000/universer-api/exchange/2/import' \
 | error.message | string    | 失败信息                                                      |
 | taskID        | string    | 转换任务 id，导入导出是异步的，使用该 id 轮询接口获取转换结果 |
 
-例子：
-```shell
+例：
+
+```
 curl 'http://localhost:8000/universer-api/exchange/2/export' \
   -X POST \
   -H 'Content-Type: application/json' \
@@ -185,6 +195,7 @@ curl 'http://localhost:8000/universer-api/exchange/2/export' \
 ```
 
 ## 获取转换结果
+
 `GET /universer-api/exchange/task/{taskID}`
 
 参数：
@@ -203,8 +214,9 @@ curl 'http://localhost:8000/universer-api/exchange/2/export' \
 | export.fileID | string       | 导出转换结果的文件 id，用于后面接口获取文件内容 |
 | import.jsonID | string       | 导入转换结果的文件 id，用于后面接口获取文件内容 |
 
-例子：
-```shell
+例：
+
+```
 curl -X GET 'http://localhost:8000/universer-api/exchange/task/123'
 
 # reponse(import)
@@ -215,6 +227,7 @@ curl -X GET 'http://localhost:8000/universer-api/exchange/task/123'
 ```
 
 ## 获取文件
+
 `GET /universer-api/file/{fileID}/sign-url`
 
 1. 接口返回一个文件下载链接，需要通过它获取文件内容
@@ -233,8 +246,9 @@ curl -X GET 'http://localhost:8000/universer-api/exchange/task/123'
 | error.message | string    | 失败信息       |
 | url           | string    | 文件的下载连接 |
 
-例子：
-```shell
+例：
+
+```
 curl -X GET 'http://localhost:8000/universer-api/file/1234/sign-url'
 
 # response

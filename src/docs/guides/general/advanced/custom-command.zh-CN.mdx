@@ -1,4 +1,4 @@
-import { Callout } from 'nextra/components'
+import { Callout, Steps } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 # 扩展命令
@@ -11,49 +11,51 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 ## 创建新命令
 
-创建一个命令需要两个步骤：
+创建新命令是 Univer 中最常见的扩展方式，通过创建新的命令，你可以实现各种业务逻辑。下面是创建新命令的步骤：
 
-第一步，创建一个实现 `ICommand` 接口的对象：
+<Steps>
+  ### 创建一个实现 `ICommand` 接口的对象：
 
-```typescript
-import { CommandType, ICommand } from '@univerjs/core'
+  ```typescript
+  import { CommandType, ICommand } from '@univerjs/core'
 
-export interface IYourCommandInterface {
-  // Your command's param's interface.
-}
-
-export const YourCommand: ICommand = {
-  name: 'your-command',
-  type: CommandType.COMMAND,
-  handler: async (accessor: IAccessor, params?: IYourCommandInterface) => {
-    // Implement your business logic here.
+  export interface IYourCommandInterface {
+    // Your command's param's interface.
   }
-}
-```
 
-命令需要声明以下属性：
-
-1. `name`：命令的名称，必须唯一；我们建议以 `业务域:类型:含义` 的方式来命名，例如 `sheet.command.copy`、`sheet.command.paste` 等
-2. `type`：命令的类型
-3. `handler`：命令的执行逻辑，接收一个 `IAccessor` 对象以及命令参数，通过 `IAccessor` 对象可以访问 Univer 的依赖注入系统
-
-命令可接收参数，参数需要是一个对象，接口由你的业务逻辑决定。当然一个命令也可以不接收参数，此时 `handler` 的第二个参数为 `undefined`。
-
-第二步，将 Command 注册到命令服务上：
-
-```typescript
-import { Disposable, ICommandService } from '@univerjs/core'
-
-export class YourController extends Disposable {
-  constructor(
-        @ICommandService private readonly _commandService: ICommandService
-  ) {
-    this.disposeWithMe(this._commandService.registerCommand(YourCommand))
+  export const YourCommand: ICommand = {
+    name: 'your-command',
+    type: CommandType.COMMAND,
+    handler: async (accessor: IAccessor, params?: IYourCommandInterface) => {
+      // Implement your business logic here.
+    }
   }
-}
-```
+  ```
 
-之后就可以通过 `ICommandService` 来执行命令了。实践中常用的方式是通过 UI 触发。
+  命令需要声明以下属性：
+
+  1. `name`：命令的名称，必须唯一；我们建议以 `业务域:类型:含义` 的方式来命名，例如 `sheet.command.copy`、`sheet.command.paste` 等
+  2. `type`：命令的类型
+  3. `handler`：命令的执行逻辑，接收一个 `IAccessor` 对象以及命令参数，通过 `IAccessor` 对象可以访问 Univer 的依赖注入系统
+
+  命令可接收参数，参数需要是一个对象，接口由你的业务逻辑决定。当然一个命令也可以不接收参数，此时 `handler` 的第二个参数为 `undefined`。
+
+  ### 将 Command 注册到命令服务上：
+
+  ```typescript
+  import { Disposable, ICommandService } from '@univerjs/core'
+
+  export class YourController extends Disposable {
+    constructor(
+      @ICommandService private readonly _commandService: ICommandService
+    ) {
+      this.disposeWithMe(this._commandService.registerCommand(YourCommand))
+    }
+  }
+  ```
+
+  之后就可以通过 `ICommandService` 来执行命令了。实践中常用的方式是通过 UI 触发。
+</Steps>
 
 ### Undo / Redo
 
@@ -102,7 +104,7 @@ import { ISheetClipboardService, ISheetClipboardHook } from '@univerjs/sheet'
 
 export class YourController extends Disposable {
   constructor(
-        @ISheetClipboardService private readonly _sheetClipboardService: ISheetClipboardService
+    @ISheetClipboardService private readonly _sheetClipboardService: ISheetClipboardService
   ) {
     super()
     
@@ -281,7 +283,7 @@ import { IAutoFillService, ISheetAutoFillHook } from '@univerjs/sheet'
 
 export class YourController extends Disposable {
   constructor(
-        @IAutoFillService private readonly _autoFillService: IAutoFillService,
+    @IAutoFillService private readonly _autoFillService: IAutoFillService,
   ) {
     super()
 

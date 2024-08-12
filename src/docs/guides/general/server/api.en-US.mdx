@@ -1,12 +1,14 @@
 # Univer server API Protocol
 
 _**rule**_
+
 1. the parameter with `*` mean it is required.
 2. the response with `.` mean json object properties.
 3. `GET` and `DELETE` method parameters only can set in pathinfo or query.
 4. `POST`, `PUT` and `PATCH` method need `content-type: application/json` request header in most api.
 
 ## Create Unit
+
 `POST /universer-api/snapshot/{type}/unit/-/create`
 
 parameters:
@@ -26,7 +28,8 @@ response:
 | unitID        | string    | Unit id                  |
 
 example:
-```shell
+
+```
 curl http://localhost:8000/universer-api/snapshot/2/unit/-/create \
   -X POST \
   -H 'Content-Type: application/json' \
@@ -37,6 +40,7 @@ curl http://localhost:8000/universer-api/snapshot/2/unit/-/create \
 ```
 
 ## List Unit
+
 `GET /universer-api/snapshot/{type}/units`
 
 parameters:
@@ -59,7 +63,8 @@ response:
 | nextCursor    | string        | The cursor for next page, when empty it is last page |
 
 example:
-```shell
+
+```
 curl -X GET 'http://localhost:8000/universer-api/snapshot/1/units?nextCursor=100'
 
 # response
@@ -67,6 +72,7 @@ curl -X GET 'http://localhost:8000/universer-api/snapshot/1/units?nextCursor=100
 ```
 
 ## Delete Unit
+
 `DELETE /universer-api/snapshot/-/units`
 
 parameters:
@@ -83,7 +89,8 @@ response:
 | error.message | string    | The information of fail situation |
 
 example:
-```shell
+
+```
 curl -X DELETE 'http://localhost:8000/universer-api/snapshot/-/units?unitIds=1&unitIds=2'
 
 # response
@@ -91,6 +98,7 @@ curl -X DELETE 'http://localhost:8000/universer-api/snapshot/-/units?unitIds=1&u
 ```
 
 ## Upload file
+
 `POST /universer-api/stream/file/upload`
 
 1. The request body is a HTLM form, so need request header like it: `content-type: multipart/form-data;boundary=---------------------------163876677831359887162093904846`.
@@ -110,7 +118,8 @@ response:
 | FileId | string | The file id for next api using, like import ane export |
 
 example:
-```shell
+
+```
 curl 'http://localhost:8000/universer-api/stream/file/upload?size=19261' \
   -X POST \
   -H 'Content-Type: multipart/form-data; boundary=---------------------------163876677831359887162093904846' \
@@ -121,6 +130,7 @@ curl 'http://localhost:8000/universer-api/stream/file/upload?size=19261' \
 ```
 
 ## Import
+
 `POST /universer-api/exchange/{type}/import`
 
 parameters:
@@ -140,7 +150,8 @@ response:
 | taskID        | string    | The exchange task id, because of import is a async task, so need to polling to get result |
 
 example:
-```shell
+
+```
 curl 'http://localhost:8000/universer-api/exchange/2/import' \
   -X POST \
   -H 'Content-Type: application/json' \
@@ -152,6 +163,7 @@ curl 'http://localhost:8000/universer-api/exchange/2/import' \
 ```
 
 ## Export
+
 `POST /universer-api/exchange/{type}/export`
 
 parameters:
@@ -170,7 +182,8 @@ response:
 | taskID        | string    | The exchange task id, because of export is a async task, so need to polling to get result |
 
 example:
-```shell
+
+```
 curl 'http://localhost:8000/universer-api/exchange/2/export' \
   -X POST \
   -H 'Content-Type: application/json' \
@@ -182,6 +195,7 @@ curl 'http://localhost:8000/universer-api/exchange/2/export' \
 ```
 
 ## Get exchange task result
+
 `GET /universer-api/exchange/task/{taskID}`
 
 parameters:
@@ -201,7 +215,8 @@ response:
 | import.jsonID | string       | The import exchange result file id, it use for next api to get file content |
 
 example:
-```shell
+
+```
 curl -X GET 'http://localhost:8000/universer-api/exchange/task/123'
 
 # reponse(import)
@@ -212,6 +227,7 @@ curl -X GET 'http://localhost:8000/universer-api/exchange/task/123'
 ```
 
 ## Get file
+
 `GET /universer-api/file/{fileID}/sign-url`
 
 1. The api return a file download url, it can used to get file content.
@@ -231,7 +247,8 @@ response:
 | url           | string    | The download url                  |
 
 example:
-```shell
+
+```
 curl -X GET 'http://localhost:8000/universer-api/file/1234/sign-url'
 
 # response

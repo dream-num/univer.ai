@@ -1,6 +1,7 @@
 {
   "core": "核心功能",
   "facade": "Facade API",
+  "permission": "权限控制",
   "numfmt": "数字格式",
   "hyperlink": "超链接",
   "floating-images": "浮动图片",
@@ -10,7 +11,6 @@
   "pivot-table": "数据透视表",
   "data-validation": "数据验证",
   "conditional-formatting": "条件格式",
-  "permission": "权限控制",
   "thread-comment": "评论 / 批注",
   "print": "打印",
   "import-export": "导入 & 导出",

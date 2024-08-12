@@ -1,6 +1,7 @@
 {
   "core": "Core",
   "facade": "Facade API",
+  "permission": "Permission",
   "numfmt": "Number Format",
   "hyperlink": "Hyperlink",
   "floating-images": "Floating Images",
@@ -10,7 +11,6 @@
   "pivot-table": "Pivot Table",
   "data-validation": "Data Validation",
   "conditional-formatting": "Conditional Formatting",
-  "permission": "Permission",
   "thread-comment": "Thread Comment",
   "print": "Print",
   "import-export": "Import & Export",
