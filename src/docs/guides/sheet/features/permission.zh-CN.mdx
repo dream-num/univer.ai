@@ -68,13 +68,13 @@ DeleteWorksheetProtectionMutationParams {
 
 ```typescript
 const commandService = accessor.get(ICommandService);
-const selectionManagerService = accessor.get(selectionManagerService);
+const sheetSelectionManagerService = accessor.get(SheetsSelectionsService);
 const target = getSheetCommandTarget(univerInstanceService);
 if (!target) {
   return;
 }
 const { unitId, subUnitId } = target;
-const ranges = selectionManagerService..getSelections().map(selection => selection.range);
+const ranges = sheetSelectionManagerService.getCurrentSelections().map(selection => selection.range);
 commandService.executeCommand(AddRangeProtectionMutation.id, {
   unitId,
   subUnitId,
