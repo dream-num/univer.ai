@@ -54,3 +54,58 @@ const univer = new Univer({
 univer.registerPlugin(UniverDataValidationPlugin);
 univer.registerPlugin(UniverSheetsDataValidationPlugin);
 ```
+
+## 使用API
+
+### 使用command
+
+以添加数据验证为例
+
+```typescript
+// Commands and Interface of Command params for sheet-data-validation
+import type {
+    IAddSheetDataValidationCommandParams,
+    IRemoveSheetDataValidationCommandParams,
+    IUpdateSheetDataValidationOptionsCommandParams,
+    IUpdateSheetDataValidationRangeCommandParams,
+    IUpdateSheetDataValidationSettingCommandParams,
+} from '@univerjs/sheets-data-validation';
+import {
+    AddSheetDataValidationCommand,
+    DATA_VALIDATION_PLUGIN_NAME,
+    RemoveSheetDataValidationCommand,
+    UniverSheetsDataValidationPlugin,
+    UpdateSheetDataValidationOptionsCommand,
+    UpdateSheetDataValidationRangeCommand,
+    UpdateSheetDataValidationSettingCommand,
+} from '@univerjs/sheets-data-validation';
+
+// eg. Add data validation from command
+const commandService = univer.__getInjector().get(ICommandService);
+
+commandService.executeCommand(AddSheetDataValidationCommand.id, {
+    unitId: 'unitId',
+    subUnitId: 'subUnitId',
+    rule: {
+        uid: 'xxx-2',
+        type: DataValidationType.CHECKBOX,
+        ranges: [{
+            startRow: 6,
+            endRow: 10,
+            startColumn: 0,
+            endColumn: 5,
+        }],
+    },
+} as IAddSheetDataValidationCommandParams);
+```
+
+### 使用内部service
+```typescript
+import {
+    // internal service
+    SheetsDataValidationValidatorService
+} from '@univerjs/sheets-data-validation';
+// Using internal service Such as validator
+const sheetsDataValidationValidatorService = univer.__getInjector().get(SheetsDataValidationValidatorService);
+sheetsDataValidationValidatorService.validatorWorksheet('unitId', 'sheetId')
+```

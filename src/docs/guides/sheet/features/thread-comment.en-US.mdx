@@ -92,3 +92,35 @@ univer.registerPlugin(UniverThreadCommentUIPlugin, {
 univer.registerPlugin(UniverSheetsThreadCommentBasePlugin);
 univer.registerPlugin(UniverSheetsThreadCommentPlugin);
 ```
+
+## API
+
+## Using Command
+
+```typescript
+import {
+    AddCommentCommand,
+    DeleteCommentCommand,
+    UpdateCommentCommand,
+    ResolveCommentCommand,
+    DeleteCommentTreeCommand,
+} from '@univerjs/sheets-thread-comment';
+import type {
+    IAddCommentCommandParams,
+    IDeleteCommentCommandParams,
+    IResolveCommentCommandParams,
+    IUpdateCommentCommandParams,
+    IDeleteCommentTreeCommandParams,
+} from '@univerjs/sheets-thread-comment';
+
+// Add comment by command
+const commandService = univer.__getInjector().get(ICommandService);
+
+commandService.executeCommand(AddCommentCommand.id, {
+    unitId: 'unitId',
+    subUnitId: 'subUnitId',
+    comment: {
+        // comment content
+    },
+} as IAddCommentCommandParams);
+```
