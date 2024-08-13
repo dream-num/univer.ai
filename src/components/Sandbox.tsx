@@ -51,6 +51,7 @@ export default function Sandbox(props: ISandboxProps) {
             '@univerjs/docs': 'latest',
             '@univerjs/docs-ui': 'latest',
             '@univerjs/docs-hyper-link': 'latest',
+            '@univerjs/docs-hyper-link-ui': 'latest',
             '@univerjs/engine-formula': 'latest',
             '@univerjs/engine-render': 'latest',
             '@univerjs/engine-numfmt': 'latest',

@@ -1,0 +1,107 @@
+import { LocaleType, Univer, UniverInstanceType } from '@univerjs/core'
+
+import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
+import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
+
+import { UniverUIPlugin } from '@univerjs/ui'
+import { defaultTheme } from '@univerjs/design'
+
+import { UniverDocsPlugin } from '@univerjs/docs'
+import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
+
+import { UniverDocsHyperLinkPlugin } from '@univerjs/docs-hyper-link';
+import { UniverDocsHyperLinkUIPlugin } from '@univerjs/docs-hyper-link-ui';
+ 
+import { enUS } from './locales'
+
+import './style.css'
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: enUS,
+  },
+})
+
+univer.registerPlugin(UniverRenderEnginePlugin)
+univer.registerPlugin(UniverFormulaEnginePlugin)
+
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+  disableAutoFocus: true,
+})
+
+univer.registerPlugin(UniverDocsPlugin, {
+  hasScroll: false,
+})
+univer.registerPlugin(UniverDocsUIPlugin, {
+    container: 'univerdoc',
+    layout: {
+        docContainerConfig: {
+            innerLeft: false,
+        },
+    },
+});
+
+univer.registerPlugin(UniverDocsHyperLinkPlugin);
+univer.registerPlugin(UniverDocsHyperLinkUIPlugin);
+
+univer.createUnit(UniverInstanceType.UNIVER_DOC, {
+    id: 'eMXMgV',
+    documentStyle: {
+        pageSize: {
+            width: 794,
+            height: 1122,
+        },
+        marginTop: 50,
+        marginBottom: 50,
+        marginRight: 40,
+        marginLeft: 40,
+        renderConfig: {
+            vertexAngle: 0,
+            centerAngle: 0,
+        },
+    },
+    locale: 'enUS',
+    title: '',
+    body: {
+        dataStream: '\u001Fhttps://univer.ai\u001E\r\n',
+        textRuns: [],
+        paragraphs: [
+            {
+                startIndex: 19,
+                paragraphStyle: {
+                    spaceAbove: {
+                        v: 5,
+                    },
+                    lineSpacing: 1,
+                    spaceBelow: {
+                        v: 0,
+                    },
+                },
+            },
+        ],
+        sectionBreaks: [
+            {
+                startIndex: 20,
+            },
+        ],
+        customRanges: [
+            {
+                rangeId: 'ip_9B7_l_ecSWddC5N03A',
+                rangeType: 0,
+                startIndex: 0,
+                endIndex: 18,
+            },
+        ],
+        customDecorations: [],
+    },
+    settings: {},
+    resources: [
+        {
+            name: 'DOC_HYPER_LINK_PLUGIN',
+            data: '{"links":[{"payload":"https://univer.ai","id":"ip_9B7_l_ecSWddC5N03A"}]}',
+        },
+    ],
+})

@@ -1,10 +1,14 @@
 import { Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import Sandbox from '@/components/Sandbox'
 
-{/* # 超链接 */}
+import entryFile from './hyperlink/demo-1/index.txt'
+
 # HyperLink
 
 <BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC]} value={UniverTypes.DOC} />
+
+<Sandbox entryFile={entryFile} />
 
 Insert hyperlinks in the document.
 

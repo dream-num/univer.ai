@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Head from 'next/head'
 import { GithubSingle40, IncreaseSingle, NextSingle } from '@univerjs/icons'
 import { useCallback, useState } from 'react'
+import { useRouter } from 'next/router'
 import { clsx } from '@/lib/utils'
 import Hero from '@/components/Hero'
 import Title from '@/components/Title'
@@ -12,6 +13,7 @@ import PricingSection from '@/components/PricingSection'
 
 export default function Page() {
   const [collapsedIds, setCollapsedIds] = useState<number[]>([])
+  const { locale } = useRouter()
 
   const t = useTranslation({
     'en-US': {
@@ -420,6 +422,39 @@ export default function Page() {
           </div>
         </section>
       </main>
+
+      {locale === 'zh-CN' && (
+        <footer
+          className={`
+            fixed bottom-7 right-7 hidden
+
+            xl:block
+          `}
+        >
+          <label className="group">
+            <a
+              className={`
+                flex h-12 w-12 cursor-pointer items-center gap-[10px] rounded-[10px] border
+                border-[#E6E8EB] bg-white p-1 shadow-[0_8px_24px_0_rgba(15,23,42,0.12)]
+
+                group-hover:hidden
+              `}
+            >
+              <img src="/images/univer/wechat.png" draggable={false} />
+            </a>
+            <a
+              className={`
+                hidden h-[136px] w-[136px] cursor-pointer items-center gap-[10px] rounded-[10px]
+                border border-[#E6E8EB] bg-white p-2 shadow-[0_8px_24px_0_rgba(15,23,42,0.12)]
+
+                group-hover:flex
+              `}
+            >
+              <img src="/images/univer/qrcode.png" draggable={false} />
+            </a>
+          </label>
+        </footer>
+      )}
     </>
   )
 }
