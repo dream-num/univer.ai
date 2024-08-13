@@ -14,7 +14,7 @@
     "lint:types": "tsc --noEmit"
   },
   "dependencies": {
-    "@antv/g2": "^5.2.2",
+    "@antv/g2": "^5.2.3",
     "@codesandbox/sandpack-react": "^2.18.2",
     "@radix-ui/react-checkbox": "^1.1.1",
     "@radix-ui/react-dialog": "^1.1.1",
@@ -48,7 +48,7 @@
     "@univerjs/engine-render": "0.2.7",
     "@univerjs/facade": "0.2.7",
     "@univerjs/find-replace": "0.2.7",
-    "@univerjs/icons": "^0.1.72",
+    "@univerjs/icons": "^0.1.73",
     "@univerjs/network": "0.2.7",
     "@univerjs/protocol": "0.1.38",
     "@univerjs/rpc": "0.2.7",
@@ -89,7 +89,7 @@
     "react-live": "^4.1.7",
     "react-mosaic-component": "^6.1.0",
     "rxjs": "^7.8.1",
-    "tailwind-merge": "^2.5.0",
+    "tailwind-merge": "^2.5.2",
     "youtube-player": "^5.6.0"
   },
   "devDependencies": {
@@ -104,7 +104,7 @@
     "eslint": "9.9.0",
     "eslint-plugin-react-hooks": "5.1.0-rc-8269d55d-20240802",
     "eslint-plugin-react-refresh": "^0.4.9",
-    "eslint-plugin-readable-tailwind": "^1.6.0",
+    "eslint-plugin-readable-tailwind": "^1.6.1",
     "lint-staged": "^15.2.8",
     "monaco-editor-webpack-plugin": "^7.1.0",
     "postcss": "^8.4.41",

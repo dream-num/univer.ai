@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { CheckMarkSingle, CloseSingle, CrownSingle, GithubSingle40, IncreaseSingle, NextSingle } from '@univerjs/icons'
+import { CheckMarkSingle, CrownSingle, GithubSingle40, IncreaseSingle, NextSingle } from '@univerjs/icons'
 import { useCallback, useState } from 'react'
 import Link from 'next/link'
 import { clsx } from '@/lib/utils'
@@ -89,7 +89,11 @@ export default function Page() {
 
       <main className="bg-[linear-gradient(180deg,#FFF_0.5%,#F6F9FF_100%)]">
         <Hero
-          className="pb-[80px]"
+          className={`
+            mb-[36px] pb-[80px]
+
+            xl:mb-[60px]
+          `}
         >
 
           <div
@@ -128,7 +132,7 @@ export default function Page() {
 
           <h1
             className={`
-              text-center text-5xl/tight font-bold italic leading-[68px] text-slate-900
+              mb-7 text-center text-5xl/tight font-bold italic leading-[68px] text-slate-900
 
               xl:mt-0 xl:text-6xl
             `}
@@ -147,13 +151,19 @@ export default function Page() {
             </span>
           </h1>
 
-          <div
+          <a
             className={`
-              mt-[36px]
-
-              xl:mt-[60px]
+              mx-auto flex h-10 w-[204px] items-center justify-center gap-2 rounded-full
+              bg-[linear-gradient(121deg,#0048FF_18.89%,#0C81ED_39.58%,#029DCE_59.87%,#00BBB0_74.37%,#00C5A8_81.94%)]
+              font-medium text-white
             `}
-          />
+            href="https://chromewebstore.google.com/detail/univer-clipsheet-ai-drive/mbcpbomfebacllmjjefeifejbbibbope"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="/images/univer-workspace/chrome-icon.svg" />
+            Add To Chrome
+          </a>
         </Hero>
 
         {/* Preview */}
@@ -240,120 +250,24 @@ export default function Page() {
 
           <div
             className={`
-              mb-[100px] grid grid-cols-1 justify-center gap-8
+              mb-[100px] flex flex-col justify-center gap-[52px]
 
-              xl:grid-cols-3
+              xl:flex-row
             `}
           >
-            {/* Without registration */}
-            <section className="rounded-[24px] border bg-white p-6">
-              <header className="mb-7">
-                <label className="mb-7 block text-[16px] font-medium">Without registration</label>
-                <span className="text-center text-[40px] font-semibold leading-none tracking-[3px]">$0</span>
-                <small className="text-center text-base text-[#474D57]">Free</small>
-                <p className="mb-5 mt-3">Perfect plan for starters.</p>
-                <a
-                  className={`
-                    flex h-[40px] items-center justify-center rounded-3xl bg-[#474D57] text-white
-                  `}
-                  href="https://chromewebstore.google.com/detail/univer-clipsheet-ai-drive/mbcpbomfebacllmjjefeifejbbibbope"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Get Started
-                </a>
-              </header>
-
-              <div>
-                <div className="mb-5">
-                  <label className="text-sm font-medium text-[#1E222B]">Web Table Extraction</label>
-                  <div className="text-[#7A7A7A]">
-                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
-                      <span>Extraction rate</span>
-                      <span className="text-[#0FCC65]">10/Day</span>
-                    </div>
-                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
-                      <span>Server extraction history</span>
-                      <span><CloseSingle style={{ color: '#FE4B4B' }} /></span>
-                    </div>
-                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
-                      <span>Tabs per extraction</span>
-                      <span className="text-[#0FCC65]">1</span>
-                    </div>
-                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
-                      <span>Targeted extraction</span>
-                      <span><CloseSingle style={{ color: '#FE4B4B' }} /></span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mb-5">
-                  <label className="text-sm font-medium text-[#1E222B]">Search</label>
-                  <div className="text-[#7A7A7A]">
-                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
-                      <span>Standard search rate</span>
-                      <span className="text-[#0FCC65]">Unlimited</span>
-                    </div>
-                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
-                      <span>Pro searchs rate</span>
-                      <span className="text-[#0FCC65]">5/4 Hour</span>
-                    </div>
-                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
-                      <span>Available AI models</span>
-                      <span className="text-[#0FCC65]">Standard AI</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mb-5">
-                  <label className="text-sm font-medium text-[#1E222B]">Drill-down Extraction</label>
-                  <div className="text-[#7A7A7A]">
-                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
-                      <span>Rows limited per extraction</span>
-                      <span className="text-[#0FCC65]">20</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mb-5">
-                  <label className="text-sm font-medium text-[#1E222B]">Workspace</label>
-                  <div className="text-[#7A7A7A]">
-                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
-                      <span>File management</span>
-                      <span><CloseSingle style={{ color: '#FE4B4B' }} /></span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mb-5">
-                  <label className="text-sm font-medium text-[#1E222B]">File storage</label>
-                  <div className="text-[#7A7A7A]">
-                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
-                      <span>File retention time(Day)</span>
-                      <span className="text-[#0FCC65]">7</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium text-[#1E222B]">Univer Sheet Features</label>
-                  <div className="text-[#7A7A7A]">
-                    <div className="flex justify-between py-3 text-sm">
-                      <span>All features</span>
-                      <span><CloseSingle style={{ color: '#FE4B4B' }} /></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
             {/* Free */}
-            <section className="rounded-[24px] border bg-white p-6">
+            <section
+              className={`
+                rounded-[24px] border bg-white p-6
+
+                xl:w-[396px]
+              `}
+            >
               <header className="mb-7">
                 <label className="mb-7 block text-[16px] font-medium">Free</label>
                 <span className="text-center text-[40px] font-semibold leading-none tracking-[3px]">$0</span>
                 <small className="text-center text-base text-[#474D57]">Free</small>
-                <p className="mb-5 mt-3">For user who want to do more.</p>
+                <p className="mb-5 mt-3">Perfect plan for starters.</p>
                 <a
                   className={`
                     flex h-[40px] items-center justify-center rounded-3xl bg-[#474D57] text-white
@@ -440,9 +354,13 @@ export default function Page() {
                 <div>
                   <label className="text-sm font-medium text-[#1E222B]">Univer Sheet Features</label>
                   <div className="text-[#7A7A7A]">
+                    <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                      <span>Basic features</span>
+                      <span><CheckMarkSingle style={{ color: '#0FCC65' }} /></span>
+                    </div>
                     <div className="flex justify-between py-3 text-sm">
-                      <span>All features</span>
-                      <span><CloseSingle style={{ color: '#FE4B4B' }} /></span>
+                      <span>History</span>
+                      <span><CheckMarkSingle style={{ color: '#0FCC65' }} /></span>
                     </div>
                   </div>
                 </div>
@@ -457,34 +375,60 @@ export default function Page() {
                 p-[3px] shadow-[0_6px_48px_0_rgba(12,34,67,0.12)]
               `}
             >
-              <div className="rounded-[20px] bg-white p-6">
+              <div
+                className={`
+                  rounded-[20px] bg-white p-6
+
+                  xl:w-[396px]
+                `}
+              >
                 <header className="mb-7">
                   <label className="mb-7 flex gap-[6px] text-[16px] font-medium">
                     Plus
-                    {paymentPlan === 'monthly' && (
-                      <span
-                        className={`
-                          flex h-[24px] items-center justify-center gap-1 rounded-[6px] border
-                          bg-[rgba(39,_79,_238,_0.08)] p-0 px-2 text-xs text-[#274FEE]
-                        `}
-                      >
-                        <img src="/images/univer-workspace/hot-icon.svg" />
-                        Limited-Time Offer
-                      </span>
-                    )}
+                    {paymentPlan === 'yearly'
+                      ? (
+                          <span
+                            className={`
+                              flex h-[24px] items-center justify-center gap-1 rounded-[6px] border
+                              border-[rgba(15,204,101,0.08)] bg-[rgba(15,204,101,0.08)] p-0 px-2
+                              text-xs text-[#0FCC65]
+                            `}
+                          >
+                            <img src="/images/univer-workspace/save-icon.svg" />
+                            Most popular Save 25%
+                          </span>
+                        )
+                      : (
+                          <span
+                            className={`
+                              flex h-[24px] items-center justify-center gap-1 rounded-[6px] border
+                              bg-[rgba(39,79,238,0.08)] p-0 px-2 text-xs text-[#274FEE]
+                            `}
+                          >
+                            <img src="/images/univer-workspace/hot-icon.svg" />
+                            Limited-Time Offer
+                          </span>
+                        )}
                   </label>
                   <span className="flex text-[40px] font-semibold leading-none">
                     <span className="mr-[6px]">
+                      <small
+                        className={`
+                          mr-1 text-xl font-medium text-[#474D57] line-through decoration-from-font
+                        `}
+                      >
+                        $20
+                      </small>
                       $
-                      {paymentPlan === 'yearly' ? '179' : '7.99'}
+                      {paymentPlan === 'yearly' ? '14.99' : '7.99'}
                     </span>
                     {paymentPlan === 'yearly'
                       ? (
-                          <small className="self-end text-base font-normal text-[#474D57]">Per annum</small>
+                          <small className="self-end text-base font-normal text-[#474D57]">/ month</small>
                         )
                       : (
                           <small className="text-sm font-normal text-[#474D57]">
-                            $7.99 first month, $20 per month starting next month
+                            First month, $20 for the next month
                           </small>
                         )}
                   </span>
@@ -576,8 +520,12 @@ export default function Page() {
                   <div>
                     <label className="text-sm font-medium text-[#1E222B]">Univer Sheet Features</label>
                     <div className="text-[#7A7A7A]">
+                      <div className="flex justify-between border-b border-[#E5E5E5] py-3 text-sm">
+                        <span>Basic features</span>
+                        <span><CheckMarkSingle style={{ color: '#0FCC65' }} /></span>
+                      </div>
                       <div className="flex justify-between py-3 text-sm">
-                        <span>All features</span>
+                        <span>History</span>
                         <span><CheckMarkSingle style={{ color: '#0FCC65' }} /></span>
                       </div>
                     </div>
