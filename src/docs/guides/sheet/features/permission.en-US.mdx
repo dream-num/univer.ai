@@ -93,6 +93,14 @@ commandService.executeCommand(AddRangeProtectionMutation.id, {
 
 This demo adds protection to a selected area. The parameters here are the same as above, except that there is an additional `ranges` parameter, which is the area you selected.
 
+In typical workflows, the creator of a permissioned area will have the highest level of access, which means they can always edit the area they created. To implement a scenario where no one, including the creator, can edit the area, you can add the following code to the demo provided above.
+
+```typescript
+const permissionService = accessor.get(IPermissionService);
+// The third parameter of RangeProtectionPermissionEditPoint is the permissionId generated above. Setting it to false indicates that editing is not allowed.
+permissionService.updatePermissionPoint(new RangeProtectionPermissionEditPoint(unitId, subUnitId, "3xtfxG1").id, false);
+```
+
 To delete, you can use `DeleteRangeProtectionMutation`, the parameters are `unitId` and `subUnitId` and the `ruleIds` you want to delete in batches.
 
 ```typescript
