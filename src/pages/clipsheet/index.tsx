@@ -1,5 +1,6 @@
 import Head from 'next/head'
-import { CheckMarkSingle, CrownSingle, GithubSingle40, IncreaseSingle, NextSingle } from '@univerjs/icons'
+// import { CheckMarkSingle, CrownSingle, GithubSingle40, IncreaseSingle, NextSingle } from '@univerjs/icons'
+import { GithubSingle40, IncreaseSingle, NextSingle } from '@univerjs/icons'
 import { useCallback, useState } from 'react'
 import Link from 'next/link'
 import { clsx } from '@/lib/utils'
@@ -11,7 +12,7 @@ import { VideoPlayer } from '@/official-site/clipsheet/components/VideoPlayer'
 import ShineBorder from '@/components/ShineBorder'
 
 export default function Page() {
-  const [paymentPlan, setPaymentPlan] = useState<'monthly' | 'yearly'>('yearly')
+  // const [paymentPlan, setPaymentPlan] = useState<'monthly' | 'yearly'>('yearly')
   const [collapsedIds, setCollapsedIds] = useState<number[]>([])
 
   const enUs = {
@@ -194,7 +195,7 @@ export default function Page() {
         </section>
 
         {/* Pricing */}
-        <section
+        {/* <section
           className={`
             px-4
 
@@ -255,7 +256,6 @@ export default function Page() {
               xl:flex-row
             `}
           >
-            {/* Free */}
             <section
               className={`
                 rounded-[24px] border bg-white p-6
@@ -367,7 +367,6 @@ export default function Page() {
               </div>
             </section>
 
-            {/* Plus */}
             <section
               className={`
                 rounded-[24px] border
@@ -534,7 +533,7 @@ export default function Page() {
               </div>
             </section>
           </div>
-        </section>
+        </section> */}
 
         {/* FAQ */}
         <section

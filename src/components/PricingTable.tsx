@@ -10,7 +10,6 @@ export default function PricingTable() {
       'row.development.business': 'No development licensing fees, low deployment costs, cost reduction and efficiency',
       'row.collaborative-editing': 'Collaborative Editing',
       'row.collaborative-editing.free': 'Max 50 people or 100 documents',
-      'row.collaborative-editing.free.limited-features': '(Limited features)',
       'row.collaborative-editing.business': 'Unlimited',
       'row.import-export': 'Import & Export',
       'row.import-export.free.size-limit': 'Imported documents\' size limited to 1MB',
@@ -31,7 +30,6 @@ export default function PricingTable() {
       'row.development.business': '无需开发许可费，极低的部署成本，降本增效',
       'row.collaborative-editing': '协同编辑',
       'row.collaborative-editing.free': '最多 50 个用户和 100 篇文档',
-      'row.collaborative-editing.free.limited-features': '（有限的功能）',
       'row.collaborative-editing.business': '无限制',
       'row.import-export': '导入 & 导出',
       'row.import-export.free.size-limit': '导入文档的大小上限为 1MB',
@@ -125,8 +123,6 @@ export default function PricingTable() {
           <div className="col-span-4 font-medium">{t('row.collaborative-editing')}</div>
           <div className="col-span-8">
             {t('row.collaborative-editing.free')}
-            <br />
-            <span className="text-[#2B4DFF]">{t('row.collaborative-editing.free.limited-features')}</span>
           </div>
         </div>
 
