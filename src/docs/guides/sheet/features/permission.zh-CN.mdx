@@ -91,6 +91,15 @@ commandService.executeCommand(AddRangeProtectionMutation.id, {
 
 这个 demo 是给自定义选区添加权限保护，这里面的参数和上面的一样，只是多了一个 `ranges` 参数，这个参数是你选中的区域。   
 
+在通常的操作流程中，已经创建的权限区域中，创建者会拥有最高权限，所以会出现在自己创建的区域中自己总是可以编辑的情况，这时候可以在上面的 demo 后面补充下面的代码来实现所有人都不可编辑等需求。其他功能逻辑一样，只需要在 update 中更换对应的点位即可。
+
+```typescript
+const permissionService = accessor.get(IPermissionService);
+// 这里 RangeProtectionPermissionEditPoint 的第三个参数就是上面生成的permissionId，false 表示不可编辑
+permissionService.updatePermissionPoint(new RangeProtectionPermissionEditPoint(unitId, subUnitId, "3xtfxG1").id, false);
+```
+
+
 删除已经存在的自定义区域保护可以使用 `DeleteRangeProtectionMutation`，参数是 `unitId` 和 `subUnitId` 以及想批量删除的 `ruleIds`。
 
 ```typescript
