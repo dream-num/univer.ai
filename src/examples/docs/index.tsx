@@ -65,8 +65,6 @@ export default function App(props: IProps) {
       link: '/src/examples/docs',
     })
 
-    window.univer = univer
-
     const injector = univer.__getInjector()
     const userManagerService = injector.get(UserManagerService)
 

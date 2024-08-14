@@ -117,8 +117,8 @@ importers:
         specifier: 0.2.7
         version: 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/ui@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)
       '@univerjs/icons':
-        specifier: ^0.1.73
-        version: 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^0.1.74
+        version: 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/network':
         specifier: 0.2.7
         version: 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
@@ -248,10 +248,10 @@ importers:
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^2.25.1
-        version: 2.25.1(@eslint-react/eslint-plugin@1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4))(@typescript-eslint/utils@8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4))(@vue/compiler-sfc@3.4.37)(eslint-plugin-react-hooks@5.1.0-rc-8269d55d-20240802(eslint@9.9.0(jiti@1.21.6)))(eslint-plugin-react-refresh@0.4.9(eslint@9.9.0(jiti@1.21.6)))(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+        version: 2.25.1(@eslint-react/eslint-plugin@1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4))(@typescript-eslint/utils@8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4))(@vue/compiler-sfc@3.4.37)(eslint-plugin-react-hooks@5.1.0-rc-8269d55d-20240802(eslint@9.9.0(jiti@1.21.6)))(eslint-plugin-react-refresh@0.4.9(eslint@9.9.0(jiti@1.21.6)))(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
       '@eslint-react/eslint-plugin':
-        specifier: ^1.10.0
-        version: 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+        specifier: ^1.10.1
+        version: 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
       '@types/node':
         specifier: ^22.2.0
         version: 22.2.0
@@ -280,8 +280,8 @@ importers:
         specifier: ^0.4.9
         version: 0.4.9(eslint@9.9.0(jiti@1.21.6))
       eslint-plugin-readable-tailwind:
-        specifier: ^1.6.1
-        version: 1.6.1(eslint@9.9.0(jiti@1.21.6))(tailwindcss@3.4.9)
+        specifier: ^1.7.0
+        version: 1.7.0(eslint@9.9.0(jiti@1.21.6))(tailwindcss@3.4.10)
       lint-staged:
         specifier: ^15.2.9
         version: 15.2.9
@@ -301,8 +301,8 @@ importers:
         specifier: ^2.11.1
         version: 2.11.1
       tailwindcss:
-        specifier: ^3.4.9
-        version: 3.4.9
+        specifier: ^3.4.10
+        version: 3.4.10
       typescript:
         specifier: ^5.5.4
         version: 5.5.4
@@ -548,14 +548,14 @@ packages:
     resolution: {integrity: sha512-G/M/tIiMrTAxEWRfLfQJMmGNX28IxBg4PBz8XqQhqUHLFI6TL2htpIB1iQCj144V5ee/JaKyT9/WZ0MGZWfA7A==}
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
 
-  '@eslint-react/ast@1.10.0':
-    resolution: {integrity: sha512-K8IFiy9HoIj2s9ohvw3RYhhDhwmb/O+ZnWOkIbEcjdsoS+Lrt6j6L1grYsxOv5EjT056M/9V3tPCzGAj4KUOhg==}
+  '@eslint-react/ast@1.10.1':
+    resolution: {integrity: sha512-8KC3Q425Es1h9E6vSuyoqLZIbT/Dpv2UV+DIH0zlosR3OxHcglUvR+b2FeNcm6PIr43OxNn3uht6O6fmsilukQ==}
 
-  '@eslint-react/core@1.10.0':
-    resolution: {integrity: sha512-pnVtRj6StT7wlUBMa2iW6oZ4Te+aoadjVBkNriyyBRYihpjFmVvDJRs+9Q6LyvSOPg/dQHSxln3baPuWCV4xqQ==}
+  '@eslint-react/core@1.10.1':
+    resolution: {integrity: sha512-3tXmEZgV556gyYKGlOiHgMkDPDl/lg71+60dIdnvY+KSVgeieeJoQ2Z7kez2ds1a/882gfaNmj8/6qxROtDagQ==}
 
-  '@eslint-react/eslint-plugin@1.10.0':
-    resolution: {integrity: sha512-lA/5WI5Cw1nRGSOgDSbe8/V4fN5jo6RKiIdRiz/BIDfITrmHJE5fpXpK77/BWF2d+IWut8zst8K6IB/WddWWiQ==}
+  '@eslint-react/eslint-plugin@1.10.1':
+    resolution: {integrity: sha512-ZZoqeE4L3Ciu7uNiyfxKTjDBsuNIJlqEc9zy1r8Jk+O0dx1cBBrH+eHCXAMRce6Q5xLWphvSorUbtYBgzmpLFw==}
     engines: {bun: '>=1.0.15', node: '>=18.18.0'}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
@@ -564,20 +564,20 @@ packages:
       typescript:
         optional: true
 
-  '@eslint-react/jsx@1.10.0':
-    resolution: {integrity: sha512-qhSxmK2hFjNxYHHxqug0F6gXVtrfhC6POKVbvU5hd4aA5Ru+PxeoB3e2w5/6S7fqJiA4nOtItGY1jfCQkRWndw==}
+  '@eslint-react/jsx@1.10.1':
+    resolution: {integrity: sha512-ddItN4nCgBKewfiV0thzu5vMi6s3SXOTrfrk1Jw5ncbbMebaTGNowMnc5jNHL2Z6ITP0ftoB6mqylBnFV/pUcA==}
 
-  '@eslint-react/shared@1.10.0':
-    resolution: {integrity: sha512-/nY0I+9OmiA3t8u08LLbJfh1rq0s+/xHXH+hSR6C6W3enwspP9MZB3M4fItypgZW7WSfvBXYtjGS7KvgSFaC7Q==}
+  '@eslint-react/shared@1.10.1':
+    resolution: {integrity: sha512-4E3OEep4oSB4h5T4pzmgvqjTru7FVG7LX2gP1WcXLV9Ne+ukMOts+RVnLj/FSpnIqZ+EU07tOuCGSm/Qc6n8Pw==}
 
-  '@eslint-react/tools@1.10.0':
-    resolution: {integrity: sha512-EY/en+rtUF9yMyWB/I0NRKu4PVOnaAlN5b4Mi4BzWHxifJU4WMp//R4jfL/egJD1pRjyCcbCZenjOVEGziMCew==}
+  '@eslint-react/tools@1.10.1':
+    resolution: {integrity: sha512-z+oy+ETIRQaJvfi59gXB9jhkhoCFNaHo7QRLiERK/kx0mQ+1KeWXAQvvSSoTgClM5WL8Z4Ma3EM8HbaHhYQMxA==}
 
-  '@eslint-react/types@1.10.0':
-    resolution: {integrity: sha512-hQjvM1jAulm+p1wuHEWmPbzx5C0AplRFsiQ+fPiWFHj6ooWiXosFbJajvELSmn2v+0Mqn1JaGcYviX7cgdqNMg==}
+  '@eslint-react/types@1.10.1':
+    resolution: {integrity: sha512-1XadAq/QBdR3nIqCiJZErqs6L6WyrD7s7TXypPFoKlp0GKJpFAWeewIpHhEIZOiqFmt3qLG+0ruYSAnctRZ1MA==}
 
-  '@eslint-react/var@1.10.0':
-    resolution: {integrity: sha512-7nT7zve16J69rVwN7wfVlzpfQSSu1cVXrepK0xMl4HHNE0HFAYRoRmPtMidIqmYn8/nFq3MJs4i2gmuVW4IjXw==}
+  '@eslint-react/var@1.10.1':
+    resolution: {integrity: sha512-Ss3eDXrchEwIwgw9UX9mFg11v0eCtDx7klSuKLB0qzKnrtTDUOsSdjFvkApq3q7GFPETuESzvsYbfESAvCM1yg==}
 
   '@eslint/config-array@0.17.1':
     resolution: {integrity: sha512-BlYOpej8AQ8Ev9xVqroV7a02JK3SkBAaN9GfMMH9W6Ch8FlQlkjGw4Ir7+FgYwfirivAf4t+GtzuAxqfukmISA==}
@@ -1984,8 +1984,21 @@ packages:
     resolution: {integrity: sha512-NpixInP5dm7uukMiRyiHjRKkom5RIFA4dfiHvalanD2cF0CLUuQqxfg8PtEUo9yqJI2bBhF+pcSafqnG3UBnRQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@typescript-eslint/scope-manager@8.1.0':
+    resolution: {integrity: sha512-DsuOZQji687sQUjm4N6c9xABJa7fjvfIdjqpSIIVOgaENf2jFXiM9hIBZOL3hb6DHK9Nvd2d7zZnoMLf9e0OtQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
   '@typescript-eslint/type-utils@8.0.1':
     resolution: {integrity: sha512-+/UT25MWvXeDX9YaHv1IS6KI1fiuTto43WprE7pgSMswHbn1Jm9GEM4Txp+X74ifOWV8emu2AWcbLhpJAvD5Ng==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
+  '@typescript-eslint/type-utils@8.1.0':
+    resolution: {integrity: sha512-oLYvTxljVvsMnldfl6jIKxTaU7ok7km0KDrwOt1RHYu6nxlhN3TIx8k5Q52L6wR33nOwDgM7VwW1fT1qMNfFIA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       typescript: '*'
@@ -1999,6 +2012,10 @@ packages:
 
   '@typescript-eslint/types@8.0.1':
     resolution: {integrity: sha512-PpqTVT3yCA/bIgJ12czBuE3iBlM3g4inRSC5J0QOdQFAn07TYrYEQBBKgXH1lQpglup+Zy6c1fxuwTk4MTNKIw==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@typescript-eslint/types@8.1.0':
+    resolution: {integrity: sha512-q2/Bxa0gMOu/2/AKALI0tCKbG2zppccnRIRCW6BaaTlRVaPKft4oVYPp7WOPpcnsgbr0qROAVCVKCvIQ0tbWog==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@typescript-eslint/typescript-estree@7.17.0':
@@ -2019,6 +2036,15 @@ packages:
       typescript:
         optional: true
 
+  '@typescript-eslint/typescript-estree@8.1.0':
+    resolution: {integrity: sha512-NTHhmufocEkMiAord/g++gWKb0Fr34e9AExBRdqgWdVBaKoei2dIyYKD9Q0jBnvfbEA5zaf8plUFMUH6kQ0vGg==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   '@typescript-eslint/utils@7.17.0':
     resolution: {integrity: sha512-r+JFlm5NdB+JXc7aWWZ3fKSm1gn0pkswEwIYsrGPdsT2GjsRATAKXiNtp3vgAAO1xZhX8alIOEQnNMl3kbTgJw==}
     engines: {node: ^18.18.0 || >=20.0.0}
@@ -2031,12 +2057,22 @@ packages:
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
 
+  '@typescript-eslint/utils@8.1.0':
+    resolution: {integrity: sha512-ypRueFNKTIFwqPeJBfeIpxZ895PQhNyH4YID6js0UoBImWYoSjBsahUn9KMiJXh94uOjVBgHD9AmkyPsPnFwJA==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      eslint: ^8.57.0 || ^9.0.0
+
   '@typescript-eslint/visitor-keys@7.17.0':
     resolution: {integrity: sha512-RVGC9UhPOCsfCdI9pU++K4nD7to+jTcMIbXTSOcrLqUEW6gF2pU1UUbYJKc9cvcRSK1UDeMJ7pdMxf4bhMpV/A==}
     engines: {node: ^18.18.0 || >=20.0.0}
 
   '@typescript-eslint/visitor-keys@8.0.1':
     resolution: {integrity: sha512-W5E+o0UfUcK5EgchLZsyVWqARmsM7v54/qEq6PY3YI5arkgmCzHiuk0zKSJJbm71V0xdRna4BGomkCTXz2/LkQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@typescript-eslint/visitor-keys@8.1.0':
+    resolution: {integrity: sha512-ba0lNI19awqZ5ZNKh6wCModMwoZs457StTebQ0q1NP58zSi2F6MOZRXwfKZy+jB78JNJ/WH8GSh2IQNzXX8Nag==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@ungap/structured-clone@1.2.0':
@@ -2281,8 +2317,8 @@ packages:
       react: ^16.9.0 || ^17.0.0 || ^18.0.0
       rxjs: '>=7.0.0'
 
-  '@univerjs/icons@0.1.73':
-    resolution: {integrity: sha512-MIXUvj/SfqL4vb5XCHQl27E6Nd0IYzjYFdsZBJCBkPzo0ZzOBAnru5K/EiDNWO+HoGN81rRk6NG5CJHyAguUDQ==}
+  '@univerjs/icons@0.1.74':
+    resolution: {integrity: sha512-JP1NUDod6jg5OOHzK1FmcJ+0qXF24MisyBC333Nz8SXAk1IKsdr89AyTEpbSXFDl8vI7xRpttCvW6hQ84s0lLg==}
     peerDependencies:
       react: '*'
       react-dom: '*'
@@ -3669,8 +3705,8 @@ packages:
       vue-eslint-parser:
         optional: true
 
-  eslint-plugin-react-debug@1.10.0:
-    resolution: {integrity: sha512-ylMyY9Glvbx+51/1M+r3xXoBKflX8sgDXbTV/4UqoL9zWezNpRUzqCk47dLGz3Bx02RfeI4S40tWjDwiuVj1gg==}
+  eslint-plugin-react-debug@1.10.1:
+    resolution: {integrity: sha512-U86dE+R8TTyd5BjNuyXnDmYCb+dhEz8Up3bXiF6/WITT8WnGyBbJmmLFfcBYP2GRRuZ4REpT9Hr1Bfen3aEaUA==}
     engines: {bun: '>=1.0.15', node: '>=18.18.0'}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
@@ -3679,8 +3715,8 @@ packages:
       typescript:
         optional: true
 
-  eslint-plugin-react-dom@1.10.0:
-    resolution: {integrity: sha512-WSle6EkKcyOv/hwyOJIpmMN+wQ+x+DK80fXj/OwCnZO6MOrj22PFcIPHl1SjPqJOZJki0oA4AlEK7Aih1zslKw==}
+  eslint-plugin-react-dom@1.10.1:
+    resolution: {integrity: sha512-AifDckTIGNmH8ZSJ/tyReRpkSFvgkSZzguX0w/Nx7WL2ZL68aDU+JPpDWkbwcVbPqANStO/egbQ4ob++Zk5KXQ==}
     engines: {bun: '>=1.0.15', node: '>=18.18.0'}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
@@ -3689,8 +3725,8 @@ packages:
       typescript:
         optional: true
 
-  eslint-plugin-react-hooks-extra@1.10.0:
-    resolution: {integrity: sha512-T7u2ri5iqI8K8/mvFufR0lqAvHAreFAdny3x0YzB9I4iQQEEMrpoq/AgnncdpmyX+htTIDhTwSsPw63SE5vZqg==}
+  eslint-plugin-react-hooks-extra@1.10.1:
+    resolution: {integrity: sha512-a63Rfu0EvbsHomHSpuccpSZGv0gDudMCjhiNmoAEG8qG/OzwlIZ7VPb1IWVvVp2S2DgqMnlhuGWjiH10nvvEjQ==}
     engines: {bun: '>=1.0.15', node: '>=18.18.0'}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
@@ -3705,8 +3741,8 @@ packages:
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
 
-  eslint-plugin-react-naming-convention@1.10.0:
-    resolution: {integrity: sha512-RGFyLQtPyfO+vVe9dgJASLYd/N/ISJ+nYChD9QzFoON/FM/D8C38iWb9b2429QOox01n3gI/CPQCBg02Iy2GWA==}
+  eslint-plugin-react-naming-convention@1.10.1:
+    resolution: {integrity: sha512-3Utp/5rIrnQJCe47P9lqB9ktwprk2qedTj4ArPNdy8StgNEbzXwAQdS0Fxkf1mKZu2w2RR/rCdyW+57mzZa4/w==}
     engines: {bun: '>=1.0.15', node: '>=18.18.0'}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
@@ -3720,8 +3756,8 @@ packages:
     peerDependencies:
       eslint: '>=7'
 
-  eslint-plugin-react-x@1.10.0:
-    resolution: {integrity: sha512-BcYssfHLHwHwn6AiNerYTCqYpY+f/eoorV+TguV+HEPAjblJiE+adiFWCqOqJlr0pvNsTI1F0lXJft6O4Lhh8w==}
+  eslint-plugin-react-x@1.10.1:
+    resolution: {integrity: sha512-bangm3Yy0urPwQnLxI8YZBgT6YEiBXQLDpW0JPycMAaIoYm/PArLxjeosSpDoKry+kHAcf9OfYQjE665zX4IUA==}
     engines: {bun: '>=1.0.15', node: '>=18.18.0'}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
@@ -3730,8 +3766,8 @@ packages:
       typescript:
         optional: true
 
-  eslint-plugin-readable-tailwind@1.6.1:
-    resolution: {integrity: sha512-2jfk6dbjanWRCNQuwEVDtIRLImyixE03Aj/M36ReM/8P4/HsQ1Aq8J2JQh9mBbtCOPBDVGQn41e3wVIpZayBxg==}
+  eslint-plugin-readable-tailwind@1.7.0:
+    resolution: {integrity: sha512-AEXpU93j4mz81PEFyGNDhvqGb+o8gElcrNXRvQkA12mSTcxDo+7j+9Co8KjOX1dwd+/1+HodnE0w3F+uCLLYGA==}
     engines: {node: '>=16'}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
@@ -6136,8 +6172,8 @@ packages:
   tailwind-merge@2.5.2:
     resolution: {integrity: sha512-kjEBm+pvD+6eAwzJL2Bi+02/9LFLal1Gs61+QB7HvTfQQ0aXwC5LGT8PEt1gS0CWKktKe6ysPTAy3cBC5MeiIg==}
 
-  tailwindcss@3.4.9:
-    resolution: {integrity: sha512-1SEOvRr6sSdV5IDf9iC+NU4dhwdqzF4zKKq3sAbasUWHEM6lsMhX+eNN5gkPx1BvLFEnZQEUFbXnGj8Qlp83Pg==}
+  tailwindcss@3.4.10:
+    resolution: {integrity: sha512-KWZkVPm7yJRhdu4SRSl9d4AK2wM3a50UsvgHZO7xY77NQr2V+fIrEuoDGQcbvswWvFGbS2f6e+jC/6WJm1Dl0w==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -6242,8 +6278,8 @@ packages:
   ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
 
-  ts-pattern@5.2.0:
-    resolution: {integrity: sha512-aGaSpOlDcns7ZoeG/OMftWyQG1KqPVhgplhJxNCvyIXqWrumM5uIoOSarw/hmmi/T1PnuQ/uD8NaFHvLpHicDg==}
+  ts-pattern@5.3.1:
+    resolution: {integrity: sha512-1RUMKa8jYQdNfmnK4jyzBK3/PS/tnjcZ1CW0v1vWDeYe5RBklc/nquw03MEoB66hVBm4BnlCfmOqDVxHyT1DpA==}
 
   tslib@2.6.3:
     resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
@@ -6599,14 +6635,14 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.25.0
 
-  '@antfu/eslint-config@2.25.1(@eslint-react/eslint-plugin@1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4))(@typescript-eslint/utils@8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4))(@vue/compiler-sfc@3.4.37)(eslint-plugin-react-hooks@5.1.0-rc-8269d55d-20240802(eslint@9.9.0(jiti@1.21.6)))(eslint-plugin-react-refresh@0.4.9(eslint@9.9.0(jiti@1.21.6)))(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
+  '@antfu/eslint-config@2.25.1(@eslint-react/eslint-plugin@1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4))(@typescript-eslint/utils@8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4))(@vue/compiler-sfc@3.4.37)(eslint-plugin-react-hooks@5.1.0-rc-8269d55d-20240802(eslint@9.9.0(jiti@1.21.6)))(eslint-plugin-react-refresh@0.4.9(eslint@9.9.0(jiti@1.21.6)))(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
     dependencies:
       '@antfu/install-pkg': 0.3.3
       '@clack/prompts': 0.7.0
       '@stylistic/eslint-plugin': 2.6.2(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
       '@typescript-eslint/eslint-plugin': 8.0.1(@typescript-eslint/parser@8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4))(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
       '@typescript-eslint/parser': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@vitest/eslint-plugin': 1.0.1(@typescript-eslint/utils@8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4))(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@vitest/eslint-plugin': 1.0.1(@typescript-eslint/utils@8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4))(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
       eslint: 9.9.0(jiti@1.21.6)
       eslint-config-flat-gitignore: 0.1.8
       eslint-flat-config-utils: 0.3.0
@@ -6638,7 +6674,7 @@ snapshots:
       yaml-eslint-parser: 1.2.3
       yargs: 17.7.2
     optionalDependencies:
-      '@eslint-react/eslint-plugin': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/eslint-plugin': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
       eslint-plugin-react-hooks: 5.1.0-rc-8269d55d-20240802(eslint@9.9.0(jiti@1.21.6))
       eslint-plugin-react-refresh: 0.4.9(eslint@9.9.0(jiti@1.21.6))
     transitivePeerDependencies:
@@ -7005,106 +7041,106 @@ snapshots:
 
   '@eslint-community/regexpp@4.11.0': {}
 
-  '@eslint-react/ast@1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
+  '@eslint-react/ast@1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
     dependencies:
-      '@eslint-react/tools': 1.10.0
-      '@eslint-react/types': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@typescript-eslint/types': 8.0.1
-      '@typescript-eslint/typescript-estree': 8.0.1(typescript@5.5.4)
-      '@typescript-eslint/utils': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/tools': 1.10.1
+      '@eslint-react/types': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@typescript-eslint/types': 8.1.0
+      '@typescript-eslint/typescript-estree': 8.1.0(typescript@5.5.4)
+      '@typescript-eslint/utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
       birecord: 0.1.1
       string-ts: 2.2.0
-      ts-pattern: 5.2.0
+      ts-pattern: 5.3.1
     transitivePeerDependencies:
       - eslint
       - supports-color
       - typescript
 
-  '@eslint-react/core@1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
+  '@eslint-react/core@1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
     dependencies:
-      '@eslint-react/ast': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/jsx': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/shared': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/tools': 1.10.0
-      '@eslint-react/types': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/var': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@typescript-eslint/scope-manager': 8.0.1
-      '@typescript-eslint/type-utils': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@typescript-eslint/types': 8.0.1
-      '@typescript-eslint/utils': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/ast': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/jsx': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/shared': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/tools': 1.10.1
+      '@eslint-react/types': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/var': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@typescript-eslint/scope-manager': 8.1.0
+      '@typescript-eslint/type-utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@typescript-eslint/types': 8.1.0
+      '@typescript-eslint/utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
       short-unique-id: 5.2.0
-      ts-pattern: 5.2.0
+      ts-pattern: 5.3.1
     transitivePeerDependencies:
       - eslint
       - supports-color
       - typescript
 
-  '@eslint-react/eslint-plugin@1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
+  '@eslint-react/eslint-plugin@1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
     dependencies:
-      '@eslint-react/shared': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/tools': 1.10.0
-      '@eslint-react/types': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@typescript-eslint/scope-manager': 8.0.1
-      '@typescript-eslint/type-utils': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@typescript-eslint/types': 8.0.1
-      '@typescript-eslint/utils': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/shared': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/tools': 1.10.1
+      '@eslint-react/types': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@typescript-eslint/scope-manager': 8.1.0
+      '@typescript-eslint/type-utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@typescript-eslint/types': 8.1.0
+      '@typescript-eslint/utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
       eslint: 9.9.0(jiti@1.21.6)
-      eslint-plugin-react-debug: 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      eslint-plugin-react-dom: 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      eslint-plugin-react-hooks-extra: 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      eslint-plugin-react-naming-convention: 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      eslint-plugin-react-x: 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      eslint-plugin-react-debug: 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      eslint-plugin-react-dom: 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      eslint-plugin-react-hooks-extra: 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      eslint-plugin-react-naming-convention: 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      eslint-plugin-react-x: 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
     optionalDependencies:
       typescript: 5.5.4
     transitivePeerDependencies:
       - supports-color
 
-  '@eslint-react/jsx@1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
+  '@eslint-react/jsx@1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
     dependencies:
-      '@eslint-react/ast': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/tools': 1.10.0
-      '@eslint-react/types': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/var': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@typescript-eslint/scope-manager': 8.0.1
-      '@typescript-eslint/types': 8.0.1
-      '@typescript-eslint/utils': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      ts-pattern: 5.2.0
+      '@eslint-react/ast': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/tools': 1.10.1
+      '@eslint-react/types': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/var': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@typescript-eslint/scope-manager': 8.1.0
+      '@typescript-eslint/types': 8.1.0
+      '@typescript-eslint/utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      ts-pattern: 5.3.1
     transitivePeerDependencies:
       - eslint
       - supports-color
       - typescript
 
-  '@eslint-react/shared@1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
+  '@eslint-react/shared@1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
     dependencies:
-      '@eslint-react/tools': 1.10.0
-      '@typescript-eslint/utils': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/tools': 1.10.1
+      '@typescript-eslint/utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
       picomatch: 4.0.2
     transitivePeerDependencies:
       - eslint
       - supports-color
       - typescript
 
-  '@eslint-react/tools@1.10.0': {}
+  '@eslint-react/tools@1.10.1': {}
 
-  '@eslint-react/types@1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
+  '@eslint-react/types@1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
     dependencies:
-      '@eslint-react/tools': 1.10.0
-      '@typescript-eslint/types': 8.0.1
-      '@typescript-eslint/utils': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/tools': 1.10.1
+      '@typescript-eslint/types': 8.1.0
+      '@typescript-eslint/utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
     transitivePeerDependencies:
       - eslint
       - supports-color
       - typescript
 
-  '@eslint-react/var@1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
+  '@eslint-react/var@1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
     dependencies:
-      '@eslint-react/ast': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/tools': 1.10.0
-      '@eslint-react/types': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@typescript-eslint/scope-manager': 8.0.1
-      '@typescript-eslint/types': 8.0.1
-      '@typescript-eslint/utils': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      ts-pattern: 5.2.0
+      '@eslint-react/ast': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/tools': 1.10.1
+      '@eslint-react/types': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@typescript-eslint/scope-manager': 8.1.0
+      '@typescript-eslint/types': 8.1.0
+      '@typescript-eslint/utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      ts-pattern: 5.3.1
     transitivePeerDependencies:
       - eslint
       - supports-color
@@ -8563,6 +8599,11 @@ snapshots:
       '@typescript-eslint/types': 8.0.1
       '@typescript-eslint/visitor-keys': 8.0.1
 
+  '@typescript-eslint/scope-manager@8.1.0':
+    dependencies:
+      '@typescript-eslint/types': 8.1.0
+      '@typescript-eslint/visitor-keys': 8.1.0
+
   '@typescript-eslint/type-utils@8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
     dependencies:
       '@typescript-eslint/typescript-estree': 8.0.1(typescript@5.5.4)
@@ -8575,9 +8616,23 @@ snapshots:
       - eslint
       - supports-color
 
+  '@typescript-eslint/type-utils@8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
+    dependencies:
+      '@typescript-eslint/typescript-estree': 8.1.0(typescript@5.5.4)
+      '@typescript-eslint/utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      debug: 4.3.6
+      ts-api-utils: 1.3.0(typescript@5.5.4)
+    optionalDependencies:
+      typescript: 5.5.4
+    transitivePeerDependencies:
+      - eslint
+      - supports-color
+
   '@typescript-eslint/types@7.17.0': {}
 
   '@typescript-eslint/types@8.0.1': {}
+
+  '@typescript-eslint/types@8.1.0': {}
 
   '@typescript-eslint/typescript-estree@7.17.0(typescript@5.5.4)':
     dependencies:
@@ -8598,6 +8653,21 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.0.1
       '@typescript-eslint/visitor-keys': 8.0.1
+      debug: 4.3.6
+      globby: 11.1.0
+      is-glob: 4.0.3
+      minimatch: 9.0.5
+      semver: 7.6.3
+      ts-api-utils: 1.3.0(typescript@5.5.4)
+    optionalDependencies:
+      typescript: 5.5.4
+    transitivePeerDependencies:
+      - supports-color
+
+  '@typescript-eslint/typescript-estree@8.1.0(typescript@5.5.4)':
+    dependencies:
+      '@typescript-eslint/types': 8.1.0
+      '@typescript-eslint/visitor-keys': 8.1.0
       debug: 4.3.6
       globby: 11.1.0
       is-glob: 4.0.3
@@ -8631,6 +8701,17 @@ snapshots:
       - supports-color
       - typescript
 
+  '@typescript-eslint/utils@8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
+    dependencies:
+      '@eslint-community/eslint-utils': 4.4.0(eslint@9.9.0(jiti@1.21.6))
+      '@typescript-eslint/scope-manager': 8.1.0
+      '@typescript-eslint/types': 8.1.0
+      '@typescript-eslint/typescript-estree': 8.1.0(typescript@5.5.4)
+      eslint: 9.9.0(jiti@1.21.6)
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
+
   '@typescript-eslint/visitor-keys@7.17.0':
     dependencies:
       '@typescript-eslint/types': 7.17.0
@@ -8639,6 +8720,11 @@ snapshots:
   '@typescript-eslint/visitor-keys@8.0.1':
     dependencies:
       '@typescript-eslint/types': 8.0.1
+      eslint-visitor-keys: 3.4.3
+
+  '@typescript-eslint/visitor-keys@8.1.0':
+    dependencies:
+      '@typescript-eslint/types': 8.1.0
       eslint-visitor-keys: 3.4.3
 
   '@ungap/structured-clone@1.2.0': {}
@@ -8652,7 +8738,7 @@ snapshots:
       '@univerjs/drawing': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)
       '@univerjs/engine-formula': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/network': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/protocol': 0.1.39-alpha.1(@grpc/grpc-js@1.11.1)(rxjs@7.8.1)
       '@univerjs/rpc': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
@@ -8689,7 +8775,7 @@ snapshots:
     dependencies:
       '@univerjs/core': 0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1)
       '@univerjs/design': 0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/network': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/protocol': 0.1.39-alpha.1(@grpc/grpc-js@1.11.1)(rxjs@7.8.1)
       '@univerjs/ui': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4)
@@ -8705,7 +8791,7 @@ snapshots:
       '@univerjs-pro/collaboration-client': 0.2.7(sdsjilpoukhumoo6nj5r4dewti)
       '@univerjs/core': 0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1)
       '@univerjs/design': 0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/protocol': 0.1.39-alpha.1(@grpc/grpc-js@1.11.1)(rxjs@7.8.1)
       '@univerjs/sheets': 0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-numfmt@0.2.7)(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/sheets-ui': 0.2.7(i7eoece4ber3i5ceo3w7f4jjha)
@@ -8723,7 +8809,7 @@ snapshots:
     dependencies:
       '@univerjs-pro/exchange-client': 0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/network@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/ui@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)
       '@univerjs/core': 0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/protocol': 0.1.39-alpha.1(@grpc/grpc-js@1.11.1)(rxjs@7.8.1)
       '@univerjs/sheets': 0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-numfmt@0.2.7)(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/sheets-ui': 0.2.7(i7eoece4ber3i5ceo3w7f4jjha)
@@ -8740,7 +8826,7 @@ snapshots:
       '@univerjs/core': 0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1)
       '@univerjs/design': 0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/network': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/sheets': 0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-numfmt@0.2.7)(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/sheets-ui': 0.2.7(i7eoece4ber3i5ceo3w7f4jjha)
@@ -8790,7 +8876,7 @@ snapshots:
       '@rc-component/color-picker': 2.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@rc-component/trigger': 2.2.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@types/react-mentions': 4.1.13
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       clsx: 2.1.1
       dayjs: 1.11.12
       rc-dialog: 9.5.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -8825,7 +8911,7 @@ snapshots:
       '@univerjs/drawing': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)
       '@univerjs/drawing-ui': 0.2.7(z2u55cqgbeencc2rpi7ara5qqa)
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/ui': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4)
       clsx: 2.1.1
       react: 18.3.1
@@ -8846,7 +8932,7 @@ snapshots:
       '@univerjs/docs-hyper-link': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/docs-ui': 0.2.7(hxbf62rqccrfopsw6tinhdjfvy)
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/ui': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4)
       clsx: 2.1.1
       react: 18.3.1
@@ -8865,7 +8951,7 @@ snapshots:
       '@univerjs/docs': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/docs-ui': 0.2.7(hxbf62rqccrfopsw6tinhdjfvy)
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/thread-comment': 0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/thread-comment-ui': 0.2.7(5z2c4ltjc2dge5kdotikvdqpza)
       '@univerjs/ui': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4)
@@ -8880,7 +8966,7 @@ snapshots:
       '@univerjs/design': 0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/docs': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/ui': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4)
       clsx: 2.1.1
       react: 18.3.1
@@ -8901,7 +8987,7 @@ snapshots:
       '@univerjs/design': 0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/drawing': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/ui': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4)
       clsx: 2.1.1
       react: 18.3.1
@@ -8912,7 +8998,7 @@ snapshots:
   '@univerjs/drawing@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)':
     dependencies:
       '@univerjs/core': 0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       ot-json1: 1.0.2
       rxjs: 7.8.1
     transitivePeerDependencies:
@@ -8959,14 +9045,14 @@ snapshots:
       '@univerjs/core': 0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1)
       '@univerjs/design': 0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/ui': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4)
       react: 18.3.1
       rxjs: 7.8.1
     transitivePeerDependencies:
       - react-dom
 
-  '@univerjs/icons@0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@univerjs/icons@0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -8997,7 +9083,7 @@ snapshots:
       '@univerjs/design': 0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/engine-formula': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/protocol': 0.1.38(@grpc/grpc-js@1.11.1)(rxjs@7.8.1)
       '@univerjs/sheets': 0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-numfmt@0.2.7)(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/sheets-conditional-formatting': 0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/sheets@0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-numfmt@0.2.7)(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(dayjs@1.11.12)(rxjs@7.8.1)
@@ -9034,7 +9120,7 @@ snapshots:
       '@univerjs/engine-formula': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/engine-numfmt': 0.2.7
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/protocol': 0.1.38(@grpc/grpc-js@1.11.1)(rxjs@7.8.1)
       '@univerjs/sheets': 0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-numfmt@0.2.7)(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/sheets-formula': 0.2.7(qi4ygfu6xmrtjtnagjlxhmpcqq)
@@ -9055,7 +9141,7 @@ snapshots:
       '@univerjs/drawing': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)
       '@univerjs/drawing-ui': 0.2.7(z2u55cqgbeencc2rpi7ara5qqa)
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/sheets': 0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-numfmt@0.2.7)(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/sheets-drawing': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/drawing@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/sheets-ui': 0.2.7(i7eoece4ber3i5ceo3w7f4jjha)
@@ -9077,7 +9163,7 @@ snapshots:
       '@univerjs/core': 0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1)
       '@univerjs/design': 0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/rpc': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/sheets': 0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-numfmt@0.2.7)(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/sheets-filter': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/sheets@0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-numfmt@0.2.7)(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
@@ -9113,7 +9199,7 @@ snapshots:
       '@univerjs/docs': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/engine-formula': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/rpc': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/sheets': 0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-numfmt@0.2.7)(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/sheets-ui': 0.2.7(i7eoece4ber3i5ceo3w7f4jjha)
@@ -9131,7 +9217,7 @@ snapshots:
       '@univerjs/docs-hyper-link': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/engine-formula': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/sheets': 0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-numfmt@0.2.7)(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/sheets-hyper-link': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/sheets@0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-numfmt@0.2.7)(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/sheets-ui': 0.2.7(i7eoece4ber3i5ceo3w7f4jjha)
@@ -9156,7 +9242,7 @@ snapshots:
       '@univerjs/design': 0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/engine-numfmt': 0.2.7
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/sheets': 0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-numfmt@0.2.7)(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/sheets-ui': 0.2.7(i7eoece4ber3i5ceo3w7f4jjha)
       '@univerjs/ui': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4)
@@ -9178,7 +9264,7 @@ snapshots:
       '@univerjs/core': 0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1)
       '@univerjs/engine-formula': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/sheets': 0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-numfmt@0.2.7)(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/sheets-thread-comment-base': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/sheets@0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-numfmt@0.2.7)(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/thread-comment@0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/sheets-ui': 0.2.7(i7eoece4ber3i5ceo3w7f4jjha)
@@ -9198,7 +9284,7 @@ snapshots:
       '@univerjs/engine-formula': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/engine-numfmt': 0.2.7
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/protocol': 0.1.38(@grpc/grpc-js@1.11.1)(rxjs@7.8.1)
       '@univerjs/sheets': 0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-numfmt@0.2.7)(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/ui': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4)
@@ -9214,7 +9300,7 @@ snapshots:
       '@univerjs/core': 0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1)
       '@univerjs/docs': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/sheets': 0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-numfmt@0.2.7)(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/sheets-ui': 0.2.7(i7eoece4ber3i5ceo3w7f4jjha)
       '@univerjs/ui': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4)
@@ -9243,7 +9329,7 @@ snapshots:
       '@univerjs/docs': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/drawing': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/slides': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/ui': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4)
       clsx: 2.1.1
@@ -9264,7 +9350,7 @@ snapshots:
       '@univerjs/design': 0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/docs': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/protocol': 0.1.38(@grpc/grpc-js@1.11.1)(rxjs@7.8.1)
       '@univerjs/thread-comment': 0.2.7(@grpc/grpc-js@1.11.1)(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/ui': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4)
@@ -9290,7 +9376,7 @@ snapshots:
       '@univerjs/design': 0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/engine-formula': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1)
       '@univerjs/engine-render': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1)
-      '@univerjs/icons': 0.1.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@univerjs/icons': 0.1.74(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@univerjs/ui': 0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/design@0.2.7(clsx@2.1.1)(dayjs@1.11.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@univerjs/engine-formula@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(@univerjs/rpc@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(rxjs@7.8.1))(@univerjs/engine-render@0.2.7(@univerjs/core@0.2.7(@grpc/grpc-js@1.11.1)(react@18.3.1)(rxjs@7.8.1))(rxjs@7.8.1))(clsx@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(typescript@5.5.4)
       clsx: 2.1.1
       localforage: 1.10.0
@@ -9483,11 +9569,11 @@ snapshots:
       '@turf/invariant': 6.5.0
       eventemitter3: 4.0.7
 
-  '@vitest/eslint-plugin@1.0.1(@typescript-eslint/utils@8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4))(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
+  '@vitest/eslint-plugin@1.0.1(@typescript-eslint/utils@8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4))(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)':
     dependencies:
       eslint: 9.9.0(jiti@1.21.6)
     optionalDependencies:
-      '@typescript-eslint/utils': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@typescript-eslint/utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
       typescript: 5.5.4
 
   '@vue/compiler-core@3.4.37':
@@ -10590,61 +10676,61 @@ snapshots:
       - supports-color
       - typescript
 
-  eslint-plugin-react-debug@1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4):
+  eslint-plugin-react-debug@1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4):
     dependencies:
-      '@eslint-react/ast': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/core': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/jsx': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/shared': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/tools': 1.10.0
-      '@eslint-react/types': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/var': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@typescript-eslint/scope-manager': 8.0.1
-      '@typescript-eslint/type-utils': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@typescript-eslint/types': 8.0.1
-      '@typescript-eslint/utils': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/ast': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/core': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/jsx': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/shared': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/tools': 1.10.1
+      '@eslint-react/types': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/var': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@typescript-eslint/scope-manager': 8.1.0
+      '@typescript-eslint/type-utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@typescript-eslint/types': 8.1.0
+      '@typescript-eslint/utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
       eslint: 9.9.0(jiti@1.21.6)
       string-ts: 2.2.0
-      ts-pattern: 5.2.0
+      ts-pattern: 5.3.1
     optionalDependencies:
       typescript: 5.5.4
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-react-dom@1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4):
+  eslint-plugin-react-dom@1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4):
     dependencies:
-      '@eslint-react/ast': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/core': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/jsx': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/shared': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/tools': 1.10.0
-      '@eslint-react/types': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/var': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@typescript-eslint/scope-manager': 8.0.1
-      '@typescript-eslint/types': 8.0.1
-      '@typescript-eslint/utils': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/ast': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/core': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/jsx': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/shared': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/tools': 1.10.1
+      '@eslint-react/types': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/var': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@typescript-eslint/scope-manager': 8.1.0
+      '@typescript-eslint/types': 8.1.0
+      '@typescript-eslint/utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
       eslint: 9.9.0(jiti@1.21.6)
-      ts-pattern: 5.2.0
+      ts-pattern: 5.3.1
     optionalDependencies:
       typescript: 5.5.4
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-react-hooks-extra@1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4):
+  eslint-plugin-react-hooks-extra@1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4):
     dependencies:
-      '@eslint-react/ast': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/core': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/jsx': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/shared': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/tools': 1.10.0
-      '@eslint-react/types': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/var': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@typescript-eslint/scope-manager': 8.0.1
-      '@typescript-eslint/type-utils': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@typescript-eslint/types': 8.0.1
-      '@typescript-eslint/utils': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/ast': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/core': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/jsx': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/shared': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/tools': 1.10.1
+      '@eslint-react/types': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/var': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@typescript-eslint/scope-manager': 8.1.0
+      '@typescript-eslint/type-utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@typescript-eslint/types': 8.1.0
+      '@typescript-eslint/utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
       eslint: 9.9.0(jiti@1.21.6)
-      ts-pattern: 5.2.0
+      ts-pattern: 5.3.1
     optionalDependencies:
       typescript: 5.5.4
     transitivePeerDependencies:
@@ -10654,20 +10740,20 @@ snapshots:
     dependencies:
       eslint: 9.9.0(jiti@1.21.6)
 
-  eslint-plugin-react-naming-convention@1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4):
+  eslint-plugin-react-naming-convention@1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4):
     dependencies:
-      '@eslint-react/ast': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/core': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/jsx': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/shared': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/tools': 1.10.0
-      '@eslint-react/types': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@typescript-eslint/scope-manager': 8.0.1
-      '@typescript-eslint/type-utils': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@typescript-eslint/types': 8.0.1
-      '@typescript-eslint/utils': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/ast': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/core': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/jsx': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/shared': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/tools': 1.10.1
+      '@eslint-react/types': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@typescript-eslint/scope-manager': 8.1.0
+      '@typescript-eslint/type-utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@typescript-eslint/types': 8.1.0
+      '@typescript-eslint/utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
       eslint: 9.9.0(jiti@1.21.6)
-      ts-pattern: 5.2.0
+      ts-pattern: 5.3.1
     optionalDependencies:
       typescript: 5.5.4
     transitivePeerDependencies:
@@ -10677,31 +10763,31 @@ snapshots:
     dependencies:
       eslint: 9.9.0(jiti@1.21.6)
 
-  eslint-plugin-react-x@1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4):
+  eslint-plugin-react-x@1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4):
     dependencies:
-      '@eslint-react/ast': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/core': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/jsx': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/shared': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/tools': 1.10.0
-      '@eslint-react/types': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@eslint-react/var': 1.10.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@typescript-eslint/scope-manager': 8.0.1
-      '@typescript-eslint/type-utils': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      '@typescript-eslint/types': 8.0.1
-      '@typescript-eslint/utils': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/ast': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/core': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/jsx': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/shared': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/tools': 1.10.1
+      '@eslint-react/types': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@eslint-react/var': 1.10.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@typescript-eslint/scope-manager': 8.1.0
+      '@typescript-eslint/type-utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@typescript-eslint/types': 8.1.0
+      '@typescript-eslint/utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
       eslint: 9.9.0(jiti@1.21.6)
       is-immutable-type: 5.0.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
-      ts-pattern: 5.2.0
+      ts-pattern: 5.3.1
     optionalDependencies:
       typescript: 5.5.4
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-readable-tailwind@1.6.1(eslint@9.9.0(jiti@1.21.6))(tailwindcss@3.4.9):
+  eslint-plugin-readable-tailwind@1.7.0(eslint@9.9.0(jiti@1.21.6))(tailwindcss@3.4.10):
     dependencies:
       eslint: 9.9.0(jiti@1.21.6)
-      tailwindcss: 3.4.9
+      tailwindcss: 3.4.10
 
   eslint-plugin-regexp@2.6.0(eslint@9.9.0(jiti@1.21.6)):
     dependencies:
@@ -11469,7 +11555,7 @@ snapshots:
 
   is-immutable-type@5.0.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4):
     dependencies:
-      '@typescript-eslint/type-utils': 8.0.1(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
+      '@typescript-eslint/type-utils': 8.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
       eslint: 9.9.0(jiti@1.21.6)
       ts-api-utils: 1.3.0(typescript@5.5.4)
       ts-declaration-location: 1.0.4(typescript@5.5.4)
@@ -13682,7 +13768,7 @@ snapshots:
 
   tailwind-merge@2.5.2: {}
 
-  tailwindcss@3.4.9:
+  tailwindcss@3.4.10:
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -13809,7 +13895,7 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  ts-pattern@5.2.0: {}
+  ts-pattern@5.3.1: {}
 
   tslib@2.6.3: {}
 
