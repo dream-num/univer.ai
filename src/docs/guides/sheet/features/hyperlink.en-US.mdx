@@ -64,7 +64,8 @@ univer.registerPlugin(UniverSheetsHyperLinkUIPlugin);
 
 The full api please refer to [@univerjs/sheets-hyper-link-ui](/typedoc/@univerjs/sheets-hyper-link-ui/README)
 
-### Using Commands
+### Using Command
+
 ```typescript
 // All commands
 import { AddHyperLinkCommand, type IAddHyperLinkCommandParams } from '@univerjs/sheets-hyper-link-ui';
@@ -75,14 +76,14 @@ import { UpdateHyperLinkCommand, type IUpdateHyperLinkCommandParams } from '@uni
 const commandService = univer.__getInjector().get(ICommandService);
 
 commandService.executeCommand(AddHyperLinkCommand.id, {
-    unitId: 'unitId',
-    subUnitId: 'subUnitId',
-    link: {
-        // comment content
-        payload: 'https://univer.ai',
-        id: '1',
-        row: 0,
-        column: 0
-    },
+  unitId: 'unitId',
+  subUnitId: 'subUnitId',
+  link: {
+    // comment content
+    payload: 'https://univer.ai',
+    id: '1',
+    row: 0,
+    column: 0
+  },
 } as IAddCommentCommandParams);
 ```

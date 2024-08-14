@@ -87,7 +87,7 @@ class CustomMentionDataService implements IThreadCommentMentionDataService {
 
 univer.registerPlugin(UniverThreadCommentPlugin);
 univer.registerPlugin(UniverThreadCommentUIPlugin, {
-    overrides: [[IThreadCommentMentionDataService, { useClass: CustomMentionDataService }]],
+  overrides: [[IThreadCommentMentionDataService, { useClass: CustomMentionDataService }]],
 });
 univer.registerPlugin(UniverSheetsThreadCommentBasePlugin);
 univer.registerPlugin(UniverSheetsThreadCommentPlugin);
@@ -101,28 +101,28 @@ Full API please refer to [@univerjs/sheets-thread-comment](/typedoc/@univerjs/sh
 
 ```typescript
 import {
-    AddCommentCommand,
-    DeleteCommentCommand,
-    UpdateCommentCommand,
-    ResolveCommentCommand,
-    DeleteCommentTreeCommand,
+  AddCommentCommand,
+  DeleteCommentCommand,
+  UpdateCommentCommand,
+  ResolveCommentCommand,
+  DeleteCommentTreeCommand,
 } from '@univerjs/sheets-thread-comment';
 import type {
-    IAddCommentCommandParams,
-    IDeleteCommentCommandParams,
-    IResolveCommentCommandParams,
-    IUpdateCommentCommandParams,
-    IDeleteCommentTreeCommandParams,
+  IAddCommentCommandParams,
+  IDeleteCommentCommandParams,
+  IResolveCommentCommandParams,
+  IUpdateCommentCommandParams,
+  IDeleteCommentTreeCommandParams,
 } from '@univerjs/sheets-thread-comment';
 
 // Add comment by command
 const commandService = univer.__getInjector().get(ICommandService);
 
 commandService.executeCommand(AddCommentCommand.id, {
-    unitId: 'unitId',
-    subUnitId: 'subUnitId',
-    comment: {
-        // comment content
-    },
+  unitId: 'unitId',
+  subUnitId: 'subUnitId',
+  comment: {
+    // comment content
+  },
 } as IAddCommentCommandParams);
 ```
