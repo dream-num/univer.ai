@@ -1,5 +1,7 @@
 'use client'
 import '@univerjs/thread-comment-ui/lib/index.css'
+import '@univerjs/drawing-ui/lib/index.css'
+
 import { LocaleType, Univer, UniverInstanceType, UserManagerService } from '@univerjs/core'
 import { defaultTheme } from '@univerjs/design'
 import { UniverDocsPlugin } from '@univerjs/docs'
@@ -62,6 +64,8 @@ export default function App(props: IProps) {
     univer.registerPlugin(GithubPlugin, {
       link: '/src/examples/docs',
     })
+
+    window.univer = univer
 
     const injector = univer.__getInjector()
     const userManagerService = injector.get(UserManagerService)

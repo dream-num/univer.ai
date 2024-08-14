@@ -55,7 +55,7 @@ export default function ShineBorder({
             '--background-radial-gradient': animate ? `radial-gradient(transparent,transparent, ${!(Array.isArray(color)) ? color : color.join(',')},transparent,transparent)` : `radial-gradient(transparent,transparent, ${!(Array.isArray(color)) ? color : color.join(',')})`,
           } as React.CSSProperties
         }
-        // eslint-disable-next-line readable-tailwind/multiline
+
         className={`
           before:bg-shine-size before:absolute before:inset-[0] before:aspect-square before:h-full
           before:w-full before:rounded-[--border-radius] before:p-[--border-width]
