@@ -40,6 +40,8 @@
     "@univerjs/docs": "0.2.7",
     "@univerjs/docs-drawing": "0.2.7",
     "@univerjs/docs-drawing-ui": "0.2.7",
+    "@univerjs/docs-hyper-link-ui": "0.2.7",
+    "@univerjs/docs-thread-comment-ui": "0.2.7",
     "@univerjs/docs-ui": "0.2.7",
     "@univerjs/drawing": "0.2.7",
     "@univerjs/drawing-ui": "0.2.7",
