@@ -16,6 +16,8 @@
   "dependencies": {
     "@antv/g2": "^5.2.3",
     "@codesandbox/sandpack-react": "^2.18.2",
+    "@docsearch/css": "^3.6.1",
+    "@docsearch/react": "^3.6.1",
     "@radix-ui/react-checkbox": "^1.1.1",
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-dropdown-menu": "^2.1.1",
