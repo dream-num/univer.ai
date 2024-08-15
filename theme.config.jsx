@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import pkg from './package.json'
 import Logo from '@/components/Logo'
+import DocSearch from '@/components/DocSearch'
 
 export default {
   logo: Logo,
@@ -39,6 +40,11 @@ export default {
         cardType: 'summary_large_image',
       },
     }
+  },
+  search: {
+    component: () => (
+      <DocSearch />
+    ),
   },
   banner: {
     dismissible: true,

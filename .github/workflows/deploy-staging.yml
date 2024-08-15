@@ -74,6 +74,10 @@ jobs:
       #     key: ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
       #     restore-keys: |
       #       ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
+      - name: set algolia env
+        run: |
+          echo "CR=${{ vars.NEXT_PUBLIC_ALGOLIA_APP_ID }}" >> $GITHUB_ENV
+          echo "CR=${{ vars.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY }}" >> $GITHUB_ENV
 
       - name: Build
         run: |
