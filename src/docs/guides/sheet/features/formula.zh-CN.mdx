@@ -1,0 +1,19 @@
+import { Tabs } from 'nextra/components'
+import { LocaleType } from '@univerjs/core'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+import FormulaList from './formula/FormulaList'
+
+# 公式
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+公式是 Univer 提供的核心能力之一，它可以让你在单元格中使用公式来计算数值，公式支持的函数和 Excel 一致，包括数学、逻辑、文本、日期等等。
+
+## 已经支持的公式函数
+
+<FormulaList locale={LocaleType.ZH_CN} />
+
+## 自定义公式
+
+Univer 支持自定义公式，请参考[自定义公式](/guides/sheet/advanced/custom-formula) 章节了解如何实现。

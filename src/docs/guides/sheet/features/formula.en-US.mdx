@@ -1,0 +1,19 @@
+import { Tabs } from 'nextra/components'
+import { LocaleType } from '@univerjs/core'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+import FormulaList from './formula/FormulaList'
+
+# Formula
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+Formula is one of the core capabilities provided by Univer, which allows you to use formulas to calculate values in cells. The functions supported by formulas are consistent with Excel, including mathematical, logical, text, date, and more.
+
+## Supported Formula Functions
+
+<FormulaList locale={LocaleType.EN_US} />
+
+## Custom Formula
+
+Univer supports custom formulas. Please refer to the [Custom Formula](/guides/sheet/advanced/custom-formula) section to learn how to implement them.
