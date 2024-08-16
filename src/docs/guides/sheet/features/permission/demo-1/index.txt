@@ -1,4 +1,4 @@
-import { LocaleType, Univer, UniverInstanceType, IPermissionService, IUniverInstanceService } from '@univerjs/core'
+import { IPermissionService, IUniverInstanceService, LocaleType, Univer, UniverInstanceType } from '@univerjs/core'
 
 import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
 import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
@@ -58,7 +58,7 @@ $a.addEventListener('click', () => {
   const univerInstanceService = injector.get(IUniverInstanceService)
 
   const workbook = univerInstanceService.getCurrentUnitForType(
-    UniverInstanceType.UNIVER_SHEET
+    UniverInstanceType.UNIVER_SHEET,
   )
 
   if (!workbook) {
@@ -68,7 +68,7 @@ $a.addEventListener('click', () => {
   const unitId = workbook.getUnitId()
   const workbookPermissionInstance = new WorkbookEditablePermission(unitId)
   let permissionPoint = permissionService.getPermissionPoint(
-    workbookPermissionInstance.id
+    workbookPermissionInstance.id,
   )
   if (!permissionPoint) {
     permissionService.addPermissionPoint(workbookPermissionInstance)
@@ -76,7 +76,7 @@ $a.addEventListener('click', () => {
   }
   permissionService.updatePermissionPoint(
     workbookPermissionInstance.id,
-    !permissionPoint.value
+    !permissionPoint.value,
   )
 })
 

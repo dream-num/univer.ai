@@ -1,9 +1,14 @@
 import { Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import Sandbox from '@/components/Sandbox'
+
+import entryFile from './filter/demo-1/index.txt'
 
 # Filter
 
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+<Sandbox entryFile={entryFile} />
 
 The filter plugin provides filtering functionality for cells.
 

@@ -14,8 +14,8 @@ import { UniverSheetsUIPlugin } from '@univerjs/sheets-ui'
 import { UniverSheetsNumfmtPlugin } from '@univerjs/sheets-numfmt'
 import { UniverSheetsFormulaPlugin } from '@univerjs/sheets-formula'
 
-import { UniverSheetsHyperLinkPlugin } from '@univerjs/sheets-hyper-link'
-import { UniverSheetsHyperLinkUIPlugin } from '@univerjs/sheets-hyper-link-ui'
+import { UniverSheetsFilterPlugin } from '@univerjs/sheets-filter'
+import { UniverSheetsFilterUIPlugin } from '@univerjs/sheets-filter-ui'
 
 import { enUS } from './locales'
 
@@ -47,24 +47,63 @@ univer.registerPlugin(UniverSheetsUIPlugin)
 univer.registerPlugin(UniverSheetsNumfmtPlugin)
 univer.registerPlugin(UniverSheetsFormulaPlugin)
 
-univer.registerPlugin(UniverSheetsHyperLinkPlugin)
-univer.registerPlugin(UniverSheetsHyperLinkUIPlugin)
+univer.registerPlugin(UniverSheetsFilterPlugin)
+univer.registerPlugin(UniverSheetsFilterUIPlugin)
 
 univer.createUnit(UniverInstanceType.UNIVER_SHEET, {
-  id: 'workbook-01',
+  id: 'iWQcFw',
   sheetOrder: [
-    '-BlrFOejKWnMvThKdRqrF',
-    'TgQMU_WKVoQDMKSLo02Mo',
+    'XY59ziGImbs3cXEqDTyAd',
   ],
-  name: 'UniverSheet Demo',
-  appVersion: '3.0.0-alpha',
+  name: '',
+  appVersion: '0.2.7',
   locale: 'zhCN',
   styles: {
+    PznCR3: {
+      ff: 'Arial',
+      fs: 11,
+      it: 0,
+      bl: 0,
+      ul: {
+        s: 0,
+        cl: {
+          rgb: 'rgb(0,0,0)',
+        },
+      },
+      st: {
+        s: 0,
+        cl: {
+          rgb: 'rgb(0,0,0)',
+        },
+      },
+      ol: {
+        s: 0,
+        cl: {
+          rgb: 'rgb(0,0,0)',
+        },
+      },
+      tr: {
+        a: 0,
+      },
+      td: 0,
+      cl: {
+        rgb: 'rgb(0,0,0)',
+      },
+      ht: 0,
+      vt: 0,
+      tb: 0,
+      pd: {
+        t: 0,
+        b: 1,
+        l: 2,
+        r: 2,
+      },
+    },
   },
   sheets: {
-    '-BlrFOejKWnMvThKdRqrF': {
-      name: 'sheet-01',
-      id: '-BlrFOejKWnMvThKdRqrF',
+    XY59ziGImbs3cXEqDTyAd: {
+      id: 'XY59ziGImbs3cXEqDTyAd',
+      name: 'Sheet1',
       tabColor: '',
       hidden: 0,
       rowCount: 1000,
@@ -84,76 +123,93 @@ univer.createUnit(UniverInstanceType.UNIVER_SHEET, {
       cellData: {
         0: {
           0: {
-            v: 'univer.ai',
+            v: 'Apple',
             t: 1,
-          },
-          1: {
-            v: 'C2',
-            t: 1,
-          },
-          2: {
-            v: 'sheet-02',
-            t: 1,
+            s: 'PznCR3',
           },
         },
-      },
-      rowData: {
-        0: {
-          hd: 0,
-          h: 24,
-          ah: 24,
-        },
-      },
-      columnData: {},
-      showGridlines: 1,
-      rowHeader: {
-        width: 46,
-        hidden: 0,
-      },
-      columnHeader: {
-        height: 20,
-        hidden: 0,
-      },
-      selections: [
-        'A1',
-      ],
-      rightToLeft: 0,
-    },
-    TgQMU_WKVoQDMKSLo02Mo: {
-      name: 'sheet-02',
-      id: 'TgQMU_WKVoQDMKSLo02Mo',
-      tabColor: '',
-      hidden: 0,
-      rowCount: 1000,
-      columnCount: 20,
-      zoomRatio: 1,
-      freeze: {
-        xSplit: 0,
-        ySplit: 0,
-        startRow: -1,
-        startColumn: -1,
-      },
-      scrollTop: 0,
-      scrollLeft: 0,
-      defaultColumnWidth: 88,
-      defaultRowHeight: 24,
-      mergeData: [],
-      cellData: {
-        0: {
+        1: {
           0: {
-            v: 'sheet-01',
+            v: 'Banana',
             t: 1,
+            s: 'PznCR3',
           },
+        },
+        2: {
+          0: {
+            v: 'Orange',
+            t: 1,
+            s: 'PznCR3',
+          },
+        },
+        3: {
+          0: {
+            v: 'Strawberry',
+            t: 1,
+            s: 'PznCR3',
+          },
+        },
+        4: {
+          0: {
+            v: 'Mango',
+            t: 1,
+            s: 'PznCR3',
+          },
+        },
+        5: {
+          0: {
+            v: 'Pineapple',
+            t: 1,
+            s: 'PznCR3',
+          },
+        },
+        6: {
+          0: {},
+        },
+        7: {
+          0: {},
         },
       },
       rowData: {
         0: {
           hd: 0,
           h: 24,
-          ah: 24,
+        },
+        1: {
+          hd: 0,
+          h: 24,
+        },
+        2: {
+          hd: 0,
+          h: 24,
+        },
+        3: {
+          hd: 0,
+          h: 24,
+        },
+        4: {
+          hd: 0,
+          h: 24,
+        },
+        5: {
+          hd: 0,
+          h: 24,
+        },
+        6: {
+          hd: 0,
+          h: 20,
+        },
+        7: {
+          hd: 0,
+          h: 20,
         },
       },
-      columnData: {},
+      columnData: {
+        0: {
+          w: 88,
+          hd: 0,
+        },
+      },
       showGridlines: 1,
       rowHeader: {
         width: 46,
@@ -183,8 +239,8 @@ univer.createUnit(UniverInstanceType.UNIVER_SHEET, {
       data: '',
     },
     {
-      name: 'SHEET_HYPER_LINK_PLUGIN',
-      data: '{"-BlrFOejKWnMvThKdRqrF":[{"id":"U9DvSHACW68-1nOSqow-8","row":0,"column":0,"payload":"http://univer.ai"},{"id":"n6abaRHvCzrP9XziihQMX","row":0,"column":1,"payload":"#gid=-BlrFOejKWnMvThKdRqrF&range=C2"},{"id":"2voQtcbQb7TpB3ce35V_S","row":0,"column":2,"payload":"#gid=TgQMU_WKVoQDMKSLo02Mo"}],"TgQMU_WKVoQDMKSLo02Mo":[{"id":"hs5UHyKYBcAXyHhxNOQTB","row":0,"column":0,"payload":"#gid=-BlrFOejKWnMvThKdRqrF"}]}',
+      name: 'SHEET_FILTER_PLUGIN',
+      data: '{"XY59ziGImbs3cXEqDTyAd":{"ref":{"startRow":0,"startColumn":0,"endRow":5,"endColumn":0},"filterColumns":[{"customFilters":{"customFilters":[{"val":"*o*"}]},"colId":0}],"cachedFilteredOut":[1,2,3,5]}}',
     },
     {
       name: 'SHEET_DEFINED_NAME_PLUGIN',

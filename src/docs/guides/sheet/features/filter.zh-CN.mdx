@@ -1,9 +1,14 @@
 import { Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import Sandbox from '@/components/Sandbox'
+
+import entryFile from './filter/demo-1/index.txt'
 
 # 筛选
 
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+<Sandbox entryFile={entryFile} />
 
 筛选插件提供了对单元格的筛选功能。
 
