@@ -76,7 +76,7 @@ Univer 的插件存在生命周期，通过使用生命周期，开发者可以�
 
 ```typescript
 export abstract class Plugin {
-  onStarting(_injector: Injector): void {}
+  onStarting(): void {}
   onReady(): void {}
   onRendered(): void {}
   onSteady(): void {}
