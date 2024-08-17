@@ -2,7 +2,7 @@
   "core": "Core",
   "facade": "Facade API",
   "permission": "Permission",
-  "built-in-formula": "Formula",
+  "formula": "Formula",
   "numfmt": "Number Format",
   "hyperlink": "Hyperlink",
   "floating-images": "Floating Images",

@@ -2,7 +2,7 @@
   "core": "核心功能",
   "facade": "Facade API",
   "permission": "权限控制",
-  "built-in-formula": "公式",
+  "formula": "公式",
   "numfmt": "数字格式",
   "hyperlink": "超链接",
   "floating-images": "浮动图片",
