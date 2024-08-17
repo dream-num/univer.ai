@@ -1,8 +1,6 @@
 {
   "core": "Core",
   "facade": "Facade API",
-  "permission": "Permission",
-  "formula": "Formula",
   "numfmt": "Number Format",
   "hyperlink": "Hyperlink",
   "floating-images": "Floating Images",
