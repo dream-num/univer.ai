@@ -2,13 +2,14 @@ import { Callout, Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 import Sandbox from '@/components/Sandbox'
 
-import entryFile from './hyperlink/demo-1/index.txt'
+import entryFile from './pivot-table/demo.txt'
+import data from './pivot-table/data.txt'
 
 # Pivot Table
 
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
 
-{/* <Sandbox entryFile={entryFile} /> */}
+<Sandbox entryFile={entryFile} files={{'data.ts':data}} />
 
 Pivot table is a powerful data analysis tool that can quickly summarize, organize and analyze large amounts of data, thereby helping users discover patterns and trends in the data.
 
