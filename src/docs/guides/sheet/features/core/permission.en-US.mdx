@@ -9,13 +9,13 @@ import entryFile from './permission/demo-1/index.txt'
 
 <Sandbox entryFile={entryFile} />
 
-It is used to handle the permission interception of the front-end scenario. When it is found that there is no corresponding operation permission, the code execution will be terminated and the user will be prompted for the missing permission. For example, you can set area protection in a selection area, and then set whether other collaborators can use editing, reading, copying, filtering, etc. within the protection range.
+Univer provides the ability to control permissions, which can typically be used to restrict users' operations on workbooks, worksheets, and selections. When a user performs an operation without permission, the code execution can be terminated and the user can be prompted for missing permissions. For example, you can set protection in a selected area to determine whether other collaborators can use editing, reading, copying, filtering, and more within that protected area.
 
-## How to use
+## Basic example
 
 ### workbook permission
 
-Currently, the overall permissions of a workbook are not set through `mutation`. Instead, the permissions are modified directly through the API. Therefore, we provide a [Facade API](/guides/sheet/facade/facade). You can set the edit permissions of a workbook by calling this API.
+By using the [Facade API](/guides/sheet/facade/facade), you can easily set the permissions of the workbook:
 
 ```typescript
 import { FUniver } from "@univerjs/facade";

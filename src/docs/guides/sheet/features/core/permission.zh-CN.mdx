@@ -9,13 +9,13 @@ import entryFile from './permission/demo-1/index.txt'
 
 <Sandbox entryFile={entryFile} />
 
-是用来处理前端场景的权限拦截，当发现没有对应操作权限的时候，会终止代码执行并提示用户缺失权限。例如你可以在一片选区内设置区域保护，就可以设置其他协作者在该保护范围内是否可以使用编辑、阅读、复制、筛选等等。
+Univer 提供了权限控制的能力，通常可用于限制用户对工作簿、工作表、选区的操作。当用户进行没有权限的操作时，可终止代码执行并提示用户缺失权限。例如你可以在一片选区内设置区域保护，就可以设置其他协作者在该保护范围内是否可以使用编辑、阅读、复制、筛选等等。
 
-## 如何使用
+## 基础示例
 
 ### 工作簿权限
 
-目前工作簿的整体权限不通过 `mutation` 设置，是直接通过 API 来修改权限点位，我们提供了 [Facade API](/guides/sheet/facade/facade)，你可以通过调用这个 API 来设置工作簿的编辑权限。
+通过 [Facade API](/guides/sheet/facade/facade)，你可以非常轻松地设置工作簿的权限:
 
 ```typescript
 import { FUniver } from "@univerjs/facade";
