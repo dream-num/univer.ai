@@ -1,0 +1,69 @@
+import { LocaleType, Univer, UniverInstanceType } from '@univerjs/core'
+
+import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
+import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
+
+import { UniverUIPlugin } from '@univerjs/ui'
+import { defaultTheme } from '@univerjs/design'
+
+import { UniverDocsPlugin } from '@univerjs/docs'
+import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
+
+import { UniverSheetsPlugin } from '@univerjs/sheets'
+import { UniverSheetsUIPlugin } from '@univerjs/sheets-ui'
+import { UniverSheetsNumfmtPlugin } from '@univerjs/sheets-numfmt'
+import { UniverSheetsFormulaPlugin } from '@univerjs/sheets-formula'
+
+
+import { UniverSheetsPivotTablePlugin } from '@univerjs-pro/sheets-pivot';
+import { UniverSheetsPivotTableUIPlugin } from '@univerjs-pro/sheets-pivot-ui';
+import SheetsPivotTableEnUS from '@univerjs-pro/sheets-pivot/locale/en-US';
+import SheetsPivotTableUIEnUS from '@univerjs-pro/sheets-pivot-ui/locale/en-US';
+
+
+import { enUS } from './locales'
+
+import './style.css'
+import { snapshotData } from './data.ts'
+
+const univer = new Univer({
+    theme: defaultTheme,
+    locale: LocaleType.EN_US,
+    locales: {
+        [LocaleType.EN_US]: Tools.deepMerge(
+            enUS,
+            SheetsPivotTableEnUS,
+            SheetsPivotTableUIEnUS
+        ),
+    },
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin)
+univer.registerPlugin(UniverFormulaEnginePlugin)
+
+univer.registerPlugin(UniverUIPlugin, {
+    container: 'app',
+    disableAutoFocus: true,
+})
+
+univer.registerPlugin(UniverDocsPlugin, {
+    hasScroll: false,
+})
+univer.registerPlugin(UniverDocsUIPlugin)
+
+univer.registerPlugin(UniverSheetsPlugin)
+univer.registerPlugin(UniverSheetsUIPlugin)
+univer.registerPlugin(UniverSheetsNumfmtPlugin)
+univer.registerPlugin(UniverSheetsFormulaPlugin)
+
+
+
+univer.registerPlugin(UniverFormulaEnginePlugin, {
+    notExecuteFormula: false,
+});
+// pivot table
+univer.registerPlugin(UniverSheetsPivotTablePlugin, { registerInOneThread: true });
+univer.registerPlugin(UniverSheetsPivotTableUIPlugin);
+
+univer.createUnit(UniverInstanceType.UNIVER_SHEET, snapshotData)
+
