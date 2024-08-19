@@ -94,6 +94,10 @@ bash uninstall.sh clean # Uninstall and delete data
 
 ## Troubleshooting
 
+### Where is the service dir?
+
+In `docker-compose` dir, include `.env` config file, `run.sh` script.
+
 ### Having trouble starting on a Windows OS?
 
 The `run.sh` script operates in a `bash` environment. To get it up and running, you'll need to use either Git Bash/MinGW or a WSL environment.
@@ -154,3 +158,25 @@ HOST_GRAFANA_PORT=13000
 3. The `docker-compose.mysql.yaml` apply a MySQL component, if you want to use yourself database, you can delete the `univer-mysql` service in `docker-compose.mysql.yaml` file, and delete the dependencies in other service `depends_on` properties.
 
 4. Start/Restart the service: `bash run.sh`
+
+### How to change S3 config?
+
+1. Update `.env` file, set the S3 config.
+```shell
+# s3 config
+S3_USER=minio
+S3_PASSWORD=minio123456
+S3_REGION=us-east-1
+S3_PATH_STYLE=true
+S3_ENDPOINT=http://univer-minio:9000
+S3_ENDPOINT_PUBLIC=http://univer-minio:9000
+S3_DEFAULT_BUCKET=univer
+```
+
+- `S3_PATH_STYLE`: `true` bucket is in path info; `false` bucket is in domain info.
+- `S3_REGION`: the bucket region, like aws `us-east-1`.
+- `S3_ENDPOINT`: internal network endpoint.
+- `S3_ENDPOINT_PUBLIC`: public network endpoint, use to download file.
+- `S3_DEFAULT_BUCKET`: s3 bucket, create it before start univer service.
+
+2. Start/Restart the service: `bash run.sh`
