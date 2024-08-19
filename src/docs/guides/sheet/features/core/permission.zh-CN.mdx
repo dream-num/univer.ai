@@ -15,7 +15,7 @@ Univer 提供了权限控制的能力，通常可用于限制用户对工作簿�
 
 ### 工作簿权限
 
-通过 [Facade API](/guides/sheet/facade/facade)，你可以非常轻松地设置工作簿的权限:
+目前工作簿的整体权限是直接通过 API 来修改权限点位，我们提供了 [Facade API](/guides/sheet/facade/facade)，你可以通过调用这个 API 来设置工作簿的编辑权限。
 
 ```typescript
 import { FUniver } from "@univerjs/facade";
@@ -85,11 +85,12 @@ commandService.executeCommand(AddRangeProtectionMutation.id, {
     unitId,
     subUnitId,
     ranges,
+    id: 'rule1'
   }],
 });
 ```
 
-这个 demo 是给自定义选区添加权限保护，这里面的参数和上面的一样，只是多了一个 `ranges` 参数，这个参数是你选中的区域。   
+这个 demo 是给自定义选区添加权限保护，这里面的参数和上面的一样，增加了 `ranges` 参数，这个参数是你选中的区域， 还有一个 `id` 参数, 这个参数是用来标识这个规则的唯一 id，用来删除这个规则。   
 
 在通常的操作流程中，已经创建的权限区域中，创建者会拥有最高权限，所以会出现在自己创建的区域中自己总是可以编辑的情况，这时候可以在上面的 demo 后面补充下面的代码来实现所有人都不可编辑等需求。其他功能逻辑一样，只需要在 update 中更换对应的点位即可。
 
