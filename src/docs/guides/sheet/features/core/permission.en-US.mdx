@@ -15,7 +15,7 @@ Univer provides the ability to control permissions, which can typically be used 
 
 ### workbook permission
 
-By using the [Facade API](/guides/sheet/facade/facade), you can easily set the permissions of the workbook:
+Currently, the overall permissions of a workbook are modified directly through the API. We provide the [Facade API](/guides/sheet/facade/facade). You can set the edit permissions of a workbook by calling this API.
 
 ```typescript
 import { FUniver } from "@univerjs/facade";
@@ -87,11 +87,12 @@ commandService.executeCommand(AddRangeProtectionMutation.id, {
     unitId,
     subUnitId,
     ranges,
+    id: 'rule1'
   }],
 });
 ```
 
-This demo adds protection to a selected area. The parameters here are the same as above, except that there is an additional `ranges` parameter, which is the area you selected.
+This demo adds permission protection to a custom selection. The parameters here are the same as above, with the addition of a `ranges` parameter, which is the area you selected, and an `id` parameter, which is the unique id used to identify this rule and is used to delete this rule.
 
 In typical workflows, the creator of a permissioned area will have the highest level of access, which means they can always edit the area they created. To implement a scenario where no one, including the creator, can edit the area, you can add the following code to the demo provided above.
 
