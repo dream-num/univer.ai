@@ -91,6 +91,10 @@ bash uninstall.sh clean # 卸载，删除数据
 
 ## 常见问题
 
+### 服务的运行目录在哪里？
+
+在`docker-compose`文件夹下，包含 .env 配置文件、 run.sh 启动脚本。
+
 ### Windows 系统下启动失败？
 
 运行脚本 `run.sh` 需要 `bash` 环境支持，请使用 Git Bash/MinGW 或 WSL 环境启动。
@@ -174,3 +178,25 @@ HOST_GRAFANA_PORT=13000
 3.  `docker-compose.mysql.yaml` 文件提供了一个 MySQL 数据库组件，如果你想使用已有的数据库，可以将 `univer-mysql` 从 `docker-compose.mysql.yaml` 文件中删除，然后再把其他服务 `depends_on` 属性中的 `univer-mysql` 依赖去掉。
 
 4. 启动/重启服务：`bash run.sh`。
+
+### 怎样修改 S3 配置？
+
+1. 更新 `.env` 文件，修改 S3 对应的配置。
+```shell
+# s3 config
+S3_USER=minio
+S3_PASSWORD=minio123456
+S3_REGION=us-east-1
+S3_PATH_STYLE=true
+S3_ENDPOINT=http://univer-minio:9000
+S3_ENDPOINT_PUBLIC=http://univer-minio:9000
+S3_DEFAULT_BUCKET=univer
+```
+
+- `S3_PATH_STYLE`：`true` 表示 bucket 在路由路径；`false` 表示 bucket 在域名上。
+- `S3_REGION`：地区，根据 s3 bucket 的位置配置。
+- `S3_ENDPOINT`：内网地址。
+- `S3_ENDPOINT_PUBLIC`：公网地址，用于下载文件。
+- `S3_DEFAULT_BUCKET`：s3 存储桶，需要在启动 univer 服务前先创建好。
+
+2. 启动/重启服务：`bash run.sh`。
