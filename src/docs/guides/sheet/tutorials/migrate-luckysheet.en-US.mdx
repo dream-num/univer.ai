@@ -20,7 +20,7 @@ The core work of the conversion is to adapt the workbook configuration, workshee
 |-------|----------------|------------|
 | Workbook configuration | [IWorkbookData](/typedoc/@univerjs/core/interfaces/IWorkbookData) | [Overall Configuration](https://dream-num.github.io/LuckysheetDocs/guide/config.html) |
 | Worksheet configuration | [IWorksheetData](/typedoc/@univerjs/core/interfaces/IWorksheetData) | [Sheet Configuration](https://dream-num.github.io/LuckysheetDocs/guide/sheet.html) |
-| Cell | [ICellData](/typedoc/@univerjs/core/interfaces/ICellData) | [Cell Attributes](https://dream-num.github.io/LuckysheetDocs/guide/cell.html) |
+| Cell | [ICellData](/guides/sheet/getting-started/cell-data) | [Cell Attributes](https://dream-num.github.io/LuckysheetDocs/guide/cell.html) |
 
 ### Plugin
 
@@ -28,8 +28,18 @@ Luckysheet is initialized through a JSON configuration, while Univer is split, t
 
 | | Univer | Luckysheet |
 |-------|----------------|------------|
-| Conditional formatting | [@univerjs/sheets-conditional-formatting](/typedoc/@univerjs/sheets-conditional-formatting/README) | [luckysheet_conditionformat_save](https://dream-num.github.io/LuckysheetDocs/guide/sheet.html#luckysheet-conditionformat-save) |
-| Data validation | [@univerjs/sheets-data-validation](/typedoc/@univerjs/sheets-data-validation/README) | [dataverification](https://dream-num.github.io/LuckysheetDocs/zh/guide/sheet.html#dataverification) |
+| Number Format | [numfmt](/guides/sheet/features/numfmt), Configure via [Cell Style](/guides/sheet/getting-started/cell-data#cell-style)  | [Cell format: cell.ct](https://dream-num.github.io/LuckysheetDocs/guide/cell.html#cell-format)  |
+| Floating Images | [floating images](/guides/sheet/features/floating-images) | [image](https://dream-num.github.io/LuckysheetDocs/guide/sheet.html#image)      |
+| Find & Replace | [find replace](/guides/sheet/features/find-replace) | -      |
+| Filter | [filter](/guides/sheet/features/filter) | [filter](https://dream-num.github.io/LuckysheetDocs/guide/sheet.html#filter)      |
+| Sort | [sort](/guides/sheet/features/sort) | [filter](https://dream-num.github.io/LuckysheetDocs/guide/sheet.html#filter) (Included in filter)      |
+| Pivot Table | [pivot table](/guides/sheet/features/pivot-table) | [pivotTable](https://dream-num.github.io/LuckysheetDocs/guide/sheet.html#pivottable)      |
+| Data Validation | [data validation](/guides/sheet/features/data-validation) | [dataverification](https://dream-num.github.io/LuckysheetDocs/zh/guide/sheet.html#dataverification)      |
+| Conditional Formatting | [conditional formatting](/guides/sheet/features/conditional-formatting)  | [luckysheet_conditionformat_save](https://dream-num.github.io/LuckysheetDocs/guide/sheet.html#luckysheet-conditionformat-save)  |
+| Comment / Annotation | [thread comment](/guides/sheet/features/thread-comment)  | [Cell Comments: cell.ps](https://dream-num.github.io/LuckysheetDocs/zh/guide/cell.html#%E5%9F%BA%E6%9C%AC%E5%8D%95%E5%85%83%E6%A0%BC)  |
+| Print | [print](/guides/sheet/features/print)  | [Print plugin](https://github.com/dream-num/Luckysheet/wiki/Plugin:-Print)  |
+| Import & Export | [import export](/guides/sheet/features/import-export) | [Luckyexcel import](https://github.com/dream-num/Luckyexcel) & [export](https://github.com/dream-num/Luckysheet/wiki/Plugin:-Export-XLSX), Or [community solutions](https://dream-num.github.io/LuckysheetDocs/guide/FAQ.html#how-to-import-and-export-excel)      |
+| Collaborative Editing | [collaboration](/guides/sheet/features/collaboration) | [LuckysheetServer](https://github.com/dream-num/LuckysheetServer)      |
 
 ### API
 
@@ -43,3 +53,11 @@ For the API part, Luckysheet API is uniformly mounted on `window.luckysheet`, th
 For some commonly used basic data, you can refer to [Migrate Luckysheet Demo](/playground?title=Migrate%20Luckysheet) and customize it according to project requirements.
 
 If Univer's existing functions do not meet your needs, you can also develop your own plugin for adaptation.
+
+## FAQ
+
+### How to migrate the `transformExcelTolucky` method of Luckyexcel?
+
+The `transformExcelTolucky` method is provided in Luckyexcel, which can convert Excel files into JSON data. In the corresponding Univer, the `importXLSXToSnapshot` method of [Facade API](/guides/sheet/facade/sheet-api#import-xlsx-and-get-workbook-data) can be used to achieve this.
+
+If you need to convert an online Excel file, Luckyexcel provides the `transformExcelToLuckyByUrl` method. Univer does not directly provide a method to convert online Excel files, but you can download the online Excel file to the local computer through the browser's fetch API, and then call the `importXLSXToSnapshot` method to achieve this. Refer to [How to Open or Edit an Excel File from a URL](/guides/sheet/features/import-export#how-to-open-or-edit-an-excel-file-from-a-url).

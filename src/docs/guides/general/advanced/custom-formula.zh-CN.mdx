@@ -92,18 +92,26 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
     在原有的国际化对象中扩展你定义的国际化内容。
 
     ```typescript
+    import { LocaleType, Tools } from '@univerjs/core';
+    import DesignEnUS from '@univerjs/design/locale/en-US';
+    import DocsUIEnUS from '@univerjs/docs-ui/locale/en-US';
+    import SheetsEnUS from '@univerjs/sheets/locale/en-US';
+    import SheetsUIEnUS from '@univerjs/sheets-ui/locale/en-US';
+    import UIEnUS from '@univerjs/ui/locale/en-US';
+    import { functionEnUS, functionZhCN } from "./custom-function";
+
     export const locales = {
-      [LocaleType.EN_US]: {
-        ...UniverSheetsEnUS,
-        ...UniverDocsUIEnUS,
-        ...UniverSheetsUIEnUS,
-        ...UniverUiEnUS,
-        ...UniverDesignEnUS,
-        ...functionEnUS,
-      },
-      [LocaleType.ZH_CN]: {
-        ...functionZhCN,
-      },
+      [LocaleType.EN_US]: Tools.deepMerge(
+        SheetsEnUS,
+        DocsUIEnUS,
+        SheetsUIEnUS,
+        UIEnUS,
+        DesignEnUS,
+        functionEnUS,
+      ),
+      [LocaleType.ZH_CN]: Tools.deepMerge(
+        functionZhCN,
+      ),
     };
     ```
 
