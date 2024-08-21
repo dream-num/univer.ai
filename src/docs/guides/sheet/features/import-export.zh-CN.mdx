@@ -61,7 +61,7 @@ const univer = new Univer({
 univer.registerPlugin(UniverSheetsExchangeClientPlugin);
 ```
 
-## 配置
+## 配置 <a id="configuration"></a>
 
 如果导入导出的接口没有变动，可以不用配置，如果有变动，可以通过以下方式配置接口地址：
 
@@ -125,3 +125,9 @@ fetchExcelFile(url).then(async file => {
 ```
 
 注: Facade API `univerAPI.importXLSXToSnapshot` 会调用  `@univerjs-pro/exchange-client` 提供的功能，使用前确保项目已经安装好了`@univerjs-pro/exchange-client`。
+
+### 导入导出 API 异常？ <a id="import-export-error" />
+
+要让导入导出正常工作，还需要正确配置 Univer Server 的 S3 配置，这些配置会用于存储导入、导出的文件。
+
+阅读 [常见问题](/guides/sheet/server/docker#import-export-error) 了解更多。

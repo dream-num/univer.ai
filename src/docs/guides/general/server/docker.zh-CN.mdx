@@ -74,12 +74,12 @@ Univer 服务默认端口如下：
 
   ### 验证服务是否可用
 
-  **方式 1：**启动内置的演示程序，访问 `http://localhost:3010` 即可查看效果。
+  **方式 1：** 启动内置的演示程序，访问 `http://localhost:3010` 即可查看效果。
   ```bash
   docker run --net=univer-prod --rm --name univer-collaboration-lite -p 3010:3010 univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/univer-collaboration-lite:latest
   ```
 
-  **方式 2：**自行建立前端工程，[了解更多](/guides/sheet/getting-started/quickstart#install-and-run-the-frontend)。
+  **方式 2：** 自行建立前端工程，[了解更多](/guides/sheet/getting-started/quickstart#install-and-run-the-frontend)。
 </Steps>
 
 ### 卸载
@@ -89,7 +89,7 @@ bash uninstall.sh       # 卸载，保留数据下次使用
 bash uninstall.sh clean # 卸载，删除数据
 ```
 
-## 常见问题
+## 常见问题 <a id="troubleshooting"></a>
 
 ### 服务的运行目录在哪里？
 
@@ -99,14 +99,24 @@ bash uninstall.sh clean # 卸载，删除数据
 
 运行脚本 `run.sh` 需要 `bash` 环境支持，请使用 Git Bash/MinGW 或 WSL 环境启动。
 
-### 表格另存为功能无法使用？
+### 导入导出功能异常 <a id="import-export-error" />
 
-编辑 `.env` 文件，将 `S3_ENDPOINT_PUBLIC` 配置为你的局域网 IP，才能使`另存为`功能正常。
+首先，请通过浏览器开发工具检查下导入导出过程中响应体中是否存在 `univer-minio` 等字样，如果有，可能是 S3 配置不当导致的导入导出功能异常，请根据以下步骤检查和配置为正确的 S3 配置。
+
+假设你使用安装时预置的 Minio 服务，打开 `.env` 文件，按下述说明将 `S3_ENDPOINT_PUBLIC` 配置项修改为 Docker 服务所在的公网或局域网 IP。
 
 ```diff
-- S3_ENDPOINT_PUBLIC=http://univer-minio:19000
-+ S3_ENDPOINT_PUBLIC=http://<你的局域网IP>:19000
+- S3_ENDPOINT_PUBLIC=http://univer-minio:9000
++ S3_ENDPOINT_PUBLIC=http://<Docker服务所在的公网或局域网IP>:19000
 ```
+
+修改配置后请重启服务验证。
+
+**注意：** 不应该配置成 `localhost` 和 `127.0.0.1`，这样会导致前端无法访问到 S3 服务。
+
+如果你使用自己的 S3 服务，可以参考完整的[S3 配置](#s3-config)。
+
+除了 S3 配置问题，你还应该检查前端工程中的 Univer Server 的[导入导出API的配置](/guides/sheet/features/import-export#configuration)是否正确。
 
 ### 拉取 docker hub 镜像失败？
 
@@ -179,7 +189,7 @@ HOST_GRAFANA_PORT=13000
 
 4. 启动/重启服务：`bash run.sh`。
 
-### 怎样修改 S3 配置？
+### 怎样修改 S3 配置？ <a id="s3-config"></a>
 
 1. 更新 `.env` 文件，修改 S3 对应的配置。
 ```shell
@@ -200,3 +210,9 @@ S3_DEFAULT_BUCKET=univer
 - `S3_DEFAULT_BUCKET`：s3 存储桶，需要在启动 univer 服务前先创建好。
 
 2. 启动/重启服务：`bash run.sh`。
+
+### 访问 8000 端口响应 `404 page not found`
+
+8000 端口是 Univer Server 对外暴露的 API 端口，访问 `/` 返回 `404 page not found` 是正常现象，因为该路径下没有 API。
+
+如果你在验证服务和功能是否正常，可以通过[模板](/guides/sheet/getting-started/quickstart#install-and-run-the-frontend)来快速建立前端工程进行验证。
