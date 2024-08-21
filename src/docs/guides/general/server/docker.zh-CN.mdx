@@ -99,7 +99,7 @@ bash uninstall.sh clean # 卸载，删除数据
 
 运行脚本 `run.sh` 需要 `bash` 环境支持，请使用 Git Bash/MinGW 或 WSL 环境启动。
 
-### 导入导出功能异常？ <a id="import-export-error" />
+### 导入导出功能异常 <a id="import-export-error" />
 
 首先，请通过浏览器开发工具检查下导入导出过程中响应体中是否存在 `univer-minio` 等字样，如果有，可能是 S3 配置不当导致的导入导出功能异常，请根据以下步骤检查和配置为正确的 S3 配置。
 
@@ -211,7 +211,7 @@ S3_DEFAULT_BUCKET=univer
 
 2. 启动/重启服务：`bash run.sh`。
 
-### 访问 8000 端口响应 `404 page not found`？
+### 访问 8000 端口响应 `404 page not found`
 
 8000 端口是 Univer Server 对外暴露的 API 端口，访问 `/` 返回 `404 page not found` 是正常现象，因为该路径下没有 API。
 
