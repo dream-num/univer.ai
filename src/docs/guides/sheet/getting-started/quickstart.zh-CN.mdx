@@ -1,5 +1,6 @@
 import { Cards, Card, Steps, Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import { Callout } from 'nextra/components'
 
 # 快速开始
 
@@ -49,6 +50,10 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
   sh -c "$(curl -fsSL https://release-univer.oss-cn-shenzhen.aliyuncs.com/release-demo/install.sh)"
   ```
 
+  <Callout emoji="⚠️">
+    如果在安装或使用过程中遇到问题，请查看[常见问题](/guides/sheet/server/docker#troubleshooting)。
+  </Callout>
+
   ### 安装并运行前端 <a id="install-and-run-the-frontend"></a>
 
   <Tabs items={['pnpm', 'npm', '不使用包管理工具']}>
@@ -58,6 +63,9 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
       cd [your-app-name] && pnpm install # 注意：pnpm 版本需要 >= 8
       pnpm dev
       ```
+      <Callout emoji="⚠️">
+        如果您将服务端部署在其他机器上，还需修改 `vite.config.ts` 中的 `server` 配置项，将 `localhost` 改为服务端的 IP 地址。
+      </Callout>
 
       🎉 恭喜你，你又成功创建了一个包含了服务端的 Univer 项目，你可以访问 [http://localhost:5173/](http://localhost:5173/) 体验这些进阶的功能。
 
@@ -69,6 +77,9 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
       cd [your-app-name] && npm install # 注意：npm 版本需要 >= 7
       npm run dev
       ```
+      <Callout emoji="⚠️">
+        如果您将服务端部署在其他机器上，还需修改 `vite.config.ts` 中的 `server` 配置项，将 `localhost` 改为服务端的 IP 地址。
+      </Callout>
             
       🎉 恭喜你，你又成功创建了一个包含了服务端的 Univer 项目，你可以访问 [http://localhost:5173/](http://localhost:5173/) 体验这些进阶的功能。
 

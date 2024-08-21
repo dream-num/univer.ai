@@ -61,7 +61,7 @@ const univer = new Univer({
 univer.registerPlugin(UniverSheetsExchangeClientPlugin);
 ```
 
-## Configuration
+## Configuration <a id="configuration"></a>
 
 If the import/export interface has not changed, you do not need to configure it. If there are changes, you can configure the interface address as follows:
 
@@ -125,3 +125,9 @@ fetchExcelFile(url).then(async file => {
 ```
 
 Note: The Facade API `univerAPI.importXLSXToSnapshot` utilizes the functionality provided by `@univerjs-pro/exchange-client`. Ensure that `@univerjs-pro/exchange-client` is installed in the project before use.
+
+### The Import/Export API is not functioning properly <a id="import-export-error" />
+
+To ensure proper functioning of the Import/Export feature, you need to correctly configure the S3 settings in Univer Server. These configurations will be used for storing imported and exported files.
+
+Read the [Troubleshooting](/guides/sheet/server/docker#import-export-error) section for more information.
