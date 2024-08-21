@@ -1,4 +1,4 @@
-import { Cards, Card, Steps, Tabs } from 'nextra/components'
+import { Cards, Card, Callout, Steps, Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 # Quickstart
@@ -49,6 +49,10 @@ Of course, you may want more than just the basics. If you're looking to add feat
   sh -c "$(curl -fsSL https://release-univer.oss-cn-shenzhen.aliyuncs.com/release-demo/install.sh)"
   ```
 
+  <Callout emoji="⚠️">
+    If you encounter any issues during installation or use, please refer to the [Troubleshooting](/guides/sheet/server/docker#troubleshooting).
+  </Callout>
+
   ### Install and Run the Frontend <a id="install-and-run-the-frontend"></a>
 
   <Tabs items={['pnpm', 'npm', 'Without package manager']}>
@@ -58,6 +62,9 @@ Of course, you may want more than just the basics. If you're looking to add feat
       cd [your-app-name] && pnpm install # pnpm version >= 8
       pnpm dev
       ```
+      <Callout emoji="⚠️">
+        If you deploy the server on a different machine, you need to update the `server` configuration in `vite.config.ts` by changing `localhost` to the machine's IP address.
+      </Callout>
 
       🎉 Congratulations! You've successfully created another Univer project with a server. You can now visit [http://localhost:5173/](http://localhost:5173/) to experience these advanced features.
 
@@ -70,6 +77,9 @@ Of course, you may want more than just the basics. If you're looking to add feat
       cd [your-app-name] && npm install # npm version >= 7
       npm run dev
       ```
+      <Callout emoji="⚠️">
+        If you deploy the server on a different machine, you need to update the `server` configuration in `vite.config.ts` by changing `localhost` to the machine's IP address.
+      </Callout>
 
       🎉 Congratulations! You've successfully created another Univer project with a server. You can now visit [http://localhost:5173/](http://localhost:5173/) to experience these advanced features.
 

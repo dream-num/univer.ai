@@ -92,7 +92,7 @@ bash uninstall.sh       # Uninstall while retaining data for future use
 bash uninstall.sh clean # Uninstall and delete data
 ```
 
-## Troubleshooting
+## Troubleshooting <a id="troubleshooting" />
 
 ### Where is the service dir?
 
@@ -102,14 +102,24 @@ In `docker-compose` dir, include `.env` config file, `run.sh` script.
 
 The `run.sh` script operates in a `bash` environment. To get it up and running, you'll need to use either Git Bash/MinGW or a WSL environment.
 
-### Can't use the save-as-table function?
+### Import/Export functionality issue <a id="import-export-error" />
 
-You'll need to tweak the `.env` file. Set `S3_ENDPOINT_PUBLIC` to your local network IP to get the `save as` function to work properly.
+First, use the browser developer tools to check if the response body during the import/export process contains references to `univer-minio`. If it does, the issue might be due to improper S3 configuration, leading to import/export functionality issues. Follow the steps below to verify and correctly configure your S3 settings.
+
+Assuming you are using the pre-installed Minio service, open the `.env` file and modify the `S3_ENDPOINT_PUBLIC` configuration item according to the instructions below, replacing it with the public or private network IP where the Docker service is running.
 
 ```diff
 - S3_ENDPOINT_PUBLIC=http://univer-minio:9000
-+ S3_ENDPOINT_PUBLIC=http://<Your Local Network IP>:19000
++ S3_ENDPOINT_PUBLIC=http://<Public_or_Private_IP_of_Docker_Service>:19000
 ```
+
+After making the changes, restart the service to verify the configuration.
+
+**Note:** Do not set this to `localhost` or `127.0.0.1`, as this will prevent the frontend from accessing the S3 service.
+
+If you are using your own S3 service, you can refer to the complete [S3 configuration](#s3-config).
+
+In addition to S3 configuration issues, you should also check whether [the import/export API configuration](/guides/sheet/features/import-export#configuration) of the Univer Server in the frontend project is correct.
 
 ### How to find error when server start failed?
 
@@ -159,7 +169,7 @@ HOST_GRAFANA_PORT=13000
 
 4. Start/Restart the service: `bash run.sh`
 
-### How to change S3 config?
+### How to change S3 config?  <a id="s3-config"></a>
 
 1. Update `.env` file, set the S3 config.
 ```shell
@@ -180,3 +190,9 @@ S3_DEFAULT_BUCKET=univer
 - `S3_DEFAULT_BUCKET`: s3 bucket, create it before start univer service.
 
 2. Start/Restart the service: `bash run.sh`
+
+### Accessing Port 8000 Returns `404 page not found`
+
+Port 8000 is the API port exposed by the Univer Server. Accessing `/` and receiving a `404 page not found` response is expected because there is no API at that path.
+
+If you want to verify whether the service and functionality are working correctly, you can do so by setting up a [start-kit template frontend project](/guides/sheet/getting-started/quickstart#install-and-run-the-frontend).
