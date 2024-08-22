@@ -1,0 +1,154 @@
+import { Tabs } from 'nextra/components'
+
+# Pivot Table Facade API
+当安装了 `@univerjs-pro/facade` 时，透视表Facade API 将自动混入到 Univer 中。
+
+## 安装
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs-pro/engine-pivot @univerjs/sheets-pivot @univerjs/sheets-pivot-ui @univerjs-pro/facade
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs-pro/engine-pivot @univerjs/sheets-pivot @univerjs/sheets-pivot-ui @univerjs-pro/facade
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## 介绍
+
+### 添加透视表
+
+在`@univerjs-pro/facade`被安装后，`addPivotTable`方法可以在F-workbook实例中使用，该实例可以从univerAPI中获取。
+
+```javascript
+import { PositionType } from '@univerjs-pro/sheets-pivot'
+const univerAPI = FUniver.newAPI(univer)
+const fWorkbook = univerAPI.getActiveWorkbook()
+
+const fWorkbook = univerAPI.getActiveWorkbook()
+  const unitId = fWorkbook.getId()
+  const fSheet = fWorkbook.getActiveSheet()
+  const subUnitId = fSheet.getSheetId()
+  const sheetName = fSheet.getSheetName()
+  const sourceInfo = {
+    unitId,
+    subUnitId,
+    sheetName,
+    range: {
+      startRow: 0,
+      startColumn: 0,
+      endRow: 8,
+      endColumn: 5,
+    },
+  }
+  const anchorCellInfo = {
+    unitId,
+    subUnitId,
+    row: 0,
+    col: 8,
+  }
+  const FPivot = await fWorkbook.addPivotTable(sourceInfo, PositionType.Exiting, anchorCellInfo)
+```
+
+### 获取FPivotTable
+
+方法getPivotTableByCell可以在F-workbook实例中使用，通过锚定单元格获取透视表实例。如果目标单元格在透视表中，它将返回FPivotTable实例。
+
+```javascript
+const fPivotTable =  fWorkbook.getPivotTableByCell(unitId, subUnitId, 0, 8)
+```
+
+### FPivotTable
+
+| 方法                | 描述                                                                    |
+| ------------------- | ----------------------------------------------------------------------- |
+| remove              | 删除透视表实例                                                          |
+| getConfig           | 获取当前透视表的配置信息，其中包括数据源范围，锚定单元格， 维度配置信息 |
+| addField            | 添加一个维度                                                            |
+| removeField         | 删除一个维度                                                            |
+| updateFieldPosition | 更新维度的所在区域以及顺序                                              |
+| updateValuePosition | 更新 ∑Value 的位置                                                      |
+| setSubtotalType     | 设置汇总方式                                                            |
+| setLabelSort        | 设置标签排序                                                            |
+| setLabelFilter      | 设置标签筛选                                                            |
+| renameField         | 重命名维度                                                              |
+
+```typescript
+    /**
+     * @description Get the pivot table config by the pivot table id.
+     * @typedef PivotTableConfig
+     * @property {TargetInfo} targetCellInfo  The target cell info of the pivot table.
+     * @property {SourceInfo} sourceRangeInfo The source data range info of the pivot table.
+     * @property {boolean} isEmpty The pivot table is empty or not.
+     * @property {object} fieldsConfig The snapshot of the pivot table fields config.
+     * @returns {PivotTableConfig|undefined} The pivot table config or undefined.
+     */
+    getConfig():IPivotTableConfig;
+    /**
+     * @description Remove a pivot table from the workbook by pivot table id
+     */
+    async remove():void;
+    /**
+     *@description Add a pivot field to the pivot table.
+     * @param {string|number} dataFieldIdOrIndex The data field id.
+     * @param {PivotTableFiledAreaEnum} fieldArea The area of the field.
+     * @param {number} index The index of the field in the target area.
+     * @returns {boolean} Whether the pivot field is added successfully.
+     */
+    async addField(dataFieldIdOrIndex: string | number, fieldArea: PivotTableFiledAreaEnum, index: number): Promise<boolean>;
+    /**
+     * @description Remove a pivot field from the pivot table
+     * @param {string[]} fieldIds The deleted field ids.
+     * @returns {boolean} Whether the pivot field is removed successfully.
+     */
+    async removeField(fieldIds: string[]): Promise<boolean>;
+    /**
+     * @description Update the pivot table field position.
+     * @param {string} fieldId - The moved field id.
+     * @param {PivotTableFiledAreaEnum} area - The target area of the field.
+     * @param {number} index - The target index of the field, if the index is bigger than the field count in the target area, the field will be moved to the last, if the index is smaller than 0, the field will be moved to the first.
+     * @returns {boolean} Whether the pivot field is moved successfully.
+     */
+    async updateFieldPosition(fieldId: string, area: PivotTableFiledAreaEnum, index: number): Promise<boolean>;
+    /**
+     * @description If there are multiple value fields in the pivot table, you can update the position of the value field, which only can be position in row or column.
+     * @param {PivotTableValuePositionEnum} position - The position of the value field.
+     * @param {number} index - The index of the value field.
+     * @returns {boolean} Whether the pivot value field is moved successfully.
+     */
+    async updateValuePosition(position: PivotTableValuePositionEnum, index: number): Promise<boolean>;
+    /**
+     * @description Set the pivot table subtotal type for value field, it only works for the value field.
+     * @param {string} fieldId - The field id.
+     * @param {PivotSubtotalTypeEnum} subtotalType - The subtotal type of the field.
+     * @returns {boolean} Whether the pivot table subtotal type is set successfully.
+     */
+    async setSubtotalType(fieldId: string, subtotalType: PivotSubtotalTypeEnum): Promise<boolean>;
+    /**
+     * @description Set the pivot table sort info.
+     * @param {string} tableFieldId - The field id of the sort.
+     * @param {PivotTableSortInfo} info - The sort info.
+     * @typedef PivotTableSortInfo
+     * @property {PivotDataFieldSortOperatorEnum} type The sort operator of the field items.
+     * @returns {boolean} Whether the pivot table sort info is set successfully.
+     */
+    async setLabelSort(tableFieldId: string, info: IPivotTableSortInfo): Promise<boolean>;
+    /**
+     * @description Set the pivot table filter.
+     * @param {string} tableFieldId - The field id of the filter.
+     * @param {string[]} items - The items of the filter.
+     * @returns {boolean} Whether the pivot table filter is set successfully.
+     */
+    async setLabelFilter(tableFieldId: string, items: string[], isAll?: boolean): Promise<boolean>;
+    /**
+     * @description Rename the pivot table field.
+     * @param {string} fieldId - The field id. 
+     * @param {string} name - The new name of the field.
+     * @returns {boolean} Whether the pivot table field is renamed successfully.
+     */
+    async renameField(fieldId: string, name: string): Promise<boolean>;
+```
