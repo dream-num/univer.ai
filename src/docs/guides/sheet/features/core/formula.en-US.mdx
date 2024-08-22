@@ -13,6 +13,50 @@ Formula is one of the core capabilities provided by Univer, which allows you to 
 
 <FormulaList locale="enUS" />
 
+
+## Facade API
+
+### Execute Calculation 
+
+```typescript
+const formula = univerAPI.getFormula();
+formula.executeCalculation();
+```
+
+### Stop Calculation
+
+```typescript
+const formula = univerAPI.getFormula();
+formula.stopCalculation();
+```
+
+### Calculation Start Event
+
+```typescript
+const formula = univerAPI.getFormula();
+formula.calculationStart((forceCalculate) => {
+    console.log(forceCalculate)
+});
+```
+
+### Calculation Processing Event
+
+```typescript
+const formula = univerAPI.getFormula();
+formula.calculationProcessing((stageInfo) => {
+    console.log(stageInfo)
+});
+```
+
+### Calculation End Event
+
+```typescript
+const formula = univerAPI.getFormula();
+formula.calculationEnd((functionsExecutedState) => {
+    console.log(functionsExecutedState)
+});
+```
+
 ## Custom Formula
 
 Univer supports custom formulas. Please refer to the [Custom Formula](/guides/sheet/advanced/custom-formula) section to learn how to implement them.

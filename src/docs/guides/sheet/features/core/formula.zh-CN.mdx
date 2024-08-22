@@ -13,6 +13,49 @@ import FormulaList from './formula/FormulaList'
 
 <FormulaList locale="zhCN" />
 
+## Facade API
+
+### 执行计算 
+
+```typescript
+const formula = univerAPI.getFormula();
+formula.executeCalculation();
+```
+
+### 停止计算
+
+```typescript
+const formula = univerAPI.getFormula();
+formula.stopCalculation();
+```
+
+### 计算开始事件
+
+```typescript
+const formula = univerAPI.getFormula();
+formula.calculationStart((forceCalculate) => {
+    console.log(forceCalculate)
+});
+```
+
+### 计算中事件
+
+```typescript
+const formula = univerAPI.getFormula();
+formula.calculationProcessing((stageInfo) => {
+    console.log(stageInfo)
+});
+```
+
+### 计算结束事件
+
+```typescript
+const formula = univerAPI.getFormula();
+formula.calculationEnd((functionsExecutedState) => {
+    console.log(functionsExecutedState)
+});
+```
+
 ## 自定义公式
 
 Univer 支持自定义公式，请参考[自定义公式](/guides/sheet/advanced/custom-formula) 章节了解如何实现。
