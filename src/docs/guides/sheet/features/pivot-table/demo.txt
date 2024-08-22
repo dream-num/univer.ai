@@ -1,53 +1,41 @@
-import { LocaleType, Univer, UniverInstanceType } from '@univerjs/core'
-
+import { ICommandService, LocaleType, RANGE_TYPE, Univer, UniverInstanceType } from '@univerjs/core'
 import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
 import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
-
 import { UniverUIPlugin } from '@univerjs/ui'
 import { defaultTheme } from '@univerjs/design'
-
 import { UniverDocsPlugin } from '@univerjs/docs'
 import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
-
 import { UniverSheetsPlugin } from '@univerjs/sheets'
 import { UniverSheetsUIPlugin } from '@univerjs/sheets-ui'
 import { UniverSheetsNumfmtPlugin } from '@univerjs/sheets-numfmt'
 import { UniverSheetsFormulaPlugin } from '@univerjs/sheets-formula'
-
-
-import { UniverSheetsPivotTablePlugin } from '@univerjs-pro/sheets-pivot';
-import { UniverSheetsPivotTableUIPlugin } from '@univerjs-pro/sheets-pivot-ui';
-import SheetsPivotTableEnUS from '@univerjs-pro/sheets-pivot/locale/en-US';
-import SheetsPivotTableUIEnUS from '@univerjs-pro/sheets-pivot-ui/locale/en-US';
-
+import { FUniver } from '@univerjs-pro/facade'
+import { PositionType, UniverSheetsPivotTablePlugin } from '@univerjs-pro/sheets-pivot'
+import { PivotTableFiledAreaEnum } from '@univerjs-pro/engine-pivot'
+import { UniverSheetsPivotTableUIPlugin } from '@univerjs-pro/sheets-pivot-ui'
 
 import { enUS } from './locales'
 
 import './style.css'
-import { snapshotData } from './data.ts'
 
 const univer = new Univer({
-    theme: defaultTheme,
-    locale: LocaleType.EN_US,
-    locales: {
-        [LocaleType.EN_US]: Tools.deepMerge(
-            enUS,
-            SheetsPivotTableEnUS,
-            SheetsPivotTableUIEnUS
-        ),
-    },
-});
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: enUS,
+  },
+})
 
 univer.registerPlugin(UniverRenderEnginePlugin)
 univer.registerPlugin(UniverFormulaEnginePlugin)
 
 univer.registerPlugin(UniverUIPlugin, {
-    container: 'app',
-    disableAutoFocus: true,
+  container: 'app',
+  disableAutoFocus: true,
 })
 
 univer.registerPlugin(UniverDocsPlugin, {
-    hasScroll: false,
+  hasScroll: false,
 })
 univer.registerPlugin(UniverDocsUIPlugin)
 
@@ -56,14 +44,435 @@ univer.registerPlugin(UniverSheetsUIPlugin)
 univer.registerPlugin(UniverSheetsNumfmtPlugin)
 univer.registerPlugin(UniverSheetsFormulaPlugin)
 
-
-
-univer.registerPlugin(UniverFormulaEnginePlugin, {
-    notExecuteFormula: false,
-});
 // pivot table
-univer.registerPlugin(UniverSheetsPivotTablePlugin, { registerInOneThread: true });
-univer.registerPlugin(UniverSheetsPivotTableUIPlugin);
+univer.registerPlugin(UniverSheetsPivotTablePlugin, { registerInOneThread: true, notExecuteFormula: true })
+univer.registerPlugin(UniverSheetsPivotTableUIPlugin)
+
+const snapshotData = {
+  id: 'GI6Z3W8CRQ-XUr4RpGNXcA',
+  sheetOrder: [
+    '-Ja7lANzJRNycl3_HXgd3',
+  ],
+  name: 'New Sheet By Univer',
+  appVersion: '1',
+  locale: 'enUS',
+  styles: {
+    XFuBjr: {
+      ff: 'Arial',
+      fs: 10,
+      it: 0,
+      bl: 0,
+      ul: {
+        s: 0,
+      },
+      st: {
+        s: 0,
+      },
+      ol: {
+        s: 0,
+      },
+      tr: {
+        a: 0,
+      },
+      td: 0,
+      ht: 0,
+      vt: 0,
+      tb: 0,
+      pd: {
+        t: 0,
+        b: 1,
+        l: 2,
+        r: 2,
+      },
+    },
+  },
+  sheets: {
+    '-Ja7lANzJRNycl3_HXgd3': {
+      id: '-Ja7lANzJRNycl3_HXgd3',
+      name: 'Sheet1',
+      rowCount: 1000,
+      columnCount: 20,
+      freeze: {
+        xSplit: 0,
+        ySplit: 0,
+        startRow: -1,
+        startColumn: -1,
+      },
+      hidden: 0,
+      rowData: {
+        0: {
+          hd: 0,
+          h: 24,
+        },
+        1: {
+          hd: 0,
+          h: 24,
+        },
+        2: {
+          hd: 0,
+          h: 24,
+        },
+        3: {
+          hd: 0,
+          h: 24,
+        },
+        4: {
+          hd: 0,
+          h: 24,
+        },
+        5: {
+          hd: 0,
+          h: 24,
+        },
+        6: {
+          hd: 0,
+          h: 24,
+        },
+        7: {
+          hd: 0,
+          h: 24,
+        },
+      },
+      tabColor: '',
+      mergeData: [],
+      rowHeader: {
+        width: 46,
+        hidden: 0,
+      },
+      scrollTop: 200,
+      zoomRatio: 1,
+      columnData: {
+        0: {
+          w: 88,
+          hd: 0,
+        },
+        1: {
+          w: 88,
+          hd: 0,
+        },
+        2: {
+          w: 88,
+          hd: 0,
+        },
+        3: {
+          w: 88,
+          hd: 0,
+        },
+        4: {
+          w: 88,
+          hd: 0,
+        },
+        5: {
+          w: 88,
+          hd: 0,
+        },
+      },
+      scrollLeft: 100,
+      selections: [
+        'A1',
+      ],
+      rightToLeft: 0,
+      columnHeader: {
+        height: 20,
+        hidden: 0,
+      },
+      showGridlines: 1,
+      defaultRowHeight: 24,
+      defaultColumnWidth: 88,
+      cellData: {
+        0: {
+          0: {
+            v: 'Area',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          1: {
+            v: 'Provinces',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          2: {
+            v: 'City',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          3: {
+            v: 'Category',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          4: {
+            v: 'Commodity',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          5: {
+            v: 'Number',
+            t: 1,
+            s: 'XFuBjr',
+          },
+        },
+        1: {
+          0: {
+            v: 'Northern',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          1: {
+            v: 'Heilongjiang',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          2: {
+            v: 'Qiqihar',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          3: {
+            v: 'fruit',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          4: {
+            v: 'Orange',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          5: {
+            v: 95,
+            t: 2,
+            s: 'XFuBjr',
+          },
+        },
+        2: {
+          0: {
+            v: 'Northern',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          1: {
+            v: 'Liaoning',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          2: {
+            v: 'Dalian',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          3: {
+            v: 'vegetable',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          4: {
+            v: 'Tomato',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          5: {
+            v: 86,
+            t: 2,
+            s: 'XFuBjr',
+          },
+        },
+        3: {
+          0: {
+            v: 'West',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          1: {
+            v: 'Henan',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          2: {
+            v: 'Zhengzhou',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          3: {
+            v: 'fruit',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          4: {
+            v: 'Grapes',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          5: {
+            v: 26,
+            t: 2,
+            s: 'XFuBjr',
+          },
+        },
+        4: {
+          0: {
+            v: 'West',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          1: {
+            v: 'Henan',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          2: {
+            v: 'Luoyang',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          3: {
+            v: 'vegetable',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          4: {
+            v: 'Eggplant',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          5: {
+            v: 36,
+            t: 2,
+            s: 'XFuBjr',
+          },
+        },
+        5: {
+          0: {
+            v: 'West',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          1: {
+            v: 'Shaanxi',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          2: {
+            v: 'Xianyang',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          3: {
+            v: 'fruit',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          4: {
+            v: 'Pear',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          5: {
+            v: 88,
+            t: 2,
+            s: 'XFuBjr',
+          },
+        },
+        6: {
+          0: {
+            v: 'Eastern',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          1: {
+            v: 'Guangxi',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          2: {
+            v: 'Nanning',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          3: {
+            v: 'fruit',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          4: {
+            v: 'Pear',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          5: {
+            v: 6,
+            t: 2,
+            s: 'XFuBjr',
+          },
+        },
+        7: {
+          0: {
+            v: 'Northern',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          1: {
+            v: 'Heilongjiang',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          2: {
+            v: 'Harbin',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          3: {
+            v: 'vegetable',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          4: {
+            v: 'Cucumber',
+            t: 1,
+            s: 'XFuBjr',
+          },
+          5: {
+            v: 95,
+            t: 2,
+            s: 'XFuBjr',
+          },
+        },
+      },
+    },
+  },
+  resources: [],
+}
 
 univer.createUnit(UniverInstanceType.UNIVER_SHEET, snapshotData)
+const univerAPI = FUniver.newAPI(univer)
+addPivotTable()
+async function addPivotTable() {
+  const fWorkbook = univerAPI.getActiveWorkbook()
+  const unitId = fWorkbook.getId()
+  const fSheet = fWorkbook.getActiveSheet()
+  const subUnitId = fSheet.getSheetId()
+  const sheetName = fSheet.getSheetName()
+  const sourceInfo = {
+    unitId,
+    subUnitId,
+    sheetName,
+    range: {
+      startRow: 0,
+      startColumn: 0,
+      endRow: 8,
+      endColumn: 5,
+    },
+  }
+  const anchorCellInfo = {
+    unitId,
+    subUnitId,
+    row: 0,
+    col: 8,
+  }
+  const FPivot = await fWorkbook.addPivotTable(sourceInfo, PositionType.Exiting, anchorCellInfo)
 
+  setTimeout(() => {
+    // add column B to row field
+    FPivot.addField(1, PivotTableFiledAreaEnum.ROW)
+    FPivot.addField(5, PivotTableFiledAreaEnum.Value)
+  }, 1000)
+}

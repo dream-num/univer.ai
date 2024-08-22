@@ -72,7 +72,7 @@ export default function Sandbox(props: ISandboxProps) {
             '@univerjs/slides': 'latest',
             '@univerjs/slides-ui': 'latest',
             '@univerjs/rpc': 'latest',
-            '@univerjs-pro/pivot-engine': 'latest',
+            '@univerjs-pro/engine-pivot': 'latest',
             '@univerjs-pro/sheets-pivot': 'latest',
             '@univerjs-pro/sheets-pivot-ui': 'latest',
             vue: 'latest',
@@ -80,6 +80,8 @@ export default function Sandbox(props: ISandboxProps) {
             react: 'latest',
             'react-dom': 'latest',
             rxjs: 'latest',
+            '@univerjs/icons': '^0.1.72',
+            'react-beautiful-dnd': '^13.1.1',
           },
           devDependencies: {
             '@univerjs/vite-plugin': 'latest',
