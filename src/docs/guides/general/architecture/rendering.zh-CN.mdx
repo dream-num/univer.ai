@@ -186,9 +186,9 @@ Component 支持滚动贴图，在滚动 sheet 的时候，渲染引擎只会绘
 
 ![rendererTextureCache](./rendering/renderer-texture-cache.png)
 
-## Render Unit
+## RenderUnit
 
-![render unit architecture](./rendering/render-unit-architecture.png)
+![RenderUnit Architecture](./rendering/render-unit-architecture.png)
 
 为了支持在一个 Univer 内部渲染多个文档，我们在架构中引入了 `RenderUnit` 机制。
 
@@ -228,12 +228,25 @@ export class UniverSheetsUIPlugin extends Plugin {
 
 通过这些属性，`IRenderModule` 可以很方便地获取到渲染所需的各种资源，而无需（也不应当）注入 `IUniverInstanceService` 和 `IRenderManagerService` 等模块。
 
-除了 `IRenderContext`，`IRenderModule` 可以通过依赖注入获取其他 `IRenderModule`。同时由于 `RenderUnit` 中的 `Injector` 是全局 `Injector` 的子节点，因此 `IRenderModule` 中也可以注入全局模块。
-
-某些情形下，你可能会需要从全局模块获取一个 `IRenderModule`，这种情形下你可以使用如下方法：
+除了 `IRenderContext`，`IRenderModule` 可以通过依赖注入获取其他 `IRenderModule`。同时由于 `RenderUnit` 中的 `Injector` 是全局 `Injector` 的子节点，因此 `IRenderModule` 中也可以注入全局模块，例如：
 
 ```ts
-const renderManagerService = this._injector.get(IRenderManagerService);
-const renderer = renderManagerService.getRenderById(unitId);
-render.with(DependencyToken);
+export class RefSelectionsRenderService extends BaseSelectionRenderService implements IRenderModule {
+    constructor(
+        private readonly _context: IRenderContext<Workbook>, // 渲染上下文
+        @Inject(Injector) injector: Injector, // RenderUnit 内部注入器
+        @Inject(ThemeService) themeService: ThemeService, // 全局依赖
+        @IShortcutService shortcutService: IShortcutService, // 全局依赖
+        @Inject(SheetSkeletonManagerService) sheetSkeletonManagerService: SheetSkeletonManagerService, // RenderUnit 内部依赖
+        @IRefSelectionsService private readonly _refSelectionsService: SheetsSelectionsService // 全局依赖
+    ) {
+      // ...
+    }
+}
+```
+
+某些情形下，你可能会需要从全局模块获取一个 `IRenderModule`，这种情形下你可以从 `IRenderManagerService` 获取 `RenderUnit` 并调用 `with` 方法，例如：
+
+```ts
+renderManagerService.getRenderById(unitId)?.with(DocSkeletonManagerService);
 ```

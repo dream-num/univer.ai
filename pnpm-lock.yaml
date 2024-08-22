@@ -6,7 +6,6 @@ settings:
 
 importers:
 
-<<<<<<< HEAD
   .:
     dependencies:
       '@antv/g2':
@@ -14592,6 +14591,3 @@ snapshots:
   zod@3.23.8: {}
 
   zwitch@2.0.4: {}
-=======
-  .: {}
->>>>>>> d7b87a4 (docs: add CODEOWNERS file)
