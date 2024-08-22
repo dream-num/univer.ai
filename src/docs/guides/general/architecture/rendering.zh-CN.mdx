@@ -182,12 +182,58 @@ export class Rect<T extends IRectProps = IRectProps> extends Shape<T> {
 
 以电子表格为例。要绘制电子表格内容区域，需要考虑三个部分，背景色、文字、边框线，所以这里有 3 个 extension，他们接受 SpreadsheetSkeleton 作为输入，根据其提供的布局信息来按单元格进行绘制。
 
-Component 支持用 canvas 作为缓存，进行贴图缓存绘制。目前在滚动 sheet 的时候，渲染引擎只会绘制增量部分的视图，极大提升了性能。
+Component 支持滚动贴图，在滚动 sheet 的时候，渲染引擎只会绘制增量内容，极大提升了性能。
 
 ![rendererTextureCache](./rendering/renderer-texture-cache.png)
 
 ## Render Unit
 
-![render unit architecture](./rendering/render-unit.png)
+![render unit architecture](./rendering/render-unit-architecture.png)
 
-为了支持注销和创建不同的 unit，以及在未来支持多个 unit 同时渲染，Univer 提出了 `RenderUnit` 的概念，一个 unit 对应一个 `RenderUnit`。`RenderUnit` 内部会持有一个 `Injector`，用户注册的 render controller 会被 Univer 在这个 `Injector` 当中实例化。Render controller 负责一个 unit 对于某个功能的渲染逻辑，它需要继承 `IRenderController` 接口。
+为了支持在一个 Univer 内部渲染多个文档，我们在架构中引入了 `RenderUnit` 机制。
+
+每个 `RenderUnit` 负责绘制一个文档，并持有：
+
+- 一个 `Engine` 实例
+- 一个 `Scene` 实例
+- 一个 `UnitModel` 实例，可能是文档、电子表格或幻灯片等的文档模型
+- 一个 `Injector` 实例，用于实例化专门用于渲染和交互逻辑的 `IRenderModule`。这个注入器使得 `RenderUnit` 能够独立地完成渲染和交互逻辑，而不会相互干扰。
+
+### `IRenderModule`
+
+业务如果需要实现渲染相关的业务逻辑，则需要实现一个 `IRenderModule` 接口的类，并注册到 `IRenderManagerService`。例如：
+
+```ts
+export class UniverSheetsUIPlugin extends Plugin {
+    private _registerRenderBasics(): void {
+        ([
+            [SheetSkeletonManagerService],
+            [SheetRenderController],
+            [ISheetSelectionRenderService, { useClass: SheetSelectionRenderService }],
+        ] as Dependency[]).forEach((m) => {
+            this.disposeWithMe(this._renderManagerService.registerRenderModule(UniverInstanceType.UNIVER_SHEET, m));
+        });
+    }
+}
+```
+
+注册时，需要将 `IRenderModule` 与其对应的文档类型，即 `UniverInstanceType` 进行关联。`RenderUnit` 初始化时，会根据文档的 `UniverInstanceType` 从 `IRenderManagerService` 中获取对应的 `IRenderModule` 依赖并实例化他们。
+
+`IRenderModule` 的 constructor 的第一个参数是一个满足 `IRenderContext` 对象，它包含的属性包括：
+
+- `engine`：`Engine` 实例
+- `scene`：`Scene` 实例
+- `unit`：`UnitModel` 实例
+- `unitId`：`UnitModel` 的 id
+
+通过这些属性，`IRenderModule` 可以很方便地获取到渲染所需的各种资源，而无需（也不应当）注入 `IUniverInstanceService` 和 `IRenderManagerService` 等模块。
+
+除了 `IRenderContext`，`IRenderModule` 可以通过依赖注入获取其他 `IRenderModule`。同时由于 `RenderUnit` 中的 `Injector` 是全局 `Injector` 的子节点，因此 `IRenderModule` 中也可以注入全局模块。
+
+某些情形下，你可能会需要从全局模块获取一个 `IRenderModule`，这种情形下你可以使用如下方法：
+
+```ts
+const renderManagerService = this._injector.get(IRenderManagerService);
+const renderer = renderManagerService.getRenderById(unitId);
+render.with(DependencyToken);
+```
