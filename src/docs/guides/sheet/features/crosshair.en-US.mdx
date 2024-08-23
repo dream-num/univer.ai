@@ -1,9 +1,14 @@
 import { Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import Sandbox from '@/components/Sandbox'
+
+import entryFile from './crosshair/demo-1/index.txt'
 
 # Crosshair Highlight
 
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+<Sandbox entryFile={entryFile} />
 
 Crosshair highlight highlights the row and column of the selected cell to make it easier for users to identify the currently selected cell.
 
@@ -38,9 +43,9 @@ import SheetsCrosshairHighlightEnUS from '@univerjs/sheets-crosshair-highlight/l
 
 const univer = new Univer({
   theme: defaultTheme,
-  locale: LocaleType.ZH_CN,
+  locale: LocaleType.EN_US,
   locales: {
-    [LocaleType.ZH_CN]: Tools.deepMerge(
+    [LocaleType.EN_US]: Tools.deepMerge(
       SheetsCrosshairHighlightEnUS 
     ),
   },
