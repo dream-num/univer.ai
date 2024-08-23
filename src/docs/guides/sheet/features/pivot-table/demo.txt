@@ -45,7 +45,7 @@ univer.registerPlugin(UniverSheetsNumfmtPlugin)
 univer.registerPlugin(UniverSheetsFormulaPlugin)
 
 // pivot table
-univer.registerPlugin(UniverSheetsPivotTablePlugin, { registerInOneThread: true, notExecuteFormula: true })
+univer.registerPlugin(UniverSheetsPivotTablePlugin)
 univer.registerPlugin(UniverSheetsPivotTableUIPlugin)
 
 const snapshotData = {
@@ -458,7 +458,7 @@ async function addPivotTable() {
     range: {
       startRow: 0,
       startColumn: 0,
-      endRow: 8,
+      endRow: 7,
       endColumn: 5,
     },
   }
@@ -466,13 +466,13 @@ async function addPivotTable() {
     unitId,
     subUnitId,
     row: 0,
-    col: 8,
+    col: 6,
   }
   const FPivot = await fWorkbook.addPivotTable(sourceInfo, PositionType.Exiting, anchorCellInfo)
 
   setTimeout(() => {
     // add column B to row field
-    FPivot.addField(1, PivotTableFiledAreaEnum.ROW)
+    FPivot.addField(1, PivotTableFiledAreaEnum.Row)
     FPivot.addField(5, PivotTableFiledAreaEnum.Value)
   }, 1000)
 }
