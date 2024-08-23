@@ -12,6 +12,6 @@ Please feel free to contribute to this repo by submitting a pull request. If you
 
 We use [MDX](https://mdxjs.com/) to write documents. MDX is a markdown format that allows you to use JSX components.
 
-### Graphs
+### Drawings 
 
-Graphs help users to understand your ideas better. To keep styles of graphs consistent, we use [Excalidraw](https://excalidraw.com/) to create graphs. We store the source files of graphs in this repo directly. It is recommend to install [Excalidraw VSCode extension](https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor) and use it to edit the source files.
+Drawings help users to understand your ideas better. To keep styles of graphs consistent, we use [Excalidraw](https://excalidraw.com/) to create graphs. We store the source files of graphs in this repo directly. It is recommend to install [Excalidraw VSCode extension](https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor) and use it to edit the source files.

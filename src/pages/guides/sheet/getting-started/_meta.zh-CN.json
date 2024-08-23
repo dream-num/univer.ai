@@ -3,5 +3,6 @@
   "installation": "安装和引入",
   "i18n": "国际化",
   "univer-plugins": "简化引入",
-  "cell-data": "单元格配置"
+  "cell-data": "单元格配置",
+  "concepts": "基础概念"
 }
