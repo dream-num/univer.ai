@@ -2,18 +2,18 @@ import { Callout, Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 import Sandbox from '@/components/Sandbox'
 
-import entryFile from './hyperlink/demo-1/index.txt'
+import entryFile from './pivot-table/demo.txt'
 
 # 数据透视表
 
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
 
-{/* <Sandbox entryFile={entryFile} /> */}
+<Sandbox entryFile={entryFile} />
 
 数据透视表是一种强大的数据分析工具，它能够快速汇总、组织和分析大量数据，从而帮助用户发现数据中的模式和趋势。
 
-- `@univerjs-pro/pivot-engine` 提供了数据透视表最基本的数据计算能力，该插件的工作不依赖任何第三方的插件
-- `@univerjs-pro/sheets-pivot` 将 pivot-engine 组装成 Univer Sheet 插件以便支持表格的渲染，协同，公式等能力
+- `@univerjs-pro/engine-pivot` 提供了数据透视表最基本的数据计算能力，该插件的工作不依赖任何第三方的插件
+- `@univerjs-pro/sheets-pivot` 将 engine-pivot 组装成 Univer Sheet 插件以便支持表格的渲染，协同，公式等能力
 - `@univerjs-pro/sheets-pivot-ui` 提供一个最基本的拖拽操作界面 & 筛选以及其他交互所需要的 Dialog
 
 ## 功能
@@ -45,12 +45,12 @@ import entryFile from './hyperlink/demo-1/index.txt'
 <Tabs items={['pnpm', 'npm']}>
   <Tabs.Tab label="pnpm">
     ```shell
-    pnpm add @univerjs-pro/pivot-engine @univerjs/sheets-pivot @univerjs/sheets-pivot-ui
+    pnpm add @univerjs-pro/engine-pivot @univerjs/sheets-pivot @univerjs/sheets-pivot-ui
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
     ```shell
-    npm install @univerjs-pro/pivot-engine @univerjs/sheets-pivot @univerjs/sheets-pivot-ui
+    npm install @univerjs-pro/engine-pivot @univerjs/sheets-pivot @univerjs/sheets-pivot-ui
     ```
   </Tabs.Tab>
 </Tabs>
