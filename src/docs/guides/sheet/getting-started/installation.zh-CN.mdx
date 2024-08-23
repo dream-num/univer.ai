@@ -312,10 +312,10 @@ range1.setValue(1);
 
 ### 存储数据
 
-通过调用当前 `Workbook` 的 `getSnapshot` 方法，可以得到 `IWorkbookData` 对象，包含了表格内部的数据。
+通过调用当前 `Workbook` 的 `save` 方法，可以得到 `IWorkbookData` 对象，包含了表格内部的数据。
 
 ```typescript
-const savedData = univerAPI.getActiveWorkbook().getSnapshot();
+const savedData = univerAPI.getActiveWorkbook().save();
 ```
 
 ---

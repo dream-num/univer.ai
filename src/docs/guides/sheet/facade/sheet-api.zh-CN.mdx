@@ -54,7 +54,7 @@ univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});`
 ```typescript
 const univerAPI = FUniver.newAPI(univer);
 const activeWorkbook = univerAPI.getActiveWorkbook()
-const saveData = activeWorkbook.getSnapshot();
+const saveData = activeWorkbook.save();
 ```
 
 ### 销毁工作簿
@@ -78,7 +78,7 @@ univerAPI.disposeUnit('your-sheet-id');
 获取工作薄中所有工作表
 ```typescript
 const activeWorkbook = univerAPI.getActiveWorkbook();
-const sheets = activeWorkbook.getSnapshot().sheets;
+const sheets = activeWorkbook.save().sheets;
 ```
 
 获取工作薄中当前激活的工作表
@@ -92,7 +92,7 @@ const activeSheet = activeWorkbook.getActiveSheet();
 
 ```typescript
 const activeWorkbook = univerAPI.getActiveWorkbook();
-const snapshot = activeWorkbook.getSnapshot()
+const snapshot = activeWorkbook.save()
 const sheet1 = Object.values(snapshot.sheets).find((sheet) => {
   return sheet.name === 'Sheet1'
 })

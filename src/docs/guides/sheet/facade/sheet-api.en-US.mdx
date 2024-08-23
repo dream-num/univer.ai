@@ -54,7 +54,7 @@ univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});`
 ```typescript
 const univerAPI = FUniver.newAPI(univer);
 const activeWorkbook = univerAPI.getActiveWorkbook()
-const saveData = activeWorkbook.getSnapshot();
+const saveData = activeWorkbook.save();
 ```
 
 ### Unload Workbook
@@ -78,7 +78,7 @@ The `subUnitId` can be used to uniquely identify a sheet in a workbook.
 Get all sheets in a sheet
 ```typescript
 const activeWorkbook = univerAPI.getActiveWorkbook();
-const sheets = activeWorkbook.getSnapshot().sheets;
+const sheets = activeWorkbook.save().sheets;
 ```
 
 Get Active Worksheet
@@ -92,7 +92,7 @@ const activeSheet = activeWorkbook.getActiveSheet();
 
 ```typescript
 const activeWorkbook = univerAPI.getActiveWorkbook();
-const snapshot = activeWorkbook.getSnapshot()
+const snapshot = activeWorkbook.save()
 const sheet1 = Object.values(snapshot.sheets).find((sheet) => {
   return sheet.name === 'Sheet1'
 })
