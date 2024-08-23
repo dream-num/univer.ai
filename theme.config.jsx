@@ -66,6 +66,7 @@ export default {
     },
   },
   sidebar: {
+    defaultMenuCollapseLevel: 3,
     toggleButton: true,
     titleComponent({ title }) {
       const apiTitles = [
