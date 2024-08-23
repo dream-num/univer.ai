@@ -30,18 +30,17 @@ function Switch({ intailValue, value, leftIcon, rightIcon, leftLabel, rightLabel
   }
 
   return (
-    <div className={`
-      inline-flex gap-[4px] rounded-[32px] p-[4px] text-sm font-normal capitalize leading-none
-      text-neutral-800
+    <div
+      className={`
+        inline-flex gap-[4px] rounded-[32px] p-[4px] text-sm font-normal capitalize leading-none
+        text-neutral-800
 
-      xl:text-[16px] xl:text-slate-900
+        xl:text-[16px] xl:text-slate-900
 
-      ${isDisabled
-        ? `cursor-not-allowed opacity-50`
-        : `cursor-pointer`}
+        ${isDisabled ? `cursor-not-allowed opacity-50` : `cursor-pointer`}
 
-      bg-blue-600 bg-opacity-5
-    `}
+        bg-blue-600 bg-opacity-5
+      `}
     >
       <div
         className={`
@@ -52,8 +51,8 @@ function Switch({ intailValue, value, leftIcon, rightIcon, leftLabel, rightLabel
           xl:px-[20px] xl:py-[10px]
 
           ${selected === 'left'
-            ? `bg-white shadow-md`
-            : ''}
+      ? `bg-white shadow-md`
+      : ''}
         `}
         onClick={() => handleToggle('left')}
       >
@@ -77,8 +76,8 @@ function Switch({ intailValue, value, leftIcon, rightIcon, leftLabel, rightLabel
           xl:px-[20px] xl:py-[10px]
 
           ${selected === 'right'
-            ? `bg-white shadow-md`
-            : ''}
+      ? `bg-white shadow-md`
+      : ''}
         `}
         onClick={() => handleToggle('right')}
       >
