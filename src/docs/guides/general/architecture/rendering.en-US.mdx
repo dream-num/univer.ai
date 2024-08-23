@@ -187,8 +187,67 @@ Components support using a canvas as a buffer for caching and offscreen renderin
 
 ![rendererTextureCache](./rendering/renderer-texture-cache.png)
 
-## Render Unit
+## RenderUnit
 
-![render unit architecture](./rendering/render-unit.png)
+To support rendering multiple documents within a single Univer, we introduced the `RenderUnit` mechanism in our architecture.
 
-In order to support disposing units and creating new units, we have created a mechanism called `RenderUnit`. Each `RenderUnit` maps to a unit and holds an `Injector`. This injector is responsible for instantiating render controllers. A render controller is a class that is responsible for rendering a specific part of the unit, and it should implements interface `IRenderController`.
+![RenderUnit Architecture](./rendering/render-unit-architecture.png)
+
+Each `RenderUnit` is responsible for rendering a document and holds:
+
+- An `Engine` instance
+- A `Scene` instance
+- A `UnitModel` instance, which could be a document, spreadsheet, or slide document model
+- An `Injector` instance, used to instantiate `IRenderModule`s which are specifically for rendering and interaction logic. This injector allows the `RenderUnit` to independently handle rendering and interaction logic without interfering with other `RenderUnit`s.
+
+### `IRenderModule`
+
+If you would like to implement rendering-related business logic, you need to implement a class that implements the `IRenderModule` interface and register it with the `IRenderManagerService`. For example:
+
+```ts
+export class UniverSheetsUIPlugin extends Plugin {
+    private _registerRenderBasics(): void {
+        ([
+            [SheetSkeletonManagerService],
+            [SheetRenderController],
+            [ISheetSelectionRenderService, { useClass: SheetSelectionRenderService }],
+        ] as Dependency[]).forEach((m) => {
+            this.disposeWithMe(this._renderManagerService.registerRenderModule(UniverInstanceType.UNIVER_SHEET, m));
+        });
+    }
+}
+```
+
+When registering, you need to associate the `IRenderModule` with its corresponding document type, i.e. `UniverInstanceType`. When initializing a `RenderUnit`, the `IRenderModule` dependencies are obtained from the `IRenderManagerService` based on the `UniverInstanceType` of the document.
+
+The `IRenderModule` constructor's first parameter is an object that satisfies `IRenderContext`, which includes the following properties:
+
+- `engine`: `Engine` instance
+- `scene`: `Scene` instance
+- `unit`: `UnitModel` instance
+- `unitId`: `UnitModel` id
+
+Via these properties, `IRenderModule` can easily obtain the resources needed for rendering, without the need to (and should not) inject `IUniverInstanceService` and `IRenderManagerService` modules.
+
+In addition to `IRenderContext`, `IRenderModule` can obtain other `IRenderModule`s through dependency injection. Since the `Injector` in `RenderUnit` is a child node of the global `Injector`, `IRenderModule` can also inject global modules. For example:
+
+```ts
+export class RefSelectionsRenderService extends BaseSelectionRenderService implements IRenderModule {
+    constructor(
+        private readonly _context: IRenderContext<Workbook>, // render context
+        @Inject(Injector) injector: Injector, // injected by the injector of RenderUnit
+        @Inject(ThemeService) themeService: ThemeService, // global dependency
+        @IShortcutService shortcutService: IShortcutService, // global dependency
+        @Inject(SheetSkeletonManagerService) sheetSkeletonManagerService: SheetSkeletonManagerService, // injected by the injector of RenderUnit
+        @IRefSelectionsService private readonly _refSelectionsService: SheetsSelectionsService // global dependency
+    ) {
+      // ...
+    }
+}
+```
+
+Under certain circumstances, you may need to obtain an `IRenderModule` from a global module. In this case, you can obtain the `RenderUnit` from the `IRenderManagerService` and call the `with` method, for example:
+
+```ts
+renderManagerService.getRenderById(unitId)?.with(DocSkeletonManagerService);
+```
