@@ -312,10 +312,10 @@ range1.setValue(1);
 
 ### Storing Data
 
-By calling the `getSnapshot` method of the current `Workbook`, you can get an `IWorkbookData` object containing the data inside the sheet.
+By calling the `save` method of the current `Workbook`, you can get an `IWorkbookData` object containing the data inside the sheet.
 
 ```typescript
-const savedData = univerAPI.getActiveWorkbook().getSnapshot();
+const savedData = univerAPI.getActiveWorkbook().save();
 ```
 
 ---
