@@ -3113,9 +3113,6 @@ export const ALL_FEATURES_WORKBOOK_DATA: IWorkbookData = {
         height: 20,
         hidden: 0,
       },
-      selections: [
-        'A1',
-      ],
       rightToLeft: 0,
     },
     'sheet-02': {
@@ -5188,9 +5185,6 @@ export const ALL_FEATURES_WORKBOOK_DATA: IWorkbookData = {
         height: 20,
         hidden: 0,
       },
-      selections: [
-        'A1',
-      ],
       rightToLeft: 0,
     },
     'sheet-03': {
@@ -5715,9 +5709,6 @@ export const ALL_FEATURES_WORKBOOK_DATA: IWorkbookData = {
         height: 20,
         hidden: 0,
       },
-      selections: [
-        'A1',
-      ],
       rightToLeft: 0,
     },
     'sheet-04': {
@@ -10355,9 +10346,6 @@ export const ALL_FEATURES_WORKBOOK_DATA: IWorkbookData = {
         height: 20,
         hidden: 0,
       },
-      selections: [
-        'A1',
-      ],
       rightToLeft: 0,
     },
     'sheet-05': {
@@ -10580,9 +10568,6 @@ export const ALL_FEATURES_WORKBOOK_DATA: IWorkbookData = {
         height: 20,
         hidden: 0,
       },
-      selections: [
-        'A1',
-      ],
       rightToLeft: 0,
     },
     'sheet-08': {
@@ -10689,9 +10674,6 @@ export const ALL_FEATURES_WORKBOOK_DATA: IWorkbookData = {
         height: 20,
         hidden: 0,
       },
-      selections: [
-        'A1',
-      ],
       rightToLeft: 0,
     },
     'sheet-09': {
@@ -10745,9 +10727,6 @@ export const ALL_FEATURES_WORKBOOK_DATA: IWorkbookData = {
         height: 20,
         hidden: 0,
       },
-      selections: [
-        'A1',
-      ],
       rightToLeft: 0,
     },
   },

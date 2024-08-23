@@ -1,5 +1,5 @@
 import type { IWorkbookData } from '@univerjs/core'
-import { BooleanNumber, BorderStyleTypes, LocaleType } from '@univerjs/core'
+import { BorderStyleTypes, LocaleType } from '@univerjs/core'
 
 import { PAGE5_RICHTEXT_1 } from './rich-text/page5-richtext1'
 
@@ -204,7 +204,7 @@ export const SLIDE_WORKBOOK_DATA: IWorkbookData = {
       id: 'sheet-0001',
       name: 'sheet-0001',
       tabColor: 'blue',
-      hidden: BooleanNumber.FALSE,
+      hidden: 0, // BooleanNumber.FALSE
       rowCount: 12,
       columnCount: 11,
       zoomRatio: 1,
@@ -589,14 +589,13 @@ export const SLIDE_WORKBOOK_DATA: IWorkbookData = {
       showGridlines: 0,
       rowHeader: {
         width: 46,
-        hidden: BooleanNumber.FALSE,
+        hidden: 0, // BooleanNumber.FALSE
       },
       columnHeader: {
         height: 20,
-        hidden: BooleanNumber.FALSE,
+        hidden: 0, // BooleanNumber.FALSE
       },
-      selections: ['A2'],
-      rightToLeft: BooleanNumber.FALSE,
+      rightToLeft: 0, // BooleanNumber.FALSE
     },
   },
   // namedRanges: [

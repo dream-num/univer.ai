@@ -5670,7 +5670,6 @@ export const UNISCRIT_WORKBOOK_DATA_DEMO: IWorkbookData = {
         height: 20,
         hidden: 0,
       },
-      selections: ['A1'],
       rightToLeft: 0,
     },
   },

@@ -1,4 +1,4 @@
-import { BooleanNumber, type ICellData, type IObjectMatrixPrimitiveType, type IWorkbookData } from '@univerjs/core'
+import type { ICellData, IObjectMatrixPrimitiveType, IWorkbookData } from '@univerjs/core'
 
 export function generateWorkbookData(row: number, col: number) {
   const cellData: IObjectMatrixPrimitiveType<ICellData> = {}
@@ -24,7 +24,7 @@ export function generateWorkbookData(row: number, col: number) {
         id: 'sheet-01',
         cellData,
         name: 'Sheet1',
-        hidden: BooleanNumber.FALSE,
+        hidden: 0, // BooleanNumber.FALSE
         rowCount: row,
         columnCount: col,
       },

@@ -16,7 +16,6 @@
 
 import type { IDocumentData } from '@univerjs/core'
 import {
-  BooleanNumber,
   ColumnSeparatorType,
   DrawingTypeEnum,
   ObjectRelativeFromH,
@@ -58,7 +57,7 @@ export const DEFAULT_DOCUMENT_DATA_EN: IDocumentData = {
       distR: 10,
       distT: 10,
       layoutType: PositionedObjectLayoutType.WRAP_SQUARE,
-      behindDoc: BooleanNumber.FALSE,
+      behindDoc: 0, // BooleanNumber.FALSE,
       wrapText: WrapTextType.BOTH_SIDES,
     },
     shapeTest2: {
@@ -84,7 +83,7 @@ export const DEFAULT_DOCUMENT_DATA_EN: IDocumentData = {
         angle: 0,
       },
       layoutType: PositionedObjectLayoutType.WRAP_SQUARE,
-      behindDoc: BooleanNumber.FALSE,
+      behindDoc: 0, // BooleanNumber.FALSE,
       wrapText: WrapTextType.BOTH_SIDES,
     },
   },
@@ -96,7 +95,7 @@ export const DEFAULT_DOCUMENT_DATA_EN: IDocumentData = {
         st: 0,
         ed: 67,
         ts: {
-          bl: BooleanNumber.TRUE,
+          bl: 1, // BooleanNumber.TRUE,
           fs: 24 * 0.75,
           cl: {
             rgb: 'rgb(0, 40, 86)',
@@ -156,7 +155,7 @@ export const DEFAULT_DOCUMENT_DATA_EN: IDocumentData = {
           cl: {
             rgb: 'rgb(0, 0, 211)',
           },
-          bl: BooleanNumber.TRUE,
+          bl: 1, // BooleanNumber.TRUE,
         },
       },
       {
@@ -208,7 +207,7 @@ export const DEFAULT_DOCUMENT_DATA_EN: IDocumentData = {
           cl: {
             rgb: 'rgb(0, 0, 211)',
           },
-          bl: BooleanNumber.TRUE,
+          bl: 1, // BooleanNumber.TRUE,
         },
       },
       {
@@ -226,7 +225,7 @@ export const DEFAULT_DOCUMENT_DATA_EN: IDocumentData = {
           cl: {
             rgb: 'rgb(0, 0, 211)',
           },
-          bl: BooleanNumber.TRUE,
+          bl: 1, // BooleanNumber.TRUE,
         },
       },
       {
@@ -244,7 +243,7 @@ export const DEFAULT_DOCUMENT_DATA_EN: IDocumentData = {
           cl: {
             rgb: 'rgb(0, 0, 0)',
           },
-          bl: BooleanNumber.TRUE,
+          bl: 1, // BooleanNumber.TRUE,
         },
       },
       {
@@ -264,7 +263,7 @@ export const DEFAULT_DOCUMENT_DATA_EN: IDocumentData = {
         paragraphStyle: {
           spaceAbove: { v: 30 },
           lineSpacing: 1.5,
-          suppressHyphenation: BooleanNumber.FALSE,
+          suppressHyphenation: 0, // BooleanNumber.FALSE,
         },
       },
       {
@@ -453,8 +452,8 @@ export const DEFAULT_DOCUMENT_DATA_EN: IDocumentData = {
       vertexAngle: 0,
       centerAngle: 0,
     },
-    autoHyphenation: BooleanNumber.TRUE,
-    doNotHyphenateCaps: BooleanNumber.FALSE,
+    autoHyphenation: 1, // BooleanNumber.TRUE,
+    doNotHyphenateCaps: 0, // BooleanNumber.FALSE,
     consecutiveHyphenLimit: 2,
     // hyphenationZone: 50,
     // gridType: GridType.LINES_AND_CHARS,
