@@ -21,7 +21,7 @@ Univer 功能以插件（plugin）为组合单元，多个插件组合成为一�
 
 1. **可组合**：你可以按照实际需要选择加载哪些插件，从而定制出适合自己的 Univer 应用。
 2. **定制化**：自行开发插件满足特定的需求而不必更改 Univer 本身的代码。
-3. **跨平台重用**：无论是在什么环境里运行 Univer ——浏览器、Electron、Node.js、web worker、test runner ——都可以通过加载不同的插件来适配不同的环境。同时还能减少冗余代码带来的开销。例如在 Node.js 环境下不加载 UI 相关的插件，这样就可以避免访问 DOM 相关的 API 导致的错误，也可以降低包体积和内存占用。
+3. **同构性**：无论是在什么环境里运行 Univer ——浏览器、Electron、Node.js、web worker、test runner ——都可以通过加载不同的插件来适配不同的环境。同时还能减少冗余代码带来的开销。例如在 Node.js 环境下不加载 UI 相关的插件，这样就可以避免访问 DOM 相关的 API 导致的错误，也可以降低包体积和内存占用。
 4. **可维护性**：插件化架构可以让 Univer 各个模块的职责及依赖关系更加明确，减少功能之间的耦合，从而使代码更易于理解、修改、测试和维护。
 
 ### 如何划分插件？
@@ -78,13 +78,6 @@ export abstract class Plugin {
   onRendered(): void {}
   onSteady(): void {}
 }
-```
-
-除了这四个生命周期勾子之外，插件内部的模块可以使用 `OnLifecycle` 装饰器声明自己需要在特定的生命周期阶段初始化，例如
-
-```typescript
-@OnLifecycle(LifecycleStages.Rendered, IMEInputController)
-export class IMEInputController extends Disposable {}
 ```
 
 另外也可以通过注入 `LifecycleService` 来监听生命周期事件。
@@ -145,7 +138,7 @@ export class YourService {
 
 ### 以关注点分离原则划分模块
 
-分层架构中有一层名为 service，这一层的模块被称为服务，它们的职责是封装一些通用的功能。Univer 在架构上鼓励按照[关注点分离](https://zh.wikipedia.org/zh-sg/%E5%85%B3%E6%B3%A8%E7%82%B9%E5%88%86%E7%A6%BB)的原则将功能封装到不同的服务中，这样可以使得服务更加专注于某一特定的功能，从而使得服务更加易于理解、修改、测试和维护。例如，`@univerjs/sheets-ui` 有管理快捷键的 `IShortcutService`，有管理选区的 `ISelectionService`，有管理菜单的 `IMenuService` 等等。
+分层架构中有一层名为 service，这一层的模块被称为服务，它们的职责是封装一些通用的功能。Univer 在架构上鼓励按照[关注点分离](https://zh.wikipedia.org/zh-sg/%E5%85%B3%E6%B3%A8%E7%82%B9%E5%88%86%E7%A6%BB)的原则将功能封装到不同的服务中，这样可以使得服务更加专注于某一特定的功能，从而使得服务更加易于理解、修改、测试和维护。例如，`@univerjs/sheets-ui` 有管理快捷键的 `IShortcutService`，有管理菜单的 `IMenuService` 等等。
 
 使用关注点分离原则划分模块的好处有：
 
@@ -159,11 +152,23 @@ export class YourService {
 
 抽象依赖原则主要是为了应对不同运行环境的差异。以剪贴板为例，浏览器环境下可以直接使用 `navigator.clipboard` API，而在移动端，往往可以通过 JSBridge 的方式访问系统剪贴板。为了解决这个问题，可以将剪贴板服务的依赖抽象为 `IClipboardService` 接口，然后在浏览器环境下实现 `BrowserClipboardService`，在浏览器环境下实现 `MobileBridgeClipboardService`，两者均实现 `IClipboardService`，从而对上层的复制粘贴业务屏蔽了底层剪贴板实现的差异。
 
+### 在合适的时机初始化模块
+
+注册在依赖注入器中的模块进会在它们被首次引用时初始化，所以你需要手动地激活那些不会被其他模块引用的模块。做法是在 plugin 的生命周期勾子中，从依赖注入器上获取一次模块，这样就会触发模块的初始化。
+
+```ts
+class MyPlugin extends Plugin {
+  onReady(): void {
+    this._injector.get(MyService);
+  }
+}
+```
+
 ## 命令系统
 
 在 Univer 当中，对应用状态和数据的变更需要通过命令系统执行。命令系统本身是对应用逻辑的抽象和日志化。
 
-`@univerjs/core` 中提供了命令服务，插件可以将业务逻辑封装在命令里，并通过依赖注入系统获取到模块从而执行业务逻辑。
+`@univerjs/core` 中提供了命令服务，插件可以将业务逻辑封装在命令里。命令的执行过程中，可以通过依赖注入系统获取到其他模块的实例，从而实现业务逻辑。
 
 插件可以通过 `ICommandService` 提供的 `registerCommand` 接口注册命令，并通过 `executeCommand` 接口执行命令：
 
@@ -173,16 +178,16 @@ export class YourService {
   - `COMMAND` 是业务逻辑的主要承载者，如果对于一个 _用户操作行为_ 需要根据应用的状态来触发不同的 _底层行为_ —— 例如 _用户点击加粗文字按钮_ 时 需要根据当前选区范围来决定 _加粗操作的生效范围_ —— 相应的判断应该由 `COMMAND` 完成
   - 可以派发其他 `COMMAND` `OPERATION` `MUTATION`
   - 允许异步执行
-- `MUTATION` 是对落盘数据所做的变更，例如插入行列，修改单元格内容，修改筛选范围等等操作。如果你想给 Univer 加入协同编辑的能力，那么它就是冲突处理的最小单元。
+- `MUTATION` 是对文档数据所做的变更，例如插入行列，修改单元格内容，修改筛选范围等等操作。如果你想给 Univer 加入协同编辑的能力，那么它就是冲突处理的最小单元。
   - 不可以再派发其他任何命令
   - **必须同步执行**
-- `OPERATION` 是对不落盘数据（或称应用状态）所做的变更，不涉及冲突处理，例如修改滚动位置、修改侧边栏状态等等
+- `OPERATION` 是对非文档数据所做的变更，不涉及冲突处理，例如修改滚动位置、修改侧边栏状态等等
   - 不可以再派发其他任何命令
   - **必须同步执行**
 
 ### 事件监听
 
-`ICommandService` 提供事件监听接口，插件可监听哪些命令被执行了，以及执行的参数是什么。实际上，命令执行后会派发这样一个事件：
+`ICommandService` 提供事件监听接口，插件可监听哪些命令被执行了，以及执行的参数是什么。实际上，命令执行后会派发这样一个对象：
 
 ```typescript
 /**
@@ -213,7 +218,6 @@ export interface ICommandInfo<T extends object = object> {
 
 你可以阅读以下章节了解 Univer 子系统的架构设计：
 
-- [数据系统](/guides/sheet/architecture/data)
 - [公式系统](/guides/sheet/architecture/formula)
 - [渲染系统](/guides/sheet/architecture/rendering)
 - [Web Worker](/guides/sheet/architecture/web-worker)
