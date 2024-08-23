@@ -80,7 +80,7 @@ export default function Sandbox(props: ISandboxProps) {
             react: 'latest',
             'react-dom': 'latest',
             rxjs: 'latest',
-            '@univerjs/icons': '^0.1.72',
+            '@univerjs/icons': 'latest',
             'react-beautiful-dnd': '^13.1.1',
           },
           devDependencies: {
