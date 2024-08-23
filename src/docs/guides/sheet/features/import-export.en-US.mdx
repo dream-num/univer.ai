@@ -11,9 +11,13 @@ import ServerNotice from '@/components/ServerNotice'
 
 <ServerNotice />
 
-We provide the ability to import and export Excel files through the server interface. Install this plugin to quickly access the import and export capabilities in Univer.
+Univer implements the import and export of Excel XLSX format files through plugins and backend services. The plugin integrates the ability to interact with the server and provides an import and export menu entry.
 
-Currently only `.xlsx` format is supported.
+<Callout type="warning" emoji="❓">
+  **Why does Univer implement import and export through backend services?**
+
+  Importing and exporting implemented only through the frontend cannot meet enterprise requirements in terms of performance or effect. Therefore, we provide backend services to implement import and export features. You can use some open-source XLSX parsing libraries to parse files into data structures that conform to the [`IWorksheetData`](/typedoc/@univerjs/core/interfaces/IWorksheetData) interface, and then import the data into Univer through the Facade API.
+</Callout>
 
 ## Installation
 

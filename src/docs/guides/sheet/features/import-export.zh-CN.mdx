@@ -1,4 +1,4 @@
-import { Tabs } from 'nextra/components'
+import { Callout, Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 import BusinessPlanNotice from '@/components/BusinessPlanNotice'
 import ServerNotice from '@/components/ServerNotice'
@@ -11,9 +11,13 @@ import ServerNotice from '@/components/ServerNotice'
 
 <ServerNotice />
 
-我们通过服务端接口提供导入导出 Excel 文件的能力，安装此插件，能在 Univer 中快速接入导入导出能力。
+Univer 通过插件 + 后端服务的方式实现了 Excel XLSX 格式文件的导入导出功能。其中插件集成了与服务端交互的能力，以及提供了一个导入导出的菜单栏入口。
 
-目前仅支持 `.xlsx` 格式。
+<Callout type="warning" emoji="❓">
+  **为什么 Univer 通过后端服务实现导入导出？**
+
+  仅通过前端实现的导入导出无论是从性能还是效果上来说都无法满足企业需求，因此我们提供了后端服务来实现导入导出功能。你可以通过一些开源的 XLSX 解析库将文件解析为符合 [`IWorksheetData`](/typedoc/@univerjs/core/interfaces/IWorksheetData) 接口的数据结构，然后通过 Facade API 将数据导入到 Univer 中。
+</Callout>
 
 ## 安装
 
