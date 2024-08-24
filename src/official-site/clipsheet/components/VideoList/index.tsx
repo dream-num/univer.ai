@@ -34,10 +34,7 @@ export function VideoList({ videos, className }: { videos: IVideo[], className?:
             >
               <VideoPlayer enableMask videoClassName="rounded-2xl" src={video.videoSrc} title={video.videoSrc} />
             </div>
-            <h3 className={`
-              text-center text-lg font-medium capitalize leading-7 text-slate-900
-            `}
-            >
+            <h3 className="text-center text-lg font-medium capitalize leading-7 text-slate-900">
               {video.title}
             </h3>
           </div>
