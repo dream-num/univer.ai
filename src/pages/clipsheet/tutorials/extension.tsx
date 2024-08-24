@@ -206,7 +206,7 @@ export default function Page() {
 
         <SimpleCases videos={videos} />
         <ExtendedReading previewVidio={previewVidio} />
-        <ContactUs type={IssueType['chrome-extension']} />
+        <ContactUs type={IssueType.clipsheet} />
         <div className={`
           mb-[48px]
 
