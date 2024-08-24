@@ -158,10 +158,7 @@ export default function Page() {
               </span>
             </h1>
 
-            <div className={`
-              mt-[20px] text-center text-lg font-normal leading-7 text-slate-900
-            `}
-            >
+            <div className="mt-[20px] text-center text-lg font-normal leading-7 text-slate-900">
               {t('hero.desc')}
             </div>
 

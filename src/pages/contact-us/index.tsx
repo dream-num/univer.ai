@@ -16,7 +16,7 @@ export default function ContactUs() {
   const { loading, withLoading } = useLoadingState()
 
   const [form, setForm] = useState({
-    product: IssueType['chrome-extension'] as IssueType,
+    product: IssueType.clipsheet satisfies IssueType as IssueType,
     content: '',
     email: '',
   })
