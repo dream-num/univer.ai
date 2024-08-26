@@ -57,6 +57,16 @@ const univer = new Univer({
 ## 注册
 
 ```typescript
+// 通过将 override 选项设置为 [[IAuthzIoService, null]]，可以告诉 Univer 不要注册内置的 IAuthzIoService。
+// 通过将 override 选项设置为 [[IUndoRedoService, null]]，可以告诉 Univer 不要注册内置的 IUndoRedoService
+// 这样，Univer 将使用 UniverCollaborationPlugin 中提供的服务作为权限、重做恢复服务的实现。
+const univer = new Univer({
+  override: [
+    [IAuthzIoService, null]
+    [IUndoRedoService, null],
+  ],
+});
+
 univer.registerPlugin(UniverCollaborationPlugin);
 univer.registerPlugin(UniverCollaborationClientPlugin);
 ```
