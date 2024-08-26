@@ -57,6 +57,16 @@ const univer = new Univer({
 ## Register
 
 ```typescript
+// By setting the override option to [[IAuthzIoService, null]], you can instruct Univer not to register the built-in IAuthzIoService.
+// By setting the override option to [[IUndoRedoService, null]], you can instruct Univer not to register the built-in IUndoRedoService.
+// This way, Univer will use the service provided by UniverCollaborationPlugin as the implementation of the authorization/undo-redo service.
+const univer = new Univer({
+  override: [
+    [IAuthzIoService, null]
+    [IUndoRedoService, null],
+  ],
+});
+
 univer.registerPlugin(UniverCollaborationPlugin);
 univer.registerPlugin(UniverCollaborationClientPlugin);
 ```
