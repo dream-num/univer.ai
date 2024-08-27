@@ -6,7 +6,6 @@ tags:
   - Tutorial
   - Custom
   - Architecture
-cover: ./anatomy.png
 author: Wenzhao Hu
 date: 2024-08-27
 ---
@@ -17,12 +16,16 @@ import { Callout } from 'nextra/components'
 
 Univer 提供的 Facade API 使得开发者们可以调用 API 来实现简单的自定义功能。但如果想开发一个全新的功能，或根据需求进行深度定制，那么就需要了解 Univer 的架构，并学习如何编写符合架构的插件。
 
-我们将以官方筛选插件为例进行介绍如何编写一个 Univer 插件，涉及插件系统、依赖注入、资源加载、命令模式、Render Unit 等主题。
+我们将以官方筛选插件为例进行介绍一个 Univer 插件的结构，读者们可以在此基础上深入源码以及 [API Reference](/typedoc/@univerjs/README) 了解如何撰写一个复杂的插件。
 
 你可以在 GitHub 上找到 [@univerjs/sheets-filter](https://github.com/dream-num/univer/tree/dev/packages/sheets-filter) 和 [@univerjs/sheets-filter-ui](https://github.com/dream-num/univer/tree/dev/packages/sheets-filter-ui) 两个包的源码。
 
 <Callout type="info" emoji="💡">
-  目前我们并没对 npm 包和 Univer 插件做严格区分，有时候我们说插件时，指的有可能是 npm 包，也可能是这个包导出的 `Plugin` 类，请注意。
+  Univer 官方文档中有一篇 [教程](/guides/sheet/tutorials/csv-import-plugin)，帮助读者通过编写一个 CSV 导入插件入门插件开发。建议在阅读博客之前完成该教程。
+</Callout>
+
+<Callout type="info" emoji="💡">
+  目前我们并没对 npm 包和 Univer 插件做严格区分。我们说插件时，指的有可能是 npm 包也可能是这个包导出的 `Plugin` 类。
 </Callout>
 
 ## 插件的结构
@@ -47,7 +50,7 @@ Univer 提供的 Facade API 使得开发者们可以调用 API 来实现简单�
 * 提供管理筛选面板的 `SheetsFilterPanelService`
 * 将以上模块封装在 `UniverSheetsFilterUIPlugin` 当中
 
-拆分成两个包的原因是： `@univerjs/sheets-filter-ui` 中的代码需要依赖 DOM，而 `@univerjs/sheets-filter` 中的代码是纯逻辑代码，不依赖 DOM，可以在 Node.js 和 Web Worker 环境中运行，用于协同编辑、远端计算等场景。通过拆分，我们可以方便地复用 `@univerjs/sheets-filter` 的代码，来发挥 Univer 架构的同构优势。
+拆分成两个包的原因是： `@univerjs/sheets-filter-ui` 中的代码需要依赖 DOM，而 `@univerjs/sheets-filter` 中的代码是纯逻辑代码，不依赖 DOM，可以在 Node.js 和 Web Worker 环境中运行，用于协同编辑、服务计算等场景。通过拆分，我们可以方便地复用 `@univerjs/sheets-filter` 的代码，充分发挥 Univer 架构的同构优势。
 
 <Callout type="info" emoji="💡">
   关于如何划分插件，可以参考架构文档的 [相关章节](guides/sheet/architecture/univer#如何划分插件)。
@@ -55,7 +58,9 @@ Univer 提供的 Facade API 使得开发者们可以调用 API 来实现简单�
 
 ### 插件的目录结构
 
-每个插件有相似的目录结构，例如 sheets-filter-ui 的目录结构如下：
+所有插件都有相似的目录结构。
+
+sheets-filter-ui 的目录结构如下：
 
 ```plaintext
 .
@@ -104,7 +109,11 @@ Univer 提供的 Facade API 使得开发者们可以调用 API 来实现简单�
 `-- vite.config.ts
 ```
 
-目录结构基本遵从了 Univer 的分层模型，能让熟悉 Univer 的开发者能够快速上手，有助于代码的维护。
+目录结构基本遵从了 Univer 的分层模型，能让熟悉 Univer 的开发者能够快速上手。
+
+<Callout type="info" emoji="💡">
+  了解 Univer 架构的 [分层模型](/guides/sheet/architecture/univer#以分层架构划分模块)。
+</Callout>
 
 作为对比，sheets-filter 插件有相似的目录结构：
 
@@ -137,27 +146,23 @@ Univer 提供的 Facade API 使得开发者们可以调用 API 来实现简单�
 ```
 
 <Callout type="info" emoji="💡">
-  进一步了解 Univer 架构中的 [分层模型](/guides/sheet/architecture/univer#以分层架构划分模块)。
-</Callout>
-
-<Callout type="info" emoji="💡">
   你可以使用官方提供的 [CLI 工具](https://www.npmjs.com/package/@univerjs/create-cli) 来创建插件。
 </Callout>
 
 ## 自定义数据
 
-需要自定义数据的插件需要设计：快照数据结构、内存数据结构以及修改这些数据结构的 mutation，以接入 Univer 系统。
+插件可能会需要自定义数据结构，需要考虑这几个方面：快照数据结构、内存数据结构以及修改这些数据结构的 mutation。
 
 ### 快照数据结构
 
-快照中的数据结构将会被存储到数据库中，因此快照数据结构必须是可以被序列化的。筛选插件定义的快照数据格式在 [types.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-filter/src/models/types.ts) 中。`IAutoFilter` 只使用了基本数据结构，因此可以被 JSON 简单的序列化和反序列化。
+快照数据结构将会被存储到数据库中，因此必须是可被序列化的。筛选的快照数据格式在 [types.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-filter/src/models/types.ts) 中。`IAutoFilter` 只使用了基本数据结构，因此可以被 JSON 简单的序列化和反序列化。
 
 <Callout type="info" emoji="💡">
-  官方文档中介绍了 [快照](/guides/sheet/getting-started/concepts#快照) 的概念。
+  了解 [快照](/guides/sheet/getting-started/concepts#快照) 的概念。
 </Callout>
 
 <Callout type="info" emoji="💡">
-  Univer 官方实现的 sheet 功能插件在定义快照数据结构时会参考 [OOXML 规范](http://officeopenxml.com/)，以便和 Excel 兼容。
+  Univer 的第一方插件在定义快照数据结构时会参考 [OOXML 规范](http://officeopenxml.com/)，以便实现导入导出。
 </Callout>
 
 ### 内存数据结构
@@ -177,11 +182,11 @@ Univer 提供的 Facade API 使得开发者们可以调用 API 来实现简单�
 在 Univer 中，对数据结构的修改均需要通过 MUTATION 类型的命令来完成，否则无法实现 undo redo、协同编辑、历史记录等功能。筛选的 mutation 定义在 [sheets-filter.mutation.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-filter/src/commands/mutations/sheets-filter.mutation.ts) 中。
 
 <Callout type="info" emoji="💡">
-  请阅读 [命令系统](/guides/sheet/architecture/univer#命令系统) 了解详情。
+  阅读 [命令系统](/guides/sheet/architecture/univer#命令系统) 了解什么是命令以及命令的三种类型。
 </Callout>
 
 <Callout type="info" emoji="💡">
-  请阅读 [扩展命令](guides/sheet/advanced/custom-command) 了解如何自定义包括 mutation 在内的命令。
+  阅读 [扩展命令](guides/sheet/advanced/custom-command) 了解如何自定义命令。
 </Callout>
 
 ## 和 sheet 基础功能的耦合
@@ -196,13 +201,15 @@ Univer 提供的 Facade API 使得开发者们可以调用 API 来实现简单�
 
 等等。
 
-<Callout emoji="🤔">
+<Callout emoji="🤔" type="info">
   在处理和 sheet 基础功能耦合的逻辑时，往往需要调用 [`SheetInterceptorService`](/typedoc/@univerjs/sheets/classes/SheetInterceptorService) 的相关方法，可参考 API 文档和已有插件的使用。
 </Callout>
 
-## 渲染
+<Callout type="info" emoji="💡">
+  一些插件需要拓展复制粘贴或下拉填充，[扩展命令](guides/sheet/advanced/custom-command) 章节也介绍了如何对这两个操作进行拓展。
+</Callout>
 
-### Sheet 选区和按钮
+## 渲染
 
 Univer 允许功能插件自定义渲染，筛选插件的渲染模块位于 [sheets-filter.render-controller.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-filter-ui/src/views/widgets/render-modules/sheets-filter.render-controller.ts)。`SheetsFilterRenderController` 是一个 `IRenderModule`，它定义了渲染筛选选区和按钮的逻辑。
 
@@ -214,7 +221,7 @@ Univer 允许功能插件自定义渲染，筛选插件的渲染模块位于 [sh
 
 ### 菜单项
 
-Univer 的菜单项以一个 `IMenuItem` 描述，筛选插件的菜单项定义在 [sheets-filter.menu.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-filter-ui/src/controllers/sheets-filter.menu.ts) 当中。
+Univer 的菜单项以一个 `IMenuItem` 描述，筛选插件的菜单项定义在 [sheets-filter.menu.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-filter-ui/src/controllers/sheets-filter.menu.ts) 当中。在 `SheetsFilterUIDesktopController` 初始化时，这些菜单项会被注册在 `IMenuService` 上。
 
 <Callout type="info" emoji="💡">
   请阅读 [自定义 UI](guides/sheet/advanced/custom-ui) 了解如何自定义包括 mutation 在内的命令。
@@ -226,20 +233,44 @@ Univer 的菜单项以一个 `IMenuItem` 描述，筛选插件的菜单项定义
 
 ### 快捷键
 
-筛选插件的快捷键定义在 [sheets-filter.shortcut.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-filter-ui/src/controllers/sheets-filter.shortcut.ts) 中。
+筛选插件的快捷键定义在 [sheets-filter.shortcut.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-filter-ui/src/controllers/sheets-filter.shortcut.ts) 中。在 `SheetsFilterUIDesktopController` 初始化时，这些菜单项会被注册在 `IShortcutService` 上。
 
-### 浮动面板
+### 自定义组件
+
+筛选面板定义在 [SheetsFilterPanel.tsx]() 文件中，它是一个 React 组件。 `SheetsFilterUIDesktopController` 会在初始化时将这个组件注册到 `ComponentManager` 当中。当用户通过筛选按钮打开筛选面板时，`SheetsFilterUIDesktopController` 会调用 `SheetCanvasPopManagerService` 提供的方法，将面板渲染到指定位置。
+
+<Callout type="info" emoji="💡">
+  Univer 中的 React 组件可以使用 `useDependency` 勾子来获取依赖。
+</Callout>
 
 ## 作为封装的插件
 
-### 注册模块
+最后，`Plugin` 将会作为以上模块的封装，让用户仅需要注册 `Plugin` 就可以在项目中引入筛选功能，无需关心插件内部的复杂度。
 
-### 处理生命周期
+插件一共会经历四个生命周期 `STARTING` `READY` `RENDERED` 和 `STEADY`。
+
+在 `STARTING` 生命周期中，插件需要调用 `Injector` 的 `add` 方法，将自己提供的模块注册到注入容器上。插件可以在任意的生命周期中按照需要初始化模块。初始化模块的方法非常简单，仅需要从注入容器上获取一次模块：
+
+```ts
+this._injector.get(SheetsFilterUIDesktopController);
+```
+
+<Callout type="info" emoji="💡">
+  关于 Univer 的生命周期机制，请查看文档 [插件生命周期](/guides/sheet/architecture/univer#插件生命周期)。
+</Callout>
+
+<Callout type="info" emoji="💡">
+  Univer 使用依赖注入模式来管理模块之间的依赖关系以及实例化模块。关于依赖注入的更多介绍，请参考我们的 [文档](/guides/sheet/architecture/univer#依赖注入)。
+</Callout>
 
 ## 国际化
 
+插件需要提供国际化资源，筛选的国际化资源位于 [locale](https://github.com/dream-num/univer/blob/dev/packages/sheets-filter-ui/src/locale) 目录下。
+
 ## Facade API
 
-## 总结
+最后，为了进一步隐藏服务、命令等概念，方便使用，还需要提供 Facade API。
+
+筛选的 Facade API 主要包含在文件 [f-filter.ts](https://github.com/dream-num/univer/blob/dev/packages/facade/src/apis/sheets/f-filter.ts) 当中。
 
 <p className="text-gray-500 text-sm mt-8">作者：[Wenzhao Hu](https://github.com/wzhudev)，Head of Engineering</p>
