@@ -8,10 +8,12 @@ tags:
   - Architecture
 cover: ./anatomy.png
 author: Wenzhao Hu
-date: 2024-08-17
+date: 2024-08-27
 ---
 
 import { Callout } from 'nextra/components'
+
+# 如何编写符合架构的插件？
 
 Univer 提供了 Facade API，使得开发者们可以简单地调用 API 来实现一些自定义功能。但是，如果想要深度定制或者是开发一个全新的功能，那么就需要了解 Univer 的架构，并学习如何编写符合架构的插件。
 
@@ -46,7 +48,6 @@ sheets-filter-ui
 
 ```plaintext
 .
-├── README.md
 ├── package.json
 ├── src
 │   ├── __testing__ // 用于测试的辅助文件，不包含用例
@@ -81,13 +82,9 @@ sheets-filter-ui
 │   ├── views // UI 组件
 │   │   ├── components // React 绘制的部分
 │   │   └── widgets // Canvas 绘制的部分
-│   ├── vite-env.d.ts
 │   └── worker
 │       ├── generate-filter-values.service.ts
 │       └── plugin.ts
-├── tsconfig.json
-├── tsconfig.node.json
-└── vite.config.ts
 ```
 
 插件内部按照层次结构来划分代码。
