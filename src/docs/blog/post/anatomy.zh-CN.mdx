@@ -180,9 +180,21 @@ Univer 提供的 Facade API 使得开发者们可以调用 API 来实现简单�
   请阅读 [命令系统](/guides/sheet/architecture/univer#命令系统) 了解详情。
 </Callout>
 
+<Callout type="info" emoji="💡">
+  请阅读 [扩展命令](guides/sheet/advanced/custom-command) 了解如何自定义包括 mutation 在内的命令。
+</Callout>
+
 ## 和 sheet 基础功能的耦合
 
-插件的功能往往需要和 sheet 基础功能耦合，筛选插件的耦合逻辑位于 [sheets-filter.controller.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-filter/src/controllers/sheets-filter.controller.ts) 中。
+由于 Univer 的插件化设计，功能之间的耦合逻辑需要通过各种回调机制实现。筛选插件的相关耦合逻辑位于 [sheets-filter.controller.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-filter/src/controllers/sheets-filter.controller.ts) 中。
+
+这些耦合逻辑包括：
+
+1. 通过 `SheetInterceptorService` 拦截 Command 的执行过程，补充操作；例如如果拆入行列的位置与筛选范围有交集，需要更新筛选范围。
+2. 通过 `SheetInterceptorService` 拦截行过滤逻辑，根据筛选结果过滤行。
+3. 监听 `ICommandService` 的 `beforeCommandExecute` 事件，在移动单元格时检查移动范围是否包括筛选头，如果包括则禁止移动。
+
+等等。
 
 <Callout emoji="🤔">
   在处理和 sheet 基础功能耦合的逻辑时，往往需要调用 [`SheetInterceptorService`](/typedoc/@univerjs/sheets/classes/SheetInterceptorService) 的相关方法，可参考 API 文档和已有插件的使用。
@@ -192,23 +204,29 @@ Univer 提供的 Facade API 使得开发者们可以调用 API 来实现简单�
 
 ### Sheet 选区和按钮
 
-Univer 允许功能插件自定义渲染，筛选插件的渲染模块位于 [sheets-filter.render-controller.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-filter-ui/src/views/widgets/render-modules/sheets-filter.render-controller.ts)。
-
-`SheetsFilterRenderController` 是一个 `IRenderModule`，它定义了渲染筛选选区和按钮的逻辑。
+Univer 允许功能插件自定义渲染，筛选插件的渲染模块位于 [sheets-filter.render-controller.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-filter-ui/src/views/widgets/render-modules/sheets-filter.render-controller.ts)。`SheetsFilterRenderController` 是一个 `IRenderModule`，它定义了渲染筛选选区和按钮的逻辑。
 
 <Callout type="info" emoji="💡">
   请阅读 [渲染引擎架构设计](/guides/sheet/architecture/rendering) 了解如何撰写渲染层代码。
 </Callout>
 
-### 让筛选行隐藏
-
-
-
 ## 开发 UI
 
 ### 菜单项
 
+Univer 的菜单项以一个 `IMenuItem` 描述，筛选插件的菜单项定义在 [sheets-filter.menu.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-filter-ui/src/controllers/sheets-filter.menu.ts) 当中。
+
+<Callout type="info" emoji="💡">
+  请阅读 [自定义 UI](guides/sheet/advanced/custom-ui) 了解如何自定义包括 mutation 在内的命令。
+</Callout>
+
+<Callout type="info" emoji="🎉">
+  Univer 的菜单项不和任何具体的 UI 框架和样式实现绑定，因此可以在不同的平台上使用相同的菜单项定义，也可以出现在任意的组件中，例如右键菜单、工具栏、菜单栏等等。
+</Callout>
+
 ### 快捷键
+
+筛选插件的快捷键定义在 [sheets-filter.shortcut.ts](https://github.com/dream-num/univer/blob/dev/packages/sheets-filter-ui/src/controllers/sheets-filter.shortcut.ts) 中。
 
 ### 浮动面板
 
