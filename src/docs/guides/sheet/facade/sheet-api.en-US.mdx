@@ -451,6 +451,40 @@ activeWorkbook.onSelectionChange((selection) => {
 });
 ```
 
+### attch a popup to cell
+```tsx
+// get range
+const workbook = univerAPI.getActiveWorkbook();
+const worksheet = workbook.getActiveSheet();
+const A1_J10 = worksheet.getRange(0, 0, 10, 10);
+
+A1_J10.attachPopupToCell({
+    componentKey: () => <div style={{ width: 100, height: 100, background: '#fff' }}>popup content</div>,
+});
+```
+
+### add float dom to sheet
+```tsx
+worksheet.addFloatDomToPosition({
+    componentKey: ({ data }) => (
+        <div style={{ width: '100%', height: '100%', background: '#fff' }}>
+            popup content
+            {data?.label}
+        </div>
+    ),
+    initPosition: {
+        startX: 100,
+        endX: 200,
+        startY: 100,
+        endY: 200,
+    },
+    // data of this component
+    data: {
+        label: 'hahah',
+    },
+});
+```
+
 ## Server-Related Features
 
 <ServerNotice />
