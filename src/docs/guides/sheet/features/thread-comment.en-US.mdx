@@ -93,36 +93,48 @@ univer.registerPlugin(UniverSheetsThreadCommentBasePlugin);
 univer.registerPlugin(UniverSheetsThreadCommentPlugin);
 ```
 
-## API
+## Facade API
 
-Full API please refer to [@univerjs/sheets-thread-comment](/typedoc/@univerjs/sheets-thread-comment/README)
-
-## Using Command
-
+### Example
 ```typescript
-import {
-  AddCommentCommand,
-  DeleteCommentCommand,
-  UpdateCommentCommand,
-  ResolveCommentCommand,
-  DeleteCommentTreeCommand,
-} from '@univerjs/sheets-thread-comment';
-import type {
-  IAddCommentCommandParams,
-  IDeleteCommentCommandParams,
-  IResolveCommentCommandParams,
-  IUpdateCommentCommandParams,
-  IDeleteCommentTreeCommandParams,
-} from '@univerjs/sheets-thread-comment';
+const univerAPI = FUniver.newAPI(univer);
 
-// Add comment by command
-const commandService = univer.__getInjector().get(ICommandService);
+// get cell
+const workbook = univerAPI.getActiveWorkbook();
+const worksheet = workbook.getActiveSheet();
+// comment only attch to single cell, if range is A1_J10 equal A1
+const A1 = worksheet.getRange(0, 0, 1, 1);
 
-commandService.executeCommand(AddCommentCommand.id, {
-  unitId: 'unitId',
-  subUnitId: 'subUnitId',
-  comment: {
-    // comment content
-  },
-} as IAddCommentCommandParams);
+// add comment to empty cell
+A1.addComment({
+    dataStream: 'hello world\r\n',
+});
+
+// reply to current comment
+A1.addComment({
+    dataStream: 'reply\r\n',
+});
+
+
+A1.clearComment();
+
+// get comment
+const comment = A1.getComment();
+
+// update content
+comment?.update({
+    dataStream: 'hello world222\r\n',
+});
+
+// delete comment
+comment?.delete();
+
+// resolve comment
+comment?.resolve();
+
+// get replies
+comment?.getReplies();
+
+// get range of this comment
+comment?.getRange();
 ```
