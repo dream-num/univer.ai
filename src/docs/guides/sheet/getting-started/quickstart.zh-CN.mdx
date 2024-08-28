@@ -26,13 +26,21 @@ import { Callout } from 'nextra/components'
 
 <Tabs items={['pnpm', 'npm']}>
   <Tabs.Tab label="pnpm">
+    执行以下命令需要设备安装有 `nodejs >= 18`, `pnpm >= 7` 和 `git`。
+
     ```shell
-    pnpm dlx degit dream-num/univer-sheet-start-kit [your-app-name]
+    pnpm dlx degit dream-num/univer-sheet-start-kit
+    cd univer-sheet-start-kit
+    pnpm install && pnpm dev
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
+    执行以下命令需要设备安装有 `nodejs >= 18`, `npm >= 8` 和 `git`。
+
     ```shell
-    npx degit dream-num/univer-sheet-start-kit [your-app-name]
+    npx degit dream-num/univer-sheet-start-kit
+    cd univer-sheet-start-kit
+    npm install && npm run dev
     ```
   </Tabs.Tab>
 </Tabs>
@@ -58,9 +66,11 @@ import { Callout } from 'nextra/components'
 
   <Tabs items={['pnpm', 'npm', '不使用包管理工具']}>
     <Tabs.Tab label="pnpm">
+      执行以下命令需要设备安装有 `nodejs >= 18`, `pnpm >= 7` 和 `git`。
+
       ```shell
-      pnpm dlx degit dream-num/univer-pro-sheet-start-kit [your-app-name]
-      cd [your-app-name] && pnpm install # 注意：pnpm 版本需要 >= 8
+      pnpm dlx degit dream-num/univer-pro-sheet-start-kit
+      cd univer-pro-sheet-start-kit && pnpm install # 注意：pnpm 版本需要 >= 8
       pnpm dev
       ```
       <Callout emoji="⚠️">
@@ -72,9 +82,11 @@ import { Callout } from 'nextra/components'
       你也可以在 [dream-num/univer-pro-sheet-start-kit](https://github.com/dream-num/univer-pro-sheet-start-kit) 找到该模板的源代码。
     </Tabs.Tab>
     <Tabs.Tab label="npm">
+      执行以下命令需要设备安装有 `nodejs >= 18`, `npm >= 8` 和 `git`。
+
       ```shell
-      npx degit dream-num/univer-pro-sheet-start-kit [your-app-name]
-      cd [your-app-name] && npm install # 注意：npm 版本需要 >= 7
+      npx degit dream-num/univer-pro-sheet-start-kit
+      cd univer-pro-sheet-start-kit && npm install # 注意：npm 版本需要 >= 7
       npm run dev
       ```
       <Callout emoji="⚠️">
