@@ -70,8 +70,8 @@ import { Callout } from 'nextra/components'
 
       ```shell
       pnpm dlx degit dream-num/univer-pro-sheet-start-kit
-      cd univer-pro-sheet-start-kit && pnpm install # 注意：pnpm 版本需要 >= 8
-      pnpm dev
+      cd univer-pro-sheet-start-kit
+      pnpm install && pnpm dev
       ```
       <Callout emoji="⚠️">
         如果服务端部署在其他机器上，需要在 `vite.config.ts` 中把 `server` 配置里的 `localhost` 改为该机器的 IP 地址。
@@ -86,8 +86,8 @@ import { Callout } from 'nextra/components'
 
       ```shell
       npx degit dream-num/univer-pro-sheet-start-kit
-      cd univer-pro-sheet-start-kit && npm install # 注意：npm 版本需要 >= 7
-      npm run dev
+      cd univer-pro-sheet-start-kit
+      npm install && npm run dev
       ```
       <Callout emoji="⚠️">
         如果服务端部署在其他机器上，需要在 `vite.config.ts` 中把 `server` 配置里的 `localhost` 改为该机器的 IP 地址。
