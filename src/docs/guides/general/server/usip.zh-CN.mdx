@@ -56,9 +56,12 @@ curl -X GET \
 
 - UserInfo 批量获取接口需要接收一个 `userIDs` 字符串数组参数，数组元素是用户标识符 `userID`
 - 接口返回值是一个 `User` 数组
+- `userIDs` 数组长度最大为 100
 
 ```shell
-curl -X GET "http://localhost:8080/userinfo?userIDs=1&userIDs=2"
+curl -X POST "http://localhost:8080/userinfo" \
+  -H 'content-type: application/json' \
+  --data-raw '{"userIDs":["1","2"]}'
 
 # response
 {
@@ -94,9 +97,12 @@ curl -X GET "http://localhost:8080/role?unitID=xxx&userID=xxx"
 4. Get Collaborator List：获取文档的协作者列表
 
 - Get Collaborator List 需要接收一个 `unitIDs` 字符串数组，表示可以同时获取多个文档的协作者
+- `unitIDs` 数组长度最大为 100
 
 ```shell
-curl -X GET "http://localhost:8080/collaborators?unitIDs=AA&unitIDs=xx"
+curl -X POST "http://localhost:8080/collaborators" \
+  -H 'content-type: application/json' \
+  --data-raw '{"unitIDs":["AA","BB"]}'
 
 # response
 {
