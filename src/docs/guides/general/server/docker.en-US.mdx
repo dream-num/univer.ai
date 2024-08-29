@@ -2,6 +2,7 @@ import { Callout, Steps } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 import Image from '@/components/Image'
 import mysqlImg from './docker/mysql.png'
+import serviceImg from './docker/service.png'
 
 # Deploying with Docker
 
@@ -44,6 +45,20 @@ Also, verify the successful startup of the collaboration service.
 For a comprehensive test, try accessing it in various browsers or in private browsing mode to experience the full collaborative capabilities.
 
 ![Example Image](./docker/img2.png)
+
+## Service introduction
+
+<Image src={serviceImg} alt="service" />
+
+- collaboration-server: collaboration engine server, use OT algorithm to deal edit conflic.
+- lb: nginx loadbalance component.
+- universer: univer backend api server, apply http api function for sheet, document, slide.
+- univer-minio: S3 component, use to storage file content.
+- univer-postgres: database component.
+- univer-rabbitmq: MQ component, use in collaboration edit situation.
+- univer-redis: cache component.
+- univer-temporal: workflow component, use in import/export situation.
+- univer-worker-exchange: import/export function component.
 
 ## Port Check
 
@@ -120,6 +135,8 @@ After making the changes, restart the service to verify the configuration.
 If you are using your own S3 service, you can refer to the complete [S3 configuration](#s3-config).
 
 In addition to S3 configuration issues, you should also check whether [the import/export API configuration](/guides/sheet/features/import-export#configuration) of the Univer Server in the frontend project is correct.
+
+If you even have some problem, can use `docker compose logs univer-worker-exchange --since 30m` to get log and ask help in community.
 
 ### How to find error when server start failed?
 
