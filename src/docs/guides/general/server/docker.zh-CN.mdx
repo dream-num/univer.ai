@@ -2,6 +2,7 @@ import { Callout, Steps } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 import Image from '@/components/Image'
 import mysqlImg from './docker/mysql.png'
+import serviceImg from './docker/service.png'
 
 # 部署到 Docker
 
@@ -42,6 +43,20 @@ bash -c "$(curl -fsSL https://get.univer.ai)"
 请尝试在不同类型浏览器或无痕模式下访问，以全面体验协同功能。
 
 ![例子](./docker/img2.png)
+
+## 服务介绍
+
+<Image src={serviceImg} alt="service" />
+
+- collaboration-server：协同引擎服务，采用 OT 算法处理编辑冲突。
+- lb：nginx 负载均衡组件。
+- universer：univer 后端接口服务，为 sheet、document、slide 提供 http 接口服务。
+- univer-minio：S3 组件，用于存储文件。
+- univer-postgres：数据库组件。
+- univer-rabbitmq：消息队列组件，用在协同编辑场景。
+- univer-redis：缓存组件。
+- univer-temporal：工作流组件，用在导入导出场景。
+- univer-worker-exchange：导入导出功能组件。
 
 ## 端口
 
@@ -117,6 +132,8 @@ bash uninstall.sh clean # 卸载，删除数据
 如果你使用自己的 S3 服务，可以参考完整的[S3 配置](#s3-config)。
 
 除了 S3 配置问题，你还应该检查前端工程中的 Univer Server 的[导入导出API的配置](/guides/sheet/features/import-export#configuration)是否正确。
+
+如果依然还是有问题，可以使用 `docker compose logs univer-worker-exchange --since 30m` 导出日志后联系我们。
 
 ### 拉取 docker hub 镜像失败？
 
