@@ -1,8 +1,8 @@
 {
   "quickstart": "Quick Start",
   "installation": "Installation & Usage",
+  "concepts": "Basic Concepts",
   "i18n": "Internationalization",
   "univer-plugins": "Simplify Import",
-  "cell-data": "Configure Cell Data",
-  "concepts": "Basic Concepts"
+  "cell-data": "Configure Cell Data"
 }
