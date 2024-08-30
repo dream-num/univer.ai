@@ -6,6 +6,14 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
 
 数据验证是一种在单元格中设置规则，以确保用户输入的数据符合特定条件的功能。
+目前已经支持的数据验证类型:
+* 数字
+* 整数
+* 文本长度
+* 日期
+* 复选框
+* 下拉列表(单选/多选)
+* 自定义公式
 
 ## 安装
 
@@ -55,59 +63,154 @@ univer.registerPlugin(UniverDataValidationPlugin);
 univer.registerPlugin(UniverSheetsDataValidationPlugin);
 ```
 
-## 使用 API
+## Facade API <VersionBadge version="0.2.10+" />
 
-完整API请参考[@univerjs/sheets-data-validation](/typedoc/@univerjs/sheets-data-validation/README)
+完整 facade api 类型定义，请查看 [FacadeAPI](/typedoc/@univerjs/facade/README)
 
-### 使用 command
-
-以添加数据验证为例
-
+### 添加一个数据验证规则
 ```typescript
-// Commands and Interface of Command params for sheet-data-validation
-import type {
-  IAddSheetDataValidationCommandParams,
-  IRemoveSheetDataValidationCommandParams,
-  IUpdateSheetDataValidationOptionsCommandParams,
-  IUpdateSheetDataValidationRangeCommandParams,
-  IUpdateSheetDataValidationSettingCommandParams,
-} from '@univerjs/sheets-data-validation';
-import {
-  AddSheetDataValidationCommand,
-  DATA_VALIDATION_PLUGIN_NAME,
-  RemoveSheetDataValidationCommand,
-  UniverSheetsDataValidationPlugin,
-  UpdateSheetDataValidationOptionsCommand,
-  UpdateSheetDataValidationRangeCommand,
-  UpdateSheetDataValidationSettingCommand,
-} from '@univerjs/sheets-data-validation';
+import { FUniver } from '@univerjs/facade';
 
-// eg. Add data validation from command
-const commandService = univer.__getInjector().get(ICommandService);
+const univerAPI = FUniver.newAPI(univer);
 
-commandService.executeCommand(AddSheetDataValidationCommand.id, {
-  unitId: 'unitId',
-  subUnitId: 'subUnitId',
-  rule: {
-    uid: 'xxx-2',
-    type: DataValidationType.CHECKBOX,
-    ranges: [{
-      startRow: 6,
-      endRow: 10,
-      startColumn: 0,
-      endColumn: 5,
-    }],
-  },
-} as IAddSheetDataValidationCommandParams);
+// get range
+const workbook = univerAPI.getActiveWorkbook();
+const worksheet = workbook.getActiveSheet();
+const A1 = worksheet.getRange(0, 0, 1, 1);
+
+// build data validation
+const dataValidationBuilder = FUniver.newDataValidation();
+const dataValidation = dataValidationBuilder.requireCheckbox().build();
+
+// set data validation
+A1.setDataValidation(dataValidation);
 ```
 
-### 使用内部 service
-
+### 清除 Range 的数据验证规则
 ```typescript
-// internal service
-import { SheetsDataValidationValidatorService } from '@univerjs/sheets-data-validation';
+import { FUniver } from '@univerjs/facade';
 
-// Using internal service Such as validator
-const sheetsDataValidationValidatorService = univer.__getInjector().get(SheetsDataValidationValidatorService);
-sheetsDataValidationValidatorService.validatorWorksheet('unitId', 'sheetId')
+const univerAPI = FUniver.newAPI(univer);
+
+// get range
+const workbook = univerAPI.getActiveWorkbook();
+const worksheet = workbook.getActiveSheet();
+const A1_J10 = worksheet.getRange(0, 0, 10, 10);
+
+// clear data validation of range
+A1_J10.setDataValidation(null);
+```
+
+### 获取 Range/Worksheet 的数据验证规则
+```typescript
+import { FUniver } from '@univerjs/facade';
+
+const univerAPI = FUniver.newAPI(univer);
+
+// get range
+const workbook = univerAPI.getActiveWorkbook();
+const worksheet = workbook.getActiveSheet();
+const A1_J10 = worksheet.getRange(0, 0, 10, 10);
+
+// get data validation of range
+const dataValidation = A1_J10.getDataValidation();
+const dataValidations = A1_J10.getDataValidations();
+
+// get data validation of worksheet
+const dataValidationsOfSheet = worksheet.getDataValidations();
+```
+
+### 更新/删除数据验证
+```typescript
+import { DataValidationErrorStyle, DataValidationOperator, DataValidationType } from '@univerjs/core';
+import { FUniver } from '@univerjs/facade';
+
+const univerAPI = FUniver.newAPI(univer);
+
+// get range
+const workbook = univerAPI.getActiveWorkbook();
+const worksheet = workbook.getActiveSheet();
+const A1_J10 = worksheet.getRange(0, 0, 10, 10);
+
+// get data validation
+const dataValidation = A1_J10.getDataValidation();
+
+// update data validation range
+dataValidation.setRanges([{
+    startRow: 0,
+    startColumn: 0,
+    endColumn: 20,
+    endRow: 20,
+}]);
+
+// update data validation criteria
+dataValidation.setCriteria(DataValidationType.WHOLE, [DataValidationOperator.BETWEEN, '1', '100']);
+
+// update data validation options
+dataValidation.setOptions({
+    errorStyle: DataValidationErrorStyle.STOP,
+});
+
+// delete data validation
+dataValidation.delete();
+```
+
+### 查询校验状态
+```typescript
+import { FUniver } from '@univerjs/facade';
+
+const univerAPI = FUniver.newAPI(univer);
+
+// get range
+const workbook = univerAPI.getActiveWorkbook();
+const worksheet = workbook.getActiveSheet();
+const A1_J10 = worksheet.getRange(0, 0, 10, 10);
+
+A1_J10.getValidatorStatus().then((status) => {
+    console.log('===status', status);
+});
+
+worksheet.getValidatorStatus().then((statusOfSheet) => {
+    console.log('===statusOfSheet', statusOfSheet);
+});
+
+workbook?.getValidatorStatus().then((statusOfWorkbook) => {
+    console.log('===statusOfWorkbook', statusOfWorkbook);
+});
+```
+
+### 事件监听
+```typescript
+import { FUniver } from '@univerjs/facade';
+const univerAPI = FUniver.newAPI(univer);
+const workbook = univerAPI.getActiveWorkbook();
+
+// don't forget to dispose the listener
+const dispose = workbook.onBeforeAddDataValidation((event) => {
+    console.log('===onBeforeAddDataValidation', event);
+});
+
+workbook.onBeforeDeleteAllDataValidation((event) => {
+    console.log('===onBeforeDeleteAllDataValidation', event);
+});
+
+workbook.onBeforeUpdateDataValidationCriteria((event) => {
+    console.log('===onBeforeUpdateDataValidationCriteria', event);
+});
+
+workbook.onBeforeUpdateDataValidationRange((event) => {
+    console.log('===onBeforeUpdateDataValidationRange', event);
+});
+
+workbook.onBeforeUpdateDataValidationOptions((event) => {
+    console.log('===onBeforeUpdateDataValidationOptions', event);
+});
+
+workbook.onDataValidationChange((event) => {
+    console.log('===onDataValidationChange', event);
+});
+
+workbook.onDataValidationStatusChange((event) => {
+    console.log('===onDataValidationStatusChange', event);
+});
 ```
