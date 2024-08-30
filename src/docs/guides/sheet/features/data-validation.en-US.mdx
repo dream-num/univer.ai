@@ -183,33 +183,34 @@ workbook?.getValidatorStatus().then((statusOfWorkbook) => {
 ```typescript
 import { FUniver } from '@univerjs/facade';
 const univerAPI = FUniver.newAPI(univer);
+const workbook = univerAPI.getActiveWorkbook();
 
 // don't forget to dispose the listener
-const dispose = univerAPI.getSheetHooks().onBeforeAddDataValidation((event) => {
+const dispose = workbook.onBeforeAddDataValidation((event) => {
     console.log('===onBeforeAddDataValidation', event);
 });
 
-univerAPI.getSheetHooks().onBeforeDeleteAllDataValidation((event) => {
+workbook.onBeforeDeleteAllDataValidation((event) => {
     console.log('===onBeforeDeleteAllDataValidation', event);
 });
 
-univerAPI.getSheetHooks().onBeforeUpdateDataValidationCriteria((event) => {
+workbook.onBeforeUpdateDataValidationCriteria((event) => {
     console.log('===onBeforeUpdateDataValidationCriteria', event);
 });
 
-univerAPI.getSheetHooks().onBeforeUpdateDataValidationRange((event) => {
+workbook.onBeforeUpdateDataValidationRange((event) => {
     console.log('===onBeforeUpdateDataValidationRange', event);
 });
 
-univerAPI.getSheetHooks().onBeforeUpdateDataValidationOptions((event) => {
+workbook.onBeforeUpdateDataValidationOptions((event) => {
     console.log('===onBeforeUpdateDataValidationOptions', event);
 });
 
-univerAPI.getSheetHooks().onDataValidationChange((event) => {
+workbook.onDataValidationChange((event) => {
     console.log('===onDataValidationChange', event);
 });
 
-univerAPI.getSheetHooks().onDataValidationStatusChange((event) => {
+workbook.onDataValidationStatusChange((event) => {
     console.log('===onDataValidationStatusChange', event);
 });
 ```
