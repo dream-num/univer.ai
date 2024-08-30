@@ -56,9 +56,13 @@ curl -X GET \
 
 - The Bulk User Info Retrieval interface accepts a `userIDs` string array parameter where each element represents a user identifier `userID`.
 - The interface returns an array of `User` objects.
+- The `userIDs` array max size is 100.
+- After 0.2.9 version (not include 0.2.9) this api of `GET` method will be deprecated.
 
 ```shell
-curl -X GET "http://localhost:8080/userinfo?userIDs=1&userIDs=2"
+curl -X POST "http://localhost:8080/userinfo" \
+  -H 'content-type: application/json' \
+  --data-raw '{"userIDs":["1","2"]}'
 
 # response
 {
@@ -94,9 +98,13 @@ curl -X GET "http://localhost:8080/role?unitID=xxx&userID=xxx"
 4. Get Collaborator List: Retrieve the list of collaborators for a document
 
 - The Get Collaborator List interface should accept a `unitIDs` string array parameter, allowing retrieval of collaborator lists for multiple documents simultaneously.
+- The `unitIDs` array max size is 100.
+- After 0.2.9 version (not include 0.2.9) this api of `GET` method will be deprecated.
 
 ```shell
-curl -X GET "http://localhost:8080/collaborators?unitIDs=AA&unitIDs=xx"
+curl -X POST "http://localhost:8080/collaborators" \
+  -H 'content-type: application/json' \
+  --data-raw '{"unitIDs":["AA","BB"]}'
 
 # response
 {
