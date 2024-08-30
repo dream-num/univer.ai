@@ -86,7 +86,7 @@ const dataValidation = dataValidationBuilder.requireCheckbox().build();
 A1.setDataValidation(dataValidation);
 ```
 
-### clear data validations of range
+### Clear data validations of range
 ```typescript
 import { FUniver } from '@univerjs/facade';
 
@@ -101,7 +101,7 @@ const A1_J10 = worksheet.getRange(0, 0, 10, 10);
 A1_J10.setDataValidation(null);
 ```
 
-### get data validations of Range/Worksheet 
+### Get data validations of Range/Worksheet 
 ```typescript
 import { FUniver } from '@univerjs/facade';
 
@@ -155,7 +155,7 @@ dataValidation.setOptions({
 dataValidation.delete();
 ```
 
-### get validator status
+### Get validator status
 ```typescript
 import { FUniver } from '@univerjs/facade';
 
@@ -179,7 +179,7 @@ workbook?.getValidatorStatus().then((statusOfWorkbook) => {
 });
 ```
 
-### event
+### Event
 ```typescript
 import { FUniver } from '@univerjs/facade';
 const univerAPI = FUniver.newAPI(univer);
