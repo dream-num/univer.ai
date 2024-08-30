@@ -451,14 +451,14 @@ activeWorkbook.onSelectionChange((selection) => {
 });
 ```
 
-### attch a popup to cell <VersionBadge version="0.2.10+" />
+### attach a popup to cell <VersionBadge version="0.2.10+" />
 ```tsx
 // get range
 const workbook = univerAPI.getActiveWorkbook();
 const worksheet = workbook.getActiveSheet();
 const A1_J10 = worksheet.getRange(0, 0, 10, 10);
 
-A1_J10.attachPopupToCell({
+A1_J10.attachPopup({
     componentKey: () => <div style={{ width: 100, height: 100, background: '#fff' }}>popup content</div>,
 });
 ```
