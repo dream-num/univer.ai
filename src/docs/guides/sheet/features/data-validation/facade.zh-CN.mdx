@@ -1,9 +1,15 @@
+import { Tabs } from 'nextra/components'
+import VersionBadge from '@/components/VersionBadge'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
-## Facade API <VersionBadge version="0.2.10+" />
+# 数据验证 Facade API <VersionBadge version="0.2.10+" />
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
 
 完整 facade api 类型定义，请查看 [FacadeAPI](/typedoc/@univerjs/facade/README)
 
-### 添加一个数据验证规则
+## 添加一个数据验证规则
 ```typescript
 import { FUniver } from '@univerjs/facade';
 
@@ -22,7 +28,7 @@ const dataValidation = dataValidationBuilder.requireCheckbox().build();
 A1.setDataValidation(dataValidation);
 ```
 
-### 清除 Range 的数据验证规则
+## 清除 Range 的数据验证规则
 ```typescript
 import { FUniver } from '@univerjs/facade';
 
@@ -37,7 +43,7 @@ const A1_J10 = worksheet.getRange(0, 0, 10, 10);
 A1_J10.setDataValidation(null);
 ```
 
-### 获取 Range/Worksheet 的数据验证规则
+## 获取 Range/Worksheet 的数据验证规则
 ```typescript
 import { FUniver } from '@univerjs/facade';
 
@@ -56,7 +62,7 @@ const dataValidations = A1_J10.getDataValidations();
 const dataValidationsOfSheet = worksheet.getDataValidations();
 ```
 
-### 更新/删除数据验证
+## 更新/删除数据验证
 ```typescript
 import { DataValidationErrorStyle, DataValidationOperator, DataValidationType } from '@univerjs/core';
 import { FUniver } from '@univerjs/facade';
@@ -115,7 +121,7 @@ workbook?.getValidatorStatus().then((statusOfWorkbook) => {
 });
 ```
 
-### 事件监听
+## 事件监听
 ```typescript
 import { FUniver } from '@univerjs/facade';
 const univerAPI = FUniver.newAPI(univer);

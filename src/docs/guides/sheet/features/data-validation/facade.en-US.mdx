@@ -1,8 +1,15 @@
-## Using Facade API <VersionBadge version="0.2.10+" />
+import { Tabs } from 'nextra/components'
+import VersionBadge from '@/components/VersionBadge'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# Data Validation Facade API <VersionBadge version="0.2.10+" />
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
 
 To get full defination of facade api, please refer to [FacadeAPI](/typedoc/@univerjs/facade/README)
 
-### Add a data validation rule
+## Add a data validation rule
 ```typescript
 import { FUniver } from '@univerjs/facade';
 
@@ -21,7 +28,7 @@ const dataValidation = dataValidationBuilder.requireCheckbox().build();
 A1.setDataValidation(dataValidation);
 ```
 
-### Clear data validations of range
+## Clear data validations of range
 ```typescript
 import { FUniver } from '@univerjs/facade';
 
@@ -36,7 +43,7 @@ const A1_J10 = worksheet.getRange(0, 0, 10, 10);
 A1_J10.setDataValidation(null);
 ```
 
-### Get data validations of Range/Worksheet 
+## Get data validations of Range/Worksheet 
 ```typescript
 import { FUniver } from '@univerjs/facade';
 
@@ -55,7 +62,7 @@ const dataValidations = A1_J10.getDataValidations();
 const dataValidationsOfSheet = worksheet.getDataValidations();
 ```
 
-### Update/Delete data validation
+## Update/Delete data validation
 ```typescript
 import { DataValidationErrorStyle, DataValidationOperator, DataValidationType } from '@univerjs/core';
 import { FUniver } from '@univerjs/facade';
@@ -90,7 +97,7 @@ dataValidation.setOptions({
 dataValidation.delete();
 ```
 
-### Get validator status
+## Get validator status
 ```typescript
 import { FUniver } from '@univerjs/facade';
 
@@ -114,7 +121,7 @@ workbook?.getValidatorStatus().then((statusOfWorkbook) => {
 });
 ```
 
-### Event
+## Event
 ```typescript
 import { FUniver } from '@univerjs/facade';
 const univerAPI = FUniver.newAPI(univer);
