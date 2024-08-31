@@ -1,73 +1,15 @@
 import { Tabs } from 'nextra/components'
+import VersionBadge from '@/components/VersionBadge'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
-# 数据验证
+# Data Validation Facade API <VersionBadge version="0.2.10+" />
 
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
 
-数据验证是一种在单元格中设置规则，以确保用户输入的数据符合特定条件的功能。
-目前已经支持的数据验证类型:
-* 数字
-* 整数
-* 文本长度
-* 日期
-* 复选框
-* 下拉列表(单选/多选)
-* 自定义公式
 
-## 安装
+To get full defination of facade api, please refer to [FacadeAPI](/typedoc/@univerjs/facade/README)
 
-<Tabs items={['pnpm', 'npm']}>
-  <Tabs.Tab label="pnpm">
-    ```shell
-    pnpm add @univerjs/data-validation @univerjs/sheets-data-validation
-    ```
-  </Tabs.Tab>
-  <Tabs.Tab label="npm">
-    ```shell
-    npm install @univerjs/data-validation @univerjs/sheets-data-validation
-    ```
-  </Tabs.Tab>
-</Tabs>
-
-## 引入
-
-```typescript
-import '@univerjs/sheets-data-validation/lib/index.css';
-
-import { UniverDataValidationPlugin } from '@univerjs/data-validation';
-import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validation';
-```
-
-## 国际化
-
-```typescript
-import { LocaleType, Tools } from '@univerjs/core';
-import SheetsDataValidationZhCN from '@univerjs/sheets-data-validation/locale/zh-CN';
-
-const univer = new Univer({
-  theme: defaultTheme,
-  locale: LocaleType.ZH_CN,
-  locales: {
-    [LocaleType.ZH_CN]: Tools.deepMerge(
-      SheetsDataValidationZhCN
-    ),
-  },
-});
-```
-
-## 注册
-
-```typescript
-univer.registerPlugin(UniverDataValidationPlugin);
-univer.registerPlugin(UniverSheetsDataValidationPlugin);
-```
-
-## Facade API <VersionBadge version="0.2.10+" />
-
-完整 facade api 类型定义，请查看 [FacadeAPI](/typedoc/@univerjs/facade/README)
-
-### 添加一个数据验证规则
+## Add a data validation rule
 ```typescript
 import { FUniver } from '@univerjs/facade';
 
@@ -86,7 +28,7 @@ const dataValidation = dataValidationBuilder.requireCheckbox().build();
 A1.setDataValidation(dataValidation);
 ```
 
-### 清除 Range 的数据验证规则
+## Clear data validations of range
 ```typescript
 import { FUniver } from '@univerjs/facade';
 
@@ -101,7 +43,7 @@ const A1_J10 = worksheet.getRange(0, 0, 10, 10);
 A1_J10.setDataValidation(null);
 ```
 
-### 获取 Range/Worksheet 的数据验证规则
+## Get data validations of Range/Worksheet 
 ```typescript
 import { FUniver } from '@univerjs/facade';
 
@@ -120,7 +62,7 @@ const dataValidations = A1_J10.getDataValidations();
 const dataValidationsOfSheet = worksheet.getDataValidations();
 ```
 
-### 更新/删除数据验证
+## Update/Delete data validation
 ```typescript
 import { DataValidationErrorStyle, DataValidationOperator, DataValidationType } from '@univerjs/core';
 import { FUniver } from '@univerjs/facade';
@@ -155,7 +97,7 @@ dataValidation.setOptions({
 dataValidation.delete();
 ```
 
-### 查询校验状态
+## Get validator status
 ```typescript
 import { FUniver } from '@univerjs/facade';
 
@@ -179,7 +121,7 @@ workbook?.getValidatorStatus().then((statusOfWorkbook) => {
 });
 ```
 
-### 事件监听
+## Event
 ```typescript
 import { FUniver } from '@univerjs/facade';
 const univerAPI = FUniver.newAPI(univer);

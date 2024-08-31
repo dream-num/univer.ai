@@ -1,0 +1,55 @@
+
+## Facade API <VersionBadge version="0.2.10+" />
+
+完整 facade api 类型定义，请查看 [FacadeAPI](/typedoc/@univerjs/facade/README)
+
+### 示例
+```typescript
+const univerAPI = FUniver.newAPI(univer);
+
+// get cell
+const workbook = univerAPI.getActiveWorkbook();
+const worksheet = workbook.getActiveSheet();
+// comment only attch to single cell, if range is A1_J10 equal A1
+const A1 = worksheet.getRange(0, 0, 1, 1);
+
+// add comment to empty cell
+A1.addComment({
+    dataStream: 'hello world\r\n',
+});
+
+// reply to current comment
+A1.addComment({
+    dataStream: 'reply\r\n',
+});
+
+
+A1.clearComment();
+
+// get comment
+const comment = A1.getComment();
+
+// update content
+comment?.update({
+    dataStream: 'hello world222\r\n',
+});
+
+// delete comment
+comment?.delete();
+
+// resolve comment
+comment?.resolve();
+
+// get replies
+comment?.getReplies();
+
+// get range of this comment
+comment?.getRange();
+
+// event
+workbook.onBeforeUpdateThreadComment
+workbook.onBeforeDeleteThreadComment
+workbook.onBeforeAddThreadComment
+// comment change event include add, update, delete
+workbook.onThreadCommentChange
+```
