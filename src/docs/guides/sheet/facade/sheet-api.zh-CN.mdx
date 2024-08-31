@@ -85,8 +85,7 @@ const sheets = activeWorkbook.save().sheets;
 获取工作薄中当前激活的工作表
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 ```
 
 ### 获取工作表数据
@@ -165,8 +164,7 @@ univerAPI.executeCommand('sheet.command.active-sheet', { unitId: workbookId, sub
 在指定行位置之后插入一行。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 这将在第一行位置后插入一行
 sheet.insertRowAfter(0);
@@ -177,8 +175,7 @@ sheet.insertRowAfter(0);
 在指定行位置之前插入一行。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 这将在第一行位置前插入一行
 sheet.insertRowBefore(0);
@@ -189,8 +186,7 @@ sheet.insertRowBefore(0);
 在工作表中从指定位置开始插入一个或多个连续的空白行。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 将所有行向下移动三位
 sheet.insertRows(0, 3);
@@ -201,8 +197,7 @@ sheet.insertRows(0, 3);
 在指定行位置之后插入若干行。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 这将在第一行后插入五行
 sheet.insertRowsAfter(0, 5);
@@ -213,8 +208,7 @@ sheet.insertRowsAfter(0, 5);
 在指定行位置之前插入若干行。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 这在第一行之前插入五行
 sheet.insertRowsBefore(0, 5);
@@ -225,8 +219,7 @@ sheet.insertRowsBefore(0, 5);
 删除给定行位置处的行。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 行从 0 开始 - 这将删除第一行
 sheet.deleteRow(0);
@@ -237,8 +230,7 @@ sheet.deleteRow(0);
 删除从给定行位置开始的若干行。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 行从 0 开始 - 这将删除前两行
 sheet.deleteRows(0, 2);
@@ -251,12 +243,11 @@ sheet.deleteRows(0, 2);
 ```typescript
 // 以下代码将行 1-2 移动到目标索引 5
 // 这会导致这些行变为行 3-4
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 选择要移动的第 1 行和第 2 行
-const rowSpec = activeSheet.getRange(0,0,2,1);
-activeSheet.moveRows(rowSpec, 5);
+const rowSpec = sheet.getRange(0,0,2,1);
+sheet.moveRows(rowSpec, 5);
 ```
 
 ### hideRow(row)
@@ -264,12 +255,11 @@ activeSheet.moveRows(rowSpec, 5);
 隐藏指定范围内的行。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 这将隐藏第一行
-const range = activeSheet.getRange(0,0,0,0);
-activeSheet.hideRow(range);
+const range = sheet.getRange(0,0,0,0);
+sheet.hideRow(range);
 ```
 
 ### hideRows(rowIndex, numRows)
@@ -277,11 +267,10 @@ activeSheet.hideRow(range);
 隐藏从指定索引开始的一个或多个连续行。此方法使用 0 索引。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 隐藏前三行
-activeSheet.hideRows(0, 3);
+sheet.hideRows(0, 3);
 ```
 
 ### unhideRow(row)
@@ -289,12 +278,11 @@ activeSheet.hideRows(0, 3);
 取消隐藏指定范围内的行。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 如果第一行之前被隐藏，则取消隐藏第一行
-const range = activeSheet.getRange(0,0,0,0);
-activeSheet.unhideRow(range);
+const range = sheet.getRange(0,0,0,0);
+sheet.unhideRow(range);
 ```
 
 ### showRows(rowIndex, numRows)
@@ -302,11 +290,10 @@ activeSheet.unhideRow(range);
 取消隐藏从指定索引开始的一个或多个连续行。此方法使用 0 索引。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 取消隐藏前三行
-activeSheet.showRows(0, 3);
+sheet.showRows(0, 3);
 ```
 
 ### setRowHeight(rowPosition, height)
@@ -314,11 +301,10 @@ activeSheet.showRows(0, 3);
 设置给定行的行高（以像素为单位）。默认情况下，行会扩展以适应单元格内容的大小。如果想要将行强制设置为指定高度，请使用 `setRowHeightsForced(startRow, numRows, height)`。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 将第一行的高度设置为 200 像素
-activeSheet.setRowHeight(0, 200);
+sheet.setRowHeight(0, 200);
 ```
 
 ### setRowHeights(startRow, numRows, height)
@@ -326,11 +312,10 @@ activeSheet.setRowHeight(0, 200);
 设置给定行的高度（以像素为单位）。默认情况下，行会扩展以适应单元格内容的大小。如果想要将行强制设置为指定高度，请使用 `setRowHeightsForced(startRow, numRows, height)`。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 将前三行的高度设置为 20 像素
-activeSheet.setRowHeights(0, 3, 20);
+sheet.setRowHeights(0, 3, 20);
 ```
 
 ### setRowHeightsForced(startRow, numRows, height)
@@ -338,11 +323,10 @@ activeSheet.setRowHeights(0, 3, 20);
 设置给定行的高度（以像素为单位）。默认情况下，行会扩展以适应单元格内容的大小。使用 `setRowHeightsForced` 时，即使单元格内容高于行高，行也会被强制为指定的高度。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 将前三行的高度设置为 5 像素
-activeSheet.setRowHeightsForced(0, 3, 5);
+sheet.setRowHeightsForced(0, 3, 5);
 ```
 
 ## 列 Column
@@ -352,8 +336,7 @@ activeSheet.setRowHeightsForced(0, 3, 5);
 在指定列位置之后插入一列。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 这将在第一列位置后插入一列
 sheet.insertColumnAfter(0);
@@ -364,8 +347,7 @@ sheet.insertColumnAfter(0);
 在指定列位置之前插入一列。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 这将在第一列位置插入一列
 sheet.insertColumnBefore(0);
@@ -376,8 +358,7 @@ sheet.insertColumnBefore(0);
 在工作表中从指定位置开始插入一个或多个连续的空白列。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 将所有列移动三位
 sheet.insertColumns(0, 3);
@@ -388,8 +369,7 @@ sheet.insertColumns(0, 3);
 在指定列位置后插入指定数量的列。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 在第一列后插入两列
 sheet.insertColumnsAfter(0, 2);
@@ -400,8 +380,7 @@ sheet.insertColumnsAfter(0, 2);
 在指定列位置之前插入若干列。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 这将在第一列之前插入五列
 sheet.insertColumnsBefore(0, 5);
@@ -412,8 +391,7 @@ sheet.insertColumnsBefore(0, 5);
 删除给定列位置处的列。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 列从 0 开始 - 这将删除第一列
 sheet.deleteColumn(0);
@@ -424,8 +402,7 @@ sheet.deleteColumn(0);
 删除从给定列位置开始的若干列。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 列从 0 开始 - 这将删除前两列
 sheet.deleteColumns(0, 2);
@@ -438,12 +415,11 @@ sheet.deleteColumns(0, 2);
 ```typescript
 // 以下代码将 A-B 行移动到目标索引 5。
 // 这会导致这些列变成 C-D 列。
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 选择要移动的 A 列和 B 列。
-const columnSpec = activeSheet.getRange(0,0,1,2);
-activeSheet.moveColumns(columnSpec, 5);
+const columnSpec = sheet.getRange(0,0,1,2);
+sheet.moveColumns(columnSpec, 5);
 ```
 
 ### hideColumn(column)
@@ -451,12 +427,11 @@ activeSheet.moveColumns(columnSpec, 5);
 隐藏给定范围内的一列或多列。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 这将隐藏第一列
-const range = activeSheet.getRange(0,0,0,0);
-activeSheet.hideColumn(range);
+const range = sheet.getRange(0,0,0,0);
+sheet.hideColumn(range);
 ```
 
 ### hideColumns(columnIndex, numColumns)
@@ -464,11 +439,10 @@ activeSheet.hideColumn(range);
 隐藏从给定索引开始的一个或多个连续列。此方法使用 0 索引。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 隐藏前三列
-activeSheet.hideColumns(0, 3);
+sheet.hideColumns(0, 3);
 ```
 
 ### unhideColumn(column)
@@ -476,12 +450,11 @@ activeSheet.hideColumns(0, 3);
 取消隐藏指定范围内的列。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 如果第一列之前被隐藏，则取消隐藏
-const range = activeSheet.getRange(0,0,0,0);
-activeSheet.unhideColumn(range);
+const range = sheet.getRange(0,0,0,0);
+sheet.unhideColumn(range);
 ```
 
 ### showColumns(columnIndex, numColumns)
@@ -489,11 +462,10 @@ activeSheet.unhideColumn(range);
 取消隐藏从指定索引开始的一个或多个连续列。此方法使用 0 索引。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 取消隐藏前三列
-activeSheet.showColumns(0, 3);
+sheet.showColumns(0, 3);
 ```
 
 ### setColumnWidth(columnPosition, width)
@@ -501,11 +473,10 @@ activeSheet.showColumns(0, 3);
 设置指定列的宽度（以像素为单位）。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 将第一列的宽度设置为 200 像素
-activeSheet.setColumnWidth(0, 200);
+sheet.setColumnWidth(0, 200);
 ```
 
 ### setColumnWidths(startColumn, numColumns, width)
@@ -513,11 +484,10 @@ activeSheet.setColumnWidth(0, 200);
 设置指定列的宽度（以像素为单位）。
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 将前三列的宽度设置为 200 像素
-activeSheet.setColumnWidths(0, 3, 200);
+sheet.setColumnWidths(0, 3, 200);
 ```
 
 ## 单元格 Cell
@@ -615,15 +585,17 @@ univerAPI.onCommandExecuted((command) => {
 创建 A1 单元格的范围：
 
 ```typescript
-const activeSheet = univerAPI.getActiveWorkbook().getActiveSheet();
-const range = activeSheet.getRange(0, 0, 1, 1);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 1, 1);
 ```
 
 创建 A1:B2 的范围：
 
 ```typescript
-const activeSheet = univerAPI.getActiveWorkbook().getActiveSheet();
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 ```
 
 ### 获取范围数据
@@ -631,14 +603,18 @@ const range = activeSheet.getRange(0, 0, 2, 2);
 获取范围第一个单元格的值
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 const value = range.getValue();
 ```
 
 获取范围的所有值
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 range.forEach(( row, column, cell) => {
   console.log( row, column, cell);
 });
@@ -647,7 +623,9 @@ range.forEach(( row, column, cell) => {
 获取范围的所有公式
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 console.log(range.getFormulas());
 ```
 
@@ -659,19 +637,25 @@ console.log(range.getFormulas());
 
 比如，设置 A1:B2 的值为 `Hello, Univer`：
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 range.setValue('Hello, Univer');
 ```
 
 设置 A1+B1 的值为公式：
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 range.setValue('=A1+B1');
 ```
 
 设置 A1:B2 的值为单元格对象：
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 range.setValue({
   v: 'Hello, Univer',
   custom: {
@@ -687,7 +671,9 @@ range.setValue({
 可以传入单元格值也可以传入单元格对象。
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 range.setValues([
   ['A1', 'B1'],
   ['A2', 'B2'],
@@ -704,7 +690,9 @@ range.setValues([
 则对象的一级索引代表行号，二级索引代表列号，与范围的长宽无需一致。
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 range.setValues({
   0: {
     0: 'A1',
@@ -720,14 +708,18 @@ range.setValues({
 ### 获取范围样式
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 const style = range.getCellStyleData();
 ```
 
 ### 设置范围样式
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 range
   .setFontWeight('bold')
   .setFontLine('underline')
@@ -739,7 +731,9 @@ range
 ### 清理范围样式
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 range
   .setFontWeight(null)
   .setFontLine(null)
@@ -751,21 +745,27 @@ range
 ### 是否合并
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 const isMerged = range.isMerged();
 ```
 
 ### 获取坐标
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 const rect = range.getCellRect(); // width、heigh、left、right、top、bottom、x、y
 ```
 
 ### 同时获取范围的合并信息和坐标
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 const cell = range.getCell();
 ```
 
@@ -778,8 +778,9 @@ Univer 表格支持多选区，所以选区是一个范围数组，可以通过�
 ### 获取激活选区的范围
 
 ```typescript
-const activeSheet = univerAPI.getActiveWorkbook().getActiveSheet();
-const selection = activeSheet.getSelection();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const selection = sheet.getSelection();
 const range = selection.getActiveRange();
 ```
 
@@ -816,12 +817,12 @@ activeWorkbook.onSelectionChange((selection) => {
 
 ### 添加一个Popup到cell <VersionBadge version="0.2.10+" />
 ```tsx
-// get range
-const workbook = univerAPI.getActiveWorkbook();
-const worksheet = workbook.getActiveSheet();
-const A1_J10 = worksheet.getRange(0, 0, 10, 10);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
-A1_J10.attachPopup({
+// get range
+const range = sheet.getRange(0, 0, 10, 10);
+
+range.attachPopup({
     componentKey: () => <div style={{ width: 100, height: 100, background: '#fff' }}>popup content</div>,
 });
 ```

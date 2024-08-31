@@ -15,17 +15,16 @@ import { FUniver } from '@univerjs/facade';
 
 const univerAPI = FUniver.newAPI(univer);
 
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 // get range
-const workbook = univerAPI.getActiveWorkbook();
-const worksheet = workbook.getActiveSheet();
-const A1 = worksheet.getRange(0, 0, 1, 1);
+const range = sheet.getRange(0, 0, 1, 1);
 
 // build data validation
 const dataValidationBuilder = FUniver.newDataValidation();
 const dataValidation = dataValidationBuilder.requireCheckbox().build();
 
 // set data validation
-A1.setDataValidation(dataValidation);
+range.setDataValidation(dataValidation);
 ```
 
 ## Clear data validations of range
@@ -33,14 +32,13 @@ A1.setDataValidation(dataValidation);
 import { FUniver } from '@univerjs/facade';
 
 const univerAPI = FUniver.newAPI(univer);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // get range
-const workbook = univerAPI.getActiveWorkbook();
-const worksheet = workbook.getActiveSheet();
-const A1_J10 = worksheet.getRange(0, 0, 10, 10);
+const range = sheet.getRange(0, 0, 10, 10); // A1:J10
 
 // clear data validation of range
-A1_J10.setDataValidation(null);
+range.setDataValidation(null);
 ```
 
 ## Get data validations of Range/Worksheet 
@@ -48,18 +46,17 @@ A1_J10.setDataValidation(null);
 import { FUniver } from '@univerjs/facade';
 
 const univerAPI = FUniver.newAPI(univer);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // get range
-const workbook = univerAPI.getActiveWorkbook();
-const worksheet = workbook.getActiveSheet();
-const A1_J10 = worksheet.getRange(0, 0, 10, 10);
+const range = sheet.getRange(0, 0, 10, 10); // A1:J10
 
 // get data validation of range
-const dataValidation = A1_J10.getDataValidation();
-const dataValidations = A1_J10.getDataValidations();
+const dataValidation = range.getDataValidation();
+const dataValidations = range.getDataValidations();
 
 // get data validation of worksheet
-const dataValidationsOfSheet = worksheet.getDataValidations();
+const dataValidationsOfSheet = sheet.getDataValidations();
 ```
 
 ## Update/Delete data validation
@@ -68,14 +65,14 @@ import { DataValidationErrorStyle, DataValidationOperator, DataValidationType } 
 import { FUniver } from '@univerjs/facade';
 
 const univerAPI = FUniver.newAPI(univer);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
 
 // get range
-const workbook = univerAPI.getActiveWorkbook();
-const worksheet = workbook.getActiveSheet();
-const A1_J10 = worksheet.getRange(0, 0, 10, 10);
+const range = sheet.getRange(0, 0, 10, 10); // A1:J10
 
 // get data validation
-const dataValidation = A1_J10.getDataValidation();
+const dataValidation = range.getDataValidation();
 
 // update data validation range
 dataValidation.setRanges([{
@@ -102,13 +99,13 @@ dataValidation.delete();
 import { FUniver } from '@univerjs/facade';
 
 const univerAPI = FUniver.newAPI(univer);
-
-// get range
 const workbook = univerAPI.getActiveWorkbook();
 const worksheet = workbook.getActiveSheet();
-const A1_J10 = worksheet.getRange(0, 0, 10, 10);
 
-A1_J10.getValidatorStatus().then((status) => {
+// get range
+const range = worksheet.getRange(0, 0, 10, 10); // A1:J10
+
+range.getValidatorStatus().then((status) => {
     console.log('===status', status);
 });
 

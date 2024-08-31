@@ -11,24 +11,24 @@ const univerAPI = FUniver.newAPI(univer);
 // get cell
 const workbook = univerAPI.getActiveWorkbook();
 const worksheet = workbook.getActiveSheet();
-// comment only attch to single cell, if range is A1_J10 equal A1
-const A1 = worksheet.getRange(0, 0, 1, 1);
+// comment only attch to single cell, if range is A1:J10 equal A1
+const range = worksheet.getRange(0, 0, 1, 1);
 
 // add comment to empty cell
-A1.addComment({
+range.addComment({
     dataStream: 'hello world\r\n',
 });
 
 // reply to current comment
-A1.addComment({
+range.addComment({
     dataStream: 'reply\r\n',
 });
 
 
-A1.clearComment();
+range.clearComment();
 
 // get comment
-const comment = A1.getComment();
+const comment = range.getComment();
 
 // update content
 comment?.update({
