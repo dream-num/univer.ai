@@ -1,139 +1,78 @@
 import { Tabs } from 'nextra/components'
+import VersionBadge from '@/components/VersionBadge'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
-# Data Validation
+# Data Validation Facade API <VersionBadge version="0.2.10+" />
 
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
 
-Data validation is a feature that sets rules in cells to ensure that the data entered by users meets specific conditions.
-Currently supported data validation types:
-* number
-* integer
-* Text length
-* date
-* checkbox
-* Drop-down list (single/multiple)
-* Custom formula
-
-## Installation
-
-<Tabs items={['pnpm', 'npm']}>
-  <Tabs.Tab label="pnpm">
-    ```shell
-    pnpm add @univerjs/data-validation @univerjs/sheets-data-validation
-    ```
-  </Tabs.Tab>
-  <Tabs.Tab label="npm">
-    ```shell
-    npm install @univerjs/data-validation @univerjs/sheets-data-validation
-    ```
-  </Tabs.Tab>
-</Tabs>
-
-## Import
-
-```typescript
-import '@univerjs/sheets-data-validation/lib/index.css';
-
-import { UniverDataValidationPlugin } from '@univerjs/data-validation';
-import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validation';
-```
-
-## Internationalization
-
-```typescript
-import { LocaleType, Tools } from '@univerjs/core';
-import SheetsDataValidationEnUS from '@univerjs/sheets-data-validation/locale/en-US';
-
-const univer = new Univer({
-  theme: defaultTheme,
-  locale: LocaleType.EN_US,
-  locales: {
-    [LocaleType.EN_US]: Tools.deepMerge(
-      SheetsDataValidationEnUS
-    ),
-  },
-});
-```
-
-## Register
-
-```typescript
-univer.registerPlugin(UniverDataValidationPlugin);
-univer.registerPlugin(UniverSheetsDataValidationPlugin);
-```
-
-## Using Facade API <VersionBadge version="0.2.10+" />
 
 To get full defination of facade api, please refer to [FacadeAPI](/typedoc/@univerjs/facade/README)
 
-### Add a data validation rule
+## Add a data validation rule
 ```typescript
 import { FUniver } from '@univerjs/facade';
 
 const univerAPI = FUniver.newAPI(univer);
 
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 // get range
-const workbook = univerAPI.getActiveWorkbook();
-const worksheet = workbook.getActiveSheet();
-const A1 = worksheet.getRange(0, 0, 1, 1);
+const range = sheet.getRange(0, 0, 1, 1);
 
 // build data validation
 const dataValidationBuilder = FUniver.newDataValidation();
 const dataValidation = dataValidationBuilder.requireCheckbox().build();
 
 // set data validation
-A1.setDataValidation(dataValidation);
+range.setDataValidation(dataValidation);
 ```
 
-### Clear data validations of range
+## Clear data validations of range
 ```typescript
 import { FUniver } from '@univerjs/facade';
 
 const univerAPI = FUniver.newAPI(univer);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // get range
-const workbook = univerAPI.getActiveWorkbook();
-const worksheet = workbook.getActiveSheet();
-const A1_J10 = worksheet.getRange(0, 0, 10, 10);
+const range = sheet.getRange(0, 0, 10, 10); // A1:J10
 
 // clear data validation of range
-A1_J10.setDataValidation(null);
+range.setDataValidation(null);
 ```
 
-### Get data validations of Range/Worksheet 
+## Get data validations of Range/Worksheet 
 ```typescript
 import { FUniver } from '@univerjs/facade';
 
 const univerAPI = FUniver.newAPI(univer);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // get range
-const workbook = univerAPI.getActiveWorkbook();
-const worksheet = workbook.getActiveSheet();
-const A1_J10 = worksheet.getRange(0, 0, 10, 10);
+const range = sheet.getRange(0, 0, 10, 10); // A1:J10
 
 // get data validation of range
-const dataValidation = A1_J10.getDataValidation();
-const dataValidations = A1_J10.getDataValidations();
+const dataValidation = range.getDataValidation();
+const dataValidations = range.getDataValidations();
 
 // get data validation of worksheet
-const dataValidationsOfSheet = worksheet.getDataValidations();
+const dataValidationsOfSheet = sheet.getDataValidations();
 ```
 
-### Update/Delete data validation
+## Update/Delete data validation
 ```typescript
 import { DataValidationErrorStyle, DataValidationOperator, DataValidationType } from '@univerjs/core';
 import { FUniver } from '@univerjs/facade';
 
 const univerAPI = FUniver.newAPI(univer);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
 
 // get range
-const workbook = univerAPI.getActiveWorkbook();
-const worksheet = workbook.getActiveSheet();
-const A1_J10 = worksheet.getRange(0, 0, 10, 10);
+const range = sheet.getRange(0, 0, 10, 10); // A1:J10
 
 // get data validation
-const dataValidation = A1_J10.getDataValidation();
+const dataValidation = range.getDataValidation();
 
 // update data validation range
 dataValidation.setRanges([{
@@ -155,18 +94,18 @@ dataValidation.setOptions({
 dataValidation.delete();
 ```
 
-### Get validator status
+## Get validator status
 ```typescript
 import { FUniver } from '@univerjs/facade';
 
 const univerAPI = FUniver.newAPI(univer);
-
-// get range
 const workbook = univerAPI.getActiveWorkbook();
 const worksheet = workbook.getActiveSheet();
-const A1_J10 = worksheet.getRange(0, 0, 10, 10);
 
-A1_J10.getValidatorStatus().then((status) => {
+// get range
+const range = worksheet.getRange(0, 0, 10, 10); // A1:J10
+
+range.getValidatorStatus().then((status) => {
     console.log('===status', status);
 });
 
@@ -179,7 +118,7 @@ workbook?.getValidatorStatus().then((statusOfWorkbook) => {
 });
 ```
 
-### Event
+## Event
 ```typescript
 import { FUniver } from '@univerjs/facade';
 const univerAPI = FUniver.newAPI(univer);

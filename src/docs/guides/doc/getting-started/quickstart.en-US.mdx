@@ -25,13 +25,21 @@ If you prefer to start with a local development environment, you can use the fol
 
 <Tabs items={['pnpm', 'npm']}>
   <Tabs.Tab label="pnpm">
+    Run the following command requires your device has `nodejs >= 18`, `pnpm >= 7` and `git` installed.
+
     ```shell
-    pnpm dlx degit dream-num/univer-doc-start-kit [your-app-name]
+    pnpm dlx degit dream-num/univer-doc-start-kit
+    cd univer-doc-start-kit
+    pnpm install && pnpm dev
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
+    Run the following command requires your device has `nodejs >= 18`, `npm >= 8` and `git` installed.
+
     ```shell
-    npx degit dream-num/univer-doc-start-kit [your-app-name]
+    npx degit dream-num/univer-doc-start-kit
+    cd univer-doc-start-kit
+    npm install && npm run dev
     ```
   </Tabs.Tab>
 </Tabs>

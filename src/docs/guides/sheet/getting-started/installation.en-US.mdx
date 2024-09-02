@@ -303,11 +303,11 @@ const univerAPI = FUniver.newAPI(univer);
 Then you can use the methods of `univerAPI` to use Univer, such as getting the currently active sheet and updating values in the specified range:
 
 ```typescript
-const activeSheet = univerAPI.getActiveWorkbook().getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // Set the number 1 in A1
-const range1 = activeSheet.getRange(0, 0, 1, 1);
-range1.setValue(1);
+const range = sheet.getRange(0, 0, 1, 1);
+range.setValue(1);
 ```
 
 ### Storing Data

@@ -2,6 +2,7 @@ import { Callout } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 import ReactLive from '@/components/ReactLive'
 import ServerNotice from '@/components/ServerNotice'
+import VersionBadge from '@/components/VersionBadge'
 
 # Univer Sheet API
 
@@ -84,9 +85,8 @@ const sheets = activeWorkbook.save().sheets;
 Get Active Worksheet
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-```
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  ```
 
 ### Get Worksheet Data
 
@@ -164,8 +164,7 @@ univerAPI.executeCommand('sheet.command.active-sheet', { unitId: workbookId, sub
 Inserts a row after the given row position.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // This inserts a row after the first row position
 sheet.insertRowAfter(0);
@@ -176,9 +175,8 @@ sheet.insertRowAfter(0);
 Inserts a row before the given row position.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // This inserts a row before the first row position
 sheet.insertRowBefore(0);
 ```
@@ -188,9 +186,8 @@ sheet.insertRowBefore(0);
 Inserts one or more consecutive blank rows in a sheet starting at the specified location.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // Shifts all rows down by three
 sheet.insertRows(0, 3);
 ```
@@ -200,9 +197,8 @@ sheet.insertRows(0, 3);
 Inserts a number of rows after the given row position.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // This inserts five rows after the first row
 sheet.insertRowsAfter(0, 5);
 ```
@@ -212,9 +208,8 @@ sheet.insertRowsAfter(0, 5);
 Inserts a number of rows before the given row position.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // This inserts five rows before the first row
 sheet.insertRowsBefore(0, 5);
 ```
@@ -224,9 +219,8 @@ sheet.insertRowsBefore(0, 5);
 Deletes the row at the given row position.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // Rows start at "0" - this deletes the first row
 sheet.deleteRow(0);
 ```
@@ -236,9 +230,8 @@ sheet.deleteRow(0);
 Deletes a number of rows starting at the given row position.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // Rows start at "0" - this deletes the first two rows
 sheet.deleteRows(0, 2);
 ```
@@ -250,12 +243,11 @@ Moves the rows selected by the given range to the position indicated by the `des
 ```typescript
 // The code below moves rows 1-2 to destination index 5
 // This results in those rows becoming rows 3-4
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // Selects row 1 and row 2 to be moved
-const rowSpec = activeSheet.getRange(0,0,2,1);
-activeSheet.moveRows(rowSpec, 5);
+const rowSpec = sheet.getRange(0,0,2,1);
+sheet.moveRows(rowSpec, 5);
 ```
 
 ### hideRow(row)
@@ -263,12 +255,11 @@ activeSheet.moveRows(rowSpec, 5);
 Hides the rows in the given range.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // This hides the first row
-const range = activeSheet.getRange(0,0,0,0);
-activeSheet.hideRow(range);
+const range = sheet.getRange(0,0,0,0);
+sheet.hideRow(range);
 ```
 
 ### hideRows(rowIndex, numRows)
@@ -276,11 +267,10 @@ activeSheet.hideRow(range);
 Hides one or more consecutive rows starting at the given index. Use 0-index for this method.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // Hides the first three rows
-activeSheet.hideRows(0, 3);
+sheet.hideRows(0, 3);
 ```
 
 ### unhideRow(row)
@@ -288,12 +278,11 @@ activeSheet.hideRows(0, 3);
 Unhides the row in the given range.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // This unhides the first row if it was previously hidden
-const range = activeSheet.getRange(0,0,0,0);
-activeSheet.unhideRow(range);
+const range = sheet.getRange(0,0,0,0);
+sheet.unhideRow(range);
 ```
 
 ### showRows(rowIndex, numRows)
@@ -301,11 +290,10 @@ activeSheet.unhideRow(range);
 Unhides one or more consecutive rows starting at the given index. Use 0-index for this method.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // Unhides the first three rows
-activeSheet.showRows(0, 3);
+sheet.showRows(0, 3);
 ```
 
 ### setRowHeight(rowPosition, height)
@@ -313,11 +301,10 @@ activeSheet.showRows(0, 3);
 Sets the row height of the given row in pixels. By default, rows grow to fit cell contents. If you want to force rows to a specified height, use `setRowHeightsForced(startRow, numRows, height)`.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // Sets the first row to a height of 200 pixels
-activeSheet.setRowHeight(0, 200);
+sheet.setRowHeight(0, 200);
 ```
 
 ### setRowHeights(startRow, numRows, height)
@@ -325,11 +312,10 @@ activeSheet.setRowHeight(0, 200);
 Sets the height of the given rows in pixels. By default, rows grow to fit cell contents. If you want to force rows to a specified height, use `setRowHeightsForced(startRow, numRows, height)`.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // Sets the first three rows to a height of 20 pixels
-activeSheet.setRowHeights(0, 3, 20);
+sheet.setRowHeights(0, 3, 20);
 ```
 
 ### setRowHeightsForced(startRow, numRows, height)
@@ -337,11 +323,10 @@ activeSheet.setRowHeights(0, 3, 20);
 Sets the height of the given rows in pixels. By default, rows grow to fit cell contents. When you use `setRowHeightsForced`, rows are forced to the specified height even if the cell contents are taller than the row height.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // Sets the first three rows to a height of 5 pixels
-activeSheet.setRowHeightsForced(0, 3, 5);
+sheet.setRowHeightsForced(0, 3, 5);
 ```
 
 ## Column
@@ -351,9 +336,8 @@ activeSheet.setRowHeightsForced(0, 3, 5);
 Inserts a column after the given column position.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // This inserts a column after the first column position
 sheet.insertColumnAfter(0);
 ```
@@ -363,9 +347,8 @@ sheet.insertColumnAfter(0);
 Inserts a column before the given column position.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // This inserts a column in the first column position
 sheet.insertColumnBefore(0);
 ```
@@ -375,9 +358,8 @@ sheet.insertColumnBefore(0);
 Inserts one or more consecutive blank columns in a sheet starting at the specified location.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // Shifts all columns by three
 sheet.insertColumns(0, 3);
 ```
@@ -387,9 +369,8 @@ sheet.insertColumns(0, 3);
 Inserts a given number of columns after the given column position.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // Inserts two columns after the first column
 sheet.insertColumnsAfter(0, 2);
 ```
@@ -399,9 +380,8 @@ sheet.insertColumnsAfter(0, 2);
 Inserts a number of columns before the given column position.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // This inserts five columns before the first column
 sheet.insertColumnsBefore(0, 5);
 ```
@@ -411,9 +391,8 @@ sheet.insertColumnsBefore(0, 5);
 Deletes the column at the given column position.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // Columns start at "0" - this deletes the first column
 sheet.deleteColumn(0);
 ```
@@ -423,9 +402,8 @@ sheet.deleteColumn(0);
 Deletes a number of columns starting at the given column position.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // Columns start at "0" - this deletes the first two columns
 sheet.deleteColumns(0, 2);
 ```
@@ -437,12 +415,11 @@ Moves the columns selected by the given range to the position indicated by the `
 ```typescript
 // The code below moves rows A-B to destination index 5.
 // This results in those columns becoming columns C-D.
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // Selects column A and column B to be moved.
-const columnSpec = activeSheet.getRange(0,0,1,2);
-activeSheet.moveColumns(columnSpec, 5);
+const columnSpec = sheet.getRange(0,0,1,2);
+sheet.moveColumns(columnSpec, 5);
 ```
 
 ### hideColumn(column)
@@ -450,12 +427,11 @@ activeSheet.moveColumns(columnSpec, 5);
 Hides the column or columns in the given range.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // This hides the first column
-const range = activeSheet.getRange(0,0,0,0);
-activeSheet.hideColumn(range);
+const range = sheet.getRange(0,0,0,0);
+sheet.hideColumn(range);
 ```
 
 ### hideColumns(columnIndex, numColumns)
@@ -463,11 +439,10 @@ activeSheet.hideColumn(range);
 Hides one or more consecutive columns starting at the given index. Use 0-index for this method.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // Hides the first three columns
-activeSheet.hideColumns(0, 3);
+sheet.hideColumns(0, 3);
 ```
 
 ### unhideColumn(column)
@@ -475,12 +450,11 @@ activeSheet.hideColumns(0, 3);
 Unhides the column in the given range.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // This unhides the first column if it was previously hidden
-const range = activeSheet.getRange(0,0,0,0);
-activeSheet.unhideColumn(range);
+const range = sheet.getRange(0,0,0,0);
+sheet.unhideColumn(range);
 ```
 
 ### showColumns(columnIndex, numColumns)
@@ -488,11 +462,10 @@ activeSheet.unhideColumn(range);
 Unhides one or more consecutive columns starting at the given index. Use 0-index for this method.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // Unhides the first three columns
-activeSheet.showColumns(0, 3);
+sheet.showColumns(0, 3);
 ```
 
 ### setColumnWidth(columnPosition, width)
@@ -500,11 +473,10 @@ activeSheet.showColumns(0, 3);
 Sets the width of the given column in pixels.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // Sets the first column to a width of 200 pixels
-activeSheet.setColumnWidth(0, 200);
+sheet.setColumnWidth(0, 200);
 ```
 
 ### setColumnWidths(startColumn, numColumns, width)
@@ -512,11 +484,10 @@ activeSheet.setColumnWidth(0, 200);
 Sets the width of the given columns in pixels.
 
 ```typescript
-const activeWorkbook = univerAPI.getActiveWorkbook();
-const activeSheet = activeWorkbook.getActiveSheet();
-
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
 // Sets the first three columns to a width of 200 pixels
-activeSheet.setColumnWidths(0, 3, 200);
+sheet.setColumnWidths(0, 3, 200);
 ```
 
 ## Cell
@@ -614,15 +585,15 @@ To get a range you need to know the starting row number, starting column number,
 Create a range of A1 cells:
 
 ```typescript
-const activeSheet = univerAPI.getActiveWorkbook().getActiveSheet();
-const range = activeSheet.getRange(0, 0, 1, 1);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+const range = sheet.getRange(0, 0, 1, 1);
 ```
 
 Creates a range of A1:B2:
 
 ```typescript
-const activeSheet = univerAPI.getActiveWorkbook().getActiveSheet();
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+const range = sheet.getRange(0, 0, 2, 2);
 ```
 
 ### Get Range Data
@@ -630,14 +601,18 @@ const range = activeSheet.getRange(0, 0, 2, 2);
 Get the value of the first cell in the range
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 const value = range.getValue();
 ```
 
 Get all cell values in the range
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 range.forEach(( row, column, cell) => {
   console.log( row, column, cell);
 });
@@ -646,7 +621,9 @@ range.forEach(( row, column, cell) => {
 Get all formulas in the range
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 console.log(range.getFormulas());
 ```
 
@@ -658,19 +635,25 @@ If a value or cell object is passed in, all cells in the range will be overwritt
 
 For example, to set the value of A1:B2 to `Hello, Univer`:
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 range.setValue('Hello, Univer');
 ```
 
 Set the value of A1+B1 to the formula:
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 range.setValue('=A1+B1');
 ```
 
 Set the value of A1:B2 to the cell object:
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 range.setValue({
   v: 'Hello, Univer',
   custom: {
@@ -686,7 +669,9 @@ The length and width of the array must match the length and width of the range.
 You can pass in cell values or cell objects.
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 range.setValues([
   ['A1', 'B1'],
   ['A2', 'B2'],
@@ -703,7 +688,9 @@ range.setValues([
 If an object is passed in, the primary index of the object represents the row number, and the secondary index represents the column number, and the length and width of the range do not need to match.
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 range.setValues({
   0: {
     0: 'A1',
@@ -719,14 +706,18 @@ range.setValues({
 ### Get Range Style
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 const style = range.getCellStyleData();
 ```
 
 ### Set Range Style
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 range
   .setFontWeight('bold')
   .setFontLine('underline')
@@ -738,7 +729,9 @@ range
 ### Clear Range Style
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 range
   .setFontWeight(null)
   .setFontLine(null)
@@ -750,21 +743,27 @@ range
 ### Whether the range is merged
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 const isMerged = range.isMerged();
 ```
 
 ### Get the coordinates of the range
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 const rect = range.getCellRect(); // width、heigh、left、right、top、bottom、x、y
 ```
 
 ### Get the merge information and coordinates of the range at the same time
 
 ```typescript
-const range = activeSheet.getRange(0, 0, 2, 2);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
 const cell = range.getCell();
 ```
 
@@ -777,8 +776,9 @@ We also provide APIs to get the current selection, set the selection, and listen
 ### Get Active Selection
 
 ```typescript
-const activeSheet = univerAPI.getActiveWorkbook().getActiveSheet();
-const selection = activeSheet.getSelection();
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();\
+
+const selection = sheet.getSelection();
 const range = selection.getActiveRange();
 ```
 
@@ -815,12 +815,10 @@ activeWorkbook.onSelectionChange((selection) => {
 
 ### attach a popup to cell <VersionBadge version="0.2.10+" />
 ```tsx
-// get range
-const workbook = univerAPI.getActiveWorkbook();
-const worksheet = workbook.getActiveSheet();
-const A1_J10 = worksheet.getRange(0, 0, 10, 10);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+const range = sheet.getRange(0, 0, 10, 10); // A1:J10
 
-A1_J10.attachPopup({
+range.attachPopup({
     componentKey: () => <div style={{ width: 100, height: 100, background: '#fff' }}>popup content</div>,
 });
 ```
@@ -833,7 +831,9 @@ A1_J10.attachPopup({
 3. `componentKey` must pass the registered component id or react/vue3 component. If it is vue3 component, it must be marked isVue3
 
 ```tsx
-worksheet.addFloatDomToPosition({
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+sheet.addFloatDomToPosition({
     componentKey: ({ data }) => (
         <div style={{ width: '100%', height: '100%', background: '#fff' }}>
             popup content

@@ -25,13 +25,21 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 <Tabs items={['pnpm', 'npm']}>
   <Tabs.Tab label="pnpm">
+    执行以下命令需要设备安装有 `nodejs >= 18`, `pnpm >= 7` 和 `git`。
+
     ```shell
-    pnpm dlx degit dream-num/univer-doc-start-kit [your-app-name]
+    pnpm dlx degit dream-num/univer-doc-start-kit
+    cd univer-doc-start-kit
+    pnpm install && pnpm dev
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
+    执行以下命令需要设备安装有 `nodejs >= 18`, `npm >= 8` 和 `git`。
+
     ```shell
-    npx degit dream-num/univer-doc-start-kit [your-app-name]
+    npx degit dream-num/univer-doc-start-kit
+    cd univer-doc-start-kit 
+    npm install && npm run dev
     ```
   </Tabs.Tab>
 </Tabs>
