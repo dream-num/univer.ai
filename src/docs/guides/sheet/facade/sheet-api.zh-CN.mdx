@@ -821,6 +821,7 @@ const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 const range = sheet.getRange(0, 0, 10, 10); // A1:J10
 
 // 将弹出窗口附加到范围的第一个单元格
+// 如果 disposeable 为 null，则表示 popup 添加失败
 const disposeable = range.attachPopup({
   // componentKey 必须是一个组件或已注册组件的键
     componentKey: () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>,
@@ -840,6 +841,7 @@ disposeable.dispose();
 
 ```tsx
 // 添加一个浮动dom
+// 如果 disposeable 为 null，则表示浮动 DOM 添加失败
 const disposeable = worksheet.addFloatDomToPosition({
     // componentKey 必须是一个组件或已注册组件的键
     componentKey: ({ data }) => (

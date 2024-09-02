@@ -819,6 +819,7 @@ const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 const range = sheet.getRange(0, 0, 10, 10); // A1:J10
 
 // attach popup to the first cell of range
+// if disposeable is null, it means that the popup is not added successfully
 const disposeable = range.attachPopup({
   // componentKey must be a componet or a key of registered component 
     componentKey: () => <div style={{ width: 100, height: 100, background: '#fff' }}>popup content</div>,
@@ -837,6 +838,8 @@ disposeable.dispose();
 3. `componentKey` must pass the registered component id or react/vue3 component. If it is vue3 component, it must be marked isVue3
 
 ```tsx
+// add a float dom
+// if disposeable is null, it means that the float-dom is not added successfully
 const disposeable = worksheet.addFloatDomToPosition({
     // componentKey must be a componet or a key of registered component 
     componentKey: ({ data }) => (
