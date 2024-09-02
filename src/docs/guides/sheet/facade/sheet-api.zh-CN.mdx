@@ -826,6 +826,11 @@ A1_J10.attachPopup({
 ```
 
 ### 添加一个FloatDom到sheet <VersionBadge version="0.2.10+" />
+[demo](https://stackblitz.com/edit/awesome-univer-sheets-vite-demo-fqsu99?file=package.json,src%2Fmain.tsx)
+1. 依赖 `@univerjs/sheets-drawing-ui` 插件 
+2. 需要在 univer 渲染完成之后调用
+3. `componentKey` 必须传已注册的组件id 或者react/vue3组件 如果是 vue3组件必须标明isVue3
+
 ```tsx
 worksheet.addFloatDomToPosition({
     componentKey: ({ data }) => (

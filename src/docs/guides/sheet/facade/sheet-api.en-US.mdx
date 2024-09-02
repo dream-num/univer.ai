@@ -826,6 +826,12 @@ A1_J10.attachPopup({
 ```
 
 ### add float dom to sheet <VersionBadge version="0.2.10+" />
+
+[demo](https://stackblitz.com/edit/awesome-univer-sheets-vite-demo-fqsu99?file=package.json,src%2Fmain.tsx)
+1. Depends on `@univerjs/sheets-drawing-ui` plugin
+2. Needs to be called after univer rendering is completed
+3. `componentKey` must pass the registered component id or react/vue3 component. If it is vue3 component, it must be marked isVue3
+
 ```tsx
 worksheet.addFloatDomToPosition({
     componentKey: ({ data }) => (
