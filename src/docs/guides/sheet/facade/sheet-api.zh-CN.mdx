@@ -818,13 +818,19 @@ activeWorkbook.onSelectionChange((selection) => {
 ### 添加一个Popup到cell <VersionBadge version="0.2.10+" />
 ```tsx
 const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+const range = sheet.getRange(0, 0, 10, 10); // A1:J10
 
-// get range
-const range = sheet.getRange(0, 0, 10, 10);
-
-range.attachPopup({
-    componentKey: () => <div style={{ width: 100, height: 100, background: '#fff' }}>popup content</div>,
+// 将弹出窗口附加到范围的第一个单元格
+// 如果 disposeable 为 null，则表示 popup 添加失败
+const disposeable = range.attachPopup({
+  // componentKey 必须是一个组件或已注册组件的键
+    componentKey: () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>,
+    // 如果 componentKey 是一个 Vue3 组件，必须将 isVue3 设置为 true
+    // isVue3: true,
 });
+
+// 删除弹出窗口
+disposeable.dispose();
 ```
 
 ### 添加一个FloatDom到sheet <VersionBadge version="0.2.10+" />
@@ -834,24 +840,33 @@ range.attachPopup({
 3. `componentKey` 必须传已注册的组件id 或者react/vue3组件 如果是 vue3组件必须标明isVue3
 
 ```tsx
-worksheet.addFloatDomToPosition({
+// 添加一个浮动dom
+// 如果 disposeable 为 null，则表示浮动 DOM 添加失败
+const disposeable = worksheet.addFloatDomToPosition({
+    // componentKey 必须是一个组件或已注册组件的键
     componentKey: ({ data }) => (
         <div style={{ width: '100%', height: '100%', background: '#fff' }}>
             popup content
             {data?.label}
         </div>
     ),
+    // 如果 componentKey 是一个 Vue3 组件，必须将 isVue3 设置为 true
+    // isVue3: true,
     initPosition: {
         startX: 100,
         endX: 200,
         startY: 100,
         endY: 200,
     },
-    // data of this component
+
+    // 这是组件的数据
     data: {
         label: 'hahah',
     },
 });
+
+// 移除浮动dom
+disposeable.dispose();
 ```
 
 ## 与服务端交互的功能

@@ -818,39 +818,53 @@ activeWorkbook.onSelectionChange((selection) => {
 const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 const range = sheet.getRange(0, 0, 10, 10); // A1:J10
 
-range.attachPopup({
+// attach popup to the first cell of range
+// if disposeable is null, it means that the popup is not added successfully
+const disposeable = range.attachPopup({
+  // componentKey must be a componet or a key of registered component 
     componentKey: () => <div style={{ width: 100, height: 100, background: '#fff' }}>popup content</div>,
+    // if componentKey is a vue3 component, you must set isVue3 to true
+    // isVue3: true,
 });
+
+// remove the popup
+disposeable.dispose();
 ```
 
 ### add float dom to sheet <VersionBadge version="0.2.10+" />
-
 [demo](https://stackblitz.com/edit/awesome-univer-sheets-vite-demo-fqsu99?file=package.json,src%2Fmain.tsx)
 1. Depends on `@univerjs/sheets-drawing-ui` plugin
 2. Needs to be called after univer rendering is completed
 3. `componentKey` must pass the registered component id or react/vue3 component. If it is vue3 component, it must be marked isVue3
 
 ```tsx
-const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
-
-sheet.addFloatDomToPosition({
+// add a float dom
+// if disposeable is null, it means that the float-dom is not added successfully
+const disposeable = worksheet.addFloatDomToPosition({
+    // componentKey must be a componet or a key of registered component 
     componentKey: ({ data }) => (
         <div style={{ width: '100%', height: '100%', background: '#fff' }}>
             popup content
             {data?.label}
         </div>
     ),
+    // if componentKey is a vue3 component, you must set isVue3 to true
+    // isVue3: true,
     initPosition: {
         startX: 100,
         endX: 200,
         startY: 100,
         endY: 200,
     },
+
     // data of this component
     data: {
         label: 'hahah',
     },
 });
+
+// remove the float dom
+disposeable.dispose();
 ```
 
 ## Server-Related Features
