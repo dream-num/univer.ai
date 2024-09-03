@@ -242,9 +242,7 @@ Of course, you may want more than just the basics. If you're looking to add feat
                 [UniverCore.IUndoRedoService, null]
               ]
             });
-            univer.registerPlugin(UniverDocs.UniverDocsPlugin, {
-              hasScroll: false,
-            });
+            univer.registerPlugin(UniverDocs.UniverDocsPlugin);
 
             univer.registerPlugin(UniverEngineRender.UniverRenderEnginePlugin);
             univer.registerPlugin(UniverEngineFormula.UniverFormulaEnginePlugin);

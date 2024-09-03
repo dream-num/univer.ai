@@ -43,9 +43,7 @@ export default function FormulaList(props: IProps) {
       disableAutoFocus: true,
     })
 
-    univer.registerPlugin(UniverDocsPlugin, {
-      hasScroll: false,
-    })
+    univer.registerPlugin(UniverDocsPlugin)
     univer.registerPlugin(UniverDocsUIPlugin)
 
     univer.registerPlugin(UniverSheetsNumfmtPlugin)
