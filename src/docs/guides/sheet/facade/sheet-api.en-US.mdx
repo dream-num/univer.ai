@@ -139,8 +139,10 @@ const univerAPI = FUniver.newAPI(univer);
 Remove Worksheet by worksheet id
 
 ```typescript
+import { RemoveSheetCommand } from '@univerjs/sheets'
+
 const sheetId = 'SheetId';
-univerAPI.executeCommand('sheet.command.remove-sheet', { subUnitId: sheetId });
+univerAPI.executeCommand(RemoveSheetCommand.id, { subUnitId: sheetId });
 ```
 
 ### Activate Worksheet
@@ -148,9 +150,11 @@ univerAPI.executeCommand('sheet.command.remove-sheet', { subUnitId: sheetId });
 To activate a worksheet, you need to know the workbook id and the sheet id.
 
 ```typescript
+import { SetWorksheetActiveOperation } from '@univerjs/sheets'
+
 const workbookId = 'WorkbookId';
 const sheetId = 'SheetId';
-univerAPI.executeCommand('sheet.command.active-sheet', { unitId: workbookId, subUnitId: sheetId });
+univerAPI.executeCommand(SetWorksheetActiveOperation.id, { unitId: workbookId, subUnitId: sheetId });
 ```
 
 ## Row
@@ -783,8 +787,10 @@ const range = selection.getActiveRange();
 Set A1:B2 as the selection
 
 ```typescript
+import { SetSelectionsOperation } from '@univerjs/sheets'
+
 const sheetId = 'SheetId';
-univerAPI.executeCommand('sheet.operation.set-selections', {
+univerAPI.executeCommand(SetSelectionsOperation.id, {
   selections: [{
     range: {
       startRow: 0,
@@ -809,7 +815,8 @@ activeWorkbook.onSelectionChange((selection) => {
 });
 ```
 
-### attach a popup to cell <VersionBadge version="0.2.10+" />
+### Attach a popup to cell <VersionBadge version="0.2.10+" />
+
 ```tsx
 const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 const range = sheet.getRange(0, 0, 10, 10); // A1:J10
@@ -827,8 +834,10 @@ const disposeable = range.attachPopup({
 disposeable.dispose();
 ```
 
-### add float dom to sheet <VersionBadge version="0.2.10+" />
+### Add float dom to sheet <VersionBadge version="0.2.10+" />
+
 [demo](https://stackblitz.com/edit/awesome-univer-sheets-vite-demo-fqsu99?file=package.json,src%2Fmain.tsx)
+
 1. Depends on `@univerjs/sheets-drawing-ui` plugin
 2. Needs to be called after univer rendering is completed
 3. `componentKey` must pass the registered component id or react/vue3 component. If it is vue3 component, it must be marked isVue3

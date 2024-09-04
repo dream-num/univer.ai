@@ -121,8 +121,8 @@ export default {
       const { locale } = useRouter()
 
       const message = {
-        'zh-CN': '有问题？给我们反馈 ↗',
-        'en-US': 'Question? Give us feedback ↗',
+        'zh-CN': '文档有问题？给我们反馈 ↗',
+        'en-US': 'Found a mistake in the docs? Let us know ↗',
       }
 
       return message[locale]
