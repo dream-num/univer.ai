@@ -93,7 +93,7 @@ dataValidation.setOptions({
 dataValidation.delete();
 ```
 
-### 查询校验状态
+## 查询校验状态
 ```typescript
 import { FUniver } from '@univerjs/facade';
 
@@ -150,5 +150,15 @@ workbook.onDataValidationChange((event) => {
 
 workbook.onDataValidationStatusChange((event) => {
     console.log('===onDataValidationStatusChange', event);
+});
+```
+
+## 其他
+### 变更列表型验证的渲染模式
+```typescript
+dataValidation.setOptions({
+    // support TEXT, ARROW, CUSTOM
+    // default is `CUSTOM`
+    renderMode: DataValidationRenderMode.TEXT,
 });
 ```
