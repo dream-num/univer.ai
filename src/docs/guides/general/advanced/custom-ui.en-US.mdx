@@ -5,23 +5,24 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 <BadgeGroup values={[UniverTypes.GENERAL]} value={UniverTypes.GENERAL} />
 
-## How To Register Custom Menu in Third-Party Plugin?
+## Adding Menu Items
 
-If you are writing a Univer plugin, you can easily use `IMenuService` in the dependency injection system to register menu items.
+In Univer, both the top toolbar menu and the right-click menu can be extended by writing plugins. Below, we will introduce how to use `IMenuManagerService` in the dependency injection system to register menu items.
 
 ### 1. Plugin Environment
 
-Make sure you understand the [plugin mechanism](/guides/sheet/architecture/univer) and have created a new plug-in via [@univerjs/create-cli](https://www.npmjs.com/package/@univerjs/create-cli).
+Make sure you have a basic understanding of the [plugin mechanism](/guides/sheet/architecture/univer) and have created a plugin using [@univerjs/create-cli](https://www.npmjs.com/package/@univerjs/create-cli).
 
 First, construct a `controller` class to register menu item commands, menu item icons, and menu item configurations.
-```ts
+
+```typescript
 // src/plugin/controllers/custom-menu.controller.ts
 @OnLifecycle(LifecycleStages.Steady, CustomMenuController)
 export class CustomMenuController extends Disposable {
   constructor(
     @Inject(Injector) private readonly _injector: Injector,
     @ICommandService private readonly _commandService: ICommandService,
-    @IMenuService private readonly _menuService: IMenuService,
+    @IMenuManagerService private readonly _menuManagerService: IMenuManagerService,
     @Inject(ComponentManager) private readonly _componentManager: ComponentManager,
   ) {
     super();
@@ -48,8 +49,9 @@ export class CustomMenuController extends Disposable {
 }
 ```
 
-Register this `controller` to the plugin
-```ts
+Register this `controller` in the plugin.
+
+```typescript
 // src/plugin/plugin.ts
 const SHEET_CUSTOM_MENU_PLUGIN = 'SHEET_CUSTOM_MENU_PLUGIN';
 
@@ -71,10 +73,11 @@ export class UniverSheetsCustomMenuPlugin extends Plugin {
 }
 ```
 
-### 2. Menu Item Command
+### 2. Menu Item Commands
 
-Before registering a menu, you need to construct a `Command`, which will be executed when the menu is clicked.
-```ts
+Before registering the menu, you need to construct a `Command`, which will be executed when the menu is clicked.
+
+```typescript
 // src/plugin/commands/operations/single-button.operation.ts
 export const SingleButtonOperation: ICommand = {
   id: 'custom-menu.operation.single-button',
@@ -86,8 +89,9 @@ export const SingleButtonOperation: ICommand = {
 };
 ```
 
-Register this `Command` to `ICommandService`
-```ts
+Register this `Command` with `ICommandService`.
+
+```typescript
 // src/plugin/controllers/custom-menu.controller.ts
 private _initCommands(): void {
   [
@@ -98,12 +102,13 @@ private _initCommands(): void {
 }
 ```
 
-### 3. Menu Item Icon
+### 3. Menu Item Icons
 
-If your menu item requires an icon, you also need to register the icon in advance.
+If your menu item needs an icon, you also need to register the icon in advance.
 
-First construct an icon tsx component
-```ts
+First, construct an icon tsx component.
+
+```tsx
 // src/plugin/components/button-icon/ButtonIcon.tsx
 export function ButtonIcon() {
   return (
@@ -114,8 +119,9 @@ export function ButtonIcon() {
 };
 ```
 
-Register this icon to `ComponentManager`
-```ts
+Register this icon with `ComponentManager`.
+
+```typescript
 // src/plugin/controllers/custom-menu.controller.ts
 private _registerComponents(): void {
   this.disposeWithMe(this._componentManager.register("ButtonIcon", ButtonIcon));
@@ -124,8 +130,9 @@ private _registerComponents(): void {
 
 ### 4. Menu Item Internationalization
 
-If your menu items need to be internationalized, you need to add internationalization resources in advance.
-```ts
+If your menu item needs internationalization, you need to add internationalization resources in advance.
+
+```typescript
 // src/plugin/locale/zh-CN.ts
 export default {
   customMenu: {
@@ -134,7 +141,8 @@ export default {
   },
 };
 ```
-```ts
+
+```typescript
 // src/plugin/locale/en-US.ts
 export default {
   customMenu: {
@@ -145,7 +153,8 @@ export default {
 ```
 
 Register this internationalized resource to `ILocaleService`
-```ts
+
+```typescript
 // src/plugin/plugin.ts
 export class UniverSheetsCustomMenuPlugin extends Plugin {
   static override type = UniverInstanceType.UNIVER_SHEET;
@@ -167,8 +176,9 @@ export class UniverSheetsCustomMenuPlugin extends Plugin {
 
 ### 5. Menu Item Configuration
 
-Organize the data needed for menu items, including the menu item's id, type, icon, title, positions, etc.
-```ts
+Define a menu item configuration factory function that returns a menu item configuration object.
+
+```typescript
 export function CustomMenuItemSingleButtonFactory(): IMenuButtonItem<string> {
   return {
     // Bind the command id, clicking the button will trigger this command
@@ -181,23 +191,31 @@ export function CustomMenuItemSingleButtonFactory(): IMenuButtonItem<string> {
     tooltip: 'customMenu.singleButton',
     // The title of the button. Prioritize matching internationalization. If no match is found, the original string will be displayed
     title: 'customMenu.button',
-    // The button position can be configured in the toolbar or context menu using MenuPosition. If it is a sheet, you can also use SheetMenuPosition to configure the row header, column header, or sheet bar context menu
-    positions: [MenuPosition.TOOLBAR_START, MenuPosition.CONTEXT_MENU],
   };
 }
 ```
 
-Register this menu item with `IMenuService`
-```ts
+Construct these menu items into a Schema and merge them into the menu through `IMenuManagerService`.
+
+```typescript
 // src/plugin/controllers/custom-menu.controller.ts
 private _initMenus(): void {
-  (
-    [
-      CustomMenuItemSingleButtonFactory
-    ] as IMenuItemFactory[]
-  ).forEach((factory) => {
-    this.disposeWithMe(this._menuService.addMenuItem(this._injector.invoke(factory), {}));
-  });
+  this._menuManagerService.mergeMenu({
+    [RibbonStartGroup.OTHERS]: {
+      [SingleButtonOperation.id]: {
+        order: 0,
+        menuItemFactory: CustomMenuItemSingleButtonFactory,
+      },
+    },
+    [ContextMenuPosition.MAIN_AREA]: {
+      [ContextMenuGroup.OTHERS]: {
+        [SingleButtonOperation.id]: {
+          order: 0,
+          menuItemFactory: CustomMenuItemSingleButtonFactory,
+        },
+      },
+    },
+  })
 }
 ```
 
@@ -208,7 +226,7 @@ In addition to adding a single button menu item, you can also add a dropdown men
 - Replace menu item type `MenuItemType.BUTTON` with `MenuItemType.SUBITEMS`
 - The main button of the dropdown list needs to customize an id, which is used as the unique identifier of the dropdown list and is used to associate the sub-menu items of the dropdown list. The `positions` of the sub-menu items need to be filled in with the id of the main button.
 
-```ts
+```typescript
 // src/plugin/controllers/menu/dropdown-list.menu.ts
 const CUSTOM_MENU_DROPDOWN_LIST_OPERATION_ID = 'custom-menu.operation.dropdown-list';
 
@@ -219,7 +237,6 @@ export function CustomMenuItemDropdownListMainButtonFactory(): IMenuSelectorItem
     icon: 'MainButtonIcon',
     tooltip: 'customMenu.dropdownList',
     title: 'customMenu.dropdown',
-    positions: [MenuPosition.TOOLBAR_START, MenuPosition.CONTEXT_MENU],
   };
 }
 
@@ -229,12 +246,51 @@ export function CustomMenuItemDropdownListFirstItemFactory(): IMenuButtonItem<st
     type: MenuItemType.BUTTON,
     title: 'customMenu.itemOne',
     icon: 'ItemIcon',
-    positions: [CUSTOM_MENU_DROPDOWN_LIST_OPERATION_ID],
   };
 }
 ```
 
-Please refer to [Custom Menu Playground](/playground?title=Custom+Menu) for more details.
+Then construct these menu items into a Schema and merge them into the menu through `IMenuManagerService`.
+
+```typescript
+// src/plugin/controllers/custom-menu.controller.ts
+private _initMenus(): void {
+  this._menuManagerService.mergeMenu({
+    [ContextMenuPosition.MAIN_AREA]: {
+      [ContextMenuGroup.OTHERS]: {
+        [CUSTOM_MENU_DROPDOWN_LIST_OPERATION_ID]: {
+          order: 0,
+          menuItemFactory: CustomMenuItemDropdownListMainButtonFactory,
+          [DropdownListFirstItemOperation.id]: {
+            order: 0,
+            menuItemFactory: CustomMenuItemDropdownListFirstItemFactory,
+          }
+        }
+      }
+    }
+  })
+}
+```
+
+For more details, please refer to the [Custom Menu Playground](/playground?title=Custom+Menu).
+
+## Overriding Built-in Business Components
+
+Some business components in Univer can be overridden, such as the right-click menu panel, pop-up windows, icons, etc. These components are registered internally in Univer through `ComponentManager`, and you can override the default components by registering components with the same name.
+
+```diff
+@OnLifecycle(LifecycleStages.Steady, CustomMenuController)
+export class CustomMenuController extends Disposable {
+  constructor(
++   @Inject(ComponentManager) private readonly _componentManager: ComponentManager,
+  ) {
+    super();
+
+    // Replace the default BoldSingle icon
++   this._componentManager.register('BoldSingle', YourBoldIconComponent);
+  }
+}
+```
 
 ## Customizing Menu Items (Hiding Menu Items)
 

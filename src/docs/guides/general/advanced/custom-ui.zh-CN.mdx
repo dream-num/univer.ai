@@ -7,21 +7,22 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 ## 新增菜单项
 
-在 Univer 中，无论是顶部的工具栏菜单还是右键菜单，都可以通过编写插件来实现扩展。下面将介绍如何使用依赖注入系统中的 `IMenuService` 来注册菜单项。
+在 Univer 中，无论是顶部的工具栏菜单还是右键菜单，都可以通过编写插件来实现扩展。下面将介绍如何使用依赖注入系统中的 `IMenuManagerService` 来注册菜单项。
 
 ### 1. 插件环境
 
 确保你对[插件机制](/guides/sheet/architecture/univer)有所了解，并且已经通过 [@univerjs/create-cli](https://www.npmjs.com/package/@univerjs/create-cli) 新建了一个插件。
 
 首先构造一个 `controller` 类，用于注册菜单项命令、菜单项图标、菜单项配置。
-```ts
+
+```typescript
 // src/plugin/controllers/custom-menu.controller.ts
 @OnLifecycle(LifecycleStages.Steady, CustomMenuController)
 export class CustomMenuController extends Disposable {
   constructor(
     @Inject(Injector) private readonly _injector: Injector,
     @ICommandService private readonly _commandService: ICommandService,
-    @IMenuService private readonly _menuService: IMenuService,
+    @IMenuManagerService private readonly _menuManagerService: IMenuManagerService,
     @Inject(ComponentManager) private readonly _componentManager: ComponentManager,
   ) {
     super();
@@ -49,7 +50,8 @@ export class CustomMenuController extends Disposable {
 ```
 
 将这个 `controller` 注册到插件中
-```ts
+
+```typescript
 // src/plugin/plugin.ts
 const SHEET_CUSTOM_MENU_PLUGIN = 'SHEET_CUSTOM_MENU_PLUGIN';
 
@@ -74,7 +76,8 @@ export class UniverSheetsCustomMenuPlugin extends Plugin {
 ### 2. 菜单项命令
 
 注册菜单之前，需要构造一个 `Command`，这个 `Command` 会在菜单被点击时执行。
-```ts
+
+```typescript
 // src/plugin/commands/operations/single-button.operation.ts
 export const SingleButtonOperation: ICommand = {
   id: 'custom-menu.operation.single-button',
@@ -87,7 +90,8 @@ export const SingleButtonOperation: ICommand = {
 ```
 
 将这个 `Command` 注册到 `ICommandService`
-```ts
+
+```typescript
 // src/plugin/controllers/custom-menu.controller.ts
 private _initCommands(): void {
   [
@@ -103,7 +107,8 @@ private _initCommands(): void {
 如果你的菜单项需要图标，也需要提前注册图标。
 
 先构造一个图标 tsx 组件
-```ts
+
+```tsx
 // src/plugin/components/button-icon/ButtonIcon.tsx
 export function ButtonIcon() {
   return (
@@ -115,7 +120,8 @@ export function ButtonIcon() {
 ```
 
 将这个图标注册到 `ComponentManager`
-```ts
+
+```typescript
 // src/plugin/controllers/custom-menu.controller.ts
 private _registerComponents(): void {
   this.disposeWithMe(this._componentManager.register("ButtonIcon", ButtonIcon));
@@ -125,7 +131,8 @@ private _registerComponents(): void {
 ### 4. 菜单项国际化
 
 如果你的菜单项需要国际化，需要提前添加好国际化资源。
-```ts
+
+```typescript
 // src/plugin/locale/zh-CN.ts
 export default {
   customMenu: {
@@ -134,7 +141,8 @@ export default {
   },
 };
 ```
-```ts
+
+```typescript
 // src/plugin/locale/en-US.ts
 export default {
   customMenu: {
@@ -145,7 +153,8 @@ export default {
 ```
 
 将这个国际化资源注册到 `ILocaleService`
-```ts
+
+```typescript
 // src/plugin/plugin.ts
 export class UniverSheetsCustomMenuPlugin extends Plugin {
   static override type = UniverInstanceType.UNIVER_SHEET;
@@ -167,8 +176,9 @@ export class UniverSheetsCustomMenuPlugin extends Plugin {
 
 ### 5. 菜单项配置
 
-整理菜单项所需要的数据，包括菜单项的 id、类型、图标、标题、位置等。
-```ts
+定义一个菜单项配置工厂函数，返回一个菜单项配置对象。
+
+```typescript
 export function CustomMenuItemSingleButtonFactory(): IMenuButtonItem<string> {
   return {
     // 绑定 Command id，单击该按钮将触发该命令
@@ -181,34 +191,42 @@ export function CustomMenuItemSingleButtonFactory(): IMenuButtonItem<string> {
     tooltip: 'customMenu.singleButton',
     // 按钮的标题，优先匹配国际化，如果没有匹配到，将显示原始字符串
     title: 'customMenu.button',
-    // 按钮位置，可以使用 MenuPosition 配置在工具栏或右键菜单，如果是表格，还可以使用 SheetMenuPosition 配置在行标题、列标题、工作表右键菜单
-    positions: [MenuPosition.TOOLBAR_START, MenuPosition.CONTEXT_MENU],
   };
 }
 ```
 
-将这个菜单项注册到 `IMenuService`
-```ts
+将这些菜单项构造成成 Schema 并通过 `IMenuManagerService` 合并到菜单中。
+
+```typescript
 // src/plugin/controllers/custom-menu.controller.ts
 private _initMenus(): void {
-  (
-    [
-      CustomMenuItemSingleButtonFactory
-    ] as IMenuItemFactory[]
-  ).forEach((factory) => {
-    this.disposeWithMe(this._menuService.addMenuItem(this._injector.invoke(factory), {}));
-  });
+  this._menuManagerService.mergeMenu({
+    [RibbonStartGroup.OTHERS]: {
+      [SingleButtonOperation.id]: {
+        order: 0,
+        menuItemFactory: CustomMenuItemSingleButtonFactory,
+      },
+    },
+    [ContextMenuPosition.MAIN_AREA]: {
+      [ContextMenuGroup.OTHERS]: {
+        [SingleButtonOperation.id]: {
+          order: 0,
+          menuItemFactory: CustomMenuItemSingleButtonFactory,
+        },
+      },
+    },
+  })
 }
 ```
 
 ### 6. 下拉列表
 
-除了添加单个按钮的菜单项，还可以添加一个下拉菜单项，具体实现方式类似，只在构造菜单项配置时有所区别：
+除了添加单个按钮的菜单项，还可以添加一个下拉菜单项，具体实现方式类似，只在构造菜单 Schema 时有所区别：
 - 将菜单项配置返回类型 `IMenuButtonItem<string>` 替换为 `IMenuSelectorItem<string>`
 - 将菜单项类型 `MenuItemType.BUTTON` 替换为 `MenuItemType.SUBITEMS`
 - 下拉列表主按钮需要自定义一个 id，作为下拉列表的唯一标识，用于关联下拉列表的子菜单项，子菜单项的 `positions` 需要填写主按钮的 id
 
-```ts
+```typescript
 // src/plugin/controllers/menu/dropdown-list.menu.ts
 const CUSTOM_MENU_DROPDOWN_LIST_OPERATION_ID = 'custom-menu.operation.dropdown-list';
 
@@ -219,7 +237,6 @@ export function CustomMenuItemDropdownListMainButtonFactory(): IMenuSelectorItem
     icon: 'MainButtonIcon',
     tooltip: 'customMenu.dropdownList',
     title: 'customMenu.dropdown',
-    positions: [MenuPosition.TOOLBAR_START, MenuPosition.CONTEXT_MENU],
   };
 }
 
@@ -229,12 +246,51 @@ export function CustomMenuItemDropdownListFirstItemFactory(): IMenuButtonItem<st
     type: MenuItemType.BUTTON,
     title: 'customMenu.itemOne',
     icon: 'ItemIcon',
-    positions: [CUSTOM_MENU_DROPDOWN_LIST_OPERATION_ID],
   };
 }
 ```
 
+构造菜单 Schema：
+
+```typescript
+// src/plugin/controllers/custom-menu.controller.ts
+private _initMenus(): void {
+  this._menuManagerService.mergeMenu({
+    [ContextMenuPosition.MAIN_AREA]: {
+      [ContextMenuGroup.OTHERS]: {
+        [CUSTOM_MENU_DROPDOWN_LIST_OPERATION_ID]: {
+          order: 0,
+          menuItemFactory: CustomMenuItemDropdownListMainButtonFactory,
+          [DropdownListFirstItemOperation.id]: {
+            order: 0,
+            menuItemFactory: CustomMenuItemDropdownListFirstItemFactory,
+          }
+        }
+      }
+    }
+  })
+}
+```
+
 更多细节请参考 [自定义菜单 Playground](/playground?title=Custom+Menu)。
+
+## 覆盖内置业务组件
+
+Univer 中部分业务组件是可以被覆盖的，例如右侧的菜单面板、弹窗、图标等。这些组件在 Univer 的内部经由 `ComponentManager` 进行注册，你可以通过注册同名的组件来覆盖默认的组件。
+
+```diff
+@OnLifecycle(LifecycleStages.Steady, CustomMenuController)
+export class CustomMenuController extends Disposable {
+  constructor(
++   @Inject(ComponentManager) private readonly _componentManager: ComponentManager,
+  ) {
+    super();
+
+    // 替换默认的 BoldSingle 图标
++   this._componentManager.register('BoldSingle', YourBoldIconComponent);
+  }
+}
+```
 
 ## 定制菜单项（隐藏菜单项）
 
