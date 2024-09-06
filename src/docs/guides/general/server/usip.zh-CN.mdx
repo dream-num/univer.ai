@@ -149,6 +149,14 @@ USIP_URI_ROLE=http://localhost:8080/role
 USIP_URI_COLLABORATORS=http://localhost:8080/collaborators
 ```
 
+如果你想让 unit 默认能被所有人编辑或查看，可以在 `.env` 文件中设置：
+```shell
+AUTH_PERMISSION_ENABLED=true
+AUTH_PERMISSION_DEFAULT_SHARE_SCOPE=public
+AUTH_PERMISSION_DEFAULT_SHARE_ROLE=editor
+```
+- AUTH_PERMISSION_DEFAULT_SHARE_ROLE：支持的配置有 `editor`， `reader`。
+
 ## 代码例子
 
 可查看 [usip-example](https://github.com/dream-num/usip-example)

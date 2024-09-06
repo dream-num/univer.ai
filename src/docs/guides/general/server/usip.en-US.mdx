@@ -149,6 +149,14 @@ USIP_URI_ROLE=http://localhost:8080/role
 USIP_URI_COLLABORATORS=http://localhost:8080/collaborators
 ```
 
+If you want to make unit can be edit/read to everyone in default, you can set this in `.env`:
+```shell
+AUTH_PERMISSION_ENABLED=true
+AUTH_PERMISSION_DEFAULT_SHARE_SCOPE=public
+AUTH_PERMISSION_DEFAULT_SHARE_ROLE=editor
+```
+- AUTH_PERMISSION_DEFAULT_SHARE_ROLE: support setting is `editor`, `reader`.
+
 ## Code Example
 
 You can view the [usip-example](https://github.com/dream-num/usip-example) for reference.
