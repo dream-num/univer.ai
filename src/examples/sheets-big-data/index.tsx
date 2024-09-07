@@ -1,5 +1,6 @@
 'use client'
 
+import { GithubPlugin } from '@/examples/plugins/github-plugin'
 import { LocaleType, Univer, UniverInstanceType } from '@univerjs/core'
 import { defaultTheme } from '@univerjs/design'
 import { UniverDocsPlugin } from '@univerjs/docs'
@@ -18,7 +19,6 @@ import { UniverUIPlugin } from '@univerjs/ui'
 import { useEffect, useRef } from 'react'
 import { enUS, zhCN } from 'univer:locales'
 import { generateWorkbookData } from './data'
-import { GithubPlugin } from '@/examples/plugins/github-plugin'
 
 interface IProps {
   locale: string

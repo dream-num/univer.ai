@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { DiscordSingle40, GithubSingle40, Loading } from '@univerjs/icons'
 import Select, { SelectItem } from '@/components/Select'
 import { useToast } from '@/components/Toast'
-import { useLoadingState } from '@/official-site/hooks/useLoadingState'
 import { IssueType, issueTypeOptions } from '@/official-site/config/issueTypes'
+import { useLoadingState } from '@/official-site/hooks/useLoadingState'
+import { DiscordSingle40, GithubSingle40, Loading } from '@univerjs/icons'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
 export default function ContactUs() {
   const router = useRouter()

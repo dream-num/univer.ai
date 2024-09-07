@@ -1,11 +1,11 @@
-import { Disposable, ICommandService, Inject, Injector, LifecycleStages, OnLifecycle, connectInjector } from '@univerjs/core'
+import { connectInjector, Disposable, ICommandService, Inject, Injector, LifecycleStages, OnLifecycle } from '@univerjs/core'
 import { BuiltInUIPart, ComponentManager, IMenuService, IUIPartsService } from '@univerjs/ui'
 
 import { ScriptPanelComponentName, ToggleScriptPanelOperation } from '../commands/operations/panel.operation'
 import { ScriptEditorPanel } from '../views/components/ScriptEditorPanel'
-import type { IUniverUniscriptConfig } from '../services/script-editor.service'
 import { Operations } from '../views/operations/Operations'
 import { UniscriptMenuItemFactory } from './menu'
+import type { IUniverUniscriptConfig } from '../services/script-editor.service'
 
 export const DefaultUniscriptConfig = {}
 

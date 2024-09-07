@@ -1,16 +1,16 @@
 'use client'
 
+import { GithubPlugin } from '@/examples/plugins/github-plugin'
 import { LocaleType, Univer, UniverInstanceType } from '@univerjs/core'
 import { defaultTheme } from '@univerjs/design'
-import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
 import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
+import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
 import { UniverSlidesPlugin } from '@univerjs/slides'
 import { UniverSlidesUIPlugin } from '@univerjs/slides-ui'
 import { UniverUIPlugin } from '@univerjs/ui'
 import { useEffect, useRef } from 'react'
 import { enUS, zhCN } from 'univer:locales'
 import { DEFAULT_SLIDE_DATA } from './data'
-import { GithubPlugin } from '@/examples/plugins/github-plugin'
 
 interface IProps {
   locale: string

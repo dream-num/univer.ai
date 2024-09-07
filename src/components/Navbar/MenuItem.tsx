@@ -1,7 +1,7 @@
+import Dropdown from '@/components/Dropdown'
 import { Box, Flex, Grid, Separator, Text } from '@radix-ui/themes'
 import { MoreSingle } from '@univerjs/icons'
 import Link from 'next/link'
-import Dropdown from '@/components/Dropdown'
 
 interface IProps {
   title: string

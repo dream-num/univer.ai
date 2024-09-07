@@ -1,18 +1,18 @@
-import Head from 'next/head'
-import { useRouter } from 'next/router'
 import { useTranslation } from '@/lib/i18n'
+import { ContactUs } from '@/official-site/clipsheet/components/ContactUs'
+import { ExtendedReading } from '@/official-site/clipsheet/components/ExtendedReading'
 
-import type { IVideo } from '@/official-site/clipsheet/components/VideoList'
+import { SimpleCases } from '@/official-site/clipsheet/components/SimpleCases'
 
+import { VideoPlayer } from '@/official-site/clipsheet/components/VideoPlayer'
 // eslint-disable-next-line import/no-duplicates
 import enUS from '@/official-site/clipsheet/tutorials/gpt/gpt.en-US.mdx'
 // eslint-disable-next-line import/no-duplicates
 import zhCN from '@/official-site/clipsheet/tutorials/gpt/gpt.en-US.mdx'
-import { VideoPlayer } from '@/official-site/clipsheet/components/VideoPlayer'
-import { ContactUs } from '@/official-site/clipsheet/components/ContactUs'
-import { ExtendedReading } from '@/official-site/clipsheet/components/ExtendedReading'
-import { SimpleCases } from '@/official-site/clipsheet/components/SimpleCases'
 import { IssueType } from '@/official-site/config/issueTypes'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import type { IVideo } from '@/official-site/clipsheet/components/VideoList'
 
 export default function Page() {
   const { locale } = useRouter()

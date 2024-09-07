@@ -1,7 +1,7 @@
-import type { IAccessor, ICommand } from '@univerjs/core'
 import { CommandType, ConfigService } from '@univerjs/core'
-import type { IConfigData } from '../../controllers/github-menu.controller'
+import type { IAccessor, ICommand } from '@univerjs/core'
 import { CONFIG_KEY } from '../../controllers/github-menu.controller'
+import type { IConfigData } from '../../controllers/github-menu.controller'
 
 export const GithubButtonOperation: ICommand = {
   id: 'github-menu.operation.github-button',

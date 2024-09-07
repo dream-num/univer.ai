@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import clsx from 'clsx'
 import RightArrow from '@/official-site/clipsheet/components/RightArrow'
+import clsx from 'clsx'
+import Link from 'next/link'
 
 export function LearnMore({ href, className }: { href: string, className?: string }) {
   return (

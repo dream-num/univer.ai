@@ -1,5 +1,5 @@
-import type { IWorkbookData } from '@univerjs/core'
 import { BorderStyleTypes, LocaleType } from '@univerjs/core'
+import type { IWorkbookData } from '@univerjs/core'
 
 import { PAGE5_RICHTEXT_1 } from './rich-text/page5-richtext1'
 

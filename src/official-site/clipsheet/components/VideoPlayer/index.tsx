@@ -1,6 +1,6 @@
 import clsx from 'clsx'
-import YouTubePlayer from 'youtube-player'
 import { useEffect, useRef, useState } from 'react'
+import YouTubePlayer from 'youtube-player'
 
 export function VideoPlayer({ src, className, title, videoClassName, enableMask }: { src?: string, className?: string, title?: string, videoClassName?: string, enableMask?: boolean }) {
   const el = useRef<HTMLIFrameElement>(null)

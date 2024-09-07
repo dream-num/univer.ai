@@ -1,15 +1,15 @@
-import Head from 'next/head'
-// import { CheckMarkSingle, CrownSingle, GithubSingle40, IncreaseSingle, NextSingle } from '@univerjs/icons'
-import { GithubSingle40, IncreaseSingle, NextSingle } from '@univerjs/icons'
-import { useCallback, useState } from 'react'
-import Link from 'next/link'
-import { clsx } from '@/lib/utils'
 import Hero from '@/components/Hero'
+import ShineBorder from '@/components/ShineBorder'
 import Title from '@/components/Title'
 import { useTranslation } from '@/lib/i18n'
-
+import { clsx } from '@/lib/utils'
 import { VideoPlayer } from '@/official-site/clipsheet/components/VideoPlayer'
-import ShineBorder from '@/components/ShineBorder'
+// import { CheckMarkSingle, CrownSingle, GithubSingle40, IncreaseSingle, NextSingle } from '@univerjs/icons'
+import { GithubSingle40, IncreaseSingle, NextSingle } from '@univerjs/icons'
+import Head from 'next/head'
+
+import Link from 'next/link'
+import { useCallback, useState } from 'react'
 
 export default function Page() {
   // const [paymentPlan, setPaymentPlan] = useState<'monthly' | 'yearly'>('yearly')

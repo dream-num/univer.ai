@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
 import { LifecycleService, LifecycleStages, LocaleService, LocaleType, Univer, UniverInstanceType } from '@univerjs/core'
-import { UniverSheetsFormulaPlugin } from '@univerjs/sheets-formula'
 import { defaultTheme } from '@univerjs/design'
-import type { IFunctionNames } from '@univerjs/engine-formula'
-import { IFunctionService, UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
-import { UniverSheetsNumfmtPlugin } from '@univerjs/sheets-numfmt'
-import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
 import { UniverDocsPlugin } from '@univerjs/docs'
-import { UniverUIPlugin } from '@univerjs/ui'
+import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
+import { IFunctionService, UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
 import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
+import { UniverSheetsFormulaPlugin } from '@univerjs/sheets-formula'
+import { UniverSheetsNumfmtPlugin } from '@univerjs/sheets-numfmt'
+import { UniverUIPlugin } from '@univerjs/ui'
+import React, { useEffect, useState } from 'react'
 import { enUS, zhCN } from 'univer:locales'
+import type { IFunctionNames } from '@univerjs/engine-formula'
 
 interface IProps {
   locale: LocaleType

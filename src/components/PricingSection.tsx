@@ -1,8 +1,8 @@
+import ShineBorder from '@/components/ShineBorder'
+import { useTranslation } from '@/lib/i18n'
+import { clsx } from '@/lib/utils'
 import { SuccessSingle } from '@univerjs/icons'
 import Link from 'next/link'
-import { clsx } from '@/lib/utils'
-import { useTranslation } from '@/lib/i18n'
-import ShineBorder from '@/components/ShineBorder'
 
 interface IProps {
   className?: string

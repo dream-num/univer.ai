@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import type { ISlidePage } from '@univerjs/core'
 import { BasicShapes, PageElementType, PageType } from '@univerjs/core'
+import type { ISlidePage } from '@univerjs/core'
 
 import { PAGE3_RICHTEXT_1 } from '../rich-text/page3-richtext1'
 import { PAGE3_RICHTEXT_2 } from '../rich-text/page3-richtext2'

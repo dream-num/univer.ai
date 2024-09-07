@@ -1,16 +1,16 @@
+import Action from '@/components/Action'
+import Dropdown from '@/components/Dropdown'
+import { useTranslation } from '@/lib/i18n'
+import { clsx } from '@/lib/utils'
 import { DropdownMenu, ScrollArea } from '@radix-ui/themes'
 import { CloseSingle, GithubSingle24, LanguageSingle, MenuSingle24, MoreSingle } from '@univerjs/icons'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import enUS from './en-US'
 import LinkItem from './LinkItem'
 import { MenuItem } from './MenuItem'
-import enUS from './en-US'
 import zhCN from './zh-CN'
-import { clsx } from '@/lib/utils'
-import { useTranslation } from '@/lib/i18n'
-import Dropdown from '@/components/Dropdown'
-import Action from '@/components/Action'
 
 type NavType = {
   title: string

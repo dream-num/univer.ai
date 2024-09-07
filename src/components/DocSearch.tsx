@@ -1,7 +1,8 @@
 /* eslint-disable node/prefer-global/process */
 import { DocSearch } from '@docsearch/react'
-import '@docsearch/css'
 import { useRouter } from 'next/router'
+
+import '@docsearch/css'
 
 function DocSearchComponent() {
   const { locale } = useRouter()

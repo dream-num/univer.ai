@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
+export { ToggleScriptPanelOperation } from './commands/operations/panel.operation'
 export { UniverUniscriptPlugin } from './plugin'
 export { ScriptEditorService } from './services/script-editor.service'
-export { IUniscriptExecutionService } from './services/script-execution.service'
 export type { IExampleItem } from './services/script-editor.service'
 // #region - all commands
 
-export { ToggleScriptPanelOperation } from './commands/operations/panel.operation'
+export { IUniscriptExecutionService } from './services/script-execution.service'
 
 // #endregion

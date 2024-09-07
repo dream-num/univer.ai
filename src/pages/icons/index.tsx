@@ -1,10 +1,10 @@
+import { ColorPicker } from '@/components/ColorPicker'
+import { Slider } from '@/components/Slider'
+import { clsx } from '@/lib/utils'
 import { GithubSingle24, SearchSingle16, SuccessSingle } from '@univerjs/icons'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
-import { clsx } from '@/lib/utils'
-import { ColorPicker } from '@/components/ColorPicker'
-import { Slider } from '@/components/Slider'
 
 interface IIconBoxProps {
   iconKey: string

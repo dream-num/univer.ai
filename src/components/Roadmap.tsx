@@ -1,10 +1,10 @@
 'use client'
 
-import type { Chart } from '@antv/g2'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { useTheme } from 'nextra-theme-docs'
 import React, { useEffect, useRef, useState } from 'react'
+import type { Chart } from '@antv/g2'
 
 dayjs.extend(customParseFormat)
 

@@ -1,14 +1,14 @@
-import Head from 'next/head'
-import { useRouter } from 'next/router'
 import { useTranslation } from '@/lib/i18n'
+import { ContactUs } from '@/official-site/clipsheet/components/ContactUs'
+import { VideoPlayer } from '@/official-site/clipsheet/components/VideoPlayer'
 
 // eslint-disable-next-line import/no-duplicates
 import enUS from '@/official-site/clipsheet/tutorials/completion/completion.en-US.mdx'
 // eslint-disable-next-line import/no-duplicates
 import zhCN from '@/official-site/clipsheet/tutorials/completion/completion.en-US.mdx'
-import { VideoPlayer } from '@/official-site/clipsheet/components/VideoPlayer'
-import { ContactUs } from '@/official-site/clipsheet/components/ContactUs'
 import { IssueType } from '@/official-site/config/issueTypes'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 export default function Page() {
   const { locale } = useRouter()

@@ -1,6 +1,6 @@
-import Nextra from 'nextra'
 import { UniverPlugin } from '@univerjs/webpack-plugin'
 import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin'
+import Nextra from 'nextra'
 
 const withNextra = Nextra({
   theme: 'nextra-theme-docs',

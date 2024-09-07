@@ -45,6 +45,7 @@
   ],
   "exclude": [
     "node_modules",
-    "submodules/univer-pro"
+    "submodules/univer-pro",
+    ".pnpm"
   ]
 }

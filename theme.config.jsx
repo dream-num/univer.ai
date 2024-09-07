@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-import pkg from './package.json'
-import Logo from '@/components/Logo'
 import DocSearch from '@/components/DocSearch'
+import Logo from '@/components/Logo'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import pkg from './package.json'
 
 export default {
   logo: Logo,

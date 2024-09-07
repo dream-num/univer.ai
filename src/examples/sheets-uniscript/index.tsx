@@ -1,5 +1,6 @@
 'use client'
 
+import { GithubPlugin } from '@/examples/plugins/github-plugin'
 import { LocaleType, Univer, UniverInstanceType } from '@univerjs/core'
 import { UniverDataValidationPlugin } from '@univerjs/data-validation'
 import { defaultTheme } from '@univerjs/design'
@@ -20,8 +21,7 @@ import { UniverUIPlugin } from '@univerjs/ui'
 import { useEffect, useRef } from 'react'
 import { enUS, zhCN } from 'univer:locales'
 import { UniverUniscriptPlugin } from '../plugins/uniscript/src'
-import { UNISCRIT_WORKBOOK_DATA_DEMO, exampleData } from './data'
-import { GithubPlugin } from '@/examples/plugins/github-plugin'
+import { exampleData, UNISCRIT_WORKBOOK_DATA_DEMO } from './data'
 
 interface IProps {
   locale: string

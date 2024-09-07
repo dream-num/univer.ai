@@ -1,10 +1,14 @@
+import { clsx } from '@/lib/utils'
 import RcColorPicker, { type Color } from '@rc-component/color-picker'
 import { useEffect, useState } from 'react'
-import { clsx } from '@/lib/utils'
 
 interface IProps {
   value: string
   onChange: (value: string) => void
+}
+
+function stopPropagation(e: React.MouseEvent<HTMLDivElement>) {
+  e.stopPropagation()
 }
 
 export function ColorPicker(props: IProps) {
@@ -32,10 +36,6 @@ export function ColorPicker(props: IProps) {
 
   function handleChange(color: Color) {
     onChange(color.toHexString())
-  }
-
-  function stopPropagation(e: React.MouseEvent<HTMLDivElement>) {
-    e.stopPropagation()
   }
 
   return (

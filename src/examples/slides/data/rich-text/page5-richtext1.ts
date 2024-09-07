@@ -1,5 +1,5 @@
-import type { IDocumentData } from '@univerjs/core'
 import { ColumnSeparatorType, PresetListType, SectionType } from '@univerjs/core'
+import type { IDocumentData } from '@univerjs/core'
 
 export const PAGE5_RICHTEXT_1: IDocumentData = {
   id: 'd',

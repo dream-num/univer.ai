@@ -1,5 +1,6 @@
 'use client'
 
+import { GithubPlugin } from '@/examples/plugins/github-plugin'
 import { LocaleType, Tools, Univer, UniverInstanceType } from '@univerjs/core'
 import { UniverDataValidationPlugin } from '@univerjs/data-validation'
 import { defaultTheme } from '@univerjs/design'
@@ -17,10 +18,9 @@ import { UniverSheetsZenEditorPlugin } from '@univerjs/sheets-zen-editor'
 import { UniverUIPlugin } from '@univerjs/ui'
 import { useEffect } from 'react'
 import { Mosaic, MosaicWindow } from 'react-mosaic-component'
-import 'react-mosaic-component/react-mosaic-component.css'
 import { enUS, zhCN } from 'univer:locales'
 import { ALL_FEATURES_WORKBOOK_DATA } from './data'
-import { GithubPlugin } from '@/examples/plugins/github-plugin'
+import 'react-mosaic-component/react-mosaic-component.css'
 
 interface IProps {
   locale: string

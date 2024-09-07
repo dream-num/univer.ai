@@ -1,5 +1,5 @@
-import { Callout } from '@radix-ui/themes'
 import { useTranslation } from '@/lib/i18n'
+import { Callout } from '@radix-ui/themes'
 
 export default function BusinessPlanNotice() {
   const t = useTranslation({

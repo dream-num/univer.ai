@@ -1,7 +1,7 @@
-import type { Dependency } from '@univerjs/core'
 import { ConfigService, Inject, Injector, Plugin, UniverInstanceType } from '@univerjs/core'
-import type { IConfigData } from './controllers/github-menu.controller'
+import type { Dependency } from '@univerjs/core'
 import { GithubMenuController } from './controllers/github-menu.controller'
+import type { IConfigData } from './controllers/github-menu.controller'
 
 export class GithubPlugin extends Plugin {
   static override type = UniverInstanceType.UNIVER_UNKNOWN

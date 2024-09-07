@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import { LocaleService, useDependency } from '@univerjs/core'
 
 import { Select } from '@univerjs/design'
-import { LocaleService, useDependency } from '@univerjs/core'
+import React, { useState } from 'react'
 import type { IExampleItem } from '../../services/script-editor.service'
 
 export interface IScriptExampleProps {

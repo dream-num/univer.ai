@@ -1,7 +1,7 @@
-import React from 'react'
 import * as SelectPrimitive from '@radix-ui/react-select'
-import clsx from 'clsx'
 import { CheckMarkSingle, MoreDownSingle } from '@univerjs/icons'
+import clsx from 'clsx'
+import React from 'react'
 
 export const SelectItem = React.forwardRef<HTMLDivElement, SelectPrimitive.SelectItemProps>(({ children, className, ...props }, forwardedRef) => {
   return (

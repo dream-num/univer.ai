@@ -1,8 +1,14 @@
-import Link from 'next/link'
-import Head from 'next/head'
-import { Badge } from '@radix-ui/themes'
 import { GitHubButton } from '@/components/GitHub'
 import { useTranslation } from '@/lib/i18n'
+import { Badge } from '@radix-ui/themes'
+import Head from 'next/head'
+import Link from 'next/link'
+
+function convertToColor(str: string): 'cyan' | 'orange' | 'grass' | 'yellow' | 'amber' | 'orange' | 'teal' | 'ruby' | 'indigo' | 'blue' {
+  const color = ['cyan', 'orange', 'grass', 'yellow', 'amber', 'teal', 'tomato', 'ruby', 'indigo', 'blue']
+  const index = str.charCodeAt(0) % color.length
+  return color[index] as any
+}
 
 export default function Page() {
   const t = useTranslation({
@@ -177,12 +183,6 @@ export default function Page() {
       link: '/examples/slides',
     }],
   }]
-
-  function convertToColor(str: string): 'cyan' | 'orange' | 'grass' | 'yellow' | 'amber' | 'orange' | 'teal' | 'ruby' | 'indigo' | 'blue' {
-    const color = ['cyan', 'orange', 'grass', 'yellow', 'amber', 'teal', 'tomato', 'ruby', 'indigo', 'blue']
-    const index = str.charCodeAt(0) % color.length
-    return color[index] as any
-  }
 
   return (
     <>

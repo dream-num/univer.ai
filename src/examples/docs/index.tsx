@@ -1,23 +1,23 @@
 'use client'
-import '@univerjs/thread-comment-ui/lib/index.css'
-import '@univerjs/drawing-ui/lib/index.css'
-
+import { GithubPlugin } from '@/examples/plugins/github-plugin'
 import { LocaleType, Univer, UniverInstanceType, UserManagerService } from '@univerjs/core'
+
 import { defaultTheme } from '@univerjs/design'
 import { UniverDocsPlugin } from '@univerjs/docs'
-import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
+import { UniverDocsDrawingUIPlugin } from '@univerjs/docs-drawing-ui'
+import { UniverDocsHyperLinkUIPlugin } from '@univerjs/docs-hyper-link-ui'
 
+import { UniverDocsThreadCommentUIPlugin } from '@univerjs/docs-thread-comment-ui'
+import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
 import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
 import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
 import { UniverUIPlugin } from '@univerjs/ui'
-import { UniverDocsHyperLinkUIPlugin } from '@univerjs/docs-hyper-link-ui'
-import { UniverDocsDrawingUIPlugin } from '@univerjs/docs-drawing-ui'
-import { UniverDocsThreadCommentUIPlugin } from '@univerjs/docs-thread-comment-ui'
-
 import { useEffect, useRef } from 'react'
+
 import { enUS, zhCN } from 'univer:locales'
 import { ALL_FEATURES_DOCUMENT_DATA } from './data'
-import { GithubPlugin } from '@/examples/plugins/github-plugin'
+import '@univerjs/drawing-ui/lib/index.css'
+import '@univerjs/thread-comment-ui/lib/index.css'
 
 interface IProps {
   locale: string

@@ -1,3 +1,4 @@
+import { clsx } from '@/lib/utils'
 import { LocaleType, Univer, UniverInstanceType } from '@univerjs/core'
 import { defaultTheme } from '@univerjs/design'
 import { UniverDocsPlugin } from '@univerjs/docs'
@@ -10,16 +11,15 @@ import { UniverSheetsPlugin } from '@univerjs/sheets'
 import { UniverSheetsFormulaPlugin } from '@univerjs/sheets-formula'
 import { UniverSheetsUIPlugin } from '@univerjs/sheets-ui'
 import { UniverSheetsZenEditorPlugin } from '@univerjs/sheets-zen-editor'
-import { UniverUIPlugin } from '@univerjs/ui'
 import { UniverSlidesPlugin } from '@univerjs/slides'
 import { UniverSlidesUIPlugin } from '@univerjs/slides-ui'
-import { enUS, zhCN } from 'univer:locales'
+import { UniverUIPlugin } from '@univerjs/ui'
 
 import { themes } from 'prism-react-renderer'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live'
-import { clsx } from '@/lib/utils'
+import { enUS, zhCN } from 'univer:locales'
 
 interface IProps {
   code: string

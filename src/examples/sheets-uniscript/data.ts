@@ -1,8 +1,8 @@
-import type { IWorkbookData } from '@univerjs/core'
 import { LocaleType } from '@univerjs/core'
-import type { IExampleItem } from '../plugins/uniscript/src/services/script-editor.service'
-import { drawUniverLogo } from './draw-univer-logo'
+import type { IWorkbookData } from '@univerjs/core'
 import { changeFontStyle } from './change-font-style'
+import { drawUniverLogo } from './draw-univer-logo'
+import type { IExampleItem } from '../plugins/uniscript/src/services/script-editor.service'
 
 export const UNISCRIT_WORKBOOK_DATA_DEMO: IWorkbookData = {
   id: 'uniscript-demo',

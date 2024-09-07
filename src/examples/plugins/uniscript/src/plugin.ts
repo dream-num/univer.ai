@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-import type { Dependency } from '@univerjs/core'
 import { Inject, Injector, LocaleService, Plugin, Tools } from '@univerjs/core'
+import type { Dependency } from '@univerjs/core'
 
 import { DefaultUniscriptConfig, UniscriptController } from './controllers/uniscript.controller'
-import type { IUniverUniscriptConfig } from './services/script-editor.service'
+import enUS from './locale/en-US'
+import zhCN from './locale/zh-CN'
 import { ScriptEditorService } from './services/script-editor.service'
 import { IUniscriptExecutionService, UniscriptExecutionService } from './services/script-execution.service'
 import { ScriptPanelService } from './services/script-panel.service'
-import zhCN from './locale/zh-CN'
-import enUS from './locale/en-US'
+import type { IUniverUniscriptConfig } from './services/script-editor.service'
 
 const PLUGIN_NAME = 'uniscript'
 
