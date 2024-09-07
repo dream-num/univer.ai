@@ -138,7 +138,7 @@ curl 'http://localhost:8000/universer-api/stream/file/upload?size=19261' \
 | 字段       | 类型                   | 描述                  |
 | ---------- | ---------------------- | --------------------- |
 | type       | enum(int)<sup> *</sup> | 1（doc）， 2（sheet） |
-| outputType | enum(int)<sup> *</sup> | 2（json）             |
+| outputType | enum(int)<sup> *</sup> | 1（unit）， 2（json） |
 | fileID     | string<sup> *</sup>    | 上传的文件id          |
 
 返回值：
@@ -206,13 +206,14 @@ curl 'http://localhost:8000/universer-api/exchange/2/export' \
 
 返回值：
 
-| 字段          | 类型         | 描述                                        |
-| ------------- | ------------ | ------------------------------------------- |
-| error.code    | enum(int)    | 1（成功）                                   |
-| error.message | string       | 失败信息                                    |
-| status        | enum(string) | `pending`, `done`, `failed`                 |
-| export.fileID | string       | 导出转换结果的文件 id，用于后面接口获取文件内容 |
-| import.jsonID | string       | 导入转换结果的文件 id，用于后面接口获取文件内容 |
+| 字段          | 类型         | 描述                                                    |
+| ------------- | ------------ | ------------------------------------------------------- |
+| error.code    | enum(int)    | 1（成功）                                               |
+| error.message | string       | 失败信息                                                |
+| status        | enum(string) | `pending`, `done`, `failed`                             |
+| export.fileID | string       | 导出转换结果的文件 id，用于后面接口获取文件内容         |
+| import.unitID | string       | 导入转换后的 unitID，用于打开在线表格                   |
+| import.jsonID | string       | 导入转换为 json 结果的文件 id，用于后面接口获取文件内容 |
 
 例：
 
