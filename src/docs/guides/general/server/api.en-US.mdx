@@ -138,8 +138,8 @@ parameters:
 | name       | type                   | description        |
 | ---------- | ---------------------- | ------------------ |
 | type       | enum(int)<sup> *</sup> | 1(doc), 2(sheet)   |
-| outputType | enum(int)<sup> *</sup> | 2(json)            |
-| fileID     | string<sup> *</sup> | The upload file id |
+| outputType | enum(int)<sup> *</sup> | 1(unit), 2(json)   |
+| fileID     | string<sup> *</sup>    | The upload file id |
 
 response:
 
@@ -206,13 +206,14 @@ parameters:
 
 response:
 
-| name          | type         | description                                                                 |
-| ------------- | ------------ | --------------------------------------------------------------------------- |
-| error.code    | enum(int)    | 1(success)                                                                  |
-| error.message | string       | The information of fail situation                                           |
-| status        | enum(string) | `pending`, `done`, `failed`                                                 |
-| export.fileID | string       | The export exchange result file id, it use for next api to get file content |
-| import.jsonID | string       | The import exchange result file id, it use for next api to get file content |
+| name          | type         | description                                                                      |
+| ------------- | ------------ | -------------------------------------------------------------------------------- |
+| error.code    | enum(int)    | 1(success)                                                                       |
+| error.message | string       | The information of fail situation                                                |
+| status        | enum(string) | `pending`, `done`, `failed`                                                      |
+| export.fileID | string       | The export exchange result file id, it use for next api to get file content      |
+| import.unitID | string       | The import exchange for unit, it use to open online file                         |
+| import.jsonID | string       | The import exchange json result file id, it use for next api to get file content |
 
 example:
 
