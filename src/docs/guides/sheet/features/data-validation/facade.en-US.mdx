@@ -152,4 +152,14 @@ workbook.onDataValidationChange((event) => {
 workbook.onDataValidationStatusChange((event) => {
     console.log('===onDataValidationStatusChange', event);
 });
+
+## Other
+### Change List render mode
+```typescript
+// update data validation options
+dataValidation.setOptions({
+    // support TEXT, ARROW, CUSTOM
+    // default is `CUSTOM`
+    renderMode: DataValidationRenderMode.TEXT,
+});
 ```
