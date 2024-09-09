@@ -35,6 +35,7 @@ Currently supported data validation types:
 ```typescript
 import '@univerjs/sheets-data-validation/lib/index.css';
 
+import { UniverDataValidationPlugin } from '@univerjs/data-validation';
 import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validation';
 ```
 
@@ -59,5 +60,6 @@ const univer = new Univer({
 ## Register
 
 ```typescript
+univer.registerPlugin(UniverDataValidationPlugin);
 univer.registerPlugin(UniverSheetsDataValidationPlugin);
 ```

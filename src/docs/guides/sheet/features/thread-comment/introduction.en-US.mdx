@@ -55,7 +55,8 @@ const univer = new Univer({
 ## Register
 
 ```typescript
-import { UniverSheetsThreadCommentPlugin } from '@univerjs/sheets-thread-comment';
-
+univer.registerPlugin(UniverThreadCommentPlugin);
+univer.registerPlugin(UniverThreadCommentUIPlugin);
+univer.registerPlugin(UniverSheetsThreadCommentBasePlugin);
 univer.registerPlugin(UniverSheetsThreadCommentPlugin);
 ```
