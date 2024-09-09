@@ -34,7 +34,9 @@ univerAPI.getActiveWorkbook().setEditable(false);
 工作表和选区相关的权限设置通过命令模式来执行
 
 ```typescript
+const accessor = univer.__getInjector();
 const commandService = accessor.get(ICommandService);
+// import { getSheetCommandTarget } from '@univerjs/sheets';
 const target = getSheetCommandTarget(univerInstanceService);
 if (!target) {
   return;
@@ -67,8 +69,10 @@ DeleteWorksheetProtectionMutationParams {
 ### 自定义选区权限代码示例
 
 ```typescript
+const accessor = univer.__getInjector();
 const commandService = accessor.get(ICommandService);
 const sheetSelectionManagerService = accessor.get(SheetsSelectionsService);
+// import { getSheetCommandTarget } from '@univerjs/sheets';
 const target = getSheetCommandTarget(univerInstanceService);
 if (!target) {
   return;
