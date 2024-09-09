@@ -1,0 +1,61 @@
+import { Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# Comment / Annotation
+
+<BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC]} value={UniverTypes.SHEET} />
+
+The Comment / Annotation plugin provides the ability to comment or annotate cells.
+
+## Installation
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/sheets-thread-comment-base @univerjs/sheets-thread-comment @univerjs/thread-comment @univerjs/thread-comment-ui
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/sheets-thread-comment-base @univerjs/sheets-thread-comment @univerjs/thread-comment @univerjs/thread-comment-ui
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Import
+
+```typescript
+import '@univerjs/thread-comment-ui/lib/index.css';
+
+import { IThreadCommentMentionDataService, UniverThreadCommentUIPlugin } from '@univerjs/thread-comment-ui';
+import { UniverThreadCommentPlugin } from '@univerjs/thread-comment';
+import { UniverSheetsThreadCommentBasePlugin } from '@univerjs/sheets-thread-comment-base';
+import { UniverSheetsThreadCommentPlugin } from '@univerjs/sheets-thread-comment';
+```
+
+## Internationalization
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core';
+import ThreadCommentUIEnUS from '@univerjs/thread-comment-ui/locale/en-US';
+import SheetsThreadCommentEnUS from '@univerjs/sheets-thread-comment/locale/en-US';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: Tools.deepMerge(
+      ThreadCommentUIEnUS,
+      SheetsThreadCommentEnUS
+    ),
+  },
+});
+```
+
+## Register
+
+```typescript
+import { UniverSheetsThreadCommentPlugin } from '@univerjs/sheets-thread-comment';
+
+univer.registerPlugin(UniverSheetsThreadCommentPlugin);
+```
