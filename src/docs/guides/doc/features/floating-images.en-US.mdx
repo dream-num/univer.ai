@@ -54,8 +54,23 @@ const univer = new Univer({
 
 ## Register
 
+When not using the collaborative plugin, the registration code is as follows:
+
 ```typescript
 univer.registerPlugin(UniverDrawingPlugin);
+univer.registerPlugin(UniverDrawingUIPlugin);
+univer.registerPlugin(UniverDocsDrawingPlugin);
+univer.registerPlugin(UniverDocsDrawingUIPlugin);
+```
+
+When using the collaborative plugin, the registration code is as follows:
+
+```typescript
+import { IImageIoService } from '@univerjs/drawing'
+
+univer.registerPlugin(UniverDrawingPlugin, {
+  override: [[IImageIoService, null]], // The collaborative plugin will provide this implementation
+});
 univer.registerPlugin(UniverDrawingUIPlugin);
 univer.registerPlugin(UniverDocsDrawingPlugin);
 univer.registerPlugin(UniverDocsDrawingUIPlugin);
