@@ -55,8 +55,23 @@ const univer = new Univer({
 
 ## 注册
 
+不使用协同插件时，注册代码如下：
+
 ```typescript
 univer.registerPlugin(UniverDrawingPlugin);
+univer.registerPlugin(UniverDrawingUIPlugin);
+univer.registerPlugin(UniverDocsDrawingPlugin);
+univer.registerPlugin(UniverDocsDrawingUIPlugin);
+```
+
+使用协同插件时，注册代码如下：
+
+```typescript
+import { IImageIoService } from '@univerjs/drawing'
+
+univer.registerPlugin(UniverDrawingPlugin, {
+  override: [[IImageIoService, null]], // 协同插件将会提供该实现
+});
 univer.registerPlugin(UniverDrawingUIPlugin);
 univer.registerPlugin(UniverDocsDrawingPlugin);
 univer.registerPlugin(UniverDocsDrawingUIPlugin);
