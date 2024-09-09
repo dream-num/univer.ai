@@ -36,8 +36,9 @@ The essence is to control the switch of permissions by setting the value of the 
 The permissions for worksheets and selections are set in command mode.
 
 ```typescript
+const accessor = univer.__getInjector();
 const commandService = accessor.get(ICommandService);
-const target = getSheetCommandTarget(univerInstanceService);
+// import { getSheetCommandTarget } from '@univerjs/sheets';
 if (!target) {
   return;
 }
@@ -69,8 +70,10 @@ DeleteWorksheetProtectionMutationParams {
 ### Custom selection permission code example
 
 ```typescript
+const accessor = univer.__getInjector();
 const commandService = accessor.get(ICommandService);
 const sheetSelectionManagerService = accessor.get(SheetsSelectionsService);
+// import { getSheetCommandTarget } from '@univerjs/sheets';
 const target = getSheetCommandTarget(univerInstanceService);
 if (!target) {
   return;
