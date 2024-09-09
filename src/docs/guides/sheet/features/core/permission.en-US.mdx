@@ -39,6 +39,7 @@ The permissions for worksheets and selections are set in command mode.
 const accessor = univer.__getInjector();
 const commandService = accessor.get(ICommandService);
 // import { getSheetCommandTarget } from '@univerjs/sheets';
+const target = getSheetCommandTarget(univerInstanceService);
 if (!target) {
   return;
 }
