@@ -213,3 +213,19 @@ S3_DEFAULT_BUCKET=univer
 Port 8000 is the API port exposed by the Univer Server. Accessing `/` and receiving a `404 page not found` response is expected because there is no API at that path.
 
 If you want to verify whether the service and functionality are working correctly, you can do so by setting up a [start-kit template frontend project](/guides/sheet/getting-started/quickstart#install-and-run-the-frontend).
+
+### How to enable CORS ?
+
+Update `configs/config.yaml.template` file set http config, then restart service:
+```yaml
+server:
+  http:
+    ...
+    corsAllowOrigins:
+    - "*"
+```
+
+`corsAllowOrigins` is a string array, support:
+
+- "*": allow all domain CORS, but not support credential headers like authorization, cookie.
+- [SelfDomainOrigin]: like http://localhost:3010, use domain origin support credential headers.
