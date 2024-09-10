@@ -233,3 +233,19 @@ S3_DEFAULT_BUCKET=univer
 8000 端口是 Univer Server 对外暴露的 API 端口，访问 `/` 返回 `404 page not found` 是正常现象，因为该路径下没有 API。
 
 如果你在验证服务和功能是否正常，可以通过[模板](/guides/sheet/getting-started/quickstart#install-and-run-the-frontend)来快速建立前端工程进行验证。
+
+### 如何配置允许跨域？
+
+更新 `configs/config.yaml.template` 中的 http 配置，然后重启服务：
+```yaml
+server:
+  http:
+    ...
+    corsAllowOrigins:
+    - "*"
+```
+
+`corsAllowOrigins` 是一个字符串数组，支持：
+
+- “*”：允许所有域名跨域，但不支持授权头信息比如 authorization、cookie。
+- “你自定义的源”：例如 http://localhost:3010，支持授权头信息。
