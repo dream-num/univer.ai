@@ -1,13 +1,13 @@
 import { Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
-# 评论 / 批注
+# Comment / Annotation Introduction
 
 <BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC]} value={UniverTypes.DOC} />
 
-评论 / 批注插件提供对文档的评论和批注功能。
+The Comment / Annotation plugin provides the ability to comment or annotate documents.
 
-## 安装
+## Installation
 
 <Tabs items={['pnpm', 'npm']}>
   <Tabs.Tab label="pnpm">
@@ -22,7 +22,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
   </Tabs.Tab>
 </Tabs>
 
-## 引入
+## Import
 
 ```typescript
 import '@univerjs/thread-comment-ui/lib/index.css';
@@ -32,24 +32,24 @@ import { UniverThreadCommentUIPlugin } from '@univerjs/thread-comment-ui';
 import { UniverDocsThreadCommentUIPlugin } from '@univerjs/docs-thread-comment-ui';
 ```
 
-## 国际化
+## Internationalization
 
 ```typescript
 import { LocaleType, Tools } from '@univerjs/core';
-import ThreadCommentUIZhCN from '@univerjs/thread-comment-ui/locale/zh-CN';
+import ThreadCommentUIEnUS from '@univerjs/thread-comment-ui/locale/en-US';
 
 const univer = new Univer({
   theme: defaultTheme,
-  locale: LocaleType.ZH_CN,
+  locale: LocaleType.EN_US,
   locales: {
-    [LocaleType.ZH_CN]: Tools.deepMerge(
-      ThreadCommentUIZhCN,
+    [LocaleType.EN_US]: Tools.deepMerge(
+      ThreadCommentUIEnUS,
     ),
   },
 });
 ```
 
-## 注册
+## Register
 
 ```typescript
 import { UserManagerService } from '@univerjs/core'

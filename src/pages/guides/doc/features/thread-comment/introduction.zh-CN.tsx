@@ -1,7 +1,7 @@
 import type { GetServerSideProps } from 'next'
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  res.setHeader('Location', '/zh-CN/guides/sheet/features/data-validation/introduction')
+  res.setHeader('Location', '/zh-CN/guides/doc/features/thread-comment')
   res.statusCode = 302 // Temporary redirect
   res.end()
 
