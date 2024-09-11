@@ -19,12 +19,12 @@ To facilitate the deployment of Univer's frontend, a variety of npm packages are
 <Callout>
   - If you are using npm, make sure you are using npm@7 or higher. This is because npm@3 ~ npm@6 will not correctly install `peerDependencies`[^1].
   - If you are using pnpm, make sure you are using pnpm@8 or higher. If you are using pnpm@6 ~ pnpm@7, you can try configuring `auto-install-peers=true` [^2] to resolve dependency installation issues.
-  - Known issue: yarn does not support automatic installation of `peerDependencies`[^3], and there seems to be no reliable solution. Please manually install the missing dependencies according to the console prompts.
+  - If you are using yarn, you need to manually install the missing `peerDependencies`[^3], but don't worry, the installation commands below already include these dependencies.
 </Callout>
 
 The following example will guide you through which plugins are necessary and how to install them:
 
-<Tabs items={['pnpm', 'npm']}>
+<Tabs items={['pnpm', 'npm', 'yarn']}>
   <Tabs.Tab label="pnpm">
     ```shell
     pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
@@ -35,11 +35,16 @@ The following example will guide you through which plugins are necessary and how
     npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
     ```
   </Tabs.Tab>
+  <Tabs.Tab label="yarn">
+    ```shell
+    yarn add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui react react-dom rxjs
+    ```
+  </Tabs.Tab>
 </Tabs>
 
 If you want to get a more convenient development experience in the future, we also recommend you to install `@univerjs/facade`:
 
-<Tabs items={['pnpm', 'npm']}>
+<Tabs items={['pnpm', 'npm', 'yarn']}>
   <Tabs.Tab label="pnpm">
     ```shell
     pnpm add @univerjs/facade
@@ -48,6 +53,11 @@ If you want to get a more convenient development experience in the future, we al
   <Tabs.Tab label="npm">
     ```shell
     npm install @univerjs/facade
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="yarn">
+    ```shell
+    yarn add @univerjs/facade
     ```
   </Tabs.Tab>
 </Tabs>
@@ -61,7 +71,7 @@ Since Univer uses a monorepo to manage its codebase, each release will update th
 If you are using pnpm, you can use the following command to update all plugins:
 
 ```shell
-pnpm update "@univerjs/*"@latest
+pnpm update "@univerjs/*" "@univerjs-pro/*" @latest
 ```
 
 ### Usage
