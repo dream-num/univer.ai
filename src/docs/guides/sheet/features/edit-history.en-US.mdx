@@ -1,0 +1,91 @@
+import { Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import BusinessPlanNotice from '@/components/BusinessPlanNotice'
+import ServerNotice from '@/components/ServerNotice'
+
+# Edit History
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+<BusinessPlanNotice />
+
+<ServerNotice />
+
+Univer provides a history tracking feature based on collaborative editing, so before using Edit History, **you need to install the [Collaboration](/guides/sheet/features/collaboration) plugin first**.
+
+## Installation
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs-pro/edit-history-viewer
+    pnpm add @univerjs-pro/edit-history-loader
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs-pro/edit-history-viewer
+    npm install @univerjs-pro/edit-history-loader
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Import
+
+```typescript
+import '@univerjs-pro/edit-history-viewer/lib/index.css';
+
+import { UniverEditHistoryLoaderPlugin } from '@univerjs-pro/edit-history-loader';
+```
+
+## Internationalization
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core';
+import EditHistoryViewerEnUS from '@univerjs-pro/edit-history-viewer/locale/en-US';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: Tools.deepMerge(
+      EditHistoryViewerEnUS
+    ),
+  },
+});
+```
+
+## Register
+
+When starting the edit-history feature, the UniverEditHistoryLoaderPlugin will load a new Univer instance and mount it on the specified DOM node.
+
+Therefore, when registering, you need to provide the appropriate DOM node ID (e.g., the container of the original Univer instance) to ensure that the history panel covers the original Univer panel. If the node ID is not specified, it defaults to 'univer-container'.
+```typescript
+
+univer.registerPlugin(UniverEditHistoryLoaderPlugin, { univerContainerId: 'Your-Univer-Container-Id'});
+
+```
+
+
+## Feature Adaptation
+
+The Univer instance for history tracking will only load the official plugins by default. Any third-party feature plugins developed for business needs must be registered with the HistoryLoaderService to be correctly displayed in the history tracking panel.
+
+For official plugins that are already registered, their configurations can also be modified.
+
+```typescript
+import { Disposable } from '@univerjs/core';
+import { HistoryLoaderService } from '@univerjs-pro/edit-history-loader'
+
+export class YourFeatureController extends Disposable {
+  constructor(
+    @Inject(HistoryLoaderService) private _historyLoaderService: HistoryLoaderService
+  ) {
+    super();
+    // Similar to PluginService registration, the Univer instance for history tracking will register the corresponding plugin according to the following configuration after being created
+    this._historyLoaderService.registerPlugin(YourPlugin, YourPluginConfig))
+    // Configure officially registered plugins
+    this._historyLoaderService.registerPlugin(ExamplePlugin, ExamplePluginConfig))
+  }
+}
+```
