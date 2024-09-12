@@ -85,8 +85,8 @@ export class YourFeatureController extends Disposable {
     super();
     // 和 PluginService 的注册方式一致，历史纪录的 Univer 实例在新建后会按照以下配置来注册对应 Plugin
     this._historyLoaderService.registerPlugin(YourPlugin, YourPluginConfig))
-    // 配置官方已注册的 Plugin
-    this._historyLoaderService.registerPlugin(ExamplePlugin, ExamplePluginConfig))
+    // 配置官方已注册的 Plugin, 需设置 true 参数表示覆盖原配置
+    this._historyLoaderService.registerPlugin(ExamplePlugin, ExamplePluginConfig, true))
   }
 }
 ```
