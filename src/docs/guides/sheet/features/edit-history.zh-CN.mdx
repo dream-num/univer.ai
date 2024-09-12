@@ -1,0 +1,92 @@
+import { Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import BusinessPlanNotice from '@/components/BusinessPlanNotice'
+import ServerNotice from '@/components/ServerNotice'
+
+# 历史纪录
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+<BusinessPlanNotice />
+
+<ServerNotice />
+
+Univer 基于协同编辑提供了历史纪录功能，**因此在使用历史纪录之前，需要先安装[协同编辑](/guides/sheet/features/collaboration)插件**。
+
+## 安装
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs-pro/edit-history-viewer
+    pnpm add @univerjs-pro/edit-history-loader
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs-pro/edit-history-viewer
+    npm install @univerjs-pro/edit-history-loader
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## 引入
+
+```typescript
+import '@univerjs-pro/edit-history-viewer/lib/index.css';
+
+import { UniverEditHistoryLoaderPlugin } from '@univerjs-pro/edit-history-loader';
+```
+
+## 国际化
+
+```typescript
+import { LocaleType, Tools } from '@univerjs/core';
+import EditHistoryViewerZhCN from '@univerjs-pro/edit-history-viewer/locale/zh-CN';
+
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.ZH_CN,
+  locales: {
+    [LocaleType.ZH_CN]: Tools.deepMerge(
+      EditHistoryViewerZhCN
+    ),
+  },
+});
+```
+
+## 注册
+
+启动历史记录时，UniverEditHistoryLoaderPlugin 会加载一个新的 Univer 实例挂载指定 DOM 节点上。
+
+因此在注册时，需要提供合适的 DOM 节点 id（如原 Univer 实例的 Container），以达到历史纪录面板覆盖原 Univer 面板的目的。若节点 id 未指定，则默认为'univer-container'。
+
+```typescript
+
+univer.registerPlugin(UniverEditHistoryLoaderPlugin, { univerContainerId: 'Your-Univer-Container-Id'});
+
+```
+
+
+## Feature 适配
+
+历史纪录的 Univer 实例中只会默认加载官方的 Plugin。为业务需求开发的第三方 Feature Plugin 需要被注册到 HistoryLoaderService 后，才会被正确的显示在历史纪录中。
+
+对已经内置注册的官方 Plugin，也可以修改其配置。
+
+```typescript
+import { Disposable } from '@univerjs/core';
+import { HistoryLoaderService } from '@univerjs-pro/edit-history-loader'
+
+export class YourFeatureController extends Disposable {
+  constructor(
+    @Inject(HistoryLoaderService) private _historyLoaderService: HistoryLoaderService
+  ) {
+    super();
+    // 和 PluginService 的注册方式一致，历史纪录的 Univer 实例在新建后会按照以下配置来注册对应 Plugin
+    this._historyLoaderService.registerPlugin(YourPlugin, YourPluginConfig))
+    // 配置官方已注册的 Plugin
+    this._historyLoaderService.registerPlugin(ExamplePlugin, ExamplePluginConfig))
+  }
+}
+```
