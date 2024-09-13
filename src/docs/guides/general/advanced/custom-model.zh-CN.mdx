@@ -67,9 +67,6 @@ export class UniverSheetsPlugin extends Plugin {
     @Inject(Injector) override readonly _injector: Injector
   ) {
     super();
-  }
-
-  override onStarting(): void {
     this._injector.add([CustomerService]);
   }
 }
@@ -100,7 +97,7 @@ class CustomerService {
 
   ) {
     const workbook = this._univerInstanceService.getCurrentUnitForType(UniverType.UNIVER_SHEET)!
-    const snapshot = this._resourceLoaderService.saveWorkbook(workbook);
+    const snapshot = this._resourceLoaderService.saveUnit(workbook.getUnitId());
   }
 }
 ```
