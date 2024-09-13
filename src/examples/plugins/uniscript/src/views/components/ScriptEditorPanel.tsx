@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
+import type { IDisposable, Nullable } from '@univerjs/core'
 import { DisposableCollection, LocaleService, toDisposable, useDependency } from '@univerjs/core'
 import { Button, MessageType } from '@univerjs/design'
 import { IMessageService, IShortcutService } from '@univerjs/ui'
 import { editor } from 'monaco-editor'
 import React, { useCallback, useEffect, useRef } from 'react'
-import type { IDisposable, Nullable } from '@univerjs/core'
 
 import { ScriptEditorService } from '../../services/script-editor.service'
 import { IUniscriptExecutionService } from '../../services/script-execution.service'

@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import type { IssueType } from '@/official-site/config/issueTypes'
+import Link from 'next/link'
 
 export function ContactUs({ type }: { type: IssueType }) {
   return (

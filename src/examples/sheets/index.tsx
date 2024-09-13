@@ -1,5 +1,7 @@
 'use client'
 
+import type { Nullable } from '@univerjs/core'
+import type { IThreadCommentMentionDataSource } from '@univerjs/thread-comment-ui'
 import { GithubPlugin } from '@/examples/plugins/github-plugin'
 import { LocaleType, Univer, UniverInstanceType, UserManagerService } from '@univerjs/core'
 import { UniverDataValidationPlugin } from '@univerjs/data-validation'
@@ -28,11 +30,9 @@ import { UniverSheetsUIPlugin } from '@univerjs/sheets-ui'
 import { UniverSheetsZenEditorPlugin } from '@univerjs/sheets-zen-editor'
 import { IThreadCommentMentionDataService } from '@univerjs/thread-comment-ui'
 import { UniverUIPlugin } from '@univerjs/ui'
+
 import { useEffect, useRef } from 'react'
 import { enUS, zhCN } from 'univer:locales'
-
-import type { Nullable } from '@univerjs/core'
-import type { IThreadCommentMentionDataSource } from '@univerjs/thread-comment-ui'
 import { ALL_FEATURES_WORKBOOK_DATA } from './data'
 
 interface IProps {

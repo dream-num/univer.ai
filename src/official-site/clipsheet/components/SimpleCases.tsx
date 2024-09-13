@@ -1,6 +1,6 @@
+import type { IVideo } from '@/official-site/clipsheet/components/VideoList'
 import { LearnMore } from '@/official-site/clipsheet/components/LearnMore'
 import { VideoList } from '@/official-site/clipsheet/components/VideoList'
-import type { IVideo } from '@/official-site/clipsheet/components/VideoList'
 
 export function SimpleCases({ videos }: { videos: IVideo[] }) {
   return (

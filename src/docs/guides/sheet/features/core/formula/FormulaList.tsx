@@ -1,3 +1,4 @@
+import type { IFunctionNames } from '@univerjs/engine-formula'
 import { LifecycleService, LifecycleStages, LocaleService, LocaleType, Univer, UniverInstanceType } from '@univerjs/core'
 import { defaultTheme } from '@univerjs/design'
 import { UniverDocsPlugin } from '@univerjs/docs'
@@ -9,7 +10,6 @@ import { UniverSheetsNumfmtPlugin } from '@univerjs/sheets-numfmt'
 import { UniverUIPlugin } from '@univerjs/ui'
 import React, { useEffect, useState } from 'react'
 import { enUS, zhCN } from 'univer:locales'
-import type { IFunctionNames } from '@univerjs/engine-formula'
 
 interface IProps {
   locale: LocaleType

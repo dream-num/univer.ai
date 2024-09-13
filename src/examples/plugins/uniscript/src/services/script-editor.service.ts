@@ -1,7 +1,7 @@
-import { Disposable, toDisposable } from '@univerjs/core'
 import type { IDisposable } from '@univerjs/core'
 import type { MenuConfig } from '@univerjs/ui'
 import type { editor } from 'monaco-editor'
+import { Disposable, toDisposable } from '@univerjs/core'
 
 export interface IExampleItem {
   label: string

@@ -1,9 +1,9 @@
+import type { OpenOptions } from '@stackblitz/sdk'
 import { clsx } from '@/lib/utils'
 import sdk from '@stackblitz/sdk'
 import { GithubSingle24, MenuSingle } from '@univerjs/icons'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
-import type { OpenOptions } from '@stackblitz/sdk'
 
 interface IEmbedProps {
   title: string

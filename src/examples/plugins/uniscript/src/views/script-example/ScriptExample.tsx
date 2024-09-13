@@ -1,8 +1,8 @@
-import { LocaleService, useDependency } from '@univerjs/core'
+import type { IExampleItem } from '../../services/script-editor.service'
 
+import { LocaleService, useDependency } from '@univerjs/core'
 import { Select } from '@univerjs/design'
 import React, { useState } from 'react'
-import type { IExampleItem } from '../../services/script-editor.service'
 
 export interface IScriptExampleProps {
   onChange: (value: string) => void

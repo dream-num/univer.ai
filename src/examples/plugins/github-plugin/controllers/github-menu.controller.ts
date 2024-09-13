@@ -1,7 +1,7 @@
+import type { IMenuItemFactory } from '@univerjs/ui'
 import { ConfigService, Disposable, ICommandService, Inject, Injector, LifecycleStages, OnLifecycle } from '@univerjs/core'
 import { GithubSingle24 } from '@univerjs/icons'
 import { ComponentManager, IMenuService } from '@univerjs/ui'
-import type { IMenuItemFactory } from '@univerjs/ui'
 import { GithubButtonOperation } from '../commands/operations/github-button.operation'
 import { GithubButtonFactory } from './menu'
 

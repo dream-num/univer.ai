@@ -1,5 +1,5 @@
-import { CREATE_VCHART_COMMAND_ID } from '@visactor/univer-vchart-plugin'
 import type { FUniver } from '@univerjs/facade'
+import { CREATE_VCHART_COMMAND_ID } from '@visactor/univer-vchart-plugin'
 
 export function createVChart(univerAPI: FUniver) {
   univerAPI.executeCommand(CREATE_VCHART_COMMAND_ID, {

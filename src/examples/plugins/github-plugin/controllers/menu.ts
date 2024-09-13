@@ -1,5 +1,5 @@
-import { MenuGroup, MenuItemType, MenuPosition } from '@univerjs/ui'
 import type { IMenuButtonItem } from '@univerjs/ui'
+import { MenuGroup, MenuItemType, MenuPosition } from '@univerjs/ui'
 import { GithubButtonOperation } from '../commands/operations/github-button.operation'
 
 export function GithubButtonFactory(): IMenuButtonItem<string> {

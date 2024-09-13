@@ -1,10 +1,10 @@
-import { UniverInstanceType } from '@univerjs/core'
-import { RangeProtectionPermissionEditPoint, WorkbookEditablePermission, WorksheetEditPermission, WorksheetSetCellStylePermission, WorksheetSetCellValuePermission } from '@univerjs/sheets'
-import { getCurrentRangeDisable$ } from '@univerjs/sheets-ui'
-
-import { getMenuHiddenObservable, MenuItemType, MenuPosition } from '@univerjs/ui'
 import type { IAccessor } from '@univerjs/core'
 import type { IMenuButtonItem } from '@univerjs/ui'
+import { UniverInstanceType } from '@univerjs/core'
+
+import { RangeProtectionPermissionEditPoint, WorkbookEditablePermission, WorksheetEditPermission, WorksheetSetCellStylePermission, WorksheetSetCellValuePermission } from '@univerjs/sheets'
+import { getCurrentRangeDisable$ } from '@univerjs/sheets-ui'
+import { getMenuHiddenObservable, MenuItemType, MenuPosition } from '@univerjs/ui'
 import { ToggleScriptPanelOperation } from '../commands/operations/panel.operation'
 
 export function UniscriptMenuItemFactory(accessor: IAccessor): IMenuButtonItem {

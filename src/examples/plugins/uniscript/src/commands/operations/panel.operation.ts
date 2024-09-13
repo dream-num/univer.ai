@@ -1,6 +1,6 @@
+import type { IAccessor, IOperation } from '@univerjs/core'
 import { CommandType } from '@univerjs/core'
 import { ISidebarService } from '@univerjs/ui'
-import type { IAccessor, IOperation } from '@univerjs/core'
 
 import { ScriptPanelService } from '../../services/script-panel.service'
 
