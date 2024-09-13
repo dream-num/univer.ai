@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@antv/g2": "^5.2.5",
-    "@codesandbox/sandpack-react": "^2.19.3",
+    "@codesandbox/sandpack-react": "^2.19.6",
     "@docsearch/css": "^3.6.1",
     "@docsearch/react": "^3.6.1",
     "@radix-ui/react-checkbox": "^1.1.1",
@@ -86,7 +86,7 @@
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
     "monaco-editor": "^0.51.0",
-    "next": "14.2.8",
+    "next": "14.2.9",
     "nextra": "^2.13.4",
     "nextra-theme-docs": "^2.13.4",
     "pako": "^2.1.0",
@@ -101,8 +101,8 @@
     "youtube-player": "^5.6.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.3.2",
-    "@eslint-react/eslint-plugin": "^1.13.0",
+    "@antfu/eslint-config": "^3.5.1",
+    "@eslint-react/eslint-plugin": "^1.14.0",
     "@types/node": "^22.5.4",
     "@types/pako": "^2.0.3",
     "@types/react": "^18.3.5",
@@ -120,7 +120,7 @@
     "sharp": "^0.33.5",
     "simple-git-hooks": "^2.11.1",
     "tailwindcss": "^3.4.10",
-    "typescript": "5.5.4"
+    "typescript": "5.6.2"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

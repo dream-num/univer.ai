@@ -19,12 +19,12 @@ Univer 以插件的形式提供了一系列功能，除了一些产品所必需�
 <Callout>
   - 如果你正在使用 npm，请确保使用的版本为 npm@7 及以上。这是因为 npm@3 ~ npm@6 并不会正确地安装 `peerDependencies`[^1]。
   - 如果你正在使用 pnpm，请确保使用的版本为 pnpm@8 及以上。如果你正在使用 pnpm@6 ~ pnpm@7，可以尝试配置 `auto-install-peers=true` [^2]来解决依赖安装问题。
-  - 已知问题：yarn 不支持自动安装 `peerDependencies`[^3]，并且似乎没有可靠的解决方案。请根据控制台的提示手动安装缺失的依赖。
+  - 如果你正在使用 yarn，你需要手动安装缺失的 `peerDependencies`[^3]，不过别担心，下面的安装命令中已经包含了这些依赖。
 </Callout>
 
 以下示例将会带你了解哪些插件是必需的，以及如何安装它们：
 
-<Tabs items={['pnpm', 'npm']}>
+<Tabs items={['pnpm', 'npm', 'yarn']}>
   <Tabs.Tab label="pnpm">
     ```shell
     pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-numfmt @univerjs/engine-render @univerjs/ui
@@ -35,17 +35,28 @@ Univer 以插件的形式提供了一系列功能，除了一些产品所必需�
     npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-numfmt @univerjs/engine-render @univerjs/ui
     ```
   </Tabs.Tab>
+  <Tabs.Tab label="yarn">
+    ```shell
+    yarn add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-numfmt @univerjs/engine-render @univerjs/ui react react-dom rxjs
+    ```
+  </Tabs.Tab>
 </Tabs>
 
 如果你想在后续的开发中获得更加便捷的开发体验，我们还推荐你安装 `@univerjs/facade`：
 
-<Tabs items={['pnpm', 'npm']}>
+
+<Tabs items={['pnpm', 'npm', 'yarn']}>
   <Tabs.Tab label="pnpm">
     ```shell
     pnpm add @univerjs/facade
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/facade
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="yarn">
     ```shell
     npm install @univerjs/facade
     ```
@@ -61,7 +72,7 @@ Univer 以插件的形式提供了一系列功能，除了一些产品所必需�
 如果你使用的是 pnpm，你可以使用以下命令来更新所有的插件：
 
 ```shell
-pnpm update "@univerjs/*"@latest
+pnpm update "@univerjs/*" "@univerjs-pro/*" @latest
 ```
 
 ### 使用
