@@ -61,7 +61,11 @@ const saveData = activeWorkbook.save();
 当我们不再需要工作簿时，可以调用 `FUniver` 的 `disposeUniverSheet` 方法来销毁实例。
 
 ```typescript
-univerAPI.disposeUnit('your-sheet-id');
+const activeWorkbook = univerAPI.getActiveWorkbook()
+const unitId = activeWorkbook && activeWorkbook.getId()
+if(unitId){
+  univerAPI.disposeUnit(unitId)
+}
 ```
 
 ## 工作表 Worksheet

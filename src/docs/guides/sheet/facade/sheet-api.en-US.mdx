@@ -61,7 +61,11 @@ const saveData = activeWorkbook.save();
 When you no longer need a `Workbook`, you can call the `disposeUnit` method on the API instance to unload it.
 
 ```typescript
-univerAPI.disposeUnit('your-sheet-id')
+const activeWorkbook = univerAPI.getActiveWorkbook()
+const unitId = activeWorkbook && activeWorkbook.getId()
+if(unitId){
+  univerAPI.disposeUnit(unitId)
+}
 ```
 
 ## Worksheet
