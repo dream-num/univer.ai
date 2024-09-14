@@ -11,11 +11,16 @@ import entryFile from './permission/demo-1/index.txt'
 
 Univer 提供了权限控制的能力，通常可用于限制用户对工作簿、工作表、选区的操作。当用户进行没有权限的操作时，可终止代码执行并提示用户缺失权限。例如你可以在一片选区内设置区域保护，就可以设置其他协作者在该保护范围内是否可以使用编辑、阅读、复制、筛选等等。
 
+**注意：Univer提供的是可拓展的基础能力，并非定制化的能力，第三方使用的时候需要自行实现权限规则的存储和组织架构接入，这里需要编写自定义插件来实现。**
+所以会出现设置权限后去查看权限列表时权限信息为空、查看用户信息时返回为空等情况，这是因为这些信息都需要走接口请求拉取，是自定义的逻辑 需要自己额外补充，可以看下面的第三方接入。
+
 ## 基础示例
 
 ### 工作簿权限
 
-目前工作簿的整体权限是直接通过 API 来修改权限点位，我们提供了 [Facade API](/guides/sheet/facade/facade)，你可以通过调用这个 API 来设置工作簿的编辑权限。
+目前工作簿的整体权限是直接通过 API 来修改权限点位，我们提供了 [Facade API](/guides/sheet/facade/facade)，你可以通过调用这个 API 来设置工作簿不同功能的权限。
+
+拿编辑权限举例（其他功能只需替换权限点位即可， 具体的权限点位列举在文章最下面， 需要从 `@univerjs/sheets` 中引入），你可以通过下面的代码来设置整体工作簿不可编辑：
 
 ```typescript
 import { FUniver } from "@univerjs/facade";
@@ -23,15 +28,28 @@ import { FUniver } from "@univerjs/facade";
 const univerAPI = FUniver.newAPI(univer);
 ```
 
-然后你就可以通过调用 `univerAPI` 的方法来使用 Univer 了，设置整体工作簿不可编辑：
+然后你就可以通过调用 `univerAPI` 的方法来获取 `FPermission` 对象，从而操作具体的权限设置：
 
 ```typescript
-univerAPI.getActiveWorkbook().setEditable(false);
+const permission = univerAPI.getPermission();
+// unitId 是工作簿的 id, WorkbookEditablePermission 是权限点位, import { WorkbookEditablePermission } from '@univerjs/sheets' , false 表示该权限不可使用
+permission.setWorkbookPermissionPoint(unitId, WorkbookEditablePermission, false)
 ```
 
 ### 工作表权限代码示例
 
-工作表和选区相关的权限设置通过命令模式来执行
+工作表和选区相关的权限设置通过API和命令模式两种方式来执行，这里以工作表编辑权限举例，其他工作表功能只需替换权限点位即可，具体的权限点位列举在文章最下面。
+
+#### API 方式
+
+```typescript
+const permission = univerAPI.getPermission();
+// 创建工作表权限，unitId 是工作簿的 id, subUnitId 是工作表的 id，此时生成的权限是一个基础权限，它的作用是用于渲染权限区域
+const permissionId = await permission.addWorksheetBasePermission(unitId, subUnitId);
+permission.setWorksheetPermissionPoint(unitId, subUnitId, WorksheetEditPermission, false);
+```
+
+#### 命令模式
 
 ```typescript
 const accessor = univer.__getInjector();
@@ -53,11 +71,16 @@ commandService.executeCommand(AddWorksheetProtectionMutation.id, {
     subUnitId,
   },
 });
+
+const permissionService = accessor.get(IPermissionService);
+permissionService.updatePermissionPoint(new WorksheetEditPermission(unitId, subUnitId).id, false);
 ```
 
-这个 demo 是给工作表添加保护，`permissionId` 需要自己生成的唯一 Id 用来存储权限，`unitType` 是工作表的类型，你可以使用仓库中的 UnitObject 枚举来替换上面的魔法数，`unitId` 是工作簿的id，`subUnitId` 是工作表的 id。   
+该命令中的参数：`permissionId` 需要自己生成的唯一 Id 用来存储权限，`unitType` 是工作表的类型，你可以使用仓库中的 UnitObject 枚举来替换上面的魔法数，`unitId` 是工作簿的id，`subUnitId` 是工作表的 id。   
 
-删除已经存在的工作表权限可以使用 `DeleteWorksheetProtectionMutation`，参数是 `unitId` 和 `subUnitId`。
+#### 删除工作表权限
+
+删除已经存在的工作表权限可以使用命令模式驱动 `DeleteWorksheetProtectionMutation`，参数是 `unitId` 和 `subUnitId`。
 
 ```typescript
 DeleteWorksheetProtectionMutationParams {
@@ -66,7 +89,28 @@ DeleteWorksheetProtectionMutationParams {
 }
 ```
 
+也可以使用API来删除工作表的所有权限设置
+
+```typescript
+const permission = univerAPI.getPermission();
+permission.removeWorksheetPermission(unitId, subUnitId);
+```
+
 ### 自定义选区权限代码示例
+
+选区的权限同样可以通过 API 和命令模式两种方式来执行，这里以选区编辑权限举例，其他选区功能只需替换权限点位即可，具体的权限点位列举在文章最下面。
+
+#### API 方式
+
+```typescript
+const permission = univerAPI.getPermission();
+const res = await permission.addRangeBasePermission(unitId, subUnitId, ranges);
+// 这里的返回区别于工作表权限，因为一个子表中可能会有多个区域保护，所以 ruleId 是用来存储该权限规则的唯一 id，permissionId 是用来拼接权限点位的。
+const { permissionId, ruleId } = res;
+permission.setRangeProtectionPermissionPoint(unitId, subUnitId, permissionId, RangeProtectionPermissionEditPoint, false);
+```
+
+#### 命令模式
 
 ```typescript
 const accessor = univer.__getInjector();
@@ -92,19 +136,18 @@ commandService.executeCommand(AddRangeProtectionMutation.id, {
     id: 'rule1'
   }],
 });
-```
 
-这个 demo 是给自定义选区添加权限保护，这里面的参数和上面的一样，增加了 `ranges` 参数，这个参数是你选中的区域， 还有一个 `id` 参数, 这个参数是用来标识这个规则的唯一 id，用来删除这个规则。   
-
-在通常的操作流程中，已经创建的权限区域中，创建者会拥有最高权限，所以会出现在自己创建的区域中自己总是可以编辑的情况，这时候可以在上面的 demo 后面补充下面的代码来实现所有人都不可编辑等需求。其他功能逻辑一样，只需要在 update 中更换对应的点位即可。
-
-```typescript
 const permissionService = accessor.get(IPermissionService);
 // 这里 RangeProtectionPermissionEditPoint 的第三个参数就是上面生成的 permissionId，false 表示不可编辑
 permissionService.updatePermissionPoint(new RangeProtectionPermissionEditPoint(unitId, subUnitId, "3xtfxG1").id, false);
 ```
 
-删除已经存在的自定义区域保护可以使用 `DeleteRangeProtectionMutation`，参数是 `unitId` 和 `subUnitId` 以及想批量删除的 `ruleIds`。
+这里面的参数和上面的一样，增加了 `ranges` 参数，这个参数是你选中的区域， 还有一个 `id` 参数, 这个参数是用来标识这个规则的唯一 id，用来删除这个规则。   
+
+
+#### 删除区域保护权限
+
+删除已经存在的自定义区域保护可以通过命令模式驱动 `DeleteRangeProtectionMutation`，参数是 `unitId` 和 `subUnitId` 以及想批量删除的 `ruleIds`。
 
 ```typescript
 DeleteRangeProtectionMutationParams {
@@ -114,7 +157,13 @@ DeleteRangeProtectionMutationParams {
 }
 ```
 
-本质是通过设置权限点位的值来控制权限的开关，权限点位对应的command在执行前会去读取该点位的值，假如权限值为false，则会终止command的执行。
+也可以使用API来删除选区的所有权限设置
+
+```typescript
+const permission = univerAPI.getPermission();
+permission.removeRangeProtection(unitId, subUnitId, ruleIds);
+```
+
 
 ## 拓展使用
 
@@ -216,9 +265,9 @@ univer.registerPlugin(YourPlugin);
 
 ## 权限点位列表
 
-具体的点位代码，请参阅[这里](https://github.com/dream-num/univer/tree/dev/packages/sheets/src/services/permission/permission-point)。
+不同的功能权限是由不同的权限点位来控制的，修改该点位的值可以控制对应功能的权限。下面是一些常用的权限点位，具体的点位代码，请参阅[这里](https://github.com/dream-num/univer/tree/dev/packages/sheets/src/services/permission/permission-point)。
 
-如果 `workbook` 的权限控制和 `worksheet` / `range` 有交叉，那么必须全部为 `true` 才能使用。
+如果 `workbook` 的权限控制和 `worksheet` / `range` 有交叉，那么必须全部为 `true` 才能使用。例如一个单元格的编辑权限必须 `workbook` 和 `worksheet` 的编辑权限都为 `true` 才能编辑。
 
 ### Workbook 工作簿
 
@@ -231,6 +280,15 @@ univer.registerPlugin(YourPlugin);
 | WorkbookCopyPermission | 能否复制 |
 | WorkbookExportPermission | 能否导出 |
 | WorkbookManageCollaboratorPermission | 能否管理协作者 |
+| WorkbookCreateSheetPermission | 能否创建工作表 |
+| WorkbookDeleteSheetPermission | 能否删除工作表 |
+| WorkbookRenameSheetPermission | 能否重命名工作表 |
+| WorkbookHideSheetPermission | 能否隐藏工作表 |
+| WorkbookDuplicateSheetPermission | 能否复制工作表 |
+| WorkbookSharePermission | 能否分享 |
+| WorkbookMoveSheetPermission | 能否移动工作表 |
+| WorksheetViewHistoryPermission | 能否查看历史记录 |
+| WorksheetRecoverHistoryPermission | 能否恢复历史记录 |
 
 ### Worksheet 工作表
 
