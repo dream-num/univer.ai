@@ -11,8 +11,8 @@ import entryFile from './permission/demo-1/index.txt'
 
 Univer provides permission control capabilities, typically used to restrict user operations on workbooks, sheets, and ranges. When a user performs an operation without permission, the code execution can be halted and the user will be prompted about the missing permissions. For example, you can set area protection within a range, which allows setting whether other collaborators can edit, read, copy, filter, etc., within the protected range.
 
-**Note: Univer provides extensible basic capabilities and not customized functionalities. Third-party users need to implement permission rule storage and organizational structure integration by themselves. Custom plugins need to be written for this purpose.**
-So when you set the permissions and then go to view the permission list, the permission information is empty, or when viewing user information, it returns empty. This is because these pieces of information need to be fetched via API requests; it's custom logic that requires additional implementation on your part. You can refer to the third-party integration below. Please help me translate this.
+**Note: Univer provides extendable foundational capabilities, not customized features. If you have more extensive and tailored requirements such as persistence or organizational structures, you need to implement the storage of permission rules and integrate organizational structures yourself. In this case, you need to write custom plugins to achieve this.**
+Therefore, after setting permissions, you might find the permission list empty when viewing it, or user information returns empty when you check it. This is because this information needs to be fetched via API requests; it's custom logic that requires additional implementation on your part. You can refer to the third-party integration below.
 
 ## Basic Example
 
