@@ -454,6 +454,7 @@ cellData 的结构如下
 ### 自定义字段
 
 `cellData.custom` 是一个对象，表示自定义字段。其中可以放入任何符合 JSON 格式的数据，用于自定义存储一些额外的信息。
+更新 `custom` 数据会覆盖原有的 `custom` 数据，如果你在更新数据时需要保留原有的 `custom` 数据，请提前获取到 `custom` 数据合并成新的数据后再更新。
 
 ```typescript
 // IWorksheetData
