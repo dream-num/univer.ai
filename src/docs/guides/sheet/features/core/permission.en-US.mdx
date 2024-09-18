@@ -1,21 +1,29 @@
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 import Sandbox from '@/components/Sandbox'
+import { Callout } from 'nextra/components'
+import Image from '@/components/Image'
+import permissionImg from './permission/permission-en.png'
 
 import entryFile from './permission/demo-1/index.txt'
 
-# Permission
+# Permission Control
 
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
 
 <Sandbox entryFile={entryFile} />
 
-Univer provides the ability to control permissions, which can typically be used to restrict users' operations on workbooks, worksheets, and selections. When a user performs an operation without permission, the code execution can be terminated and the user can be prompted for missing permissions. For example, you can set protection in a selected area to determine whether other collaborators can use editing, reading, copying, filtering, and more within that protected area.
+Univer provides permission control capabilities, typically used to restrict user operations on workbooks, sheets, and ranges. When a user performs an operation without permission, the code execution can be halted and the user will be prompted about the missing permissions. For example, you can set area protection within a range, which allows setting whether other collaborators can edit, read, copy, filter, etc., within the protected range.
 
-## Basic example
+**Note: Univer provides extendable foundational capabilities, not customized features. If you have more extensive and tailored requirements such as persistence or organizational structures, you need to implement the storage of permission rules and integrate organizational structures yourself. In this case, you need to write custom plugins to achieve this.**
+Therefore, after setting permissions, you might find the permission list empty when viewing it, or user information returns empty when you check it. This is because this information needs to be fetched via API requests; it's custom logic that requires additional implementation on your part. You can refer to the third-party integration below.
 
-### workbook permission
+## Basic Example
 
-Currently, the overall permissions of a workbook are modified directly through the API. We provide the [Facade API](/guides/sheet/facade/facade). You can set the edit permissions of a workbook by calling this API.
+### Workbook Permissions
+
+Currently, workbook-level permissions are directly modified through the API. We provide the [Facade API](/guides/sheet/facade/facade), and you can use this API to set permissions for different functions of the workbook.
+
+Taking edit permission as an example (other functions require replacing the permission points, which are listed at the bottom of the article and need to be imported from `@univerjs/sheets`), you can use the following code to set the entire workbook to be non-editable:
 
 ```typescript
 import { FUniver } from "@univerjs/facade";
@@ -23,17 +31,28 @@ import { FUniver } from "@univerjs/facade";
 const univerAPI = FUniver.newAPI(univer);
 ```
 
-Then you can use Univer by calling the `univerAPI` method and set the entire workbook to be uneditable:
+Then, you can use the univerAPI methods to get the FPermission object and set specific permissions:
 
 ```typescript
-univerAPI.getActiveWorkbook().setEditable(false);
+const permission = univerAPI.getPermission();
+// unitId is the workbook id, WorkbookEditablePermission is the permission point, import { WorkbookEditablePermission } from '@univerjs/sheets', false means the permission is not available
+permission.setWorkbookPermissionPoint(unitId, WorkbookEditablePermission, false)
 ```
 
-The essence is to control the switch of permissions by setting the value of the permission point. The command corresponding to the permission point will read the value of the point before execution. If the permission value is false, the execution of the command will be terminated.
+### Worksheet Permissions Code Example
 
-### Worksheet permission code example
+Worksheet and range-related permissions can be set via API and command modes. Here, we'll use worksheet edit permissions as an example. Other worksheet functions require replacing the permission points, which are listed at the bottom of the article.
 
-The permissions for worksheets and selections are set in command mode.
+#### API Method
+
+```typescript
+const permission = univerAPI.getPermission();
+// Create worksheet permission, unitId is the workbook id, subUnitId is the sheet id, the generated permission is a basic permission used for rendering permission areas
+const permissionId = await permission.addWorksheetBasePermission(unitId, subUnitId);
+permission.setWorksheetPermissionPoint(unitId, subUnitId, WorksheetEditPermission, false);
+```
+
+#### Command Mode
 
 ```typescript
 const accessor = univer.__getInjector();
@@ -55,11 +74,16 @@ commandService.executeCommand(AddWorksheetProtectionMutation.id, {
     subUnitId,
   },
 });
+
+const permissionService = accessor.get(IPermissionService);
+permissionService.updatePermissionPoint(new WorksheetEditPermission(unitId, subUnitId).id, false);
 ```
 
-This demo is to add protection to the worksheet. `permissionId` is a randomly generated unique ID for storing permissions. You need to generate it yourself. `unitType` is the type of the worksheet. You can use the `UnitObject` enumeration in the warehouse to replace the magic number above. `unitId` is the id of the workbook, and `subUnitId` is the id of the worksheet.
+Parameters in this command: `permissionId` is a unique ID you generate to store the permission, `unitType` is the sheet type (you can use the UnitObject enum from the repository), unitId is the workbook id, and `subUnitId` is the sheet id.
 
-To delete, you can use `DeleteWorksheetProtectionMutation`, the parameters are `unitId` and `subUnitId`.
+#### Delete Worksheet Permissions
+
+To delete existing worksheet permissions, you can use command mode to drive `DeleteWorksheetProtectionMutation`,` with `unitId` and `subUnitId` as parameters.
 
 ```typescript
 DeleteWorksheetProtectionMutationParams {
@@ -68,7 +92,28 @@ DeleteWorksheetProtectionMutationParams {
 }
 ```
 
-### Custom selection permission code example
+You can also use the API to delete all permissions settings for a worksheet:
+
+```typescript
+const permission = univerAPI.getPermission();
+permission.removeWorksheetPermission(unitId, subUnitId);
+```
+
+### Custom Range Permissions Code Example
+
+Range permissions can also be set via API and command modes. Here, we'll use range edit permissions as an example. Other range functions require replacing the permission points, which are listed at the bottom of the article.
+
+#### API Method
+
+```typescript
+const permission = univerAPI.getPermission();
+const res = await permission.addRangeBasePermission(unitId, subUnitId, ranges);
+// The response differs from worksheet permissions as a sheet may have multiple range protections, so ruleId is used for storing the unique permission rule, and permissionId is for combining permission points.
+const { permissionId, ruleId } = res;
+permission.setRangeProtectionPermissionPoint(unitId, subUnitId, permissionId, RangeProtectionPermissionEditPoint, false);
+```
+
+#### Command Mode
 
 ```typescript
 const accessor = univer.__getInjector();
@@ -94,19 +139,18 @@ commandService.executeCommand(AddRangeProtectionMutation.id, {
     id: 'rule1'
   }],
 });
-```
 
-This demo adds permission protection to a custom selection. The parameters here are the same as above, with the addition of a `ranges` parameter, which is the area you selected, and an `id` parameter, which is the unique id used to identify this rule and is used to delete this rule.
-
-In typical workflows, the creator of a permissioned area will have the highest level of access, which means they can always edit the area they created. To implement a scenario where no one, including the creator, can edit the area, you can add the following code to the demo provided above.
-
-```typescript
 const permissionService = accessor.get(IPermissionService);
-// The third parameter of RangeProtectionPermissionEditPoint is the permissionId generated above. Setting it to false indicates that editing is not allowed.
+// Here, RangeProtectionPermissionEditPoint's third parameter is the generated permissionId, false means not editable
 permissionService.updatePermissionPoint(new RangeProtectionPermissionEditPoint(unitId, subUnitId, "3xtfxG1").id, false);
 ```
 
-To delete, you can use `DeleteRangeProtectionMutation`, the parameters are `unitId` and `subUnitId` and the `ruleIds` you want to delete in batches.
+Here, the parameters are similar to those above, with additional `ranges` parameter for selected areas, and `id` parameter for uniquely identifying the rule, used for deletion.  
+
+
+#### Delete Range Protection Permissions
+
+To delete existing custom range protections, use command mode to drive `DeleteRangeProtectionMutation`, with `unitId`, `subUnitId`, and the `ruleIds` to be deleted.
 
 ```typescript
 DeleteRangeProtectionMutationParams {
@@ -114,6 +158,13 @@ DeleteRangeProtectionMutationParams {
   subUnitId: string;
   ruleIds: string[];
 }
+```
+
+You can also use the API to delete all permission settings for a selection.
+
+```typescript
+const permission = univerAPI.getPermission();
+permission.removeRangeProtection(unitId, subUnitId, ruleIds);
 ```
 
 ## Extended usage
@@ -186,18 +237,189 @@ class ConsumeService {
 }
 ```
 
-### Integration of Third-Party Authorization Service
+### Integration of Third-Party Authorization Service(Advanced Usage)
+
+<Callout type="warning" emoji=" 🚨 ">
+  **It is recommended to avoid mixing custom permission access with the Permission Facade API, as it allows for more granular control over permission points.**
+</Callout>
 
 The logic for determining permissions is typically handled by an external service, which involves a communication process. In the frontend SDK implementation, we use the [AuthzIoLocalService](https://github.com/dream-num/univer/blob/dev/packages/core/src/services/authz-io/authz-io-local.service.ts) to handle this logic.
 
 In a production environment, we need to replace this implementation with a backend service. The frontend needs to implement the corresponding request functions based on the [IAuthzIoService](https://github.com/dream-num/univer/blob/dev/packages/core/src/services/authz-io/type.ts) interface for runtime replacement.
 
-Here's how you can replace it:
+<Image src={permissionImg} alt="Permission"  />
+
+Here is a simple example demonstrating the addition and deletion of protected range permissions for two predefined roles (Owner/Reader).
+The Owner has editing/viewing permissions for protected ranges, while the Reader cannot edit or view the contents of cells within protected ranges.
 
 ```typescript
 import { IAuthzIoService, Injector, Univer } from '@univerjs/core';
 
-class YourAuthzService implements IAuthzIoService { }
+import { IAuthzIoService, Injector, Univer, Inject, generateRandomId, IResourceManagerService, createDefaultUser, isDevRole, UserManagerService } from '@univerjs/core';
+import { ObjectScope, UnitAction, UnitObject, UnitRole, UniverType } from '@univerjs/protocol';
+import type { IActionInfo, IAllowedRequest, IBatchAllowedResponse, ICollaborator, ICreateRequest, ICreateRequest_SelectRangeObject, IListPermPointRequest, IPermissionPoint, IPutCollaboratorsRequest, IUnitRoleKV, IUpdatePermPointRequest } from '@univerjs/protocol';
+
+class YourAuthzService implements IAuthzIoService {
+    private _permissionMap: Map<string, ICreateRequest_SelectRangeObject & { objectType: UnitObject }> = new Map([]);
+
+    constructor(
+        @IResourceManagerService private _resourceManagerService: IResourceManagerService,
+        @Inject(UserManagerService) private _userManagerService: UserManagerService
+    ) {
+        this._initSnapshot();
+        this._initDefaultUser();
+    }
+
+    private _initDefaultUser() {
+        const currentUser = this._userManagerService.getCurrentUser();
+        const currentUserIsValid = currentUser && currentUser.userID;
+        if (!currentUserIsValid) {
+            this._userManagerService.setCurrentUser(createDefaultUser(UnitRole.Owner));
+        }
+    }
+
+    private _getRole(type: UnitRole) {
+        const user = this._userManagerService.getCurrentUser();
+        if (!user) {
+            return false;
+        }
+        return isDevRole(user.userID, type);
+    }
+
+    private _initSnapshot() {
+        this._resourceManagerService.registerPluginResource({
+            toJson: (_unitId: string) => {
+                const obj = [...this._permissionMap.keys()].reduce((r, k) => {
+                    const v = this._permissionMap.get(k);
+                    r[k] = v!;
+                    return r;
+                }, {} as Record<string, ICreateRequest_SelectRangeObject & { objectType: UnitObject }>);
+                return JSON.stringify(obj);
+            },
+            parseJson: (json: string) => {
+                return JSON.parse(json);
+            },
+            pluginName: 'SHEET_AuthzIoMockService_PLUGIN',
+            businesses: [UniverType.UNIVER_SHEET, UniverType.UNIVER_DOC, UniverType.UNIVER_SLIDE],
+            onLoad: (_unitId, resource) => {
+                for (const key in resource) {
+                    this._permissionMap.set(key, resource[key]);
+                }
+            },
+            onUnLoad: () => {
+                this._permissionMap.clear();
+            },
+        });
+    }
+
+    async create(config: ICreateRequest): Promise<string> {
+        const permissionId = generateRandomId(8);
+        if (config.objectType === UnitObject.SelectRange && config.selectRangeObject) {
+            this._permissionMap.set(permissionId, { ...config.selectRangeObject, objectType: config.objectType });
+        }
+        return permissionId;
+    }
+
+    async batchAllowed(config: IAllowedRequest[]): Promise<IBatchAllowedResponse['objectActions']> {
+        const selectionRangeConfig = config.filter((c) => c.objectType === UnitObject.SelectRange);
+        if (selectionRangeConfig.length) {
+            const currentUser = this._userManagerService.getCurrentUser();
+            const res = [] as IBatchAllowedResponse['objectActions'];
+            selectionRangeConfig.forEach((c) => {
+                res.push({
+                    unitID: c.unitID,
+                    objectID: c.objectID,
+                    actions: c.actions.map((action) => {
+                        if (isDevRole(currentUser.userID, UnitRole.Owner)) {
+                            return { action, allowed: true };
+                        }
+                        return { action, allowed: false };
+                    }),
+                });
+            });
+            return res;
+        }
+        return Promise.resolve([]);
+    }
+
+    async list(config: IListPermPointRequest): Promise<IPermissionPoint[]> {
+        const result: IPermissionPoint[] = [];
+        config.objectIDs.forEach((objectID) => {
+            const rule = this._permissionMap.get(objectID);
+            if (rule) {
+                const item = {
+                    objectID,
+                    unitID: config.unitID,
+                    objectType: rule!.objectType,
+                    name: rule!.name,
+                    shareOn: false,
+                    shareRole: UnitRole.Owner,
+                    shareScope: -1,
+                    scope: {
+                        read: ObjectScope.AllCollaborator,
+                        edit: ObjectScope.AllCollaborator,
+                    },
+                    creator: createDefaultUser(UnitRole.Owner),
+                    strategies: [
+                        {
+                            action: UnitAction.View,
+                            role: UnitRole.Owner,
+                        },
+                        {
+                            action: UnitAction.Edit,
+                            role: UnitRole.Owner,
+                        },
+                    ],
+                    actions: config.actions.map((a) => {
+                        return { action: a, allowed: this._getRole(UnitRole.Owner) };
+                    }),
+                };
+                result.push(item);
+            }
+        });
+        return result;
+    }
+
+    async listCollaborators(): Promise<ICollaborator[]> {
+        // List the existing collaborators
+        return [];
+    }
+
+    async allowed(_config: IAllowedRequest): Promise<IActionInfo[]> {
+        // Because this is a mockService for handling permissions, we will not write real logic in it. We will only return an empty array to ensure that the permissions originally set by the user are not modified.
+        // If you want to achieve persistence of permissions, you can modify the logic here.
+        return Promise.resolve([]);
+    }
+
+    async listRoles(): Promise<{ roles: IUnitRoleKV[]; actions: UnitAction[] }> {
+        return {
+            roles: [],
+            actions: [],
+        };
+    }
+
+    async update(config: IUpdatePermPointRequest): Promise<void> {
+        // Update bit information
+    }
+
+    async updateCollaborator(): Promise<void> {
+        // Update collaborator information
+        return undefined;
+    }
+
+    async createCollaborator(): Promise<void> {
+        // Create new collaborator information
+        return undefined;
+    }
+
+    async deleteCollaborator(): Promise<void> {
+        return undefined;
+    }
+
+    async putCollaborators(config: IPutCollaboratorsRequest): Promise<void> {
+        return undefined;
+    }
+}
 
 export class YourPlugin extends Plugin {
   override onStarting(injector: Injector): void {
@@ -222,39 +444,48 @@ In the case where the permission control of the workbook intersects with the wor
 
 ### Workbook Permissions
 
-| Permission | Description |
-| --- | --- |
-| WorkbookEditablePermission | Whether or not editing is allowed. |
-| WorkbookPrintPermission | Whether or not printing is allowed. |
-| WorkbookCommentPermission | Whether or not commenting is allowed. |
-| WorkbookViewPermission | Whether or not viewing is allowed. |
-| WorkbookCopyPermission | Whether or not copying is allowed. |
-| WorkbookExportPermission | Whether or not exporting is allowed. |
-| WorkbookManageCollaboratorPermission | Whether or not managing collaborators is allowed. |
+| Permission                           | Description                         |
+|--------------------------------------|-------------------------------------|
+| WorkbookEditablePermission           | Can edit                            |
+| WorkbookPrintPermission              | Can print                           |
+| WorkbookCommentPermission            | Can comment                         |
+| WorkbookViewPermission               | Can view                            |
+| WorkbookCopyPermission               | Can copy                            |
+| WorkbookExportPermission             | Can export                          |
+| WorkbookManageCollaboratorPermission | Can manage collaborators            |
+| WorkbookCreateSheetPermission        | Can create worksheets               |
+| WorkbookDeleteSheetPermission        | Can delete worksheets               |
+| WorkbookRenameSheetPermission        | Can rename worksheets               |
+| WorkbookHideSheetPermission          | Can hide worksheets                 |
+| WorkbookDuplicateSheetPermission     | Can duplicate worksheets            |
+| WorkbookSharePermission              | Can share                           |
+| WorkbookMoveSheetPermission          | Can move worksheets                 |
+| WorksheetViewHistoryPermission       | Can view history                    |
+| WorksheetRecoverHistoryPermission    | Can recover history                 |
 
 ### Worksheet Permissions
 
-| Permission | Description |
-| --- | --- |
-| WorksheetCopyPermission | Whether or not copying is allowed. |
-| WorksheetDeleteColumnPermission | Whether or not delete columns is allowed. |
-| WorksheetDeleteRowPermission | Whether or not delete row is allowed. |
-| WorksheetFilterPermission | Whether or not sort is allowed. |
-| WorksheetInsertColumnPermission | Whether or not insert columns is allowed. |
-| WorksheetInsertHyperlinkPermission | Whether or not use hyperlinks is allowed. |
-| WorksheetInsertRowPermission | Whether or not insert row is allowed. |
-| WorksheetPivotTablePermission | Whether or not use pivot tables is allowed. |
-| WorksheetSetCellStylePermission | Whether or not set cell style is allowed. |
-| WorksheetSetCellValuePermission | Whether or not set cell value is allowed. |
-| WorksheetSetColumnStylePermission | Whether or not set column style is allowed. |
-| WorksheetSetRowStylePermission | Whether or not set row style is allowed. |
-| WorksheetSortPermission | Whether or not use sort is allowed. |
-| WorksheetViewPermission | Whether or not viewing is allowed. |
-| WorksheetEditPermission | Whether or not editing is allowed. |
+| Permission                          | Description                 |
+|-------------------------------------|-----------------------------|
+| WorksheetCopyPermission             | Can copy                    |
+| WorksheetDeleteColumnPermission     | Can delete columns          |
+| WorksheetDeleteRowPermission        | Can delete rows             |
+| WorksheetFilterPermission           | Can filter                  |
+| WorksheetInsertColumnPermission     | Can insert columns          |
+| WorksheetInsertHyperlinkPermission  | Can use hyperlinks          |
+| WorksheetInsertRowPermission        | Can insert rows             |
+| WorksheetPivotTablePermission       | Can use pivot tables        |
+| WorksheetSetCellStylePermission     | Can edit cell styles        |
+| WorksheetSetCellValuePermission     | Can edit cell values        |
+| WorksheetSetColumnStylePermission   | Can set column styles       |
+| WorksheetSetRowStylePermission      | Can set row styles          |
+| WorksheetSortPermission             | Can sort                    |
+| WorksheetViewPermission             | Can view                    |
+| WorksheetEditPermission             | Can edit                    |
 
-### Range Permissions
+### Range Protection
 
-| Permission | Description |
-| --- | --- |
-| RangeProtectionPermissionViewPoint | Whether or not view the contents of a protected area. |
-| RangeProtectionPermissionEditPoint | Whether or not edit the contents of a protected area. |
+| Permission                           | Description                                |
+|--------------------------------------|--------------------------------------------|
+| RangeProtectionPermissionViewPoint   | Can view content of protected ranges       |
+| RangeProtectionPermissionEditPoint   | Can edit protected ranges                  |     
