@@ -1,11 +1,16 @@
 import { Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import { Callout } from 'nextra/components'
 
 # Number Format
 
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
 
 The number format plugin provides the formatting function of numbers in cells, including the number of decimal places, thousands separator, currency symbol, etc.
+
+<Callout type="warning" emoji=" 🚨 ">
+The **DBNum syntax** is not supported.
+</Callout>
 
 ## Installation
 

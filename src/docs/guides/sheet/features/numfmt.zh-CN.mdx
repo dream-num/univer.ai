@@ -1,11 +1,16 @@
 import { Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import { Callout } from 'nextra/components'
 
 # 数字格式
 
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
 
 数字格式插件提供了对单元格中数字的格式化功能，包括数字的小数位数、千分位分隔符、货币符号等。
+
+<Callout type="warning" emoji=" 🚨 ">
+不支持 **DBNum** 语法
+</Callout>
 
 ## 安装
 
@@ -52,3 +57,4 @@ const univer = new Univer({
 ```typescript
 univer.registerPlugin(UniverSheetsNumfmtPlugin);
 ```
+
