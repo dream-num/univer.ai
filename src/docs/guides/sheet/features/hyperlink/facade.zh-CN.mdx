@@ -1,0 +1,74 @@
+import { Tabs } from 'nextra/components'
+import VersionBadge from '@/components/VersionBadge'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# 超链接 Facade API <VersionBadge version="0.2.14+" />
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+[demo](https://stackblitz.com/edit/awesome-univer-sheets-vite-demo-bsmejh?file=src%2Fmain.ts%3AL277-L277)
+
+## 构建/解析/跳转
+
+```typescript
+import { FUniver } from '@univerjs/facade';
+
+const univerAPI = FUniver.newAPI(univer);
+
+const workbook = univerAPI.getActiveWorkbook();
+const sheet = workbook.getActiveSheet();
+const range = sheet.getRange(0, 0, 1, 1);
+
+// 创建一个链接，跳转到子表
+// 返回的链接: `#gid=sheetId`
+const sheetLink = workbook.createSheetHyperlink(sheet.getSheetId());
+
+// 创建一个链接，跳转到range或者cell
+// 返回的链接: `#gid=sheetId&range=A1`
+const rangeLink = workbook.createSheetHyperlink(sheet.getSheetId(), range.getRange());
+// 或者
+const rangeLink = workbook.createSheetHyperlink(
+    sheet.getSheetId(),
+    {
+        startRow: 0,
+        endRow: 0,
+        startColumn: 0,
+        endColumn: 0
+    }
+);
+
+// 解析链接，返回的信息包括link的name、hanlder、type
+const linkInfo = workbook.parseSheetHyperlink('#gid=sheet&range=A1');
+
+// 跳转到链接
+linkInfo.handler();
+
+// 或者
+workbook.navigateToSheetHyperlink('#gid=sheet&range=A1');
+```
+
+## 在单元格上操作超链接
+```typescript
+import { FUniver } from '@univerjs/facade';
+
+const univerAPI = FUniver.newAPI(univer);
+
+const workbook = univerAPI.getActiveWorkbook();
+const sheet = workbook.getActiveSheet();
+const range = sheet.getRange(0, 0, 1, 1);
+
+// 添加一个链接
+const url = workbook.createSheetHyperlink(sheet.getSheetId());
+const label = '123';
+// 如果当前cell不为空，label也可以不传
+await range.setHyperLink(url, label);
+
+// 查询当前cell的超链接
+const links = range.getHyperLinks();
+
+// 更新超链接
+range.updateHyperLink(linkId, url, label);
+
+// 取消超链接
+range.cancelHyperLink(linkId);
+```
