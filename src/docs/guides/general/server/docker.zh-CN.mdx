@@ -206,7 +206,7 @@ HOST_GRAFANA_PORT=13000
 
 4. 启动/重启服务：`bash run.sh`。
 
-### 怎样修改 S3 配置？ <a id="s3-config"></a>
+### 怎样修改 S3 配置以使用自己的组件？ <a id="s3-config"></a>
 
 1. 更新 `.env` 文件，修改 S3 对应的配置。
 ```shell
@@ -226,7 +226,9 @@ S3_DEFAULT_BUCKET=univer
 - `S3_ENDPOINT_PUBLIC`：公网地址，用于下载文件。
 - `S3_DEFAULT_BUCKET`：s3 存储桶，需要在启动 univer 服务前先创建好。
 
-2. 启动/重启服务：`bash run.sh`。
+2. 在 `docker-compose.yaml` 文件中删除掉 `univer-minio` 服务，并删除掉其他服务中 `depends_on` 的依赖。
+
+3. 启动/重启服务：`bash run.sh`。
 
 ### 访问 8000 端口响应 `404 page not found`
 
@@ -249,3 +251,44 @@ server:
 
 - “*”：允许所有域名跨域，但不支持授权头信息比如 authorization、cookie。
 - “你自定义的源”：例如 http://localhost:3010，支持授权头信息。
+
+### 如何修改 redis 配置以使用自己的组件？  <a id="redis-config"></a>
+
+1. 更新 `.env` 文件，设置对应的配置：
+```shell
+REDIS_ADDR=univer-redis:6379
+REDIS_USERNAME=
+REDIS_PASSWORD=
+REDIS_DB=0
+```
+- REDIS_ADDR：redis 节点地址，如果使用 redis 集群，请使用逗号分开多个地址，例如 `REDIS_ADDR=192.168.1.5:6001,192.168.1.5:6002,192.168.1.5:6003,192.168.1.5:6004`
+- REDIS_DB: 如果使用了 redis 集群，该值只支持 `0`
+
+2. 在 `docker-compose.yaml` 文件中删除掉 `univer-redis` 服务，并删除掉其他服务中 `depends_on` 的依赖。
+
+3. 启动/重启服务：`bash run.sh`
+
+### 如何修改 rabbitmq 配置以使用自己的组件？  <a id="rabbitmq-config"></a>
+
+1. 更新 `.env` 文件，设置对应的配置：
+```shell
+# 单节点配置
+RABBITMQ_HOST=univer-rabbitmq
+RABBITMQ_PORT=5672
+RABBITMQ_HTTPPORT=15672
+RABBITMQ_USERNAME=guest
+RABBITMQ_PASSWORD=guest
+
+# 多节点配置
+RABBITMQ_CLUSTER_ENABLED=false
+RABBITMQ_CLUSTER_USERNAME=
+RABBITMQ_CLUSTER_PASSWORD=
+RABBITMQ_CLUSTER_ADDR=
+RABBITMQ_CLUSTER_VHOST=/
+RABBITMQ_CLUSTER_SCHEMA=amqp
+```
+- RABBITMQ_CLUSTER_ADDR：使用逗号分开多个地址，例如：`RABBITMQ_CLUSTER_ADDR=192.168.1.2:5672,192.168.1.5:5672,192.168.1.7:5672`
+
+2. 在 `docker-compose.yaml` 文件中删除掉 `univer-rabbitmq` 服务，并删除掉其他服务中 `depends_on` 的依赖。
+
+3. 启动/重启服务：`bash run.sh`
