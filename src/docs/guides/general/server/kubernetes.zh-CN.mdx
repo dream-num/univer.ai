@@ -50,6 +50,13 @@ helm version
   kubectl get pods
   ```
 
+  3. 部署可观测性组件（可选）：
+  ```bash
+  helm upgrade --install -n univer-observability --create-namespace \
+      --set global.univerNamespace="univer" \
+      univer-observability oci://univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/helm-charts/univer-observability
+  ```
+
   ### 验证部署
 
   ```bash
