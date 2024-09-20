@@ -224,7 +224,7 @@ import { Callout } from 'nextra/components'
               UniverCollaborationClient,
               UniverSheetsThreadComment,
               UniverSheetsFormula: { UniverSheetsFormulaPlugin },
-              UniverExchangeClient,
+              UniverExchangeClient: { UniverExchangeClientPlugin },
               UniverSheetsExchangeClient: { UniverSheetsExchangeClientPlugin },
             } = window
 
@@ -290,22 +290,17 @@ import { Callout } from 'nextra/components'
               overrides: [[IThreadCommentMentionDataService, { useClass: CustomMentionDataService }]],
             });
 
-            // 获取配置服务
-            const injector = univer.__getInjector();
-            const configService = injector.get(UniverCore.IConfigService);
-
-            // 配置协同、打印、交换的服务端地址
-            const { SNAPSHOT_SERVER_URL_KEY, COLLAB_SUBMIT_CHANGESET_URL_KEY, COLLAB_WEB_SOCKET_URL_KEY, AUTHZ_URL_KEY, SEND_CHANGESET_TIMEOUT_KEY } = UniverCollaborationClient;
-            configService.setConfig(AUTHZ_URL_KEY, `http://${universerEndpoint}/universer-api/authz`);
-            configService.setConfig(SNAPSHOT_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/snapshot`);
-            configService.setConfig(COLLAB_SUBMIT_CHANGESET_URL_KEY, `http://${universerEndpoint}/universer-api/comb`);
-            configService.setConfig(COLLAB_WEB_SOCKET_URL_KEY, `ws://${universerEndpoint}/universer-api/comb/connect`);
-            // 如果将 `SEND_CHANGESET_TIMEOUT_KEY` 设置更小，那么协作的变更会更快的同步到其他用户，但是可能会增加服务器的负载
-            configService.setConfig(SEND_CHANGESET_TIMEOUT_KEY, 200) // optional
-
             // 注册协同插件
             univer.registerPlugin(UniverCollaboration.UniverCollaborationPlugin);
-            univer.registerPlugin(UniverCollaborationClient.UniverCollaborationClientPlugin);
+            univer.registerPlugin(UniverCollaborationClient.UniverCollaborationClientPlugin, {
+              authzUrl: `http://${universerEndpoint}/universer-api/authz`,
+              snapshotServerUrl: `http://${universerEndpoint}/universer-api/snapshot`,
+              collabSubmitChangesetUrl: `http://${universerEndpoint}/universer-api/comb`,
+              collabWebSocketUrl: `http://${universerEndpoint}/universer-api/comb/connect`,
+              // 如果你使用了导入导出插件，需要配置以下参数
+              uploadFileServerUrl: `http://${universerEndpoint}/universer-api/stream/file/upload`,
+              signUrlServerUrl: `http://${universerEndpoint}/universer-api/file/{fileID}/sign-url`,
+            });
 
             // 注册实时共享插件
             univer.registerPlugin(UniverLiveShare.UniverLiveSharePlugin)
@@ -313,15 +308,14 @@ import { Callout } from 'nextra/components'
             // 注册打印插件
             univer.registerPlugin(UniverSheetsPrint.UniverSheetsPrintPlugin)
 
-            // 配置导入导出的服务端地址
-            const { EXCHANGE_UPLOAD_FILE_SERVER_URL_KEY, EXCHANGE_IMPORT_SERVER_URL_KEY, EXCHANGE_EXPORT_SERVER_URL_KEY, EXCHANGE_GET_TASK_SERVER_URL_KEY, EXCHANGE_SIGN_URL_SERVER_URL_KEY } = UniverExchangeClient;
-            configService.setConfig(EXCHANGE_UPLOAD_FILE_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/stream/file/upload`);
-            configService.setConfig(EXCHANGE_IMPORT_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/exchange/{type}/import`);
-            configService.setConfig(EXCHANGE_EXPORT_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/exchange/{type}/export`);
-            configService.setConfig(EXCHANGE_GET_TASK_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/exchange/task/{taskID}`);
-            configService.setConfig(EXCHANGE_SIGN_URL_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/file/{fileID}/sign-url`);
-
             // 注册导入导出插件
+            univer.registerPlugin(UniverExchangeClientPlugin, {
+              uploadFileServerUrl: `http://${universerEndpoint}/universer-api/stream/file/upload`,
+              importServerUrl: `http://${universerEndpoint}/universer-api/exchange/{type}/import`,
+              exportServerUrl: `http://${universerEndpoint}/universer-api/exchange/{type}/export`,
+              getTaskServerUrl: `http://${universerEndpoint}/universer-api/exchange/task/{taskID}`,
+              signUrlServerUrl: `http://${universerEndpoint}/universer-api/file/{fileID}/sign-url`,
+            })
             univer.registerPlugin(UniverSheetsExchangeClientPlugin)
           }
         </script>

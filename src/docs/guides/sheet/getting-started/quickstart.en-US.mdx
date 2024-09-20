@@ -224,7 +224,7 @@ Of course, you may want more than just the basics. If you're looking to add feat
               UniverCollaborationClient,
               UniverSheetsThreadComment,
               UniverSheetsFormula: { UniverSheetsFormulaPlugin },
-              UniverExchangeClient,
+              UniverExchangeClient: { UniverExchangeClientPlugin },
               UniverSheetsExchangeClient: { UniverSheetsExchangeClientPlugin },
             } = window
 
@@ -290,24 +290,18 @@ Of course, you may want more than just the basics. If you're looking to add feat
               overrides: [[IThreadCommentMentionDataService, { useClass: CustomMentionDataService }]],
             });
 
-            //   pro
-            const injector = univer.__getInjector();
-            const configService = injector.get(UniverCore.IConfigService);
-
-            // debug via reverse proxy
-            const { SNAPSHOT_SERVER_URL_KEY, COLLAB_SUBMIT_CHANGESET_URL_KEY, COLLAB_WEB_SOCKET_URL_KEY, AUTHZ_URL_KEY, SEND_CHANGESET_TIMEOUT_KEY } = UniverCollaborationClient;
-
-            // config collaboration endpoint
-            configService.setConfig(AUTHZ_URL_KEY, `http://${universerEndpoint}/universer-api/authz`);
-            configService.setConfig(SNAPSHOT_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/snapshot`);
-            configService.setConfig(COLLAB_SUBMIT_CHANGESET_URL_KEY, `http://${universerEndpoint}/universer-api/comb`);
-            configService.setConfig(COLLAB_WEB_SOCKET_URL_KEY, `ws://${universerEndpoint}/universer-api/comb/connect`);
-            // Set `SEND_CHANGESET_TIMEOUT_KEY` to a smaller value will make collaborative changes sync faster to other users, but it will increase the server load.
-            configService.setConfig(SEND_CHANGESET_TIMEOUT_KEY, 200) // optional
-
             // collaboration
             univer.registerPlugin(UniverCollaboration.UniverCollaborationPlugin);
-            univer.registerPlugin(UniverCollaborationClient.UniverCollaborationClientPlugin);
+            univer.registerPlugin(UniverCollaborationClient.UniverCollaborationClientPlugin, {
+              authzUrl: `http://${universerEndpoint}/universer-api/authz`,
+              snapshotServerUrl: `http://${universerEndpoint}/universer-api/snapshot`,
+              collabSubmitChangesetUrl: `http://${universerEndpoint}/universer-api/comb`,
+              collabWebSocketUrl: `http://${universerEndpoint}/universer-api/comb/connect`,
+              // If you use the `@univerjs/exchange-client`, you need to configure the following parameters
+              uploadFileServerUrl: `http://${universerEndpoint}/universer-api/stream/file/upload`,
+              signUrlServerUrl: `http://${universerEndpoint}/universer-api/file/{fileID}/sign-url`,
+
+            });
 
             // live share
             univer.registerPlugin(UniverLiveShare.UniverLiveSharePlugin)
@@ -315,15 +309,14 @@ Of course, you may want more than just the basics. If you're looking to add feat
             // print
             univer.registerPlugin(UniverSheetsPrint.UniverSheetsPrintPlugin)
 
-            // config import & export endpoint
-            const { EXCHANGE_UPLOAD_FILE_SERVER_URL_KEY, EXCHANGE_IMPORT_SERVER_URL_KEY, EXCHANGE_EXPORT_SERVER_URL_KEY, EXCHANGE_GET_TASK_SERVER_URL_KEY, EXCHANGE_SIGN_URL_SERVER_URL_KEY } = UniverExchangeClient;
-            configService.setConfig(EXCHANGE_UPLOAD_FILE_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/stream/file/upload`);
-            configService.setConfig(EXCHANGE_IMPORT_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/exchange/{type}/import`);
-            configService.setConfig(EXCHANGE_EXPORT_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/exchange/{type}/export`);
-            configService.setConfig(EXCHANGE_GET_TASK_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/exchange/task/{taskID}`);
-            configService.setConfig(EXCHANGE_SIGN_URL_SERVER_URL_KEY, `http://${universerEndpoint}/universer-api/file/{fileID}/sign-url`);
-
             // import & export
+            univer.registerPlugin(UniverExchangeClientPlugin, {
+              uploadFileServerUrl: `http://${universerEndpoint}/universer-api/stream/file/upload`,
+              importServerUrl: `http://${universerEndpoint}/universer-api/exchange/{type}/import`,
+              exportServerUrl: `http://${universerEndpoint}/universer-api/exchange/{type}/export`,
+              getTaskServerUrl: `http://${universerEndpoint}/universer-api/exchange/task/{taskID}`,
+              signUrlServerUrl: `http://${universerEndpoint}/universer-api/file/{fileID}/sign-url`,
+            })
             univer.registerPlugin(UniverSheetsExchangeClientPlugin)
           }
         </script>

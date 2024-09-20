@@ -68,23 +68,12 @@ const univer = new Univer({
 });
 
 univer.registerPlugin(UniverCollaborationPlugin);
-univer.registerPlugin(UniverCollaborationClientPlugin);
-```
-
-## Configuration
-
-If the Collaborative interface has not changed, you do not need to configure it. If there are changes, you can configure the interface address as follows:
-
-```typescript
-import { IConfigService } from '@univerjs/core'
-import { AUTHZ_URL_KEY, COLLAB_SUBMIT_CHANGESET_URL_KEY, COLLAB_WEB_SOCKET_URL_KEY, SNAPSHOT_SERVER_URL_KEY } from '@univerjs-pro/collaboration-client'
-
-const injector = univer.__getInjector();
-const configService = injector.get(IConfigService);
-configService.setConfig(AUTHZ_URL_KEY, 'http://localhost:3010/universer-api/authz')
-configService.setConfig(SNAPSHOT_SERVER_URL_KEY, 'http://localhost:3010/universer-api/snapshot')
-configService.setConfig(COLLAB_SUBMIT_CHANGESET_URL_KEY, 'http://localhost:3010/universer-api/comb')
-configService.setConfig(COLLAB_WEB_SOCKET_URL_KEY, 'ws://localhost:3010/universer-api/comb/connect')
+univer.registerPlugin(UniverCollaborationClientPlugin, {
+  authzUrl: 'http://localhost:3010/universer-api/authz',
+  snapshotServerUrl: 'http://localhost:3010/universer-api/snapshot',
+  collabSubmitChangesetUrl: 'http://localhost:3010/universer-api/comb',
+  collabWebSocketUrl: 'ws://localhost:3010/universer-api/comb/connect',
+});
 ```
 
 ## Automatically Load Data
