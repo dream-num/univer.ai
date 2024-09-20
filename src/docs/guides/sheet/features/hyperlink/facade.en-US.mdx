@@ -1,0 +1,74 @@
+import { Tabs } from 'nextra/components'
+import VersionBadge from '@/components/VersionBadge'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# Data Validation Facade API <VersionBadge version="0.2.15+" />
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+[demo](https://stackblitz.com/edit/awesome-univer-sheets-vite-demo-bsmejh?file=src%2Fmain.ts%3AL277-L277)
+
+## Build/Parse/Jump HyperLink
+
+```typescript
+import { FUniver } from '@univerjs/facade';
+
+const univerAPI = FUniver.newAPI(univer);
+
+const workbook = univerAPI.getActiveWorkbook();
+const sheet = workbook.getActiveSheet();
+const range = sheet.getRange(0, 0, 1, 1);
+
+// Create a link to jump to a sheet
+// The returned link: `#gid=sheetId`
+const sheetLink = workbook.createSheetHyperlink(sheet.getSheetId());
+
+// Create a link to jump to a range or cell
+// The returned link: `#gid=sheetId&range=A1`
+const rangeLink = workbook.createSheetHyperlink(sheet.getSheetId(), range.getRange());
+// Or
+const rangeLink = workbook.createSheetHyperlink(
+    sheet.getSheetId(),
+    {
+        startRow: 0,
+        endRow: 0,
+        startColumn: 0,
+        endColumn: 0
+    }
+);
+
+// Parse the link, returning information including the link's name, handler, and type
+const linkInfo = workbook.parseSheetHyperlink('#gid=sheet&range=A1');
+
+// Jump to the link
+linkInfo.handler();
+
+// Or
+workbook.navigateToSheetHyperlink('#gid=sheet&range=A1');
+```
+
+## Manipulating Hyperlinks in Cells
+```typescript
+import { FUniver } from '@univerjs/facade';
+
+const univerAPI = FUniver.newAPI(univer);
+
+const workbook = univerAPI.getActiveWorkbook();
+const sheet = workbook.getActiveSheet();
+const range = sheet.getRange(0, 0, 1, 1);
+
+// Add a link
+const url = workbook.createSheetHyperlink(sheet.getSheetId());
+const label = '123';
+// If the current cell is not empty, the label can be omitted
+await range.setHyperLink(url, label);
+
+// Query the hyperlink in the current cell
+const links = range.getHyperLinks();
+
+// Update the hyperlink
+range.updateHyperLink(linkId, url, label);
+
+// Remove the hyperlink
+range.cancelHyperLink(linkId);
+```

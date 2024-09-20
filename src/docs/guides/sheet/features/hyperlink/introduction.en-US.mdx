@@ -2,7 +2,7 @@ import { Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 import Sandbox from '@/components/Sandbox'
 
-import entryFile from './hyperlink/demo-1/index.txt'
+import entryFile from './demo-1/index.txt'
 
 # HyperLink
 
@@ -10,7 +10,9 @@ import entryFile from './hyperlink/demo-1/index.txt'
 
 <Sandbox entryFile={entryFile} />
 
-Insert hyperlinks, support click to jump to specified link, cell, or worksheet.
+1.	The hyperlink feature allows jumping to worksheets and cells, supporting adding, updating, parsing, and removing links.
+2.	Supports inserting hyperlinks within rich text.
+3.	Hyperlinks support sub-sheets, ranges/cells, defined names, and standard links (http, mailto, etc.).
 
 ## Installation
 
@@ -58,32 +60,4 @@ const univer = new Univer({
 ```typescript
 univer.registerPlugin(UniverSheetsHyperLinkPlugin);
 univer.registerPlugin(UniverSheetsHyperLinkUIPlugin);
-```
-
-## API
-
-The full api please refer to [@univerjs/sheets-hyper-link-ui](/typedoc/@univerjs/sheets-hyper-link-ui/README)
-
-### Using Command
-
-```typescript
-// All commands
-import { AddHyperLinkCommand, type IAddHyperLinkCommandParams } from '@univerjs/sheets-hyper-link-ui';
-import { RemoveHyperLinkCommand, CancelHyperLinkCommand, type IRemoveHyperLinkCommandParams } from '@univerjs/sheets-hyper-link-ui';
-import { UpdateHyperLinkCommand, type IUpdateHyperLinkCommandParams } from '@univerjs/sheets-hyper-link-ui';
-
-// Add hyperlink by command
-const commandService = univer.__getInjector().get(ICommandService);
-
-commandService.executeCommand(AddHyperLinkCommand.id, {
-  unitId: 'unitId',
-  subUnitId: 'subUnitId',
-  link: {
-    // comment content
-    payload: 'https://univer.ai',
-    id: '1',
-    row: 0,
-    column: 0
-  },
-} as IAddCommentCommandParams);
 ```
