@@ -2,19 +2,19 @@ import { Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 import Sandbox from '@/components/Sandbox'
 
-import entryFile from './demo-1/index.txt'
+import entryFile from './hyperlink/demo-1/index.txt'
 
-# 超链接
+# HyperLink
 
 <BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC]} value={UniverTypes.SHEET} />
 
 <Sandbox entryFile={entryFile} />
 
-1. 超链接功能可跳转工作表、单元格，支持添加、更新、解析和删除链接。
-2. 支持富文本内插入超链接。
-3. 超链接支持 子表、range/cell、defined-name、标准链接(http,mailto等)。
+1.	The hyperlink feature allows jumping to worksheets and cells, supporting adding, updating, parsing, and removing links.
+2.	Supports inserting hyperlinks within rich text.
+3.	Hyperlinks support sub-sheets, ranges/cells, defined names, and standard links (http, mailto, etc.).
 
-## 安装
+## Installation
 
 <Tabs items={['pnpm', 'npm']}>
   <Tabs.Tab label="pnpm">
@@ -29,7 +29,7 @@ import entryFile from './demo-1/index.txt'
   </Tabs.Tab>
 </Tabs>
 
-## 引入
+## Import
 
 ```typescript
 import '@univerjs/sheets-hyper-link-ui/lib/index.css';
@@ -38,24 +38,24 @@ import { UniverSheetsHyperLinkPlugin } from '@univerjs/sheets-hyper-link';
 import { UniverSheetsHyperLinkUIPlugin } from '@univerjs/sheets-hyper-link-ui';
 ```
 
-## 国际化
+## Internationalization
 
 ```typescript
 import { LocaleType, Tools } from '@univerjs/core';
-import SheetsHyperLinkUIZhCN from '@univerjs/sheets-hyper-link-ui/locale/zh-CN';
+import SheetsHyperLinkUIEnUS from '@univerjs/sheets-hyper-link-ui/locale/en-US';
 
 const univer = new Univer({
   theme: defaultTheme,
-  locale: LocaleType.ZH_CN,
+  locale: LocaleType.EN_US,
   locales: {
-    [LocaleType.ZH_CN]: Tools.deepMerge(
-      SheetsHyperLinkUIZhCN
+    [LocaleType.EN_US]: Tools.deepMerge(
+      SheetsHyperLinkUIEnUS
     ),
   },
 });
 ```
 
-## 注册
+## Register
 
 ```typescript
 univer.registerPlugin(UniverSheetsHyperLinkPlugin);
