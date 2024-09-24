@@ -107,7 +107,7 @@ permission.removeWorksheetPermission(unitId, subUnitId);
 
 ```typescript
 const permission = univerAPI.getPermission();
-const res = await permission.addRangeBasePermission(unitId, subUnitId, ranges);
+const res = await permission.addRangeBaseProtection(unitId, subUnitId, ranges);
 // 这里的返回区别于工作表权限，因为一个子表中可能会有多个区域保护，所以 ruleId 是用来存储该权限规则的唯一 id，permissionId 是用来拼接权限点位的。
 const { permissionId, ruleId } = res;
 permission.setRangeProtectionPermissionPoint(unitId, subUnitId, permissionId, RangeProtectionPermissionEditPoint, false);
@@ -165,6 +165,12 @@ DeleteRangeProtectionMutationParams {
 ```typescript
 const permission = univerAPI.getPermission();
 permission.removeRangeProtection(unitId, subUnitId, ruleIds);
+```
+
+### 如何去除权限弹窗
+```typescript
+const permission = univerAPI.getPermission();
+permission.setPermissionDialogVisible(false);
 ```
 
 ## 拓展使用
