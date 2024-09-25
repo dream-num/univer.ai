@@ -61,5 +61,10 @@ const univer = new Univer({
 
 ```typescript
 univer.registerPlugin(UniverDataValidationPlugin);
-univer.registerPlugin(UniverSheetsDataValidationPlugin);
+
+univer.registerPlugin(UniverSheetsDataValidationPlugin, {
+  // 是否在下拉菜单中显示编辑按钮
+  // version >= 0.2.16
+  showEditOnDropdown: true
+});
 ```

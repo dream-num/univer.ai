@@ -61,5 +61,10 @@ const univer = new Univer({
 
 ```typescript
 univer.registerPlugin(UniverDataValidationPlugin);
-univer.registerPlugin(UniverSheetsDataValidationPlugin);
+
+univer.registerPlugin(UniverSheetsDataValidationPlugin, {
+  // Whether to show the edit button in the dropdown menu
+  // version >= 0.2.16
+  showEditOnDropdown: true
+});
 ```
