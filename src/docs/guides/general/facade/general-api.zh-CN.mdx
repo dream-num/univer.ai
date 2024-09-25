@@ -149,9 +149,9 @@ sheet.setActiveRange(sourceRange)
 univerAPI.copy(sourceRange)
 // 获取 A2 作为粘贴目标
 var targetRange = sheet.getRange(0,1)
-//  设置 A2 为激活选区
+// 设置 A2 为激活选区
 sheet.setActiveRange(targetRange)
-// 粘贴
+// 将剪贴板内容粘贴到当前选区，A2 的值变为 "Hello, Univer!"
 univerAPI.paste()
 ```
 
