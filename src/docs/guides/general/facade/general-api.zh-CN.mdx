@@ -1,5 +1,6 @@
 import { Callout } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import VersionBadge from '@/components/VersionBadge'
 
 # 通用 API
 
@@ -121,6 +122,49 @@ univerAPI.executeCommand('univer.command.undo')
 
 ```ts
 univerAPI.executeCommand('univer.command.redo')
+```
+
+## 系统剪切板
+
+从 `0.2.12` 开始，使用 [`FUniver.copy()`](https://univer.ai/typedoc/@univerjs/facade/classes/FUniver#copy) 和 [`FUniver.paste()`](https://univer.ai/typedoc/@univerjs/facade/classes/FUniver#paste) 方法读取和写入系统剪贴板。
+
+<Callout type="info" emoji="ℹ️">
+  复制与粘贴依赖浏览器原生 API ，当[环境条件或者权限](https://developer.mozilla.org/zh-CN/docs/Web/API/Clipboard/writeText)不满足时复制与粘贴功能将无法工作。
+</Callout>
+
+
+示例: Sheet 区域的复制与粘贴 <VersionBadge version="0.2.12+" />
+
+该示例可在 [Univer Sheet Playground](https://univer.ai/examples/sheets-uniscript) 中运行。
+
+```ts
+var sheet = univerAPI.getActiveWorkbook().getActiveSheet()
+// 获取 A1 作为复制来源
+var sourceRange = sheet.getRange(0,0)
+// 设置 A1 的值
+sourceRange.setValue('Hello, Univer!')
+// 设置 A1 为激活选区
+sheet.setActiveRange(sourceRange)
+// 复制 A1 的值到系统剪贴板
+univerAPI.copy(sourceRange)
+// 获取 A2 作为粘贴目标
+var targetRange = sheet.getRange(0,1)
+//  设置 A2 为激活选区
+sheet.setActiveRange(targetRange)
+// 粘贴
+univerAPI.paste()
+```
+
+
+`0.2.12` 之前的版本，可以使用[命令系统](#命令系统)实现调用剪贴板功能：
+
+```ts
+import { CopyCommand, PasteCommand } from '@univerjs/ui';
+
+// 复制
+univerAPI.executeCommand(CopyCommand.id)
+// 粘贴
+univerAPI.executeCommand(PasteCommand.id)
 ```
 
 ## UI
