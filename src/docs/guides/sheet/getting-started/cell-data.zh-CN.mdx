@@ -432,7 +432,9 @@ cellData 的结构如下
 
 ### 公式 ID
 
-`cellData.si` 是一个字符串，表示公式 ID。Univer Sheet 支持对公式做引用优化，单元格中用 si 关联上当前公式后，其他单元格可以通过 si 引用到当前公式。
+`cellData.si` 是一个字符串，表示公式 ID。Univer Sheet 支持对公式做引用优化，单元格中用 `si` 关联上当前公式后，其他单元格可以通过 `si` 引用到当前公式。
+
+可以通过 Facade API `range.getFormulas()` 来获取实际的公式，规则是取 `si` 对应的公式 `f` 后，根据当前单元格位置到引用位置的偏移量来计算实际的公式。
 
 ```typescript
 // IWorksheetData

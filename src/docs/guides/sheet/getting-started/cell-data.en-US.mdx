@@ -434,6 +434,8 @@ If the cell is a boolean type, the value of `cellData.v` is stored as `0` or `1`
 
 `cellData.si` is a string that represents the formula ID. Univer Sheet supports reference optimization for formulas. After the current formula is associated with `si` in the cell, other cells can refer to the current formula through `si`.
 
+The actual formula can be obtained through the Facade API `range.getFormulas()`. The rule is to get the formula `f` corresponding to `si`, and then calculate the actual formula based on the offset from the current cell position to the reference position.
+
 ```typescript
 // IWorksheetData
 {
