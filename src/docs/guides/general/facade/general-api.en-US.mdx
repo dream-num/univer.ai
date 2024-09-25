@@ -1,5 +1,6 @@
 import { Callout } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import VersionBadge from '@/components/VersionBadge'
 
 # General API
 
@@ -121,6 +122,47 @@ univerAPI.executeCommand('univer.command.undo')
 
 ```ts
 univerAPI.executeCommand('univer.command.redo')
+```
+
+## System Clipboard
+
+Starting from version `0.2.12`, use the [`FUniver.copy()`](https://univer.ai/typedoc/@univerjs/facade/classes/FUniver#copy) and [`FUniver.paste()`](https://univer.ai/typedoc/@univerjs/facade/classes/FUniver#paste) methods to read from and write to the system clipboard.
+
+<Callout type="info" emoji="ℹ️">
+  Copy and paste rely on the browser's native API. When environmental conditions or permissions are insufficient, the copy and paste functions will not work. For more information, see [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/writeText).
+</Callout>
+
+Example: Copy and paste in a Sheet Range <VersionBadge version="0.2.12+" />
+
+This example can be run in the [Sheet UniScript Playground](https://univer.ai/examples/sheets-uniscript).
+
+```ts
+var sheet = univerAPI.getActiveWorkbook().getActiveSheet()
+// Get A1 as the source for copying
+var sourceRange = sheet.getRange(0,0)
+// Set the value of A1
+sourceRange.setValue('Hello, Univer!')
+// Set A1 as the active selection
+sheet.setActiveRange(sourceRange)
+// Copy the value of A1 to the system clipboard
+univerAPI.copy(sourceRange)
+// Get A2 as the paste target
+var targetRange = sheet.getRange(0,1)
+// Set A2 as the active selection
+sheet.setActiveRange(targetRange)
+// Paste the clipboard content to the current selection, and the value of A2 becomes "Hello, Univer!"
+univerAPI.paste()
+```
+
+For versions before `0.2.12`, you can use the [commands-api](#commands-api) to implement clipboard functionality:
+
+```ts
+import { CopyCommand, PasteCommand } from '@univerjs/ui';
+
+// Copy
+univerAPI.executeCommand(CopyCommand.id)
+// Paste
+univerAPI.executeCommand(PasteCommand.id)
 ```
 
 ## UI
