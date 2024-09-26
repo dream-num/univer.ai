@@ -910,17 +910,19 @@ To export via API, use the [Server Version of the Facade API](/guides/sheet/faca
 
 #### Export XLSX via `unitId`
 
-Use the API `exportXLSXByUnitId` to pass in the `unitId` parameter and return a File object.
+Use the API `exportXLSXByUnitId` to pass in the `unitId` parameter and return an `File` object. You can use `downloadFile` to download the file or process it further.
 
 ```typescript
+import { downloadFile } from '@univerjs-pro/exchange-client';
 univerAPI.exportXLSXByUnitId(unitId).then((file)=>{
-  console.log(file)
+  console.log(file);
+  downloadFile(file, 'univer', 'xlsx'); // download file
 })
 ```
 
 ### Export XLSX via Workbook Data
 
-Use the API `exportXLSXBySnapshot` to pass in the table data in the `IWorkbookData` format and return a File object.
+Use the API `exportXLSXBySnapshot` to pass in the table data in the `IWorkbookData` format and return a `File` object.
 
 You can refer to [Getting Workbook Data](/guides/sheet/facade/sheet-api#getting-workbook-data) to get the data in the `IWorkbookData` format.
 
