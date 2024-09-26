@@ -39,6 +39,7 @@ Univer 通过插件 + 后端服务的方式实现了 Excel XLSX 格式文件的�
 ```typescript
 import '@univerjs-pro/exchange-client/lib/index.css';
 
+import { UniverExchangeClientPlugin } from '@univerjs-pro/exchange-client';
 import { UniverSheetsExchangeClientPlugin } from '@univerjs-pro/sheets-exchange-client';
 ```
 
@@ -62,24 +63,14 @@ const univer = new Univer({
 ## 注册
 
 ```typescript
+univer.registerPlugin(UniverExchangeClientPlugin, {
+  uploadFileServerUrl: `http://localhost:3010/universer-api/stream/file/upload`,
+  importServerUrl: `http://localhost:3010/universer-api/exchange/{type}/import`,
+  exportServerUrl: `http://localhost:3010/universer-api/exchange/{type}/export`,
+  getTaskServerUrl: `http://localhost:3010/universer-api/exchange/task/{taskID}`,
+  signUrlServerUrl: `http://localhost:3010/universer-api/file/{fileID}/sign-url`,
+});
 univer.registerPlugin(UniverSheetsExchangeClientPlugin);
-```
-
-## 配置 <a id="configuration"></a>
-
-如果导入导出的接口没有变动，可以不用配置，如果有变动，可以通过以下方式配置接口地址：
-
-```typescript
-import { IConfigService } from '@univerjs/core'
-import { EXCHANGE_UPLOAD_FILE_SERVER_URL_KEY, EXCHANGE_IMPORT_SERVER_URL_KEY, EXCHANGE_EXPORT_SERVER_URL_KEY, EXCHANGE_GET_TASK_SERVER_URL_KEY, EXCHANGE_SIGN_URL_SERVER_URL_KEY } from '@univerjs-pro/exchange-client';
-
-const injector = univer.__getInjector();
-const configService = injector.get(IConfigService);
-configService.setConfig(EXCHANGE_UPLOAD_FILE_SERVER_URL_KEY, `http://localhost:3010/universer-api/stream/file/upload`);
-configService.setConfig(EXCHANGE_IMPORT_SERVER_URL_KEY, `http://localhost:3010/universer-api/exchange/{type}/import`);
-configService.setConfig(EXCHANGE_EXPORT_SERVER_URL_KEY, `http://localhost:3010/universer-api/exchange/{type}/export`);
-configService.setConfig(EXCHANGE_GET_TASK_SERVER_URL_KEY, `http://localhost:3010/universer-api/exchange/task/{taskID}`);
-configService.setConfig(EXCHANGE_SIGN_URL_SERVER_URL_KEY, `http://localhost:3010/universer-api/file/{fileID}/sign-url`);
 ```
 
 ## 定制化使用
