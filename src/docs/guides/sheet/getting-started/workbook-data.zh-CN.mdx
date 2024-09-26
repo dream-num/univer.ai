@@ -10,15 +10,15 @@
 
 | 属性 | 类型 | 描述 |
 |----------|------|-------------|
-| id | string | Univer Sheet 的唯一标识符。 |
-| name | string | Univer Sheet 的名称。 |
-| appVersion | string | Univer 模型定义的版本。 |
-| locale | LocaleType | 文档的语言环境。 |
-| styles | Record<string, Nullable<IStyleData>> | 工作簿的样式引用。 |
-| sheetOrder | string[] | 表示工作表顺序的工作表 ID 数组。 |
-| sheets | { [sheetId: string]: Partial<IWorksheetData> } | 包含每个工作表数据的记录。 |
-| resources? | IResources | 其他插件的可选资源。 |
-| rev? | number | 用于协作编辑的修订号（从 1 开始）。*@ignore* |
+| id | `string` | Univer Sheet 的唯一标识符。 |
+| name | `string` | Univer Sheet 的名称。 |
+| appVersion | `string` | Univer 模型定义的版本。 |
+| locale | `LocaleType` | 文档的语言环境。 |
+| styles | `Record<string, Nullable<IStyleData>>` | 工作簿的样式引用。 |
+| sheetOrder | `string[]` | 表示工作表顺序的工作表 ID 数组。 |
+| sheets | `{ [sheetId: string]: Partial<IWorksheetData> }` | 包含每个工作表数据的记录。 |
+| resources? | `IResources` | 其他插件的可选资源。 |
+| rev? | `number` | 用于协作编辑的修订号（从 1 开始）。*@ignore* |
 
 ### 示例
 
@@ -45,23 +45,23 @@ const workbookData: IWorkbookData = {
 
 | 属性 | 类型 | 描述 |
 |----------|------|-------------|
-| id | string | 工作表的唯一标识符。 |
-| name | string | 工作表的名称。 |
-| tabColor | string | 工作表标签的颜色。 |
-| hidden | BooleanNumber | 工作表是否隐藏。默认值：`BooleanNumber.FALSE`。 |
-| freeze | IFreeze | 冻结窗格设置。 |
-| rowCount | number | 总行数。 |
-| columnCount | number | 总列数。 |
-| defaultColumnWidth | number | 列的默认宽度。 |
-| defaultRowHeight | number | 行的默认高度。 |
-| mergeData | IRange[] | 合并单元格范围的数组。 |
-| cellData | IObjectMatrixPrimitiveType<ICellData> | 单元格内容的矩阵。[详情](guides/sheet/getting-started/cell-data) |
-| rowData | IObjectArrayPrimitiveType<Partial<IRowData>> | 行数据对象的数组。 |
-| columnData | IObjectArrayPrimitiveType<Partial<IColumnData>> | 列数据对象的数组。 |
-| rowHeader | { width: number; hidden?: BooleanNumber; } | 行标题配置。 |
-| columnHeader | { height: number; hidden?: BooleanNumber; } | 列标题配置。 |
-| showGridlines | BooleanNumber | 是否显示网格线。 |
-| rightToLeft | BooleanNumber | 工作表是否为从右到左模式。 |
+| id | `string` | 工作表的唯一标识符。 |
+| name | `string` | 工作表的名称。 |
+| tabColor | `string` | 工作表标签的颜色。 |
+| hidden | `BooleanNumber` | 工作表是否隐藏。默认值：`BooleanNumber.FALSE`。 |
+| freeze | `IFreeze` | 冻结窗格设置。 |
+| rowCount | `number` | 总行数。 |
+| columnCount | `number` | 总列数。 |
+| defaultColumnWidth | `number` | 列的默认宽度。 |
+| defaultRowHeight | `number` | 行的默认高度。 |
+| mergeData | `IRange[]` | 合并单元格范围的数组。 |
+| cellData | `IObjectMatrixPrimitiveType<ICellData>` | 单元格内容的矩阵。[详情](guides/sheet/getting-started/cell-data) |
+| rowData | `IObjectArrayPrimitiveType<Partial<IRowData>>` | 行数据对象的数组。 |
+| columnData | `IObjectArrayPrimitiveType<Partial<IColumnData>>` | 列数据对象的数组。 |
+| rowHeader | `{ width: number; hidden?: BooleanNumber; }` | 行标题配置。 |
+| columnHeader | `{ height: number; hidden?: BooleanNumber; }` | 列标题配置。 |
+| showGridlines | `BooleanNumber` | 是否显示网格线。 |
+| rightToLeft | `BooleanNumber` | 工作表是否为从右到左模式。 |
 
 ### 示例
 
