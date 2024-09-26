@@ -1,0 +1,95 @@
+# Univer Sheet 数据结构
+
+本文档描述了 Univer Sheet 中使用的主要数据结构：`IWorkbookData` 和 `IWorksheetData`。
+
+## [IWorkbookData](/typedoc/@univerjs/core/interfaces/IWorkbookData)
+
+`IWorkbookData` 表示 Univer Sheet 中工作簿的快照。
+
+### 属性
+
+| 属性 | 类型 | 描述 |
+|----------|------|-------------|
+| id | `string` | Univer Sheet 的唯一标识符。 |
+| name | `string` | Univer Sheet 的名称。 |
+| appVersion | `string` | Univer 模型定义的版本。 |
+| locale | `LocaleType` | 文档的语言环境。 |
+| styles | `Record<string, Nullable<IStyleData>>` | 工作簿的样式引用。 |
+| sheetOrder | `string[]` | 表示工作表顺序的工作表 ID 数组。 |
+| sheets | `{ [sheetId: string]: Partial<IWorksheetData> }` | 包含每个工作表数据的记录。 |
+| resources? | `IResources` | 其他插件的可选资源。 |
+
+### 示例
+
+```typescript
+const workbookData: IWorkbookData = {
+    id: 'unique-workbook-id',
+    name: '我的工作簿',
+    appVersion: '1.0.0',
+    locale: LocaleType.ZH_CN,
+    styles: { /* 样式定义 */ },
+    sheetOrder: ['sheet1', 'sheet2'],
+    sheets: {
+        sheet1: { /* 工作表数据 */ },
+        sheet2: { /* 工作表数据 */ }
+    }
+};
+```
+
+## [IWorksheetData](/typedoc/@univerjs/core/interfaces/IWorksheetData)
+
+`IWorksheetData` 表示 Univer Sheet 中工作表的快照。
+
+### 属性
+
+| 属性 | 类型 | 描述 |
+|----------|------|-------------|
+| id | `string` | 工作表的唯一标识符。 |
+| name | `string` | 工作表的名称。 |
+| tabColor | `string` | 工作表标签的颜色。 |
+| hidden | `BooleanNumber` | 工作表是否隐藏。默认值：`BooleanNumber.FALSE`。 |
+| freeze | `IFreeze` | 冻结窗格设置。 |
+| rowCount | `number` | 总行数。 |
+| columnCount | `number` | 总列数。 |
+| defaultColumnWidth | `number` | 列的默认宽度。 |
+| defaultRowHeight | `number` | 行的默认高度。 |
+| mergeData | `IRange[]` | 合并单元格范围的数组。 |
+| cellData | `IObjectMatrixPrimitiveType<ICellData>` | 单元格内容的矩阵。[详情](guides/sheet/getting-started/cell-data) |
+| rowData | `IObjectArrayPrimitiveType<Partial<IRowData>>` | 行数据对象的数组。 |
+| columnData | `IObjectArrayPrimitiveType<Partial<IColumnData>>` | 列数据对象的数组。 |
+| rowHeader | `{ width: number; hidden?: BooleanNumber; }` | 行标题配置。 |
+| columnHeader | `{ height: number; hidden?: BooleanNumber; }` | 列标题配置。 |
+| showGridlines | `BooleanNumber` | 是否显示网格线。 |
+| rightToLeft | `BooleanNumber` | 工作表是否为从右到左模式。 |
+
+### 示例
+
+```typescript
+const worksheetData: IWorksheetData = {
+  id: 'sheet1',
+  name: '工作表 1',
+  tabColor: '#FF0000',
+  hidden: BooleanNumber.FALSE,
+  freeze: { xSplit: 1, ySplit: 1, startRow: 1, startColumn: 1 },
+  rowCount: 1000,
+  columnCount: 26,
+  defaultColumnWidth: 100,
+  defaultRowHeight: 25,
+  mergeData: [],
+  cellData: {
+    '0': {
+        '0': {
+            v: 123
+        }
+    }
+  },
+  rowData: [],
+  columnData: [],
+  rowHeader: { width: 40 },
+  columnHeader: { height: 20 },
+  showGridlines: BooleanNumber.TRUE,
+  rightToLeft: BooleanNumber.FALSE
+};
+```
+
+这个结构提供了工作表数据的全面表示，包括布局、内容和显示设置。
