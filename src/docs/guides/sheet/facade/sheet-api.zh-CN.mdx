@@ -582,11 +582,13 @@ univerAPI.onCommandExecuted((command) => {
 
 范围指工作表中的一块矩形区域，有起始行号、起始列号、长宽或者结束行号、结束列号来确定。
 
+表格中的大部分操作都可以通过范围 API 来操作，如设置值、获取值、设置样式、获取样式等。
+
 ### 创建范围
 
 获得一个范围需要知道起始行号、起始列号、长宽。
 
-创建 A1 单元格的范围：
+获取 A1 单元格的范围：
 
 ```typescript
 const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
@@ -594,12 +596,32 @@ const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 const range = sheet.getRange(0, 0, 1, 1);
 ```
 
-创建 A1:B2 的范围：
+获取 A1:B2 的范围：
 
 ```typescript
 const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 const range = sheet.getRange(0, 0, 2, 2);
+```
+
+从 `0.2.15` 开始 `getRange` 支持用 A1 表示法获取范围。
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+// 获取 Sheet1 工作表的 A1:B2 范围
+const range1 = sheet.getRange('Sheet1!A1:B2');
+
+// 获取单个单元格 A1
+const range2 = sheet.getRange('A1');
+
+// 获取 A1:B2 范围
+const range3 = sheet.getRange('A1:B2');
+
+// 获取 A 列的范围
+const range4 = sheet.getRange('A:A');
+
+// 获取第 1 行的范围
+const range5 = sheet.getRange('1:1');
 ```
 
 ### 获取范围数据
