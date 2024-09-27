@@ -580,16 +580,19 @@ univerAPI.onCommandExecuted((command) => {
 
 ## Range
 
-A range refers to a rectangular area in a worksheet, which is determined by the starting row number, starting column number, length, and width, or ending row number, ending column number.
+A range refers to a rectangular area in a worksheet, determined by the starting row number, starting column number, length and width, or ending row number and ending column number.
+
+Most operations in a spreadsheet can be performed through the Range API, such as setting values, getting values, setting styles, getting styles, etc.
 
 ### Create a Range
 
 To get a range you need to know the starting row number, starting column number, length and width.
 
-Create a range of A1 cells:
+Create a range of A1 cell:
 
 ```typescript
 const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
 const range = sheet.getRange(0, 0, 1, 1);
 ```
 
@@ -597,7 +600,28 @@ Creates a range of A1:B2:
 
 ```typescript
 const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
 const range = sheet.getRange(0, 0, 2, 2);
+```
+
+Starting from `0.2.15`, `getRange` supports using A1 notation to get ranges.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+// Get the A1:B2 range on named Sheet1
+const range1 = sheet.getRange('Sheet1!A1:B2');
+
+// Get a single cell A1
+const range2 = sheet.getRange('A1');
+
+// Get the A1:B2 range
+const range3 = sheet.getRange('A1:B2');
+
+// Get the range of column A
+const range4 = sheet.getRange('A:A');
+
+// Get the range of row 1
+const range5 = sheet.getRange('1:1');
 ```
 
 ### Get Range Data
