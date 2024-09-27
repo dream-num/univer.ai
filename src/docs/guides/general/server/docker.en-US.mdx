@@ -94,7 +94,7 @@ If you need to deploy in an offline environment, we also provide an offline inst
   **Method 1:** Start the built-in demo application and visit `http://localhost:3010` to see the results.
 
   ```bash
-  docker run --net=univer-prod --rm --name univer-collaboration-lite -p 3010:3010 univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/univer-collaboration-lite:latest
+  bash run.sh start-demo-ui
   ```
 
   **Method 2:** Set up your own front-end project. [Learn more](/guides/sheet/getting-started/quickstart#install-and-run-the-frontend).
@@ -230,7 +230,7 @@ server:
 `corsAllowOrigins` is a string array, support:
 
 - "*": allow all domain CORS, but not support credential headers like authorization, cookie.
-- [SelfDomainOrigin]: like http://localhost:3010, use domain origin support credential headers.
+- [SelfDomainOrigin]: like `http://localhost:3010`, use domain origin support credential headers.
 
 ### How to change redis config to use self component?  <a id="redis-config"></a>
 

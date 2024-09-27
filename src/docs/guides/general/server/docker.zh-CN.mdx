@@ -91,7 +91,7 @@ Univer 服务默认端口如下：
 
   **方式 1：** 启动内置的演示程序，访问 `http://localhost:3010` 即可查看效果。
   ```bash
-  docker run --net=univer-prod --rm --name univer-collaboration-lite -p 3010:3010 univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/release/univer-collaboration-lite:latest
+  bash run.sh start-demo-ui
   ```
 
   **方式 2：** 自行建立前端工程，[了解更多](/guides/sheet/getting-started/quickstart#install-and-run-the-frontend)。
@@ -250,7 +250,7 @@ server:
 `corsAllowOrigins` 是一个字符串数组，支持：
 
 - “*”：允许所有域名跨域，但不支持授权头信息比如 authorization、cookie。
-- “你自定义的源”：例如 http://localhost:3010，支持授权头信息。
+- “你自定义的源”：例如 `http://localhost:3010`，支持授权头信息。
 
 ### 如何修改 redis 配置以使用自己的组件？  <a id="redis-config"></a>
 
