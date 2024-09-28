@@ -6,6 +6,11 @@ This document describes the main data structures used in Univer Sheet: `IWorkboo
 
 `IWorkbookData` represents the snapshot of a workbook in Univer Sheet.
 
+### Usage
+IWorkbookData is the object used to store data in univer-sheet. It is mainly used for:
+1. [Creating a univer-Sheet using IWorkbookData](/guides/sheet/facade/sheet-api#creating-a-workbook)
+2. [Saving IWorkbookData from univer-Sheet](/guides/sheet/facade/sheet-api#getting-workbook-data)
+
 ### Properties
 
 | Property | Type | Description |
@@ -93,3 +98,102 @@ const worksheetData: IWorksheetData = {
 ```
 
 This structure provides a comprehensive representation of worksheet data, including layout, content, and display settings.
+
+## Full Example
+```typescript
+const workbook: IWorkbookData = {
+  "id": "gyI0JO",
+  "sheetOrder": [
+      "RSfWjJFv4opmE1JaiRj80"
+  ],
+  "name": "",
+  "appVersion": "0.1.11",
+  "locale": "zhCN",
+  "styles": {},
+  "sheets": {
+      "RSfWjJFv4opmE1JaiRj80": {
+          "id": "RSfWjJFv4opmE1JaiRj80",
+          "name": "测试",
+          "tabColor": "",
+          "hidden": 0,
+          "rowCount": 30,
+          "columnCount": 10,
+          "zoomRatio": 1,
+          "freeze": {
+              "startRow": -1,
+              "startColumn": -1,
+              "ySplit": 0,
+              "xSplit": 0
+          },
+          "scrollTop": 0,
+          "scrollLeft": 0,
+          "defaultColumnWidth": 73,
+          "defaultRowHeight": 23,
+          "mergeData": [],
+          "cellData": {},
+          "rowData": {},
+          "columnData": {
+              "0": {
+                  "w": 125,
+                  "hd": 0
+              },
+              "1": {
+                  "w": 125,
+                  "hd": 0
+              },
+              "2": {
+                  "w": 125,
+                  "hd": 0
+              },
+              "3": {
+                  "w": 125,
+                  "hd": 0
+              },
+              "4": {
+                  "w": 125,
+                  "hd": 0
+              },
+              "5": {
+                  "w": 125,
+                  "hd": 0
+              },
+              "6": {
+                  "w": 125,
+                  "hd": 0
+              },
+              "7": {
+                  "w": 125,
+                  "hd": 0
+              },
+              "8": {
+                  "w": 125,
+                  "hd": 0
+              },
+              "9": {
+                  "w": 125,
+                  "hd": 0
+              }
+          },
+          "showGridlines": 1,
+          "rowHeader": {
+              "width": 46,
+              "hidden": 0
+          },
+          "columnHeader": {
+              "height": 20,
+              "hidden": 0
+          },
+          "selections": [
+              "A1"
+          ],
+          "rightToLeft": 0
+      }
+  },
+  "resources": [
+      {
+          "name": "SHEET_DEFINED_NAME_PLUGIN",
+          "data": ""
+      }
+  ]
+}
+```
