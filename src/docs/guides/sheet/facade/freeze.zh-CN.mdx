@@ -1,0 +1,104 @@
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import VersionBadge from '@/components/VersionBadge'
+
+# 冻结
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+`FWorksheet` 类提供了几种方法来管理工作表中行和列的冻结状态。这些方法允许您设置、获取和取消冻结窗格。<VersionBadge version="0.3.0+" />
+
+## 设置冻结状态
+
+### `setFreeze(freeze: IFreeze): boolean`
+
+设置当前工作表的冻结状态。
+
+- **参数：**
+  - `freeze`：一个包含冻结工作表参数的 `IFreeze` 对象。
+- **返回值：** 如果命令成功则返回 `true`，否则返回 `false`。
+
+### `setFrozenColumns(columns: number): void`
+
+设置冻结列的数量。
+
+- **参数：**
+  - `columns`：要冻结的列数。设置为 0 可解冻所有列。
+
+### `setFrozenRows(rows: number): void`
+
+设置冻结行的数量。
+
+- **参数：**
+  - `rows`：要冻结的行数。设置为 0 可解冻所有行。
+
+## 获取冻结状态
+
+### `getFreeze(): IFreeze`
+
+获取当前工作表的冻结状态。
+
+- **返回值：** 表示当前冻结状态的 `IFreeze` 对象。
+
+### `getFrozenColumns(): number`
+
+获取冻结列的数量。
+
+- **返回值：** 冻结列的数量。如果没有冻结列，则返回 0。
+
+### `getFrozenRows(): number`
+
+获取冻结行的数量。
+
+- **返回值：** 冻结行的数量。如果没有冻结行，则返回 0。
+
+## 取消冻结
+
+### `cancelFreeze(): boolean`
+
+取消当前工作表的冻结状态。
+
+- **返回值：** 如果命令成功则返回 `true`，否则返回 `false`。
+
+## 使用示例
+
+以下是一个全面的示例，演示如何使用这些与冻结相关的方法：
+
+```typescript
+import { FUniver } from '@univerjs/facade';
+
+// 假设 'univer' 是您的 Univer 实例
+const univerAPI = FUniver.newAPI(univer);
+
+// 获取活动工作簿和工作表
+const workbook = univerAPI.getActiveWorkbook();
+const worksheet = workbook.getActiveSheet();
+
+// 设置 2 个冻结列和 3 个冻结行
+worksheet.setFrozenColumns(2);
+worksheet.setFrozenRows(3);
+
+// 获取当前冻结状态
+const freezeState = worksheet.getFreeze();
+console.log('当前冻结状态：', freezeState);
+
+// 获取冻结列和行的数量
+const frozenColumns = worksheet.getFrozenColumns();
+const frozenRows = worksheet.getFrozenRows();
+console.log(`冻结列数：${frozenColumns}，冻结行数：${frozenRows}`);
+
+// 取消所有冻结
+worksheet.cancelFreeze();
+
+// 验证冻结已被取消
+console.log('取消后的冻结列数：', worksheet.getFrozenColumns());
+console.log('取消后的冻结行数：', worksheet.getFrozenRows());
+```
+
+这个示例演示了如何：
+1. 设置冻结列和行
+2. 获取当前冻结状态
+3. 获取冻结列和行的数量
+4. 取消所有冻结
+5. 验证冻结已被取消
+
+这些方法提供了一种全面的方式来管理工作表中的冻结窗格，使您能够轻松地设置、获取和修改行和列的冻结状态。

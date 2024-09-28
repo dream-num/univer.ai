@@ -1,0 +1,122 @@
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import VersionBadge from '@/components/VersionBadge'
+
+# 在Univer中使用自定义组件
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+Univer提供了多种方式来集成自定义组件，使您能够扩展和定制Univer的功能。本指南将介绍几种常用的方法。
+
+## 1. 在侧边栏中使用自定义组件
+
+### openSidebar 方法 <VersionBadge version="0.3.0+" />
+
+使用 `workbook.openSidebar()` 方法可以在Univer界面中打开一个包含自定义组件的侧边栏。
+
+```typescript
+const sidebar = workbook.openSidebar({
+  id: 'mySidebar',
+  title: '我的侧边栏',
+  component: MyCustomSidebarComponent,
+});
+
+// 稍后关闭侧边栏
+sidebar.dispose();
+```
+
+## 2. 在对话框中使用自定义组件
+
+### openDialog 方法 <VersionBadge version="0.3.0+" />
+
+使用 `workbook.openDialog()` 方法可以打开一个包含自定义组件的对话框。
+
+```typescript
+const dialog = workbook.openDialog({
+  id: 'myDialog',
+  title: '我的对话框',
+  body: MyCustomDialogComponent,
+});
+
+// 稍后关闭对话框
+dialog.dispose();
+```
+
+## 3. 将弹出框附加到单元格 <VersionBadge version="0.2.10+" />
+
+### attachPopup 方法
+
+Popup 是一个cell上面依附的临时dom，一般用于显示一些临时的状态信息，不支持持久化存储。
+使用 `range.attachPopup()` 方法可以将自定义弹出框附加到特定的单元格范围。
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+const range = sheet.getRange(0, 0, 10, 10); // A1:J10
+
+const disposable = range.attachPopup({
+  componentKey: () => (
+    <div style={{ width: 100, height: 100, background: '#fff' }}>
+      弹出框内容
+    </div>
+  ),
+  // 如果是Vue3组件，需要设置 isVue3: true
+});
+
+// 移除弹出框
+disposable.dispose();
+```
+
+## 4. 添加浮动DOM到工作表 <VersionBadge version="0.2.10+" />
+
+### addFloatDomToPosition 方法
+
+浮动DOM是悬浮在sheet上的可拖动组件，同时支持持久化存储。
+使用 `worksheet.addFloatDomToPosition()` 方法可以在工作表中添加一个浮动的自定义DOM元素。
+
+```typescript
+const disposable = worksheet.addFloatDomToPosition({
+  componentKey: ({ data }) => (
+    <div style={{ width: '100%', height: '100%', background: '#fff' }}>
+      浮动DOM内容
+      {data?.label}
+    </div>
+  ),
+  initPosition: {
+    startX: 100,
+    endX: 200,
+    startY: 100,
+    endY: 200,
+  },
+  data: {
+    label: '自定义标签',
+  },
+});
+
+// 移除浮动DOM
+disposable.dispose();
+```
+
+## 5. 附加警告弹出框 <VersionBadge version="0.3.0+" />
+
+### attachAlertPopup 方法
+
+使用 `range.attachAlertPopup()` 方法可以在指定范围的起始单元格附加一个警告弹出框。
+
+```typescript
+const range = sheet.getRange("A1:B2");
+const alertDisposable = range.attachAlertPopup({
+  key: "myAlert",
+  message: "这是一个警告！",
+  type: "warning"
+});
+
+// 稍后移除警告
+alertDisposable.dispose();
+```
+
+## 注意事项
+
+1. 在使用这些方法时，请确保Univer已经完成渲染。
+2. 对于需要注册的组件，请确保在使用前已正确注册。
+3. 使用 `dispose()` 方法来清理和移除添加的组件，以避免内存泄漏。
+4. 对于Vue3组件，需要在选项中设置 `isVue3: true`。
+
+通过这些方法，您可以灵活地在Univer中集成各种自定义组件，从而增强和定制Univer的功能。

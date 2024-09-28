@@ -1,4 +1,10 @@
 {
+  "general-api": "Basic API",
+  "sheet-api": "Sheet API",
   "permission": "Permission",
-  "formula": "Formula"
+  "formula": "Formula",
+  "row-col": "Row and Column",
+  "range-selection": "Range Selection",
+  "freeze": "Freeze",
+  "dom": "Custom Component"
 }

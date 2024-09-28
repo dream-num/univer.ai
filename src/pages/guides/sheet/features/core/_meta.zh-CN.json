@@ -1,4 +1,10 @@
 {
+  "general-api": "基础 API",
+  "sheet-api": "Sheet API",
   "permission": "权限控制",
-  "formula": "公式"
+  "formula": "公式",
+  "row-col": "行和列",
+  "range-selection": "范围选择",
+  "freeze": "冻结",
+  "dom": "集成自定义组件"
 }
