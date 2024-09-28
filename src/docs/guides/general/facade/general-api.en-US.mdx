@@ -165,6 +165,41 @@ univerAPI.executeCommand(CopyCommand.id)
 univerAPI.executeCommand(PasteCommand.id)
 ```
 
+## Basic Event
+
+Usage
+```typescript
+const univerAPI = FUniver.newAPI(univer);
+
+univerAPI.getHooks().onStarting(() => {
+  console.log('Starting');
+})
+```
+
+### Full Basic Event List
+
+| Method                   | Description                                                                                              | Callback Arguments                          | Returns                          |
+|--------------------------|----------------------------------------------------------------------------------------------------------|---------------------------------------------|----------------------------------|
+| **Lifecycle Hooks**       |                                                                                                          |                                             |                                  |
+| `onStarting`              | Fired when the lifecycle stage is `Starting`.                                                            | `callback: () => void`                      | `IDisposable` to unsubscribe     |
+| `onReady`                 | Fired when the lifecycle stage is `Ready`.                                                               | `callback: () => void`                      | `IDisposable` to unsubscribe     |
+| `onRendered`              | Fired when the lifecycle stage is `Rendered`.                                                            | `callback: () => void`                      | `IDisposable` to unsubscribe     |
+| `onSteady`                | Fired when the lifecycle stage is `Steady`.                                                              | `callback: () => void`                      | `IDisposable` to unsubscribe     |
+| **Undo/Redo Hooks**       |                                                                                                          |                                             |                                  |
+| `onBeforeUndo`            | Fired before an undo operation is performed.                                                            | `callback: (action: IUndoRedoItem) => void` | `IDisposable` to unsubscribe     |
+| `onUndo`                  | Fired after an undo operation is performed.                                                             | `callback: (action: IUndoRedoItem) => void` | `IDisposable` to unsubscribe     |
+| `onBeforeRedo`            | Fired before a redo operation is performed.                                                             | `callback: (action: IUndoRedoItem) => void` | `IDisposable` to unsubscribe     |
+| `onRedo`                  | Fired after a redo operation is performed.                                                              | `callback: (action: IUndoRedoItem) => void` | `IDisposable` to unsubscribe     |
+| **Clipboard Hooks**       |                                                                                                          |                                             |                                  |
+| `onBeforeCopy`            | Fired before a copy operation is performed.                                                             | `callback: () => void`                      | `IDisposable` to unsubscribe     |
+| `onCopy`                  | Fired after a copy operation is performed.                                                              | `callback: () => void`                      | `IDisposable` to unsubscribe     |
+| `onBeforePaste`           | Fired before a paste operation is performed.                                                            | `callback: () => void`                      | `IDisposable` to unsubscribe     |
+| `onPaste`                 | Fired after a paste operation is performed.                                                             | `callback: () => void`                      | `IDisposable` to unsubscribe     |
+
+### Common Return Value
+
+All of these methods return an `IDisposable` object, which can be used to unsubscribe from the events when no longer needed.
+
 ## UI
 
 Please refer to the following documentation to extend the Univer UI :
