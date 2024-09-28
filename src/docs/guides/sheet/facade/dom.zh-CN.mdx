@@ -71,8 +71,9 @@ disposable.dispose();
 
 ### addFloatDomToPosition 方法
 
-浮动DOM是悬浮在sheet上的可拖动组件，同时支持持久化存储。
-使用 `worksheet.addFloatDomToPosition()` 方法可以在工作表中添加一个浮动的自定义DOM元素。
+* 使用该方法前需要安装 `@univerjs/sheet-drawing-ui` 插件
+* 浮动DOM是悬浮在sheet上的可拖动组件，同时支持持久化存储。
+* 使用 `worksheet.addFloatDomToPosition()` 方法可以在工作表中添加一个浮动的自定义DOM元素。
 
 ```typescript
 const disposable = worksheet.addFloatDomToPosition({

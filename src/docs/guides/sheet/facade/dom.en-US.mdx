@@ -47,8 +47,9 @@ dialog.dispose();
 
 ### attachPopup Method
 
-A Popup is a temporary DOM element attached to a cell, generally used to display temporary status information. It does not support persistent storage.
-Use the `range.attachPopup()` method to attach custom popups to specific cell ranges.
+* The `@univerjs/sheet-drawing-ui` plugin needs to be installed before using this method.
+* A Popup is a temporary DOM element attached to a cell, generally used to display temporary status information. It does not support persistent storage.
+* Use the `range.attachPopup()` method to attach custom popups to specific cell ranges.
 
 ```typescript
 const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
