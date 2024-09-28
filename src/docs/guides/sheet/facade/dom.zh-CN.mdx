@@ -16,6 +16,17 @@ Univer提供了多种方式来集成自定义组件，使您能够扩展和定�
 使用 `workbook.openSidebar()` 方法可以在Univer界面中打开一个包含自定义组件的侧边栏。
 
 ```typescript
+import { ComponentManager } from '@univerjs/ui';
+
+const injector = univer.__getInjector();
+const componentManager = injector.get(ComponentManager);
+
+// 你应该在合适的时机（比如univer加载完成）注册组件
+componentManager.register({
+  componentKey: 'mySidebar',
+  component: () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>,
+});
+
 const sidebar = workbook.openSidebar({
   id: 'mySidebar',
   title: '我的侧边栏',
@@ -33,6 +44,17 @@ sidebar.dispose();
 使用 `workbook.openDialog()` 方法可以打开一个包含自定义组件的对话框。
 
 ```typescript
+import { ComponentManager } from '@univerjs/ui';
+
+const injector = univer.__getInjector();
+const componentManager = injector.get(ComponentManager);
+
+// 你应该在合适的时机（比如univer加载完成）注册组件
+componentManager.register({
+  componentKey: 'myDialog',
+  component: () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>,
+});
+
 const dialog = workbook.openDialog({
   id: 'myDialog',
   title: '我的对话框',
@@ -49,18 +71,29 @@ dialog.dispose();
 
 * Popup 是一个cell上面依附的临时dom，一般用于显示一些临时的状态信息，不支持持久化存储。
 * 使用 `range.attachPopup()` 方法可以将自定义弹出框附加到特定的单元格范围。
+* Popup 会吸附在单元的四边，如果被遮挡，会自动调整位置和方向。
 
 ```typescript
+import { ComponentManager } from '@univerjs/ui';
 const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 const range = sheet.getRange(0, 0, 10, 10); // A1:J10
 
-const disposable = range.attachPopup({
-  componentKey: () => (
-    <div style={{ width: 100, height: 100, background: '#fff' }}>
-      弹出框内容
-    </div>
-  ),
-  // 如果是Vue3组件，需要设置 isVue3: true
+const injector = univer.__getInjector();
+const componentManager = injector.get(ComponentManager);
+
+// 你应该在合适的时机（比如univer加载完成）注册组件
+componentManager.register({
+  componentKey: 'myPopup',
+  component: () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>,
+});
+
+// 将弹出窗口附加到范围的第一个单元格
+// 如果 disposeable 为 null，则表示 popup 添加失败
+const disposeable = range.attachPopup({
+  // componentKey 必须是一个组件或已注册组件的键
+    componentKey: myPopup,
+    // 如果 componentKey 是一个 Vue3 组件，必须将 isVue3 设置为 true
+    // isVue3: true,
 });
 
 // 移除弹出框
@@ -71,32 +104,53 @@ disposable.dispose();
 
 ### addFloatDomToPosition 方法
 
-* 使用该方法前需要安装 `@univerjs/sheet-drawing-ui` 插件
+* 使用该方法前需要安装 `@univerjs/sheet-drawing-ui` 插件。
 * 浮动DOM是悬浮在sheet上的可拖动组件，同时支持持久化存储。
-* 使用 `worksheet.addFloatDomToPosition()` 方法可以在工作表中添加一个浮动的自定义DOM元素。
+* 需要在 univer 渲染完成之后调用.
+* `componentKey` 必须传已注册的组件id 或者react/vue3组件 如果是 vue3组件必须标明isVue3。
 
-```typescript
-const disposable = worksheet.addFloatDomToPosition({
-  componentKey: ({ data }) => (
-    <div style={{ width: '100%', height: '100%', background: '#fff' }}>
-      浮动DOM内容
-      {data?.label}
-    </div>
-  ),
-  initPosition: {
-    startX: 100,
-    endX: 200,
-    startY: 100,
-    endY: 200,
-  },
-  data: {
-    label: '自定义标签',
-  },
+
+[demo](https://stackblitz.com/edit/awesome-univer-sheets-vite-demo-fqsu99?file=package.json,src%2Fmain.tsx)
+
+```tsx
+import { ComponentManager } from '@univerjs/ui';
+const worksheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+// 你应该在合适的时机（比如univer加载完成）注册组件
+componentManager.register({
+  componentKey: 'myFloatDom',
+  component: ({ data }) => (
+        <div style={{ width: '100%', height: '100%', background: '#fff' }}>
+            popup content
+            {data?.label}
+        </div>
+    ),
 });
 
-// 移除浮动DOM
-disposable.dispose();
+// 添加一个浮动dom
+// 如果 disposeable 为 null，则表示浮动 DOM 添加失败
+const disposeable = worksheet.addFloatDomToPosition({
+    // componentKey 必须是一个组件或已注册组件的键
+    componentKey: myFloatDom,
+    // 如果 componentKey 是一个 Vue3 组件，必须将 isVue3 设置为 true
+    // isVue3: true,
+    initPosition: {
+        startX: 100,
+        endX: 200,
+        startY: 100,
+        endY: 200,
+    },
+
+    // 这是组件的数据
+    data: {
+        label: 'hahah',
+    },
+});
+
+// 移除浮动dom
+disposeable.dispose();
 ```
+
 
 ## 5. 附加警告弹出框 <VersionBadge version="0.3.0+" />
 
