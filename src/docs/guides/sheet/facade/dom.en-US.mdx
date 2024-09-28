@@ -22,10 +22,10 @@ const injector = univer.__getInjector();
 const componentManager = injector.get(ComponentManager);
 
 // You should register components at an appropriate time (e.g., when Univer has finished loading)
-componentManager.register({
-  componentKey: 'mySidebar',
-  component: () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>,
-});
+componentManager.register(
+  'mySidebar',
+   () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>,
+);
 
 const sidebar = workbook.openSidebar({
   id: 'mySidebar',
@@ -50,10 +50,10 @@ const injector = univer.__getInjector();
 const componentManager = injector.get(ComponentManager);
 
 // You should register components at an appropriate time (e.g., when Univer has finished loading)
-componentManager.register({
-  componentKey: 'myDialog',
-  component: () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>,
-});
+componentManager.register(
+  'myDialog',
+  () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>,
+);
 
 const dialog = workbook.openDialog({
   id: 'myDialog',
@@ -82,10 +82,10 @@ const injector = univer.__getInjector();
 const componentManager = injector.get(ComponentManager);
 
 // You should register components at an appropriate time (e.g., when Univer has finished loading)
-componentManager.register({
-  componentKey: 'myPopup',
-  component: () => <div style={{ width: 100, height: 100, background: '#fff' }}>Popup content</div>,
-});
+componentManager.register(
+  'myPopup',
+  () => <div style={{ width: 100, height: 100, background: '#fff' }}>Popup content</div>
+);
 
 // Attach the popup to the first cell of the range
 // If disposable is null, it means the popup failed to add
@@ -116,15 +116,15 @@ import { ComponentManager } from '@univerjs/ui';
 const worksheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // You should register components at an appropriate time (e.g., when Univer has finished loading)
-componentManager.register({
-  componentKey: 'myFloatDom',
-  component: ({ data }) => (
-        <div style={{ width: '100%', height: '100%', background: '#fff' }}>
-            Popup content
-            {data?.label}
-        </div>
-    ),
-});
+componentManager.register(
+  'myFloatDom',
+  ({ data }) => (
+    <div style={{ width: '100%', height: '100%', background: '#fff' }}>
+      Popup content
+      {data?.label}
+    </div>
+  )
+);
 
 // Add a floating DOM
 // If disposable is null, it means the floating DOM failed to add
