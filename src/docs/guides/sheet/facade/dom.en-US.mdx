@@ -47,7 +47,6 @@ dialog.dispose();
 
 ### attachPopup Method
 
-* The `@univerjs/sheet-drawing-ui` plugin needs to be installed before using this method.
 * A Popup is a temporary DOM element attached to a cell, generally used to display temporary status information. It does not support persistent storage.
 * Use the `range.attachPopup()` method to attach custom popups to specific cell ranges.
 
@@ -72,8 +71,9 @@ disposable.dispose();
 
 ### addFloatDomToPosition Method
 
-Floating DOM is a draggable component hovering over the sheet, which also supports persistent storage.
-Use the `worksheet.addFloatDomToPosition()` method to add a floating custom DOM element to the worksheet.
+* The `@univerjs/sheet-drawing-ui` plugin needs to be installed before using this method.
+* Floating DOM is a draggable component hovering over the sheet, which also supports persistent storage.
+* Use the `worksheet.addFloatDomToPosition()` method to add a floating custom DOM element to the worksheet.
 
 ```typescript
 const disposable = worksheet.addFloatDomToPosition({
