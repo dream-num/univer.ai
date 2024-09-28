@@ -1,0 +1,339 @@
+import { Callout } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import ReactLive from '@/components/ReactLive'
+import ServerNotice from '@/components/ServerNotice'
+import VersionBadge from '@/components/VersionBadge'
+
+# Row & Column
+## Row
+
+### Insert row after given position
+
+`insertRowAfter(afterPosition)`: Inserts a row after the specified row position.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+// This inserts a row after the first row position
+sheet.insertRowAfter(0);
+```
+
+### Insert row before given position
+
+`insertRowBefore(beforePosition)`: Inserts a row before the specified row position.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// This inserts a row before the first row position
+sheet.insertRowBefore(0);
+```
+
+### Insert multiple rows at specified location
+
+`insertRows(rowIndex, numRows)`: Inserts one or more consecutive blank rows in a sheet starting at the specified location.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// Shifts all rows down by three
+sheet.insertRows(0, 3);
+```
+
+### Insert multiple rows after given position
+
+`insertRowsAfter(afterPosition, howMany)`: Inserts a specified number of rows after the given row position.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// This inserts five rows after the first row
+sheet.insertRowsAfter(0, 5);
+```
+
+### Insert multiple rows before given position
+
+`insertRowsBefore(beforePosition, howMany)`: Inserts a specified number of rows before the given row position.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// This inserts five rows before the first row
+sheet.insertRowsBefore(0, 5);
+```
+
+### Delete row at given position
+
+`deleteRow(rowPosition)`: Deletes the row at the specified row position.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// Rows start at "0" - this deletes the first row
+sheet.deleteRow(0);
+```
+
+### Delete multiple rows starting at given position
+
+`deleteRows(rowPosition, howMany)`: Deletes a specified number of rows starting at the given row position.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// Rows start at "0" - this deletes the first two rows
+sheet.deleteRows(0, 2);
+```
+
+### Move rows to new position
+
+`moveRows(rowSpec, destinationIndex)`: Moves the rows selected by the given range to the position indicated by the `destinationIndex`. The `rowSpec` itself does not have to exactly represent an entire row or group of rows to move—it selects all rows that the range spans.
+
+```typescript
+// The code below moves rows 1-2 to destination index 5
+// This results in those rows becoming rows 3-4
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// Selects row 1 and row 2 to be moved
+const rowSpec = sheet.getRange(0,0,2,1);
+sheet.moveRows(rowSpec, 5);
+```
+
+### Hide rows in given range
+
+`hideRow(row)`: Hides the rows in the specified range.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// This hides the first row
+const range = sheet.getRange(0,0,0,0);
+sheet.hideRow(range);
+```
+
+### Hide multiple consecutive rows
+
+`hideRows(rowIndex, numRows)`: Hides one or more consecutive rows starting at the given index. Use 0-index for this method.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// Hides the first three rows
+sheet.hideRows(0, 3);
+```
+
+### Unhide row in given range
+
+`unhideRow(row)`: Unhides the row in the specified range.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// This unhides the first row if it was previously hidden
+const range = sheet.getRange(0,0,0,0);
+sheet.unhideRow(range);
+```
+
+### Unhide multiple consecutive rows
+
+`showRows(rowIndex, numRows)`: Unhides one or more consecutive rows starting at the given index. Use 0-index for this method.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// Unhides the first three rows
+sheet.showRows(0, 3);
+```
+
+### Set row height
+
+`setRowHeight(rowPosition, height)`: Sets the row height of the given row in pixels. By default, rows grow to fit cell contents. If you want to force rows to a specified height, use `setRowHeightsForced(startRow, numRows, height)`.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// Sets the first row to a height of 200 pixels
+sheet.setRowHeight(0, 200);
+```
+
+### Set height for multiple rows
+
+`setRowHeights(startRow, numRows, height)`: Sets the height of the given rows in pixels. By default, rows grow to fit cell contents. If you want to force rows to a specified height, use `setRowHeightsForced(startRow, numRows, height)`.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// Sets the first three rows to a height of 20 pixels
+sheet.setRowHeights(0, 3, 20);
+```
+
+### Force set height for multiple rows
+
+`setRowHeightsForced(startRow, numRows, height)`: Sets the height of the given rows in pixels. By default, rows grow to fit cell contents. When you use `setRowHeightsForced`, rows are forced to the specified height even if the cell contents are taller than the row height.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// Sets the first three rows to a height of 5 pixels
+sheet.setRowHeightsForced(0, 3, 5);
+```
+
+## Column
+
+### Insert column after given position
+
+`insertColumnAfter(afterPosition)`: Inserts a column after the given column position.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// This inserts a column after the first column position
+sheet.insertColumnAfter(0);
+```
+
+### Insert column before given position
+
+`insertColumnBefore(beforePosition)`: Inserts a column before the given column position.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// This inserts a column in the first column position
+sheet.insertColumnBefore(0);
+```
+
+### Insert multiple columns at specified location
+
+`insertColumns(columnIndex, numColumns)`: Inserts one or more consecutive blank columns in a sheet starting at the specified location.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// Shifts all columns by three
+sheet.insertColumns(0, 3);
+```
+
+### Insert multiple columns after given position
+
+`insertColumnsAfter(afterPosition, howMany)`: Inserts a given number of columns after the given column position.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// Inserts two columns after the first column
+sheet.insertColumnsAfter(0, 2);
+```
+
+### Insert multiple columns before given position
+
+`insertColumnsBefore(beforePosition, howMany)`: Inserts a number of columns before the given column position.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// This inserts five columns before the first column
+sheet.insertColumnsBefore(0, 5);
+```
+
+### Delete column at given position
+
+`deleteColumn(columnPosition)`: Deletes the column at the given column position.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// Columns start at "0" - this deletes the first column
+sheet.deleteColumn(0);
+```
+
+### Delete multiple columns starting at given position
+
+`deleteColumns(columnPosition, howMany)`: Deletes a number of columns starting at the given column position.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// Columns start at "0" - this deletes the first two columns
+sheet.deleteColumns(0, 2);
+```
+
+### Move columns to new position
+
+`moveColumns(columnSpec, destinationIndex)`: Moves the columns selected by the given range to the position indicated by the `destinationIndex`. The `columnSpec` itself does not have to exactly represent an entire column or group of columns to move—it selects all columns that the range spans.
+
+```typescript
+// The code below moves rows A-B to destination index 5.
+// This results in those columns becoming columns C-D.
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// Selects column A and column B to be moved.
+const columnSpec = sheet.getRange(0,0,1,2);
+sheet.moveColumns(columnSpec, 5);
+```
+
+### Hide columns in given range
+
+`hideColumn(column)`: Hides the column or columns in the given range.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// This hides the first column
+const range = sheet.getRange(0,0,0,0);
+sheet.hideColumn(range);
+```
+
+### Hide multiple consecutive columns
+
+`hideColumns(columnIndex, numColumns)`: Hides one or more consecutive columns starting at the given index. Use 0-index for this method.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// Hides the first three columns
+sheet.hideColumns(0, 3);
+```
+
+### Unhide column in given range
+
+`unhideColumn(column)`: Unhides the column in the given range.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// This unhides the first column if it was previously hidden
+const range = sheet.getRange(0,0,0,0);
+sheet.unhideColumn(range);
+```
+
+### Unhide multiple consecutive columns
+
+`showColumns(columnIndex, numColumns)`: Unhides one or more consecutive columns starting at the given index. Use 0-index for this method.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// Unhides the first three columns
+sheet.showColumns(0, 3);
+```
+
+### Set column width
+
+`setColumnWidth(columnPosition, width)`: Sets the width of the given column in pixels.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// Sets the first column to a width of 200 pixels
+sheet.setColumnWidth(0, 200);
+```
+
+### Set width for multiple columns
+
+`setColumnWidths(startColumn, numColumns, width)`: Sets the width of the given columns in pixels.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+  
+// Sets the first three columns to a width of 200 pixels
+sheet.setColumnWidths(0, 3, 200);
+```

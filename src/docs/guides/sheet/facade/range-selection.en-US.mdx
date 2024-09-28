@@ -1,0 +1,357 @@
+import { Callout } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import ReactLive from '@/components/ReactLive'
+import ServerNotice from '@/components/ServerNotice'
+import VersionBadge from '@/components/VersionBadge'
+
+# Range & Selection & Cell
+
+## Range
+
+A range refers to a rectangular area in a worksheet, determined by the starting row number, starting column number, length and width, or ending row number and ending column number.
+
+Most operations in a spreadsheet can be performed through the Range API, such as setting values, getting values, setting styles, getting styles, etc.
+
+### Create a Range
+
+To get a range you need to know the starting row number, starting column number, length and width.
+
+Create a range of A1 cell:
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 1, 1);
+```
+
+Creates a range of A1:B2:
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
+```
+
+Starting from `0.2.15`, `getRange` supports using A1 notation to get ranges.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+// Get the A1:B2 range on named Sheet1
+const range1 = sheet.getRange('Sheet1!A1:B2');
+
+// Get a single cell A1
+const range2 = sheet.getRange('A1');
+
+// Get the A1:B2 range
+const range3 = sheet.getRange('A1:B2');
+
+// Get the range of column A
+const range4 = sheet.getRange('A:A');
+
+// Get the range of row 1
+const range5 = sheet.getRange('1:1');
+```
+
+### Get Range Data
+
+Get the value of the first cell in the range
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
+const value = range.getValue();
+```
+
+Get all cell values in the range
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
+range.forEach(( row, column, cell) => {
+  console.log( row, column, cell);
+});
+```
+
+Get all formulas in the range
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
+console.log(range.getFormulas());
+```
+
+### Set Range Value
+
+#### Set a single value
+
+If a value or cell object is passed in, all cells in the range will be overwritten. If it starts with `=`, it will be interpreted as a formula.
+
+For example, to set the value of A1:B2 to `Hello, Univer`:
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
+range.setValue('Hello, Univer');
+```
+
+Set the value of A1+B1 to the formula:
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
+range.setValue('=A1+B1');
+```
+
+Set the value of A1:B2 to the cell object:
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
+range.setValue({
+  v: 'Hello, Univer',
+  custom: {
+      key: 'value',
+  },
+});
+```
+
+#### Set multiple values with an array
+
+The length and width of the array must match the length and width of the range.
+
+You can pass in cell values or cell objects.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
+range.setValues([
+  ['A1', 'B1'],
+  ['A2', 'B2'],
+]);
+
+range.setValues([
+  [{ v: 'A1' }, { v: 'B1' }],
+  [{ v: 'A2' }, { v: 'B2' }],
+]);
+```
+
+#### Set multiple values with an object
+
+If an object is passed in, the primary index of the object represents the row number, and the secondary index represents the column number, and the length and width of the range do not need to match.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
+range.setValues({
+  0: {
+    0: 'A1',
+    1: 'B1',
+  },
+  1: {
+    0: 'A2',
+    1: 'B2',
+  },
+});
+```
+
+### Get Range Style
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
+const style = range.getCellStyleData();
+```
+
+### Set Range Style
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
+range
+  .setFontWeight('bold')
+  .setFontLine('underline')
+  .setFontFamily('Arial')
+  .setFontSize(24)
+  .setFontColor('red');
+```
+
+### Clear Range Style
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
+range
+  .setFontWeight(null)
+  .setFontLine(null)
+  .setFontFamily(null)
+  .setFontSize(null)
+  .setFontColor(null);
+```
+
+### Whether the range is merged
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
+const isMerged = range.isMerged();
+```
+
+### Get the coordinates of the range
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
+const rect = range.getCellRect(); // width、heigh、left、right、top、bottom、x、y
+```
+
+### Get the merge information and coordinates of the range at the same time
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const range = sheet.getRange(0, 0, 2, 2);
+const cell = range.getCell();
+```
+
+## Selection
+
+Univer Sheets support multiple constituencies, so a constituency is an array of ranges, and you can manipulate the constituency data through the range API.
+
+We also provide APIs to get the current selection, set the selection, and listen for changes to the selection.
+
+### Get Active Selection
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();\
+
+const selection = sheet.getSelection();
+const range = selection.getActiveRange();
+```
+
+### Set Selection
+
+Set A1:B2 as the selection
+
+```typescript
+import { SetSelectionsOperation } from '@univerjs/sheets'
+
+const sheetId = 'SheetId';
+univerAPI.executeCommand(SetSelectionsOperation.id, {
+  selections: [{
+    range: {
+      startRow: 0,
+      startColumn: 0,
+      endRow: 1,
+      endColumn: 1,
+      rangeType: 0,
+    },
+  }],
+  subUnitId,
+  unitId: activeWorkbook.getId(),
+  type: 2,
+})
+```
+
+### Listen for Selection Changes
+
+```typescript
+const activeWorkbook = univerAPI.getActiveWorkbook();
+activeWorkbook.onSelectionChange((selection) => {
+  console.log(selection);
+});
+```
+
+## Cell
+
+Cell data is stored in the worksheet as a two-dimensional Map, with the first and second indexes representing the row number and column number respectively.
+
+The following is a typical cell object:
+
+```typescript
+{
+  v: 'Hello, Univer',
+  s: 'styleId',
+  t: CellValueType.STRING
+}
+```
+
+For detailed field descriptions, please refer to [Configure Cell Data](/guides/sheet/getting-started/cell-data).
+
+<Callout type="info" emoji="ℹ️">
+  Cell operations can be regarded as operations on a range of rows and columns with a height of 1 and a width of 1. For the operation range, please refer to [Range](/guides/sheet/facade/sheet-api#range).
+</Callout>
+
+<Callout type="info" emoji="ℹ️">
+  The Univer API plugin will also store the extended cell attributes in the `resources` property of the `Workbook`, please refer to [Plugin Custom Model](/guides/customization/model/).
+</Callout>
+
+### Cell PointerMove
+
+The `onCellPointerMove` event is fired when a pointer changes coordinates.
+```typescript
+univerAPI.getSheetHooks().onCellPointerMove((cell) => {
+  // Get the cell currently pointed to by the mouse
+  console.log(cell);
+})
+```
+
+### Cell PointerOver
+
+The `onCellPointerOver` event is fired when a pointer is moved into a cell's hit test boundaries.
+```typescript
+univerAPI.getSheetHooks().onCellPointerOver((cell) => {
+  // Get the cell currently pointed to by the mouse
+  console.log(cell);
+})
+```
+
+### Cell DragOver
+
+The `onCellDragOver` event is fired when an element or text selection is being dragged into a cell's hit test boundaries.
+```typescript
+univerAPI.getSheetHooks().onCellDragOver((cell) => {
+  // Get the cell currently pointed to by the mouse
+  console.log(cell);
+})
+```
+
+### Cell Drop
+
+The `onCellDrop` event is fired when an element or text selection is being dropped on the cell.
+```typescript
+univerAPI.getSheetHooks().onCellDrop((cell) => {
+  // Get the cell currently pointed to by the mouse
+  console.log(cell);
+})
+```
+
+### Cell Enters Editing
+
+```typescript
+univerAPI.onCommandExecuted((command) => {
+  if(command.id === 'sheet.operation.set-cell-edit-visible' && command.params.visible){
+    console.log('Cell edit visible')
+  }
+})
+```
+
+### Cell Exits Editing
+
+```typescript
+univerAPI.onCommandExecuted((command) => {
+  if(command.id === 'sheet.operation.set-cell-edit-visible' && !command.params.visible){
+    console.log('Cell edit invisible')
+  }
+})
+```
+

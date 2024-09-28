@@ -75,13 +75,13 @@ univer.registerPlugin(UniverSheetsExchangeClientPlugin);
 
 ## Custom Usage
 
-If you are not satisfied with the features provided by the plugin, you can also use the [Facade API](/guides/sheet/facade/facade#use-with-the-univer-server) to implement custom import and export processes. Please refer to [Server-Related Features](/guides/sheet/facade/sheet-api#server-related-features) for more details.
+If you are not satisfied with the features provided by the plugin, you can also use the [Facade API](/guides/sheet/getting-started/facade#use-with-the-univer-server) to implement custom import and export processes. Please refer to [Server-Related Features](/guides/sheet/facade/sheet-api#server-related-features) for more details.
 
 ## FAQ
 
 ### How to Open or Edit an Excel File from a URL
 
-Here is an implementation idea for your reference. First, use the browser's fetch API to download the file from the URL and convert it into a File object. Then, call the `importXLSXToUnitId` or `importXLSXToSnapshot` methods from the [Facade API](/guides/sheet/facade/facade#use-with-the-univer-server) to import it. The sample code is as follows:
+Here is an implementation idea for your reference. First, use the browser's fetch API to download the file from the URL and convert it into a File object. Then, call the `importXLSXToUnitId` or `importXLSXToSnapshot` methods from the [Facade API](/guides/sheet/getting-started/facade#use-with-the-univer-server) to import it. The sample code is as follows:
 
 ```typescript
 const url = 'https://example.com/filename.xlsx'; // Your Excel file URL

@@ -1,0 +1,178 @@
+import { Callout } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import ReactLive from '@/components/ReactLive'
+import ServerNotice from '@/components/ServerNotice'
+import VersionBadge from '@/components/VersionBadge'
+
+# Using Custom Components in Univer
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+Univer provides multiple ways to integrate custom components, allowing you to extend and customize Univer's functionality. This guide will introduce several common methods.
+
+## 1. Using Custom Components in the Sidebar
+
+### openSidebar Method <VersionBadge version="0.3.0+" />
+
+Use the `workbook.openSidebar()` method to open a sidebar containing custom components in the Univer interface.
+
+```typescript
+import { ComponentManager } from '@univerjs/ui';
+
+const injector = univer.__getInjector();
+const componentManager = injector.get(ComponentManager);
+
+// You should register components at an appropriate time (e.g., when Univer has finished loading)
+componentManager.register({
+  componentKey: 'mySidebar',
+  component: () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>,
+});
+
+const sidebar = workbook.openSidebar({
+  id: 'mySidebar',
+  title: 'My Sidebar',
+  component: MyCustomSidebarComponent,
+});
+
+// Close the sidebar later
+sidebar.dispose();
+```
+
+## 2. Using Custom Components in Dialogs
+
+### openDialog Method <VersionBadge version="0.3.0+" />
+
+Use the `workbook.openDialog()` method to open a dialog containing custom components.
+
+```typescript
+import { ComponentManager } from '@univerjs/ui';
+
+const injector = univer.__getInjector();
+const componentManager = injector.get(ComponentManager);
+
+// You should register components at an appropriate time (e.g., when Univer has finished loading)
+componentManager.register({
+  componentKey: 'myDialog',
+  component: () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>,
+});
+
+const dialog = workbook.openDialog({
+  id: 'myDialog',
+  title: 'My Dialog',
+  body: MyCustomDialogComponent,
+});
+
+// Close the dialog later
+dialog.dispose();
+```
+
+## 3. Attaching Popups to Cells <VersionBadge version="0.2.10+" />
+
+### attachPopup Method
+
+* A Popup is a temporary DOM element attached to a cell, generally used to display temporary status information. It does not support persistent storage.
+* Use the `range.attachPopup()` method to attach custom popups to specific cell ranges.
+* Popups will stick to the edges of cells, and if they are obstructed, they will automatically adjust their position and direction.
+
+```typescript
+import { ComponentManager } from '@univerjs/ui';
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+const range = sheet.getRange(0, 0, 10, 10); // A1:J10
+
+const injector = univer.__getInjector();
+const componentManager = injector.get(ComponentManager);
+
+// You should register components at an appropriate time (e.g., when Univer has finished loading)
+componentManager.register({
+  componentKey: 'myPopup',
+  component: () => <div style={{ width: 100, height: 100, background: '#fff' }}>Popup content</div>,
+});
+
+// Attach the popup to the first cell of the range
+// If disposable is null, it means the popup failed to add
+const disposable = range.attachPopup({
+  // componentKey must be a component or a key of a registered component
+    componentKey: myPopup,
+    // If componentKey is a Vue3 component, isVue3 must be set to true
+    // isVue3: true,
+});
+
+// Remove the popup
+disposable.dispose();
+```
+
+## 4. Adding Floating DOM to Worksheets <VersionBadge version="0.2.10+" />
+
+### addFloatDomToPosition Method
+
+* The `@univerjs/sheet-drawing-ui` plugin needs to be installed before using this method.
+* Floating DOM is a draggable component hovering over the sheet, which also supports persistent storage.
+* Call this method after Univer has finished rendering.
+* `componentKey` must be a registered component key or a React/Vue3 component. If it is a Vue3 component, `isVue3` must be set to true.
+
+[demo](https://stackblitz.com/edit/awesome-univer-sheets-vite-demo-fqsu99?file=package.json,src%2Fmain.tsx)
+
+```tsx
+import { ComponentManager } from '@univerjs/ui';
+const worksheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+// You should register components at an appropriate time (e.g., when Univer has finished loading)
+componentManager.register({
+  componentKey: 'myFloatDom',
+  component: ({ data }) => (
+        <div style={{ width: '100%', height: '100%', background: '#fff' }}>
+            Popup content
+            {data?.label}
+        </div>
+    ),
+});
+
+// Add a floating DOM
+// If disposable is null, it means the floating DOM failed to add
+const disposable = worksheet.addFloatDomToPosition({
+    // componentKey must be a component or a key of a registered component
+    componentKey: myFloatDom,
+    // If componentKey is a Vue3 component, isVue3 must be set to true
+    // isVue3: true,
+    initPosition: {
+        startX: 100,
+        endX: 200,
+        startY: 100,
+        endY: 200,
+    },
+
+    // This is the component's data
+    data: {
+        label: 'Hello',
+    },
+});
+
+// Remove the floating DOM
+disposable.dispose();
+```
+
+## 5. Attaching Alert Popups <VersionBadge version="0.3.0+" />
+
+### attachAlertPopup Method
+
+Use the `range.attachAlertPopup()` method to attach an alert popup to the starting cell of a specified range.
+
+```typescript
+const range = sheet.getRange("A1:B2");
+const alertDisposable = range.attachAlertPopup({
+  key: "myAlert",
+  message: "This is a warning!",
+  type: "warning"
+});
+
+// Remove the alert later
+alertDisposable.dispose();
+```
+
+## Notes
+
+1. When using these methods, ensure that Univer has finished rendering.
+2. For components that need registration, make sure they are correctly registered before use.
+3. Use the `dispose()` method to clean up and remove added components to avoid memory leaks.
+4. For Vue3 components, set `isVue3: true` in the options.
+
+By using these methods, you can flexibly integrate various custom components in Univer, thereby enhancing and customizing Univer's functionality.

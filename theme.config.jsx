@@ -156,7 +156,7 @@ export default {
         '/guides/doc/architecture',
         '/guides/slide/architecture',
 
-        '/guides/sheet/facade/facade',
+        '/guides/sheet/getting-started/facade',
         '/guides/doc/facade/facade',
         '/guides/slide/facade/facade',
 
