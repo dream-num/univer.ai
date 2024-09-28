@@ -29,14 +29,12 @@ componentManager.register(
 );
 
 const sidebar = workbook.openSiderbar({
-  const sidebar = workbook.openSiderbar({
-    header: { title: 'My Sidebar' },
-    children: { label: 'mySidebar' },
-    onClose: () => {
-        console.log('close');
-    },
-    width: 360,
-  });
+  header: { title: 'My Sidebar' },
+  children: { label: 'mySidebar' },
+  onClose: () => {
+      console.log('close');
+  },
+  width: 360,
 });
 
 // Close the sidebar later
