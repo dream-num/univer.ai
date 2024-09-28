@@ -75,13 +75,13 @@ univer.registerPlugin(UniverSheetsExchangeClientPlugin);
 
 ## 定制化使用
 
-如果你不满足插件默认提供的功能，你还可以调用 [Facade API](/guides/sheet/facade/facade#与服务端配合使用) 来实现自定义的导入和导出的流程，请阅读 [与服务端交互的功能](/zh-CN/guides/sheet/facade/sheet-api#与服务端交互的功能)。
+如果你不满足插件默认提供的功能，你还可以调用 [Facade API](/guides/sheet/getting-started/facade#与服务端配合使用) 来实现自定义的导入和导出的流程，请阅读 [与服务端交互的功能](/zh-CN/guides/sheet/facade/sheet-api#与服务端交互的功能)。
 
 ## 常见问题
 
 ### 如何打开或编辑一个 Excel 文件的 URL 地址？
 
-这里提供一种实现思路供参考，先通过浏览器 API 将 URL 下载转换得到一个 File 对象，然后调用 [Facade API](/guides/sheet/facade/facade#与服务端配合使用) 的 `importXLSXToUnitId` 或者 `importXLSXToSnapshot` 方法导入，参考代码如下：
+这里提供一种实现思路供参考，先通过浏览器 API 将 URL 下载转换得到一个 File 对象，然后调用 [Facade API](/guides/sheet/getting-started/facade#与服务端配合使用) 的 `importXLSXToUnitId` 或者 `importXLSXToSnapshot` 方法导入，参考代码如下：
 
 ```typescript
 const url = 'https://example.com/filename.xlsx'; // 你的 Excel 文件 URL
