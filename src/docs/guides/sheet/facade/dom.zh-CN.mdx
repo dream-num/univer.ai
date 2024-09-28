@@ -11,9 +11,9 @@ Univer提供了多种方式来集成自定义组件，使您能够扩展和定�
 
 ## 1. 在侧边栏中使用自定义组件
 
-### openSidebar 方法 <VersionBadge version="0.3.0+" />
+### openSiderbar 方法 <VersionBadge version="0.3.0+" />
 
-使用 `workbook.openSidebar()` 方法可以在Univer界面中打开一个包含自定义组件的侧边栏。
+使用 `workbook.openSiderbar()` 方法可以在Univer界面中打开一个包含自定义组件的侧边栏。
 
 ```typescript
 import { ComponentManager } from '@univerjs/ui';
@@ -22,12 +22,12 @@ const injector = univer.__getInjector();
 const componentManager = injector.get(ComponentManager);
 
 // 你应该在合适的时机（比如univer加载完成）注册组件
-componentManager.register({
-  componentKey: 'mySidebar',
-  component: () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>,
-});
+componentManager.register(
+  'mySidebar',
+  () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>
+);
 
-const sidebar = workbook.openSidebar({
+const sidebar = workbook.openSiderbar({
   id: 'mySidebar',
   title: '我的侧边栏',
   component: MyCustomSidebarComponent,
@@ -50,10 +50,10 @@ const injector = univer.__getInjector();
 const componentManager = injector.get(ComponentManager);
 
 // 你应该在合适的时机（比如univer加载完成）注册组件
-componentManager.register({
-  componentKey: 'myDialog',
-  component: () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>,
-});
+componentManager.register(
+  'myDialog',
+  () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>
+);
 
 const dialog = workbook.openDialog({
   id: 'myDialog',
@@ -82,10 +82,10 @@ const injector = univer.__getInjector();
 const componentManager = injector.get(ComponentManager);
 
 // 你应该在合适的时机（比如univer加载完成）注册组件
-componentManager.register({
-  componentKey: 'myPopup',
-  component: () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>,
-});
+componentManager.register(
+  'myPopup',
+  () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>
+);
 
 // 将弹出窗口附加到范围的第一个单元格
 // 如果 disposeable 为 null，则表示 popup 添加失败
@@ -117,15 +117,15 @@ import { ComponentManager } from '@univerjs/ui';
 const worksheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // 你应该在合适的时机（比如univer加载完成）注册组件
-componentManager.register({
-  componentKey: 'myFloatDom',
-  component: ({ data }) => (
+componentManager.register(
+  'myFloatDom',
+  ({ data }) => (
         <div style={{ width: '100%', height: '100%', background: '#fff' }}>
             popup content
             {data?.label}
         </div>
     ),
-});
+);
 
 // 添加一个浮动dom
 // 如果 disposeable 为 null，则表示浮动 DOM 添加失败
