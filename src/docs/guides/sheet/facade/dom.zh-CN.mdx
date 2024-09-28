@@ -13,7 +13,9 @@ Univer提供了多种方式来集成自定义组件，使您能够扩展和定�
 
 ### openSiderbar 方法 <VersionBadge version="0.3.0+" />
 
-使用 `workbook.openSiderbar()` 方法可以在Univer界面中打开一个包含自定义组件的侧边栏。
+* 使用 `workbook.openSiderbar(params:ISidebarMethodOptions)` 方法可以在Univer界面中打开一个包含自定义组件的侧边栏。
+* [ISidebarMethodOptions](https://univer.ai/typedoc/@univerjs/ui/interfaces/ISidebarMethodOptions): 完整的参数定义
+
 
 ```typescript
 import { ComponentManager } from '@univerjs/ui';
@@ -23,14 +25,17 @@ const componentManager = injector.get(ComponentManager);
 
 // 你应该在合适的时机（比如univer加载完成）注册组件
 componentManager.register(
-  'mySidebar',
+  'mySidebarComponentKey',
   () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>
 );
 
 const sidebar = workbook.openSiderbar({
-  id: 'mySidebar',
-  title: '我的侧边栏',
-  component: MyCustomSidebarComponent,
+  header: { title: '我的侧边栏' },
+  children: { label: 'mySidebarComponentKey' },
+  onClose: () => {
+      console.log('close');
+  },
+  width: 360,
 });
 
 // 稍后关闭侧边栏
@@ -41,7 +46,8 @@ sidebar.dispose();
 
 ### openDialog 方法 <VersionBadge version="0.3.0+" />
 
-使用 `workbook.openDialog()` 方法可以打开一个包含自定义组件的对话框。
+* 使用 `workbook.openDialog(params: IDialogPartMethodOptions)` 方法可以打开一个包含自定义组件的对话框。
+* [IDialogPartMethodOptions](https://univer.ai/typedoc/@univerjs/ui/type-aliases/IDialogPartMethodOptions): 完整的参数定义
 
 ```typescript
 import { ComponentManager } from '@univerjs/ui';
@@ -51,14 +57,22 @@ const componentManager = injector.get(ComponentManager);
 
 // 你应该在合适的时机（比如univer加载完成）注册组件
 componentManager.register(
-  'myDialog',
+  'myDialogComponentKey',
   () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>
 );
 
 const dialog = workbook.openDialog({
+  // unique id
   id: 'myDialog',
-  title: '我的对话框',
-  body: MyCustomDialogComponent,
+  draggable: true,
+  width: 300,
+  title: { title: 'Dialog title' },
+  children: { 
+    label: 'myDialogComponentKey'
+  },
+  destroyOnClose: true,
+  preservePositionOnDestroy: true,
+  onClose: () => {},
 });
 
 // 稍后关闭对话框
@@ -108,7 +122,7 @@ disposable.dispose();
 * 浮动DOM是悬浮在sheet上的可拖动组件，同时支持持久化存储。
 * 需要在 univer 渲染完成之后调用.
 * `componentKey` 必须传已注册的组件id 或者react/vue3组件 如果是 vue3组件必须标明isVue3。
-
+* [完整的参数定义](https://univer.ai/typedoc/@univerjs/sheets-drawing-ui/interfaces/ICanvasFloatDom)
 
 [demo](https://stackblitz.com/edit/awesome-univer-sheets-vite-demo-fqsu99?file=package.json,src%2Fmain.tsx)
 
@@ -162,8 +176,14 @@ disposeable.dispose();
 const range = sheet.getRange("A1:B2");
 const alertDisposable = range.attachAlertPopup({
   key: "myAlert",
+  title: "这是一个警告！",
   message: "这是一个警告！",
-  type: "warning"
+  width: 300,
+  height: 200,
+  // 0: 信息
+  // 1: 警告
+  // 2: 错误
+  type: 0
 });
 
 // 稍后移除警告

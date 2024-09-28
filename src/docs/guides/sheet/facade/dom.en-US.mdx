@@ -13,7 +13,8 @@ Univer provides multiple ways to integrate custom components, allowing you to ex
 
 ### openSiderbar Method <VersionBadge version="0.3.0+" />
 
-Use the `workbook.openSiderbar()` method to open a sidebar containing custom components in the Univer interface.
+* Use the `workbook.openSiderbar(params: ISidebarMethodOptions)` method to open a sidebar containing custom components in the Univer interface.
+* [ISidebarMethodOptions](https://univer.ai/typedoc/@univerjs/ui/interfaces/ISidebarMethodOptions): Full parameter definition
 
 ```typescript
 import { ComponentManager } from '@univerjs/ui';
@@ -28,9 +29,12 @@ componentManager.register(
 );
 
 const sidebar = workbook.openSiderbar({
-  id: 'mySidebar',
-  title: 'My Sidebar',
-  component: MyCustomSidebarComponent,
+  header: { title: 'My Sidebar' },
+  children: { label: 'mySidebar' },
+  onClose: () => {
+      console.log('close');
+  },
+  width: 360,
 });
 
 // Close the sidebar later
@@ -41,7 +45,8 @@ sidebar.dispose();
 
 ### openDialog Method <VersionBadge version="0.3.0+" />
 
-Use the `workbook.openDialog()` method to open a dialog containing custom components.
+* Use the `workbook.openDialog(params: IDialogPartMethodOptions)` method to open a dialog containing custom components.
+* [IDialogPartMethodOptions](https://univer.ai/typedoc/@univerjs/ui/type-aliases/IDialogPartMethodOptions): Full parameter definition
 
 ```typescript
 import { ComponentManager } from '@univerjs/ui';
@@ -160,8 +165,14 @@ Use the `range.attachAlertPopup()` method to attach an alert popup to the starti
 const range = sheet.getRange("A1:B2");
 const alertDisposable = range.attachAlertPopup({
   key: "myAlert",
-  message: "This is a warning!",
-  type: "warning"
+  title: "这是一个警告！",
+  message: "这是一个警告！",
+  width: 300,
+  height: 200,
+  // 0: 信息
+  // 1: 警告
+  // 2: 错误
+  type: 0
 });
 
 // Remove the alert later
