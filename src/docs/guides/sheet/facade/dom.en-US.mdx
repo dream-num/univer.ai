@@ -11,9 +11,9 @@ Univer provides multiple ways to integrate custom components, allowing you to ex
 
 ## 1. Using Custom Components in the Sidebar
 
-### openSidebar Method <VersionBadge version="0.3.0+" />
+### openSiderbar Method <VersionBadge version="0.3.0+" />
 
-Use the `workbook.openSidebar()` method to open a sidebar containing custom components in the Univer interface.
+Use the `workbook.openSiderbar()` method to open a sidebar containing custom components in the Univer interface.
 
 ```typescript
 import { ComponentManager } from '@univerjs/ui';
@@ -27,7 +27,7 @@ componentManager.register(
    () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>,
 );
 
-const sidebar = workbook.openSidebar({
+const sidebar = workbook.openSiderbar({
   id: 'mySidebar',
   title: 'My Sidebar',
   component: MyCustomSidebarComponent,

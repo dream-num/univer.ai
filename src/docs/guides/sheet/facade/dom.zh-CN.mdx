@@ -11,9 +11,9 @@ Univer提供了多种方式来集成自定义组件，使您能够扩展和定�
 
 ## 1. 在侧边栏中使用自定义组件
 
-### openSidebar 方法 <VersionBadge version="0.3.0+" />
+### openSiderbar 方法 <VersionBadge version="0.3.0+" />
 
-使用 `workbook.openSidebar()` 方法可以在Univer界面中打开一个包含自定义组件的侧边栏。
+使用 `workbook.openSiderbar()` 方法可以在Univer界面中打开一个包含自定义组件的侧边栏。
 
 ```typescript
 import { ComponentManager } from '@univerjs/ui';
@@ -27,7 +27,7 @@ componentManager.register(
   () => <div style={{ width: 100, height: 100, background: '#fff' }}>弹出内容</div>
 );
 
-const sidebar = workbook.openSidebar({
+const sidebar = workbook.openSiderbar({
   id: 'mySidebar',
   title: '我的侧边栏',
   component: MyCustomSidebarComponent,
