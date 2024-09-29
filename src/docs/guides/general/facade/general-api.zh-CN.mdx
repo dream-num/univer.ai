@@ -167,6 +167,40 @@ univerAPI.executeCommand(CopyCommand.id)
 univerAPI.executeCommand(PasteCommand.id)
 ```
 
+## 基础事件
+
+如何使用：
+```typescript
+const univerAPI = FUniver.newAPI(univer);
+
+univerAPI.getHooks().onStarting(() => {
+  console.log('Starting');
+})
+```
+### 完整基础事件列表
+
+| 方法                      | 描述                                                                                                     | 回调参数                                  | 返回值                          |
+|--------------------------|----------------------------------------------------------------------------------------------------------|-------------------------------------------|--------------------------------|
+| **生命周期钩子**           |                                                                                                          |                                           |                                |
+| `onStarting`              | 当生命周期阶段为 `Starting` 时触发。                                                                      | `callback: () => void`                    | `IDisposable` 用于取消订阅      |
+| `onReady`                 | 当生命周期阶段为 `Ready` 时触发。                                                                         | `callback: () => void`                    | `IDisposable` 用于取消订阅      |
+| `onRendered`              | 当生命周期阶段为 `Rendered` 时触发。                                                                      | `callback: () => void`                    | `IDisposable` 用于取消订阅      |
+| `onSteady`                | 当生命周期阶段为 `Steady` 时触发。                                                                        | `callback: () => void`                    | `IDisposable` 用于取消订阅      |
+| **撤销/重做钩子**         |                                                                                                          |                                           |                                |
+| `onBeforeUndo`            | 在执行撤销操作之前触发。                                                                                 | `callback: (action: IUndoRedoItem) => void` | `IDisposable` 用于取消订阅      |
+| `onUndo`                  | 在执行撤销操作之后触发。                                                                                 | `callback: (action: IUndoRedoItem) => void` | `IDisposable` 用于取消订阅      |
+| `onBeforeRedo`            | 在执行重做操作之前触发。                                                                                 | `callback: (action: IUndoRedoItem) => void` | `IDisposable` 用于取消订阅      |
+| `onRedo`                  | 在执行重做操作之后触发。                                                                                 | `callback: (action: IUndoRedoItem) => void` | `IDisposable` 用于取消订阅      |
+| **剪贴板钩子**            |                                                                                                          |                                           |                                |
+| `onBeforeCopy`            | 在执行复制操作之前触发。                                                                                 | `callback: () => void`                    | `IDisposable` 用于取消订阅      |
+| `onCopy`                  | 在执行复制操作之后触发。                                                                                 | `callback: () => void`                    | `IDisposable` 用于取消订阅      |
+| `onBeforePaste`           | 在执行粘贴操作之前触发。                                                                                 | `callback: () => void`                    | `IDisposable` 用于取消订阅      |
+| `onPaste`                 | 在执行粘贴操作之后触发。                                                                                 | `callback: () => void`                    | `IDisposable` 用于取消订阅      |
+
+### 通用返回值
+
+所有这些方法都会返回一个 `IDisposable` 对象，该对象可以用于取消事件订阅，当不再需要监听时使用。
+
 ## UI
 
 请参考下面文档来拓展 Univer 的 UI :
