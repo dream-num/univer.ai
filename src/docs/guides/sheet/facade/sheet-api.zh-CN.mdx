@@ -215,17 +215,19 @@ univerAPI.importXLSXToSnapshot(file).then((data)=>{
 
 ### 通过 `unitId` 导出 XLSX
 
-使用 API `exportXLSXByUnitId` 传入 `unitId` 参数，返回一个 File 对象。
+使用 API `exportXLSXByUnitId` 传入 `unitId` 参数，返回一个 `File` 对象，可以使用 `downloadFile` 下载文件或进一步处理。
 
 ```typescript
+import { downloadFile } from '@univerjs-pro/exchange-client';
 univerAPI.exportXLSXByUnitId(unitId).then((file)=>{
-  console.log(file)
+  console.log(file);
+  downloadFile(file, 'univer', 'xlsx'); // 下载文件
 })
 ```
 
 ### 通过 Workbook 数据导出 XLSX
 
-使用 API `exportXLSXBySnapshot` 传入 `IWorkbookData` 格式的表格数据, 返回一个 File 对象。
+使用 API `exportXLSXBySnapshot` 传入 `IWorkbookData` 格式的表格数据, 返回一个 `File` 对象。
 
 可参考[获取工作簿数据](/guides/sheet/facade/sheet-api#获取工作簿数据)获取 `IWorkbookData` 格式的数据。
 
