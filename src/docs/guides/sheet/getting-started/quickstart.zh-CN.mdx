@@ -106,113 +106,60 @@ import { Callout } from 'nextra/components'
 
       ```html
       <!DOCTYPE html>
-      <html lang="en">
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>
-          Univer UMD With Collaboration, Live Share, Print, Exchange
-        </title>
-        <script src="https://unpkg.com/@univerjs/umd/lib/univer.full.umd.js"></script>
-        <script src="https://unpkg.com/@univerjs/umd/lib/locale/zh-CN.js"></script>
-        <link rel="stylesheet" href="https://unpkg.com/@univerjs/umd/lib/univer.css">
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>
+            Univer UMD With Collaboration, Live Share, Print, Exchange
+          </title>
+          <script src="https://unpkg.com/@univerjs/umd/lib/univer.full.umd.js"></script>
+          <script src="https://unpkg.com/@univerjs/umd/lib/locale/zh-CN.js"></script>
+          <link rel="stylesheet" href="https://unpkg.com/@univerjs/umd/lib/univer.css">
+        
+          <script src="https://unpkg.com/@univerjs-pro/license/lib/umd/index.js"></script>
+          
+          <script src="https://unpkg.com/@univerjs-pro/collaboration/lib/umd/index.js"></script>
+          <script src="https://unpkg.com/@univerjs-pro/collaboration-client/lib/umd/index.js"></script>
+          <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/collaboration-client/lib/index.css">
+        
+          <script src="https://unpkg.com/@univerjs-pro/live-share/lib/umd/index.js"></script>
+          <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/live-share/lib/index.css">
+        
+          <script src="https://unpkg.com/@univerjs-pro/print/lib/umd/index.js"></script>
+          <script src="https://unpkg.com/@univerjs-pro/sheets-print/lib/umd/index.js"></script>
+          <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/sheets-print/lib/index.css">
+        
+          <script src="https://unpkg.com/@univerjs-pro/exchange-client/lib/umd/index.js"></script>
+          <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/exchange-client/lib/index.css">
+        
+          <script src="https://unpkg.com/@univerjs-pro/sheets-exchange-client/lib/umd/index.js"></script>
 
-        <script src="https://unpkg.com/lodash/lodash.js"></script>
-        <script> window.lodash = _ </script>
+          <script src="https://unpkg.com/@univerjs-pro/engine-pivot/lib/umd/index.js"></script>
+          <script src="https://unpkg.com/@univerjs-pro/sheets-pivot/lib/umd/index.js"></script>
+          <script src="https://unpkg.com/@univerjs-pro/sheets-pivot-ui/lib/umd/index.js"></script>
+          <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/sheets-pivot-ui/lib/index.css">
 
-        <script src="https://unpkg.com/@univerjs-pro/collaboration/lib/umd/index.js"></script>
-        <script src="https://unpkg.com/@univerjs-pro/collaboration-client/lib/umd/index.js"></script>
-        <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/collaboration-client/lib/index.css">
-
-        <script src="https://unpkg.com/@univerjs-pro/live-share/lib/umd/index.js"></script>
-        <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/live-share/lib/index.css">
-
-        <script src="https://unpkg.com/@univerjs-pro/print/lib/umd/index.js"></script>
-        <script src="https://unpkg.com/@univerjs-pro/sheets-print/lib/umd/index.js"></script>
-        <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/sheets-print/lib/index.css">
-
-        <script src="https://unpkg.com/@univerjs-pro/exchange-client/lib/umd/index.js"></script>
-        <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/exchange-client/lib/index.css">
-
-        <script src="https://unpkg.com/@univerjs-pro/sheets-exchange-client/lib/umd/index.js"></script>
-        <style>
-          body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-          }
-
-          #app {
-            height: 100vh;
-            width: 100vw;
-          }
-        </style>
-      </head>
-
-      <body>
-        <div id="app"></div>
-
-        <script>
-          // 你好，开发者，这是一个简单的示例，展示如何使用 Univer UMD 实现协作、实时共享、打印和导入导出功能
-          // 如果你想使用协作、实时共享、打印和交换功能，你需要配置 `universerEndpoint`
-          // `universerEndpoint` 是提供协作、实时共享、打印和交换服务的 Univer 后端服务器地址
-          // 你可以在自己的服务器上部署 Univer 服务器，详见部署指南：https://univer.ai/zh-CN/guides/sheet/server/docker
-
-          const universerEndpoint = 'localhost:8000';
-
-          // 协同插件从 URL 中获取 unit 参数，如果没有 unit 参数，则创建一个新的 unit
-          const url = new URL(window.location.href)
-          const unit = url.searchParams.get('unit')
-          if (unit) {
-
-            // 加载协作、打印、交换的国际化资源
-            Promise.all([
-              fetch('https://unpkg.com/@univerjs-pro/collaboration-client/lib/locale/zh-CN.json').then(res => res.json()),
-              fetch('https://unpkg.com/@univerjs-pro/sheets-print/lib/locale/zh-CN.json').then(res => res.json()),
-              fetch('https://unpkg.com/@univerjs-pro/exchange-client/lib/locale/zh-CN.json').then(res => res.json()),
-            ]).then(([
-              collaborationLocale,
-              printLocale,
-              exchangeLocale
-            ]) => {
-              setup({
-                ...collaborationLocale,
-                ...printLocale,
-                ...exchangeLocale
-              });
-            })
-          } else {
-            const { UniverInstanceType } = window.UniverCore;
-            fetch(`http://${universerEndpoint}/universer-api/snapshot/${UniverInstanceType.UNIVER_SHEET}/unit/-/create`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                type: UniverInstanceType.UNIVER_SHEET,
-                name: 'New Sheet By Univer',
-                creator: 'user',
-              }),
-            }).then((response) => {
-              if (!response.ok) {
-                throw new Error('Failed to create new sheet')
-              }
-
-              return response.json()
-            }).then((data) => {
-              if (!data.unitID) {
-                throw new Error('create unit failed')
-              }
-
-              url.searchParams.set('unit', data.unitID)
-              url.searchParams.set('type', String(UniverInstanceType.UNIVER_SHEET))
-              window.location.href = url.toString()
-            }).catch((error) => {
-              console.error(error)
-            })
-          }
-
-          const setup = (extLocale) => {
+          <script src="https://unpkg.com/@univerjs-pro/edit-history-viewer/lib/umd/index.js"></script>
+          <script src="https://unpkg.com/@univerjs-pro/edit-history-loader/lib/umd/index.js"></script>
+          <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/edit-history-viewer/lib/index.css">
+          <style>
+            body {
+              margin: 0;
+              padding: 0;
+              font-family: Arial, sans-serif;
+            }
+        
+            #app {
+              height: 100vh;
+              width: 100vw;
+            }
+          </style>
+        </head>
+        
+        <body>
+          <div id="app"></div>
+          <script>
             var {
               UniverCore,
               UniverDesign,
@@ -227,104 +174,185 @@ import { Callout } from 'nextra/components'
               UniverCollaboration,
               UniverCollaborationClient,
               UniverSheetsThreadComment,
-              UniverSheetsFormula: { UniverSheetsFormulaPlugin },
-              UniverExchangeClient: { UniverExchangeClientPlugin },
-              UniverSheetsExchangeClient: { UniverSheetsExchangeClientPlugin },
-            } = window
-
-            var univer = new UniverCore.Univer({
-              theme: UniverDesign.defaultTheme,
-              locale: UniverCore.LocaleType.ZH_CN,
-              locales: {
-                [UniverCore.LocaleType.ZH_CN]: {
-                  ...UniverUMD['zh-CN'],
-                  ...extLocale
+              UniverExchangeClient,
+              UniverFacade
+            } = window;
+            var { UniverSheetsFormulaPlugin } = UniverSheetsFormula;
+            var { UniverSheetsExchangeClientPlugin } = UniverSheetsExchangeClient;
+            var { UniverSheetsNumfmtPlugin } = UniverSheetsNumfmt;
+            var { UniverDocsPlugin } = UniverDocs;
+            var { UniverRenderEnginePlugin } = UniverEngineRender;
+            var { UniverFormulaEnginePlugin } = UniverEngineFormula;
+            var { UniverUIPlugin } = UniverUi;
+            var { UniverDocsUIPlugin } = UniverDocsUi;
+            var { UniverSheetsPlugin } = UniverSheets;
+            var { UniverSheetsUIPlugin } = UniverSheetsUi;
+            var { UniverSheetsPivotTablePlugin } = UniverSheetsPivot;
+            var { UniverSheetsPivotTableUIPlugin } = UniverSheetsPivotUi;
+            var { UniverEditHistoryLoaderPlugin } = UniverEditHistoryLoader;
+            var { UniverCollaborationPlugin } = UniverCollaboration;
+            var { UniverCollaborationClientPlugin } = UniverCollaborationClient;
+            var { UniverLiveSharePlugin } = UniverLiveShare;
+            var { UniverSheetsPrintPlugin } = UniverSheetsPrint;
+            var { UniverSheetsThreadCommentPlugin, IThreadCommentMentionDataService } = UniverSheetsThreadComment;
+            var { defaultTheme, greenTheme } = UniverDesign;
+            var { FUniver } = UniverFacade;
+            var { UniverExchangeClientPlugin }= UniverExchangeClient;
+            var {UniverLicensePlugin} = UniverLicense;
+            var {
+              UniverInstanceType,
+              Tools,
+              IUndoRedoService,
+              IAuthzIoService,
+              LocaleType,
+              Univer,
+              IConfigService
+            } = window.UniverCore;
+          </script>
+          <script>
+            // 你好，开发者，这是一个简单的示例，展示如何使用 Univer UMD 实现协作、实时共享、打印和导入导出功能
+            // 如果你想使用协作、实时共享、打印和交换功能，你需要配置 `universerEndpoint`
+            // `universerEndpoint` 是提供协作、实时共享、打印和交换服务的 Univer 后端服务器地址
+            // 你可以在自己的服务器上部署 Univer 服务器，详见部署指南：https://univer.ai/zh-CN/guides/sheet/server/docker
+        
+            const universerEndpoint = 'localhost:8000';
+        
+            // 协同插件从 URL 中获取 unit 参数，如果没有 unit 参数，则创建一个新的 unit
+            const url = new URL(window.location.href)
+            const unit = url.searchParams.get('unit')
+            if (unit) {
+        
+              // 加载协作、打印、交换的国际化资源
+              Promise.all([
+                fetch('https://unpkg.com/@univerjs-pro/collaboration-client/lib/locale/zh-CN.json').then(res => res.json()),
+                fetch('https://unpkg.com/@univerjs-pro/sheets-print/lib/locale/zh-CN.json').then(res => res.json()),
+                fetch('https://unpkg.com/@univerjs-pro/exchange-client/lib/locale/zh-CN.json').then(res => res.json()),
+                fetch('https://unpkg.com/@univerjs-pro/edit-history-viewer/lib/locale/zh-CN.json').then(res => res.json()),
+                fetch('https://unpkg.com/@univerjs-pro/sheets-pivot/lib/locale/zh-CN.json').then(res => res.json()),
+                fetch('https://unpkg.com/@univerjs-pro/sheets-pivot-ui/lib/locale/zh-CN.json').then(res => res.json()),
+            ]).then((langs) => {
+                setup(Tools.deepMerge(UniverUMD['zh-CN'],...langs));
+              })
+            } else {
+              const { UniverInstanceType } = window.UniverCore;
+              fetch(`http://${universerEndpoint}/universer-api/snapshot/${UniverInstanceType.UNIVER_SHEET}/unit/-/create`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
                 },
-              },
-              override: [
-                [UniverCore.IAuthzIoService, null],
-                [UniverCore.IUndoRedoService, null]
-              ]
-            });
-            univer.registerPlugin(UniverDocs.UniverDocsPlugin);
-
-            univer.registerPlugin(UniverEngineRender.UniverRenderEnginePlugin);
-            univer.registerPlugin(UniverEngineFormula.UniverFormulaEnginePlugin);
-            univer.registerPlugin(UniverSheetsFormulaPlugin);
-
-            univer.registerPlugin(UniverUi.UniverUIPlugin, {
-              container: "app",
-            });
-
-            univer.registerPlugin(UniverDocsUi.UniverDocsUIPlugin);
-
-            univer.registerPlugin(UniverSheets.UniverSheetsPlugin);
-            univer.registerPlugin(UniverSheetsUi.UniverSheetsUIPlugin);
-
-            const { IThreadCommentMentionDataService, UniverSheetsThreadCommentPlugin } = UniverSheetsThreadComment;
-            const mockUser = {
-              userID: 'mockId',
-              name: 'MockUser',
-              avatar: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAInSURBVHgBtZU9TxtBEIbfWRzFSIdkikhBSqRQkJqkCKTCFkqVInSUSaT0wC8w/gXxD4gU2nRJkXQWhAZowDUUWKIwEgWWbEEB3mVmx3dn4DA2nB/ppNuPeWd29mMIPXDr+RxwtgRHeW6+guNPRxogqnL7Dwz9psJ27S4NShaeZTH3kwXy6I81dlRKcmRui88swdq9AcSFL7Buz1Vmlns64MiLsCjzwnIYHLH57tbfFbs7KRaXyEU8FVZofqccOfA5l7Q8LPIkGrwnb2RPNEXWFVMUF3L+kDCk0btDDAMzOm5YfAHDwp4tG74wnzAsiOYMnJ3GoDybA7IT98/jm5+JNnfiIzAS6LlqHQBN/i6b2t/cV1Hh6BfwYlHnHP4AXi5q/8kmMMpOs8+BixZw/Fd6xUEHEbnkgclvQP2fGp7uShRKnQ3G32rkjV1th8JhIGG7tR/JyjGteSOZELwGMmNqIIigRCLRh2OZIE6BjItdd7pCW6Uhm1zzkUtungSxwEUzNpQ+GQumtH1ej1MqgmNT6vwmhCq5yuwq56EYTbgeQUz3yvrpV1b4ok3nYJ+eYhgYmjRUqErx2EDq0Fr8FhG++iqVGqxlUJI/70Ar0UgJaWHj6hYVHJrfKssAHot1JfqwE9WVWzXZVd5z2Ws/4PnmtEjkXeKJDvxUecLbWOXH/DP6QQ4J72NS0adedp1aseBfXP8odlZFfPvBF7SN/8hky1TYuPOAXAEipMx15u5ToAAAAABJRU5ErkJggg==',
-              anonymous: false,
-              canBindAnonymous: false,
-            };
-            class CustomMentionDataService {
-              trigger = '@';
-
-              async getMentions (search) {
-                return [
-                  {
-                    id: mockUser.userID,
-                    label: mockUser.name,
-                    type: 'user',
-                    icon: mockUser.avatar,
-                  },
-                  {
-                    id: '2',
-                    label: 'User2',
-                    type: 'user',
-                    icon: mockUser.avatar,
-                  },
-                ];
-              }
+                body: JSON.stringify({
+                  type: UniverInstanceType.UNIVER_SHEET,
+                  name: 'New Sheet By Univer',
+                  creator: 'user',
+                }),
+              }).then((response) => {
+                if (!response.ok) {
+                  throw new Error('Failed to create new sheet')
+                }
+        
+                return response.json()
+              }).then((data) => {
+                if (!data.unitID) {
+                  throw new Error('create unit failed')
+                }
+        
+                url.searchParams.set('unit', data.unitID)
+                url.searchParams.set('type', String(UniverInstanceType.UNIVER_SHEET))
+                window.location.href = url.toString()
+              }).catch((error) => {
+                console.error(error)
+              })
             }
-
-            univer.registerPlugin(UniverSheetsThreadCommentPlugin, {
-              overrides: [[IThreadCommentMentionDataService, { useClass: CustomMentionDataService }]],
-            });
-
-            // 注册协同插件
-            univer.registerPlugin(UniverCollaboration.UniverCollaborationPlugin);
-            univer.registerPlugin(UniverCollaborationClient.UniverCollaborationClientPlugin, {
-              authzUrl: `http://${universerEndpoint}/universer-api/authz`,
-              snapshotServerUrl: `http://${universerEndpoint}/universer-api/snapshot`,
-              collabSubmitChangesetUrl: `http://${universerEndpoint}/universer-api/comb`,
-              collabWebSocketUrl: `http://${universerEndpoint}/universer-api/comb/connect`,
-              // 如果你使用了导入导出插件，需要配置以下参数
-              uploadFileServerUrl: `http://${universerEndpoint}/universer-api/stream/file/upload`,
-              signUrlServerUrl: `http://${universerEndpoint}/universer-api/file/{fileID}/sign-url`,
-            });
-
-            // 注册实时共享插件
-            univer.registerPlugin(UniverLiveShare.UniverLiveSharePlugin)
-
-            // 注册打印插件
-            univer.registerPlugin(UniverSheetsPrint.UniverSheetsPrintPlugin)
-
-            // 注册导入导出插件
-            univer.registerPlugin(UniverExchangeClientPlugin, {
-              uploadFileServerUrl: `http://${universerEndpoint}/universer-api/stream/file/upload`,
-              importServerUrl: `http://${universerEndpoint}/universer-api/exchange/{type}/import`,
-              exportServerUrl: `http://${universerEndpoint}/universer-api/exchange/{type}/export`,
-              getTaskServerUrl: `http://${universerEndpoint}/universer-api/exchange/task/{taskID}`,
-              signUrlServerUrl: `http://${universerEndpoint}/universer-api/file/{fileID}/sign-url`,
-            })
-            univer.registerPlugin(UniverSheetsExchangeClientPlugin)
-          }
-        </script>
-      </body>
-      </html>
+        
+            const setup = (locales) => {
+              var univer = new Univer({
+                theme: defaultTheme,
+                locale: LocaleType.ZH_CN,
+                locales:{
+                    [LocaleType.ZH_CN]: locales,
+                },
+                override: [
+                  [IAuthzIoService, null],
+                  [IUndoRedoService, null]
+                ]
+              });
+              univer.registerPlugin(UniverRenderEnginePlugin);
+              univer.registerPlugin(UniverDocsPlugin);
+              univer.registerPlugin(UniverFormulaEnginePlugin);
+              univer.registerPlugin(UniverSheetsFormulaPlugin);
+        
+              univer.registerPlugin(UniverUIPlugin, {
+                container: "app",
+              });
+        
+              univer.registerPlugin(UniverDocsUIPlugin);
+        
+              univer.registerPlugin(UniverSheetsPlugin);
+              univer.registerPlugin(UniverSheetsUIPlugin);
+        
+              const mockUser = {
+                userID: 'mockId',
+                name: 'MockUser',
+                avatar: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAInSURBVHgBtZU9TxtBEIbfWRzFSIdkikhBSqRQkJqkCKTCFkqVInSUSaT0wC8w/gXxD4gU2nRJkXQWhAZowDUUWKIwEgWWbEEB3mVmx3dn4DA2nB/ppNuPeWd29mMIPXDr+RxwtgRHeW6+guNPRxogqnL7Dwz9psJ27S4NShaeZTH3kwXy6I81dlRKcmRui88swdq9AcSFL7Buz1Vmlns64MiLsCjzwnIYHLH57tbfFbs7KRaXyEU8FVZofqccOfA5l7Q8LPIkGrwnb2RPNEXWFVMUF3L+kDCk0btDDAMzOm5YfAHDwp4tG74wnzAsiOYMnJ3GoDybA7IT98/jm5+JNnfiIzAS6LlqHQBN/i6b2t/cV1Hh6BfwYlHnHP4AXi5q/8kmMMpOs8+BixZw/Fd6xUEHEbnkgclvQP2fGp7uShRKnQ3G32rkjV1th8JhIGG7tR/JyjGteSOZELwGMmNqIIigRCLRh2OZIE6BjItdd7pCW6Uhm1zzkUtungSxwEUzNpQ+GQumtH1ej1MqgmNT6vwmhCq5yuwq56EYTbgeQUz3yvrpV1b4ok3nYJ+eYhgYmjRUqErx2EDq0Fr8FhG++iqVGqxlUJI/70Ar0UgJaWHj6hYVHJrfKssAHot1JfqwE9WVWzXZVd5z2Ws/4PnmtEjkXeKJDvxUecLbWOXH/DP6QQ4J72NS0adedp1aseBfXP8odlZFfPvBF7SN/8hky1TYuPOAXAEipMx15u5ToAAAAABJRU5ErkJggg==',
+                anonymous: false,
+                canBindAnonymous: false,
+              };
+              class CustomMentionDataService {
+                trigger = '@';
+        
+                async getMentions (search) {
+                  return [
+                    {
+                      id: mockUser.userID,
+                      label: mockUser.name,
+                      type: 'user',
+                      icon: mockUser.avatar,
+                    },
+                    {
+                      id: '2',
+                      label: 'User2',
+                      type: 'user',
+                      icon: mockUser.avatar,
+                    },
+                  ];
+                }
+              }
+        
+              univer.registerPlugin(UniverSheetsThreadCommentPlugin, {
+                overrides: [[IThreadCommentMentionDataService, { useClass: CustomMentionDataService }]],
+              });
+        
+              // 注册协同插件
+              univer.registerPlugin(UniverCollaborationPlugin);
+              univer.registerPlugin(UniverCollaborationClientPlugin, {
+                authzUrl: `http://${universerEndpoint}/universer-api/authz`,
+                snapshotServerUrl: `http://${universerEndpoint}/universer-api/snapshot`,
+                collabSubmitChangesetUrl: `http://${universerEndpoint}/universer-api/comb`,
+                collabWebSocketUrl: `http://${universerEndpoint}/universer-api/comb/connect`,
+                // 如果你使用了导入导出插件，需要配置以下参数
+                uploadFileServerUrl: `http://${universerEndpoint}/universer-api/stream/file/upload`,
+                signUrlServerUrl: `http://${universerEndpoint}/universer-api/file/{fileID}/sign-url`,
+              });
+        
+              // 注册实时共享插件
+              univer.registerPlugin(UniverLiveSharePlugin)
+        
+              // 注册打印插件
+              univer.registerPlugin(UniverSheetsPrintPlugin)
+        
+              // 注册导入导出插件
+              univer.registerPlugin(UniverExchangeClientPlugin, {
+                uploadFileServerUrl: `http://${universerEndpoint}/universer-api/stream/file/upload`,
+                importServerUrl: `http://${universerEndpoint}/universer-api/exchange/{type}/import`,
+                exportServerUrl: `http://${universerEndpoint}/universer-api/exchange/{type}/export`,
+                getTaskServerUrl: `http://${universerEndpoint}/universer-api/exchange/task/{taskID}`,
+                signUrlServerUrl: `http://${universerEndpoint}/universer-api/file/{fileID}/sign-url`,
+              })
+              univer.registerPlugin(UniverSheetsExchangeClientPlugin)
+            }
+          </script>
+        </body>
+        </html>
       ```
     </Tabs.Tab>
   </Tabs>

@@ -116,42 +116,99 @@ Of course, you may want more than just the basics. If you're looking to add feat
         <script src="https://unpkg.com/@univerjs/umd/lib/univer.full.umd.js"></script>
         <script src="https://unpkg.com/@univerjs/umd/lib/locale/en-US.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/@univerjs/umd/lib/univer.css">
-
-        <script src="https://unpkg.com/lodash/lodash.js"></script>
-        <script> window.lodash = _ </script>
-
+      
+        <script src="https://unpkg.com/@univerjs-pro/license/lib/umd/index.js"></script>
+        
         <script src="https://unpkg.com/@univerjs-pro/collaboration/lib/umd/index.js"></script>
         <script src="https://unpkg.com/@univerjs-pro/collaboration-client/lib/umd/index.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/collaboration-client/lib/index.css">
-
+      
         <script src="https://unpkg.com/@univerjs-pro/live-share/lib/umd/index.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/live-share/lib/index.css">
-
+      
         <script src="https://unpkg.com/@univerjs-pro/print/lib/umd/index.js"></script>
         <script src="https://unpkg.com/@univerjs-pro/sheets-print/lib/umd/index.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/sheets-print/lib/index.css">
-
+      
         <script src="https://unpkg.com/@univerjs-pro/exchange-client/lib/umd/index.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/exchange-client/lib/index.css">
-
+      
         <script src="https://unpkg.com/@univerjs-pro/sheets-exchange-client/lib/umd/index.js"></script>
+
+        <script src="https://unpkg.com/@univerjs-pro/engine-pivot/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs-pro/sheets-pivot/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs-pro/sheets-pivot-ui/lib/umd/index.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/sheets-pivot-ui/lib/index.css">
+
+        <script src="https://unpkg.com/@univerjs-pro/edit-history-viewer/lib/umd/index.js"></script>
+        <script src="https://unpkg.com/@univerjs-pro/edit-history-loader/lib/umd/index.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/@univerjs-pro/edit-history-viewer/lib/index.css">
         <style>
           body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
           }
-
+      
           #app {
             height: 100vh;
             width: 100vw;
           }
         </style>
       </head>
-
+      
       <body>
         <div id="app"></div>
-
+        <script>
+          var {
+            UniverCore,
+            UniverDesign,
+            UniverEngineRender,
+            UniverEngineFormula,
+            UniverDocs,
+            UniverDocsUi,
+            UniverUi,
+            UniverSheets,
+            UniverSheetsUi,
+            UniverSheetsNumfmt,
+            UniverCollaboration,
+            UniverCollaborationClient,
+            UniverSheetsThreadComment,
+            UniverExchangeClient,
+            UniverFacade
+          } = window;
+          var { UniverSheetsFormulaPlugin } = UniverSheetsFormula;
+          var { UniverSheetsExchangeClientPlugin } = UniverSheetsExchangeClient;
+          var { UniverSheetsNumfmtPlugin } = UniverSheetsNumfmt;
+          var { UniverDocsPlugin } = UniverDocs;
+          var { UniverRenderEnginePlugin } = UniverEngineRender;
+          var { UniverFormulaEnginePlugin } = UniverEngineFormula;
+          var { UniverUIPlugin } = UniverUi;
+          var { UniverDocsUIPlugin } = UniverDocsUi;
+          var { UniverSheetsPlugin } = UniverSheets;
+          var { UniverSheetsUIPlugin } = UniverSheetsUi;
+          var { UniverSheetsPivotTablePlugin } = UniverSheetsPivot;
+          var { UniverSheetsPivotTableUIPlugin } = UniverSheetsPivotUi;
+          var { UniverEditHistoryLoaderPlugin } = UniverEditHistoryLoader;
+          var { UniverCollaborationPlugin } = UniverCollaboration;
+          var { UniverCollaborationClientPlugin } = UniverCollaborationClient;
+          var { UniverLiveSharePlugin } = UniverLiveShare;
+          var { UniverSheetsPrintPlugin } = UniverSheetsPrint;
+          var { UniverSheetsThreadCommentPlugin, IThreadCommentMentionDataService } = UniverSheetsThreadComment;
+          var { defaultTheme, greenTheme } = UniverDesign;
+          var { FUniver } = UniverFacade;
+          var { UniverExchangeClientPlugin }= UniverExchangeClient;
+          var {UniverLicensePlugin} = UniverLicense;
+          var {
+            UniverInstanceType,
+            Tools,
+            IUndoRedoService,
+            IAuthzIoService,
+            LocaleType,
+            Univer,
+            IConfigService
+          } = window.UniverCore;
+        </script>
         <script>
           // Hi, developer, this is a simple example to show how to use Univer UMD with collaboration, live share, print, exchange
           // If you want to use the collaboration, live share, print, exchange, you need to config the endpoint
@@ -159,27 +216,22 @@ Of course, you may want more than just the basics. If you're looking to add feat
           // You can deploy the universer server on your own server, see the deployment guide: https://univer.ai/guides/sheet/server/docker
 
           const universerEndpoint = 'localhost:8000';
-
+      
           // check if the unit is already created
           const url = new URL(window.location.href)
           const unit = url.searchParams.get('unit')
           if (unit) {
-
-            // load the locale
+      
+            // load the business locale
             Promise.all([
               fetch('https://unpkg.com/@univerjs-pro/collaboration-client/lib/locale/en-US.json').then(res => res.json()),
               fetch('https://unpkg.com/@univerjs-pro/sheets-print/lib/locale/en-US.json').then(res => res.json()),
-              fetch('https://unpkg.com/@univerjs-pro/exchange-client/lib/locale/en-US.json').then(res => res.json())
-            ]).then(([
-              collaborationLocale,
-              printLocale,
-              exchangeLocale
-            ]) => {
-              setup({
-                ...collaborationLocale,
-                ...printLocale,
-                ...exchangeLocale
-              });
+              fetch('https://unpkg.com/@univerjs-pro/exchange-client/lib/locale/en-US.json').then(res => res.json()),
+              fetch('https://unpkg.com/@univerjs-pro/edit-history-viewer/lib/locale/en-US.json').then(res => res.json()),
+              fetch('https://unpkg.com/@univerjs-pro/sheets-pivot/lib/locale/en-US.json').then(res => res.json()),
+              fetch('https://unpkg.com/@univerjs-pro/sheets-pivot-ui/lib/locale/en-US.json').then(res => res.json()),
+          ]).then((langs) => {
+              setup(Tools.deepMerge(UniverUMD['en-US'],...langs));
             })
           } else {
             const { UniverInstanceType } = window.UniverCore;
@@ -197,13 +249,13 @@ Of course, you may want more than just the basics. If you're looking to add feat
               if (!response.ok) {
                 throw new Error('Failed to create new sheet')
               }
-
+      
               return response.json()
             }).then((data) => {
               if (!data.unitID) {
                 throw new Error('create unit failed')
               }
-
+      
               url.searchParams.set('unit', data.unitID)
               url.searchParams.set('type', String(UniverInstanceType.UNIVER_SHEET))
               window.location.href = url.toString()
@@ -211,57 +263,33 @@ Of course, you may want more than just the basics. If you're looking to add feat
               console.error(error)
             })
           }
-
-          const setup = (extLocale) => {
-            var {
-              UniverCore,
-              UniverDesign,
-              UniverEngineRender,
-              UniverEngineFormula,
-              UniverDocs,
-              UniverDocsUi,
-              UniverUi,
-              UniverSheets,
-              UniverSheetsUi,
-              UniverSheetsNumfmt,
-              UniverCollaboration,
-              UniverCollaborationClient,
-              UniverSheetsThreadComment,
-              UniverSheetsFormula: { UniverSheetsFormulaPlugin },
-              UniverExchangeClient: { UniverExchangeClientPlugin },
-              UniverSheetsExchangeClient: { UniverSheetsExchangeClientPlugin },
-            } = window
-
-            var univer = new UniverCore.Univer({
-              theme: UniverDesign.defaultTheme,
-              locale: UniverCore.LocaleType.EN_US,
-              locales: {
-                [UniverCore.LocaleType.EN_US]: {
-                  ...UniverUMD['en-US'],
-                  ...extLocale
-                },
+      
+          const setup = (locales) => {
+            var univer = new Univer({
+              theme: defaultTheme,
+              locale: LocaleType.EN_US,
+              locales:{
+                  [LocaleType.EN_US]: locales,
               },
               override: [
-                [UniverCore.IAuthzIoService, null],
-                [UniverCore.IUndoRedoService, null]
+                [IAuthzIoService, null],
+                [IUndoRedoService, null]
               ]
             });
-            univer.registerPlugin(UniverDocs.UniverDocsPlugin);
-
-            univer.registerPlugin(UniverEngineRender.UniverRenderEnginePlugin);
-            univer.registerPlugin(UniverEngineFormula.UniverFormulaEnginePlugin);
+            univer.registerPlugin(UniverRenderEnginePlugin);
+            univer.registerPlugin(UniverDocsPlugin);
+            univer.registerPlugin(UniverFormulaEnginePlugin);
             univer.registerPlugin(UniverSheetsFormulaPlugin);
-
-            univer.registerPlugin(UniverUi.UniverUIPlugin, {
+      
+            univer.registerPlugin(UniverUIPlugin, {
               container: "app",
             });
-
-            univer.registerPlugin(UniverDocsUi.UniverDocsUIPlugin);
-
-            univer.registerPlugin(UniverSheets.UniverSheetsPlugin);
-            univer.registerPlugin(UniverSheetsUi.UniverSheetsUIPlugin);
-
-            const { IThreadCommentMentionDataService, UniverSheetsThreadCommentPlugin } = UniverSheetsThreadComment;
+      
+            univer.registerPlugin(UniverDocsUIPlugin);
+      
+            univer.registerPlugin(UniverSheetsPlugin);
+            univer.registerPlugin(UniverSheetsUIPlugin);
+      
             const mockUser = {
               userID: 'mockId',
               name: 'MockUser',
@@ -271,7 +299,7 @@ Of course, you may want more than just the basics. If you're looking to add feat
             };
             class CustomMentionDataService {
               trigger = '@';
-
+      
               async getMentions (search) {
                 return [
                   {
@@ -289,14 +317,14 @@ Of course, you may want more than just the basics. If you're looking to add feat
                 ];
               }
             }
-
+      
             univer.registerPlugin(UniverSheetsThreadCommentPlugin, {
               overrides: [[IThreadCommentMentionDataService, { useClass: CustomMentionDataService }]],
             });
-
-            // collaboration
-            univer.registerPlugin(UniverCollaboration.UniverCollaborationPlugin);
-            univer.registerPlugin(UniverCollaborationClient.UniverCollaborationClientPlugin, {
+      
+            // register collaboration plugin
+            univer.registerPlugin(UniverCollaborationPlugin);
+            univer.registerPlugin(UniverCollaborationClientPlugin, {
               authzUrl: `http://${universerEndpoint}/universer-api/authz`,
               snapshotServerUrl: `http://${universerEndpoint}/universer-api/snapshot`,
               collabSubmitChangesetUrl: `http://${universerEndpoint}/universer-api/comb`,
@@ -304,16 +332,15 @@ Of course, you may want more than just the basics. If you're looking to add feat
               // If you use the `@univerjs/exchange-client`, you need to configure the following parameters
               uploadFileServerUrl: `http://${universerEndpoint}/universer-api/stream/file/upload`,
               signUrlServerUrl: `http://${universerEndpoint}/universer-api/file/{fileID}/sign-url`,
-
             });
-
-            // live share
-            univer.registerPlugin(UniverLiveShare.UniverLiveSharePlugin)
-
-            // print
-            univer.registerPlugin(UniverSheetsPrint.UniverSheetsPrintPlugin)
-
-            // import & export
+      
+            // register live share plugin
+            univer.registerPlugin(UniverLiveSharePlugin)
+      
+            // register print plugin
+            univer.registerPlugin(UniverSheetsPrintPlugin)
+      
+            // register exchange client plugin
             univer.registerPlugin(UniverExchangeClientPlugin, {
               uploadFileServerUrl: `http://${universerEndpoint}/universer-api/stream/file/upload`,
               importServerUrl: `http://${universerEndpoint}/universer-api/exchange/{type}/import`,
