@@ -32,7 +32,7 @@ Plugin division is quite flexible, and you can have your own set of methods. How
 
 - Whether there are modules that need to be loaded in environment A but not in environment B, if such modules exist, these modules are suitable for placement in a separate plugin. For example, UI-related parts of spreadsheets are split into `@univerjs/sheets-ui` because they do not need to be loaded in Node.js, while the core capabilities covering data and operations are placed in `@univerjs/sheets` because they need to be loaded in any environment. This classification method is very common in Univer source code.
 - Divide according to different document types, such as `@univerjs/sheets` and `@univerjs/docs` are divided according to document types.
-- Some complex functions can be divided into separate plugins, such as `@univerjs/sheet-find-replace`, which provides search and replace functionality.
+- Some complex functions can be divided into separate plugins, such as `@univerjs/sheets-find-replace`, which provides search and replace functionality.
 - Some common underlying capabilities can be divided into separate plugins, such as `@univerjs/design`, which provides design system-related capabilities such as themes, colors, and components, and `@univerjs/rpc`, which provides RPC capabilities.
 
 ### Plugin Types
