@@ -45,10 +45,10 @@ univer.registerPlugin(UniverSheetsPlugin);
 univer.registerPlugin(UniverSheetsUIPlugin);
 univer.registerPlugin(UniverSheetsFormulaPlugin);
 
-// Passing in an empty object will automatically initialize the workbook
+// 传入空对象会自动初始化工作簿
 univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});`
 
-<ReactLive code={code}  />
+<ReactLive code={code} hideEditor={false} />
 
 ### 获取工作簿数据
 
@@ -129,16 +129,16 @@ univer.registerPlugin(UniverSheetsPlugin);
 univer.registerPlugin(UniverSheetsUIPlugin);
 univer.registerPlugin(UniverSheetsFormulaPlugin);
 
-// Passing in an empty object will automatically initialize the workbook
+// 传入空对象会自动初始化工作簿
 univer.createUnit(UniverInstanceType.UNIVER_SHEET, {})
 
 const univerAPI = FUniver.newAPI(univer);
-//const activeWorkbook = univerAPI.getActiveWorkbook();
+const activeWorkbook = univerAPI.getActiveWorkbook();
 
-// Create a new sheet that named 'Sheet2' with 10 rows and 10 columns
-//const sheet = activeWorkbook.create('Sheet2', 10, 10)`
+// 创建一个名为 'Sheet2' 的工作表，包含 10 行和 10 列
+const sheet2 = activeWorkbook.create('Sheet2', 10, 10)`
 
-<ReactLive code={code2}  />
+<ReactLive code={code2} hideEditor={false} />
 
 ### 删除工作表
 
