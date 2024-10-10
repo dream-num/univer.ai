@@ -1,8 +1,8 @@
-import { GitHubButton } from '@/components/GitHub'
-import { useTranslation } from '@/lib/i18n'
 import { Badge } from '@radix-ui/themes'
 import Head from 'next/head'
 import Link from 'next/link'
+import { useTranslation } from '@/lib/i18n'
+import { GitHubButton } from '@/components/GitHub'
 
 function convertToColor(str: string): 'cyan' | 'orange' | 'grass' | 'yellow' | 'amber' | 'orange' | 'teal' | 'ruby' | 'indigo' | 'blue' {
   const color = ['cyan', 'orange', 'grass', 'yellow', 'amber', 'teal', 'tomato', 'ruby', 'indigo', 'blue']
@@ -43,6 +43,8 @@ export default function Page() {
       'examples.doc-collaboration.desc': 'Create and share documents with our Docs feature.',
       'examples.doc-collaboration-playground.title': 'Collaborative Editing Playground',
       'examples.doc-collaboration-playground.desc': 'An interesting playground to demonstrate the process of document collaboration.',
+      'examples.doc-exchange.title': 'Import & Export',
+      'examples.doc-exchange.desc': 'Powerful import and export services, supporting docx files.',
       'examples.slide.title': 'Presentations',
       'examples.slide.desc': 'The basic functions of presentations, including editing, typesetting, and slides.',
       'tags.community': 'Community Plugin 👨‍💻',
@@ -79,6 +81,8 @@ export default function Page() {
       'examples.doc-collaboration.desc': '使用我们的 Docs 功能创建和共享文档。',
       'examples.doc-collaboration-playground.title': '协同编辑可视化',
       'examples.doc-collaboration-playground.desc': '一个有趣的 Playground，用于演示文档协作的过程。',
+      'examples.doc-exchange.title': '导入 & 导出',
+      'examples.doc-exchange.desc': '强大的导入和导出服务，支持 docx 文件。',
       'examples.slide.title': '基础演示文稿',
       'examples.slide.desc': '演示文稿的基本功能，包括编辑、排版、幻灯片等。',
       'tags.community': '社区插件 👨‍💻',
@@ -172,6 +176,12 @@ export default function Page() {
       preview: '/images/univer-pro/examples/docs-collaboration-playground.gif',
       desc: t('examples.doc-collaboration-playground.desc'),
       link: '/pro/examples/docs-collaboration-playground',
+      tags: [t('tags.server')],
+    }, {
+      title: t('examples.doc-exchange.title'),
+      preview: '/images/univer-pro/examples/docs-exchange.gif',
+      desc: t('examples.doc-exchange.desc'),
+      link: '/pro/examples/docs-exchange',
       tags: [t('tags.server')],
     }],
   }, {
