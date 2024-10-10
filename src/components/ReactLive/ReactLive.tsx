@@ -26,6 +26,31 @@ interface IProps {
   hideEditor?: boolean
 }
 
+function CopyButton({ code }: { code: string }) {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(code)
+    setCopied(true)
+
+    setTimeout(() => {
+      setCopied(false)
+    }, 1000)
+  }
+
+  return (
+    <a
+      className={`
+        cursor-pointer text-base
+
+        hover:text-[#274FEE]
+      `}
+      onClick={handleCopy}
+    >
+      {copied ? <SuccessSingle className="text-[#409F11]" /> : <CreateCopySingle />}
+    </a>
+  )
+}
 export default function ReactLive(props: IProps) {
   const scope = {
     Univer,
@@ -54,10 +79,9 @@ export default function ReactLive(props: IProps) {
     useRef,
   }
 
-  const { code, hideEditor = true } = props
+  const { code, hideEditor = false } = props
 
-  const [copied, setCopied] = useState(false)
-  const [visible, setVisible] = useState(!hideEditor)
+  const [visible, setVisible] = useState(false)
 
   const transformCode = useCallback((value: string) => {
     return `function Demo () {
@@ -77,18 +101,13 @@ export default function ReactLive(props: IProps) {
     }`
   }, [])
 
-  function handleCopy() {
-    navigator.clipboard.writeText(code)
-    setCopied(true)
-
-    setTimeout(() => {
-      setCopied(false)
-    }, 1000)
-  }
-
   return code && (
     <LiveProvider code={code} transformCode={transformCode} scope={scope}>
-      <section className="mt-6 overflow-hidden rounded-xl shadow">
+      <section className={clsx({
+        'mt-6 overflow-hidden rounded-xl shadow': true,
+        'h-[500px]': hideEditor,
+      })}
+      >
         <div onFocus={e => e.preventDefault()}>
           <LiveError className="bg-red-100 py-x py-4 text-red-800" />
           <LivePreview />
@@ -97,16 +116,7 @@ export default function ReactLive(props: IProps) {
         {!hideEditor && (
           <div className="font-mono text-sm">
             <div className="flex justify-end gap-2 px-4 py-2">
-              <a
-                className={`
-                  cursor-pointer text-base
-
-                  hover:text-[#274FEE]
-                `}
-                onClick={handleCopy}
-              >
-                {copied ? <SuccessSingle className="text-[#409F11]" /> : <CreateCopySingle />}
-              </a>
+              <CopyButton code={code} />
               <a
                 className={`
                   cursor-pointer text-base

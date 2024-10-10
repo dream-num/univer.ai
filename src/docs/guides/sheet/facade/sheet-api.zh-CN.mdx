@@ -48,7 +48,7 @@ univer.registerPlugin(UniverSheetsFormulaPlugin);
 // 传入空对象会自动初始化工作簿
 univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});`
 
-<ReactLive code={code} hideEditor={false} />
+<ReactLive code={code} />
 
 ### 获取工作簿数据
 
@@ -138,7 +138,7 @@ const activeWorkbook = univerAPI.getActiveWorkbook();
 // 创建一个名为 'Sheet2' 的工作表，包含 10 行和 10 列
 const sheet2 = activeWorkbook.create('Sheet2', 10, 10)`
 
-<ReactLive code={code2} hideEditor={false} />
+<ReactLive code={code2} />
 
 ### 删除工作表
 
@@ -189,7 +189,7 @@ univerAPI.executeCommand(SetWorksheetActiveOperation.id, { unitId: workbookId, s
 
 导入 API 需要使用[服务端版本 Facade API](/zh-CN/guides/sheet/getting-started/facade#与服务端配合使用) 调用 [导入导出插件](/zh-CN/guides/sheet/features/import-export) 提供的功能，使用前确保已经引入对应的依赖。
 
-#### 导入 XLSX 并获取 `unitId`
+#### 导入 XLSX 并获取 `unitId` <a id="import-xlsx-and-get-unitid" />
 
 在协同环境下，每个工作簿都有一个唯一的 `unitId`。使用 API `importXLSXToUnitId` 传入 `file` 参数会返回 `unitId`，可以通过该 `unitId` 来访问工作簿。 `file` 参数可以是一个 File 对象，或者远程文件的 URL。
 

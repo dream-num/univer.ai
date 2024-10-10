@@ -46,7 +46,7 @@ univer.registerPlugin(UniverSheetsFormulaPlugin);
 // Passing in an empty object will automatically initialize the workbook
 univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});`
 
-<ReactLive code={code} hideEditor={false} />
+<ReactLive code={code} />
 
 ### Getting Workbook Data
 
@@ -136,7 +136,7 @@ const activeWorkbook = univerAPI.getActiveWorkbook();
 // Create a new sheet that named 'Sheet2' with 10 rows and 10 columns
 const sheet = activeWorkbook.create('Sheet2', 10, 10)`
 
-<ReactLive code={code2} hideEditor={false} />
+<ReactLive code={code2} />
 
 ### Remove Worksheet
 
@@ -187,7 +187,7 @@ univerAPI.executeCommand(SetWorksheetActiveOperation.id, { unitId: workbookId, s
 
 To import via API, use the [Server Version of the Facade API](/guides/sheet/getting-started/facade#use-with-the-univer-server) to call the features provided by the [import/export plugin](/guides/sheet/features/import-export). Make sure to include the necessary dependencies before use.
 
-#### Import XLSX and Get `unitId`
+#### Import XLSX and Get `unitId` <a id="import-xlsx-and-get-unitid" />
 
 In a collaborative environment, each workbook has a unique `unitId`. Use the API `importXLSXToUnitId` to pass in the `file` parameter and return `unitId`, which can be used to access the workbook. The `file` parameter can be a File object or a URL to a remote file.
 
