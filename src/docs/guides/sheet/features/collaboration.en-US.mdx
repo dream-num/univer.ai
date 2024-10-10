@@ -76,7 +76,28 @@ univer.registerPlugin(UniverCollaborationClientPlugin, {
 });
 ```
 
-## Automatically Load Data
+## Collaborative Document Data
+
+The collaborative editing plugin relies on the Univer server, and the data for collaborative documents is stored in the Univer server.
+
+### unitId
+
+Each collaborative document in the Univer server has a unique `unitId`.
+
+The Univer collaboration client (collaborative editing plugin) uses the `unitId` to retrieve the corresponding collaborative document data from the Univer server for collaborative editing.
+
+### type
+
+`type` is the type of the collaborative document, which determines the initial data structure of the collaborative document.
+
+## Creating Collaborative Documents
+
+There are multiple ways to create collaborative documents in the Univer server:
+
+1. You can create a blank document using the [Create Unit](/guides/sheet/server/api#create-empty-document) API.
+2. You can import an XLSX file into the Univer server using the [`importXLSXToUnitId`](/guides/sheet/features/core/sheet-api#import-xlsx-and-get-unitid) method provided by the [Import Plugin](/guides/sheet/features/import-export) Facade API.
+
+## Loading Collaborative Documents
 
 `@univerjs-pro/collaboration-client` plugin provides a feature that automatically loads corresponding data according to the URL parameters `unit` and `type`, which can simplify the data loading logic in some cases.
 
@@ -123,3 +144,9 @@ import { UniverInstanceType } from '@univerjs/core';
 +   })
 + }
 ```
+
+## Further Reading
+
+If you want to learn more about how collaborative editing works, you can read the following article:
+
+- [OT Algorithm and Univer's Collaborative Editing Design](/blog/post/ot)

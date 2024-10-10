@@ -76,7 +76,28 @@ univer.registerPlugin(UniverCollaborationClientPlugin, {
 });
 ```
 
-## 自动加载数据
+## 协同文档数据
+
+协同编辑插件依赖 Univer 服务，协同文档的数据存储在 Univer 服务中。
+
+### unitId
+
+每篇协同文档在 Univer 服务中都有一个唯一的 `unitId`。
+
+Univer 协同客户端（协同编辑插件）使用 `unitId` 可从 Univer 服务获取到对应的协同文档数据进行协同编辑。
+
+### type
+
+`type` 是协同文档的类型，协同文档的类型决定了协同文档的初始数据结构。
+
+## 创建协同文档
+
+有多种方式在 Univer 服务中创建协同文档：
+
+1. 通过 [创建文档](/guides/sheet/server/api#create-empty-document) 接口可以创建一篇空白文档。
+2. 通过 [导入插件](/guides/sheet/features/import-export) 提供的 Facade API [`importXLSXToUnitId`](/guides/sheet/features/core/sheet-api#import-xlsx-and-get-unitid) 方法，将 XlSX 文件导入到 Univer 服务。
+
+## 加载协同文档
 
 `@univerjs-pro/collaboration-client` 插件内部提供了根据 URL 参数 `unit` 和 `type` 自动加载对应的数据的功能，这可以简化一些场景下的数据加载逻辑。
 
@@ -85,8 +106,10 @@ univer.registerPlugin(UniverCollaborationClientPlugin, {
 ```diff
 import { UniverInstanceType } from '@univerjs/core';
 
+# 原有逻辑，只适用于非协同文档
 - univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});
  
+# 修改后的逻辑，适用于协同文档
 + const url = new URL(window.location.href);
 + const unit = url.searchParams.get('unit');
 
@@ -123,3 +146,9 @@ import { UniverInstanceType } from '@univerjs/core';
 +   })
 + }
 ```
+
+## 拓展阅读
+
+如果你想进一步了解协同编辑的工作原理，可以阅读以下文章：
+
+- [OT 算法以及 Univer 的协同编辑设计](/blog/post/ot)
