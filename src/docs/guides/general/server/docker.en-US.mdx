@@ -1,4 +1,4 @@
-import { Callout, Steps } from 'nextra/components'
+import { Callout, Steps, Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 import Image from '@/components/Image'
 import mysqlImg from './docker/mysql.png'
@@ -189,16 +189,42 @@ HOST_GRAFANA_PORT=13000
 ### How to change S3 config to use self component?  <a id="s3-config" />
 
 1. Update `.env` file, set the S3 config.
-```shell
-# s3 config
-S3_USER=minio
-S3_PASSWORD=minio123456
-S3_REGION=us-east-1
-S3_PATH_STYLE=true
-S3_ENDPOINT=http://univer-minio:9000
-S3_ENDPOINT_PUBLIC=http://univer-minio:9000
-S3_DEFAULT_BUCKET=univer
-```
+
+<Tabs items={['minio', 'aliyun oss', 'aws s3']}>
+  <Tabs.Tab label="minio">
+    ```shell
+    S3_USER=minio
+    S3_PASSWORD=minio123456
+    S3_REGION=us-east-1
+    S3_PATH_STYLE=true
+    S3_ENDPOINT=http://192.168.1.100:9000
+    S3_ENDPOINT_PUBLIC=http://192.168.1.100:9000
+    S3_DEFAULT_BUCKET=univer
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="aliyun oss">
+    ```shell
+    S3_USER=${ACCESS_KEY_ID}
+    S3_PASSWORD=${ACCESS_KEY_SECRET}
+    S3_REGION=oss-cn-shenzhen
+    S3_PATH_STYLE=false
+    S3_ENDPOINT=https://oss-cn-shenzhen-internal.aliyuncs.com
+    S3_ENDPOINT_PUBLIC=https://oss-cn-shenzhen.aliyuncs.com
+    S3_DEFAULT_BUCKET=univer
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="aws s3">
+    ```shell
+    S3_USER=${ACCESS_KEY_ID}
+    S3_PASSWORD=${ACCESS_KEY_SECRET}
+    S3_REGION=us-east-1
+    S3_PATH_STYLE=false
+    S3_ENDPOINT=https://s3.amazonaws.com
+    S3_ENDPOINT_PUBLIC=https://s3.amazonaws.com
+    S3_DEFAULT_BUCKET=univer
+    ```
+  </Tabs.Tab>
+</Tabs>
 
 - `S3_PATH_STYLE`: `true` bucket is in path info; `false` bucket is in domain info.
 - `S3_REGION`: the bucket region, like aws `us-east-1`.
