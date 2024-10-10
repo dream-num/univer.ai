@@ -1,8 +1,8 @@
+import { GitHubButton } from '@/components/GitHub'
+import { useTranslation } from '@/lib/i18n'
 import { Badge } from '@radix-ui/themes'
 import Head from 'next/head'
 import Link from 'next/link'
-import { useTranslation } from '@/lib/i18n'
-import { GitHubButton } from '@/components/GitHub'
 
 function convertToColor(str: string): 'cyan' | 'orange' | 'grass' | 'yellow' | 'amber' | 'orange' | 'teal' | 'ruby' | 'indigo' | 'blue' {
   const color = ['cyan', 'orange', 'grass', 'yellow', 'amber', 'teal', 'tomato', 'ruby', 'indigo', 'blue']
