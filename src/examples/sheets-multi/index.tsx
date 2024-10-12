@@ -11,7 +11,9 @@ import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
 import { UniverSheetsPlugin } from '@univerjs/sheets'
 import { UniverSheetsConditionalFormattingUIPlugin } from '@univerjs/sheets-conditional-formatting-ui'
 import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validation'
+import { UniverSheetsDataValidationUIPlugin } from '@univerjs/sheets-data-validation-ui'
 import { UniverSheetsFormulaPlugin } from '@univerjs/sheets-formula'
+import { UniverSheetsFormulaUIPlugin } from '@univerjs/sheets-formula-ui'
 import { UniverSheetsNumfmtPlugin } from '@univerjs/sheets-numfmt'
 import { UniverSheetsUIPlugin } from '@univerjs/sheets-ui'
 import { UniverSheetsZenEditorPlugin } from '@univerjs/sheets-zen-editor'
@@ -56,12 +58,13 @@ export default function App(props: IProps) {
     univer.registerPlugin(UniverSheetsNumfmtPlugin)
     univer.registerPlugin(UniverFormulaEnginePlugin)
     univer.registerPlugin(UniverSheetsFormulaPlugin)
+    univer.registerPlugin(UniverSheetsFormulaUIPlugin)
     univer.registerPlugin(UniverSheetsZenEditorPlugin)
 
     // data validation
     univer.registerPlugin(UniverDataValidationPlugin)
     univer.registerPlugin(UniverSheetsDataValidationPlugin)
-
+    univer.registerPlugin(UniverSheetsDataValidationUIPlugin)
     // sheet condition formatting
     univer.registerPlugin(UniverSheetsConditionalFormattingUIPlugin)
 

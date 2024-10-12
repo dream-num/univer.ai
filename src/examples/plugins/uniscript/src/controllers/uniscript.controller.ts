@@ -1,5 +1,5 @@
 import type { IUniverUniscriptConfig } from '../services/script-editor.service'
-import { connectInjector, Disposable, ICommandService, Inject, Injector, LifecycleStages, OnLifecycle } from '@univerjs/core'
+import { connectInjector, Disposable, ICommandService, Inject, Injector } from '@univerjs/core'
 
 import { BuiltInUIPart, ComponentManager, IMenuService, IUIPartsService } from '@univerjs/ui'
 import { ScriptPanelComponentName, ToggleScriptPanelOperation } from '../commands/operations/panel.operation'
@@ -9,7 +9,6 @@ import { UniscriptMenuItemFactory } from './menu'
 
 export const DefaultUniscriptConfig = {}
 
-@OnLifecycle(LifecycleStages.Steady, UniscriptController)
 export class UniscriptController extends Disposable {
   constructor(
     private readonly _config: Partial<IUniverUniscriptConfig>,

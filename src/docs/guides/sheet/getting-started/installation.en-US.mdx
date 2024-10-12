@@ -27,17 +27,17 @@ The following example will guide you through which plugins are necessary and how
 <Tabs items={['pnpm', 'npm', 'yarn']}>
   <Tabs.Tab label="pnpm">
     ```shell
-    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-formula-ui @univerjs/sheets-ui @univerjs/ui
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
     ```shell
-    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui
+    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-formula-ui @univerjs/sheets-ui @univerjs/ui
     ```
   </Tabs.Tab>
   <Tabs.Tab label="yarn">
     ```shell
-    yarn add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-ui @univerjs/ui react react-dom rxjs
+    yarn add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-formula-ui @univerjs/sheets-ui @univerjs/ui react react-dom rxjs
     ```
   </Tabs.Tab>
 </Tabs>
@@ -87,7 +87,7 @@ import "@univerjs/design/lib/index.css";
 import "@univerjs/ui/lib/index.css";
 import "@univerjs/docs-ui/lib/index.css";
 import "@univerjs/sheets-ui/lib/index.css";
-import "@univerjs/sheets-formula/lib/index.css";
+import "@univerjs/sheets-formula-ui/lib/index.css";
 
 import { LocaleType, Tools, Univer } from "@univerjs/core";
 import { defaultTheme } from "@univerjs/design";
@@ -102,6 +102,7 @@ import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
 
 import { UniverSheetsPlugin } from "@univerjs/sheets";
 import { UniverSheetsFormulaPlugin } from "@univerjs/sheets-formula";
+import { UniverSheetsFormulaUIPlugin } from "@univerjs/sheets-formula-ui";
 import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
 
 import DesignEnUS from '@univerjs/design/locale/en-US';
@@ -109,7 +110,7 @@ import UIEnUS from '@univerjs/ui/locale/en-US';
 import DocsUIEnUS from '@univerjs/docs-ui/locale/en-US';
 import SheetsEnUS from '@univerjs/sheets/locale/en-US';
 import SheetsUIEnUS from '@univerjs/sheets-ui/locale/en-US';
-import SheetsFormulaEnUS from '@univerjs/sheets-formula/locale/en-US';
+import SheetsFormulaEnUS from '@univerjs/sheets-formula-ui/locale/en-US';
 ```
 
 <Callout type="info" emoji="ℹ️">
@@ -147,6 +148,7 @@ univer.registerPlugin(UniverDocsUIPlugin);
 univer.registerPlugin(UniverSheetsPlugin);
 univer.registerPlugin(UniverSheetsUIPlugin);
 univer.registerPlugin(UniverSheetsFormulaPlugin);
+univer.registerPlugin(UniverSheetsFormulaUIPlugin);
 
 univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});
 ```

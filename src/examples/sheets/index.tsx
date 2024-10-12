@@ -17,12 +17,14 @@ import { UniverSheetsPlugin } from '@univerjs/sheets'
 import { UniverSheetsConditionalFormattingPlugin } from '@univerjs/sheets-conditional-formatting'
 import { UniverSheetsConditionalFormattingUIPlugin } from '@univerjs/sheets-conditional-formatting-ui'
 import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validation'
+import { UniverSheetsDataValidationUIPlugin } from '@univerjs/sheets-data-validation-ui'
 import { UniverSheetsDrawingPlugin } from '@univerjs/sheets-drawing'
 import { UniverSheetsDrawingUIPlugin } from '@univerjs/sheets-drawing-ui'
 import { UniverSheetsFilterPlugin } from '@univerjs/sheets-filter'
 import { UniverSheetsFilterUIPlugin } from '@univerjs/sheets-filter-ui'
 import { UniverSheetsFindReplacePlugin } from '@univerjs/sheets-find-replace'
 import { UniverSheetsFormulaPlugin } from '@univerjs/sheets-formula'
+import { UniverSheetsFormulaUIPlugin } from '@univerjs/sheets-formula-ui'
 import { UniverSheetsHyperLinkUIPlugin } from '@univerjs/sheets-hyper-link-ui'
 import { UniverSheetsNumfmtPlugin } from '@univerjs/sheets-numfmt'
 import { UniverSheetsThreadCommentPlugin } from '@univerjs/sheets-thread-comment'
@@ -71,6 +73,7 @@ export default function App(props: IProps) {
     //   notExecuteFormula: true,
     // });
     univer.registerPlugin(UniverSheetsFormulaPlugin)
+    univer.registerPlugin(UniverSheetsFormulaUIPlugin)
     // univer.registerPlugin(UniverRPCMainThreadPlugin, {
     //   workerURL: './worker.js',
     // } as IUniverRPCMainThreadConfig);
@@ -82,6 +85,7 @@ export default function App(props: IProps) {
     // data validation
     univer.registerPlugin(UniverDataValidationPlugin)
     univer.registerPlugin(UniverSheetsDataValidationPlugin)
+    univer.registerPlugin(UniverSheetsDataValidationUIPlugin)
     univer.registerPlugin(UniverSheetsFindReplacePlugin)
 
     // sheet condition formatting
