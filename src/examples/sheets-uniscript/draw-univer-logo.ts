@@ -1,5 +1,5 @@
 export const drawUniverLogo = `const newSheet = univerAPI.getActiveWorkbook().create("Draw Univer Logo", 80, 80);
-newSheet.setRowHeights(0, 80, 6);
+newSheet.setRowHeightsForced(0, 80, 6);
 newSheet.setColumnWidths(0, 80, 6);
 
 let colors = [

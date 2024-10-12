@@ -2,6 +2,7 @@ import type { IWorkbookData } from '@univerjs/core'
 import type { IExampleItem } from '../plugins/uniscript/src/services/script-editor.service'
 import { LocaleType } from '@univerjs/core'
 import { changeFontStyle } from './change-font-style'
+import { chinaIDValidation } from './china-id-validation'
 import { drawUniverLogo } from './draw-univer-logo'
 
 export const UNISCRIT_WORKBOOK_DATA_DEMO: IWorkbookData = {
@@ -5683,5 +5684,9 @@ export const exampleData: IExampleItem[] = [
   {
     value: changeFontStyle,
     label: 'Change Font Style',
+  },
+  {
+    value: chinaIDValidation,
+    label: 'China ID Validation',
   },
 ]
