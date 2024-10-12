@@ -9,6 +9,7 @@ import { FUniver } from '@univerjs/facade'
 import { CodeSingle, CreateCopySingle, SuccessSingle } from '@univerjs/icons'
 import { UniverSheetsPlugin } from '@univerjs/sheets'
 import { UniverSheetsFormulaPlugin } from '@univerjs/sheets-formula'
+import { UniverSheetsFormulaUIPlugin } from '@univerjs/sheets-formula-ui'
 import { UniverSheetsUIPlugin } from '@univerjs/sheets-ui'
 import { UniverSheetsZenEditorPlugin } from '@univerjs/sheets-zen-editor'
 import { UniverSlidesPlugin } from '@univerjs/slides'
@@ -64,6 +65,7 @@ export default function ReactLive(props: IProps) {
     UniverRenderEnginePlugin,
     UniverSheetsPlugin,
     UniverSheetsFormulaPlugin,
+    UniverSheetsFormulaUIPlugin,
     UniverSheetsUIPlugin,
     UniverUIPlugin,
     UniverSheetsZenEditorPlugin,

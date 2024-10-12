@@ -1,5 +1,5 @@
 import type { IMenuItemFactory } from '@univerjs/ui'
-import { ConfigService, Disposable, ICommandService, Inject, Injector, LifecycleStages, OnLifecycle } from '@univerjs/core'
+import { ConfigService, Disposable, ICommandService, Inject, Injector } from '@univerjs/core'
 import { GithubSingle24 } from '@univerjs/icons'
 import { ComponentManager, IMenuService } from '@univerjs/ui'
 import { GithubButtonOperation } from '../commands/operations/github-button.operation'
@@ -11,7 +11,6 @@ export interface IConfigData {
 
 export const CONFIG_KEY = 'github-plugin'
 
-@OnLifecycle(LifecycleStages.Steady, GithubMenuController)
 export class GithubMenuController extends Disposable {
   constructor(
     private readonly _config: IConfigData,

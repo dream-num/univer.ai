@@ -20,12 +20,12 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 <Tabs items={['pnpm', 'npm']}>
   <Tabs.Tab label="pnpm">
     ```shell
-    pnpm add @univerjs/data-validation @univerjs/sheets-data-validation
+    pnpm add @univerjs/data-validation @univerjs/sheets-data-validation @univerjs/sheets-data-validation-ui
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
     ```shell
-    npm install @univerjs/data-validation @univerjs/sheets-data-validation
+    npm install @univerjs/data-validation @univerjs/sheets-data-validation @univerjs/sheets-data-validation-ui
     ```
   </Tabs.Tab>
 </Tabs>
@@ -33,17 +33,18 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 ## 引入
 
 ```typescript
-import '@univerjs/sheets-data-validation/lib/index.css';
+import '@univerjs/sheets-data-validation-ui/lib/index.css';
 
 import { UniverDataValidationPlugin } from '@univerjs/data-validation';
 import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validation';
+import { UniverSheetsDataValidationUIPlugin } from '@univerjs/sheets-data-validation-ui';
 ```
 
 ## 国际化
 
 ```typescript
 import { LocaleType, Tools } from '@univerjs/core';
-import SheetsDataValidationZhCN from '@univerjs/sheets-data-validation/locale/zh-CN';
+import SheetsDataValidationZhCN from '@univerjs/sheets-data-validation-ui/locale/zh-CN';
 
 const univer = new Univer({
   theme: defaultTheme,
@@ -62,9 +63,10 @@ const univer = new Univer({
 ```typescript
 univer.registerPlugin(UniverDataValidationPlugin);
 
-univer.registerPlugin(UniverSheetsDataValidationPlugin, {
+univer.registerPlugin(UniverSheetsDataValidationPlugin);
+
+univer.registerPlugin(UniverSheetsDataValidationUIPlugin, {
   // 是否在下拉菜单中显示编辑按钮
-  // version >= 0.2.16
   showEditOnDropdown: true
 });
 ```

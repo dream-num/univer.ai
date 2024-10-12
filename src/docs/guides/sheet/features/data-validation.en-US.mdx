@@ -20,12 +20,12 @@ Currently supported data validation types:
 <Tabs items={['pnpm', 'npm']}>
   <Tabs.Tab label="pnpm">
     ```shell
-    pnpm add @univerjs/data-validation @univerjs/sheets-data-validation
+    pnpm add @univerjs/data-validation @univerjs/sheets-data-validation @univerjs/sheets-data-validation-ui
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
     ```shell
-    npm install @univerjs/data-validation @univerjs/sheets-data-validation
+    npm install @univerjs/data-validation @univerjs/sheets-data-validation @univerjs/sheets-data-validation-ui
     ```
   </Tabs.Tab>
 </Tabs>
@@ -33,17 +33,18 @@ Currently supported data validation types:
 ## Import
 
 ```typescript
-import '@univerjs/sheets-data-validation/lib/index.css';
+import '@univerjs/sheets-data-validation-ui/lib/index.css';
 
 import { UniverDataValidationPlugin } from '@univerjs/data-validation';
 import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validation';
+import { UniverSheetsDataValidationUIPlugin } from '@univerjs/sheets-data-validation-ui';
 ```
 
 ## Internationalization
 
 ```typescript
 import { LocaleType, Tools } from '@univerjs/core';
-import SheetsDataValidationEnUS from '@univerjs/sheets-data-validation/locale/en-US';
+import SheetsDataValidationEnUS from '@univerjs/sheets-data-validation-ui/locale/en-US';
 
 const univer = new Univer({
   theme: defaultTheme,
@@ -62,9 +63,10 @@ const univer = new Univer({
 ```typescript
 univer.registerPlugin(UniverDataValidationPlugin);
 
-univer.registerPlugin(UniverSheetsDataValidationPlugin, {
+univer.registerPlugin(UniverSheetsDataValidationPlugin);
+
+univer.registerPlugin(UniverSheetsDataValidationUIPlugin, {
   // Whether to show the edit button in the dropdown menu
-  // version >= 0.2.16
   showEditOnDropdown: true
 });
 ```

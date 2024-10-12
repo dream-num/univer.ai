@@ -17,7 +17,7 @@
 import type { Dependency } from '@univerjs/core'
 import type { IUniverUniscriptConfig } from './services/script-editor.service'
 
-import { Inject, Injector, LocaleService, Plugin, Tools } from '@univerjs/core'
+import { Inject, Injector, LocaleService, Plugin, registerDependencies, Tools, touchDependencies } from '@univerjs/core'
 import { DefaultUniscriptConfig, UniscriptController } from './controllers/uniscript.controller'
 import enUS from './locale/en-US'
 import zhCN from './locale/zh-CN'
@@ -45,25 +45,23 @@ export class UniverUniscriptPlugin extends Plugin {
     this._config = Tools.deepMerge({}, DefaultUniscriptConfig, this._config)
   }
 
-  override onStarting(injector: Injector): void {
+  override onStarting(): void {
     const dependencies: Dependency[] = [
       // controllers
-      [UniscriptController, { useFactory: () => injector.createInstance(UniscriptController, this._config) }],
+      [UniscriptController, { useFactory: () => this._injector.createInstance(UniscriptController, this._config) }],
 
       // services
-      [ScriptEditorService, { useFactory: () => injector.createInstance(ScriptEditorService, this._config) }],
+      [ScriptEditorService, { useFactory: () => this._injector.createInstance(ScriptEditorService, this._config) }],
       [ScriptPanelService],
+      [IUniscriptExecutionService, { useClass: UniscriptExecutionService }],
     ]
 
-    dependencies.forEach(d => injector.add(d))
-
-    this.registerExecution()
+    registerDependencies(this._injector, dependencies)
   }
 
-  /**
-   * Allows being overridden, replacing with a new UniscriptExecutionService.
-   */
-  registerExecution(): void {
-    this._injector.add([IUniscriptExecutionService, { useClass: UniscriptExecutionService }])
+  override onSteady(): void {
+    touchDependencies(this._injector, [
+      [UniscriptController],
+    ])
   }
 }

@@ -1,6 +1,5 @@
-import type { Dependency } from '@univerjs/core'
 import type { IConfigData } from './controllers/github-menu.controller'
-import { ConfigService, Inject, Injector, Plugin, UniverInstanceType } from '@univerjs/core'
+import { ConfigService, Inject, Injector, Plugin, registerDependencies, touchDependencies, UniverInstanceType } from '@univerjs/core'
 import { GithubMenuController } from './controllers/github-menu.controller'
 
 export class GithubPlugin extends Plugin {
@@ -14,12 +13,18 @@ export class GithubPlugin extends Plugin {
     super()
   }
 
-  override onStarting(injector: Injector): void {
-    ([
+  override onStarting(): void {
+    registerDependencies(this._injector, [
       [ConfigService],
       [GithubMenuController, {
         useFactory: () => this._injector.createInstance(GithubMenuController, this._config),
       }],
-    ] as Dependency[]).forEach(d => injector.add(d))
+    ])
+  }
+
+  override onSteady(): void {
+    touchDependencies(this._injector, [
+      [GithubMenuController],
+    ])
   }
 }
