@@ -41,6 +41,11 @@ const nextConfig = {
       use: 'raw-loader',
     })
 
+    config.module.rules.push({
+      test: /\.d\.ts$/,
+      loader: 'ignore-loader',
+    })
+
     if (!isServer) {
       // https://github.com/vercel/next.js/issues/31692
       config.plugins.push(
