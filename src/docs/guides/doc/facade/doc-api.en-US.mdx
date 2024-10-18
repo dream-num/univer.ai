@@ -64,16 +64,16 @@ univer.createUnit(UniverInstanceType.UNIVER_DOC, {});`
 
 ```ts
 const univerAPI = FUniver.newAPI(univer);
-const activeDoc = univerAPI.getActiveDocument()
-const unitId = activeDoc?.getId()
+const doc = univerAPI.getActiveDocument()
+const unitId = doc?.getId()
 ```
 
 ### Get Document Data
 
 ```ts
 const univerAPI = FUniver.newAPI(univer);
-const activeDoucment = univerAPI.getActiveDocument()
-const saveData = activeDoucment.getSnapshot();
+const doc = univerAPI.getActiveDocument()
+const saveData = doc.getSnapshot();
 ```
 
 Or
@@ -101,8 +101,8 @@ Adds the specified text to the end of this text region.
 
 ```ts
 const univerAPI = FUniver.newAPI(univer)
-const activeDoc = univerAPI.getActiveDocument()
-activeDoc?.appendText('Univer')
+const doc = univerAPI.getActiveDocument()
+doc?.appendText('Univer')
 ```
 
 ### Delete Text
@@ -135,8 +135,8 @@ univerAPI.executeCommand("doc.command.set-inline-format-text-color", {value: "#f
 
 ```ts
 const univerAPI = FUniver.newAPI(univer)
-const activeDoc = univerAPI.getActiveDocument()
-activeDoc?.appendText('\f')
+const doc = univerAPI.getActiveDocument()
+doc?.appendText('\f')
 ```
 
 {/* range */}
