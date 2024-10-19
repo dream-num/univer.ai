@@ -30,6 +30,14 @@ Univer Server 基于这一系列协议可以访问第三方系统，以获得客
 
 ## 需要实现的接口
 
+> <p style={{ color:"red" }}>！！！ 重要</p>
+> 1. 只有 `Credential verify` 接口会转发鉴权头信息用于鉴权外部浏览器 web 调用，其他接口用于业务内部接口，不会转发。 <br />
+> 2. `userID` 是字符串类型。 <br />
+> 3. 确保 USIP server 端网络能通，能被 univer 服务调用到。 <br />
+> 4. 验证过程遇到问题时，可以在 USIP server 端打印查看日志，同时排查 univer 服务日志，以及对比文档和自己代码的实现是否有差异（比如返回值结构不匹配、返回值类型不匹配等） <br />
+
+<br />
+
 1. Credential verify：验证用户身份合法性 (AuthN)
 
 - Univer server 接口会验证用户身份，当被调用时会将请求的 http header 都转发到 USIP server 的 credential verify 接口进行身份验证
@@ -149,13 +157,17 @@ USIP_URI_ROLE=http://localhost:8080/role
 USIP_URI_COLLABORATORS=http://localhost:8080/collaborators
 ```
 
-如果你想让 unit 默认能被所有人编辑或查看，可以在 `.env` 文件中设置：
+### 常见问题 <a id="troubleshooting" />
+
+1. 如果你想让 unit 默认能被所有人编辑或查看，可以在 `.env` 文件中设置：
 ```shell
 AUTH_PERMISSION_ENABLED=true
 AUTH_PERMISSION_DEFAULT_SHARE_SCOPE=public
 AUTH_PERMISSION_DEFAULT_SHARE_ROLE=editor
 ```
 - AUTH_PERMISSION_DEFAULT_SHARE_ROLE：支持的配置有 `editor`， `reader`。
+
+2. `AUTH_PERMISSION_ENABLE_OBJ_INHERIT` 控制文档管理员是否具有所有权限，`true`开启，`false`关闭。
 
 ## 代码例子
 

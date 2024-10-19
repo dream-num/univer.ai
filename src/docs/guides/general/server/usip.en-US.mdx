@@ -30,6 +30,14 @@ In this way, while ensuring that data remains within the third-party client syst
 
 ## Required Interfaces
 
+> <p style={{ color:"red" }}>!!! Important</p>
+> 1. Only `Credential verify` api will get credential headers from web browser, other api do not send credential headers because of called in internal enviroment. <br />
+> 2. `userID` is string value type. <br />
+> 3. Be sure USIP server network is work, and can be called by univer server. <br />
+> 4. If you have some trouble when verify yourself usip server, you can add some logs in USIP server, check the univer server logs and compare your code to this document api define (like response struct is error or response value type is error). <br />
+
+<br />
+
 1. Credential verify: Verify user identity legality (AuthN)
 
 - The Univer Server interface verifies user identity by forwarding all request HTTP headers to the USIP server's credential verify interface for authentication.
@@ -149,13 +157,17 @@ USIP_URI_ROLE=http://localhost:8080/role
 USIP_URI_COLLABORATORS=http://localhost:8080/collaborators
 ```
 
-If you want to make unit can be edit/read to everyone in default, you can set this in `.env`:
+### Troubleshooting <a id="troubleshooting" />
+
+1. If you want to make unit can be edit/read to everyone in default, you can set this in `.env`:
 ```shell
 AUTH_PERMISSION_ENABLED=true
 AUTH_PERMISSION_DEFAULT_SHARE_SCOPE=public
 AUTH_PERMISSION_DEFAULT_SHARE_ROLE=editor
 ```
 - AUTH_PERMISSION_DEFAULT_SHARE_ROLE: support setting is `editor`, `reader`.
+
+2. `AUTH_PERMISSION_ENABLE_OBJ_INHERIT` control if file owner can have all permission, `true` or `false`.
 
 ## Code Example
 
