@@ -15,12 +15,14 @@ const worksheet = workbook.getActiveSheet();
 const range = worksheet.getRange(0, 0, 1, 1); // A1
 
 // add comment to empty cell
-range.addComment({
+// this method is async!
+await range.addComment({
     dataStream: 'hello world\r\n',
 });
 
 // reply to current comment
-range.addComment({
+// this method is async!
+await range.addComment({
     dataStream: 'reply\r\n',
 });
 
