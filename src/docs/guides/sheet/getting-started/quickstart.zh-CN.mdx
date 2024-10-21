@@ -47,9 +47,21 @@ import { Callout } from 'nextra/components'
   </Tabs.Tab>
 </Tabs>
 
-至此，你已经成功创建了属于你的第一个 Univer 项目，并且体验了 Univer 的一些功能。
+至此，你已经成功创建了属于你的第一个 Univer 项目。
 
-## 集成服务端的模板
+## 从单 HTML 文件开始
+
+如果你未使用编译工具，可以下载如下 HTML 文件以快速开始：
+
+<Cards>
+  <Card
+    icon="🌍"
+    title={<span className="">Univer Sheet (HTML)</span>}
+    href="https://stackblitz.com/~/github.com/awesome-univer/sheets-vite-demo"
+  />
+</Cards>
+
+## 集成 Univer 高级功能的模板
 
 当然，你有可能不满足于此，想要打印、导入导出、协同编辑等更多功能，这些功能需要更多的配置以及服务端的支持。不过不用担心，Univer 也为你提供了快速体验这些功能的方式，不妨照着下面的步骤来试试：
 
@@ -64,7 +76,7 @@ import { Callout } from 'nextra/components'
     如果在安装或使用过程中遇到问题，请查看[常见问题](/guides/sheet/server/docker#troubleshooting)。
   </Callout>
 
-  ### 安装并运行前端 <a id="install-and-run-the-frontend" />
+  ### 安装并运行客户端 <a id="install-and-run-the-frontend" />
 
   <Tabs items={['pnpm', 'npm', '不使用包管理工具']}>
     <Tabs.Tab label="pnpm">

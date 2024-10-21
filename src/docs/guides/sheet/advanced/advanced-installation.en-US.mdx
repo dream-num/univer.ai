@@ -1,0 +1,331 @@
+import { Callout, Tabs } from 'nextra/components'
+import ReactLive from '@/components/ReactLive'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# Installation & Usage
+
+<BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC, UniverTypes.SLIDE]} value={UniverTypes.SHEET} />
+
+## Using Package Managers
+
+If you are familiar with modern frontend development, using package managers to build applications containing Univer will be a good choice.
+
+We recommend using build tools such as [Vite](https://vitejs.dev/), [esbuild](https://esbuild.github.io/), or [Webpack 5](https://webpack.js.org/) that have good support for ES Modules to build Univer applications. If you are using other build tools like Webpack 4, you may require some additional configurations. For more information, please refer to [Read More](/guides/quickstart#read-more) and the [Troubleshooting](/guides/sheet/troubleshooting).
+
+### Installation
+
+To facilitate the deployment of Univer's frontend, a variety of npm packages are utilized. You may install the requisite packages based on your specific requirements.
+
+<Callout>
+  - If you are using npm, make sure you are using npm@7 or higher. This is because npm@3 ~ npm@6 will not correctly install `peerDependencies`[^1].
+  - If you are using pnpm, make sure you are using pnpm@8 or higher. If you are using pnpm@6 ~ pnpm@7, you can try configuring `auto-install-peers=true` [^2] to resolve dependency installation issues.
+  - If you are using yarn, you need to manually install the missing `peerDependencies`[^3], but don't worry, the installation commands below already include these dependencies.
+</Callout>
+
+The following example will guide you through which plugins are necessary and how to install them:
+
+<Tabs items={['pnpm', 'npm', 'yarn']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-formula-ui @univerjs/sheets-ui @univerjs/ui
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-formula-ui @univerjs/sheets-ui @univerjs/ui
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="yarn">
+    ```shell
+    yarn add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-formula-ui @univerjs/sheets-ui @univerjs/ui react react-dom rxjs
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+If you want to get a more convenient development experience in the future, we also recommend you to install `@univerjs/facade`:
+
+<Tabs items={['pnpm', 'npm', 'yarn']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/facade
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/facade
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="yarn">
+    ```shell
+    yarn add @univerjs/facade
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+For more information about `@univerjs/facade`, please refer to the [Facade](/guides/sheet/getting-started/facade) section.
+
+### Update
+
+Since Univer uses a monorepo to manage its codebase, each release will update the version number of all official plugins. Therefore, when updating Univer, you should update all plugins at the same time to ensure that their version numbers are consistent.
+
+If you are using pnpm, you can use the following command to update all plugins:
+
+```shell
+pnpm update "@univerjs/*" "@univerjs-pro/*" @latest
+```
+
+### Usage
+
+<Callout>
+  The order of importing the style files is important. Make sure you import the CSS styles of `@univerjs/design` and `@univerjs/ui` before importing the CSS styles of other plugins.
+</Callout>
+
+You need to import Univer's css files, locales, and some necessary plugins in your project:
+
+```typescript
+import "@univerjs/design/lib/index.css";
+import "@univerjs/ui/lib/index.css";
+import "@univerjs/docs-ui/lib/index.css";
+import "@univerjs/sheets-ui/lib/index.css";
+import "@univerjs/sheets-formula-ui/lib/index.css";
+
+import { LocaleType, Tools, Univer } from "@univerjs/core";
+import { defaultTheme } from "@univerjs/design";
+
+import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
+import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
+
+import { UniverUIPlugin } from "@univerjs/ui";
+
+import { UniverDocsPlugin } from "@univerjs/docs";
+import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
+
+import { UniverSheetsPlugin } from "@univerjs/sheets";
+import { UniverSheetsFormulaPlugin } from "@univerjs/sheets-formula";
+import { UniverSheetsFormulaUIPlugin } from "@univerjs/sheets-formula-ui";
+import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
+
+import DesignEnUS from '@univerjs/design/locale/en-US';
+import UIEnUS from '@univerjs/ui/locale/en-US';
+import DocsUIEnUS from '@univerjs/docs-ui/locale/en-US';
+import SheetsEnUS from '@univerjs/sheets/locale/en-US';
+import SheetsUIEnUS from '@univerjs/sheets-ui/locale/en-US';
+import SheetsFormulaUIEnUS from '@univerjs/sheets-formula-ui/locale/en-US';
+```
+
+<Callout type="info" emoji="ℹ️">
+  Import a variety of locales and css files for plugins may make development cumbersome and difficult to maintain. We provide Univer Plugins to help you import plugins more conveniently. For more information, please refer to the [Simplified Import](/guides/sheet/getting-started/univer-plugins) section.
+</Callout>
+
+Then create a Univer instance and register these plugins:
+
+```typescript
+const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: Tools.deepMerge(
+      SheetsEnUS,
+      DocsUIEnUS,
+      SheetsUIEnUS,
+      SheetsFormulaUIEnUS,
+      UIEnUS,
+      DesignEnUS,
+    ),
+  },
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+});
+
+univer.registerPlugin(UniverDocsPlugin);
+univer.registerPlugin(UniverDocsUIPlugin);
+
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
+univer.registerPlugin(UniverSheetsFormulaUIPlugin);
+
+univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});
+```
+
+export const code = `const univer = new Univer({
+  theme: defaultTheme,
+  locale: LocaleType.EN_US,
+  locales: {
+    [LocaleType.EN_US]: enUS,
+  },
+});
+
+univer.registerPlugin(UniverRenderEnginePlugin);
+univer.registerPlugin(UniverFormulaEnginePlugin);
+
+univer.registerPlugin(UniverUIPlugin, {
+  container: 'app',
+});
+
+univer.registerPlugin(UniverDocsPlugin);
+univer.registerPlugin(UniverDocsUIPlugin);
+
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
+
+univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});`
+
+<ReactLive code={code} />
+
+## Using CDN
+
+If you don't want to use package managers, you can also import Univer's style files, language packs, and plugins via CDN. Univer provides a separate UMD build for each plugin. Of course, the trivial UMD packages give developers a lot of flexibility, but they also pose some new challenges:
+
+- How do I determine the pre-dependencies of a package?
+- How do I determine the correct import order?
+- How do I determine which packages provide a feature?
+
+If you don't have a clear understanding of Univer's plugin mechanism, these questions usually mean countless trial-and-error attempts.
+
+Therefore, Univer also provides a UMD build that includes all plugins. You can include this UMD build in your HTML file and access each plugin through the `window` object.
+
+### Example
+
+Current mainstream CDN service providers (such as jsDelivr and unpkg) support Univer's UMD build, and you can include these resources in your HTML file:
+
+```html
+<head>
+  <script src="https://unpkg.com/@univerjs/umd/lib/univer.full.umd.js"></script>
+  <script src="https://unpkg.com/@univerjs/umd/lib/locale/en-US.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/@univerjs/umd/lib/univer.css">
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    var {
+      UniverCore,
+      UniverDesign,
+      UniverEngineRender,
+      UniverEngineFormula,
+      UniverDocs,
+      UniverDocsUi,
+      UniverUi,
+      UniverSheets,
+      UniverSheetsUi,
+      UniverSheetsNumfmt,
+      UniverSheetsFormula,
+      UniverFacade,
+    } = window
+
+    var univer = new UniverCore.Univer({
+      theme: UniverDesign.defaultTheme,
+      locale: UniverCore.LocaleType.EN_US,
+      locales: {
+        [UniverCore.LocaleType.EN_US]: UniverUMD['en-US'],
+      },
+    });
+
+    univer.registerPlugin(UniverEngineRender.UniverRenderEnginePlugin);
+    univer.registerPlugin(UniverEngineFormula.UniverFormulaEnginePlugin);
+
+    univer.registerPlugin(UniverUi.UniverUIPlugin, {
+      container: "app",
+    });
+
+    univer.registerPlugin(UniverDocs.UniverDocsPlugin);
+    univer.registerPlugin(UniverDocsUi.UniverDocsUIPlugin);
+
+    univer.registerPlugin(UniverSheets.UniverSheetsPlugin);
+    univer.registerPlugin(UniverSheetsUi.UniverSheetsUIPlugin);
+    univer.registerPlugin(UniverSheetsNumfmt.UniverSheetsNumfmtPlugin);
+    univer.registerPlugin(UniverSheetsFormula.UniverSheetsFormulaPlugin);
+
+    univer.createUnit(UniverCore.UniverInstanceType.UNIVER_SHEET, {})
+
+    const univerAPI = UniverFacade.FUniver.newAPI(univer)
+  </script>
+</body>
+```
+
+From the above code, it can be seen that the way to import Univer via CDN is basically the same as using package managers, except that each plugin has its own namespace. Typically, the naming convention for these namespaces is the uppercase camel case `Univer<PluginName>`.
+
+### Slim Version
+
+If you are already using React, ReactDOM, and RxJS in your project, you can opt for the slim version of the UMD bundle, which excludes these dependencies.
+
+```diff
++ <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
++ <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
++ <script src="https://unpkg.com/rxjs/dist/bundles/rxjs.umd.min.js"></script>
+ 
+- <script src="https://unpkg.com/@univerjs/umd/lib/univer.full.umd.js"></script>
++ <script src="https://unpkg.com/@univerjs/umd/lib/univer.slim.umd.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@univerjs/umd/lib/univer.css">
+```
+
+### Specifying Versions
+
+Both unpkg and jsDeliver support specifying specific versions of resources. For example, if you want to use version 0.1.16 of Univer, you only need to add `@<version>` to the URL to specify the version:
+
+```diff
+- https://unpkg.com/@univerjs/umd/lib/univer.full.umd.js
++ https://unpkg.com/@univerjs/umd@0.1.16/lib/univer.full.umd.js
+```
+
+## Getting Started: Loading, modifying and storing data
+
+In the previous section, you have already created a Univer instance and an empty spreadsheet. However, in most cases, you will likely need to load existing data into Univer. This section will explain how to load data into Univer and retrieve data from it.
+
+### Loading Data
+
+By calling the `createUniverSheet` method of `Univer`, you can create a new `Workbook` instance. The first parameter of the method is an object containing the data of the `Workbook`, which should conform to the `IWorkbookData` interface.
+
+```typescript
+import { IWorkbookData, UniverInstanceType } from "@univerjs/core";
+
+const data: IWorkbookData = {};
+const workbook = univer.createUnit(UniverInstanceType.UNIVER_SHEET, data);
+```
+
+You can learn more about all the fields supported by `IWorkbookData` [here](/typedoc/@univerjs/core/interfaces/IWorkbookData).
+
+### Modifying Data
+
+<Callout type="error" emoji="🚨">
+  Univer operates and updates states and data based on a [command system](/guides/sheet/architecture/univer#command-system), so you **must** use commands or the corresponding Facade API to update data properly, rather than directly modifying data. Any operation that directly modifies data in the hope of updating the view is not allowed.
+</Callout>
+
+`@univerjs/facade` provides a set of APIs for modifying data in Univer. You can use these APIs to modify the data in the `Workbook` instance.
+
+```typescript
+import { FUniver } from "@univerjs/facade";
+
+const univerAPI = FUniver.newAPI(univer);
+```
+
+Then you can use the methods of `univerAPI` to use Univer, such as getting the currently active sheet and updating values in the specified range:
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+// Set the number 1 in A1
+const range = sheet.getRange(0, 0, 1, 1);
+range.setValue(1);
+```
+
+### Storing Data
+
+By calling the `save` method of the current `Workbook`, you can get an `IWorkbookData` object containing the data inside the sheet.
+
+```typescript
+const savedData = univerAPI.getActiveWorkbook().save();
+```
+
+---
+
+[^1]: https://blog.npmjs.org/post/110924823920/npm-weekly-5
+[^2]: https://pnpm.io/npmrc#auto-install-peers
+[^3]: https://github.com/yarnpkg/yarn/issues/1503

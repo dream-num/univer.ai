@@ -4,7 +4,17 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 # 安装和引入
 
-<BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC, UniverTypes.SLIDE]} value={UniverTypes.DOC} />
+<BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC, UniverTypes.SLIDE]} value={UniverTypes.SHEET} />
+
+## 使用包管理器
+
+如果你对现代前端开发有所了解，那么使用包管理工具来构建包含 Univer 的应用将会是一个不错的选择。
+
+我们推荐使用 [Vite](https://vitejs.dev/)、[esbuild](https://esbuild.github.io/) 或 [Webpack 5](https://webpack.js.org/) 等对 ES Module 支持较好的构建工具来构建 Univer 应用。如果你使用了其它构建工具（例如 Webpack 4），可能会需要一些额外的配置，请阅读 [常见问题](/guides/sheet/troubleshooting) 获取更多信息。
+
+### 安装
+
+Univer 以插件的形式提供了一系列功能，除了一些产品所必需的核心插件外，你还可以根据需要选择性地引入其它插件。
 
 <Callout>
   - 如果你正在使用 npm，请确保使用的版本为 npm@7 及以上。这是因为 npm@3 ~ npm@6 并不会正确地安装 `peerDependencies`[^1]。
@@ -17,23 +27,22 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 <Tabs items={['pnpm', 'npm', 'yarn']}>
   <Tabs.Tab label="pnpm">
     ```shell
-    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-numfmt @univerjs/engine-render @univerjs/ui
+    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-formula-ui @univerjs/sheets-ui @univerjs/ui
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
     ```shell
-    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-numfmt @univerjs/engine-render @univerjs/ui
+    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-formula-ui @univerjs/sheets-ui @univerjs/ui
     ```
   </Tabs.Tab>
   <Tabs.Tab label="yarn">
     ```shell
-    yarn add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-numfmt @univerjs/engine-render @univerjs/ui react react-dom rxjs
+    yarn add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/sheets @univerjs/sheets-formula @univerjs/sheets-formula-ui @univerjs/sheets-ui @univerjs/ui react react-dom rxjs
     ```
   </Tabs.Tab>
 </Tabs>
 
 如果你想在后续的开发中获得更加便捷的开发体验，我们还推荐你安装 `@univerjs/facade`：
-
 
 <Tabs items={['pnpm', 'npm', 'yarn']}>
   <Tabs.Tab label="pnpm">
@@ -48,12 +57,12 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
   </Tabs.Tab>
   <Tabs.Tab label="yarn">
     ```shell
-    npm install @univerjs/facade
+    yarn add @univerjs/facade
     ```
   </Tabs.Tab>
 </Tabs>
 
-有关 `@univerjs/facade` 的更多信息，请参考 [Facade](/guides/doc/facade/facade) 章节。
+有关 `@univerjs/facade` 的更多信息，请参考 [Facade](/guides/sheet/getting-started/facade) 章节。
 
 ### 更新
 
@@ -77,8 +86,10 @@ pnpm update "@univerjs/*" "@univerjs-pro/*" @latest
 import "@univerjs/design/lib/index.css";
 import "@univerjs/ui/lib/index.css";
 import "@univerjs/docs-ui/lib/index.css";
+import "@univerjs/sheets-ui/lib/index.css";
+import "@univerjs/sheets-formula-ui/lib/index.css";
 
-import { LocaleType, Tools, Univer } from "@univerjs/core";
+import { LocaleType, Tools, Univer, UniverInstanceType } from "@univerjs/core";
 import { defaultTheme } from "@univerjs/design";
 
 import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
@@ -89,16 +100,26 @@ import { UniverUIPlugin } from "@univerjs/ui";
 import { UniverDocsPlugin } from "@univerjs/docs";
 import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
 
+import { UniverSheetsPlugin } from "@univerjs/sheets";
+import { UniverSheetsFormulaPlugin } from "@univerjs/sheets-formula";
+import { UniverSheetsFormulaUIPlugin } from "@univerjs/sheets-formula-ui";
+import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
+
 import DesignZhCN from '@univerjs/design/locale/zh-CN';
-import DocsUIZhCN from '@univerjs/docs-ui/locale/zh-CN';
 import UIZhCN from '@univerjs/ui/locale/zh-CN';
+import DocsUIZhCN from '@univerjs/docs-ui/locale/zh-CN';
+import SheetsZhCN from '@univerjs/sheets/locale/zh-CN';
+import SheetsUIZhCN from '@univerjs/sheets-ui/locale/zh-CN';
+import SheetsFormulaUIZhCN from '@univerjs/sheets-formula-ui/locale/zh-CN';
 ```
 
 <Callout type="info" emoji="ℹ️">
   大量插件的语言包和样式加载可能会使开发变得繁琐且难以维护。我们提供了 Univer Plugins 来帮助你更加方便地引入插件，详情请参考 [简化引入](/guides/sheet/getting-started/univer-plugins) 章节。
 </Callout>
 
-然后创建一个 Univer 实例，并注册这些插件：
+然后创建一个 Univer 实例，并注册这些插件，并组装 Facade API：
+
+// TODO: 组装 Facade API 的代码
 
 ```typescript
 const univer = new Univer({
@@ -106,9 +127,12 @@ const univer = new Univer({
   locale: LocaleType.ZH_CN,
   locales: {
     [LocaleType.ZH_CN]: Tools.deepMerge(
-      DesignZhCN,
+      SheetsZhCN,
       DocsUIZhCN,
+      SheetsUIZhCN,
+      SheetsFormulaUIZhCN,
       UIZhCN,
+      DesignZhCN,
     ),
   },
 });
@@ -118,20 +142,17 @@ univer.registerPlugin(UniverFormulaEnginePlugin);
 
 univer.registerPlugin(UniverUIPlugin, {
   container: 'app',
-  footer: false,
 });
 
 univer.registerPlugin(UniverDocsPlugin);
-univer.registerPlugin(UniverDocsUIPlugin, {
-  container: 'univerdoc',
-  layout: {
-    docContainerConfig: {
-      innerLeft: false,
-    },
-  },
-});
+univer.registerPlugin(UniverDocsUIPlugin);
 
-univer.createUnit(UniverInstanceType.UNIVER_DOC, {});
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
+univer.registerPlugin(UniverSheetsFormulaUIPlugin);
+
+univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});
 ```
 
 export const code = `const univer = new Univer({
@@ -147,20 +168,15 @@ univer.registerPlugin(UniverFormulaEnginePlugin);
 
 univer.registerPlugin(UniverUIPlugin, {
   container: 'app',
-  footer: false,
 });
 
 univer.registerPlugin(UniverDocsPlugin);
-univer.registerPlugin(UniverDocsUIPlugin, {
-  container: 'univerdoc',
-  layout: {
-    docContainerConfig: {
-      innerLeft: false,
-    },
-  },
-});
+univer.registerPlugin(UniverDocsUIPlugin);
 
-univer.createUnit(UniverInstanceType.UNIVER_DOC, {});`
+univer.registerPlugin(UniverSheetsPlugin);
+univer.registerPlugin(UniverSheetsUIPlugin);
+univer.registerPlugin(UniverSheetsFormulaPlugin);
+`
 
 <ReactLive code={code} />
 
@@ -188,7 +204,7 @@ univer.createUnit(UniverInstanceType.UNIVER_DOC, {});`
 </head>
 <body>
   <div id="app"></div>
-
+ 
   <script>
     var {
       UniverCore,
@@ -198,9 +214,13 @@ univer.createUnit(UniverInstanceType.UNIVER_DOC, {});`
       UniverDocs,
       UniverDocsUi,
       UniverUi,
+      UniverSheets,
+      UniverSheetsUi,
+      UniverSheetsNumfmt,
+      UniverSheetsFormula,
       UniverFacade,
     } = window
-
+ 
     var univer = new UniverCore.Univer({
       theme: UniverDesign.defaultTheme,
       locale: UniverCore.LocaleType.ZH_CN,
@@ -208,26 +228,24 @@ univer.createUnit(UniverInstanceType.UNIVER_DOC, {});`
         [UniverCore.LocaleType.ZH_CN]: UniverUMD['zh-CN'],
       },
     });
-
+ 
     univer.registerPlugin(UniverEngineRender.UniverRenderEnginePlugin);
     univer.registerPlugin(UniverEngineFormula.UniverFormulaEnginePlugin);
-
+ 
     univer.registerPlugin(UniverUi.UniverUIPlugin, {
       container: "app",
     });
-
+ 
     univer.registerPlugin(UniverDocs.UniverDocsPlugin);
-    univer.registerPlugin(UniverDocsUi.UniverDocsUIPlugin, {
-      container: 'univerdoc',
-      layout: {
-        docContainerConfig: {
-          innerLeft: false,
-        },
-      },
-    });
-
-    univer.createUnit(UniverCore.UniverInstanceType.UNIVER_DOC, {})
-
+    univer.registerPlugin(UniverDocsUi.UniverDocsUIPlugin);
+ 
+    univer.registerPlugin(UniverSheets.UniverSheetsPlugin);
+    univer.registerPlugin(UniverSheetsUi.UniverSheetsUIPlugin);
+    univer.registerPlugin(UniverSheetsNumfmt.UniverSheetsNumfmtPlugin);
+    univer.registerPlugin(UniverSheetsFormula.UniverSheetsFormulaPlugin);
+ 
+    univer.createUnit(UniverCore.UniverInstanceType.UNIVER_SHEET, {})
+ 
     const univerAPI = UniverFacade.FUniver.newAPI(univer)
   </script>
 </body>

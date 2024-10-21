@@ -2,9 +2,12 @@
   "quickstart": "Quick Start",
   "installation": "Installation & Usage",
   "concepts": "Basic Concepts",
+  "presets": "Presets",
   "i18n": "Internationalization",
-  "univer-plugins": "Simplify Import",
   "workbook-data": "Configure Workbook Data",
   "cell-data": "Configure Cell Data",
-  "facade": "Using Facade API"
+  "facade": "Using Facade API",
+  "node": "Run Univer on Node.js",
+  "advanced-installation": "Advanced Installation",
+  "univer-plugins": "Bundler Plugins"
 }
