@@ -31,8 +31,8 @@ In this way, while ensuring that data remains within the third-party client syst
 ## Required Interfaces
 
 > <p style={{ color:"red" }}>!!! Important</p>
-> 1. Only `Credential verify` api will get credential headers from web browser, other api do not send credential headers because of called in internal enviroment. <br />
-> 2. `userID` is string value type. <br />
+> 1. Only the `Credential verify` api will forward credential headers information for authenticating external browser web calls; another apis are used for internal business purposes and will not be forwarded. <br />
+> 2. `userID` should be of string type. <br />
 > 3. Be sure USIP server network is work, and can be called by univer server. <br />
 > 4. If you have some trouble when verify yourself usip server, you can add some logs in USIP server, check the univer server logs and compare your code to this document api define (like response struct is error or response value type is error). <br />
 
