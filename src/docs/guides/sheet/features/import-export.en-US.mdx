@@ -63,12 +63,30 @@ const univer = new Univer({
 ## Register
 
 ```typescript
+univer.registerPlugin(UniverExchangeClientPlugin);
+univer.registerPlugin(UniverSheetsExchangeClientPlugin);
+```
+
+## Configuration
+
+If the Univer page and the server are not on the same domain, you need to additionally configure parameters such as `uploadFileServerUrl`.
+
+```typescript
 univer.registerPlugin(UniverExchangeClientPlugin, {
   uploadFileServerUrl: `http://localhost:3010/universer-api/stream/file/upload`,
   importServerUrl: `http://localhost:3010/universer-api/exchange/{type}/import`,
   exportServerUrl: `http://localhost:3010/universer-api/exchange/{type}/export`,
   getTaskServerUrl: `http://localhost:3010/universer-api/exchange/task/{taskID}`,
   signUrlServerUrl: `http://localhost:3010/universer-api/file/{fileID}/sign-url`,
+});
+univer.registerPlugin(UniverSheetsExchangeClientPlugin);
+```
+
+You can change the maximum timeout for file uploads by configuring `maxTimeoutTime`. If you need to upload larger files, you can increase this value appropriately. The default is 2 minutes.
+
+```typescript
+univer.registerPlugin(UniverExchangeClientPlugin, {
+  maxTimeoutTime: 1000 * 60 * 10, // 10 minutes
 });
 univer.registerPlugin(UniverSheetsExchangeClientPlugin);
 ```

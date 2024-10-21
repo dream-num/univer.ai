@@ -63,12 +63,30 @@ const univer = new Univer({
 ## 注册
 
 ```typescript
+univer.registerPlugin(UniverExchangeClientPlugin);
+univer.registerPlugin(UniverSheetsExchangeClientPlugin);
+```
+
+## 配置
+
+如果 Univer 页面与服务端不在同一个域名下，需要额外配置 `uploadFileServerUrl` 等参数。
+
+```typescript
 univer.registerPlugin(UniverExchangeClientPlugin, {
   uploadFileServerUrl: `http://localhost:3010/universer-api/stream/file/upload`,
   importServerUrl: `http://localhost:3010/universer-api/exchange/{type}/import`,
   exportServerUrl: `http://localhost:3010/universer-api/exchange/{type}/export`,
   getTaskServerUrl: `http://localhost:3010/universer-api/exchange/task/{taskID}`,
   signUrlServerUrl: `http://localhost:3010/universer-api/file/{fileID}/sign-url`,
+});
+univer.registerPlugin(UniverSheetsExchangeClientPlugin);
+```
+
+配置 `maxTimeoutTime` 可改变上传文件的最大超时时间，若您需要上传的文件较大，可适当调大该值，默认为 2 分钟。
+
+```typescript
+univer.registerPlugin(UniverExchangeClientPlugin, {
+  maxTimeoutTime: 1000 * 60 * 10, // 10 分钟
 });
 univer.registerPlugin(UniverSheetsExchangeClientPlugin);
 ```
