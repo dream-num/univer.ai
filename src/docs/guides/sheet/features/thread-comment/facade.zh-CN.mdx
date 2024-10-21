@@ -15,13 +15,13 @@ const worksheet = workbook.getActiveSheet();
 const range = worksheet.getRange(0, 0, 1, 1);
 
 // add comment to empty cell
-// this method is async!
+// [Attention]: this method is async!
 await range.addComment({
     dataStream: 'hello world\r\n',
 });
 
 // reply to current comment
-// this method is async!
+// [Attention]: this method is async!
 await range.addComment({
     dataStream: 'reply\r\n',
 });
