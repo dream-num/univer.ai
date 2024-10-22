@@ -19,7 +19,7 @@ sheet.setHiddenGridlines(true);
 sheet.setHiddenGridlines(false);
 ```
 
-## Get if the sheet's gridlines ar hidden
+## Get if the sheet's gridlines or hidden
 
 ```typescript
 import { FUniver } from '@univerjs/facade';
@@ -27,7 +27,6 @@ import { FUniver } from '@univerjs/facade';
 const univerAPI = FUniver.newAPI(univer);
 const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
-sheet.hasHiddenGridlines();
+const hidden = sheet.hasHiddenGridlines();
 ```
-
 
