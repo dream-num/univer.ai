@@ -1,0 +1,33 @@
+import { Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import VersionBadge from '@/components/VersionBadge'
+
+# 网格线 Facade API <VersionBadge version="0.5.0+" />
+
+## 切换子表网格线的显示和隐藏
+
+```typescript
+import { FUniver } from '@univerjs/facade';
+
+const univerAPI = FUniver.newAPI(univer);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+// hide
+sheet.setHiddenGridlines(true); 
+
+// show
+sheet.setHiddenGridlines(false);
+```
+
+## 获取当前子表网格线的隐藏状态
+
+```typescript
+import { FUniver } from '@univerjs/facade';
+
+const univerAPI = FUniver.newAPI(univer);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+sheet.hasHiddenGridlines();
+```
+
+
