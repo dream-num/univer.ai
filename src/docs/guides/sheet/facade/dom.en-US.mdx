@@ -83,6 +83,8 @@ dialog.dispose();
 * Use the `range.attachPopup()` method to attach custom popups to specific cell ranges.
 * Popups will stick to the edges of cells, and if they are obstructed, they will automatically adjust their position and direction.
 
+
+#### React Example
 ```typescript
 import { ComponentManager } from '@univerjs/ui';
 const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
@@ -92,12 +94,52 @@ const injector = univer.__getInjector();
 const componentManager = injector.get(ComponentManager);
 
 // You should register components at an appropriate time (e.g., when Univer has finished loading)
+// Components only need to be registered once
 componentManager.register(
   'myPopup',
   ({ popup }) => <div style={{ width: 100, height: 100, background: '#fff' }}>Popup content {popup.extraProps.label}</div>,
   // If the component is a React component, you need to set the framework to 'react'
   // If the component is a Vue3 component, you need to set the framework to 'vue3'
   { framework: 'react' }
+);
+
+// Attach the popup to the first cell of the range
+// If disposable is null, it means the popup failed to add
+const disposable = range.attachPopup({
+  // componentKey must be a component or a key of a registered component
+    componentKey: 'myPopup',
+    // This is the component's data, which can be passed to the component
+    extraProps: {
+      label: 'hahah',
+    },
+});
+
+// Remove the popup
+disposable.dispose();
+```
+
+#### Vue3 Example
+```typescript
+import { ComponentManager } from '@univerjs/ui';
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+const range = sheet.getRange(0, 0, 10, 10); // A1:J10
+
+const injector = univer.__getInjector();
+const componentManager = injector.get(ComponentManager);
+
+const vue3Component = defineComponent({
+  setup(props) {
+    return () => <div style={{ width: 100, height: 100, background: '#fff' }}>Popup content {props.popup.extraProps.label}</div>;
+  },
+});
+
+// You should register components at an appropriate time (e.g., when Univer has finished loading)
+componentManager.register(
+  'myPopup',
+  vue3Component,
+  // If the component is a React component, you need to set the framework to 'react'
+  // If the component is a Vue3 component, you need to set the framework to 'vue3'
+  { framework: 'vue3' }
 );
 
 // Attach the popup to the first cell of the range
@@ -131,6 +173,7 @@ import { ComponentManager } from '@univerjs/ui';
 const worksheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
 // You should register components at an appropriate time (e.g., when Univer has finished loading)
+// Components only need to be registered once
 componentManager.register(
   'myFloatDom',
   ({ data }) => (
