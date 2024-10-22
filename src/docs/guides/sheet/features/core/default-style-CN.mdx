@@ -5,11 +5,11 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
 
 我们提供了两级默认样式：工作表的默认样式和列或行的默认样式。
-这两种样式都可以通过 `IWorksheetData` 接口或 facade API 进行设置。
+这两种样式都可以通过 `IWorksheetData` 接口或 Facade API 进行设置。
+
+### 配置
 
 默认情况下，列样式优先于行样式。您可以通过在注册时设置 `isRowStylePrecedeColumnStyle` 来更改此行为。
-
-您可以通过在注册时设置 `isRowStylePrecedeColumnStyle` 来设置行样式是否优先于列样式。
 
 ```typescript
   univer.registerPlugin(UniverSheetsPlugin, {
@@ -25,7 +25,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
     interface IWorksheetData{
         // other
         /**
-         * @property {Nullable<IStyleData>} [defaultStyle] - 工作表的默认样式 ID 或样式数据。
+         * @property {Nullable<IStyleData>} [defaultStyle] - 样式数据。
          */
         defaultStyle?: Nullable<IStyleData>;
 
@@ -34,7 +34,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
     interface IRowData{
         // other
         /**
-         * 样式 ID
+         * 样式数据。
          */
         s?: Nullable<IStyleData>;
     }
@@ -42,13 +42,13 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
     interface IColumnData{
      // other
      /**
-     * 样式 ID
+     * 样式数据。
      */
     s?: Nullable<IStyleData>;
 }
 ```
 
-2. 通过Facade 通过API设置
+2. 通过Facade API 设置
 
 ```typescript
   const fworkbook = univerAPI.getActiveWorkbook()
@@ -63,13 +63,13 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
           rgb: 'blue'
       }
   }
-  // set default style
+  // 设置工作表默认样式
   fworksheet.setDefaultStyle(defaultStyle)
-  // set default column style
+  // 设置列默认样式
   fworksheet.setColumnDefaultStyle(3, defaultColumnStyle)
-  // reset the column default style
+  // 删除列默认样式
   fworksheet.setColumnDefaultStyle(3, undefined)
 
-  // set row default style
+  // 设置行默认样式
   fworksheet.setRowDefaultStyle(1, defaultColumnStyle)
 ```
