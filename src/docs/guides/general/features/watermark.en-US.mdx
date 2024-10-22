@@ -1,0 +1,60 @@
+import { Callout, Steps, Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# Use Watermark
+
+<BadgeGroup values={[UniverTypes.GENERAL]} value={UniverTypes.GENERAL} />
+
+The watermark feature is designed to provide a flexible and secure watermark solution for web pages or applications. With this feature, developers can dynamically generate text or image watermarks on the page to prevent unauthorized use or dissemination of content. It supports multiple configurations.
+
+## Install
+
+Install using your package manager:
+
+<Tabs items={['pnpm', 'npm']}>
+  <Tabs.Tab label="pnpm">
+    ```shell
+    pnpm add @univerjs/watermark
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab label="npm">
+    ```shell
+    npm install @univerjs/watermark
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Import
+
+```typescript
+import { UniverWatermarkPlugin } from '@univerjs/watermark';
+
+univer.registerPlugin(UniverWatermarkPlugin);
+```
+
+
+## Use
+
+Watermark supports three settings: UI interface, FacadeAPI, and plug-in configuration.
+
+### How to use FacadeAPI
+
+```typescript
+import { FUniver } from "@univerjs/facade";
+
+const univerAPI = FUniver.newAPI(univer);
+// Please refer to the API documentation for specific parameters https://github.com/dream-num/univer/blob/d0054f3e690d9d3cf9715b59a97a8cb95f65a6c8/packages/facade/src/apis/facade.ts#L555
+univerAPI.addWatermark()
+```
+
+### Configurable plugins
+
+```typescript
+
+univer.registerPlugin(UniverWatermarkPlugin, {
+    textWatermarkSettings: {
+        // For specific configuration parameters, see https://github.com/dream-num/univer/blob/d0054f3e690d9d3cf9715b59a97a8cb95f65a6c8/packages/watermark/src/controllers/config.schema.ts#L24
+        content: "Univer",
+    }
+})
+```
