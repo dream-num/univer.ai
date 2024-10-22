@@ -5,20 +5,16 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 <BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC, UniverTypes.SLIDE]} value={UniverTypes.SHEET} />
 
-<Callout>
-  如果你不使用 Preset，请参考 [高级引入/国际化]()。
-</Callout>
+## Presets
 
-## 使用 Presets 语言包
-
-需要引入你所使用的 Preset 对应的语言包：
+每一个 Presets 都提供了对应的语言包，引入你所使用的 Preset 对应的语言包：
 
 ```ts
 import { defaultTheme } from '@univerjs/design';
 import { createUniver, LocaleType } from '@univerjs/presets';
-import { UniverSheetsAdvancedPreset } from '@univerjs/presets/sheets/sheets-advanced-features/index';
+import { UniverSheetsAdvancedPreset } from '@univerjs/presets/sheets/sheets-advanced-features';
 import { zhCN as advancedZhCN } from '@univerjs/presets/sheets/sheets-advanced-features/zh-CN';
-import { UniverSheetsBasicPreset } from '@univerjs/presets/sheets/sheets-basic/index';
+import { UniverSheetsBasicPreset } from '@univerjs/presets/sheets/sheets-basic';
 import { zhCN as basicZhCN } from '@univerjs/presets/sheets/sheets-basic/zh-CN';
 
 const { univerAPI } = createUniver({
@@ -31,6 +27,8 @@ const { univerAPI } = createUniver({
 });
 ```
 
+## 高级引入方式
+
 ## 贡献语言包
 
-Univer OSS 是一个充满包容性的开源项目，我们欢迎来自五湖四海的开发者为 Univer 添加或者改进语言包。如果你有兴趣为 Univer 贡献语言包，请参考 [贡献指南](/guides/sheet/contributing)。
+Univer OSS 是一个包容的开源项目，我们欢迎来自五湖四海的开发者为 Univer 添加或者改进语言包，如果你有兴趣为 Univer 贡献翻译，请参考 [贡献指南](/guides/sheet/contributing)。

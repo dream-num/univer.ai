@@ -1,11 +1,12 @@
 import { Callout } from 'nextra/components'
+import VersionBadge from '@/components/VersionBadge'
 
-# Presets
+# Presets  <VersionBadge version="0.5.0+" />
 
-我们为一些常见的场景准备了预置的插件组合以及配置，并提供了 Facade API，让你无需安装和配置插件就可以立即开始开发 Univer，并且无需关心后续 “功能” 章节中有关于安装、引入、国际化、注册和配置的章节。
+从 0.5.0 版本开始，我们为一些常见的场景准备了预置的插件组合以及配置，让你无需安装和配置插件就可以立即开始开发 Univer，不用再关心安装、引入 Facade API 和注册插件等细节。
 
-<Callout>
-  如果你希望更灵活地引入和配置插件（例如懒加载部分插件，以及使用一些 Presets 不提供的配置项），可以参考 [高级安装](/guides/sheet/advanced/installation)。
+<Callout type="info">
+  如果你希望更灵活地引入和配置插件（例如懒加载部分插件，以及使用一些 Presets 不提供的配置项），可以参考 [高级引入方式](/guides/sheet/getting-started/advanced-installation)。
 </Callout>
 
 TODO: 要不我们提供基于包管理器和使用 HTML 的两个版本？
@@ -88,10 +89,9 @@ createUniver({
 });
 ```
 
-
 在线例子
 
-## 运行在 Node.js 当中的 Univer 
+## 运行在 Node.js 当中的 Univer
 
 请移步 [“在 Node.js 上运行 Univer”](/guides/sheet/getting-started/node)。
 
@@ -101,4 +101,8 @@ Univer 支持在 Web Worker 线程中进行公式和透视表等运算，Presets
 
 1. 在基础电子表格中使用 Web Worker
 2. 高级功能使用 Web Worker
+
+## 提交建议
+
+我们非常欢迎你试用 Presets，如果你发现 Presets 无法满足你的配置需求，可以在 [GitHub](https://github.com/dream-num/univer-presets/issues/new) 上向我们提交 Feature Request，我们会综合评估社区的需要有选择性地将更多底层的配置能力开发给 Presets。
 

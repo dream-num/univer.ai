@@ -1,43 +1,54 @@
 import { Callout, Steps, Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
-# 使用 Facade API
+# 引入 Facade API
 
 <BadgeGroup values={[UniverTypes.GENERAL]} value={UniverTypes.GENERAL} />
 
-Univer 的插件化能力非常强大，它几乎允许你对 Univer 的方方面面进行扩展。但在大多数情况下，过于灵活的扩展能力会使得开发者手足无措。因此我们提供了 `@univerjs/facade`，为 Univer 的用户提供一个更加简单易用的面板 API（Facade API）。
+为了应对复杂的需求，Univer 的架构也较为复杂，这可能会给使用造成一些困难，为此我们提供了一个更加简单易用的面板 API（Facade API）。本文档将详细介绍如何在应用中添加 Facade API，后续的 “功能” 章节中，我们将列出每个功能的主要 Facade API，如果你想查看所有的 Facade API，请参考各个插件的 [API 文档](/typedoc/@univerjs/facade/README)。
 
-`@univerjs/facade` 适用于任何人，尤其是那些熟悉 Luckysheet 的老用户，或者只是想简单地使用 Univer 的功能而并不打算深度扩展的用户。使用 `@univerjs/facade`，你可以快速上手，轻松实现各种常见的增删改查功能。
-
-本文档将详细介绍如何使用 `@univerjs/facade` 提供的 API，帮助你充分发挥 Univer 的潜力。如果你想查看所有的 Facade API，请参考 `@univerjs/facade` 的 [API 文档](/typedoc/@univerjs/facade/README)。通过学习和使用这些 API，你将能够更高效、更便捷地开发出功能强大的办公应用。
-
-<Callout type="info" emoji="ℹ️">
-  实际上，[Uniscript](/typedoc/@univerjs/uniscript/README) 也使用了 `@univerjs/facade`，因此你可以在 `@univerjs/uniscript` 创建的 Uniscript 面板中直接使用 `@univerjs/facade` 提供的 API。
+<Callout>
+  从 0.5.0 开始版本，`@univerjs/facade` 包被标记为废弃，并计划在 0.7.0 版本中移除。如果你使用 Presets，无需关心这个变化，否而请参考 “使用高级引入” 部分引入 Facade API。
 </Callout>
 
-## 安装
 
-使用你的包管理器安装：
+## Presets
 
-<Tabs items={['pnpm', 'npm']}>
-  <Tabs.Tab label="pnpm">
-    ```shell
-    pnpm add @univerjs/facade
-    ```
-  </Tabs.Tab>
-  <Tabs.Tab label="npm">
-    ```shell
-    npm install @univerjs/facade
-    ```
-  </Tabs.Tab>
-</Tabs>
+如果你使用 Presets，它会自动引入所含功能的 Facade API，并在你创建 Univer 实例时返回一个对应的 Facade API 实例，直接使用即可。
 
-## 使用
+## 使用高级引入
 
-`@univerjs/facade` 提供的 API 是对 `Univer` 实例的封装，因此你需要在创建了 `Univer` 实例之后，再用 `FUniver` 包裹这个实例：
+### 安装
+
+从 0.5.0 版本开始，Facade API 的实现被分散到各个插件中，并挂载到全局的 Facade API 根对象上，这意味着对于那些提供了 Facade API 的插件，你需要引入他们对应的 Facade API 实现。
+
+我们会在每个功能的页面介绍它是否提供了 Facade API 实现。总体而言，你需要编写如下代码：
 
 ```typescript
-import { FUniver } from "@univerjs/facade";
+import '@univerjs/sheets/facade';
+import '@univerjs/ui/facade';
+import '@univerjs/docs-ui/facade';
+import '@univerjs/sheets-ui/facade';
+import '@univerjs/sheets-data-validation/facade';
+import '@univerjs/engine-formula/facade';
+import '@univerjs/sheets-filter/facade';
+import '@univerjs/sheets-formula/facade';
+import '@univerjs/sheets-numfmt/facade';
+import '@univerjs/sheets-hyper-link-ui/facade';
+```
+
+引入高级功能的 Facade API 的方式与引入开源功能的方式相同，例如：
+
+```typescript
+import '@univerjs-pro/sheets-pivot/facade';
+```
+
+### 使用
+
+Facade API 是对 `Univer` 实例的封装，因此你需要在创建了 `Univer` 实例之后，再用 `FUniver` 包裹这个实例：
+
+```typescript
+import { FUniver } from "@univerjs/core";
 
 const univerAPI = FUniver.newAPI(univer);
 ```
@@ -47,37 +58,3 @@ const univerAPI = FUniver.newAPI(univer);
 ```typescript
 univerAPI.getActiveWorkbook();
 ```
-
-## 与服务端配合使用
-
-如果你使用的功能包含了与服务端交互的部分，那么你需要将 `@univerjs/facade` 包替换成 `@univerjs-pro/facade` 才能调用与这些功能相关的 API。
-
-`@univerjs-pro/facade` 的使用与 `@univerjs/facade` 完全相同，只需要将 `@univerjs/facade` 替换成 `@univerjs-pro/facade` 即可：
-
-<Steps>
-  ### 安装
-
-  <Tabs items={['pnpm', 'npm']}>
-    <Tabs.Tab label="pnpm">
-      ```shell
-      pnpm remove @univerjs/facade
-      pnpm add @univerjs-pro/facade
-      ```
-    </Tabs.Tab>
-    <Tabs.Tab label="npm">
-      ```shell
-      npm remove @univerjs/facade
-      npm install @univerjs-pro/facade
-      ```
-    </Tabs.Tab>
-  </Tabs>
- 
-  ### 替换
- 
-  ```diff
-  - import { FUniver } from "@univerjs/facade";
-  + import { FUniver } from "@univerjs-pro/facade";
- 
-  const univerAPI = FUniver.newAPI(univer);
-  ```
-</Steps>

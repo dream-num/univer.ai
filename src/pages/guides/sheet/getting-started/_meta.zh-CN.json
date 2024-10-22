@@ -3,11 +3,11 @@
   "installation": "安装和基本使用",
   "concepts": "基础概念",
   "presets": "Presets",
-  "i18n": "国际化",
   "workbook-data": "工作表数据结构",
   "cell-data": "单元格数据结构",
-  "facade": "使用 Facade API",
-  "advanced-installation": "高级安装和引入",
+  "advanced-installation": "高级引入方式",
+  "i18n": "国际化",
+  "facade": "引入 Facade API",
   "univer-plugins": "构造器插件",
   "node": "在 Node.js 上运行 Univer"
 }
