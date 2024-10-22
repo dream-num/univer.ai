@@ -24,9 +24,9 @@ There are two ways to set the default style of a worksheet:
     interface IWorksheetData{
         // other
         /**
-         * @property {string|Nullable<IStyleData>} [defaultStyle] - Default style id or style data of Worksheet.
+         * @property {Nullable<IStyleData>} [defaultStyle] - Default style id or style data of Worksheet.
          */
-        defaultStyle?: Nullable<IStyleData> | string;
+        defaultStyle?: Nullable<IStyleData>;
 
     }
 
@@ -35,7 +35,7 @@ There are two ways to set the default style of a worksheet:
         /**
          * style id
          */
-        s?: Nullable<IStyleData | string>;
+        s?: Nullable<IStyleData>;
     }
 
     interface IColumnData{
@@ -43,7 +43,7 @@ There are two ways to set the default style of a worksheet:
      /**
      * style id
      */
-    s?: Nullable<IStyleData | string>;
+    s?: Nullable<IStyleData>;
 }
 ```
 2. Set through the facade API
@@ -51,18 +51,23 @@ There are two ways to set the default style of a worksheet:
 ```typescript
   const fworkbook = univerAPI.getActiveWorkbook()
   const fworksheet = fworkbook.getActiveSheet()
-  // set default style
-  fworksheet.setDefaultStyle('uJSelZ')
-  // set default column style
-  fworksheet.setColumnDefaultStyle(3, 'uJSelZ')
-  fworksheet.setColumnDefaultStyle(3, {
+  const defaultStyle = {
       bg: {
           rgb: 'red'
       }
-  })
+  }
+  const defaultColumnStyle = {
+      bg: {
+          rgb: 'blue'
+      }
+  }
+  // set default style
+  fworksheet.setDefaultStyle(defaultStyle)
+  // set default column style
+  fworksheet.setColumnDefaultStyle(3, defaultColumnStyle)
   // reset the column default style
   fworksheet.setColumnDefaultStyle(3, undefined)
 
   // set row default style
-  fworksheet.setRowDefaultStyle(1, 'uJSelZ')
+  fworksheet.setRowDefaultStyle(1, defaultColumnStyle)
 ```

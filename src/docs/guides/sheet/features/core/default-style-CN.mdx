@@ -25,9 +25,9 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
     interface IWorksheetData{
         // other
         /**
-         * @property {string|Nullable<IStyleData>} [defaultStyle] - 工作表的默认样式 ID 或样式数据。
+         * @property {Nullable<IStyleData>} [defaultStyle] - 工作表的默认样式 ID 或样式数据。
          */
-        defaultStyle?: Nullable<IStyleData> | string;
+        defaultStyle?: Nullable<IStyleData>;
 
     }
 
@@ -36,7 +36,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
         /**
          * 样式 ID
          */
-        s?: Nullable<IStyleData | string>;
+        s?: Nullable<IStyleData>;
     }
 
     interface IColumnData{
@@ -44,7 +44,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
      /**
      * 样式 ID
      */
-    s?: Nullable<IStyleData | string>;
+    s?: Nullable<IStyleData>;
 }
 ```
 
@@ -53,18 +53,23 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 ```typescript
   const fworkbook = univerAPI.getActiveWorkbook()
   const fworksheet = fworkbook.getActiveSheet()
-  // set default style
-  fworksheet.setDefaultStyle('uJSelZ')
-  // set default column style
-  fworksheet.setColumnDefaultStyle(3, 'uJSelZ')
-  fworksheet.setColumnDefaultStyle(3, {
+  const defaultStyle = {
       bg: {
           rgb: 'red'
       }
-  })
+  }
+  const defaultColumnStyle = {
+      bg: {
+          rgb: 'blue'
+      }
+  }
+  // set default style
+  fworksheet.setDefaultStyle(defaultStyle)
+  // set default column style
+  fworksheet.setColumnDefaultStyle(3, defaultColumnStyle)
   // reset the column default style
   fworksheet.setColumnDefaultStyle(3, undefined)
 
   // set row default style
-  fworksheet.setRowDefaultStyle(1, 'uJSelZ')
+  fworksheet.setRowDefaultStyle(1, defaultColumnStyle)
 ```
