@@ -6,5 +6,6 @@
   "row-col": "Row & Column",
   "range-selection": "Range & Selection & Cell",
   "freeze": "Freeze",
-  "dom": "Custom Component"
+  "dom": "Custom Component",
+  "default-style": "Default Style"
 }
