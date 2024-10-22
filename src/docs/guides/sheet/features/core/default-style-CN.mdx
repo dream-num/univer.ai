@@ -1,0 +1,70 @@
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+
+# 表格默认样式
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+我们提供了两级默认样式：工作表的默认样式和列或行的默认样式。
+这两种样式都可以通过 `IWorksheetData` 接口或 facade API 进行设置。
+
+默认情况下，列样式优先于行样式。您可以通过在注册时设置 `isRowStylePrecedeColumnStyle` 来更改此行为。
+
+您可以通过在注册时设置 `isRowStylePrecedeColumnStyle` 来设置行样式是否优先于列样式。
+
+```typescript
+  univer.registerPlugin(UniverSheetsPlugin, {
+      isRowStylePrecedeColumnStyle: true,
+  });
+```
+
+### 设置默认样式
+有两种方法可以设置工作表的默认样式：
+
+1. 通过 `IWorksheetData` 接口
+```typescript
+    interface IWorksheetData{
+        // other
+        /**
+         * @property {string|Nullable<IStyleData>} [defaultStyle] - 工作表的默认样式 ID 或样式数据。
+         */
+        defaultStyle?: Nullable<IStyleData> | string;
+
+    }
+
+    interface IRowData{
+        // other
+        /**
+         * 样式 ID
+         */
+        s?: Nullable<IStyleData | string>;
+    }
+
+    interface IColumnData{
+     // other
+     /**
+     * 样式 ID
+     */
+    s?: Nullable<IStyleData | string>;
+}
+```
+
+2. 通过Facade 通过API设置
+
+```typescript
+  const fworkbook = univerAPI.getActiveWorkbook()
+  const fworksheet = fworkbook.getActiveSheet()
+  // set default style
+  fworksheet.setDefaultStyle('uJSelZ')
+  // set default column style
+  fworksheet.setColumnDefaultStyle(3, 'uJSelZ')
+  fworksheet.setColumnDefaultStyle(3, {
+      bg: {
+          rgb: 'red'
+      }
+  })
+  // reset the column default style
+  fworksheet.setColumnDefaultStyle(3, undefined)
+
+  // set row default style
+  fworksheet.setRowDefaultStyle(1, 'uJSelZ')
+```
