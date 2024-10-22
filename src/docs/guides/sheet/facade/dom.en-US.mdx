@@ -61,9 +61,14 @@ componentManager.register(
 );
 
 const dialog = workbook.openDialog({
-  id: 'myDialog',
-  title: 'My Dialog',
-  body: MyCustomDialogComponent,
+  id: 'unique-dialog-id',
+  title: { title: 'permission.dialog.allowedPermissionType' },
+  children: { label: 'myDialog' },
+  width: 393,
+  destroyOnClose: true,
+  onClose: () => {
+    console.log('close');
+  },
 });
 
 // Close the dialog later
@@ -89,16 +94,21 @@ const componentManager = injector.get(ComponentManager);
 // You should register components at an appropriate time (e.g., when Univer has finished loading)
 componentManager.register(
   'myPopup',
-  () => <div style={{ width: 100, height: 100, background: '#fff' }}>Popup content</div>
+  ({ popup }) => <div style={{ width: 100, height: 100, background: '#fff' }}>Popup content {popup.extraProps.label}</div>,
+  // If the component is a React component, you need to set the framework to 'react'
+  // If the component is a Vue3 component, you need to set the framework to 'vue3'
+  { framework: 'react' }
 );
 
 // Attach the popup to the first cell of the range
 // If disposable is null, it means the popup failed to add
 const disposable = range.attachPopup({
   // componentKey must be a component or a key of a registered component
-    componentKey: myPopup,
-    // If componentKey is a Vue3 component, isVue3 must be set to true
-    // isVue3: true,
+    componentKey: 'myPopup',
+    // This is the component's data, which can be passed to the component
+    extraProps: {
+      label: 'hahah',
+    },
 });
 
 // Remove the popup
@@ -135,7 +145,7 @@ componentManager.register(
 // If disposable is null, it means the floating DOM failed to add
 const disposable = worksheet.addFloatDomToPosition({
     // componentKey must be a component or a key of a registered component
-    componentKey: myFloatDom,
+    componentKey: 'myFloatDom',
     // If componentKey is a Vue3 component, isVue3 must be set to true
     // isVue3: true,
     initPosition: {
