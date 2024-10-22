@@ -7,7 +7,7 @@
   "workbook-data": "工作表数据结构",
   "cell-data": "单元格数据结构",
   "facade": "使用 Facade API",
-  "node": "在 Node.js 上运行 Univer",
   "advanced-installation": "高级安装和引入",
-  "univer-plugins": "构造器插件"
+  "univer-plugins": "构造器插件",
+  "node": "在 Node.js 上运行 Univer"
 }
