@@ -1,6 +1,7 @@
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import VersionBadge from '@/components/VersionBadge'
 
-# Sheet Default Style
+# Sheet Default Style <VersionBadge version="0.4.2+" />
 
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
 
@@ -47,7 +48,7 @@ There are two ways to set the default style of a worksheet:
       s?: Nullable<IStyleData>;
     }
 ```
-2. Set through the Facade API
+2. Set through the [Facade API](/guides/sheet/features/facade)
 
 ```typescript
   const fworkbook = univerAPI.getActiveWorkbook()

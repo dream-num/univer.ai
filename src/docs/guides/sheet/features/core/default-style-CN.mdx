@@ -1,6 +1,7 @@
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import VersionBadge from '@/components/VersionBadge'
 
-# 表格默认样式
+# 表格默认样式 <VersionBadge version="0.4.2+" />
 
 <BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
 
@@ -48,7 +49,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
     }
 ```
 
-2. 通过Facade API 设置
+2. 通过 [Facade API](/guides/sheet/features/facade) 设置
 
 ```typescript
   const fworkbook = univerAPI.getActiveWorkbook()
