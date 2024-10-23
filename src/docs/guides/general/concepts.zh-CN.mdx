@@ -5,7 +5,9 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 <BadgeGroup values={[UniverTypes.GENERAL]} value={UniverTypes.GENERAL} />
 
-在进一步深入了解 Univer 之前，请阅读本篇文档以了解 Univer 的基本概念，将有助于你更顺利地使用 Univer。
+<Callout type="info" emoji="🧱">
+  在深入使用 Univer 之前，建议先阅读本篇文档以了解 Univer 的基本概念，将有助于你更顺利地使用 Univer。
+</Callout>
 
 基本概念包括：
 
@@ -17,68 +19,60 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 ## 插件
 
-Univer 的功能均由插件提供，插件是 Univer 的基本组成单元，多个插件组合在一起构成了 Univer 应用。
+插件是 Univer 的基本组成单元，多个插件组合在一起构成了 Univer 应用。
 
 插件的职责包括：
 
+1. 提供基础能力，例如 `@univerjs/engine-render` 提供渲染能力
 1. 实现功能，例如 `@univerjs/sheets-filter` 实现了筛选功能
-2. 提供某种基础能力，例如 `@univerjs/engine-render` 提供渲染能力
 
-你可以按照自己的需要组合 Univer 提供的插件，定制符合你的需求的 Univer 应用，避免加载多余代码；也可以通过编写插件来扩展 Univer 的功能，满足个性化的需求。
+你可以根据使用场景自由组合插件，同时避免加载多余代码；也可以通过编写插件来扩展 Univer 的功能，满足个性化的需求。
 
-相关链接
+相关链接：
 
-1. [编写一个 CSV 导入插件](/guides/sheet/tutorials/csv-import-plugin) 了解如何编写一个插件
-2. [Univer 架构](/guides/sheet/architecture/univer) 详细了解 Univer 的架构设计
+1. [编写一个 CSV 导入插件](/guides/sheet/tutorials/csv-import-plugin) 了解如何编写一个插件。
+1. [Univer 架构](/guides/sheet/architecture/univer) 详细了解 Univer 的架构设计。
 
 ## 快照
 
-你需要在 Univer 中加载快照来加载文档，每种类型的文档都提供了自己的快照格式，请参考以下 API 文档了解如何编写符合格式要求的快照：
+你需要在 Univer 中加载快照来初始化文档，每种类型的文档都提供了自己的快照格式。请参考以下文档了解如何编写符合格式要求的快照：
 
-1. 电子表格的完整快照格式可参考 API 手册中的 [`IWorkbookData`](/typedoc/@univerjs/core/interfaces/IWorkbookData)
-    1. [工作簿数据结构](/guides/sheet/getting-started/workbook-data) 介绍了工作簿的基本结构
-    1. [单元格配置](/guides/sheet/getting-started/cell-data) 介绍了单元格的数据结构
-2. 文档的完整快照结构可参考 API 手册中的 [`IDocumentData`](/typedoc/@univerjs/core/interfaces/IDocumentData)
-
-功能插件可以通过 `resources` 字段来存储资源，例如图片等等，可参考 [插件自定义模型](/guides/sheet/advanced/custom-model)。
+1. 文档的完整快照结构可参考 API 手册中的 [`IDocumentData`](/typedoc/@univerjs/core/interfaces/IDocumentData) 。
+1. 电子表格的完整快照格式可参考 API 手册中的 [`IWorkbookData`](/typedoc/@univerjs/core/interfaces/IWorkbookData) 。
+    1. [工作簿数据结构](/guides/sheet/getting-started/workbook-data) 介绍了工作簿的基本结构。
+    1. [单元格配置](/guides/sheet/getting-started/cell-data) 介绍了单元格的数据结构。
+1. 你可能需要在快照中保存自定义数据，可参考 [插件自定义模型](/guides/sheet/advanced/custom-model)。
 
 <Callout type="error" emoji="🚨">
   注意！Univer 的快照仅用于存储数据，在运行时，它并不会反映最新的文档状态！如果你想把文档状态保存为快照，请使用 Facade API 上的保存快照的方法。
 </Callout>
 
-相关链接
-
-1. [安装和基本使用](/guides/sheet/getting-started/installation#表格基本操作) 了解如何加载、保存快照
-
 ## 命令
 
 在 Univer 中，对于数据的修改都需要通过命令执行，基于命令的方式可以更好地追踪值的变化，并且能够实现撤销、重做和协同编辑等功能，以及处理功能之间复杂的关联逻辑等等。
 
-如果你想通过命令的方式修改文档数据，请参考 [如何查找命令 ID](/guides/sheet/tutorials/find-the-command-id)。如果你选择通过 Facade API 来修改文档数据，实际上 Facade API 在背后会为你准备参数并执行命令。
+如果你想通过命令的方式修改文档数据，请参考 [如何查找命令 ID](/guides/sheet/tutorials/find-the-command-id)。
 
 <Callout type="error" emoji="🚨">
-  Univer 基于[命令系统](/guides/sheet/architecture/univer#%E5%91%BD%E4%BB%A4%E7%B3%BB%E7%BB%9F)对状态和数据进行操作和更新，因此你**必须**使用命令或者相应的 Facade API 来更新数据，任何直接对数据进行修改以更新视图的操作都不会生效。
+  Univer 基于 [命令系统](/guides/sheet/architecture/univer#%E5%91%BD%E4%BB%A4%E7%B3%BB%E7%BB%9F) 对状态和数据进行操作和更新，因此你**必须**使用 Facade API（或其对应的命令）来更新数据，任何直接对数据进行修改以更新视图的操作都不会生效。
 </Callout>
 
 ## Facade API
 
-Facade API 是对 Univer 第一方插件底层接口的封装，提供了更简单的使用方式，让开发者可以使用 Univer 而无需了解内部设计。
+Facade API 是对插件所提供的底层接口的封装，让开发者可以更简易地使用 Univer 而无需了解其内部设计。
 
-当然凡事皆有两面，Facade API 虽然让 Univer 更易用，但它同时也使得用户无法接触到 Univer 内部一些更强大的 API。如果你需要更高级的自定义能力，就需要在了解 Univer 架构的基础上使用底层 API。
+当然凡事皆有两面，Facade API 虽然让 Univer 更易用，但它同时也使得你无法接触到内部一些更强大的 API。如果你需要更高级的自定义能力，就需要在了解架构的基础上使用底层 API。
 
 相关链接
 
-1. [Facade API 介绍](/guides/sheet/getting-started/facade)
-2. [Facade API 常用方法](/guides/sheet/facade/general-api)
-3. [Facade Sheet API 常用方法](/zh-CN/guides/sheet/facade/sheet-api)
-4. [Facade API 参考手册](/typedoc/@univerjs/facade/README)
+1. [引入 Facade API](/guides/sheet/getting-started/facade)
+1. [Facade Sheet API 常用方法](/zh-CN/guides/sheet/facade/sheet-api)
 
 ## Presets
 
-我们为首次接触 Univer 的用户准备了一些开箱即用的解决方案，如果你的使用场景比较常规，你可以选择从 Presets 开始。Presets 的代码也是开源的，因此你也可以参考 Presets 的源码来入手 Univer。
+我们为首次接触 Univer 的用户准备了一些开箱即用的解决方案，如果你的使用场景比较常规，你可以选择从 Presets 开始。Presets 的代码也是开源的，因此你也可以参考 Presets 的源码来学习如何进一步定制 Univer。
 
 相关链接
 
 1. [使用 Presets](/guides/sheet/getting-started/presets)
-2. [开源仓库](https://github.com/dream-num/univer-presets)
-
+2. [Presets 开源仓库](https://github.com/dream-num/univer-presets)

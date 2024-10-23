@@ -8,8 +8,8 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 Univer 从 0.5.0 版本起提供了 `@univerjs/presets` 包，它针对一些常见场景提供了预设的配置，可以帮助你快速地搭建一个 Univer 应用而无需关心如何引入和配置 Univer 插件。
 
-<Callout>
-  如果你是首次使用 Univer，我们推荐从 `@univerjs/presets` 开始。在后续的小节中，除非特殊说明，我们都会假设你使用了 Presets。如果你已经较为熟悉 Univer，并且希望更加灵活地引入插件（例如懒加载部分插件），可以参考 [高级引入方式](/guides/sheet/advanced/installation)。
+<Callout type="info" emoji="🍃">
+  如果你是首次使用 Univer，我们推荐从 Presets 开始。在后续的小节中，除非特殊说明，我们都会假设你使用了 Presets。如果你已经较为熟悉 Univer，并且希望更加灵活地引入插件（例如懒加载部分插件），可以参考 [高级引入方式](/guides/sheet/advanced/installation)。
 </Callout>
 
 ## 使用包管理器
@@ -102,7 +102,9 @@ univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});`
 
 我们在当前主流的 CDN 服务商（例如 jsDelivr、unpkg）都提供了 Univer 的 UMD 构建，你可以在 HTML 文件中引入这些资源（当然你也可以下载这些文件然后通过自己的服务器或者 CDN 网络分发）：
 
-TODO: @jikkai update imports and API here
+<Callout type="error">
+  TODO: @jikkai 这里需要给 presets 打 UMD 包并指导用户引入
+</Callout>
 
 ```html
 <head>
@@ -128,6 +130,8 @@ TODO: @jikkai update imports and API here
 </body>
 ```
 
+这里返回的 `univerAPI` 对象被称为 Univer 的面板 API（Facade API），通过它可以调用 Univer 提供的许多功能。
+
 ### 指定版本
 
 unpkg 和 jsDeliver 都支持指定特定版本的资源。以 unpkg 为例，如果你想使用 0.1.16 版本的 Univer，仅需在 URL 中加上 `@<version>` 来指定版本即可：
@@ -149,35 +153,33 @@ unpkg 和 jsDeliver 都支持指定特定版本的资源。以 unpkg 为例，�
 import { IWorkbookData, UniverInstanceType } from "@univerjs/core";
 
 const data: IWorkbookData = {
-id: 'test',
-        appVersion: '3.0.0-alpha',
-        sheets: {
-            sheet1: {
-                id: 'sheet1',
-                name: 'sheet1',
-                cellData: {
-                    0: {
-                        0: {
-                            v: 'Hello Univer!',
-                        },
-                    },
-                    
-                },
-                rowCount: 100,
-                columnCount: 100,
-            },
+  id: 'test',
+  sheets: {
+    sheet1: {
+      id: 'sheet1',
+      name: 'sheet1',
+      cellData: {
+        0: {
+          0: {
+            v: 'Hello Univer!',
+          },
         },
-        locale: LocaleType.ZH_CN,
-        name: '',
-        sheetOrder: ['sheet1'],
-        styles: {},
-        resources: [
-        ],
+
+      },
+      rowCount: 100,
+      columnCount: 100,
+    },
+  },
+  locale: LocaleType.ZH_CN,
+  name: 'Test Workbook',
+  sheetOrder: ['sheet1'],
 };
 const workbook = univerAPI.createUniverSheet(data);
 ```
 
-TODO: 这里没有引入 Facade API
+<Callout type="error">
+  TODO: @jikkai 这里需要给 presets 打 UMD 包并指导用户引入
+</Callout>
 
 export const code2 = `const univer = new Univer({
   theme: defaultTheme,
@@ -232,15 +234,9 @@ univer.createUnit(UniverInstanceType.UNIVER_SHEET, data);`
 
 <ReactLive code={code2} />
 
-你可以在[这里](/typedoc/@univerjs/core/interfaces/IWorkbookData)了解 `IWorkbookData` 所支持的全部字段。
-
-我们这里所调用的 `univerAPI` 对象被称为 Univer 的 Facade API（面板 API）。
+你可以在 [工作表数据结构](http://localhost:3000/zh-CN/guides/sheet/getting-started/workbook-data) 进一步了解如何初始化表格数据。
 
 ### 修改数据
-
-<Callout type="error" emoji="🚨">
-  Univer 基于[命令系统](/guides/sheet/architecture/univer#%E5%91%BD%E4%BB%A4%E7%B3%BB%E7%BB%9F)对状态和数据进行操作和更新，因此你**必须**使用命令或者相应的 Facade API 来更新数据，任何直接对数据进行修改以更新视图的操作都不会生效。
-</Callout>
 
 你可以通过调用 `univerAPI` 的方法来使用 Univer 了，例如获取当前激活的，并在指定的范围更新值：
 
@@ -252,18 +248,24 @@ const range = sheet.getRange(0, 0, 1, 1);
 range.setValue(1);
 ```
 
+<Callout type="error" emoji="🚨">
+  Univer 基于 [命令系统](/guides/sheet/architecture/univer#%E5%91%BD%E4%BB%A4%E7%B3%BB%E7%BB%9F) 对状态和数据进行操作和更新，因此你**必须**使用 Facade API（或其对应的命令）来更新数据，任何直接对数据进行修改以更新视图的操作都不会生效。
+</Callout>
+
 ### 存储数据
 
-通过调用当前 `FWorkbook` 的 `save` 方法，可以得到 `IWorkbookData` 对象，包含了表格内部的数据。
+通过调用 `workbook` 的 `save` 方法，可以得到 `IWorkbookData` 对象，包含表格内部的最新数据。
 
 ```typescript
 const savedData = univerAPI.getActiveWorkbook().save();
 ```
 
-## 了解更多
+## 下一步
 
 * 在 [基础概念](/guides/sheet/getting-started/concepts) 章节了解本章中出现的插件、命令和 Facade API 等概念。
 * 在 [Presets](/guides/sheet/getting-started/presets) 章节了解 Univer 官方提供的所有 Presets。
+* 在 [工作表数据结构](/guides/sheet/getting-started/workbook-data) 进一步了解如何初始化表格数据。
+* 在 [功能](/guides/sheet/features/core) 相关章节中了解修改电子表格数据的所有操作。
 
 [^1]: https://blog.npmjs.org/post/110924823920/npm-weekly-5
 [^2]: https://pnpm.io/npmrc#auto-install-peers

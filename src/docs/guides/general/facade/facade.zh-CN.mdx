@@ -5,7 +5,9 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 <BadgeGroup values={[UniverTypes.GENERAL]} value={UniverTypes.GENERAL} />
 
-为了应对复杂的需求，Univer 的架构也较为复杂，这可能会给使用造成一些困难，为此我们提供了一个更加简单易用的面板 API（Facade API）。本文档将详细介绍如何在应用中添加 Facade API，后续的 “功能” 章节中，我们将列出每个功能的主要 Facade API，如果你想查看所有的 Facade API，请参考各个插件的 [API 文档](/typedoc/@univerjs/facade/README)。
+为了应对复杂的需求，Univer 的架构也较为复杂，这可能会给使用造成一些困难，为此我们提供了一个更加简单易用的面板 API（Facade API）。
+
+本小节将详细介绍如何在应用中添加 Facade API，后续的 “功能” 章节中，我们将列出每个功能的主要 Facade API，如果你想查看所有的 Facade API，请参考各个插件的 [API 文档](/typedoc/@univerjs/facade/README)。
 
 <Callout>
   从 0.5.0 开始版本，`@univerjs/facade` 包被标记为废弃，并计划在 0.7.0 版本中移除。如果你使用 Presets，无需关心这个变化，否而请参考 “使用高级引入” 部分引入 Facade API。
@@ -14,7 +16,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 ## Presets
 
-如果你使用 Presets，它会自动引入所含功能的 Facade API，并在你创建 Univer 实例时返回一个对应的 Facade API 实例，直接使用即可。
+如果你使用 Presets，它会自动引入所含功能的 Facade API，并在你创建 Univer 实例时返回一个对应的 Facade API 实例 `univerAPI`，直接使用即可。
 
 ## 使用高级引入
 
@@ -41,6 +43,7 @@ import '@univerjs/sheets-hyper-link-ui/facade';
 
 ```typescript
 import '@univerjs-pro/sheets-pivot/facade';
+import '@univerjs-pro/exchange-client/facade';
 ```
 
 ### 使用
@@ -51,10 +54,4 @@ Facade API 是对 `Univer` 实例的封装，因此你需要在创建了 `Univer
 import { FUniver } from "@univerjs/core";
 
 const univerAPI = FUniver.newAPI(univer);
-```
-
-然后你就可以通过调用 `univerAPI` 的方法来使用 Univer 了，例如获取当前激活的 Workbook：
-
-```typescript
-univerAPI.getActiveWorkbook();
 ```
