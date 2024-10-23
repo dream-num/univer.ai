@@ -5,7 +5,9 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 <BadgeGroup values={[UniverTypes.GENERAL]} value={UniverTypes.GENERAL} />
 
-Before diving deeper into Univer, please read this document to understand the basic concepts of Univer, which will help you use Univer more smoothly.
+<Callout type="info" emoji="🧱">
+  Before diving deeper into Univer, please read this document to understand the basic concepts of Univer, which will help you use Univer more smoothly.
+</Callout>
 
 The basic concepts include:
 
@@ -13,6 +15,7 @@ The basic concepts include:
 * Snapshot
 * Command
 * Facade API
+* Presets
 
 ## Plugins
 
@@ -30,51 +33,35 @@ You can combine Univer's plugins to customize a Univer application that meets yo
 1. [Write a CSV import plugin](/guides/sheet/tutorials/csv-import-plugin) to learn how to write a plugin.
 2. [Univer Architecture](/guides/sheet/architecture/univer) to learn more about Univer's architecture design.
 
-## Presets
-
-We provide some presets that combine multiple plugins to meet common requirements. You can use presets directly to quickly build a Univer application that meets your requirements. 
-
-### Related Links
-
 ## Snapshot
 
 You need to load a snapshot in Univer to load a document. Each type of document provides its own snapshot format. Please refer to the above API documentation to learn how to write a snapshot that meets the format requirements:
 
-1. The snapshot format of a spreadsheet is [`IWorkbookData`](/typedoc/@univerjs/core/interfaces/IWorkbookData).
-  1. [Configure Cell Data](guides/sheet/getting-started/cell-data) gives a detailed introduction to the data structure of cells.
-2. The snapshot format of a document is [`IDocumentData`](/typedoc/@univerjs/core/interfaces/IDocumentData).
+1. The complete snapshot structure of the document can be found in the API manual [`IDocumentData`](/typedoc/@univerjs/core/interfaces/IDocumentData).
+1. The complete snapshot format of the spreadsheet can be found in the API manual [`IWorkbookData`](/typedoc/@univerjs/core/interfaces/IWorkbookData).
+    1. [Configure Workbook Data](/guides/sheet/getting-started/workbook-data) introduces the basic structure of the workbook.
+    1. [Configure Cell Data](/guides/sheet/getting-started/cell-data) introduces the data structure of the cell.
+1. You may need to save custom data in the snapshot, see [Plugin Custom Model](/guides/sheet/advanced/custom-model).
 
-Functional plugins can store resources, such as images, etc., through the `resources` field. For more information, see [Plugin Custom Model](/guides/sheet/advanced/custom-model).
-
-<Callout emoji="⚠️">
+<Callout type="error" emoji="🚨">
   Note! Univer's snapshot is only used to store data. It does not reflect the latest document status at runtime! If you want to save the document status as a snapshot, use the method to save the snapshot on the Facade API.
 </Callout>
-
-### Related Links
-
-1. [Getting Started Example](/guides/sheet/getting-started/installation#Getting-Started-Example-Loading-Data-Modifying-Data-and-Storing-Data) to learn how to load and save snapshots.
 
 ## Command
 
 In Univer, all data modifications need to be executed through commands. The command-based approach can better track changes in values, implement functions such as undo, redo, and collaborative editing, handle complex associated logic between functions, etc.
 
-If you want to modify document data through commands, please refer to [How to Find Command ID](/guides/sheet/tutorials/find-the-command-id). If you choose to modify document data through the Facade API, the Facade API will actually prepare parameters for you and execute commands behind the scenes.
+If you want to modify document data through commands, please refer to [How to Find Command ID](/guides/sheet/tutorials/find-the-command-id).
 
 <Callout emoji="⚠️">
   **Do not modify the snapshot directly!** This will not take effect and will not trigger the update of views or UI. Please modify data through commands or the Facade API.
 </Callout>
 
-### Related Links
-
-1. [Getting Started Example](/guides/sheet/getting-started/installation#Getting-Started-Example-Loading-Data-Modifying-Data-and-Storing-Data) to learn how to modify data through the Facade API
-
 ## Facade API
 
-Due to the high complexity of office applications, Univer's architecture is also very complex. To make it easier for developers to use Univer, we provide the Facade API, which is a wrapper for Univer's first-party plugins, providing simpler interfaces that make it easier for developers to use Univer.
+Facade API is a wrapper for the underlying interfaces provided by plugins, allowing developers to use Univer more easily without having to understand its internal design.
 
-We are improving the Facade API. Stay tuned for more updates. If you have any questions or requirements, please submit an issue on GitHub.
-
-Of course, everything comes with a price. The Facade API is a high-level API that abstracts the underlying details. If you need to implement some complex features, you may need to understand Univer's architecture and use the low-level API directly.
+Of course, everything has two sides. Although the Facade API makes Univer easier to use, it also prevents you from accessing some more powerful APIs internally. If you need more advanced custom capabilities, you need to use the underlying API based on an understanding of the architecture.
 
 ### Related Links
 
@@ -83,3 +70,12 @@ Of course, everything comes with a price. The Facade API is a high-level API tha
 3. [Univer Doc API](/guides/doc/facade/doc-api)
 4. [Univer Sheet API](/guides/sheet/facade/sheet-api)
 5. [Facade API Reference](/typedoc/@univerjs/facade/README)
+
+## Presets
+
+We have prepared some out-of-the-box solutions for users who are new to Univer. If your use case is more common, you can start with Presets. The code for Presets is also open source, so you can refer to the source code of Presets to learn how to further customize Univer.
+
+### Related Links
+
+1. [Presets](/guides/sheet/getting-started/presets)
+1. [Presets Source Code](https://github.com/dream-num/univer-presets)

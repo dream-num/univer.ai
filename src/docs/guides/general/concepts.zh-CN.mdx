@@ -28,7 +28,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 你可以根据使用场景自由组合插件，同时避免加载多余代码；也可以通过编写插件来扩展 Univer 的功能，满足个性化的需求。
 
-相关链接：
+### 相关链接
 
 1. [编写一个 CSV 导入插件](/guides/sheet/tutorials/csv-import-plugin) 了解如何编写一个插件。
 1. [Univer 架构](/guides/sheet/architecture/univer) 详细了解 Univer 的架构设计。
@@ -57,13 +57,14 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
   Univer 基于 [命令系统](/guides/sheet/architecture/univer#%E5%91%BD%E4%BB%A4%E7%B3%BB%E7%BB%9F) 对状态和数据进行操作和更新，因此你**必须**使用 Facade API（或其对应的命令）来更新数据，任何直接对数据进行修改以更新视图的操作都不会生效。
 </Callout>
 
+
 ## Facade API
 
 Facade API 是对插件所提供的底层接口的封装，让开发者可以更简易地使用 Univer 而无需了解其内部设计。
 
 当然凡事皆有两面，Facade API 虽然让 Univer 更易用，但它同时也使得你无法接触到内部一些更强大的 API。如果你需要更高级的自定义能力，就需要在了解架构的基础上使用底层 API。
 
-相关链接
+### 相关链接
 
 1. [引入 Facade API](/guides/sheet/getting-started/facade)
 1. [Facade Sheet API 常用方法](/zh-CN/guides/sheet/facade/sheet-api)
@@ -72,7 +73,7 @@ Facade API 是对插件所提供的底层接口的封装，让开发者可以更
 
 我们为首次接触 Univer 的用户准备了一些开箱即用的解决方案，如果你的使用场景比较常规，你可以选择从 Presets 开始。Presets 的代码也是开源的，因此你也可以参考 Presets 的源码来学习如何进一步定制 Univer。
 
-相关链接
+### 相关链接
 
 1. [使用 Presets](/guides/sheet/getting-started/presets)
 2. [Presets 开源仓库](https://github.com/dream-num/univer-presets)

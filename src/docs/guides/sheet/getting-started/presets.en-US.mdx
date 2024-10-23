@@ -1,0 +1,105 @@
+import { Callout } from 'nextra/components'
+import VersionBadge from '@/components/VersionBadge'
+
+# Presets  <VersionBadge version="0.5.0+" />
+
+From version 0.5.0, Univer provides the `@univerjs/presets` package, which provides presets for common scenarios to help you quickly build a Univer application without worrying about how to import and configure Univer plugins.
+
+<Callout type="info" emoji="🛸">
+  If you are already familiar with Univer and want to import plugins more flexibly (e.g., lazy loading some plugins, and using some configuration options not provided by Presets), you can refer to [Advanced Installation](/guides/sheet/getting-started/advanced-installation).
+</Callout>
+
+
+## Basic Spreadsheet
+
+Create a simple spreadsheet and reference all the first-party features (plugins) provided by Univer.
+
+```js
+import { createUniver, defaultTheme, LocaleType } from '@univerjs/presets';
+import { UniverSheetsBasicPreset } from '@univerjs/presets/sheets/sheets-basic';
+import { zhCN } from '@univerjs/presets/sheets/sheets-basic/zh-CN';
+
+const { univerAPI } = createUniver({
+    locale: LocaleType.ZH_CN,
+    theme: defaultTheme,
+    presets: [
+        UniverSheetsBasicPreset({ locales: { zhCN } }),
+    ],
+});
+
+univerAPI.createUniverSheet({ name: 'Test Sheet' });
+```
+
+Online Example.
+
+## Spreadsheet with Advanced Features
+
+To use the advanced features provided by Univer (including printing, pivot tables, etc.), you need to import `UniverSheetsAdvancedPreset`.
+
+1. If you have obtained authorization, you need to configure the authorization information.
+2. If you have the server setup, you need to configure the server endpoint.
+
+```js
+import { createUniver, defaultTheme, LocaleType } from '@univerjs/presets';
+import { UniverSheetsAdvancedPreset } from '@univerjs/presets/sheets/sheets-advanced-features';
+import { zhCN as advancedZhCN } from '@univerjs/presets/sheets/sheets-advanced-features/zh-CN';
+import { UniverSheetsBasicPreset } from '@univerjs/presets/sheets/sheets-basic';
+import { zhCN as basicZhCN } from '@univerjs/presets/sheets/sheets-basic/zh-CN';
+
+const { univerAPI } = createUniver({
+    locale: LocaleType.ZH_CN,
+    theme: defaultTheme,
+    presets: [
+        UniverSheetsBasicPreset({ locales: { zhCN: basicZhCN } }),
+        UniverSheetsAdvancedPreset({ 
+            locales: { zhCN: advancedZhCN }, 
+            universerEndpoint: 'https://dev.univer.plus',
+            license: 'xxx',
+        }),
+    ],
+});
+
+univerAPI.createUniverSheet({ name: 'Test Sheet' });
+```
+
+Online Example.
+
+## Spreadsheet with Collaboration
+
+```js
+import { createUniver, defaultTheme, LocaleType } from '@univerjs/presets';
+import { UniverSheetsAdvancedPreset } from '@univerjs/presets/sheets/sheets-advanced-features';
+import { zhCN as advancedZhCN } from '@univerjs/presets/sheets/sheets-advanced-features/zh-CN';
+import { UniverSheetsBasicPreset } from '@univerjs/presets/sheets/sheets-basic';
+import { zhCN as basicZhCN } from '@univerjs/presets/sheets/sheets-basic/zh-CN';
+import { UniverSheetsCollaborationPreset } from '@univerjs/presets/sheets/sheets-collaboration';
+import { zhCN as collaborationZhCN } from '@univerjs/presets/sheets/sheets-collaboration/zh-CN';
+
+createUniver({
+    locale: LocaleType.ZH_CN,
+    theme: defaultTheme,
+    collaboration: true,
+    presets: [
+        UniverSheetsBasicPreset({ locales: { zhCN: basicZhCN }, collaboration: true }),
+        UniverSheetsAdvancedPreset({ locales: { zhCN: advancedZhCN } }),
+        UniverSheetsCollaborationPreset({ locales: { zhCN: collaborationZhCN } }),
+    ],
+});
+```
+
+Online Example.
+
+## Univer running on Node.js
+
+Please refer to [Run Univer on Node.js](/guides/sheet/getting-started/node).
+
+## Enable Web Worker in the above Presets
+
+Univer supports formula and pivot table calculations in Web Worker threads, and Presets also support Web Worker-based configurations. Please refer to the code in the Presets repository:
+
+1. Use Web Worker in the basic spreadsheet
+2. Use Web Worker in advanced features
+
+## Submit a Suggestion
+
+We welcome you to try Presets. If you find that Presets cannot meet your configuration needs, you can submit a Feature Request to us on [GitHub](https://github.com/dream-num/univer-presets/issues/new). We will comprehensively evaluate the needs of the community and selectively develop more underlying configuration capabilities for Presets.

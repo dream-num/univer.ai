@@ -9,7 +9,7 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 Univer 从 0.5.0 版本起提供了 `@univerjs/presets` 包，它针对一些常见场景提供了预设的配置，可以帮助你快速地搭建一个 Univer 应用而无需关心如何引入和配置 Univer 插件。
 
 <Callout type="info" emoji="🍃">
-  如果你是首次使用 Univer，我们推荐从 Presets 开始。在后续的小节中，除非特殊说明，我们都会假设你使用了 Presets。如果你已经较为熟悉 Univer，并且希望更加灵活地引入插件（例如懒加载部分插件），可以参考 [高级引入方式](/guides/sheet/advanced/installation)。
+  如果你是首次使用 Univer，我们推荐从 Presets 开始。在后续的小节中，除非特殊说明，我们都会假设你使用了 Presets。如果你已经较为熟悉 Univer，并且希望更加灵活地引入插件（例如懒加载部分插件），可以参考 [高级引入方式](/guides/sheet/advanced-installation)。
 </Callout>
 
 ## 使用包管理器
@@ -37,14 +37,6 @@ Univer 从 0.5.0 版本起提供了 `@univerjs/presets` 包，它针对一些常
     ```
   </Tabs.Tab>
 </Tabs>
-
-### 更新
-
-如果你使用的是 pnpm，你可以使用以下命令来更新所有的插件：
-
-```shell
-pnpm update "@univerjs/presets" @latest
-```
 
 ### 使用
 
@@ -93,6 +85,14 @@ univer.registerPlugin(UniverSheetsFormulaPlugin);
 univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});`
 
 <ReactLive code={code} />
+
+### 更新
+
+如果你使用的是 pnpm，你可以使用以下命令来更新所有的插件：
+
+```shell
+pnpm update "@univerjs/presets" @latest
+```
 
 ## 通过 `<script>` 标签引入
 
@@ -243,7 +243,6 @@ univer.createUnit(UniverInstanceType.UNIVER_SHEET, data);`
 ```typescript
 const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 
-// A1 设置数字 1
 const range = sheet.getRange(0, 0, 1, 1);
 range.setValue(1);
 ```
