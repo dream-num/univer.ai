@@ -178,6 +178,12 @@ univer.registerPlugin(UniverSheetsFormulaPlugin);
 
 <ReactLive code={code} />
 
+### 懒加载部分插件
+
+使用高级引入方式的一个优势是你可以更加灵活地控制插件的加载时机，一种常见的方式是在应用初始化时仅加载必须的插件，而将部分插件的加载时机延迟到首次渲染完成之后。
+
+Univer 的 [官方 demo](https://github.com/dream-num/univer/blob/dev/examples/src/sheets/main.ts) 就使用了这样的优化技巧，可参考。
+
 ## 通过 CDN 引入
 
 如果你不想使用包管理工具，你也可以通过 CDN 引入 Univer 的样式文件、语言包和插件。Univer 为每一个插件都提供了单独的 UMD 构建。当然，琐碎的 UMD 包会使得开发者拥有非常灵活的选择权，但也同样会让开发者面临一些新的挑战：

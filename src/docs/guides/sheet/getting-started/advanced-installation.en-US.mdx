@@ -179,6 +179,12 @@ univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});`
 
 <ReactLive code={code} />
 
+### Lazy Loading
+
+One of the advantages of using the advanced import method is that you can more flexibly control when the plugins are loaded. A common way is to load only the necessary plugins during application initialization, and delay the loading of some plugins until after the first rendering is completed.
+
+The [official demo](https://github.com/dream-num/univer/blob/dev/examples/src/sheets/main.ts) of Univer uses this optimization technique, which you can refer to.
+
 ## Using CDN
 
 If you don't want to use package managers, you can also import Univer's style files, language packs, and plugins via CDN. Univer provides a separate UMD build for each plugin. Of course, the trivial UMD packages give developers a lot of flexibility, but they also pose some new challenges:
@@ -273,55 +279,6 @@ Both unpkg and jsDeliver support specifying specific versions of resources. For 
 ```diff
 - https://unpkg.com/@univerjs/umd/lib/univer.full.umd.js
 + https://unpkg.com/@univerjs/umd@0.1.16/lib/univer.full.umd.js
-```
-
-## Getting Started: Loading, modifying and storing data
-
-In the previous section, you have already created a Univer instance and an empty spreadsheet. However, in most cases, you will likely need to load existing data into Univer. This section will explain how to load data into Univer and retrieve data from it.
-
-### Loading Data
-
-By calling the `createUniverSheet` method of `Univer`, you can create a new `Workbook` instance. The first parameter of the method is an object containing the data of the `Workbook`, which should conform to the `IWorkbookData` interface.
-
-```typescript
-import { IWorkbookData, UniverInstanceType } from "@univerjs/core";
-
-const data: IWorkbookData = {};
-const workbook = univer.createUnit(UniverInstanceType.UNIVER_SHEET, data);
-```
-
-You can learn more about all the fields supported by `IWorkbookData` [here](/typedoc/@univerjs/core/interfaces/IWorkbookData).
-
-### Modifying Data
-
-<Callout type="error" emoji="🚨">
-  Univer operates and updates states and data based on a [command system](/guides/sheet/architecture/univer#command-system), so you **must** use commands or the corresponding Facade API to update data properly, rather than directly modifying data. Any operation that directly modifies data in the hope of updating the view is not allowed.
-</Callout>
-
-`@univerjs/facade` provides a set of APIs for modifying data in Univer. You can use these APIs to modify the data in the `Workbook` instance.
-
-```typescript
-import { FUniver } from "@univerjs/facade";
-
-const univerAPI = FUniver.newAPI(univer);
-```
-
-Then you can use the methods of `univerAPI` to use Univer, such as getting the currently active sheet and updating values in the specified range:
-
-```typescript
-const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
-
-// Set the number 1 in A1
-const range = sheet.getRange(0, 0, 1, 1);
-range.setValue(1);
-```
-
-### Storing Data
-
-By calling the `save` method of the current `Workbook`, you can get an `IWorkbookData` object containing the data inside the sheet.
-
-```typescript
-const savedData = univerAPI.getActiveWorkbook().save();
 ```
 
 ---
