@@ -6,6 +6,12 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 <BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC, UniverTypes.SLIDE]} value={UniverTypes.DOC} />
 
+From version 0.5.0, Univer provides the `@univerjs/presets` package, which provides presets for common scenarios to help you quickly build a Univer application without worrying about how to import and configure Univer plugins.
+
+<Callout type="info" emoji="🍃">
+  If you are using Univer for the first time, we recommend starting with Presets. In the following sections, unless otherwise specified, we will assume that you are using Presets. If you are already familiar with Univer and want to import plugins more flexibly (e.g., lazy loading some plugins), you can refer to the [Advanced Installation](/guides/sheet/advanced-installation) section.
+</Callout>
+
 ## Using Package Managers
 
 If you are familiar with modern frontend development, using package managers to build applications containing Univer will be a good choice.
@@ -14,140 +20,49 @@ We recommend using build tools such as [Vite](https://vitejs.dev/), [esbuild](ht
 
 ### Installation
 
-To facilitate the deployment of Univer's frontend, a variety of npm packages are utilized. You may install the requisite packages based on your specific requirements.
-
-<Callout>
-  - If you are using npm, make sure you are using npm@7 or higher. This is because npm@3 ~ npm@6 will not correctly install `peerDependencies`[^1].
-  - If you are using pnpm, make sure you are using pnpm@8 or higher. If you are using pnpm@6 ~ pnpm@7, you can try configuring `auto-install-peers=true` [^2] to resolve dependency installation issues.
-  - If you are using yarn, you need to manually install the missing `peerDependencies`[^3], but don't worry, the installation commands below already include these dependencies.
-</Callout>
-
-The following example will guide you through which plugins are necessary and how to install them:
+Choose your package manager to install `@unvierjs/presets`:
 
 <Tabs items={['pnpm', 'npm', 'yarn']}>
   <Tabs.Tab label="pnpm">
     ```shell
-    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-numfmt @univerjs/engine-render @univerjs/ui
+    pnpm add @univerjs/presets
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
     ```shell
-    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-numfmt @univerjs/engine-render @univerjs/ui
+    npm install @univerjs/presets
     ```
   </Tabs.Tab>
   <Tabs.Tab label="yarn">
     ```shell
-    yarn add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-numfmt @univerjs/engine-render @univerjs/ui react react-dom rxjs
+    yarn add @univerjs/presets
     ```
   </Tabs.Tab>
 </Tabs>
-
-If you want to get a more convenient development experience in the future, we also recommend you to install `@univerjs/facade`:
-
-<Tabs items={['pnpm', 'npm', 'yarn']}>
-  <Tabs.Tab label="pnpm">
-    ```shell
-    pnpm add @univerjs/facade
-    ```
-  </Tabs.Tab>
-  <Tabs.Tab label="npm">
-    ```shell
-    npm install @univerjs/facade
-    ```
-  </Tabs.Tab>
-  <Tabs.Tab label="yarn">
-    ```shell
-    npm install @univerjs/facade
-    ```
-  </Tabs.Tab>
-</Tabs>
-
-For more information about `@univerjs/facade`, please refer to the [Facade](/guides/doc/facade/facade) section.
-
-### Update
-
-Since Univer uses a monorepo to manage its codebase, each release will update the version number of all official plugins. Therefore, when updating Univer, you should update all plugins at the same time to ensure that their version numbers are consistent.
-
-If you are using pnpm, you can use the following command to update all plugins:
-
-```shell
-pnpm update "@univerjs/*" "@univerjs-pro/*" @latest
-```
 
 ### Usage
 
-<Callout>
-  The order of importing the style files is important. Make sure you import the CSS styles of `@univerjs/design` and `@univerjs/ui` before importing the CSS styles of other plugins.
-</Callout>
-
-You need to import Univer's css files, locales, and some necessary plugins in your project:
-
 ```typescript
-import "@univerjs/design/lib/index.css";
-import "@univerjs/ui/lib/index.css";
-import "@univerjs/docs-ui/lib/index.css";
+import { createUniver, defaultTheme, LocaleType } from '@univerjs/presets';
+import { zhCN } from '@univerjs/presets/docs/docs-basic/zh-CN';
+import { UniverDocsBasicPreset } from '@univerjs/presets/presets/docs/docs-basic/index.js';
 
-import { LocaleType, Tools, Univer } from "@univerjs/core";
-import { defaultTheme } from "@univerjs/design";
-
-import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
-import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
-
-import { UniverUIPlugin } from "@univerjs/ui";
-
-import { UniverDocsPlugin } from "@univerjs/docs";
-import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
-
-import DesignEnUS from '@univerjs/design/locale/en-US';
-import DocsUIEnUS from '@univerjs/docs-ui/locale/en-US';
-import UIEnUS from '@univerjs/ui/locale/en-US';
-```
-
-<Callout type="info" emoji="ℹ️">
-  Import a variety of locales and css files for plugins may make development cumbersome and difficult to maintain. We provide Univer Plugins to help you import plugins more conveniently. For more information, please refer to the [Simplified Import](/guides/sheet/getting-started/univer-plugins) section.
-</Callout>
-
-Then create a Univer instance and register these plugins:
-
-```typescript
-const univer = new Univer({
-  theme: defaultTheme,
-  locale: LocaleType.EN_US,
-  locales: {
-    [LocaleType.EN_US]: Tools.deepMerge(
-      DesignEnUS,
-      DocsUIEnUS,
-      UIEnUS,
-    ),
-  },
+const { univerAPI } = createUniver({
+    locale: LocaleType.ZH_CN,
+    theme: defaultTheme,
+    presets: [
+        UniverDocsBasicPreset({ locales: { zhCN } }),
+    ],
 });
 
-univer.registerPlugin(UniverRenderEnginePlugin);
-univer.registerPlugin(UniverFormulaEnginePlugin);
-
-univer.registerPlugin(UniverUIPlugin, {
-  container: 'app',
-  footer: false,
-});
-
-univer.registerPlugin(UniverDocsPlugin);
-univer.registerPlugin(UniverDocsUIPlugin, {
-  container: 'univerdoc',
-  layout: {
-    docContainerConfig: {
-      innerLeft: false,
-    },
-  },
-});
-
-univer.createUnit(UniverInstanceType.UNIVER_DOC, {});
+univerAPI.createUniverDoc({});
 ```
 
 export const code = `const univer = new Univer({
   theme: defaultTheme,
-  locale: LocaleType.EN_US,
+  locale: LocaleType.ZH_CN,
   locales: {
-    [LocaleType.EN_US]: enUS,
+    [LocaleType.ZH_CN]: zhCN,
   },
 });
 
@@ -173,17 +88,19 @@ univer.createUnit(UniverInstanceType.UNIVER_DOC, {});`
 
 <ReactLive code={code} />
 
-## Using CDN
+### Update
 
-If you don't want to use package managers, you can also import Univer's style files, language packs, and plugins via CDN. Univer provides a separate UMD build for each plugin. Of course, the trivial UMD packages give developers a lot of flexibility, but they also pose some new challenges:
+Since Univer uses a monorepo to manage its codebase, each release will update the version number of all official plugins. Therefore, when updating Univer, you should update all plugins at the same time to ensure that their version numbers are consistent.
 
-- How do I determine the pre-dependencies of a package?
-- How do I determine the correct import order?
-- How do I determine which packages provide a feature?
+If you are using pnpm, you can use the following command to update all plugins:
 
-If you don't have a clear understanding of Univer's plugin mechanism, these questions usually mean countless trial-and-error attempts.
+```shell
+pnpm update "@univerjs/presets" @latest
+```
 
-Therefore, Univer also provides a UMD build that includes all plugins. You can include this UMD build in your HTML file and access each plugin through the `window` object.
+## Import by a `<script>` Tag
+
+If you are not using a package manager, you can also import Univer via a `<script>` tag.
 
 ### Example
 

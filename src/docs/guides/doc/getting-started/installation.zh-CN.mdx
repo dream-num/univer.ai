@@ -2,136 +2,59 @@ import { Callout, Tabs } from 'nextra/components'
 import ReactLive from '@/components/ReactLive'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
-# 安装和引入
+# 安装和基本使用
 
 <BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC, UniverTypes.SLIDE]} value={UniverTypes.DOC} />
 
-<Callout>
-  - 如果你正在使用 npm，请确保使用的版本为 npm@7 及以上。这是因为 npm@3 ~ npm@6 并不会正确地安装 `peerDependencies`[^1]。
-  - 如果你正在使用 pnpm，请确保使用的版本为 pnpm@8 及以上。如果你正在使用 pnpm@6 ~ pnpm@7，可以尝试配置 `auto-install-peers=true` [^2]来解决依赖安装问题。
-  - 如果你正在使用 yarn，你需要手动安装缺失的 `peerDependencies`[^3]，不过别担心，下面的安装命令中已经包含了这些依赖。
+Univer 从 0.5.0 版本起提供了 `@univerjs/presets` 包，它针对一些常见场景提供了预设的配置，可以帮助你快速地搭建一个 Univer 应用而无需关心如何引入和配置 Univer 插件。
+
+<Callout type="info" emoji="🍃">
+  如果你是首次使用 Univer，我们推荐从 Presets 开始。在后续的小节中，除非特殊说明，我们都会假设你使用了 Presets。如果你已经较为熟悉 Univer，并且希望更加灵活地引入插件（例如懒加载部分插件），可以参考 [高级引入方式](/guides/doc/advanced-installation)。
 </Callout>
 
-以下示例将会带你了解哪些插件是必需的，以及如何安装它们：
+## 使用包管理器
+
+如果你的项目中已经引入了现代前端开发工具，那么引入 Univer 将会非常简单。我们推荐使用 [Vite](https://vitejs.dev/)、[esbuild](https://esbuild.github.io/) 或 [Webpack 5](https://webpack.js.org/) 等对 ES Module 支持较好的构建工具来构建 Univer 应用。如果你使用了其它构建工具（例如 Webpack 4），可能会需要一些额外的配置，请阅读 [常见问题](/guides/sheet/troubleshooting) 获取更多信息。
+
+### 安装
+
+选择你所使用的包管理器以安装 `@unvierjs/presets`：
 
 <Tabs items={['pnpm', 'npm', 'yarn']}>
   <Tabs.Tab label="pnpm">
     ```shell
-    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-numfmt @univerjs/engine-render @univerjs/ui
+    pnpm add @univerjs/presets
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
     ```shell
-    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-numfmt @univerjs/engine-render @univerjs/ui
+    npm install @univerjs/presets
     ```
   </Tabs.Tab>
   <Tabs.Tab label="yarn">
     ```shell
-    yarn add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-numfmt @univerjs/engine-render @univerjs/ui react react-dom rxjs
+    yarn add @univerjs/presets
     ```
   </Tabs.Tab>
 </Tabs>
 
-如果你想在后续的开发中获得更加便捷的开发体验，我们还推荐你安装 `@univerjs/facade`：
-
-
-<Tabs items={['pnpm', 'npm', 'yarn']}>
-  <Tabs.Tab label="pnpm">
-    ```shell
-    pnpm add @univerjs/facade
-    ```
-  </Tabs.Tab>
-  <Tabs.Tab label="npm">
-    ```shell
-    npm install @univerjs/facade
-    ```
-  </Tabs.Tab>
-  <Tabs.Tab label="yarn">
-    ```shell
-    npm install @univerjs/facade
-    ```
-  </Tabs.Tab>
-</Tabs>
-
-有关 `@univerjs/facade` 的更多信息，请参考 [Facade](/guides/doc/facade/facade) 章节。
-
-### 更新
-
-由于 Univer 使用了 monorepo 的方式进行管理，每次发布都会更新所有官方插件的版本号。因此在更新 Univer 时，你应当同时更新所有的插件，保证它们的版本号一致。
-
-如果你使用的是 pnpm，你可以使用以下命令来更新所有的插件：
-
-```shell
-pnpm update "@univerjs/*" "@univerjs-pro/*" @latest
-```
 
 ### 使用
 
-<Callout>
-  样式文件的引入顺序很重要，确保你在依次引入 `@univerjs/design`、`@univerjs/ui` 的 CSS 样式后再引入其他插件的样式文件。
-</Callout>
-
-你需要在项目中引入 Univer 的样式文件、语言包，以及一些必要的插件：
-
 ```typescript
-import "@univerjs/design/lib/index.css";
-import "@univerjs/ui/lib/index.css";
-import "@univerjs/docs-ui/lib/index.css";
+import { createUniver, defaultTheme, LocaleType } from '@univerjs/presets';
+import { zhCN } from '@univerjs/presets/docs/docs-basic/zh-CN';
+import { UniverDocsBasicPreset } from '@univerjs/presets/presets/docs/docs-basic/index.js';
 
-import { LocaleType, Tools, Univer } from "@univerjs/core";
-import { defaultTheme } from "@univerjs/design";
-
-import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
-import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
-
-import { UniverUIPlugin } from "@univerjs/ui";
-
-import { UniverDocsPlugin } from "@univerjs/docs";
-import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
-
-import DesignZhCN from '@univerjs/design/locale/zh-CN';
-import DocsUIZhCN from '@univerjs/docs-ui/locale/zh-CN';
-import UIZhCN from '@univerjs/ui/locale/zh-CN';
-```
-
-<Callout type="info" emoji="ℹ️">
-  大量插件的语言包和样式加载可能会使开发变得繁琐且难以维护。我们提供了 Univer Plugins 来帮助你更加方便地引入插件，详情请参考 [简化引入](/guides/sheet/getting-started/univer-plugins) 章节。
-</Callout>
-
-然后创建一个 Univer 实例，并注册这些插件：
-
-```typescript
-const univer = new Univer({
-  theme: defaultTheme,
-  locale: LocaleType.ZH_CN,
-  locales: {
-    [LocaleType.ZH_CN]: Tools.deepMerge(
-      DesignZhCN,
-      DocsUIZhCN,
-      UIZhCN,
-    ),
-  },
+const { univerAPI } = createUniver({
+    locale: LocaleType.ZH_CN,
+    theme: defaultTheme,
+    presets: [
+        UniverDocsBasicPreset({ locales: { zhCN } }),
+    ],
 });
 
-univer.registerPlugin(UniverRenderEnginePlugin);
-univer.registerPlugin(UniverFormulaEnginePlugin);
-
-univer.registerPlugin(UniverUIPlugin, {
-  container: 'app',
-  footer: false,
-});
-
-univer.registerPlugin(UniverDocsPlugin);
-univer.registerPlugin(UniverDocsUIPlugin, {
-  container: 'univerdoc',
-  layout: {
-    docContainerConfig: {
-      innerLeft: false,
-    },
-  },
-});
-
-univer.createUnit(UniverInstanceType.UNIVER_DOC, {});
+univerAPI.createUniverDoc({});
 ```
 
 export const code = `const univer = new Univer({
@@ -164,21 +87,19 @@ univer.createUnit(UniverInstanceType.UNIVER_DOC, {});`
 
 <ReactLive code={code} />
 
-## 通过 CDN 引入
+### 更新
 
-如果你不想使用包管理工具，你也可以通过 CDN 引入 Univer 的样式文件、语言包和插件。Univer 为每一个插件都提供了单独的 UMD 构建。当然，琐碎的 UMD 包会使得开发者拥有非常灵活的选择权，但也同样会让开发者面临一些新的挑战：
+```shell
+pnpm update "@univerjs/presets" @latest
+```
 
-- 我要如何确定一个包的前置依赖？
-- 我要如何确定正确的引入顺序？
-- 我要如何确定一个功能究竟是由哪些包提供的？
+## 通过 `<script>` 标签引入
 
-如果对 Univer 的插件化机制没有一个非常清晰的了解的话，通常来说这些问题的背后就意味着无数种排列组合尝试的过程。
-
-因此，Univer 也提供了一个包含了所有插件的 UMD 构建，你可以在 HTML 文件中引入这个 UMD 构建，然后通过 `window` 对象来访问各个插件。
+如果你不使用包管理工具，你也可以通过 `<script>` 标签引入 Univer。
 
 ### 示例
 
-当前主流的 CDN 服务商（例如 jsDelivr、unpkg）都支持 Univer 的 UMD 构建，你可以在 HTML 文件中引入这些资源：
+我们在当前主流的 CDN 服务商（例如 jsDelivr、unpkg）都提供了 Univer 的 UMD 构建，你可以在 HTML 文件中引入这些资源（当然你也可以下载这些文件然后通过自己的服务器或者 CDN 网络分发）：
 
 ```html
 <head>

@@ -1,7 +1,9 @@
 {
   "quickstart": "快速开始",
   "installation": "安装和引入",
+  "concepts": "基础概念",
+  "presets": "Presets",
+  "advanced-installation": "高级安装和引入",
   "i18n": "国际化",
-  "univer-plugins": "简化引入",
-  "concepts": "基础概念"
+  "univer-plugins": "打包器插件"
 }

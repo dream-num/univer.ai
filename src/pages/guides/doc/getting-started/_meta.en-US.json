@@ -1,7 +1,9 @@
 {
   "quickstart": "Quickstart",
   "installation": "Installation & Usage",
+  "concepts": "Basic Concepts",
+  "presets": "Presets",
+  "advanced-installation": "Advanced Installation",
   "i18n": "Internationalization",
-  "univer-plugins": "Simplify Import",
-  "concepts": "Basic Concepts"
+  "univer-plugins": "Bundle Plugins"
 }

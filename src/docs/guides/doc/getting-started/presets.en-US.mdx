@@ -1,0 +1,58 @@
+import { Callout } from 'nextra/components'
+import VersionBadge from '@/components/VersionBadge'
+
+# Presets  <VersionBadge version="0.5.0+" />
+
+From version 0.5.0, Univer provides the `@univerjs/presets` package, which provides presets for common scenarios to help you quickly build a Univer application without worrying about how to import and configure Univer plugins.
+
+<Callout type="info" emoji="🛸">
+  If you are already familiar with Univer and want to import plugins more flexibly (e.g., lazy loading some plugins, and using some configuration options not provided by Presets), you can refer to [Advanced Installation](/guides/doc/getting-started/advanced-installation).
+</Callout>
+
+## Basic Document
+
+Create a simple spreadsheet and reference all the first-party features (plugins) provided by Univer.
+
+```js
+import { createUniver, defaultTheme, LocaleType } from '@univerjs/presets';
+import { zhCN } from '@univerjs/presets/docs/docs-basic/zh-CN';
+import { UniverDocsBasicPreset } from '@univerjs/presets/presets/docs/docs-basic/index.js';
+
+const { univerAPI } = createUniver({
+    locale: LocaleType.ZH_CN,
+    theme: defaultTheme,
+    presets: [
+        UniverDocsBasicPreset({ locales: { zhCN } }),
+    ],
+});
+
+univerAPI.createUniverDoc({});
+```
+
+Online Example.
+
+## Document with Collaboration
+
+```js
+import { createUniver, defaultTheme, LocaleType } from '@univerjs/presets';
+import { zhCN as basicZhCN } from '@univerjs/presets/docs/docs-basic/zh-CN';
+import { UniverDocsCollaborationPreset } from '@univerjs/presets/docs/docs-collaboration/index';
+import { zhCN as collaborationZhCH } from '@univerjs/presets/docs/docs-collaboration/zh-CN';
+import { UniverDocsBasicPreset } from '@univerjs/presets/presets/docs/docs-basic/index.js';
+
+createUniver({
+    locale: LocaleType.ZH_CN,
+    theme: defaultTheme,
+    collaboration: true,
+    presets: [
+        UniverDocsBasicPreset({ locales: { zhCN: basicZhCN }, collaboration: true }),
+        UniverDocsCollaborationPreset({ locales: { zhCN: collaborationZhCH } }),
+    ],
+});
+```
+
+Online Example.
+
+## Submit a Suggestion
+
+We welcome you to try Presets. If you find that Presets cannot meet your configuration needs, you can submit a Feature Request to us on [GitHub](https://github.com/dream-num/univer-presets/issues/new). We will comprehensively evaluate the needs of the community and selectively develop more underlying configuration capabilities for Presets.

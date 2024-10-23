@@ -8,6 +8,6 @@
   "advanced-installation": "高级引入方式",
   "i18n": "国际化",
   "facade": "引入 Facade API",
-  "univer-plugins": "构造器插件",
+  "univer-plugins": "打包器插件",
   "node": "在 Node.js 上运行 Univer"
 }

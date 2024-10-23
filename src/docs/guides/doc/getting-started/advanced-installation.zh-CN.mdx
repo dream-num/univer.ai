@@ -2,19 +2,9 @@ import { Callout, Tabs } from 'nextra/components'
 import ReactLive from '@/components/ReactLive'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
-# 安装和引入
+# 高级安装和引入
 
-<BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC, UniverTypes.SLIDE]} value={UniverTypes.SLIDE} />
-
-## 使用包管理器
-
-如果你对现代前端开发有所了解，那么使用包管理工具来构建包含 Univer 的应用将会是一个不错的选择。
-
-我们推荐使用 [Vite](https://vitejs.dev/)、[esbuild](https://esbuild.github.io/) 或 [Webpack 5](https://webpack.js.org/) 等对 ES Module 支持较好的构建工具来构建 Univer 应用。如果你使用了其它构建工具（例如 Webpack 4），可能会需要一些额外的配置，请阅读 [常见问题](/guides/sheet/troubleshooting) 获取更多信息。
-
-### 安装
-
-Univer 以插件的形式提供了一系列功能，除了一些产品所必需的核心插件外，你还可以根据需要选择性地引入其它插件。
+<BadgeGroup values={[UniverTypes.SHEET, UniverTypes.DOC, UniverTypes.SLIDE]} value={UniverTypes.DOC} />
 
 <Callout>
   - 如果你正在使用 npm，请确保使用的版本为 npm@7 及以上。这是因为 npm@3 ~ npm@6 并不会正确地安装 `peerDependencies`[^1]。
@@ -27,22 +17,23 @@ Univer 以插件的形式提供了一系列功能，除了一些产品所必需�
 <Tabs items={['pnpm', 'npm', 'yarn']}>
   <Tabs.Tab label="pnpm">
     ```shell
-    pnpm add @univerjs/core @univerjs/design @univerjs/slides @univerjs/slides-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/ui
+    pnpm add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-numfmt @univerjs/engine-render @univerjs/ui
     ```
   </Tabs.Tab>
   <Tabs.Tab label="npm">
     ```shell
-    npm install @univerjs/core @univerjs/design @univerjs/slides @univerjs/slides-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/ui
+    npm install @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-numfmt @univerjs/engine-render @univerjs/ui
     ```
   </Tabs.Tab>
   <Tabs.Tab label="yarn">
     ```shell
-    yarn add @univerjs/core @univerjs/design @univerjs/slides @univerjs/slides-ui @univerjs/engine-formula @univerjs/engine-render @univerjs/ui react react-dom rxjs
+    yarn add @univerjs/core @univerjs/design @univerjs/docs @univerjs/docs-ui @univerjs/engine-formula @univerjs/engine-numfmt @univerjs/engine-render @univerjs/ui react react-dom rxjs
     ```
   </Tabs.Tab>
 </Tabs>
 
 如果你想在后续的开发中获得更加便捷的开发体验，我们还推荐你安装 `@univerjs/facade`：
+
 
 <Tabs items={['pnpm', 'npm', 'yarn']}>
   <Tabs.Tab label="pnpm">
@@ -57,12 +48,12 @@ Univer 以插件的形式提供了一系列功能，除了一些产品所必需�
   </Tabs.Tab>
   <Tabs.Tab label="yarn">
     ```shell
-    yarn add @univerjs/facade
+    npm install @univerjs/facade
     ```
   </Tabs.Tab>
 </Tabs>
 
-有关 `@univerjs/facade` 的更多信息，请参考 [Facade](/guides/slides/facade/facade) 章节。
+有关 `@univerjs/facade` 的更多信息，请参考 [Facade](/guides/doc/facade/facade) 章节。
 
 ### 更新
 
@@ -80,14 +71,14 @@ pnpm update "@univerjs/*" "@univerjs-pro/*" @latest
   样式文件的引入顺序很重要，确保你在依次引入 `@univerjs/design`、`@univerjs/ui` 的 CSS 样式后再引入其他插件的样式文件。
 </Callout>
 
-你需要在项目中引入 Univer 的样式文件，以及一些必要的插件：
+你需要在项目中引入 Univer 的样式文件、语言包，以及一些必要的插件：
 
 ```typescript
 import "@univerjs/design/lib/index.css";
 import "@univerjs/ui/lib/index.css";
-import "@univerjs/slides-ui/lib/index.css";
+import "@univerjs/docs-ui/lib/index.css";
 
-import { Univer } from "@univerjs/core";
+import { LocaleType, Tools, Univer } from "@univerjs/core";
 import { defaultTheme } from "@univerjs/design";
 
 import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
@@ -95,8 +86,12 @@ import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
 
 import { UniverUIPlugin } from "@univerjs/ui";
 
-import { UniverSlidesPlugin } from "@univerjs/slides";
-import { UniverSlidesUIPlugin } from "@univerjs/slides-ui";
+import { UniverDocsPlugin } from "@univerjs/docs";
+import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
+
+import DesignZhCN from '@univerjs/design/locale/zh-CN';
+import DocsUIZhCN from '@univerjs/docs-ui/locale/zh-CN';
+import UIZhCN from '@univerjs/ui/locale/zh-CN';
 ```
 
 <Callout type="info" emoji="ℹ️">
@@ -110,7 +105,11 @@ const univer = new Univer({
   theme: defaultTheme,
   locale: LocaleType.ZH_CN,
   locales: {
-    [LocaleType.ZH_CN]: zhCN,
+    [LocaleType.ZH_CN]: Tools.deepMerge(
+      DesignZhCN,
+      DocsUIZhCN,
+      UIZhCN,
+    ),
   },
 });
 
@@ -119,12 +118,20 @@ univer.registerPlugin(UniverFormulaEnginePlugin);
 
 univer.registerPlugin(UniverUIPlugin, {
   container: 'app',
+  footer: false,
 });
 
-univer.registerPlugin(UniverSlidesPlugin);
-univer.registerPlugin(UniverSlidesUIPlugin);
+univer.registerPlugin(UniverDocsPlugin);
+univer.registerPlugin(UniverDocsUIPlugin, {
+  container: 'univerdoc',
+  layout: {
+    docContainerConfig: {
+      innerLeft: false,
+    },
+  },
+});
 
-univer.createUnit(UniverInstanceType.UNIVER_SLIDE, {});
+univer.createUnit(UniverInstanceType.UNIVER_DOC, {});
 ```
 
 export const code = `const univer = new Univer({
@@ -140,12 +147,20 @@ univer.registerPlugin(UniverFormulaEnginePlugin);
 
 univer.registerPlugin(UniverUIPlugin, {
   container: 'app',
+  footer: false,
 });
 
-univer.registerPlugin(UniverSlidesPlugin);
-univer.registerPlugin(UniverSlidesUIPlugin);
+univer.registerPlugin(UniverDocsPlugin);
+univer.registerPlugin(UniverDocsUIPlugin, {
+  container: 'univerdoc',
+  layout: {
+    docContainerConfig: {
+      innerLeft: false,
+    },
+  },
+});
 
-univer.createUnit(UniverInstanceType.UNIVER_SLIDE, {});`
+univer.createUnit(UniverInstanceType.UNIVER_DOC, {});`
 
 <ReactLive code={code} />
 
@@ -180,8 +195,8 @@ univer.createUnit(UniverInstanceType.UNIVER_SLIDE, {});`
       UniverDesign,
       UniverEngineRender,
       UniverEngineFormula,
-      UniverSlides,
-      UniverSlidesUi,
+      UniverDocs,
+      UniverDocsUi,
       UniverUi,
       UniverFacade,
     } = window
@@ -201,10 +216,17 @@ univer.createUnit(UniverInstanceType.UNIVER_SLIDE, {});`
       container: "app",
     });
 
-    univer.registerPlugin(UniverSlides.UniverSlidesPlugin);
-    univer.registerPlugin(UniverSlidesUi.UniverSlidesUIPlugin);
+    univer.registerPlugin(UniverDocs.UniverDocsPlugin);
+    univer.registerPlugin(UniverDocsUi.UniverDocsUIPlugin, {
+      container: 'univerdoc',
+      layout: {
+        docContainerConfig: {
+          innerLeft: false,
+        },
+      },
+    });
 
-    univer.createUnit(UniverCore.UniverInstanceType.UNIVER_SLIDE, {})
+    univer.createUnit(UniverCore.UniverInstanceType.UNIVER_DOC, {})
 
     const univerAPI = UniverFacade.FUniver.newAPI(univer)
   </script>
