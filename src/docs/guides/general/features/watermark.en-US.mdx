@@ -1,11 +1,15 @@
 import { Callout, Steps, Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import VersionBadge from '@/components/VersionBadge'
 
-# Use Watermark
+# Use Watermark <VersionBadge version="0.4.2+" />
 
 <BadgeGroup values={[UniverTypes.GENERAL]} value={UniverTypes.GENERAL} />
 
 The watermark feature is designed to provide a flexible and secure watermark solution for web pages or applications. With this feature, developers can dynamically generate text or image watermarks on the page to prevent unauthorized use or dissemination of content. It supports multiple configurations.
+
+Watermark supports three settings: UI interface, FacadeAPI, and plug-in configuration.
+Three types of watermarks are supported: user information type, custom image type, and custom text type. The display of watermarks only supports one type of display, and the priority is user information type > custom image type > custom text type.
 
 ## Install
 
@@ -28,30 +32,17 @@ Install using your package manager:
 
 ```typescript
 import { UniverWatermarkPlugin } from '@univerjs/watermark';
+```
 
+## Register
+
+```typescript
 univer.registerPlugin(UniverWatermarkPlugin);
 ```
 
-
-## Use
-
-Watermark supports three settings: UI interface, FacadeAPI, and plug-in configuration.
-Three types of watermarks are supported: user information type, custom image type, and custom text type. The display of watermarks only supports one type of display, and the priority is user information type > custom image type > custom text type.
-
-### How to use FacadeAPI
+## Config
 
 ```typescript
-import { FUniver } from "@univerjs/facade";
-
-const univerAPI = FUniver.newAPI(univer);
-// Please refer to the API documentation for specific parameters https://github.com/dream-num/univer/blob/d0054f3e690d9d3cf9715b59a97a8cb95f65a6c8/packages/facade/src/apis/facade.ts#L555
-univerAPI.addWatermark()
-```
-
-### Configurable plugins
-
-```typescript
-
 univer.registerPlugin(UniverWatermarkPlugin, {
     textWatermarkSettings: {
         // For specific configuration parameters, see https://github.com/dream-num/univer/blob/d0054f3e690d9d3cf9715b59a97a8cb95f65a6c8/packages/watermark/src/controllers/config.schema.ts#L24
@@ -59,3 +50,19 @@ univer.registerPlugin(UniverWatermarkPlugin, {
     }
 })
 ```
+
+### Facade API
+
+### `FUniver.setWatermark(type, config)`
+
+Set watermark.
+
+```typescript
+const univerAPI = FUniver.newAPI(univer);
+// Please refer to the API documentation for specific parameters https://github.com/dream-num/univer/blob/d0054f3e690d9d3cf9715b59a97a8cb95f65a6c8/packages/facade/src/apis/facade.ts#L555
+univerAPI.setWatermark("text", { content: "hello", repeat: true })
+```
+
+### `FUniver.setWatermark(null)`
+
+Remove watermark.

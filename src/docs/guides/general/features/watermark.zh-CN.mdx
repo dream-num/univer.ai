@@ -1,11 +1,15 @@
 import { Callout, Steps, Tabs } from 'nextra/components'
 import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import VersionBadge from '@/components/VersionBadge'
 
-# 使用水印
+# 使用水印 <VersionBadge version="0.4.2+" />
 
 <BadgeGroup values={[UniverTypes.GENERAL]} value={UniverTypes.GENERAL} />
 
 水印功能旨在为网页或应用提供灵活且安全的水印方案。通过该功能，开发者可以在页面上动态生成文本或图片水印，以防止内容未经授权的使用或传播。并支持多种配置。
+
+水印支持三种设置方式，分别为 UI 界面、Facade API、和插件配置。
+水印类型支持三种类型，分别是用户信息类型、自定义图片类型、自定义文本类型，水印的展示只支持某一种类型的展示，优先级为用户信息类型 > 自定义图片类型 > 自定义文本类型。
 
 ## 安装
 
@@ -28,30 +32,17 @@ import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
 
 ```typescript
 import { UniverWatermarkPlugin } from '@univerjs/watermark';
+```
 
+## 注册
+
+```typescript
 univer.registerPlugin(UniverWatermarkPlugin);
 ```
 
-
-## 使用
-
-水印支持三种设置方式，分别为 UI 界面、Facade API、和插件配置。
-水印类型支持三种类型，分别是用户信息类型、自定义图片类型、自定义文本类型，水印的展示只支持某一种类型的展示，优先级为用户信息类型 > 自定义图片类型 > 自定义文本类型。
-
-### Facade API使用方式
+## 配置
 
 ```typescript
-import { FUniver } from "@univerjs/facade";
-
-const univerAPI = FUniver.newAPI(univer);
-// 具体参数请看 API 文档 https://github.com/dream-num/univer/blob/d0054f3e690d9d3cf9715b59a97a8cb95f65a6c8/packages/facade/src/apis/facade.ts#L555
-univerAPI.addWatermark()
-```
-
-### 通过插件配置化
-
-```typescript
-
 univer.registerPlugin(UniverWatermarkPlugin, {
     textWatermarkSettings: {
         // 具体配置参数请看 https://github.com/dream-num/univer/blob/d0054f3e690d9d3cf9715b59a97a8cb95f65a6c8/packages/watermark/src/controllers/config.schema.ts#L24
@@ -59,3 +50,19 @@ univer.registerPlugin(UniverWatermarkPlugin, {
     }
 })
 ```
+
+## Facade API 
+
+### `FUniver.setWatermark(type, config)`
+
+设置水印。
+
+```typescript
+const univerAPI = FUniver.newAPI(univer);
+// 具体参数请看 API 文档 https://github.com/dream-num/univer/blob/d0054f3e690d9d3cf9715b59a97a8cb95f65a6c8/packages/facade/src/apis/facade.ts#L555
+univerAPI.setWatermark("text", { content: "hello", repeat: true })
+```
+
+### `FUniver.setWatermark(null)`
+
+移除水印。
