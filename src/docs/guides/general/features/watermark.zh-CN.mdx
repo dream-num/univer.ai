@@ -35,9 +35,10 @@ univer.registerPlugin(UniverWatermarkPlugin);
 
 ## 使用
 
-水印支持三种设置方式，分别为 UI 界面、FacadeAPI、和插件配置。
+水印支持三种设置方式，分别为 UI 界面、Facade API、和插件配置。
+水印类型支持三种类型，分别是用户信息类型、自定义图片类型、自定义文本类型，水印的展示只支持某一种类型的展示，优先级为用户信息类型 > 自定义图片类型 > 自定义文本类型。
 
-### FacadeAPI使用方式
+### Facade API使用方式
 
 ```typescript
 import { FUniver } from "@univerjs/facade";
