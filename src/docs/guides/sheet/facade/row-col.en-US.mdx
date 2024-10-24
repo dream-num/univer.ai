@@ -177,6 +177,21 @@ const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
 sheet.setRowHeightsForced(0, 3, 5);
 ```
 
+### Set row custom properties
+
+`setRowCustom(custom)`: Set custom properties for given rows, store an object `custom` on the row, in which you can put any data that conforms to the JSON format, for custom storage of some additional information.
+Updating `custom` data will overwrite the original `custom` data. If you need to keep the original `custom` data when updating data, please get the `custom` data in advance and merge it into new data before updating.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+// Set custom properties for the first and third rows
+sheet.setRowCustom({
+    0: { color: 'red' },
+    2: { size: 16 },
+});
+```
+
 ## Column
 
 ### Insert column after given position
@@ -336,4 +351,19 @@ const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
   
 // Sets the first three columns to a width of 200 pixels
 sheet.setColumnWidths(0, 3, 200);
+```
+
+### Set column custom properties
+
+`setColumnCustom(custom)`: Set custom properties for given columns, store an object `custom` on the column, in which you can put any data that conforms to the JSON format, for custom storage of some additional information.
+Updating `custom` data will overwrite the original `custom` data. If you need to keep the original `custom` data when updating data, please get the `custom` data in advance and merge it into new data before updating.
+
+```typescript
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+// Set custom properties for the first and third columns
+sheet.setColumnCustom({
+    0: { color: 'red' },
+    2: { size: 16 },
+});
 ```
