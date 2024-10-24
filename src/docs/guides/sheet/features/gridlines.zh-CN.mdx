@@ -1,0 +1,15 @@
+import { Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import Sandbox from '@/components/Sandbox'
+import VersionBadge from '@/components/VersionBadge'
+
+import entryFile from './gridlines/demo-1/index.txt'
+
+# 网格线 <VersionBadge version="0.4.2+" />
+
+<BadgeGroup values={[UniverTypes.SHEET]} value={UniverTypes.SHEET} />
+
+<Sandbox entryFile={entryFile} />
+
+从 0.4.2 版本开始，你可以切换网格线的显示和隐藏。
+

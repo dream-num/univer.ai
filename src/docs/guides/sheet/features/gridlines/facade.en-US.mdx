@@ -1,0 +1,32 @@
+import { Tabs } from 'nextra/components'
+import BadgeGroup, { UniverTypes } from '@/components/BadgeGroup'
+import VersionBadge from '@/components/VersionBadge'
+
+# Gridlines Facade API <VersionBadge version="0.4.2+" />
+
+## Show or line gridlines of a worksheet
+
+```typescript
+import { FUniver } from '@univerjs/facade';
+
+const univerAPI = FUniver.newAPI(univer);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+// hide
+sheet.setHiddenGridlines(true); 
+
+// show
+sheet.setHiddenGridlines(false);
+```
+
+## Get if the sheet's gridlines or hidden
+
+```typescript
+import { FUniver } from '@univerjs/facade';
+
+const univerAPI = FUniver.newAPI(univer);
+const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
+
+const hidden = sheet.hasHiddenGridlines();
+```
+
